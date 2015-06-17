@@ -44,6 +44,7 @@ angular.module('hypercube.auth')
 			console.log('signup called with:', signupData);
 			var self = this;
 			//TODO: Check confirm
+			console.log('calling to:', DB_URL + '/signup');
 			$http.post(DB_URL + '/signup', {
 	      username:signupData.username,
 	      email: signupData.email,
@@ -75,6 +76,7 @@ angular.module('hypercube.auth')
 			var self = this;
 			$log.log('[AuthService.login()] Login called with:', loginData);
 			//TODO: Login with username or email
+			console.log("Login url:", DB_URL + '/login');
 			$http.put(DB_URL + '/login', {
 	      username: loginData.username,
 	      password: loginData.password

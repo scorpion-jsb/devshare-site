@@ -19,7 +19,7 @@ angular.module('hypercube.account')
 			console.log('Successful login:', authData);
 			$scope.loginForm.loading = false;
 			$scope.showToast("Logged in");
-			$state.go('users');
+			$state.go('apps');
 		}, function (err){
 			$scope.loginForm = {loading:false, email:null, password:null};
 		});

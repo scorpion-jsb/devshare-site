@@ -1,4 +1,6 @@
 angular.module('hypercube')
+// Whitelist Urls
+
 .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, USER_ROLES) {
   $stateProvider
     .state('layout', {

@@ -1,5 +1,5 @@
 angular.module('hypercube.nav')
-.controller('NavCtrl', ['$scope', 'AuthService', function ($scope, AuthService){
+.controller('NavCtrl', ['$scope', 'AuthService', '$state', function ($scope, AuthService, $state){
   $scope.logout = function () {
     AuthService.logout().then(function () {
       $scope.showToast("Logout Successful");

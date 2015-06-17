@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-connect": "^0.10.1",
-    "grunt-contrib-watch": "^0.6.1",
-    "load-grunt-tasks": "^3.2.0"
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-ng-constant": "^0.3.0",
+    "gulp-rename": "^1.2.2"
   }
 }

@@ -1,6 +1,6 @@
 angular.module('hypercube.auth')
 
-.factory('AuthService', ['$q', '$http', '$log', '$sessionStorage','$rootScope', 'Session', 'AUTH_EVENTS', 'USER_ROLES', function ($q, $http, $log, $sessionStorage, $rootScope, Session, AUTH_EVENTS, USER_ROLES) {
+.factory('AuthService', ['$q', '$http', '$log', '$sessionStorage','$rootScope', 'Session', 'AUTH_EVENTS', 'USER_ROLES', 'DB_URL', function ($q, $http, $log, $sessionStorage, $rootScope, Session, AUTH_EVENTS, USER_ROLES, DB_URL) {
 	return {
 		isAuthenticated : function (){
 			return Session.exists();
@@ -18,7 +18,7 @@ angular.module('hypercube.auth')
 			if($rootScope.currentUser){
 				deferred.resolve($rootScope.currentUser);
 			} else if(Session.exists()){
-				$http.get('/user')
+				$http.get(DB_URL + '/user')
 				.then(function (successRes){
 					console.log('currentUser response:', successRes);
 					if(successRes.status == 401){
@@ -44,7 +44,7 @@ angular.module('hypercube.auth')
 			console.log('signup called with:', signupData);
 			var self = this;
 			//TODO: Check confirm
-			$http.post('/signup', {
+			$http.post(DB_URL + '/signup', {
 	      username:signupData.username,
 	      email: signupData.email,
 	      password: signupData.password,
@@ -75,7 +75,7 @@ angular.module('hypercube.auth')
 			var self = this;
 			$log.log('[AuthService.login()] Login called with:', loginData);
 			//TODO: Login with username or email
-			$http.put('/login', {
+			$http.put(DB_URL + '/login', {
 	      username: loginData.username,
 	      password: loginData.password
 	    })
@@ -99,7 +99,7 @@ angular.module('hypercube.auth')
 		logout:function (){
 			console.log('user service: logout called');
 			var deferred = $q.defer();
-			$http.put('/logout').then(function(){
+			$http.put(DB_URL + '/logout').then(function(){
 				Session.destroy();
 				$rootScope.currentUser = null;
 				$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
@@ -114,7 +114,7 @@ angular.module('hypercube.auth')
 			var deferred = $q.defer();
 			console.log('Updating user with id: ' + userId, userData);
 			//TODO: Get User id from token
-			$http.put('/user/'+ userId, userData)
+			$http.put(DB_URL + '/user/'+ userId, userData)
 			.then(function (updateRes){
 				console.log('Profile update responded:', updateRes.data);
 				deferred.resolve(updateRes.data);

@@ -1,4 +1,4 @@
-angular.module('hypercube.auth', ['ui.router','angular-jwt', 'ngStorage'])
+angular.module('hypercube.auth', ['ui.router','angular-jwt', 'ngStorage', 'hypercube.const'])
 .constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',
   loginFailed: 'auth-login-failed',

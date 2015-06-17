@@ -24,20 +24,6 @@ angular.module('hypercube')
       templateUrl:'home/home.html',
       controller:'HomeCtrl'
     })
-    .state('users', {
-      parent:'nav',
-      url:'/users',
-      authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'user/users.html',
-      controller:'UsersCtrl'
-    })
-    .state('user', {
-      parent:'nav',
-      url:'/user/:username',
-      authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'user/user.html',
-      controller:'UserCtrl'
-    })
     .state('apps', {
       parent:'nav',
       url:'/apps',
@@ -51,20 +37,6 @@ angular.module('hypercube')
       authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
       templateUrl:'application/application.html',
       controller:'ApplicationCtrl'
-    })
-    .state('roles', {
-      parent:'nav',
-      url:'/roles',
-      authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'roles/roles.html',
-      controller:'RolesCtrl'
-    })
-    .state('role', {
-      parent:'nav',
-      url:'/roles/:name',
-      authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'roles/role.html',
-      controller:'RoleCtrl'
     })
     .state('signup', {
       parent:'nav',

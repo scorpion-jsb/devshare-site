@@ -7,9 +7,8 @@ angular.module('hypercube', [
     'hypercube.auth',
     'hypercube.account',
     'hypercube.nav',
-    'hypercube.home', 
-    'hypercube.roles', 
-    'hypercube.users'
+    'hypercube.const',
+    'hypercube.home'
   ])
 
 .directive('stopEvent', function () {

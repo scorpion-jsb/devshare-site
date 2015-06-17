@@ -1,0 +1,1 @@
+angular.module('hypercube.applications', ['hypercube.users'])

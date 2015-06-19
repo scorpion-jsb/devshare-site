@@ -1,5 +1,5 @@
 angular.module('hypercube.nav')
-.controller('NavCtrl', ['$scope', 'AuthService', '$state', function ($scope, AuthService, $state){
+.controller('NavCtrl', ['$rootScope', '$scope', 'AuthService', '$state', function ($rootScope, $scope, AuthService, $state){
   $scope.logout = function () {
     AuthService.logout().then(function () {
       $scope.showToast("Logout Successful");
@@ -9,4 +9,11 @@ angular.module('hypercube.nav')
       $state.go('home');
     });
   };
+  $scope.clickTitle = function(){
+  	if($rootScope.currentUser){
+  		$state.go('apps');
+  	} else {
+  		$state.go('home');
+  	}
+  }
 }])

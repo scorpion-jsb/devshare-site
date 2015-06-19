@@ -1,15 +1,15 @@
 <md-toolbar class="navbar-dark shadow-z-2">
   <div class="md-toolbar-tools">
     <h2>
-      <a ui-sref="home">
-        <span>
+      <span>
+        <a href="" ng-click="clickTitle()">
           <i class="fa fa-cube ion-icon-lg" style="margin-right:5px; font-size:1.5em;"></i>
           Hypercube
-        </span>
-      </a>
+        </a>
+      </span>
     </h2>
     <span flex></span>
-    <div ng-if="!currentUser">
+    <div ng-if="!currentUser" layout="row">
       <md-button class="" ui-sref="login" >Login</md-button>
       <md-button class="" ui-sref="signup">Signup</md-button>
     </div>

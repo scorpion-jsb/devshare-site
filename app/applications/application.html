@@ -14,11 +14,9 @@
     </section>
     <section layout="column" layout-sm="column">
       <!-- <h4 class="md-title">Role</h4> -->
-      <label>Owner</label>
-      <md-select ng-model="application.owner" md-on-open="getUsers()" style="min-width: 200px;">
-        <md-select-label>{{ application.owner ? application.owner.username : 'No Owner. Please Select' }}</md-select-label>
-        <md-option ng-value="user" ng-repeat="user in usersList">{{user.username}}</md-option>
-      </md-select>
+      <label class="md-title">Owner</label>
+      <label>{{application.owner.username}}</label>
+
     </section>
     <section layout="row" layout-sm="column" layout-align="center center">
       <md-button class="md-raised" ng-click="update()">Save</md-button>

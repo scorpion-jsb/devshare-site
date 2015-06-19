@@ -16,11 +16,9 @@ angular.module('hypercube.auth')
     return angular.isDefined($sessionStorage.token) ? $sessionStorage.token : null;
   };
   this.create = function (token) {
-    console.log('Session Service: New session started.', $sessionStorage);
     $sessionStorage.token = token;
     this.tokenData = jwtHelper.decodeToken(token);
     this.role = this.tokenData.role;
-    console.log('role set:', this.role);
     // this.id = sessionId;
   };
   this.destroy = function () {

@@ -1,18 +1,30 @@
 angular.module('hypercube.applications')
-.factory('applicationsService', ['$q', '$http', '$rootScope','$sessionStorage', 'DB_URL', function ($q, $http, $rootScope, $sessionStorage, DB_URL) {
+.factory('applicationsService', ['$q', '$http', '$log', '$rootScope', 'DB_URL', function ($q, $http, $log, $rootScope, DB_URL) {
 	var applications = null;
 	return {
+		add:function(applicationData){
+			var d = $q.defer();
+			console.log('$rootScope:', $rootScope);
+			applicationData.owner = $rootScope.currentUser._id;
+			$http.post(DB_URL + '/apps', applicationData)
+			.then(function (apiRes){
+				d.resolve(apiRes.data);
+			})
+			.catch(function (errRes){
+				//TODO: Handle different error response codes
+				$log.error('Error loading application', errRes.data);
+				d.reject(errRes.data);
+			});
+			return d.promise;
+		},
 		update:function(applicationId, applicationData){
 			var deferred = $q.defer();
-			console.log('applicationService: Updating application with id: ' + applicationId, applicationData);
 			$http.put(DB_URL + '/apps/'+ applicationId, applicationData)
 			.then(function (apiRes){
-				console.log('applicationService: application data loaded:', apiRes.data);
 				deferred.resolve(apiRes.data);
 			})
 			.catch(function (errRes){
 				//TODO: Handle different error response codes
-				console.error('Error loading application', errRes.data);
 				deferred.reject(errRes.data);
 			});
 			return deferred.promise;
@@ -28,7 +40,6 @@ angular.module('hypercube.applications')
 			}
 			$http.get(endpointUrl)
 			.then(function (apiRes){
-				console.log('application data loaded:', apiRes.data);
 				if(isList){
 					applications = apiRes.data;
 				} else {
@@ -38,26 +49,25 @@ angular.module('hypercube.applications')
 			})
 			.catch(function (errRes){
 				//TODO: Handle different error response codes
-				console.error('Error loading application data', errRes.data);
+				$log.error('Error loading application data', errRes.data);
 				deferred.reject(errRes.data);
 			});
 			return deferred.promise;
 		},
 		del:function(applicationId){
 			var deferred = $q.defer();
-			// console.log('Loading application with ID:', applicationId);
+			// $log.log('Loading application with ID:', applicationId);
 			if(applicationId){
 				endpointUrl =  DB_URL + "apps/" + applicationId;
 			}
 			$http.delete(endpointUrl)
 			.then(function (apiRes){
-				console.log('application succesfully deleted:', apiRes.data);
-				applications = apiRes.data;
+				// applications = apiRes.data;
 				deferred.resolve(apiRes.data);
 			})
 			.catch(function (errRes){
 				//TODO: Handle different error response codes
-				console.error('Error deleting application', errRes.data);
+				$log.error('Error deleting application', errRes.data);
 				deferred.reject(errRes.data);
 			});
 			return deferred.promise;

@@ -3,12 +3,14 @@
 	<head> 
 		<link rel="stylesheet" href="app.css">
 		<link rel="stylesheet" href="/components/nav/nav.css">
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.css">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<title>Hypercube</title>
 	</head>
 	<body ng-app="hypercube" ng-controller="AppCtrl">
-		<div ui-view></div>
+		<div ui-view="topnav"></div>
+		<div ui-view="main"></div>
+		<div ui-view="footer"></div>
 	</body>
 	<script src="bower/angular/angular.js"></script>
 	<script src="bower/angular-animate/angular-animate.min.js"></script>

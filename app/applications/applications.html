@@ -1,29 +1,36 @@
-<md-content>
-  <div id="table-wrap">
-  <div class="table-responsive-vertical shadow-z-1">
-  <!-- Table starts here -->
-    <table id="table" class="table table-hover table-mc-light-blue">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Owner</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="app in applications"  ui-sref="app({name:app.name})">
-          <td data-title="Name">{{app.name}}</td>
-          <td data-title="Owner">{{app.owner.username || "No Owner"}}</td>
-          <td data-title="Delete" stop-event>      
-            <md-button ng-click="delete($index)"
-               aria-label="Delete"
-               class="md-icon-button" >
-                <i class="fa fa-trash"></i>
-            </md-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
+<md-content layout-padding>
+  <md-content layout-padding>
+    <md-grid-list
+        md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4"
+        md-row-height-md="1.6:1"
+        md-row-height-gt-md="2:1" md-row-height-sm="1:1"
+        md-gutter-gt-md="25px" md-gutter-gt-sm="20px" md-gutter="4px">
+      <md-grid-tile
+          ng-repeat="app in applications"
+          md-colspan-sm="2"
+          md-colspan-gt-sm="2"
+          md-rowspan-sm="1"
+          md-rowspan-md="2"
+          md-rowspan-gt-md="3">
+
+              <md-card layout-fill>
+                <md-card-content>
+                  <h2 ui-sref="app({name:app.name})" class="md-title">{{app.name}}</h2>
+                  <p>
+                  Owner: <strong>{{app.owner.username}}</strong>
+                  </p>
+                </md-card-content>
+                <div class="md-actions" layout="row" layout-align="end center" layout-padding>
+                  <md-button class="md-fab md-mini md-accent" aria-label="Use Android" ng-disabled="true">
+                    <i class="fa fa-user-plus"></i>
+                  </md-button>
+                  <span flex></span>
+                  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ui-sref="app({name:app.name})">
+                    <i class="fa fa-cubes"></i>
+                  </md-button>
+                </div>
+              </md-card>
+      </md-grid-tile>
+    </md-grid-list>
+  </md-content>
 </md-content>

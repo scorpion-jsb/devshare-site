@@ -1,11 +1,11 @@
 angular.module('hypercube.applications')
-.factory('applicationsService', ['$q', '$http', '$rootScope','$sessionStorage', function ($q, $http, $rootScope, $sessionStorage) {
+.factory('applicationsService', ['$q', '$http', '$rootScope','$sessionStorage', 'DB_URL', function ($q, $http, $rootScope, $sessionStorage, DB_URL) {
 	var applications = null;
 	return {
 		update:function(applicationId, applicationData){
 			var deferred = $q.defer();
 			console.log('applicationService: Updating application with id: ' + applicationId, applicationData);
-			$http.put('/apps/'+ applicationId, applicationData)
+			$http.put(DB_URL + '/apps/'+ applicationId, applicationData)
 			.then(function (apiRes){
 				console.log('applicationService: application data loaded:', apiRes.data);
 				deferred.resolve(apiRes.data);
@@ -20,7 +20,7 @@ angular.module('hypercube.applications')
 		get:function(applicationName){
 			var deferred = $q.defer();
 			// console.log('Loading application with ID:', applicationName);
-			var endpointUrl = "/apps";
+			var endpointUrl = DB_URL + "/apps";
 			var isList = true;
 			if(applicationName){
 				endpointUrl = endpointUrl + "/" + applicationName;
@@ -47,7 +47,7 @@ angular.module('hypercube.applications')
 			var deferred = $q.defer();
 			// console.log('Loading application with ID:', applicationId);
 			if(applicationId){
-				endpointUrl =  "apps/" + applicationId;
+				endpointUrl =  DB_URL + "apps/" + applicationId;
 			}
 			$http.delete(endpointUrl)
 			.then(function (apiRes){

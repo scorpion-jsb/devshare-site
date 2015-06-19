@@ -3,12 +3,8 @@ angular.module('hypercube')
 
 .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, USER_ROLES) {
   $stateProvider
-    .state('layout', {
-      abstract:true,
-      templateUrl:'components/nav/topnav-layout.html'
-    })
+
     .state('nav', {
-      parent:'layout',
       abstract:true,
       views:{
         'topnav':{
@@ -16,7 +12,7 @@ angular.module('hypercube')
           controller:'NavCtrl'
         },
         'main':{
-          templateUrl:'components/nav/sidenav-layout.html'
+          template:'<ui-view></ui-view>'
         }
       }
     })
@@ -30,14 +26,14 @@ angular.module('hypercube')
       parent:'nav',
       url:'/apps',
       authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'application/applications.html',
+      templateUrl:'applications/applications.html',
       controller:'ApplicationsCtrl'
     })
     .state('app', {
       parent:'nav',
       url:'/apps/:name',
       authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'application/application.html',
+      templateUrl:'applications/application.html',
       controller:'ApplicationCtrl'
     })
     .state('signup', {

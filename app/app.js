@@ -5,10 +5,14 @@ angular.module('hypercube', [
     'angular-jwt',
 
     'hypercube.auth',
-    'hypercube.account',
-    'hypercube.nav',
     'hypercube.const',
-    'hypercube.home'
+
+    'hypercube.nav',
+
+    'hypercube.account',
+    'hypercube.home',
+    'hypercube.applications'
+
   ])
 
 .directive('stopEvent', function () {

@@ -1,1 +1,1 @@
-angular.module('hypercube.applications', ['hypercube.users'])
+angular.module('hypercube.applications', ['hypercube.const'])

@@ -1,5 +1,5 @@
 angular.module('hypercube.applications')
-.controller('ApplicationCtrl', ['$scope', '$http', '$stateParams', 'applicationsService', 'usersService', function($scope, $http, $stateParams, applicationsService, usersService){
+.controller('ApplicationCtrl', ['$scope', '$http', '$stateParams', 'applicationsService', function($scope, $http, $stateParams, applicationsService){
 		$scope.data = {
 			loading:false,
 			error:null,
@@ -25,11 +25,7 @@ angular.module('hypercube.applications')
 			$scope.data.error = 'application Id is required to load application data';
 		}
 		//TODO: Make owner select an input that searches instead of a dropdown
-		$scope.getUsers = function(){
-			return usersService.get().then(function(usersList){
-				$scope.usersList = usersList;
-			});
-		};
+
 		$scope.update = function(){
 			$scope.data.editing = false;
 			$scope.data.loading = true;

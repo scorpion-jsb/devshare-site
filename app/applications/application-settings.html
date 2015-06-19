@@ -2,18 +2,15 @@
   <md-whiteframe flex class="md-whiteframe-z1" layout-align="center center">
     <section layout="row" layout-sm="column" layout-align="center center">
       <md-input-container >
-        <!-- Use floating label instead of placeholder -->
         <label>Name</label>
         <input ng-model="application.name" type="text">
       </md-input-container>
       <md-input-container >
-        <!-- Use floating placeholder instead of label -->
         <label>createdAt</label>
         <input ng-model="application.createdAt" type="text">
       </md-input-container>
     </section>
     <section layout="column" layout-sm="column">
-      <!-- <h4 class="md-title">Role</h4> -->
       <label class="md-title">Owner</label>
       <label>{{application.owner.username}}</label>
 

@@ -31,10 +31,23 @@ angular.module('hypercube')
     })
     .state('app', {
       parent:'nav',
+      abstract:true,
       url:'/apps/:name',
       authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'applications/application.html',
+      templateUrl:'components/nav/sidenav-layout.html',
       controller:'ApplicationCtrl'
+    })
+    .state('app.settings', {
+      url:'/settings',
+      templateUrl:'applications/application-settings.html',
+    })
+    .state('app.editor', {
+      url:'/editor',
+      templateUrl:'applications/application-editor.html',
+    })
+    .state('app.preview', {
+      url:'/preview',
+      templateUrl:'applications/application-preview.html',
     })
     .state('signup', {
       parent:'nav',

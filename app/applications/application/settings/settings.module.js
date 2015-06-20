@@ -1,0 +1,1 @@
+angular.module('hypercube.application.settings', [])

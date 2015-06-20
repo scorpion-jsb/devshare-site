@@ -39,15 +39,17 @@ angular.module('hypercube')
     })
     .state('app.settings', {
       url:'/settings',
-      templateUrl:'applications/application-settings.html',
+      templateUrl:'applications/application/settings/settings.html',
+      controller:'SettingsCtrl'
     })
     .state('app.editor', {
       url:'/editor',
-      templateUrl:'applications/application-editor.html',
+      templateUrl:'applications/application/editor/editor.html',
+      controller:'EditorCtrl'
     })
     .state('app.preview', {
       url:'/preview',
-      templateUrl:'applications/application-preview.html',
+      templateUrl:'applications/application/preview/preview.html'
     })
     .state('signup', {
       parent:'nav',

@@ -3,6 +3,7 @@ angular.module('hypercube', [
     'ngMaterial', 
     'ngStorage', 
     'angular-jwt',
+    'ui.ace',
 
     'hypercube.auth',
     'hypercube.const',
@@ -11,7 +12,8 @@ angular.module('hypercube', [
 
     'hypercube.account',
     'hypercube.home',
-    'hypercube.applications'
+    'hypercube.applications',
+    'hypercube.application'
 
   ])
 

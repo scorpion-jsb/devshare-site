@@ -1,0 +1,28 @@
+<md-toolbar style="margin-bottom:30px;">
+  <div class="md-toolbar-tools">
+    <span flex></span>
+    <h2>
+      <span>Application Settings</span>
+    </h2>
+    <span flex></span>
+  </div>
+</md-toolbar>
+<md-content layout-padding>
+
+  <md-input-container>
+      <label>Name</label>
+      <input ng-model="application.name">
+    </md-input-container>
+    <md-input-container>
+      <label>Owner</label>
+      <input ng-model="application.owner.email" type="email" disabled>
+    </md-input-container>
+    <md-subheader class="md-no-sticky">Collaborators</md-subheader>
+    <md-contact-chips
+        ng-model="application.collaborators"
+        md-contacts="getPossibleUsers($query)"
+        md-contact-name="name"
+        md-contact-email="email"
+    >
+    </md-contact-chips>
+</md-content>

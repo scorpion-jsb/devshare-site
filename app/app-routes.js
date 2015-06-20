@@ -49,7 +49,8 @@ angular.module('hypercube')
     })
     .state('app.preview', {
       url:'/preview',
-      templateUrl:'applications/application/preview/preview.html'
+      templateUrl:'applications/application/preview/preview.html',
+      controller:'PreviewCtrl'
     })
     .state('signup', {
       parent:'nav',

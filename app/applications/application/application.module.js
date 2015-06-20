@@ -1,1 +1,1 @@
-angular.module('hypercube.application', ['hypercube.application.editor', 'hypercube.application.settings'])
+angular.module('hypercube.application', ['hypercube.application.editor', 'hypercube.application.settings','hypercube.application.preview'])

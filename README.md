@@ -4,6 +4,10 @@
 
 [Hypercube](http://hyper-cube.herokuapp.com) is a platform that allows you to develop complete web applications (front-end & back-end) right in the browser. 
 
+Hypercube is built to allow the user to create, manage and build applications going from the MVP state to a full scale service. The platform is build to be framework agnostic, meaning that many of the most popular frameworks are offered by default, but plugins can be made to handle non-default actions.
+
+The process of creating an app on Hypercube begins with the user entering a name and choosing a template application. From there, the user has full control of the application's front end and backend code. Along with this the use can control what type of libraries and database(s)the app will use, and of course, view the data visualtions that are generated from the usage of the application.
+
 ## Getting Started
 
 ### Local Development

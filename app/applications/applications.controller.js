@@ -17,7 +17,7 @@ angular.module('hypercube')
 		$scope.create = function(appData){
 			applicationsService.add(appData).then(function(newApp){
 				$log.log('Application created successfully:', newApp);
-				$state.go('app', {name:newApp.name});
+				$state.go('app.editor', {name:newApp.name});
 			}, function(err){
 				$log.error('[ApplicationsCtrl.create()] Error loading applications', err);
 				$scope.data.loading = false;
@@ -26,8 +26,9 @@ angular.module('hypercube')
 		};
 		$scope.delete = function(ind){
 			$scope.data.loading = true;
-			var applicationId = $scope.applications[ind]._id;
-			applicationsService.delete(applicationId).then(function(response){
+			var applicationName = $scope.applications[ind].name;
+			applicationsService.del(applicationName).then(function(response){
+				$scope.applications.splice(ind, 1);
 				$log.info('application deleted successfully');
 			}, function(err){
 				$log.error('Error loading applications', err);

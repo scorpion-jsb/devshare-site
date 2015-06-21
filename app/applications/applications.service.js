@@ -54,11 +54,11 @@ angular.module('hypercube.applications')
 			});
 			return deferred.promise;
 		},
-		del:function(applicationId){
+		del:function(applicationName){
 			var deferred = $q.defer();
-			// $log.log('Loading application with ID:', applicationId);
-			if(applicationId){
-				endpointUrl =  DB_URL + "apps/" + applicationId;
+			// $log.log('Loading application with ID:', applicationName);
+			if(applicationName){
+				endpointUrl =  DB_URL + "/apps/" + applicationName;
 			}
 			$http.delete(endpointUrl)
 			.then(function (apiRes){

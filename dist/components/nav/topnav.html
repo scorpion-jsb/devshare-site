@@ -1,0 +1,28 @@
+<md-toolbar class="navbar-dark shadow-z-2">
+  <div class="md-toolbar-tools">
+    <h2>
+      <span>
+        <a href="" ng-click="clickTitle()">
+          <i class="fa fa-cube ion-icon-lg" style="margin-right:5px; font-size:1.5em;"></i>
+          Hypercube
+        </a>
+      </span>
+    </h2>
+    <span flex></span>
+    <div ng-if="!currentUser" layout="row">
+      <md-button class="" ui-sref="login" >Login</md-button>
+      <md-button class="" ui-sref="signup">Signup</md-button>
+    </div>
+    <md-select ng-if="currentUser" ng-model="someVal" aria-label="User">
+      <md-select-label>
+        <i class="fa fa-user" ng-if="!currentUser.name"></i>
+        &nbsp;
+        {{currentUser.name}}
+        &nbsp;
+      </md-select-label>
+      <md-option ui-sref="home">Profile</md-option>
+      <md-option ng-click="logout()">Logout</md-option>
+    </md-select>
+      <!-- <md-button class="md-warn" ui-sref="signup" href="#/signup">Login</md-button> -->
+  </div>
+</md-toolbar>

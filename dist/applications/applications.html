@@ -1,0 +1,45 @@
+<md-content layout-padding>
+  <md-content layout-padding>
+    <md-grid-list md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4" md-row-height-md="1.6:1"
+    md-row-height-gt-md="2:1" md-row-height-sm="1:1"
+    md-gutter-gt-md="25px" md-gutter-gt-sm="20px" md-gutter="4px">
+      <md-grid-tile ng-repeat="app in applications" md-colspan-sm="2"
+      md-colspan-gt-sm="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
+        <md-card layout-fill>
+          <md-card-content>
+            <h2 ui-sref="app({name:app.name})" class="md-title">{{app.name}}</h2>
+            <p>
+            Owner: <strong>{{app.owner.username}}</strong>
+            </p>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center" layout-padding>
+            <md-button class="md-fab md-mini md-accent" aria-label="Settings" ng-click="delete($index)">
+              <i class="fa fa-trash"></i>
+            </md-button>
+            <span flex></span>
+            <md-button class="md-fab md-mini md-primary" aria-label="Open App" ui-sref="app.editor({name:app.name})">
+              <i class="fa fa-cubes"></i>
+            </md-button>
+          </div>
+        </md-card>
+      </md-grid-tile>
+      <!-- New app tile -->
+      <md-grid-tile class="apps-tile" md-colspan-sm="2" md-colspan-gt-sm="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
+        <md-card layout-fill>
+          <md-card-content>
+            <h4 class="title">New App</h4>
+            <md-input-container>
+              <label>App name</label>
+              <input ng-model="newApp.name" type="text">
+            </md-input-container>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center">
+            <md-button class="md-fab md-mini md-primary" aria-label="Create" ng-click="create(newApp)">
+              <i class="fa fa-plus"></i>
+            </md-button>
+          </div>
+        </md-card>
+      </md-grid-tile>
+    </md-grid-list>
+  </md-content>
+</md-content>

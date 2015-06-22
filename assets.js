@@ -1,4 +1,10 @@
 module.exports = {
+	style:[
+		'app.css',
+		'components/nav/nav.css',
+		'applications/applications.css',
+		'applications/application/editor/editor.css'
+	],
 	vendor: [
 		'bower/ace-builds/src-min-noconflict/ace.js',
 		'bower/angular/angular.js',

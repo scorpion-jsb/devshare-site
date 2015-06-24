@@ -1,6 +1,7 @@
 angular.module('hypercube.application.editor')
 .controller('EditorCtrl', ['$rootScope', '$scope', '$log', function($rootScope, $scope, $log){
-	//TODO: Change file mode dynamically (editor service)
+	$scope.data = {createMode:false};
+  //TODO: Change file mode dynamically (editor service)
 	$scope.aceLoaded = function(_editor) {
     // Options
     // _editor.setReadOnly(true);
@@ -10,5 +11,8 @@ angular.module('hypercube.application.editor')
 
   $scope.aceChanged = function(e) {
     //
+  };
+  $scope.newFile = function(){
+    
   };
 }])

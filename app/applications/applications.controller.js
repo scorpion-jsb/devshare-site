@@ -17,7 +17,7 @@ angular.module('hypercube')
 		$scope.create = function(appData){
 			applicationsService.add(appData).then(function(newApp){
 				$log.log('Application created successfully:', newApp);
-				$state.go('app.editor', {name:newApp.name});
+				$state.go('app.settings', {name:newApp.name});
 			}, function(err){
 				$log.error('[ApplicationsCtrl.create()] Error loading applications', err);
 				$scope.data.loading = false;

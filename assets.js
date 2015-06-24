@@ -50,6 +50,7 @@ module.exports = {
 
 		'applications/application/editor/editor.module.js',
 		'applications/application/editor/editor.controller.js',
+		'applications/application/editor/editor.service.js',
 
 		'applications/application/settings/settings.module.js',
 		'applications/application/settings/settings.controller.js',

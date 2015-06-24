@@ -5,15 +5,16 @@ angular.module('hypercube.applications')
 			error:null,
 			editing:false
 		};
-		//TODO: Move to a resolve
 		//Load application data based on name
 		if($stateParams.name){
 			$scope.data.loading = true;
-			console.log('applicationName:', $stateParams.name)
-			applicationsService.get($stateParams.name)
-			.then(function (applicationData){
-				console.log('application Detail Ctrl: application data loaded:', applicationData);
-				$scope.application = applicationData;
+			//TODO: Use already loaded applications list? Maybe in service?
+			applicationsService.get()
+			.then(function (applicationList){
+				console.log('application Detail Ctrl: application data loaded:', applicationList);
+				$scope.applications = applicationList;
+				$scope.application = _.findWhere($scope.applications, {name:$stateParams.name});
+				console.log('Application loaded:', $scope.application);
 			}).catch(function (err){
 				console.error('application Detail Ctrl: Error loading application with id:' + $stateParams.name, err);
 				$scope.data.error = err;

@@ -1,12 +1,27 @@
-<md-content layout-fill>
-	<md-toolbar>
-    <div class="md-toolbar-tools">
-      <span flex></span>
-      <h2>
-        <span>Application Code Editor</span>
-      </h2>
-      <span flex></span>
+<section layout="row" flex layout-fill>
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" flex="15" ng-if="currentUser">
+    <md-content layout-padding>
+<!--       <md-button ng-click="close()" class="md-primary" hide-gt-md>
+        Close Sidenav Left
+      </md-button> -->
+      <div layout="column">
+        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; New File</md-button>
+      </div>
+    </md-content>
+  </md-sidenav>
+  <md-content layout-fill>
+    <md-toolbar class="" style="height:20px; background-color:white;" ng-if="data.createMode">
+      <div class="md-toolbar-tools">
+        <div layout="row" layout-sm="column" layout-align="center center">
+          <md-input-container>
+            <label>File Name</label>
+            <input ng-model="newFile.name">
+          </md-input-container>
+          <md-button class="md-raised" ng-click="createFile()">Create</md-button>
+          <md-button class="md-raised" ng-click="data.createMode = false">Cancel</md-button>
+        </div>
       </div>
     </md-toolbar>
-	<div ui-ace="{ onLoad :aceLoaded }" layout-fill></div>
-</md-content>
+    <div ui-ace="{ onLoad :aceLoaded }" layout-fill></div>
+  </md-content>
+</section>

@@ -19,17 +19,16 @@ angular.module('hypercube.account')
 		if(!$scope.loginData.password || $scope.loginData.password.length < 1){
 			$scope.loginData.missing.password = true;
 		}
-		if($scope.loginData.username && $scope.loginData.password){
-			AuthService.login($scope.loginData)
-			.then(function (authData){
-				$log.log('Successful login:', authData);
-				$scope.loginData.loading = false;
-				$scope.showToast("Logged in");
-				$state.go('users');
-			}, function (err){
-				$scope.loginData = {loading:false, email:null, password:null};
-			});
-		}
+		$scope.loginData.loading = true;
+		AuthService.login($scope.loginData)
+		.then(function (authData){
+			console.log('Successful login:', authData);
+			$scope.loginData.loading = false;
+			$scope.showToast("Logged in");
+			$state.go('apps');
+		}, function (err){
+			$scope.loginData = {loading:false, username:null, password:null};
+		});
 	};
 	$scope.logout = function(){
 		AuthService.logout().then(function(){

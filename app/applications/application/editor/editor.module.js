@@ -1,1 +1,1 @@
-angular.module('hypercube.application.editor', ['ui.ace'])
+angular.module('hypercube.application.editor', ['ui.ace', 'hypercube.const'])

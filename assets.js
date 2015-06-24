@@ -1,5 +1,5 @@
 module.exports = {
-	style:[
+	styles:[
 		'app.css',
 		'components/nav/nav.css',
 		'applications/applications.css',
@@ -43,7 +43,6 @@ module.exports = {
 		'applications/applications.module.js',
 		'applications/applications.service.js',
 		'applications/applications.controller.js',
-		'applications/application.controller.js',
 
 		'applications/application/application.module.js',
 		'applications/application/application.controller.js',

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link rel="stylesheet" href="app.css"></link>
-<link rel="stylesheet" href="components/nav/nav.css"></link>
-<link rel="stylesheet" href="applications/applications.css"></link>
-<link rel="stylesheet" href="applications/application/editor/editor.css"></link>
+		<%= styles %>
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<title>Hypercube</title>
@@ -14,7 +11,5 @@
 			<div ui-view="main" layout-fill style="height:100%;"></div>
 			<div ui-view="footer"></div>
 	</body>
-	
-<script src="vendor.js"></script>
-<script src="app.js"></script>
+	<%= scripts %>
 </html>

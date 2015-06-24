@@ -2,8 +2,8 @@
 	"port": "5000",
 	"devFolder":"app",
 	"distFolder":"dist",
-	"envs":[
-		{"name":"local", "authUrl":"http://localhost:4000"},
-		{"name":"production", "authUrl":"hyper-cube.herokuapp.com"}
-	]
+	"envs":{
+		"local":{"name":"local", "authUrl":"http://localhost:4000"},
+		"production":{"name":"production", "authUrl":"hyper-cube.herokuapp.com"}
+	}
 }

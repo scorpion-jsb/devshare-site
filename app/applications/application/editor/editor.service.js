@@ -1,6 +1,5 @@
 angular.module('hypercube.application.editor')
 
-
 .service('Editor', [ '$http', '$log', '$q', 'DB_URL', function ($http, $log, $q, DB_URL){
 	
 	this.newFile = function(fileData, fileContents){
@@ -16,7 +15,7 @@ angular.module('hypercube.application.editor')
 		});
 		return d.promise;
 	};
-}]);
+}])
 
 .service('editorService', ['$log', function ($log){
 	this.newFile = function(){

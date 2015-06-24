@@ -5,13 +5,23 @@
         Close Sidenav Left
       </md-button> -->
       <div layout="column">
-        <md-button md-no-ink class="" ui-sref="app.editor" ><i class="fa fa-code"></i>  Editor</md-button>
-        <md-button md-no-ink class="" ui-sref="app.preview"><i class="fa fa-mobile"></i>  Preview</md-button>
-        <md-button md-no-ink class="" ui-sref="app.settings"><i class="fa fa-cogs"></i>  Settings</md-button>
+        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; New File</md-button>
       </div>
     </md-content>
   </md-sidenav>
   <md-content layout-fill>
+    <md-toolbar class="" style="height:20px; background-color:white;" ng-if="data.createMode">
+      <div class="md-toolbar-tools">
+        <div layout="row" layout-sm="column" layout-align="center center">
+          <md-input-container>
+            <label>File Name</label>
+            <input ng-model="newFile.name">
+          </md-input-container>
+          <md-button class="md-raised" ng-click="createFile()">Create</md-button>
+          <md-button class="md-raised" ng-click="data.createMode = false">Cancel</md-button>
+        </div>
+      </div>
+    </md-toolbar>
     <div ui-ace="{ onLoad :aceLoaded }" layout-fill></div>
   </md-content>
 </section>

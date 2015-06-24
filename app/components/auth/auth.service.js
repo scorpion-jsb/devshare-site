@@ -41,23 +41,23 @@ angular.module('hypercube.auth')
 		},
 		signup:function (signupData){
 			var deferred = $q.defer();
-			console.log('signup called with:', signupData);
+			$log.log('signup called with:', signupData);
 			var self = this;
 			//TODO: Check confirm
-			console.log('calling to:', DB_URL + '/signup');
 			$http.post(DB_URL + '/signup', {
 	      username:signupData.username,
 	      email: signupData.email,
 	      password: signupData.password,
 	      name:signupData.name,
-	      title:signupData.title
+	      title:signupData.title,
+	      role:"admin"
 	    })
 	    .then(function (successRes){
 	    	$log.log('[AuthService.signup()]: Signup successful:', successRes.data);
 	    	//Login with new user
 	    	$log.log('[AuthService.signup()]: Logging in as new user');
-	    	self.login({username:successRes.data.username, password:signupData.password}).then(function(){
-					$log.info('New user logged in successfully:', err);
+	    	self.login({username:successRes.data.username, password:signupData.password}).then(function(newUser){
+					$log.info('New user logged in successfully:', newUser);
 	    		deferred.resolve(successRes.data);
 	    	}, function(err){
 					$log.error('Error Logging in as new user:', err);

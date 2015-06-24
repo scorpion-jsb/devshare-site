@@ -2,26 +2,32 @@ angular.module('hypercube.account')
 .controller('AccountCtrl', ['$scope','AuthService', '$state', function($scope, AuthService, $state){
 	
 	// set-up loading state
-	$scope.signupForm = {
+	$scope.signupData = {
 		loading: false,
-		error:null
+		missing:{username:false, password:false}
 	};
-	$scope.loginForm = {
+	$scope.loginData = {
 		loading: false,
-		error:null
+		missing:{username:false, password:false}
 	};
-
 	// --------------- Auth Session ----------------- //
 	$scope.login = function() {
-		$scope.loginForm.loading = true;
-		AuthService.login($scope.loginForm)
+		$scope.loginData.loading = true;
+		if(!$scope.loginData.username || $scope.loginData.username.length < 1){
+			$scope.loginData.missing.username = true;
+		}
+		if(!$scope.loginData.password || $scope.loginData.password.length < 1){
+			$scope.loginData.missing.password = true;
+		}
+		$scope.loginData.loading = true;
+		AuthService.login($scope.loginData)
 		.then(function (authData){
 			console.log('Successful login:', authData);
-			$scope.loginForm.loading = false;
+			$scope.loginData.loading = false;
 			$scope.showToast("Logged in");
 			$state.go('apps');
 		}, function (err){
-			$scope.loginForm = {loading:false, email:null, password:null};
+			$scope.loginData = {loading:false, username:null, password:null};
 		});
 	};
 	$scope.logout = function(){

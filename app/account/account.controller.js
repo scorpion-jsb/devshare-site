@@ -1,5 +1,5 @@
 angular.module('hypercube.account')
-.controller('AccountCtrl', ['$scope','AuthService', '$state', function($scope, AuthService, $state){
+.controller('AccountCtrl', ['$scope','AuthService', '$state', '$log', function($scope, AuthService, $state, $log){
 	
 	// set-up loading state
 	$scope.signupData = {
@@ -10,6 +10,7 @@ angular.module('hypercube.account')
 		loading: false,
 		missing:{username:false, password:false}
 	};
+	$scope.userData = $scope.currentUser;
 	// --------------- Auth Session ----------------- //
 	$scope.login = function() {
 		if(!$scope.loginData.username || $scope.loginData.username.length < 1){
@@ -22,7 +23,7 @@ angular.module('hypercube.account')
 			$scope.loginData.loading = true;
 			AuthService.login($scope.loginData)
 			.then(function (authData){
-				console.log('Successful login:', authData);
+				$log.log('Successful login:', authData);
 				$scope.loginData.loading = false;
 				$scope.showToast("Logged in");
 				$state.go('apps');
@@ -31,26 +32,32 @@ angular.module('hypercube.account')
 				$scope.showToast("Error Logging in");
 			});
 		}
-
 	};
 	$scope.logout = function(){
 		AuthService.logout().then(function(){
-			console.log('logout successful');
+			$log.log('logout successful');
       // $scope.showToast('Successfully Logged Out');
 			//TODO: Refresh page after logout
 			$state.go('home');
 		}, function(err){
-			console.error('error logging out');
+			$log.error('error logging out');
 		});
 	};
 	$scope.signup = function(){
 		AuthService.signup($scope.signupForm).then(function(){
-			console.log('Signup successful');
-			//TODO: Refresh page after logout
-      // $scope.showToast('Successfully signed up');
-			$state.go('users');
+			$log.log('Signup successful');
+      $scope.showToast('Successfully signed up');
+			$state.go('apps');
 		}, function(err){
-			console.error('error siging up:', err);
+			$log.error('error siging up:', err);
+		});
+	};
+	$scope.update = function(){
+		AuthService.updateProfile($scope.user).then(function (updatedAccount){
+			$log.log('Account update successful');
+      $scope.showToast('User account updated successfully');
+		}, function(err){
+			$log.error('error logging out');
 		});
 	};
 }])

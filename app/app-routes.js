@@ -52,6 +52,12 @@ angular.module('hypercube')
       templateUrl:'applications/application/preview/preview.html',
       controller:'PreviewCtrl'
     })
+    .state('account', {
+      parent:'nav',
+      url:'/account',
+      templateUrl:'account/account-index.html',
+      controller:'AccountCtrl'
+    })
     .state('signup', {
       parent:'nav',
       url:'/signup',

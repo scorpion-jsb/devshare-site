@@ -49,7 +49,7 @@ angular.module('hypercube.auth')
 	      email: signupData.email,
 	      password: signupData.password,
 	      name:signupData.name,
-	      title:signupData.title
+	      title:signupData.title || "Alpha User"
 	    })
 	    .then(function (successRes){
 	    	$log.log('[AuthService.signup()]: Signup successful:', successRes.data);
@@ -111,13 +111,14 @@ angular.module('hypercube.auth')
 			});
 			return deferred.promise;
 		},
-		updateProfile:function (userId, userData){
+		updateAccount:function (userId, userData){
 			var deferred = $q.defer();
 			console.log('Updating user with id: ' + userId, userData);
 			//TODO: Get User id from token
 			$http.put(DB_URL + '/user/'+ userId, userData)
 			.then(function (updateRes){
 				console.log('Profile update responded:', updateRes.data);
+				$rootScope.currentUser = updateRes.data;
 				deferred.resolve(updateRes.data);
 			})
 			.catch(function (errRes){

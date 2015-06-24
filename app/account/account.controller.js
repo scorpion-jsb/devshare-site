@@ -12,23 +12,26 @@ angular.module('hypercube.account')
 	};
 	// --------------- Auth Session ----------------- //
 	$scope.login = function() {
-		$scope.loginData.loading = true;
 		if(!$scope.loginData.username || $scope.loginData.username.length < 1){
 			$scope.loginData.missing.username = true;
-		}
-		if(!$scope.loginData.password || $scope.loginData.password.length < 1){
+			$scope.showToast("Username or Email is required to login");
+		} else if(!$scope.loginData.password || $scope.loginData.password.length < 1){
 			$scope.loginData.missing.password = true;
+			$scope.showToast("Password requried to login");
+		} else {
+			$scope.loginData.loading = true;
+			AuthService.login($scope.loginData)
+			.then(function (authData){
+				console.log('Successful login:', authData);
+				$scope.loginData.loading = false;
+				$scope.showToast("Logged in");
+				$state.go('apps');
+			}, function (err){
+				$scope.loginData = {loading:false, username:null, password:null};
+				$scope.showToast("Error Logging in");
+			});
 		}
-		$scope.loginData.loading = true;
-		AuthService.login($scope.loginData)
-		.then(function (authData){
-			console.log('Successful login:', authData);
-			$scope.loginData.loading = false;
-			$scope.showToast("Logged in");
-			$state.go('apps');
-		}, function (err){
-			$scope.loginData = {loading:false, username:null, password:null};
-		});
+
 	};
 	$scope.logout = function(){
 		AuthService.logout().then(function(){

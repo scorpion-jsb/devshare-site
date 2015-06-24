@@ -34,7 +34,7 @@ angular.module('hypercube')
       abstract:true,
       url:'/apps/:name',
       authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
-      templateUrl:'components/nav/sidenav-layout.html',
+      templateUrl:'applications/application/application.html',
       controller:'ApplicationCtrl'
     })
     .state('app.settings', {

@@ -49,8 +49,7 @@ angular.module('hypercube.auth')
 	      email: signupData.email,
 	      password: signupData.password,
 	      name:signupData.name,
-	      title:signupData.title,
-	      role:"admin"
+	      title:signupData.title
 	    })
 	    .then(function (successRes){
 	    	$log.log('[AuthService.signup()]: Signup successful:', successRes.data);

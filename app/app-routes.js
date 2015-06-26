@@ -1,7 +1,14 @@
 angular.module('hypercube')
 // Whitelist Urls
 
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, USER_ROLES) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, USER_ROLES, $sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+   // Allow same origin resource loads.
+   'self',
+   // // Allow loading from our assets domain.  Notice the difference between * and **.
+   // 'http://srv*.assets.example.com/**'
+   'http://*.s3.amazonaws.com/**'
+   ]);
   $stateProvider
 
     .state('nav', {
@@ -35,7 +42,19 @@ angular.module('hypercube')
       url:'/apps/:name',
       authorizedRoles:[USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.user],
       templateUrl:'applications/application/application.html',
-      controller:'ApplicationCtrl'
+      controller:'ApplicationCtrl',
+      resolve:{
+        application:function(applicationsService, $q, $stateParams){
+          return $q(function(resolve, reject){
+            applicationsService.get().then(function (applicationList){
+              console.log('application Detail Ctrl: application data loaded:', applicationList);
+              resolve(_.findWhere(applicationList, {name:$stateParams.name}));
+            }, function(err){
+              reject(err);
+            });
+          });
+        }
+      }
     })
     .state('app.settings', {
       url:'/settings',

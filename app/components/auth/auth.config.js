@@ -39,7 +39,11 @@ angular.module('hypercube.auth')
 //Intercept $http requests and responses
 .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS, Session, $log) {
   function isHTTP(url){
-    return url.search(".html") == -1
+    if(url){
+      return url.search(".html") == -1
+    } else {
+      return true;
+    }
   }
   return {
     //Set auth header on request if it is available

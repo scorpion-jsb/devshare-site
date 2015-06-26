@@ -1,9 +1,9 @@
 var gulp = require('gulp'),
 connect = require('gulp-connect'),
 ngConstant = require('gulp-ng-constant'),
-rename = require("gulp-rename"),
-s3 = require("gulp-s3"),
-template = require("gulp-template"),
+rename = require('gulp-rename'),
+s3 = require('gulp-s3'),
+template = require('gulp-template'),
 ngAnnotate = require('gulp-ng-annotate'),
 concat = require('gulp-concat'),
 rename = require('gulp-rename'),
@@ -19,17 +19,16 @@ var locatedVendorAssets = locateAssets('vendor');
 
 function locateAssets(assetType){
   return assets[assetType].map(function(asset){
-    return "./" + conf.devFolder + "/" + asset;
+    return './' + conf.devFolder + '/' + asset;
   });
 }
-console.log('located:', locatedStyleAssets, locatedAppAssets, locatedVendorAssets);
 /** Copy Style Assets to single styles.css file in distFolder
  */
 //TODO: Handle scripts per env
 gulp.task('assets:style', function () {
   return gulp.src(locatedStyleAssets)
   .pipe(concat('styles.css'))
-  .pipe(gulp.dest(conf.distFolder + "/"));
+  .pipe(gulp.dest(conf.distFolder + '/'));
 });
 
 /** Copy Vendor libs to single vendor.js file in distFolder
@@ -54,38 +53,40 @@ gulp.task('assets:app', function () {
  */
 //TODO: Convert html files to js?
 gulp.task('copyHtml', function(){
-    return gulp.src([conf.devFolder + "/**/*.html", '!' + conf.devFolder + "/index-template.html", '!' + conf.devFolder + "/index.html"], {base:"./app/"})
+    return gulp.src([conf.devFolder + '/**/*.html', '!' + conf.devFolder + '/index-template.html', '!' + conf.devFolder + '/index.html'], {base:'./app/'})
     .pipe(gulp.dest(conf.distFolder));
 });
 
 /** Build script and style tags to place into HTML
  */
 gulp.task('assetTags:dev', function () {
-  return gulp.src(conf.devFolder + "/index-template.html")
-    .pipe(template({scripts:refBuilder.buildScriptTags("local"), styles:refBuilder.buildStyleTags("local")}))
+  return gulp.src(conf.devFolder + '/index-template.html')
+    .pipe(template({scripts:refBuilder.buildScriptTags('local'), styles:refBuilder.buildStyleTags('local')}))
     // Writes script reference to index.html dist/ folder
-    .pipe(rename("index.html"))
+    .pipe(rename('index.html'))
     .pipe(gulp.dest(conf.devFolder));
 
 });
+
 gulp.task('assetTags:prod', function () {
-  return gulp.src(conf.devFolder + "/index-template.html")
-    .pipe(template({scripts:refBuilder.buildScriptTags("prod"), styles:refBuilder.buildStyleTags("prod")}))
+  return gulp.src(conf.devFolder + '/index-template.html')
+    .pipe(template({scripts:refBuilder.buildScriptTags('prod'), styles:refBuilder.buildStyleTags('prod')}))
     // Writes script reference to index.html devfolder
-    .pipe(rename("index.html"))
+    .pipe(rename('index.html'))
     .pipe(gulp.dest(conf.distFolder));
 });
+
 /** Create Angular constants file
  */
 //TODO: Have this build per environment
 gulp.task('buildEnv', function () {
   return ngConstant({
     name: 'hypercube.const',
-    constants: { VERSION:pkg.version,  DB_URL:conf.envs.local.authUrl || "localhost:4000"},
+    constants: { VERSION:pkg.version,  DB_URL:conf.envs.local.authUrl || 'localhost:4000'},
     stream:true
   })
   // Writes config.js to dist/ folder
-  .pipe(rename("app-const.js"))
+  .pipe(rename('app-const.js'))
   .pipe(gulp.dest(conf.devFolder));
 });
 
@@ -93,10 +94,10 @@ gulp.task('buildEnv', function () {
 */
 gulp.task('s3Upload', function() {
 	var s3Config = {
-		"key":process.env.HYPERCUBE_S3_KEY,
-		"secret":process.env.HYPERCUBE_S3_SECRET,
-		"bucket":"hyper-cube",
-		"region":"us-east-1"
+		key:process.env.HYPERCUBE_S3_KEY,
+		secret:process.env.HYPERCUBE_S3_SECRET,
+		bucket:'hyper-cube',
+		region:'us-east-1'
 	}
 	gulp.src('./' + conf.distFolder + '/**')
     .pipe(s3(s3Config));

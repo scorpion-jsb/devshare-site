@@ -15,7 +15,9 @@ module.exports = {
 		'bower/angular-jwt/dist/angular-jwt.min.js',
 		'bower/ngstorage/ngStorage.min.js',
 		'bower/underscore/underscore-min.js',
-		'bower/angular-ui-ace/ui-ace.js'
+		'bower/angular-ui-ace/ui-ace.js',
+		'bower/aws-sdk-js/dist/aws-sdk.min.js'
+
 	],
 
 	app: [

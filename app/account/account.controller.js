@@ -1,5 +1,5 @@
 angular.module('hypercube.account')
-.controller('AccountCtrl', ['$scope','AuthService', '$state', '$log', function($scope, AuthService, $state, $log){
+.controller('AccountCtrl', ['$scope','AuthService', '$state', '$log', function ($scope, AuthService, $state, $log){
 	
 	// set-up loading state
 	$scope.signupData = {
@@ -29,7 +29,11 @@ angular.module('hypercube.account')
 				$state.go('apps');
 			}, function (err){
 				$scope.loginData = {loading:false, username:null, password:null};
-				$scope.showToast("Error Logging in");
+				var msg = "Login Error: ";
+				if(err){
+					msg += err;
+				}
+				$scope.showToast(msg);
 			});
 		}
 	};
@@ -39,16 +43,16 @@ angular.module('hypercube.account')
       // $scope.showToast('Successfully Logged Out');
 			//TODO: Refresh page after logout
 			$state.go('home');
-		}, function(err){
+		}, function (err){
 			$log.error('error logging out');
 		});
 	};
 	$scope.signup = function(){
-		AuthService.signup($scope.signupForm).then(function(){
+		AuthService.signup($scope.signupForm).then(function (){
 			$log.log('Signup successful');
       $scope.showToast('Successfully signed up');
 			$state.go('apps');
-		}, function(err){
+		}, function (err){
 			$log.error('error siging up:', err);
 		});
 	};
@@ -56,7 +60,7 @@ angular.module('hypercube.account')
 		AuthService.updateProfile($scope.user).then(function (updatedAccount){
 			$log.log('Account update successful');
       $scope.showToast('User account updated successfully');
-		}, function(err){
+		}, function (err){
 			$log.error('error logging out');
 		});
 	};

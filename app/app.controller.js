@@ -20,8 +20,6 @@ angular.module('hypercube')
     };
     $scope.showAlert = function(ev, alertObj) {
       // Appending dialog to document.body to cover sidenav in docs app
-      // Modal dialogs should fully cover application
-      // to prevent interaction outside of dialog
       var title = alertObj.title || "Alert";
       var description = alertObj.description || "Error, please try again.";
       console.log("showAlert:", ev, alertObj);

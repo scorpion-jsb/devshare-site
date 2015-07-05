@@ -55,13 +55,13 @@ angular.module('hypercube.auth')
 	    	$log.log('[AuthService.signup()]: Signup successful:', successRes.data);
 	    	//Login with new user
 	    	$log.log('[AuthService.signup()]: Logging in as new user');
-	    	self.login({username:successRes.data.username, password:signupData.password}).then(function(newUser){
+	    	self.login({username:successRes.data.username, password:signupData.password}).then(function (newUser){
 					$log.info('New user logged in successfully:', newUser);
 	    		deferred.resolve(successRes.data);
-	    	}, function(err){
+	    	}, function (err){
 					$log.error('Error Logging in as new user:', err);
 	    		deferred.reject(err);
-	    	})
+	    	});
 	    })
 	    .catch(function (apiResponse) {
 	      console.error('AuthService: Error signing up:', apiResponse);
@@ -90,7 +90,7 @@ angular.module('hypercube.auth')
 	    .catch(function (errRes) {
 	      console.error('Error logging in:', errRes);
 	    	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-	      if (errRes.status === 209) {
+	      if (errRes.status === 401) {
     			console.error('invalid email/password combo', errRes);
       	}
 	      deferred.reject(errRes.data);

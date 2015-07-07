@@ -2,7 +2,6 @@ angular.module('hypercube.application.editor')
 
 .service('Editor', [ '$http', '$log', '$q', 'DB_URL', function ($http, $log, $q, DB_URL){
 	this.setAce = function(aceEditor){
-		$log.log('Editor.newFile()');
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
 	};
@@ -26,12 +25,25 @@ angular.module('hypercube.application.editor')
 			return this.ace.getSession().setMode("ace/mode/javascript");
 		}
 	};
-	this.newFile = function(appData, filePath){
-		$log.log('Editor.newFile()');
+	this.getStructure = function(appData){
+		$log.log('[Editor.getStructure()] Called with:', appData);
 		var d = $q.defer();
-		var apiUrl = DB_URL + '/apps/' + appData.name + '/files?action=putObject&key=' + filePath;
+		var apiUrl = DB_URL + '/apps/' + appData.name + '/files';
 		$http.get(apiUrl).success(function (newUrlRes){
-			$log.info('[Editor] New file url generated successfully:', newUrlRes);
+			$log.info('[Editor.getStructure()] File stucture loaded successfully:', newUrlRes);
+			d.resolve(newUrlRes.data);
+		}).error(function (errRes){
+			$log.error('[Editor] Error getting file structure:', errRes);
+			d.reject(errRes);
+		});
+		return d.promise;
+	};
+	this.newFile = function(appData, filePath){
+		$log.log('[Editor.newFile()] Called with:', appData, filePath);
+		var d = $q.defer();
+		var apiUrl = DB_URL + '/apps/' + appData.name + '/files?key=' + filePath + '&action=putObject';
+		$http.get(apiUrl).success(function (newUrlRes){
+			$log.info('[Editor.newFile()] New file url generated successfully:', newUrlRes);
 			//Make put request to new url
 			$http.put(newUrlRes, {Body:'asdf'}).success(function(newFileRes){
 				$log.info('New file created:', newFileRes);

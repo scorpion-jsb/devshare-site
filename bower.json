@@ -10,7 +10,9 @@
     "angular-ui-ace": "~0.2.3",
     "aws-sdk-js": "~2.1.35",
     "angularfire": "~1.1.2",
-    "angular-tree-control": "~0.2.10"
+    "angular-tree-control": "~0.2.10",
+    "firepad": "~1.1.1",
+    "font-awesome": "~4.3.0"
   },
   "resolutions": {
     "angular": "1.4.1"

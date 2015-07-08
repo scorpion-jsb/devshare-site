@@ -1,16 +1,19 @@
 <section layout="row" flex layout-fill>
 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" flex="15" ng-if="currentUser">
-    <md-content layout-padding>
+    <md-content layout-padding layout-align="center" layout="column">
 <!--       <md-button ng-click="close()" class="md-primary" hide-gt-md>
         Close Sidenav Left
       </md-button> -->
-      <div layout="column">
-        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; <i class="fa fa-file-o"></i></md-button>
-        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; <i class="fa fa-folder"></i></md-button>
+      <div layout="row">
+        <md-button md-no-ink class="md-raised button-new" ng-click="data.createMode = 'file'" ><i class="fa fa-plus"></i> &nbsp; <i class="fa fa-file"></i></md-button>
+        <md-button md-no-ink class="md-raised button-new" ng-click="data.createMode = 'folder'" ><i class="fa fa-plus"></i> &nbsp; <i class="fa fa-folder"></i></md-button>
       </div>
-      <treecontrol class="tree-classic" tree-model="files" options="opts" on-selection="openFile(node)">
-        {{node.name}}
-      </treecontrol>
+      <!-- Files -->
+      <div class="filestree-wrapper" layout-padding>
+        <treecontrol class="tree-classic" tree-model="files" options="opts" on-selection="openFile(node)">
+          {{node.name}}
+        </treecontrol>
+      </div>
     </md-content>
   </md-sidenav>
   <md-content layout-fill>
@@ -18,11 +21,12 @@
       <div class="md-toolbar-tools">
         <div layout="row" layout-sm="column" layout-align="center center">
           <md-input-container>
-            <label>File Name</label>
-            <input ng-model="data.newFileName">
+            <label ng-if="data.createMode == 'file'">File Name</label>
+            <label ng-if="data.createMode == 'folder'">Folder Name</label>
+            <input ng-model="data.newName">
           </md-input-container>
-          <md-button class="md-raised" ng-click="newFile()">Create</md-button>
-          <md-button class="md-raised" ng-click="data.createMode = false">Cancel</md-button>
+          <md-button class="md-raised" ng-click="createNew()">Create</md-button>
+          <md-button class="md-raised" ng-click="data.createMode = null">Cancel</md-button>
         </div>
       </div>
     </md-toolbar>

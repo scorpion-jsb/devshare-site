@@ -7,6 +7,7 @@ angular.module('hypercube.application.editor')
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
+		this.ace.$blockScrolling = Infinity; //Disable warning message
 	};
 	this.setApplication = function(applicationData){
 		this.application = applicationData;
@@ -36,25 +37,14 @@ angular.module('hypercube.application.editor')
 			return this.ace.getSession().setMode("ace/mode/javascript");
 		}
 	};
-	this.openFile = function(appData, fileData){
+	this.openFile = function(file){
 		$log.log('Editor.openFile()');
 		var d = $q.defer();
-		this.setFileType(fileData.filetype);
-		if(appData.frontend.files){
-			//Load contents by using path parameter
-			//fileData.path
-			var apiUrl = DB_URL + '/apps/' + appData.name + '/files?action=getObject&key=' + fileData.path;
-			$http.get(apiUrl).success(function (openUrlRes){
-				$log.info('[Editor] File open url retreived successfully:', openUrlRes);
-				//TODO: User signed url to open file
-				d.resolve(openUrlRes.data);
-			}).error(function (errRes){
-				$log.error('[Editor] Error creating new file:', err);
-				d.reject(err);
-			});
-		} else {
-			//Get app data to check again for files
-		}
+		//// Create Firepad.
+		this.setFileType(file.filetype);
+    var firepad = Firepad.fromACE(file.$ref(), this.ace, {
+      defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
+    });
 		return d.promise;
 	};
 	// this.newFile = function(appData, filePath){
@@ -82,8 +72,16 @@ angular.module('hypercube.application.editor')
 //File Object 
 .factory('File', ['$firebaseObject', function ($firebaseObject){
 	function File(snap){
-		angular.extend(this, snap.val()); //Add current value from Firebase
-		angular.extend(this,$firebaseObject(snap.ref())); //Add firebaseObject functionality
+		//Check that snap is a snapshot
+		if(snap.val()){
+			//Snap is a snapshot
+			angular.extend(this, snap.val()); //Add current value from Firebase
+			_.extend(this,$firebaseObject(snap.ref())); //Add firebaseObject functionality
+		} else {
+			//Snap is not a snapshot
+			angular.extend(this, snap);
+		}
+
 		// this.$id = snap.key();
 		// this.name = snap.val().name || "test.html";
 		// this.setDefaults(snap);
@@ -106,7 +104,23 @@ angular.module('hypercube.application.editor')
     $$added: function(snap) {
       return new File(snap);
     },
+    $addFile:function(fileData){
+    	//TODO: Handle path
+    	var pathArray = fileData.path.split("/");
+    	//TODO: Handle file types
+    	//TODO: Make key be safe version of name
+    	// var self = this;
+    	// _.each(pathArray, function (loc){
+    	// });
+    	// var filePath = self.$ref();
 
+    	this.$add({name:fileData.path, type:'file', filetype:fileData.filetype || 'javascript'});
+    },
+    $addFolder:function(folderData){
+    	//TODO: Handle path
+    	var pathArray = folderData.path.split("/");
+    	this.$add({name:folderData.path, type:'folder', children:[{}]});
+    }
     // override the $$updated behavior to call a method on the File
     // $$updated: function(snap) {
     //   var msg = this.$getRecord(snap.key());

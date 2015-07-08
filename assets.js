@@ -1,5 +1,9 @@
 module.exports = {
 	styles:[
+		'bower/angular-material/angular-material.min.css',
+		'bower/font-awesome/css/font-awesome.min.css',
+		'bower/firepad/dist/firepad.css',
+		'bower/angular-tree-control/css/tree-control.css',
 		'app.css',
 		'components/nav/nav.css',
 		'applications/applications.css',
@@ -19,8 +23,8 @@ module.exports = {
 		'bower/aws-sdk-js/dist/aws-sdk.min.js',
 		'bower/angular-tree-control/angular-tree-control.js',
 		'bower/firebase/firebase.js',
-		'bower/angularfire/dist/angularfire.js'
-
+		'bower/angularfire/dist/angularfire.js',
+		'bower/firepad/dist/firepad.min.js'
 	],
 
 	app: [

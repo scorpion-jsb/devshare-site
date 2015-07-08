@@ -1,6 +1,6 @@
 angular.module('hypercube.application.editor')
 .controller('EditorCtrl', ['$rootScope', '$scope', '$log', 'Editor',  'application', function($rootScope, $scope, $log, Editor, application){
-	$scope.data = {createMode:false, newFileName:null};
+	$scope.data = {createMode:null, newFileName:null};
   $scope.file = {};
   $log.info('$scope.application:', $scope.application);
   Editor.setApplication($scope.application);
@@ -21,19 +21,26 @@ angular.module('hypercube.application.editor')
   $scope.aceChanged = function(e) {
     //TODO: Sync these changes with a db
   };
-  $scope.openFile = function(){
+  $scope.openFile = function(file){
     //TODO: Open file from synced db
-    Editor.openFile().then(function (openedFile){
+    Editor.openFile(file).then(function (openedFile){
       $log.log('file opened:', openedFile);
     }, function (err){
       $log.error('[EditorCtrl.openFile()] Error opening file:', err);
     });
   };
-  $scope.newFile = function(){
+  $scope.createNew = function(){
     // $scope.files.$add({name:$scope.data.newFileName});
+    //TODO: Handle creating both file and folder
     //TODO: Make sure file name can be key name
-    $scope.files.$add({name:$scope.data.newFileName, filetype:"javascript"});
-    $log.log('files added to:', $scope.files);
+    var newObj = {path:$scope.data.newName};
+    if($scope.data.createMode == "folder"){
+      $scope.files.$addFolder(newObj);
+      $log.log('New folder added:', $scope.files);
+    } else {
+      $scope.files.$addFile(newObj);
+      $log.log('New file added:', $scope.files);
+    }
   };
   $scope.uploadFile = function(){
 

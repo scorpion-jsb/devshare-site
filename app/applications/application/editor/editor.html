@@ -5,7 +5,8 @@
         Close Sidenav Left
       </md-button> -->
       <div layout="column">
-        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; New File</md-button>
+        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; <i class="fa fa-file-o"></i></md-button>
+        <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; <i class="fa fa-folder"></i></md-button>
       </div>
       <treecontrol class="tree-classic" tree-model="files" options="opts" on-selection="openFile(node)">
         {{node.name}}

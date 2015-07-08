@@ -1,3 +1,5 @@
+var filesLocation = 'appFiles';
+
 angular.module('hypercube.application.editor')
 
 .service('Editor', [ '$http', '$log', '$q', 'DB_URL', 'Files', function ($http, $log, $q, DB_URL, Files){
@@ -77,10 +79,45 @@ angular.module('hypercube.application.editor')
 	// };
 
 }])
-.factory('Files', ['fbutil', '$firebaseArray', function (fbutil, $firebaseArray) {
+//File Object 
+.factory('File', ['$firebaseObject', function ($firebaseObject){
+	function File(snap){
+		angular.extend(this, snap.val()); //Add current value from Firebase
+		angular.extend(this,$firebaseObject(snap.ref())); //Add firebaseObject functionality
+		// this.$id = snap.key();
+		// this.name = snap.val().name || "test.html";
+		// this.setDefaults(snap);
+	}
+	File.prototype = {
+    setDefaults: function(snapshot) {
+      var oldData = angular.extend({}, this.data);
+      // add a parsed date to our widget
+      // this._date = new Date(this.data.date);
+			if(!this.filetype){
+				this.filetype = "javascript";
+			}
+    },
+	};
+	return File;
+}])
+.factory("FilesFactory", ['$firebaseArray', 'File', function ($firebaseArray, File) {
+  return $firebaseArray.$extend({
+    // override the $createObject behavior to return a File object
+    $$added: function(snap) {
+      return new File(snap);
+    },
+
+    // override the $$updated behavior to call a method on the File
+    // $$updated: function(snap) {
+    //   var msg = this.$getRecord(snap.key());
+    //   return msg.update(snap);
+    // }
+  });
+}])
+.factory('Files', ['fbutil', 'FilesFactory', function (fbutil, FilesFactory) {
 	return function (appName){
-		var ref = fbutil.ref('appFiles', appName);
-  	return $firebaseArray(ref);
+		var ref = fbutil.ref(filesLocation, appName);
+  	return FilesFactory(ref);
 	}
 }])
 .service('editorService', ['$log', function ($log){

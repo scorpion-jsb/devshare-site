@@ -6,7 +6,7 @@ angular.module('hypercube.application.editor')
   Editor.setApplication($scope.application);
   Editor.getFiles().then(function(fileStructure){
     $scope.files = fileStructure;
-    $log.info('files set:', $scope.files);
+    $log.info('Structure set:', $scope.files);
   });
   // Editor.getStructure($scope.application).then(function (fileStructure){
   //   console.log('file stucture:', fileStructure);

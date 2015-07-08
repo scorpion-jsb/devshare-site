@@ -3,7 +3,6 @@ var filesLocation = 'appFiles';
 angular.module('hypercube.application.editor')
 
 .service('Editor', [ '$http', '$log', '$q', 'DB_URL', 'Files', function ($http, $log, $q, DB_URL, Files){
-	
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
@@ -69,6 +68,39 @@ angular.module('hypercube.application.editor')
 	// };
 
 }])
+//Folder Object 
+.factory('Folder', ['$firebaseObject', '$firebaseArray', function ($firebaseObject, $firebaseArray){
+	function Folder(snap){
+		//Check that snap is a snapshot
+		if(snap.val()){
+			//Snap is a snapshot
+			angular.extend(this, snap.val()); //Add current value from Firebase
+			_.extend(this,$firebaseObject(snap.ref())); //Add firebaseObject functionality
+			//Fill children parameter if folder without children
+			
+			if(!this.children){
+				this.children = [{}];
+			} else {
+				this.children = $firebaseArray(snap.ref().child('children'));
+			}
+		} else {
+			//Snap is not a snapshot
+			angular.extend(this, snap);
+		}
+		if(!this.type){
+			this.type = "folder";
+		}
+		// this.$id = snap.key();
+		// this.name = snap.val().name || "test.html";
+		// this.setDefaults(snap);
+	}
+	Folder.prototype = {
+    addFile: function(snapshot) {
+      var oldData = angular.extend({}, this.data);
+    },
+	};
+	return Folder;
+}])
 //File Object 
 .factory('File', ['$firebaseObject', function ($firebaseObject){
 	function File(snap){
@@ -77,13 +109,18 @@ angular.module('hypercube.application.editor')
 			//Snap is a snapshot
 			angular.extend(this, snap.val()); //Add current value from Firebase
 			_.extend(this,$firebaseObject(snap.ref())); //Add firebaseObject functionality
+			//Fill children parameter if folder without children
+			if(this.type == 'folder' && !this.children){
+				this.children = ['mock child'];
+			}
 		} else {
 			//Snap is not a snapshot
 			angular.extend(this, snap);
 		}
-
+		if(!this.type){
+			this.type = "file";
+		}
 		// this.$id = snap.key();
-		// this.name = snap.val().name || "test.html";
 		// this.setDefaults(snap);
 	}
 	File.prototype = {
@@ -98,11 +135,16 @@ angular.module('hypercube.application.editor')
 	};
 	return File;
 }])
-.factory("FilesFactory", ['$firebaseArray', 'File', function ($firebaseArray, File) {
+//Files list factory the outputs extended firebaseArray
+.factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', function ($firebaseArray, File, Folder) {
   return $firebaseArray.$extend({
     // override the $createObject behavior to return a File object
     $$added: function(snap) {
-      return new File(snap);
+    	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
+    		return new Folder(snap);
+    	} else {
+      	return new File(snap);
+    	}
     },
     $addFile:function(fileData){
     	//TODO: Handle path
@@ -113,7 +155,6 @@ angular.module('hypercube.application.editor')
     	// _.each(pathArray, function (loc){
     	// });
     	// var filePath = self.$ref();
-
     	this.$add({name:fileData.path, type:'file', filetype:fileData.filetype || 'javascript'});
     },
     $addFolder:function(folderData){
@@ -121,11 +162,6 @@ angular.module('hypercube.application.editor')
     	var pathArray = folderData.path.split("/");
     	this.$add({name:folderData.path, type:'folder', children:[{}]});
     }
-    // override the $$updated behavior to call a method on the File
-    // $$updated: function(snap) {
-    //   var msg = this.$getRecord(snap.key());
-    //   return msg.update(snap);
-    // }
   });
 }])
 .factory('Files', ['fbutil', 'FilesFactory', function (fbutil, FilesFactory) {

@@ -4,6 +4,7 @@ angular.module('hypercube', [
     'ngStorage', 
     'angular-jwt',
     'ui.ace',
+    'firebase',
 
     'hypercube.auth',
     'hypercube.const',

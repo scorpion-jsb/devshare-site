@@ -1,1 +1,1 @@
-angular.module('hypercube.application.editor', ['ui.ace', 'hypercube.const'])
+angular.module('hypercube.application.editor', ['firebase', 'firebase.utils', 'ui.ace', 'hypercube.const',  'treeControl'])

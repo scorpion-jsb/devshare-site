@@ -16,7 +16,10 @@ module.exports = {
 		'bower/ngstorage/ngStorage.min.js',
 		'bower/underscore/underscore-min.js',
 		'bower/angular-ui-ace/ui-ace.js',
-		'bower/aws-sdk-js/dist/aws-sdk.min.js'
+		'bower/aws-sdk-js/dist/aws-sdk.min.js',
+		'bower/angular-tree-control/angular-tree-control.js',
+		'bower/firebase/firebase.js',
+		'bower/angularfire/dist/angularfire.js'
 
 	],
 
@@ -32,6 +35,8 @@ module.exports = {
 		'components/auth/auth.config.js',
 		'components/auth/auth.directive.js',
 		'components/auth/auth-session.service.js',
+		'components/firebase.utils/firebase.utils.js',
+
 
 		'components/nav/nav.module.js',
 		'components/nav/nav.controller.js',

@@ -7,6 +7,9 @@
       <div layout="column">
         <md-button md-no-ink class="" ng-click="data.createMode = true" ><i class="fa fa-plus"></i> &nbsp;&nbsp; New File</md-button>
       </div>
+      <treecontrol class="tree-classic" tree-model="files" options="opts" on-selection="openFile(node)">
+        {{node.name}}
+      </treecontrol>
     </md-content>
   </md-sidenav>
   <md-content layout-fill>

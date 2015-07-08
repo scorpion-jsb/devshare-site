@@ -82,7 +82,7 @@ gulp.task('assetTags:prod', function () {
 gulp.task('buildEnv', function () {
   return ngConstant({
     name: 'hypercube.const',
-    constants: { VERSION:pkg.version,  DB_URL:conf.envs.local.authUrl || 'localhost:4000'},
+    constants: { VERSION:pkg.version,  DB_URL:conf.envs.local.authUrl || 'localhost:4000', FB_URL:conf.envs.local.fbUrl},
     stream:true
   })
   // Writes config.js to dist/ folder

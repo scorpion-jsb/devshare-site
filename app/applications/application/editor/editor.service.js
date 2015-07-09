@@ -2,7 +2,7 @@ var filesLocation = 'appFiles';
 
 angular.module('hypercube.application.editor')
 
-.service('Editor', [ '$http', '$log', '$q', 'DB_URL', 'Files', function ($http, $log, $q, DB_URL, Files){
+.service('Editor', [ '$http', '$log', '$q', 'DB_URL', 'Files', 'AuthService', '$rootScope', function ($http, $log, $q, DB_URL, Files, AuthService, $rootScope){
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
@@ -33,43 +33,50 @@ angular.module('hypercube.application.editor')
 		} else {
 			var setType = 'ace/mode/' + type;
 			$log.log('Setting filetype:', setType);
-			return this.ace.getSession().setMode("ace/mode/javascript");
+			return this.ace.getSession().setMode(setType);
 		}
 	};
 	this.openFile = function(file){
-		$log.log('Editor.openFile()');
+		$log.log('Editor.openFile()', file);
 		var d = $q.defer();
-		//// Create Firepad.
+		var self = this;
 		this.setFileType(file.filetype);
-    var firepad = Firepad.fromACE(file.$ref(), this.ace, {
-      defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
-    });
+		var aceOptions = {defaultText:'//JavaScript Editing!'};
+		//Add current user information
+		//User info loaded from AuthService
+		// AuthService.getCurrentUser().then(function (currentUser){
+			// aceOptions.userId = currentUser.username;
+		// });
+		//User info loaded from $rootScope
+		aceOptions.userId = $rootScope.currentUser.username;
+		console.log('aceOptions:', aceOptions);
+  	self.firepad = Firepad.fromACE(file.$ref(), self.ace, aceOptions);
+  	console.log('this.firepad set');
+  	d.resolve(file);
 		return d.promise;
 	};
-	// this.newFile = function(appData, filePath){
-	// 	$log.log('[Editor.newFile()] Called with:', appData, filePath);
-	// 	var d = $q.defer();
-	// 	var apiUrl = DB_URL + '/apps/' + appData.name + '/files?key=' + filePath + '&action=putObject';
-	// 	$http.get(apiUrl).success(function (newUrlRes){
-	// 		$log.info('[Editor.newFile()] New file url generated successfully:', newUrlRes);
-	// 		//Make put request to new url
-	// 		$http.put(newUrlRes, {Body:'asdf'}).success(function(newFileRes){
-	// 			$log.info('New file created:', newFileRes);
-	// 			d.resolve(newFileRes.data);
-	// 		}).error(function (err){
-	// 			$log.error('Error putting new file to signed url:', err);
-	// 			d.reject(err);
-	// 		})
-	// 	}).error(function (errRes){
-	// 		$log.error('[Editor] Error creating new file:', errRes);
-	// 		d.reject(errRes);
-	// 	});
-	// 	return d.promise;
-	// };
-
+	this.publishFile = function(){
+		$log.log('Editor.publishFile()');
+		var d = $q.defer();
+		console.log('File text:',this.firepad.getText());
+		$http.post(DB_URL + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText()}).then(function (){
+			$log.info('File published successfully');
+			d.resolve();
+		}, function (errRes){
+			$log.error('Error requesting publishFile:', errRes);
+			d.reject(errRes);
+		});
+		return d.promise;
+	};
+	this.publish = function(){
+		$log.log('Editor.publish()');
+		//TODO: Have this publish whole application structure
+		var d = $q.defer();
+		return d.promise;
+	};
 }])
 //Folder Object 
-.factory('Folder', ['$firebaseObject', '$firebaseArray', function ($firebaseObject, $firebaseArray){
+.factory('Folder', ['$firebaseObject', '$firebaseArray', 'File', function ($firebaseObject, $firebaseArray, File){
 	function Folder(snap){
 		//Check that snap is a snapshot
 		if(snap.val()){
@@ -120,7 +127,7 @@ angular.module('hypercube.application.editor')
 		if(!this.type){
 			this.type = "file";
 		}
-		// this.$id = snap.key();
+		this.$id = snap.key();
 		// this.setDefaults(snap);
 	}
 	File.prototype = {
@@ -141,6 +148,13 @@ angular.module('hypercube.application.editor')
     // override the $createObject behavior to return a File object
     $$added: function(snap) {
     	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
+    		//TODO: Make this recursive so it goes all the way down
+    		// _.map(snap.val().children, function (child){
+    		// 	console.log('Child map:', child);
+    		// 	if(child.type == "file"){
+    		// 		return new File(child.ref());
+    		// 	}
+    		// })
     		return new Folder(snap);
     	} else {
       	return new File(snap);

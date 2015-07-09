@@ -3,8 +3,6 @@ angular.module('hypercube', [
     'ngMaterial', 
     'ngStorage', 
     'angular-jwt',
-    'ui.ace',
-    'firebase',
 
     'hypercube.auth',
     'hypercube.const',

@@ -43,6 +43,8 @@ List and detail views/controllers for applications
 Login and Signup pages.
 
 ## TODO
+* Live Preview
+* Upload of files/Hosted View
 * $log decorator
 * Angular Plugin
 * Getting Started guide for Angular plugin

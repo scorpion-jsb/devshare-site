@@ -39,7 +39,6 @@ angular.module('hypercube.application.editor')
 	this.openFile = function(file){
 		$log.log('Editor.openFile()', file);
 		var d = $q.defer();
-		var self = this;
 		this.setFileType(file.filetype);
 		var aceOptions = {defaultText:'//JavaScript Editing!'};
 		//Add current user information
@@ -49,17 +48,20 @@ angular.module('hypercube.application.editor')
 		// });
 		//User info loaded from $rootScope
 		aceOptions.userId = $rootScope.currentUser.username;
-		console.log('aceOptions:', aceOptions);
-  	self.firepad = Firepad.fromACE(file.$ref(), self.ace, aceOptions);
-  	console.log('this.firepad set');
+  	this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
+  	this.currentFile = file;
   	d.resolve(file);
 		return d.promise;
 	};
-	this.publishFile = function(){
+	this.publishCurrent = function(){
 		$log.log('Editor.publishFile()');
 		var d = $q.defer();
 		console.log('File text:',this.firepad.getText());
-		$http.post(DB_URL + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText()}).then(function (){
+		if(!this.currentFile){
+			d.reject({message:'A file needs to be open to publish'});
+		}
+		//TODO:Make key work with file path
+		$http.post(DB_URL + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText(), key:this.currentFile.name}).then(function (){
 			$log.info('File published successfully');
 			d.resolve();
 		}, function (errRes){

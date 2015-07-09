@@ -25,8 +25,6 @@ angular.module('hypercube.application.editor')
     //TODO: Open file from synced db
     Editor.openFile(file).then(function (openedFile){
       $log.log('file opened:', openedFile);
-    }, function (err){
-      $log.error('[EditorCtrl.openFile()] Error opening file:', err);
     });
   };
   $scope.createNew = function(){
@@ -42,7 +40,9 @@ angular.module('hypercube.application.editor')
       $log.log('New file added:', $scope.files);
     }
   };
-  $scope.uploadFile = function(){
-
+  $scope.publishCurrentFile = function(){
+    Editor.publishCurrent().then(function (publishedFile){
+      $log.info('Publish successful:', publishedFile);
+    });
   };
 }])

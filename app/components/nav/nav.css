@@ -8,3 +8,9 @@ md-sidenav.md-closed.md-locked-open-add-active {
 .navbar-dark {
   background-color: #616161 !important;
 }
+.hc-icon {
+	font-size:1.2em !important;
+}
+.hc-title {
+	font-size:1.4em;
+}

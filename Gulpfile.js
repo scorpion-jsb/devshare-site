@@ -7,7 +7,8 @@ template = require('gulp-template'),
 ngAnnotate = require('gulp-ng-annotate'),
 concat = require('gulp-concat'),
 rename = require('gulp-rename'),
-clean = require('gulp-clean');
+clean = require('gulp-clean'),
+cssmin = require('gulp-cssmin');
 
 var pkg = require('./package.json');
 var conf = require('./config.json');
@@ -24,11 +25,17 @@ function locateAssets(assetType){
 }
 /** Copy Style Assets to single styles.css file in distFolder
  */
-//TODO: Handle scripts per env
-gulp.task('assets:style', function () {
+ //Copy Fonts
+gulp.task('copyFonts', function(){
+    return gulp.src([conf.devFolder + '/bower/font-awesome/fonts/**'])
+    .pipe(gulp.dest(conf.distFolder+ '/fonts/'));
+});
+gulp.task('assets:style', ['copyFonts'],function () {
+  console.log('locatedAssets:', locatedStyleAssets);
   return gulp.src(locatedStyleAssets)
-  .pipe(concat('styles.css'))
-  .pipe(gulp.dest(conf.distFolder + '/'));
+  .pipe(cssmin({keepSpecialComments:0}))
+  .pipe(concat('app.css'))
+  .pipe(gulp.dest(conf.distFolder + '/styles/'));
 });
 
 /** Copy Vendor libs to single vendor.js file in distFolder
@@ -53,11 +60,11 @@ gulp.task('assets:app', function () {
  */
 //TODO: Convert html files to js?
 gulp.task('copyHtml', function(){
-    return gulp.src([conf.devFolder + '/**/*.html', '!' + conf.devFolder + '/index-template.html', '!' + conf.devFolder + '/index.html'], {base:'./app/'})
+    return gulp.src([conf.devFolder + '/**/*.html', '!' + conf.devFolder + '/index-template.html', '!' + conf.devFolder + '/index.html', '!' + conf.devFolder+'/bower/**/*.html'], {base:'./'+conf.devFolder+'/'})
     .pipe(gulp.dest(conf.distFolder));
 });
 
-/** Build script and style tags to place into HTML
+/** Build script and style tags to place into HTML in dev folder
  */
 gulp.task('assetTags:dev', function () {
   return gulp.src(conf.devFolder + '/index-template.html')
@@ -68,6 +75,8 @@ gulp.task('assetTags:dev', function () {
 
 });
 
+/** Build script and style tags to place into HTML in dist folder
+ */
 gulp.task('assetTags:prod', function () {
   return gulp.src(conf.devFolder + '/index-template.html')
     .pipe(template({scripts:refBuilder.buildScriptTags('prod'), styles:refBuilder.buildStyleTags('prod')}))
@@ -79,10 +88,20 @@ gulp.task('assetTags:prod', function () {
 /** Create Angular constants file
  */
 //TODO: Have this build per environment
-gulp.task('buildEnv', function () {
+gulp.task('buildEnv:local', function () {
   return ngConstant({
     name: 'hypercube.const',
     constants: { VERSION:pkg.version,  DB_URL:conf.envs.local.authUrl || 'localhost:4000', FB_URL:conf.envs.local.fbUrl},
+    stream:true
+  })
+  // Writes config.js to dist/ folder
+  .pipe(rename('app-const.js'))
+  .pipe(gulp.dest(conf.devFolder));
+});
+gulp.task('buildEnv:production', function () {
+  return ngConstant({
+    name: 'hypercube.const',
+    constants: { VERSION:pkg.version,  DB_URL:conf.envs.production.authUrl, FB_URL:conf.envs.production.fbUrl},
     stream:true
   })
   // Writes config.js to dist/ folder
@@ -94,10 +113,10 @@ gulp.task('buildEnv', function () {
 */
 gulp.task('s3Upload', function() {
 	var s3Config = {
-		key:process.env.HYPERCUBE_S3_KEY,
-		secret:process.env.HYPERCUBE_S3_SECRET,
-		bucket:'hyper-cube',
-		region:'us-east-1'
+		key:process.env.HYPERCUBE_SERVER_S3_KEY || process.env.AWS_ACCESS_KEY_ID,
+		secret:process.env.HYPERCUBE_SERVER_S3_SECRET || process.env.AWS_SECRET_ACCESS_KEY,
+		bucket:conf.s3.bucket,
+		region:conf.s3.region
 	}
 	gulp.src('./' + conf.distFolder + '/**')
     .pipe(s3(s3Config));
@@ -122,10 +141,10 @@ gulp.task('connect:dist', function() {
   });
 });
 
-gulp.task('clean', function(){
-  return gulp.src(conf.distFolder)
-  .pipe(clean());
-});
+// gulp.task('clean', function(){
+//   return gulp.src(conf.distFolder)
+//   .pipe(clean());
+// });
 
 gulp.task('watch-assets', function(){
   gulp.watch(['./assets.js'], ['assets']);
@@ -135,10 +154,12 @@ gulp.task('watch-html', function(){
 });
 gulp.task('assets', ['copyHtml', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
 
-gulp.task('build', ['buildEnv', 'assets']);
+gulp.task('build:local', ['buildEnv:local', 'assets']);
 
-gulp.task('upload', ['build', 's3Upload']);
+gulp.task('build:production', ['buildEnv:production', 'assets']);
 
-gulp.task('default', ['buildEnv', 'assetTags:dev', 'watch-assets', 'watch-html', 'connect:dev']);
+gulp.task('upload', ['build:production','s3Upload']);
 
-gulp.task('dist', ['build', 'connect:dist']);
+gulp.task('default', ['buildEnv:local', 'assetTags:dev', 'watch-assets', 'watch-html', 'connect:dev']);
+
+gulp.task('dist', ['build:production', 'connect:dist']);

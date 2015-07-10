@@ -2,8 +2,12 @@
 	"port": "5000",
 	"devFolder":"app",
 	"distFolder":"dist",
+	"s3":{
+		"bucket":"hypercube.kyper.io",
+		"region":"us-east-1"
+	},
 	"envs":{
 		"local":{"authUrl":"http://localhost:4000", "fbUrl":"https://pruvit.firebaseio.com/hypercube"},
-		"production":{"authUrl":"hyper-cube.herokuapp.com", "fbUrl":"https://pruvit.firebaseio.com/hypercube"}
+		"production":{"authUrl":"http://hyper-cube.herokuapp.com", "fbUrl":"https://pruvit.firebaseio.com/hypercube"}
 	}
 }

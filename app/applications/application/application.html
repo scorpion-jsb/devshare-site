@@ -1,6 +1,6 @@
 <md-toolbar class="md-primary shadow-z-2">
   <div class="md-toolbar-tools" layout-align="center">
-    <div flex="20">
+    <div flex="25">
       <md-select ng-if="currentUser" ng-model="someVal" aria-label="User">
         <md-select-label>
           <i class="fa fa-user" ng-if="!currentUser.name"></i>
@@ -11,10 +11,16 @@
       <md-option ng-repeat="app in applications" ui-sref="app.editor({name:app.name})">{{app.name}}</md-option>
       </md-select>
     </div>
-    <div flex="80" layout-align="center" layout="row">
-        <md-button md-no-ink class="" ui-sref="app.editor" ><i class="fa fa-code"></i>  Editor</md-button>
-        <md-button md-no-ink class="" ui-sref="app.preview"><i class="fa fa-mobile"></i>  Preview</md-button>
-        <md-button md-no-ink class="" ui-sref="app.settings"><i class="fa fa-cogs"></i>  Settings</md-button>
+    <div flex="75" layout-align="center" layout="row">
+        <div flex>
+          <md-button class="page-button" ui-sref="app.editor" ng-class="{'md-warn md-focused':stateName == 'app.editor'}"><i class="fa fa-code page-icon"></i>  Editor</md-button>
+        </div>
+        <div flex>
+          <md-button class="page-button" ui-sref="app.preview" ng-class="{'md-warn md-focused':stateName == 'app.preview'}"><i class="fa fa-mobile page-icon"></i>  Preview</md-button>
+        </div>
+        <div flex>
+          <md-button class="page-button" ui-sref="app.settings" ng-class="{'md-warn md-focused':stateName == 'app.settings'}"><i class="fa fa-cogs page-icon"></i>  Settings</md-button>
+        </div>
     </div>
   </div>
 </md-toolbar>

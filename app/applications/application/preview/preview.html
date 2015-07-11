@@ -1,13 +1,13 @@
 <section layout="row" flex layout-fill class="hc-background">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" flex="15" ng-if="currentUser">
     <md-content layout-padding layout-align="center" layout="column">
-	    <md-button aria-label="Settings" ng-click="setDevice('iphone6')">
+	    <md-button aria-label="Settings" ng-click="setDevice('iphone6')" ng-class="{'md-focused':previewData.device == 'iphone6'}">
 				<i class="fa fa-mobile"></i>&nbsp;iPhone 6
 	    </md-button>
-	    <md-button aria-label="Settings" ng-click="setDevice('iphone5')">
+	    <md-button aria-label="Settings" ng-click="setDevice('iphone5')" ng-class="{'md-focused':previewData.device == 'iphone5'}">
 				<i class="fa fa-mobile"></i>&nbsp;iPhone 5 
 	    </md-button>
-	    <md-button aria-label="Settings" ng-click="setDevice()">
+	    <md-button aria-label="Settings" ng-click="setDevice()" ng-class="{'md-focused':previewData.device == 'computer'}">
 	    	<i class="fa fa-desktop"></i>&nbsp;Computer 
 	    </md-button>
     </md-content>
@@ -21,7 +21,23 @@
         </md-input-container>
       </div>
       <div flex layout-align="center" layout="row">
-        <div>
+        <div class="marvel-device" ng-class="{'iphone6 black':previewData.device == 'iphone6', 'iphone5s black':previewData.device == 'iphone5'}" ng-if="previewData.device == 'iphone6' || previewData.device == 'iphone5'">
+          <div class="top-bar"></div>
+          <div class="sleep"></div>
+          <div class="volume"></div>
+          <div class="camera"></div>
+          <div class="sensor"></div>
+          <div class="speaker"></div>
+          <div class="screen">
+            <!-- Content goes here -->
+            <iframe class="md-whiteframe-z2 preview-frame" ng-src="{{previewData.url}}" width="{{previewData.width}}" height="{{previewData.height}}">
+              Error...
+            </iframe>
+          </div>
+          <div class="home"></div>
+          <div class="bottom-bar"></div>
+        </div>
+        <div ng-if="previewData.device == 'computer'">
           <iframe class="md-whiteframe-z2 preview-frame" ng-src="{{previewData.url}}" width="{{previewData.width}}" height="{{previewData.height}}">
             Error...
           </iframe>

@@ -12,7 +12,8 @@
     "angularfire": "~1.1.2",
     "angular-tree-control": "~0.2.10",
     "firepad": "~1.1.1",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "devices.css": "*"
   },
   "resolutions": {
     "angular": "1.4.2"

@@ -1,4 +1,4 @@
-.ace_editor { height: 500px; width:100%;}
+.ace_editor {position:relative; height: 1100px; width:100%;}
 
 .button-new{
 	min-width:50px;

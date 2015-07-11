@@ -16,13 +16,8 @@ body {
 	background-color:white !important;
 }
 .preview-frame {
-/*	-moz-box-shadow: 4px 4px 10px #000;
-  -webkit-box-shadow: 4px 4px 10px #000;
-  box-shadow: 4px 4px 10px #000;*/
   position:relative;
   border:none;
-  /*border-top: #c00 1px dotted;*/
-  /*border-right: #c00 2px dotted;*/
-  /*border-left: #c00 2px dotted;*/
-  /*border-bottom: #c00 4px dotted;*/
 }
+
+

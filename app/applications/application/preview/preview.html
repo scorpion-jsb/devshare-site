@@ -1,4 +1,32 @@
-<md-content>
-	<h2>Preview Page</h2>
-	<p>Soon there will be a preview of the app here</p>
-</md-content>
+<section layout="row" flex layout-fill class="hc-background">
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" flex="15" ng-if="currentUser">
+    <md-content layout-padding layout-align="center" layout="column">
+	    <md-button aria-label="Settings" ng-click="setDevice('iphone6')">
+				<i class="fa fa-mobile"></i>&nbsp;iPhone 6
+	    </md-button>
+	    <md-button aria-label="Settings" ng-click="setDevice('iphone5')">
+				<i class="fa fa-mobile"></i>&nbsp;iPhone 5 
+	    </md-button>
+	    <md-button aria-label="Settings" ng-click="setDevice()">
+	    	<i class="fa fa-desktop"></i>&nbsp;Computer 
+	    </md-button>
+    </md-content>
+  </md-sidenav>
+  <div id="iframe-container" class="hc-background" layout="column" layout-fill  layout-padding>
+    <div layout="column"  class="hc-background" layout-fill  layout-padding layout-align="center">
+      <div layout="row" flex layout-align="center">
+        <md-input-container flex="40" ng-click="goTo(application.frontend.siteUrl)">
+          <label>App Url</label>
+          <input ng-model="application.frontend.siteUrl" disabled>
+        </md-input-container>
+      </div>
+      <div flex layout-align="center" layout="row">
+        <div>
+          <iframe class="md-whiteframe-z2 preview-frame" ng-src="{{previewData.url}}" width="{{previewData.width}}" height="{{previewData.height}}">
+            Error...
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

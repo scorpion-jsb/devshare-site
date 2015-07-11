@@ -19,8 +19,9 @@
       </div>
     </md-content>
   </md-sidenav>
-  <md-content layout-fill>
-    <md-toolbar class="" style="height:20px; background-color:white;" ng-if="data.createMode">
+  <md-content layout-fill layout="column">
+      <div ui-ace="{showGutter:true, useWrapMode: true, theme:'monokai', onLoad:aceLoaded, onChange:aceChanged}" layout-fill flex></div>
+    <md-toolbar class="" style="height:30px; background-color:white;" ng-if="data.createMode">
       <div class="md-toolbar-tools">
         <div layout="row" layout-sm="column" layout-align="center center">
           <md-input-container>
@@ -33,6 +34,6 @@
         </div>
       </div>
     </md-toolbar>
-    <div ui-ace="{ onLoad :aceLoaded }" layout-fill></div>
+
   </md-content>
 </section>

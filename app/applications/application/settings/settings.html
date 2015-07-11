@@ -1,22 +1,28 @@
-<md-content layout-padding>
-  <md-input-container>
-      <label>Name</label>
-      <input ng-model="application.name">
-    </md-input-container>
-    <md-input-container>
-      <label>Owner</label>
-      <input ng-model="application.owner.email" type="email" disabled>
-    </md-input-container>
-    <md-input-container ng-click="goTo(application.frontend.siteUrl)">
-      <label>Website Url</label>
-      <input ng-model="application.frontend.siteUrl" type="email" disabled>
-    </md-input-container>
-    <md-input-container ng-click="goTo(application.frontend.bucketUrl)">
-      <label>Bucket Url</label>
-      <input ng-model="application.frontend.bucketUrl" type="email" disabled>
-    </md-input-container>
-    <md-subheader class="md-no-sticky">Collaborators</md-subheader>
-    <md-contact-chips ng-model="application.collaborators" md-contacts="getPossibleUsers($query)"
-      md-contact-name="name" md-contact-email="email">
-    </md-contact-chips>
+<md-content class="hc-background" layout-padding layout-align="center" layout="row" >
+  <md-whiteframe class="md-whiteframe-z2" layout="row" flex-sm="80" flex="60" layout-padding layout-align="center">
+    <div flex="95">
+      <md-input-container>
+        <label>Name</label>
+        <input ng-model="application.name">
+      </md-input-container>
+      <md-input-container>
+        <label>Owner</label>
+        <input ng-model="application.owner.email" type="email" disabled>
+      </md-input-container>
+      <md-input-container ng-click="goTo(application.frontend.siteUrl)">
+        <label>Website Url</label>
+        <input ng-model="application.frontend.siteUrl" type="email" disabled>
+      </md-input-container>
+      <md-input-container ng-click="goTo(application.frontend.bucketUrl)">
+        <label>Bucket Url</label>
+        <input ng-model="application.frontend.bucketUrl" type="email" disabled>
+      </md-input-container>
+      <md-subheader class="md-no-sticky">Collaborators</md-subheader>
+      <div layout-padding>
+        <md-contact-chips ng-model="application.collaborators" md-contacts="getPossibleUsers($query)"
+          md-contact-name="name" md-contact-email="email">
+        </md-contact-chips>
+      </div>
+    </div>
+  </md-whiteframe>
 </md-content>

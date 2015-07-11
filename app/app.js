@@ -15,7 +15,6 @@ angular.module('hypercube', [
     'hypercube.application'
 
   ])
-
 .directive('stopEvent', function () {
   return {
     restrict: 'A',

@@ -7,6 +7,14 @@
       <label>Owner</label>
       <input ng-model="application.owner.email" type="email" disabled>
     </md-input-container>
+    <md-input-container ng-click="goTo(application.frontend.siteUrl)">
+      <label>Website Url</label>
+      <input ng-model="application.frontend.siteUrl" type="email" disabled>
+    </md-input-container>
+    <md-input-container ng-click="goTo(application.frontend.bucketUrl)">
+      <label>Bucket Url</label>
+      <input ng-model="application.frontend.bucketUrl" type="email" disabled>
+    </md-input-container>
     <md-subheader class="md-no-sticky">Collaborators</md-subheader>
     <md-contact-chips ng-model="application.collaborators" md-contacts="getPossibleUsers($query)"
       md-contact-name="name" md-contact-email="email">

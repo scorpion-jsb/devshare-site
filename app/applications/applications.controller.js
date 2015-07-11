@@ -13,7 +13,9 @@ angular.module('hypercube')
 			$log.error('[ApplicationsCtrl.get()] Error loading applications', err);
 			$scope.data.loading = false;
 			$scope.data.error = err;
+			$scope.showToast('Error: ' + err.message || err);
 		});
+
 		$scope.create = function(appData){
 			applicationsService.add(appData).then(function(newApp){
 				$log.log('Application created successfully:', newApp);
@@ -22,6 +24,7 @@ angular.module('hypercube')
 				$log.error('[ApplicationsCtrl.create()] Error loading applications', err);
 				$scope.data.loading = false;
 				$scope.data.error = err;
+				$scope.showToast('Error: ' + err.message || err);
 			});
 		};
 		$scope.delete = function(ind, ev){
@@ -36,6 +39,7 @@ angular.module('hypercube')
 					$log.error('Error loading applications', err);
 					$scope.data.loading = false;
 					$scope.data.error = err;
+					$scope.showToast('Error: ' + err.message || err);
 				});
 			});
 		};

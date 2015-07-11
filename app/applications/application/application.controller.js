@@ -1,5 +1,5 @@
 angular.module('hypercube.applications')
-.controller('ApplicationCtrl', ['$scope', '$http', '$stateParams', 'application', 'applicationsService', function($scope, $http, $stateParams, application, applicationsService){
+.controller('ApplicationCtrl', ['$scope', '$http', '$stateParams', 'application', 'applicationsService', '$window', function($scope, $http, $stateParams, application, applicationsService, $window){
 		$scope.data = {
 			loading:false,
 			error:null,
@@ -22,5 +22,8 @@ angular.module('hypercube.applications')
 				$scope.data.loading = false;
 			});
 		};
-		
+		$scope.goTo = function(path){
+			console.log('going to path: '+ path);
+			$window.open("http://" + path);
+		};
 }])

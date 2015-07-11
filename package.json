@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "gulp-cssmin": "^0.1.7",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

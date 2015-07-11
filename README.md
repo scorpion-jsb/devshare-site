@@ -43,6 +43,9 @@ List and detail views/controllers for applications
 Login and Signup pages.
 
 ## TODO
+-Create Application (From template or Blank)
+- Click to publish whole app
+
 * Live Preview
 * Upload of files/Hosted View
 * $log decorator

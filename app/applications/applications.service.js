@@ -7,8 +7,9 @@ angular.module('hypercube.applications')
 			if(!applicationData){
 				$log.warn('[ApplicationsService.add()] No application data');
 				d.reject({message:'Name required to create new application'});
+			} else if(!$rootScope.currentUser){
+				d.reject({message:'You must be logged in.'});
 			} else {
-				console.log('$rootScope:', $rootScope);
 				applicationData.owner = $rootScope.currentUser._id;
 				$http.post(DB_URL + '/apps', applicationData)
 				.then(function (apiRes){
@@ -17,7 +18,7 @@ angular.module('hypercube.applications')
 				.catch(function (errRes){
 					//TODO: Handle different error response codes
 					$log.error('Error loading application', errRes.data);
-					d.reject(errRes.data);
+					d.reject({message:errRes.data});
 				});
 			}
 

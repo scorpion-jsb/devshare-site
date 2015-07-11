@@ -17,12 +17,17 @@
         <label>Bucket Url</label>
         <input ng-model="application.frontend.bucketUrl" type="email" disabled>
       </md-input-container>
-      <md-subheader class="md-no-sticky">Collaborators</md-subheader>
-      <div layout-padding>
-        <md-contact-chips ng-model="application.collaborators" md-contacts="getPossibleUsers($query)"
-          md-contact-name="name" md-contact-email="email">
-        </md-contact-chips>
-      </div>
+        <!-- <md-subheader class="md-no-sticky">Collaborators</md-subheader> -->
+      <md-input-container>
+        <label>Collaborators (Coming soon)</label>
+        <input type="text" disabled>
+      </md-input-container>
+<!--         <md-input-container disabled>
+          <md-contact-chips ng-model="application.collaborators" md-contacts="getPossibleUsers($query)"
+            md-contact-name="username" md-contact-email="email">
+          </md-contact-chips>
+        </md-input-container> -->
+        </div>
     </div>
   </md-whiteframe>
 </md-content>

@@ -13,7 +13,15 @@ angular.module('hypercube.application.editor')
     // Options
     Editor.setAce(_editor);
   };
-
+      $scope.demo = {
+        topDirections: ['left', 'up'],
+        bottomDirections: ['down', 'right'],
+        isOpen: false,
+        availableModes: ['md-fling', 'md-scale'],
+        selectedMode: 'md-scale',
+        availableDirections: ['up', 'down', 'left', 'right'],
+        selectedDirection: 'down'
+      };
   $scope.aceChanged = function(e) {
   };
 
@@ -22,6 +30,7 @@ angular.module('hypercube.application.editor')
     if(node.type == "file") {
       Editor.openFile(node).then(function (openedFile){
         $log.log('file opened:', openedFile);
+        $scope.currentFile = openedFile;
       });
     }
   };
@@ -47,6 +56,8 @@ angular.module('hypercube.application.editor')
   $scope.publishCurrentFile = function(){
     Editor.publishCurrent().then(function (publishedFile){
       $log.info('Publish successful:', publishedFile);
+      $scope.currentFile = null;
+      $scope.showToast('Publish successful');
     });
   };
   $scope.remove = function(node, ev){

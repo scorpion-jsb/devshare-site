@@ -17,11 +17,13 @@ angular.module('hypercube.application.editor')
   $scope.aceChanged = function(e) {
   };
 
-  $scope.openFile = function(file){
-    //TODO: Open file from synced db
-    Editor.openFile(file).then(function (openedFile){
-      $log.log('file opened:', openedFile);
-    });
+  $scope.open= function(node){
+    //TODO: Open node from synced db
+    if(node.type == "file") {
+      Editor.openFile(node).then(function (openedFile){
+        $log.log('file opened:', openedFile);
+      });
+    }
   };
   $scope.createNew = function(){
     var newObj = {path:$scope.data.newName};
@@ -29,8 +31,14 @@ angular.module('hypercube.application.editor')
       $scope.files.$addFolder(newObj);
       $log.log('New folder added:', $scope.files);
     } else {
-      $scope.files.$addFile(newObj).then(function(folder){
-        $scope.openFile(folder);
+      $scope.files.$addFile(newObj).then(function(file){
+        console.log('Add file successful:', file);
+        // $scope.openFile();
+        //Reload structure
+        Editor.getFiles().then(function(fileStructure){
+          $scope.files = fileStructure;
+          $log.info('Structure set:', $scope.files);
+        });
       });
       $log.log('New file added:', $scope.files);
     }
@@ -39,6 +47,12 @@ angular.module('hypercube.application.editor')
   $scope.publishCurrentFile = function(){
     Editor.publishCurrent().then(function (publishedFile){
       $log.info('Publish successful:', publishedFile);
+    });
+  };
+  $scope.remove = function(node, ev){
+    //TODO: Show confirm
+    $scope.showConfirm(ev,  {title:"Delete", description:"Are you sure you want to delete " + node.name + " ?"}).then(function(){
+
     });
   };
 }])

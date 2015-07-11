@@ -117,9 +117,6 @@ angular.module('hypercube.application.editor')
 		}
 	}
 	Folder.prototype = {
-    addFile: function(snapshot) {
-      var oldData = angular.extend({}, this.data);
-    },
 	};
 	return Folder;
 }])
@@ -134,6 +131,7 @@ angular.module('hypercube.application.editor')
 			if(this.type == 'folder' && !this.children){ //Fill children parameter if folder without children
 				this.children = ['mock child'];
 			}
+			this.makeKey();
 		} else { //Snap is not a snapshot
 			angular.extend(this, snap);
 		}
@@ -153,7 +151,7 @@ angular.module('hypercube.application.editor')
     },
   	getExt:function(path){
     	var re = /(?:\.([^.]+))?$/;
-    	var fileName = this.name || path;
+    	var fileName = _.last(this.path.split("/")) || path;
     	console.warn('Get ext calling with: ' + re.exec(fileName)[1]);
     	return re.exec(fileName)[1];
     },
@@ -162,10 +160,38 @@ angular.module('hypercube.application.editor')
     	this.fileType = extToFileType(this.getExt());
     },
     makeKey:function(){
-    	return this.name.replace(".", ":");
+    	console.log('makeKey called with:', this);
+    	if(_.has(this, 'name')){
+    		var name = this.name;
+    		return name.replace(".", ":");
+    	} else if(_.has(this, 'path')){
+    		var pathArray = this.path.split("/");
+    		var name = _.last(pathArray);
+    		this.name = name;
+    		return name.replace(".", ":");
+    	}
     },
     makeRef:function(appRef){
     	//TODO: Create ref based on path
+    	//folder/index.html
+			var pathArray = this.path.split("/");
+			console.log('pathArray:', pathArray);
+			var self = this;
+			if(pathArray.length == 1){
+				return appRef.child(self.makeKey());
+			} else {
+				var finalRef = appRef;
+				_.each(pathArray, function (loc, ind, list){
+					//TODO: Handle more than one period here
+					if(ind != list.length - 1){
+						finalRef = finalRef.child(loc).child('children');
+					} else {
+						finalRef = finalRef.child(loc.replace(".", ":"));
+					}
+				});
+				console.log('finalRef:', finalRef);
+				return finalRef;
+			}
     }
 	};
 	return File;
@@ -223,30 +249,28 @@ angular.module('hypercube.application.editor')
     },
     $addFile:function(fileData){
     	//TODO: Handle path
-    	var pathArray = fileData.path.split("/");
-    	var file = new File({name:_.last(pathArray), path:fileData.path});
+    	//TODO: Save file within correct path
+    	var file = new File({path:fileData.path});
     	file.getTypes();
-    	// console.log('new file:', file);
-    	//TODO: Make key be safe version of name
+    	var d = $q.defer();
+    	console.log('new fileObj:', file);
     	// var self = this;
     	// _.each(pathArray, function (loc){
     	// });
-    	// var filePath = self.$ref();
-    	console.warn('adding file:', _.extendOwn({},file));
-    	//TODO: Save file within correct path
     	//Save as firebase object with key
-    	var d = $q.defer();
-    	var self = $firebaseObject(this.$ref());
-    	self.$loaded().then(function(){
+    	var self = this;
+    	var fileObj = $firebaseObject(file.makeRef(self.$ref()));
+	    console.log('fileObj set:', fileObj);
+    	fileObj.$loaded().then(function(){
     		//Check to make sure name is not taken
     		var key = file.makeKey();
-    		if(_.has(self, key)){
+    		if(_.has(fileObj, key)){
     			key += "-1";
     		}
     		//Set by key within structure
-	    	self[key] = file;
-	    	self.$save().then(function(){
-    			d.resolve(self);
+	    	fileObj.$value = file;
+	    	fileObj.$save().then(function(){
+    			d.resolve();
     		}, function (err){
     			console.log('Error adding file:', err);
     			d.reject(err);
@@ -276,7 +300,7 @@ angular.module('hypercube.application.editor')
     		}, function (err){
     			console.log('Error adding folder:', err);
     			d.reject(err);
-    		})
+    		});
     	}, function (err){
     		console.log('Error loading stucture:', err);
     		d.reject(err);

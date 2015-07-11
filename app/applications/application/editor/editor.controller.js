@@ -8,19 +8,15 @@ angular.module('hypercube.application.editor')
     $scope.files = fileStructure;
     $log.info('Structure set:', $scope.files);
   });
-  // Editor.getStructure($scope.application).then(function (fileStructure){
-  //   console.log('file stucture:', fileStructure);
-  // })
   //TODO: Change file mode dynamically (editor service)
 	$scope.aceLoaded = function(_editor) {
     // Options
-    // _editor.setReadOnly(true);
     Editor.setAce(_editor);
   };
 
   $scope.aceChanged = function(e) {
-    //TODO: Sync these changes with a db
   };
+
   $scope.openFile = function(file){
     //TODO: Open file from synced db
     Editor.openFile(file).then(function (openedFile){
@@ -28,17 +24,17 @@ angular.module('hypercube.application.editor')
     });
   };
   $scope.createNew = function(){
-    // $scope.files.$add({name:$scope.data.newFileName});
-    //TODO: Handle creating both file and folder
-    //TODO: Make sure file name can be key name
     var newObj = {path:$scope.data.newName};
     if($scope.data.createMode == "folder"){
       $scope.files.$addFolder(newObj);
       $log.log('New folder added:', $scope.files);
     } else {
-      $scope.files.$addFile(newObj);
+      $scope.files.$addFile(newObj).then(function(folder){
+        $scope.openFile(folder);
+      });
       $log.log('New file added:', $scope.files);
     }
+    $scope.data = {newName: null, createMode:null};
   };
   $scope.publishCurrentFile = function(){
     Editor.publishCurrent().then(function (publishedFile){

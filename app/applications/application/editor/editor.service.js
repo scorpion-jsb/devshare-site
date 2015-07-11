@@ -39,6 +39,7 @@ angular.module('hypercube.application.editor')
 	this.openFile = function(file){
 		$log.log('Editor.openFile()', file);
 		var d = $q.defer();
+		var aceOptions = {};
 		//Check for already existing firepad
     if(_.has(this, 'firepad')){
       // Disconnect old firepad session
@@ -46,16 +47,28 @@ angular.module('hypercube.application.editor')
       // Empty out editor
       this.ace.getSession().setValue(null);
     }
-		this.setFileType(file.filetype);
-		var aceOptions = {defaultText:'//JavaScript Editing!'};
+    //Set Default Editor text
+		if(file.fileType == "javascript"){
+			aceOptions.defaultText = '// ' + file.name;
+		} else if(file.fileType == "html"){
+			if(file.name == "index.html"){
+				aceOptions.defaultText = '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\n\t</head>\n\t<body>\n\n\t</body>\n</html>';
+			} else {
+				aceOptions.defaultText = '<!-- '+ file.name +' -->';
+			}
+		}
 		//Add current user information
 		//User info loaded from AuthService
 		// AuthService.getCurrentUser().then(function (currentUser){
 			// aceOptions.userId = currentUser.username;
 		// });
 		//User info loaded from $rootScope
-		aceOptions.userId = $rootScope.currentUser.username;
+		if(_.has($rootScope, 'currentUser')){
+			aceOptions.userId = $rootScope.currentUser.username;
+		}
+		//Set firepad
   	this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
+		this.setFileType(file.fileType);
   	this.currentFile = file;
   	d.resolve(file);
 		return d.promise;
@@ -68,7 +81,7 @@ angular.module('hypercube.application.editor')
 			d.reject({message:'A file needs to be open to publish'});
 		}
 		//TODO:Make key work with file path
-		$http.post(DB_URL + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText(), key:this.currentFile.name}).then(function (){
+		$http.post(DB_URL + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText(), key:this.currentFile.path, contentType:this.currentFile.contentType}).then(function (){
 			$log.info('File published successfully');
 			d.resolve();
 		}, function (errRes){
@@ -147,6 +160,12 @@ angular.module('hypercube.application.editor')
     getTypes:function(){
     	this.contentType = extToContentType(this.getExt());
     	this.fileType = extToFileType(this.getExt());
+    },
+    makeKey:function(){
+    	return this.name.replace(".", ":");
+    },
+    makeRef:function(appRef){
+    	//TODO: Create ref based on path
     }
 	};
 	return File;
@@ -185,7 +204,7 @@ angular.module('hypercube.application.editor')
   }
 }])
 //Files list factory the outputs extended firebaseArray
-.factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', function ($firebaseArray, File, Folder) {
+.factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', '$firebaseObject', '$q', function ($firebaseArray, File, Folder, $firebaseObject, $q) {
   return $firebaseArray.$extend({
     // override the $createObject behavior to return a File object
     $$added: function(snap) {
@@ -213,16 +232,57 @@ angular.module('hypercube.application.editor')
     	// _.each(pathArray, function (loc){
     	// });
     	// var filePath = self.$ref();
-    	//TODO: Handle file types
     	console.warn('adding file:', _.extendOwn({},file));
-    	this.$add(_.extendOwn({},file));
+    	//TODO: Save file within correct path
+    	//Save as firebase object with key
+    	var d = $q.defer();
+    	var self = $firebaseObject(this.$ref());
+    	self.$loaded().then(function(){
+    		//Check to make sure name is not taken
+    		var key = file.makeKey();
+    		if(_.has(self, key)){
+    			key += "-1";
+    		}
+    		//Set by key within structure
+	    	self[key] = file;
+	    	self.$save().then(function(){
+    			d.resolve(self);
+    		}, function (err){
+    			console.log('Error adding file:', err);
+    			d.reject(err);
+    		});
+    	}, function (err){
+    		console.log('Error loading stucture:', err);
+    		d.reject(err);
+    	})
+    	return d.promise;
     },
     $addFolder:function(folderData){
     	//TODO: Handle path
     	var pathArray = folderData.path.split("/");
-    	this.$add({name:folderData.path, type:'folder', children:[{}]});
+    	var folder = new Folder({name:_.last(pathArray), path:folderData.path});
+    	var self = $firebaseObject(this.$ref());
+    	var d = $q.defer();
+    	self.$loaded().then(function(){
+    		var key = folder.name;
+    		//Check to make sure name is not taken
+    		if(_.has(self, key)){
+    			key += "-1";
+    		}
+    		//Set by key within structure
+    		self[key] = folder;
+    		self.$save().then(function(){
+    			d.resolve(self);
+    		}, function (err){
+    			console.log('Error adding folder:', err);
+    			d.reject(err);
+    		})
+    	}, function (err){
+    		console.log('Error loading stucture:', err);
+    		d.reject(err);
+    	});
+    	return d.promise;
     }
-
   });
 }])
 .factory('Files', ['fbutil', 'FilesFactory', function (fbutil, FilesFactory) {
@@ -230,12 +290,4 @@ angular.module('hypercube.application.editor')
 		var ref = fbutil.ref(filesLocation, appName);
   	return FilesFactory(ref);
 	}
-}])
-.service('fileType', ['$log', function($log){
-
-}])
-.service('editorService', ['$log', function ($log){
-	this.newFile = function(){
-		$log.log('Editor.newFile');
-	};
 }]);

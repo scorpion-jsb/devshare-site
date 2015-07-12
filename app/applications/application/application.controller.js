@@ -6,7 +6,6 @@ angular.module('hypercube.applications')
 			editing:false
 		};
 		$scope.application = application;
-		//TODO: Make owner select an input that searches instead of a dropdown
 		$scope.update = function(){
 			$scope.data.editing = false;
 			$scope.data.loading = true;
@@ -25,4 +24,4 @@ angular.module('hypercube.applications')
 			console.log('going to path: '+ path);
 			$window.open("http://" + path);
 		};
-}])
+}]);

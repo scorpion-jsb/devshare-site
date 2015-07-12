@@ -27,4 +27,13 @@ angular.module('hypercube', [
       });
     }
   };
- });
+ })
+//Set environment based on host
+.service('ENV', ['$location', 'CONST', function($location, CONST){
+  //TODO: Check for other environments as well (staging)
+  if($location.host() == "localhost"){
+    return {serverUrl:CONST.local.SERVER_URL, fbUrl:CONST.local.FB_URL};
+  } else {
+    return {serverUrl:CONST.production.SERVER_URL, fbUrl:CONST.production.FB_URL};
+  }
+}]);

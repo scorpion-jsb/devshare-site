@@ -1,6 +1,6 @@
 // a simple wrapper on Firebase and AngularFire to simplify deps and keep things DRY
 angular.module('firebase.utils', ['firebase', 'hypercube.const'])
-   .factory('fbutil', ['$window', 'FB_URL', '$q', function ($window, FB_URL, $q) {
+   .factory('fbutil', ['$window', 'ENV', '$q', function ($window, ENV, $q) {
       "use strict";
 
       var utils = {
@@ -52,7 +52,7 @@ angular.module('firebase.utils', ['firebase', 'hypercube.const'])
        * @return a Firebase instance
        */
       function firebaseRef(path) {
-        var ref = new $window.Firebase(FB_URL);
+        var ref = new $window.Firebase(ENV.fbUrl);
         var args = Array.prototype.slice.call(arguments);
         if( args.length ) {
           ref = ref.child(pathRef(args));

@@ -31,7 +31,6 @@ gulp.task('copyFonts', function(){
     .pipe(gulp.dest(conf.distFolder+ '/fonts/'));
 });
 gulp.task('assets:style', ['copyFonts'],function () {
-  console.log('locatedAssets:', locatedStyleAssets);
   return gulp.src(locatedStyleAssets)
   .pipe(cssmin({keepSpecialComments:0}))
   .pipe(concat('app.css'))
@@ -87,24 +86,25 @@ gulp.task('assetTags:prod', function () {
 
 /** Create Angular constants file
  */
-//TODO: Have this build per environment
-gulp.task('buildEnv:local', function () {
+gulp.task('buildEnv', function () {
   return ngConstant({
     name: 'hypercube.const',
-    constants: { VERSION:pkg.version,  DB_URL:conf.envs.local.authUrl || 'localhost:4000', FB_URL:conf.envs.local.fbUrl},
+    constants: { 
+      VERSION:pkg.version,  
+      CONST:{
+        local:{
+          SERVER_URL:conf.envs.local.authUrl || 'http://localhost:4000', 
+          FB_URL:conf.envs.local.fbUrl
+        },
+        production:{
+          SERVER_URL:conf.envs.production.authUrl, 
+          FB_URL:conf.envs.production.fbUrl
+        }
+      },
+    },
     stream:true
   })
-  // Writes config.js to dist/ folder
-  .pipe(rename('app-const.js'))
-  .pipe(gulp.dest(conf.devFolder));
-});
-gulp.task('buildEnv:production', function () {
-  return ngConstant({
-    name: 'hypercube.const',
-    constants: { VERSION:pkg.version,  DB_URL:conf.envs.production.authUrl, FB_URL:conf.envs.production.fbUrl},
-    stream:true
-  })
-  // Writes config.js to dist/ folder
+  // Writes config.js to dev folder
   .pipe(rename('app-const.js'))
   .pipe(gulp.dest(conf.devFolder));
 });
@@ -154,12 +154,10 @@ gulp.task('watch-html', function(){
 });
 gulp.task('assets', ['copyHtml', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
 
-gulp.task('build:local', ['buildEnv:local', 'assets']);
+gulp.task('build', ['buildEnv', 'assets']);
 
-gulp.task('build:production', ['buildEnv:production', 'assets']);
+gulp.task('upload', ['build','s3Upload']);
 
-gulp.task('upload', ['build:production','s3Upload']);
+gulp.task('default', ['build', 'watch-assets', 'watch-html', 'connect:dev']);
 
-gulp.task('default', ['buildEnv:local', 'assetTags:dev', 'watch-assets', 'watch-html', 'connect:dev']);
-
-gulp.task('dist', ['build:production', 'connect:dist']);
+gulp.task('dist', ['build', 'connect:dist']);

@@ -2,7 +2,7 @@ var filesLocation = 'appFiles';
 
 angular.module('hypercube.application.editor')
 
-.service('Editor', [ '$http', '$log', '$q', 'DB_URL', 'Files', 'AuthService', '$rootScope', function ($http, $log, $q, DB_URL, Files, AuthService, $rootScope){
+.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'AuthService', '$rootScope', function ($http, $log, $q, ENV, Files, AuthService, $rootScope){
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
@@ -81,7 +81,7 @@ angular.module('hypercube.application.editor')
 			d.reject({message:'A file needs to be open to publish'});
 		}
 		//TODO:Make key work with file path
-		$http.post(DB_URL + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText(), key:this.currentFile.path, contentType:this.currentFile.contentType}).then(function (){
+		$http.post(ENV.serverUrl + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText(), key:this.currentFile.path, contentType:this.currentFile.contentType}).then(function (){
 			$log.info('File published successfully');
 			d.resolve();
 		}, function (errRes){
@@ -278,7 +278,7 @@ angular.module('hypercube.application.editor')
     	}, function (err){
     		console.log('Error loading stucture:', err);
     		d.reject(err);
-    	})
+    	});
     	return d.promise;
     },
     $addFolder:function(folderData){

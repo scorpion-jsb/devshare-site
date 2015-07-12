@@ -1,5 +1,5 @@
 angular.module('hypercube.applications')
-.factory('applicationsService', ['$q', '$http', '$log', '$rootScope', 'DB_URL', function ($q, $http, $log, $rootScope, DB_URL) {
+.factory('applicationsService', ['$q', '$http', '$log', '$rootScope', 'ENV', function ($q, $http, $log, $rootScope, ENV) {
 	var applications = null;
 	return {
 		add:function(applicationData){
@@ -11,7 +11,7 @@ angular.module('hypercube.applications')
 				d.reject({message:'You must be logged in.'});
 			} else {
 				applicationData.owner = $rootScope.currentUser._id;
-				$http.post(DB_URL + '/apps', applicationData)
+				$http.post(ENV.serverUrl + '/apps', applicationData)
 				.then(function (apiRes){
 					d.resolve(apiRes.data);
 				})
@@ -26,7 +26,7 @@ angular.module('hypercube.applications')
 		},
 		update:function(applicationId, applicationData){
 			var deferred = $q.defer();
-			$http.put(DB_URL + '/apps/'+ applicationId, applicationData)
+			$http.put(ENV.serverUrl + '/apps/'+ applicationId, applicationData)
 			.then(function (apiRes){
 				deferred.resolve(apiRes.data);
 			})
@@ -39,7 +39,7 @@ angular.module('hypercube.applications')
 		get:function(applicationName){
 			var deferred = $q.defer();
 			// console.log('Loading application with ID:', applicationName);
-			var endpointUrl = DB_URL + "/apps";
+			var endpointUrl = ENV.serverUrl + "/apps";
 			var isList = true;
 			if(applicationName){
 				endpointUrl = endpointUrl + "/" + applicationName;
@@ -65,7 +65,7 @@ angular.module('hypercube.applications')
 			var deferred = $q.defer();
 			// $log.log('Loading application with ID:', applicationName);
 			if(applicationName){
-				endpointUrl =  DB_URL + "/apps/" + applicationName;
+				endpointUrl =  ENV.serverUrl + "/apps/" + applicationName;
 			}
 			$http.delete(endpointUrl)
 			.then(function (apiRes){

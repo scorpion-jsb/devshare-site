@@ -1,11 +1,20 @@
 angular.module('hypercube.applications')
-.controller('ApplicationCtrl', ['$scope', '$http', '$stateParams', 'application', 'applicationsService', '$window', function($scope, $http, $stateParams, application, applicationsService, $window){
+.controller('ApplicationCtrl', ['$scope', '$http', '$stateParams', 'application', 'applicationsService', '$window', '$rootScope', function($scope, $http, $stateParams, application, applicationsService, $window, $rootScope){
 		$scope.data = {
 			loading:false,
 			error:null,
 			editing:false
 		};
 		$scope.application = application;
+		//Set tab to correct page when state changes
+		$rootScope.$on('$stateChangeStart', function (event, next) {
+		  var tabStates = ["app.editor", "app.preview", "app.settings"];
+			_.each(tabStates, function(state, ind){
+				if($scope.stateName == state){
+					$scope.currentTabInd = ind;
+				}
+			});
+	  });
 		$scope.update = function(){
 			$scope.data.editing = false;
 			$scope.data.loading = true;

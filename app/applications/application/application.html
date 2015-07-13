@@ -12,7 +12,18 @@
       </md-select>
     </div>
     <div flex="75" layout-align="center" layout="row">
-        <div flex>
+      <md-tabs md-selected="currentTabInd" md-stretch-tabs="always" class="md-primary hc-btn" flex="50">
+        <md-tab id="tab1" aria-controls="Editor" ui-sref="app.editor" >
+          <md-tab-label>Editor</md-tab-label>
+        </md-tab>
+        <md-tab id="tab2" aria-controls="Preview" ui-sref="app.preview">
+          <md-tab-label>Preview</md-tab-label>
+        </md-tab>
+        <md-tab id="tab3" class="hc-btn" aria-controls="Settings" ui-sref="app.settings">
+          <md-tab-label>Settings</md-tab-label>
+        </md-tab>
+      </md-tabs>
+<!--         <div flex>
           <md-button class="page-button" ui-sref="app.editor" ng-class="{'md-warn':stateName == 'app.editor'}"><i class="fa fa-code page-icon"></i>  Editor</md-button>
         </div>
         <div flex>
@@ -20,7 +31,7 @@
         </div>
         <div flex>
           <md-button class="page-button" ui-sref="app.settings" ng-class="{'md-warn':stateName == 'app.settings'}"><i class="fa fa-cogs page-icon"></i>  Settings</md-button>
-        </div>
+        </div> -->
     </div>
   </div>
 </md-toolbar>

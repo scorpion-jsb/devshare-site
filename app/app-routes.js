@@ -19,7 +19,7 @@ angular.module('hypercube')
           controller:'NavCtrl'
         },
         'main':{
-          template:'<ui-view></ui-view>'
+          template:'<ui-view layout-fill></ui-view>'
         }
       }
     })

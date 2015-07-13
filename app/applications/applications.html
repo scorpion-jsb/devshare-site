@@ -1,30 +1,30 @@
   <md-content layout-padding class="hc-background">
-    <md-grid-list md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4" md-row-height-md="1.6:1"
-    md-row-height-gt-md="2:1" md-row-height-sm="1:1"
-    md-gutter-gt-md="25px" md-gutter-gt-sm="20px" md-gutter="4px">
-      <md-grid-tile ng-repeat="app in applications" md-colspan-sm="2"
-      md-colspan-gt-sm="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
-        <md-card layout-fill>
+    <md-grid-list md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4" md-row-height-md="1.4:1"
+    md-row-height-lg="1.5:1" md-row-height-gt-lg="1.9:1" md-row-height-sm="1:1.5"
+    md-gutter-gt-md="25px" md-gutter-gt-sm="40px" md-gutter="4px" style="margin-top:25px;">
+      <!-- App Tiles -->
+      <md-grid-tile class="apps-tile" ng-repeat="app in applications" md-colspan="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
+        <md-card layout="column" layout-fill layout-padding>
           <md-card-content>
-            <h2 ui-sref="app({name:app.name})" class="md-title">{{app.name}}</h2>
+            <h4 ui-sref="app({name:app.name})" class="title">{{app.name}}</h4>
             <p>
-            Owner: <strong>{{app.owner.username}}</strong>
+            <i class="fa fa-user"></i> &nbsp;&nbsp;<span>{{app.owner.username}}</span>
             </p>
           </md-card-content>
-          <div class="md-actions" layout="row" layout-align="end center" layout-padding>
-            <md-button class="md-fab md-mini md-accent" aria-label="Settings" ng-click="delete($index)">
+          <div class="md-actions" layout="row" layout-align="end end" flex>
+            <md-button class="md-fab md-accent hc-btn" aria-label="Settings" ng-click="delete($index)">
               <i class="fa fa-trash"></i>
             </md-button>
             <span flex></span>
-            <md-button class="md-fab md-mini md-primary" aria-label="Open App" ui-sref="app.editor({name:app.name})">
+            <md-button class="md-fab md-primary hc-btn" aria-label="Open App" ui-sref="app.editor({name:app.name})">
               <i class="fa fa-cubes"></i>
             </md-button>
           </div>
         </md-card>
       </md-grid-tile>
-      <!-- New app tile -->
-      <md-grid-tile class="apps-tile" md-colspan-sm="2" md-colspan-gt-sm="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
-        <md-card layout-fill>
+      <!-- New app Tile -->
+      <md-grid-tile class="apps-tile" md-colspan="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
+        <md-card layout="column" layout-fill  layout-padding>
           <md-card-content>
             <h4 class="title">New App</h4>
             <md-input-container>
@@ -32,10 +32,13 @@
               <input ng-model="newApp.name" type="text" required>
             </md-input-container>
           </md-card-content>
-          <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-fab md-mini md-primary" aria-label="Create" ng-click="create(newApp)">
-              <i class="fa fa-plus"></i>
-            </md-button>
+          <div class="md-actions" layout="row" layout-align="end end" flex>
+            <div>
+              <md-progress-circular class="primary" md-mode="indeterminate" ng-if="data.loading"></md-progress-circular>
+              <md-button class="md-fab md-primary hc-btn" aria-label="Create" ng-click="create(newApp)" ng-hide="data.loading">
+                <i class="fa fa-plus"></i>
+              </md-button>
+            </div>
           </div>
         </md-card>
       </md-grid-tile>

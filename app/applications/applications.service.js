@@ -17,11 +17,10 @@ angular.module('hypercube.applications')
 				})
 				.catch(function (errRes){
 					//TODO: Handle different error response codes
-					$log.error('Error loading application', errRes.data);
+					$log.error('Error adding application: ', errRes.data);
 					d.reject({message:errRes.data});
 				});
 			}
-
 			return d.promise;
 		},
 		update:function(applicationId, applicationData){

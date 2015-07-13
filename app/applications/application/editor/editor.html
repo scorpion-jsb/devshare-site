@@ -1,71 +1,41 @@
 <section layout="row" layout-fill>
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" flex="15" ng-if="currentUser">
     <md-content layout-padding layout-align="center" layout="column">
-       <div layout="row" layout-align="center">
-       <div flex>
-        <md-button md-no-ink class="md-fab md-raised md-mini" ng-click="publishCurrentFile()" aria-label="Publish Project" disabled="true"><i class="fa fa-cloud-upload"></i></md-button>
-       </div>
-       <div flex>
-
-        <md-button md-no-ink class="md-fab md-raised md-mini" ng-click="publishCurrentFile()" aria-label="Publish File" ng-disabled="!currentFile"><i class="fa fa-upload"></i></md-button>
+      <div layout="row" layout-align="left" flex>
+        <div flex>
+          <md-fab-speed-dial md-open="false" md-direction="right" ng-class="'md-scale'">
+            <md-fab-trigger>
+              <md-button aria-label="menu" class="md-fab md-warn hc-btn" ng-click="">
+                <i class="fa fa-plus"></i>
+              </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+              <md-button class="md-fab md-raised md-mini hc-btn" ng-click="data.createMode = 'file'" aria-label="New File" style="font-size:.7em;">
+                <i class="fa fa-file"></i></md-icon>
+              </md-button>
+              <md-button class="md-fab md-raised md-mini hc-btn" ng-click="data.createMode = 'folder'" aria-label="New Folder" style="font-size:.7em;">
+                <i class="fa fa-folder"></i></md-icon>
+              </md-button>
+            </md-fab-actions>
+          </md-fab-speed-dial>
         </div>
-<!--         <div flex>
-        </div> -->
-<!--         <div flex>
-        <md-fab-speed-dial md-open="false" md-direction="up"ng-class="demo.selectedMode">
-          <md-fab-trigger>
-            <md-button aria-label="menu" class="md-fab md-warn" ng-click="" >
-              <i class="fa fa-plus"></i>
-            </md-button>
-          </md-fab-trigger>
-          <md-fab-actions>
-            <md-button class="md-fab md-raised md-mini" ng-click="data.createMode = 'file'" aria-label="New File">
-              <i class="fa fa-file"></i></md-icon>
-            </md-button>
-            <md-button class="md-fab md-raised md-mini" ng-click="data.createMode = 'folder'" aria-label="New Folder">
-              <i class="fa fa-folder"></i></md-icon>
-            </md-button>
-          </md-fab-actions>
-        </md-fab-speed-dial>
-        </div> -->
       </div>
+
       <!-- Files -->
       <div class="filestree-wrapper" layout-padding>
         <treecontrol class="tree-classic" tree-model="files" options="opts" on-selection="open(node)">
           {{node.name}}
         </treecontrol>
-        <span ng-if="!file || files.length < 1">Hover over below plus below to add files and folders</span>
+        <span ng-if="!file || files.length < 1">Hover over <i class="fa fa-plus"></i> to add a file or folder</span>
       </div>
       <div flex style="height:150px;"></div>
-      <div layout="row" layout-align="left" flex>
+      <div layout="row" layout-align="center">
         <div flex>
+          <md-button md-no-ink class="md-fab md-raised hc-btn" ng-click="publishCurrentFile()" aria-label="Publish Project" disabled="true"><i class="fa fa-cloud-upload"></i></md-button>
         </div>
         <div flex>
-        <md-fab-speed-dial md-open="false" md-direction="up"ng-class="demo.selectedMode">
-          <md-fab-trigger>
-            <md-button aria-label="menu" class="md-fab md-warn" ng-click="" >
-              <i class="fa fa-plus"></i>
-            </md-button>
-          </md-fab-trigger>
-          <md-fab-actions>
-            <md-button class="md-fab md-raised md-mini" ng-click="data.createMode = 'file'" aria-label="New File">
-              <i class="fa fa-file"></i></md-icon>
-            </md-button>
-            <md-button class="md-fab md-raised md-mini" ng-click="data.createMode = 'folder'" aria-label="New Folder">
-              <i class="fa fa-folder"></i></md-icon>
-            </md-button>
-          </md-fab-actions>
-        </md-fab-speed-dial>
+          <md-button md-no-ink class="md-fab md-raised hc-btn" ng-click="publishCurrentFile()" aria-label="Publish File" ng-disabled="!currentFile"><i class="fa fa-upload"></i></md-button>
         </div>
-      </div>
-      <div layout="row" layout-align="center end" style="margin-top:60%;">
-
-<!--         <div flex>
-          <md-button md-no-ink class="md-raised button-new" ng-click="data.createMode = 'file'" aria-label="New File"><i class="fa fa-plus"></i> &nbsp; <i class="fa fa-file"></i></md-button>
-        </div>
-        <div flex>
-          <md-button md-no-ink class="md-raised button-new" ng-click="data.createMode = 'folder'" aria-label="New Folder"><i class="fa fa-plus"></i> &nbsp; <i class="fa fa-folder"></i></md-button>
-        </div> -->
       </div>
     </md-content>
   </md-sidenav>

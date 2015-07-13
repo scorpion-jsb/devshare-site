@@ -13,18 +13,8 @@ angular.module('hypercube.application.editor')
     // Options
     Editor.setAce(_editor);
   };
-      $scope.demo = {
-        topDirections: ['left', 'up'],
-        bottomDirections: ['down', 'right'],
-        isOpen: false,
-        availableModes: ['md-fling', 'md-scale'],
-        selectedMode: 'md-scale',
-        availableDirections: ['up', 'down', 'left', 'right'],
-        selectedDirection: 'down'
-      };
   $scope.aceChanged = function(e) {
   };
-
   $scope.open= function(node){
     //TODO: Open node from synced db
     if(node.type == "file") {

@@ -1,14 +1,14 @@
 <section layout="row" flex layout-fill class="hc-background">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" flex="15" ng-if="currentUser">
-    <md-content layout-padding layout-align="center" layout="column">
-	    <md-button aria-label="Settings" ng-click="setDevice('iphone6')"  md-no-ink ng-class="{'md-primary':previewData.device == 'iphone6'}">
-				<i class="fa fa-mobile"></i>&nbsp;iPhone 6
+    <md-content  layout-padding layout-align="center" layout="column">
+	    <md-button class="hc-btn" aria-label="Settings" ng-click="setDevice('iphone6')"  md-no-ink ng-class="{'md-primary':previewData.device == 'iphone6'}">
+				<i class="fa fa-mobile"></i>&nbsp;&nbsp;iPhone 6
 	    </md-button>
-	    <md-button aria-label="Settings" ng-click="setDevice('iphone5')"   md-no-ink ng-class="{'md-primary':previewData.device == 'iphone5'}">
-				<i class="fa fa-mobile"></i>&nbsp;iPhone 5 
+	    <md-button class="hc-btn" aria-label="Settings" ng-click="setDevice('iphone5')"   md-no-ink ng-class="{'md-primary':previewData.device == 'iphone5'}">
+				<i class="fa fa-mobile"></i>&nbsp;&nbsp;iPhone 5 
 	    </md-button>
-	    <md-button aria-label="Settings" ng-click="setDevice()" ng-class="{'md-primary':previewData.device == 'computer'}">
-	    	<i class="fa fa-desktop"></i>&nbsp;Computer 
+	    <md-button class="hc-btn" aria-label="Settings" ng-click="setDevice()" ng-class="{'md-primary':previewData.device == 'computer'}">
+	    	<i class="fa fa-desktop"></i>&nbsp;&nbsp;Computer 
 	    </md-button>
     </md-content>
   </md-sidenav>

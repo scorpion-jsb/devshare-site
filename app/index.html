@@ -11,11 +11,12 @@
 <link rel="stylesheet" href="applications/application/editor/editor.css"></link>
 		<title>Hypercube</title>
 	</head>
-	<body ng-app="hypercube" ng-controller="AppCtrl" ng-cloak style>
+	<body ng-app="hypercube" ng-controller="AppCtrl" ng-cloak>
 			<div ui-view="topnav"></div>
-			<div ui-view="main" layout-fill></div>
+			<div ui-view="main"></div>
 			<div ui-view="footer"></div>
 	</body>
+	<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 	<script src="/bower/ace-builds/src-min-noconflict/ace.js"></script>
 <script src="/bower/angular/angular.js"></script>
 <script src="/bower/angular-animate/angular-animate.js"></script>
@@ -30,7 +31,8 @@
 <script src="/bower/angular-tree-control/angular-tree-control.js"></script>
 <script src="/bower/firebase/firebase.js"></script>
 <script src="/bower/angularfire/dist/angularfire.js"></script>
-<script src="/bower/firepad/dist/firepad.min.js"></script><script src="/app.js"></script>
+<script src="/bower/firepad/dist/firepad.min.js"></script>
+<script src="/bower/aws-sdk-js/dist/aws-sdk.js"></script><script src="/app.js"></script>
 <script src="/app-routes.js"></script>
 <script src="/app-theme.js"></script>
 <script src="/app-const.js"></script>
@@ -43,6 +45,7 @@
 <script src="/components/firebase.utils/firebase.utils.js"></script>
 <script src="/components/nav/nav.module.js"></script>
 <script src="/components/nav/nav.controller.js"></script>
+<script src="/components/aws/aws.module.js"></script>
 <script src="/home/home.module.js"></script>
 <script src="/home/home.controller.js"></script>
 <script src="/account/account.module.js"></script>

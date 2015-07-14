@@ -8,14 +8,15 @@
     "ui-router": "~0.2.15",
     "underscore": "~1.8.3",
     "angular-ui-ace": "~0.2.3",
-    "aws-sdk-js": "~2.1.35",
+    "aws-sdk-js": "~2.1.38",
     "angularfire": "~1.1.2",
     "angular-tree-control": "~0.2.10",
     "firepad": "~1.1.1",
     "font-awesome": "~4.3.0",
-    "devices.css": "*"
+    "devices.css": "*",
+    "angular-directive.g-signin": "~0.1.2"
   },
   "resolutions": {
-    "angular": "1.4.2"
+    "angular": "1.4.1"
   }
 }

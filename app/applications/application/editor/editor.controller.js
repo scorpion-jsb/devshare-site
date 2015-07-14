@@ -1,5 +1,5 @@
 angular.module('hypercube.application.editor')
-.controller('EditorCtrl', ['$rootScope', '$scope', '$log', 'Editor',  'application', function($rootScope, $scope, $log, Editor, application){
+.controller('EditorCtrl', ['$rootScope', '$scope', '$log', 'Editor',  'application', function ($rootScope, $scope, $log, Editor, application){
 	$scope.data = {createMode:null, newFileName:null};
   $scope.file = {};
   $log.info('$scope.application:', $scope.application);

@@ -1,6 +1,5 @@
 angular.module('hypercube.account')
 .controller('AccountCtrl', ['$scope','AuthService', '$state', '$log', function ($scope, AuthService, $state, $log){
-	
 	// set-up loading state
 	$scope.signupData = {
 		loading: false,

@@ -2,7 +2,7 @@ var filesLocation = 'appFiles';
 
 angular.module('hypercube.application.editor')
 
-.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'AuthService', '$rootScope', function ($http, $log, $q, ENV, Files, AuthService, $rootScope){
+.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'AuthService', '$rootScope', '$s3', function ($http, $log, $q, ENV, Files, AuthService, $rootScope, $s3){
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
@@ -21,7 +21,9 @@ angular.module('hypercube.application.editor')
 	};
 	//Get firebase array of file structure
 	this.getFiles = function(){
-		return Files(this.application.name).$loaded();
+    return $s3.getObjects(this.application.frontend.bucketName)
+
+		// return Files(this.application.name).$loaded();
 	};
 	this.setFileType = function(type){
 		$log.log('[Editor.setFileType()] Called with type:', type);

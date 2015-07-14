@@ -82,8 +82,8 @@ angular.module('hypercube.auth')
 	    })
 	    .then(function (successRes){
 	    	$log.log('[AuthService.login()] Login response:', successRes);
-	    	Session.create(successRes.data.token);
-	    	$rootScope.currentUser = successRes.data.user;
+	    	Session.create(successRes.data.token)
+    		$rootScope.currentUser = successRes.data.user;
 	    	$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 	    	deferred.resolve($rootScope.currentUser);
 	    })

@@ -21,10 +21,25 @@ angular.module('hypercube.application.editor')
 	};
 	//Get firebase array of file structure
 	this.getFiles = function(){
-    return $s3.getObjects(this.application.frontend.bucketName)
-
-		// return Files(this.application.name).$loaded();
+		var d = $q.defer();
+		var self = this;
+		var files = Files(this.application.name);
+		files.$loaded().then(function(){
+			$s3.getObjects(self.application.frontend.bucketName).then(function(s3Files){
+				//TODO: Compare here and add missing files to firebase
+				d.resolve(files);
+			});
+		});
+    return d.promise;
 	};
+	this.getStructure = function(){
+		this.getFiles.then(function(){
+			//TODO: Convert array from s3 into what is needed for directive
+		}, function(err){
+
+		});
+		return d.promise;
+	}
 	this.setFileType = function(type){
 		$log.log('[Editor.setFileType()] Called with type:', type);
 		if(!type){
@@ -173,27 +188,25 @@ angular.module('hypercube.application.editor')
     		return name.replace(".", ":");
     	}
     },
-    makeRef:function(appRef){
-    	//TODO: Create ref based on path
-    	//folder/index.html
-			var pathArray = this.path.split("/");
-			console.log('pathArray:', pathArray);
-			var self = this;
-			if(pathArray.length == 1){
-				return appRef.child(self.makeKey());
-			} else {
-				var finalRef = appRef;
-				_.each(pathArray, function (loc, ind, list){
-					//TODO: Handle more than one period here
-					if(ind != list.length - 1){
-						finalRef = finalRef.child(loc).child('children');
-					} else {
-						finalRef = finalRef.child(loc.replace(".", ":"));
-					}
-				});
-				console.log('finalRef:', finalRef);
-				return finalRef;
-			}
+    addFbObj:function(appName){
+    	//TODO: Save current value into fb object
+			var ref = fbutil.ref(filesLocation, appName);
+			_.extend(this, $firebaseObject(ref.push()));
+			var d = $q.defer();
+    	this.$loaded().then(function(){
+    		//Set by key within structure
+	    	fileObj.$value = file;
+	    	fileObj.$save().then(function(){
+    			d.resolve();
+    		}, function (err){
+    			$log.log('Error adding files:', err);
+    			d.reject(err);
+    		});
+    	}, function (err){
+    		$log.log('Error adding files:', err);
+    		d.reject(err);
+    	});
+  		return d.promise;
     }
 	};
 	return File;
@@ -235,50 +248,29 @@ angular.module('hypercube.application.editor')
 .factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', '$firebaseObject', '$q', function ($firebaseArray, File, Folder, $firebaseObject, $q) {
   return $firebaseArray.$extend({
     // override the $createObject behavior to return a File object
-    $$added: function(snap) {
-    	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
-    		//TODO: Make this recursive so it goes all the way down
-    		// _.map(snap.val().children, function (child){
-    		// 	console.log('Child map:', child);
-    		// 	if(child.type == "file"){
-    		// 		return new File(child.ref());
-    		// 	}
-    		// })
-    		return new Folder(snap);
-    	} else {
-      	return new File(snap);
-    	}
-    },
+    // $$added: function(snap) {
+    // 	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
+    // 		//TODO: Make this recursive so it goes all the way down
+    // 		// _.map(snap.val().children, function (child){
+    // 		// 	console.log('Child map:', child);
+    // 		// 	if(child.type == "file"){
+    // 		// 		return new File(child.ref());
+    // 		// 	}
+    // 		// })
+    // 		return new Folder(snap);
+    // 	} else {
+    //   	return new File(snap);
+    // 	}
+    // },
     $addFile:function(fileData){
     	//TODO: Handle path
     	//TODO: Save file within correct path
     	var file = new File({path:fileData.path});
     	file.getTypes();
     	var d = $q.defer();
-    	console.log('new fileObj:', file);
-    	// var self = this;
-    	// _.each(pathArray, function (loc){
-    	// });
-    	//Save as firebase object with key
-    	var self = this;
-    	var fileObj = $firebaseObject(file.makeRef(self.$ref()));
-	    console.log('fileObj set:', fileObj);
-    	fileObj.$loaded().then(function(){
-    		//Check to make sure name is not taken
-    		var key = file.makeKey();
-    		if(_.has(fileObj, key)){
-    			key += "-1";
-    		}
-    		//Set by key within structure
-	    	fileObj.$value = file;
-	    	fileObj.$save().then(function(){
-    			d.resolve();
-    		}, function (err){
-    			console.log('Error adding file:', err);
-    			d.reject(err);
-    		});
+    	file.addFbObj().then(function(){
+    		d.resolve(file);
     	}, function (err){
-    		console.log('Error loading stucture:', err);
     		d.reject(err);
     	});
     	return d.promise;
@@ -308,8 +300,47 @@ angular.module('hypercube.application.editor')
     		d.reject(err);
     	});
     	return d.promise;
-    }
-  });
+    },
+    $getStructure:function(){
+    	//TODO: Create ref based on path
+    	//folder/index.html
+    	var d = $q.defer();
+    	var self = this;
+    	self.$loaded().then(function(structureArray){
+    		var finalArray = [];
+    		console.info('structureArray loaded:', structureArray);
+    		structureArray.forEach(function buildIntoTree(file){
+					var pathArray = file.path.split("/");
+					console.log('pathArray:', pathArray);
+					var currentObj = {path:file.path};
+					if(pathArray.length == 1){
+						currentObj.name = pathArray[0];
+						currentObj.type = "file";
+						finalArray.push(currentObj);
+					}
+					if(pathArray.length >= 2) {
+						_.each(pathArray, function (loc, ind, list){
+							currentObj.name = loc;
+							if(ind != pathArray.length - 1){ //Not the last loc
+								currentObj.type = "folder";
+								if(currentObj.children){
+									currentObj['children']['children'] = [currentObj];
+								} else {
+									currentObj.children = [currentObj];
+									currentObj = currentObj.children[0]
+								}
+							} else {
+								currentObj.type = "file";
+								finalArray.push(currentObj);
+							}
+						});
+					}
+    		});
+    		d.resolve(finalArray);
+    	});
+    	return d.promise;
+	  }
+	});
 }])
 .factory('Files', ['fbutil', 'FilesFactory', function (fbutil, FilesFactory) {
 	return function (appName){

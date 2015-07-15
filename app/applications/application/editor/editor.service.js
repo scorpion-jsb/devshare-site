@@ -2,7 +2,7 @@ var filesLocation = 'appFiles';
 
 angular.module('hypercube.application.editor')
 
-.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'AuthService', '$rootScope', '$s3', function ($http, $log, $q, ENV, Files, AuthService, $rootScope, $s3){
+.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'File', 'AuthService', '$rootScope', '$s3', '$firebaseObject', 'fbutil', function ($http, $log, $q, ENV, Files, File, AuthService, $rootScope, $s3, $firebaseObject, fbutil){
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.ace.setTheme('ace/theme/monokai');
@@ -24,10 +24,16 @@ angular.module('hypercube.application.editor')
 		var d = $q.defer();
 		var self = this;
 		var files = Files(this.application.name);
+				var filesObj = _.extend({}, $firebaseObject(files.$ref()));
 		files.$loaded().then(function(){
 			$s3.getObjects(self.application.frontend.bucketName).then(function(s3Files){
 				//TODO: Compare here and add missing files to firebase
-				d.resolve(files);
+				console.log('s3.getObjects:', s3Files);
+				files.$saveFbObj(s3Files).then(function(){
+					d.resolve(files);
+				}, function (err){
+					d.reject(err);
+				});
 			});
 		});
     return d.promise;
@@ -92,7 +98,13 @@ angular.module('hypercube.application.editor')
 			aceOptions.userId = $rootScope.currentUser.username;
 		}
 		//Set firepad
-  	this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
+		if(_.isFunction(file.$ref)){
+  		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
+		} else {
+			new File(file).addFbObj(this.application.name).then(function(){
+  			this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
+			})
+		}
 		this.setFileType(file.fileType);
   	this.currentFile = file;
   	d.resolve(file);
@@ -146,7 +158,7 @@ angular.module('hypercube.application.editor')
 	return Folder;
 }])
 //File Object 
-.factory('File', ['$firebaseObject', '$firebaseUtils', function ($firebaseObject, $firebaseUtils){
+.factory('File', ['$firebaseObject', '$firebaseUtils', 'fbutil', '$q', function ($firebaseObject, $firebaseUtils, fbutil, $q){
 	function File(snap){
 		//Check that snap is a snapshot
 		if(_.isFunction(snap.val)){ //Snap is a snapshot
@@ -200,13 +212,14 @@ angular.module('hypercube.application.editor')
     addFbObj:function(appName){
 			var ref = fbutil.ref(filesLocation, appName);
 			//Make file a Firebase object
-			_.extend(this, $firebaseObject(ref.push()));
+			var self = this;
+			var fbSelf = _.extend({}, $firebaseObject(ref.push()));
 			var d = $q.defer();
-    	this.$loaded().then(function(){
+    	fbSelf.$loaded().then(function(){
     		//Set by key within structure
-	    	fileObj.$value = file;
+	    	fbSelf.$value = _.extend({}, self);
 	    	//Save current value into fb object
-	    	fileObj.$save().then(function(){
+	    	fbSelf.$save().then(function(){
     			d.resolve();
     		}, function (err){
     			$log.log('Error adding files:', err);
@@ -350,6 +363,7 @@ angular.module('hypercube.application.editor')
 								} else {
 									currentObj.type = "file";
 									currentObj.name = loc;
+									currentObj.path = pathArray.join("/");
 								}
 						});
 						return finalObj;
@@ -361,6 +375,27 @@ angular.module('hypercube.application.editor')
     		d.resolve(mappedStructure);
     	});
     	return d.promise;
+	  },
+	  $saveFbObj:function(saveData){
+	    //Make File a Firebase object and combine its current data with data in Firebase
+			//Make file a Firebase object
+			var fbObj = $firebaseObject(this.$ref());
+			var d = $q.defer();
+    	fbObj.$loaded().then(function(){
+    		//Set by key within structure
+	    	fbObj.$value = _.extend({},saveData);
+	    	//Save current value into fb object
+	    	fbObj.$save().then(function(){
+    			d.resolve();
+    		}, function (err){
+    			$log.log('Error adding files:', err);
+    			d.reject(err);
+    		});
+    	}, function (err){
+    		$log.log('Error adding files:', err);
+    		d.reject(err);
+    	});
+  		return d.promise;
 	  }
 	});
 }])

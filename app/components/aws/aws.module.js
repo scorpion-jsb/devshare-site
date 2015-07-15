@@ -48,7 +48,7 @@ angular.module('hypercube.aws', ['ngStorage', 'hypercube.auth'])
 				}
 			  else {
 			  	$log.log("[getObjects] listObjects returned:", data);
-			    d.resolve(data);
+			    d.resolve(data.Contents);
 			  }
 			});
 			return d.promise;

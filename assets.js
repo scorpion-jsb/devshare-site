@@ -2,7 +2,7 @@ module.exports = {
 	styles:[
 		'bower/angular-material/angular-material.min.css',
 		'bower/font-awesome/css/font-awesome.min.css',
-		'bower/angular-tree-control/css/tree-control.css',
+		// 'bower/angular-tree-control/css/tree-control.css', //Moved to template due to image references
 		'bower/devices.css/assets/devices.min.css',
 		'app.css',
 		'components/nav/nav.css',

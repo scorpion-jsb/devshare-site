@@ -1,5 +1,5 @@
 angular.module('hypercube.applications')
-.factory('applicationsService', ['$q', '$http', '$log', '$rootScope', 'ENV', function ($q, $http, $log, $rootScope, ENV) {
+.factory('applicationsService', ['$q', '$http', '$log', '$rootScope', 'ENV', 'AuthService', function ($q, $http, $log, $rootScope, ENV, AuthService) {
 	var applications = null;
 	return {
 		add:function(applicationData){
@@ -7,10 +7,9 @@ angular.module('hypercube.applications')
 			if(!applicationData){
 				$log.warn('[ApplicationsService.add()] No application data');
 				d.reject({message:'Name required to create new application'});
-			} else if(!$rootScope.currentUser){
-				d.reject({message:'You must be logged in.'});
-			} else {
-				applicationData.owner = $rootScope.currentUser._id;
+			}
+			AuthService.getCurrentUser().then(function(currentUser){
+				applicationData.owner = currentUser._id;
 				$http.post(ENV.serverUrl + '/apps', applicationData)
 				.then(function (apiRes){
 					d.resolve(apiRes.data);
@@ -20,7 +19,7 @@ angular.module('hypercube.applications')
 					$log.error('Error adding application: ', errRes.data);
 					d.reject({message:errRes.data});
 				});
-			}
+			});
 			return d.promise;
 		},
 		update:function(applicationId, applicationData){

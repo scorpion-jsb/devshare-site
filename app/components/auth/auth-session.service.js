@@ -6,7 +6,7 @@ angular.module('hypercube.auth')
   this.getRole = function(){
     if(this.role) return this.role; //Not available if refresh has occured
     if(this.exists()){
-      $log.log('[Session.getRole] decoded token:', jwtHelper.decodeToken($sessionStorage.token));
+      // $log.log('[Session.getRole] decoded token:', jwtHelper.decodeToken($sessionStorage.token));
       return jwtHelper.decodeToken($sessionStorage.token).role;
     } else {
       return "guest";

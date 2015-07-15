@@ -4,7 +4,7 @@ module.exports = {
 	styles:[
 		'bower/angular-material/angular-material.min.css',
 		'bower/font-awesome/css/font-awesome.min.css',
-		'bower/angular-tree-control/css/tree-control.css',
+		// 'bower/angular-tree-control/css/tree-control.css', //Moved to template due to image references
 		'bower/devices.css/assets/devices.min.css',
 		'app.css',
 		'components/nav/nav.css',
@@ -23,13 +23,12 @@ module.exports = {
 		'bower/underscore/underscore-min.js',
 		'bower/angular-ui-ace/ui-ace.js',
 		'bower/aws-sdk-js/dist/aws-sdk.min.js',
-		'bower/angular-tree-control/angular-tree-control.js',
 		'bower/firebase/firebase.js',
 		'bower/angularfire/dist/angularfire.js',
 		'bower/firepad/dist/firepad.min.js',
-		'bower/aws-sdk-js/dist/aws-sdk.js'
+		'bower/aws-sdk-js/dist/aws-sdk.js',
+		'bower/angular-tree-control/angular-tree-control.js'
 	],
-
 	app: [
 		'app.js',
 		'app-routes.js',

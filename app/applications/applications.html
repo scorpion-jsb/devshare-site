@@ -6,7 +6,7 @@
       <md-grid-tile class="apps-tile" ng-repeat="app in applications" md-colspan="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
         <md-card layout="column" layout-fill layout-padding>
           <md-card-content>
-            <h4 ui-sref="app({name:app.name})" class="title">{{app.name}}</h4>
+            <md-button md-no-ink class="md-primary title" ui-sref="app.editor({name:app.name})">{{app.name}}</md-button>
             <p>
             <i class="fa fa-user"></i> &nbsp;&nbsp;<span>{{app.owner.username}}</span>
             </p>

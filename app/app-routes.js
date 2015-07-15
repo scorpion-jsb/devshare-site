@@ -44,12 +44,22 @@ angular.module('hypercube')
       templateUrl:'applications/application/application.html',
       controller:'ApplicationCtrl',
       resolve:{
-        application:function(applicationsService, $q, $stateParams){
+        applications:function(applicationsService, $q){
           return $q(function(resolve, reject){
             applicationsService.get().then(function (applicationList){
               console.log('application Detail Ctrl: application data loaded:', applicationList);
-              resolve(_.findWhere(applicationList, {name:$stateParams.name}));
-            }, function(err){
+              resolve(applicationList);
+            }, function (err){
+              reject(err);
+            });
+          });
+        },
+        application:function(applicationsService, $q, $stateParams){
+          return $q(function(resolve, reject){
+            applicationsService.get($stateParams.name).then(function (applicationData){
+              console.log('application Detail Ctrl: application data loaded:', applicationData);
+              resolve(applicationData);
+            }, function (err){
               reject(err);
             });
           });

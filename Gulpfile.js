@@ -9,7 +9,7 @@ concat = require('gulp-concat'),
 rename = require('gulp-rename'),
 clean = require('gulp-clean'),
 cssmin = require('gulp-cssmin');
-
+var _ = require('underscore');
 var pkg = require('./package.json');
 var conf = require('./config.json');
 var refBuilder = require('./lib/refBuilder');
@@ -17,7 +17,16 @@ var assets = require('./assets');
 var locatedStyleAssets = locateAssets('styles');
 var locatedAppAssets = locateAssets('app');
 var locatedVendorAssets = locateAssets('vendor');
-
+// var locatedVendorLibAssets = libFolders();
+//Vendor folders included based on path in assets file
+// function libFolders(){
+//   return assets['vendorLib'].map(function(asset){
+//     var pathArray = asset.split("/");
+//     var pathStr = _.first(pathArray, pathArray.length - 1).join("/") + "/**";
+//     console.log('built path:', pathStr);
+//     return './' + conf.devFolder + '/' + pathStr;
+//   });
+// }
 function locateAssets(assetType){
   return assets[assetType].map(function(asset){
     return './' + conf.devFolder + '/' + asset;
@@ -46,6 +55,14 @@ gulp.task('assets:vendor', function () {
   .pipe(concat('vendor.js'))
   .pipe(gulp.dest(conf.distFolder));
 });
+/** Copy Vendor libs to single vendor.js file in distFolder
+ */
+//TODO: Handle scripts per env
+gulp.task('assets:vendorLib', function () {
+  return gulp.src(locatedVendorLibAssets, {"base": './' + conf.devFolder + '/'})
+  // Writes vendor.js to dist/ folder
+  .pipe(gulp.dest(conf.distFolder));
+});
 /** Angular annotation and Application files concatination to hypercube.js
    */
 gulp.task('assets:app', function () {
@@ -62,7 +79,33 @@ gulp.task('copyHtml', function(){
     return gulp.src([conf.devFolder + '/**/*.html', '!' + conf.devFolder + '/index-template.html', '!' + conf.devFolder + '/index.html', '!' + conf.devFolder+'/bower/**/*.html'], {base:'./'+conf.devFolder+'/'})
     .pipe(gulp.dest(conf.distFolder));
 });
-
+/** Copy Bower folders to distFolder in respective locations
+ */
+//TODO: Convert html files to js?
+gulp.task('copyBower', function(){
+  //List of directories to ignore when copying bower file
+  var ignoreDirs = [
+    'bower/ace-builds/src-min', 
+    'bower/ace-builds/src', 
+    'bower/ace-builds/src-noconflict', 
+    'bower/ace-builds/demo',
+    'bower/angular-material/demos',
+    'bower/angular-material/modules'
+  ]
+  ignoreArray = ignoreDirs.map(function (ref){
+    return '!'+ conf.devFolder + '/' + ref + "/**";
+  });
+  console.log('bower ignore array:', ignoreArray);
+    return gulp.src([conf.devFolder + '/bower/**'].concat(ignoreArray), {base:'./'+conf.devFolder+'/'})
+    .pipe(gulp.dest(conf.distFolder));
+});
+/** Copy Favicon and other style assets to distFolder in respective locations
+ */
+//TODO: Convert html files to js?
+gulp.task('copyStyles', function(){
+    return gulp.src([conf.devFolder + '/favicon.ico'], {base:'./'+conf.devFolder+'/'})
+    .pipe(gulp.dest(conf.distFolder));
+});
 /** Build script and style tags to place into HTML in dev folder
  */
 gulp.task('assetTags:dev', function () {
@@ -71,7 +114,6 @@ gulp.task('assetTags:dev', function () {
     // Writes script reference to index.html dist/ folder
     .pipe(rename('index.html'))
     .pipe(gulp.dest(conf.devFolder));
-
 });
 
 /** Build script and style tags to place into HTML in dist folder
@@ -84,7 +126,7 @@ gulp.task('assetTags:prod', function () {
     .pipe(gulp.dest(conf.distFolder));
 });
 
-/** Create Angular constants file
+/** Create Angular constants file using variables loaded from config.json
  */
 gulp.task('buildEnv', function () {
   return ngConstant({
@@ -116,9 +158,9 @@ gulp.task('s3Upload', function() {
 		key:process.env.HYPERCUBE_SERVER_S3_KEY || process.env.AWS_ACCESS_KEY_ID,
 		secret:process.env.HYPERCUBE_SERVER_S3_SECRET || process.env.AWS_SECRET_ACCESS_KEY,
 		bucket:conf.s3.bucket,
-		region:conf.s3.region
-	}
-	gulp.src('./' + conf.distFolder + '/**')
+		region:conf.s3.region || "us-east-1"
+	};
+	return gulp.src('./' + conf.distFolder + '/**')
     .pipe(s3(s3Config));
 });
 
@@ -131,6 +173,7 @@ gulp.task('connect:dev', function() {
     port: conf.port || 3000
   });
 });
+
 /** Run local server to host dist folder
 */
 gulp.task('connect:dist', function() {
@@ -141,6 +184,8 @@ gulp.task('connect:dist', function() {
   });
 });
 
+/** Clean dist folder
+*/
 // gulp.task('clean', function(){
 //   return gulp.src(conf.distFolder)
 //   .pipe(clean());
@@ -152,7 +197,7 @@ gulp.task('watch-assets', function(){
 gulp.task('watch-html', function(){
   gulp.watch([conf.devFolder + '/**/*.html'], ['copyHtml']);
 });
-gulp.task('assets', ['copyHtml', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
+gulp.task('assets', ['copyHtml', 'copyBower', 'copyStyles', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
 
 gulp.task('build', ['buildEnv', 'assets']);
 

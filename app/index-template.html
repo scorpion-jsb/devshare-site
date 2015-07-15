@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<%= styles %>
+		<link rel="stylesheet" href="bower/angular-tree-control/css/tree-control.css">
+<%= styles %>
 		<title>Hypercube</title>
 	</head>
 	<body ng-app="hypercube" ng-controller="AppCtrl" ng-cloak>
 			<div ui-view="topnav"></div>
 			<div ui-view="main"></div>
 			<div ui-view="footer"></div>
+			<%= scripts %>
 	</body>
-	<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
-	<%= scripts %>
 </html>

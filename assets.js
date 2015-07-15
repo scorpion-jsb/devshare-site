@@ -2,7 +2,6 @@ module.exports = {
 	styles:[
 		'bower/angular-material/angular-material.min.css',
 		'bower/font-awesome/css/font-awesome.min.css',
-		// 'bower/firepad/dist/firepad.css',
 		'bower/angular-tree-control/css/tree-control.css',
 		'bower/devices.css/assets/devices.min.css',
 		'app.css',
@@ -11,7 +10,6 @@ module.exports = {
 		'applications/application/editor/editor.css'
 	],
 	vendor: [
-		'bower/ace-builds/src-min-noconflict/ace.js',
 		'bower/angular/angular.js',
 		'bower/angular-animate/angular-animate.js',
 		'bower/angular-aria/angular-aria.min.js',
@@ -22,12 +20,15 @@ module.exports = {
 		'bower/underscore/underscore-min.js',
 		'bower/angular-ui-ace/ui-ace.js',
 		'bower/aws-sdk-js/dist/aws-sdk.min.js',
-		'bower/angular-tree-control/angular-tree-control.js',
 		'bower/firebase/firebase.js',
 		'bower/angularfire/dist/angularfire.js',
-		'bower/firepad/dist/firepad.min.js'
-	],
+		'bower/firepad/dist/firepad.min.js',
 
+	],
+	vendorLib:[
+		'bower/ace-builds/src-min-noconflict/ace.js',
+		'bower/angular-tree-control/angular-tree-control.js'
+	],
 	app: [
 		'app.js',
 		'app-routes.js',

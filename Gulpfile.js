@@ -9,7 +9,7 @@ concat = require('gulp-concat'),
 rename = require('gulp-rename'),
 clean = require('gulp-clean'),
 cssmin = require('gulp-cssmin');
-
+var _ = require('underscore');
 var pkg = require('./package.json');
 var conf = require('./config.json');
 var refBuilder = require('./lib/refBuilder');
@@ -17,7 +17,15 @@ var assets = require('./assets');
 var locatedStyleAssets = locateAssets('styles');
 var locatedAppAssets = locateAssets('app');
 var locatedVendorAssets = locateAssets('vendor');
-
+var locatedVendorLibAssets = libFolders();
+function libFolders(){
+  return assets['vendorLib'].map(function(asset){
+    var pathArray = asset.split("/");
+    var pathStr = _.first(pathArray, pathArray.length - 1).join("/") + "/**";
+    console.log('built path:', pathStr);
+    return './' + conf.devFolder + '/' + pathStr;
+  });
+}
 function locateAssets(assetType){
   return assets[assetType].map(function(asset){
     return './' + conf.devFolder + '/' + asset;
@@ -46,6 +54,14 @@ gulp.task('assets:vendor', function () {
   .pipe(concat('vendor.js'))
   .pipe(gulp.dest(conf.distFolder));
 });
+/** Copy Vendor libs to single vendor.js file in distFolder
+ */
+//TODO: Handle scripts per env
+gulp.task('assets:vendorLib', function () {
+  return gulp.src(locatedVendorLibAssets, {"base": './' + conf.devFolder + '/'})
+  // Writes vendor.js to dist/ folder
+  .pipe(gulp.dest(conf.distFolder));
+});
 /** Angular annotation and Application files concatination to hypercube.js
    */
 gulp.task('assets:app', function () {
@@ -71,7 +87,6 @@ gulp.task('assetTags:dev', function () {
     // Writes script reference to index.html dist/ folder
     .pipe(rename('index.html'))
     .pipe(gulp.dest(conf.devFolder));
-
 });
 
 /** Build script and style tags to place into HTML in dist folder

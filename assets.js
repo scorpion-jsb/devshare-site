@@ -10,6 +10,7 @@ module.exports = {
 		'applications/application/editor/editor.css'
 	],
 	vendor: [
+		'bower/ace-builds/src-min-noconflict/ace.js',
 		'bower/angular/angular.js',
 		'bower/angular-animate/angular-animate.js',
 		'bower/angular-aria/angular-aria.min.js',
@@ -23,11 +24,8 @@ module.exports = {
 		'bower/firebase/firebase.js',
 		'bower/angularfire/dist/angularfire.js',
 		'bower/firepad/dist/firepad.min.js',
-
-	],
-	vendorLib:[
-		'bower/ace-builds/src-min-noconflict/ace.js',
 		'bower/angular-tree-control/angular-tree-control.js'
+
 	],
 	app: [
 		'app.js',

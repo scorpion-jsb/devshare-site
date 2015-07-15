@@ -78,7 +78,20 @@ gulp.task('copyHtml', function(){
     return gulp.src([conf.devFolder + '/**/*.html', '!' + conf.devFolder + '/index-template.html', '!' + conf.devFolder + '/index.html', '!' + conf.devFolder+'/bower/**/*.html'], {base:'./'+conf.devFolder+'/'})
     .pipe(gulp.dest(conf.distFolder));
 });
-
+/** Copy Bower folder to distFolder in respective locations
+ */
+//TODO: Convert html files to js?
+gulp.task('copyBower', function(){
+    return gulp.src([conf.devFolder + '/bower/**', '!' + conf.devFolder +'/bower/ace-builds/src-min', '!'+ conf.devFolder + 'bower/ace-builds/src/**', '!'+ conf.devFolder + 'bower/ace-builds/src-noconflict/**', '!'+ conf.devFolder + 'bower/ace-builds/demo/**'], {base:'./'+conf.devFolder+'/'})
+    .pipe(gulp.dest(conf.distFolder));
+});
+/** Copy Bower folder to distFolder in respective locations
+ */
+//TODO: Convert html files to js?
+gulp.task('copyStyles', function(){
+    return gulp.src([conf.devFolder + '/favicon.ico'], {base:'./'+conf.devFolder+'/'})
+    .pipe(gulp.dest(conf.distFolder));
+});
 /** Build script and style tags to place into HTML in dev folder
  */
 gulp.task('assetTags:dev', function () {
@@ -167,7 +180,7 @@ gulp.task('watch-assets', function(){
 gulp.task('watch-html', function(){
   gulp.watch([conf.devFolder + '/**/*.html'], ['copyHtml']);
 });
-gulp.task('assets', ['copyHtml', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
+gulp.task('assets', ['copyHtml', 'copyBower', 'copyStyles', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
 
 gulp.task('build', ['buildEnv', 'assets']);
 

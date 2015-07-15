@@ -33,10 +33,18 @@ angular.module('hypercube.application.editor')
     return d.promise;
 	};
 	this.getStructure = function(){
-		this.getFiles.then(function(){
+		var d = $q.defer();
+		var self = this;
+		self.getFiles().then(function (files){
+			files.$getStructure().then(function (structure){
+				$log.debug('structure:', structure, files);
+				d.resolve(structure);
+			}, function(err){
+				d.reject(err);
+			})
 			//TODO: Convert array from s3 into what is needed for directive
 		}, function(err){
-
+			d.reject(err);
 		});
 		return d.promise;
 	}
@@ -188,14 +196,16 @@ angular.module('hypercube.application.editor')
     		return name.replace(".", ":");
     	}
     },
+    //Make File a Firebase object and combine its current data with data in Firebase
     addFbObj:function(appName){
-    	//TODO: Save current value into fb object
 			var ref = fbutil.ref(filesLocation, appName);
+			//Make file a Firebase object
 			_.extend(this, $firebaseObject(ref.push()));
 			var d = $q.defer();
     	this.$loaded().then(function(){
     		//Set by key within structure
 	    	fileObj.$value = file;
+	    	//Save current value into fb object
 	    	fileObj.$save().then(function(){
     			d.resolve();
     		}, function (err){
@@ -210,7 +220,7 @@ angular.module('hypercube.application.editor')
     }
 	};
 	return File;
-	//Utility functions
+	//----------- Utility functions ------------//
 	//Convert File extension to contentType
   function extToContentType(ext){
   	//Default content type
@@ -244,8 +254,8 @@ angular.module('hypercube.application.editor')
   	return extToContentType(ext).split("/")[1];
   }
 }])
-//Files list factory the outputs extended firebaseArray
-.factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', '$firebaseObject', '$q', function ($firebaseArray, File, Folder, $firebaseObject, $q) {
+//Accepts Firebase ref and returns extended firebaseArray
+.factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', '$firebaseObject', '$q', '$log', function ($firebaseArray, File, Folder, $firebaseObject, $q, $log) {
   return $firebaseArray.$extend({
     // override the $createObject behavior to return a File object
     // $$added: function(snap) {
@@ -309,34 +319,46 @@ angular.module('hypercube.application.editor')
     	self.$loaded().then(function(structureArray){
     		var finalArray = [];
     		console.info('structureArray loaded:', structureArray);
-    		structureArray.forEach(function buildIntoTree(file){
+    		var mappedStructure = structureArray.map(function (file){
 					var pathArray = file.path.split("/");
 					console.log('pathArray:', pathArray);
-					var currentObj = {path:file.path};
+    			var currentObj = {};
+					var currentLevel = {};
+
 					if(pathArray.length == 1){
 						currentObj.name = pathArray[0];
 						currentObj.type = "file";
-						finalArray.push(currentObj);
-					}
-					if(pathArray.length >= 2) {
+						currentObj.path = pathArray[0];
+						return currentObj;
+					} else {
+						var finalObj = {};
 						_.each(pathArray, function (loc, ind, list){
-							currentObj.name = loc;
-							if(ind != pathArray.length - 1){ //Not the last loc
-								currentObj.type = "folder";
-								if(currentObj.children){
-									currentObj['children']['children'] = [currentObj];
+							$log.debug('loop:', loc, ind, currentObj);
+								if(ind != list.length - 1){ //Not the last loc
+									$log.debug('path1:', currentObj);
+									currentObj.name = loc;
+									currentObj.path = _.first(list, ind + 1).join("/");
+									currentObj.type = "folder";
+									currentObj.children = [{}];
+									$log.debug('path2:', currentObj);
+									if(ind == 0 ){
+										finalObj = currentObj;
+									}
+									currentObj = currentObj.children[0];
+									$log.debug('going down one', currentObj);
+
 								} else {
-									currentObj.children = [currentObj];
-									currentObj = currentObj.children[0]
+									currentObj.type = "file";
+									currentObj.name = loc;
 								}
-							} else {
-								currentObj.type = "file";
-								finalArray.push(currentObj);
-							}
 						});
+						return finalObj;
+
 					}
+
     		});
-    		d.resolve(finalArray);
+				self.structure = mappedStructure;
+    		d.resolve(mappedStructure);
     	});
     	return d.promise;
 	  }

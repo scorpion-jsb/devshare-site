@@ -23,7 +23,7 @@
 
       <!-- Files -->
       <div class="filestree-wrapper" layout-padding>
-        <treecontrol class="tree-classic" tree-model="files" options="opts" on-selection="open(node)">
+        <treecontrol class="tree-classic" tree-model="structure" options="opts" on-selection="open(node)">
           {{node.name}}
         </treecontrol>
         <span ng-if="!file || files.length < 1">Hover over <i class="fa fa-plus"></i> to add a file or folder</span>

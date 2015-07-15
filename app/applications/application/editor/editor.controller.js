@@ -4,15 +4,14 @@ angular.module('hypercube.application.editor')
   $scope.file = {};
   $log.info('$scope.application:', $scope.application);
   Editor.setApplication($scope.application);
-  Editor.getFiles().then(function(fileStructure){
-    $scope.files = fileStructure;
-          $scope.files.$getStructure().then(function(structure){
-            $log.warn('$getStructure returned', structure);
-          }, function(err){
-            $log.warn(err);
-          })
+  Editor.getFiles().then(function(files){
+    $scope.files = files;
     $log.info('Structure set:', $scope.files);
   });
+  Editor.getStructure().then(function(structure){
+    $scope.structure = structure;
+    $log.warn('getStructure returned', structure);
+  })
   //TODO: Change file mode dynamically (editor service)
 	$scope.aceLoaded = function(_editor) {
     // Options

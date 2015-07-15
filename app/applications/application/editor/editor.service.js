@@ -10,45 +10,50 @@ angular.module('hypercube.application.editor')
 	};
 	this.setApplication = function(applicationData){
 		this.application = applicationData;
-		$log.log('Application data set in editor', this.application);
+		// $log.log('[Editor.setApplication] Application data set in editor', this.application);
 	};
 	this.getAce = function(){
 		if(this.ace){
 			return this.ace;
 		} else {
-			$log.error('No current ace editor available.');
+			$log.error('[Editor.getAce()] No current ace editor available.');
 		}
 	};
 	//Get firebase array of file structure
 	this.getFiles = function(){
 		var d = $q.defer();
+		this.files = Files(this.application.name);
 		var self = this;
-		var files = Files(this.application.name);
-				var filesObj = _.extend({}, $firebaseObject(files.$ref()));
-		files.$loaded().then(function(){
-			$s3.getObjects(self.application.frontend.bucketName).then(function(s3Files){
-				//TODO: Compare here and add missing files to firebase
-				console.log('s3.getObjects:', s3Files);
-				files.$saveFbObj(s3Files).then(function(){
-					d.resolve(files);
-				}, function (err){
-					d.reject(err);
-				});
-			});
+		var filesObj = _.extend({}, $firebaseObject(self.files.$ref()));
+		self.files.$loaded().then(function(){
+			//Get s3 objects and save the data to firebase
+			// $s3.getObjects(self.application.frontend.bucketName).then(function(s3Files){
+			// 	//TODO: Compare here and add missing files to firebase
+			// 	$log.info('[Editor.getFiles()] s3.getObjects:', s3Files);
+			// 	files.$saveFbObj(s3Files).then(function(){
+			// 		d.resolve(files);
+			// 	}, function (err){
+			// 		d.reject(err);
+			// 	});
+			// });
+			d.resolve(self.files);
+		}, function (err){
+			$log.error('[Editor.getFiles()] Error loading files array:', err);
+			d.reject(err);
 		});
     return d.promise;
 	};
+	//Get File structure in "children" format to be used with tree viewing/control
 	this.getStructure = function(){
 		var d = $q.defer();
 		var self = this;
 		self.getFiles().then(function (files){
 			files.$getStructure().then(function (structure){
-				$log.debug('structure:', structure, files);
+				$log.debug('[Editor.getStructure()]:', structure, files);
 				d.resolve(structure);
 			}, function(err){
 				d.reject(err);
-			})
-			//TODO: Convert array from s3 into what is needed for directive
+			});
 		}, function(err){
 			d.reject(err);
 		});
@@ -71,6 +76,7 @@ angular.module('hypercube.application.editor')
 		$log.log('Editor.openFile()', file);
 		var d = $q.defer();
 		var aceOptions = {};
+		var self = this;
 		//Check for already existing firepad
     if(_.has(this, 'firepad')){
       // Disconnect old firepad session
@@ -97,17 +103,20 @@ angular.module('hypercube.application.editor')
 		if(_.has($rootScope, 'currentUser')){
 			aceOptions.userId = $rootScope.currentUser.username;
 		}
+		this.setFileType(file.fileType);
+  	this.currentFile = file;
 		//Set firepad
 		if(_.isFunction(file.$ref)){
   		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
 		} else {
-			new File(file).addFbObj(this.application.name).then(function(){
-  			this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
-			})
+			var structureArray = Files(this.application.name);
+			structureArray.$loaded().then(function(){
+				var fbFile = _.findWhere(structureArray, {path:file.path});
+				console.log('fbFIle:', fbFile);
+				self.firepad = Firepad.fromACE(fbFile.$ref(), self.ace, aceOptions);
+  			d.resolve(file);
+			});
 		}
-		this.setFileType(file.fileType);
-  	this.currentFile = file;
-  	d.resolve(file);
 		return d.promise;
 	};
 	this.publishCurrent = function(){
@@ -168,7 +177,7 @@ angular.module('hypercube.application.editor')
 			if(this.type == 'folder' && !this.children){ //Fill children parameter if folder without children
 				this.children = ['mock child'];
 			}
-			this.makeKey();
+			// this.makeKey();
 		} else { //Snap is not a snapshot
 			angular.extend(this, snap);
 		}
@@ -196,18 +205,18 @@ angular.module('hypercube.application.editor')
     	this.contentType = extToContentType(this.getExt());
     	this.fileType = extToFileType(this.getExt());
     },
-    makeKey:function(){
-    	console.log('makeKey called with:', this);
-    	if(_.has(this, 'name')){
-    		var name = this.name;
-    		return name.replace(".", ":");
-    	} else if(_.has(this, 'path')){
-    		var pathArray = this.path.split("/");
-    		var name = _.last(pathArray);
-    		this.name = name;
-    		return name.replace(".", ":");
-    	}
-    },
+    // makeKey:function(){
+    // 	console.log('makeKey called with:', this);
+    // 	if(_.has(this, 'name')){
+    // 		var name = this.name;
+    // 		return name.replace(".", ":");
+    // 	} else if(_.has(this, 'path')){
+    // 		var pathArray = this.path.split("/");
+    // 		var name = _.last(pathArray);
+    // 		this.name = name;
+    // 		return name.replace(".", ":");
+    // 	}
+    // },
     //Make File a Firebase object and combine its current data with data in Firebase
     addFbObj:function(appName){
 			var ref = fbutil.ref(filesLocation, appName);
@@ -217,7 +226,7 @@ angular.module('hypercube.application.editor')
 			var d = $q.defer();
     	fbSelf.$loaded().then(function(){
     		//Set by key within structure
-	    	fbSelf.$value = _.extend({}, self);
+	    	fbSelf.$value = _.clone(self);
 	    	//Save current value into fb object
 	    	fbSelf.$save().then(function(){
     			d.resolve();
@@ -258,12 +267,10 @@ angular.module('hypercube.application.editor')
 		} else {
 			contentType = 'application/octet-stream'
 		}
-  	console.log("Ext: " + ext + "Content Type: " + contentType);
 		return contentType;
   }
   function extToFileType(ext){
   	//Default content type
-  	console.log("Ext: " + ext + "File Type: " + extToContentType(ext).split("/")[1]);
   	return extToContentType(ext).split("/")[1];
   }
 }])
@@ -271,20 +278,20 @@ angular.module('hypercube.application.editor')
 .factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', '$firebaseObject', '$q', '$log', function ($firebaseArray, File, Folder, $firebaseObject, $q, $log) {
   return $firebaseArray.$extend({
     // override the $createObject behavior to return a File object
-    // $$added: function(snap) {
-    // 	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
-    // 		//TODO: Make this recursive so it goes all the way down
-    // 		// _.map(snap.val().children, function (child){
-    // 		// 	console.log('Child map:', child);
-    // 		// 	if(child.type == "file"){
-    // 		// 		return new File(child.ref());
-    // 		// 	}
-    // 		// })
-    // 		return new Folder(snap);
-    // 	} else {
-    //   	return new File(snap);
-    // 	}
-    // },
+    $$added: function(snap) {
+    	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
+    		//TODO: Make this recursive so it goes all the way down
+    		// _.map(snap.val().children, function (child){
+    		// 	console.log('Child map:', child);
+    		// 	if(child.type == "file"){
+    		// 		return new File(child.ref());
+    		// 	}
+    		// })
+    		return new Folder(snap);
+    	} else {
+      	return new File(snap);
+    	}
+    },
     $addFile:function(fileData){
     	//TODO: Handle path
     	//TODO: Save file within correct path
@@ -331,13 +338,10 @@ angular.module('hypercube.application.editor')
     	var self = this;
     	self.$loaded().then(function(structureArray){
     		var finalArray = [];
-    		console.info('structureArray loaded:', structureArray);
     		var mappedStructure = structureArray.map(function (file){
 					var pathArray = file.path.split("/");
-					console.log('pathArray:', pathArray);
     			var currentObj = {};
 					var currentLevel = {};
-
 					if(pathArray.length == 1){
 						currentObj.name = pathArray[0];
 						currentObj.type = "file";
@@ -346,20 +350,17 @@ angular.module('hypercube.application.editor')
 					} else {
 						var finalObj = {};
 						_.each(pathArray, function (loc, ind, list){
-							$log.debug('loop:', loc, ind, currentObj);
+							// $log.debug('loop:', loc, ind, currentObj);
 								if(ind != list.length - 1){ //Not the last loc
-									$log.debug('path1:', currentObj);
 									currentObj.name = loc;
 									currentObj.path = _.first(list, ind + 1).join("/");
 									currentObj.type = "folder";
 									currentObj.children = [{}];
-									$log.debug('path2:', currentObj);
+									//TODO: Find out why this works
 									if(ind == 0 ){
 										finalObj = currentObj;
 									}
 									currentObj = currentObj.children[0];
-									$log.debug('going down one', currentObj);
-
 								} else {
 									currentObj.type = "file";
 									currentObj.name = loc;
@@ -367,9 +368,7 @@ angular.module('hypercube.application.editor')
 								}
 						});
 						return finalObj;
-
 					}
-
     		});
 				self.structure = mappedStructure;
     		d.resolve(mappedStructure);

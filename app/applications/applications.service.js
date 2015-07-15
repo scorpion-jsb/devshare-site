@@ -10,6 +10,7 @@ angular.module('hypercube.applications')
 			}
 			AuthService.getCurrentUser().then(function(currentUser){
 				applicationData.owner = currentUser._id;
+				$log.debug('requesting new app with:', applicationData);
 				$http.post(ENV.serverUrl + '/apps', applicationData)
 				.then(function (apiRes){
 					d.resolve(apiRes.data);

@@ -57,13 +57,17 @@ angular.module('hypercube.auth')
       return config || $q.when(config);
     },
     //Broadcast auth error events
-    responseError: function (response) { 
+    responseError: function (response) {
       $rootScope.$broadcast({
         401: AUTH_EVENTS.notAuthenticated,
         403: AUTH_EVENTS.notAuthorized,
         419: AUTH_EVENTS.sessionTimeout,
         440: AUTH_EVENTS.sessionTimeout
       }[response.status], response);
+      //Let 401 through
+      // if(response.status == 401){
+      //   return $q.resolve(response);
+      // }
       return $q.reject(response);
     }
   };

@@ -7,7 +7,6 @@ angular.module('hypercube.application.editor')
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
 		this.session = aceEditor.getSession();
-		this.ace.setTheme('ace/theme/monokai');
 		this.ace.$blockScrolling = Infinity; //Disable warning message
 	};
 	//Get current application
@@ -126,13 +125,11 @@ angular.module('hypercube.application.editor')
   		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
 		} else { //file is not a firebase object
 			//Create firebase object by locating in Files array
-			var structureArray = Files(this.application.name);
-			structureArray.$loaded().then(function(){
-				var fbFile = _.findWhere(structureArray, {path:file.path});
-				console.log('fbFIle:', fbFile);
-				self.currentFile = fbFile;
+			self.getFiles().then(function(filesArray){
+				var fbFile = _.findWhere(filesArray, {path:file.path});
+				console.log('fbFile:', fbFile);
 				self.firepad = Firepad.fromACE(fbFile.$ref(), self.ace, aceOptions);
-  			d.resolve(self.currentFile);
+  			d.resolve(file);
 			});
 		}
 		return d.promise;
@@ -264,14 +261,8 @@ angular.module('hypercube.application.editor')
   return $firebaseArray.$extend({
     // override the $createObject behavior to return a File object
     $$added: function(snap) {
+    	console.log('snap:', snap.val());
     	if(snap.val().type == 'folder' || _.has(snap.val(), 'children')){
-    		//TODO: Make this recursive so it goes all the way down
-    		// _.map(snap.val().children, function (child){
-    		// 	console.log('Child map:', child);
-    		// 	if(child.type == "file"){
-    		// 		return new File(child.ref());
-    		// 	}
-    		// })
     		return new Folder(snap);
     	} else {
       	return new File(snap);
@@ -283,7 +274,7 @@ angular.module('hypercube.application.editor')
     	var file = new File({path:fileData.path});
     	file.getTypes();
     	var d = $q.defer();
-    	file.addFbObj().then(function(){
+    	this.$add(file).then(function(){
     		d.resolve(file);
     	}, function (err){
     		d.reject(err);
@@ -298,6 +289,7 @@ angular.module('hypercube.application.editor')
     	var self = $firebaseObject(this.$ref());
     	var d = $q.defer();
     	self.$loaded().then(function(){
+    		//TODO: Check for other folders that match
     		// _.findWhere(self, {name:folder.name})
     		var key = folder.name;
     		//Check to make sure name is not taken
@@ -326,38 +318,40 @@ angular.module('hypercube.application.editor')
     		var finalArray = [];
     		var mappedStructure = structureArray.map(function (file){
 					var pathArray = file.path.split("/");
-    			var currentObj = {};
+    			var currentObj = file;
 					var currentLevel = {};
 					if(pathArray.length == 1){
 						currentObj.name = pathArray[0];
-						currentObj.type = "file";
+						if(!_.has(currentObj,'type')){
+							currentObj.type = "file";
+						} 
 						currentObj.path = pathArray[0];
 						return currentObj;
 					} else {
 						var finalObj = {};
 						_.each(pathArray, function (loc, ind, list){
 							// $log.debug('loop:', loc, ind, currentObj);
-								if(ind != list.length - 1){ //Not the last loc
-									currentObj.name = loc;
-									currentObj.path = _.first(list, ind + 1).join("/");
-									currentObj.type = "folder";
-									currentObj.children = [{}];
-									//TODO: Find out why this works
-									if(ind == 0 ){
-										finalObj = currentObj;
-									}
-									currentObj = currentObj.children[0];
-								} else {
-									currentObj.type = "file";
-									currentObj.name = loc;
-									currentObj.path = pathArray.join("/");
+							if(ind != list.length - 1){ //Not the last loc
+								currentObj.name = loc;
+								currentObj.path = _.first(list, ind + 1).join("/");
+								currentObj.type = "folder";
+								currentObj.children = [{}];
+								//TODO: Find out why this works
+								if(ind == 0 ){
+									finalObj = currentObj;
 								}
+								currentObj = currentObj.children[0];
+							} else {
+								currentObj.type = "file";
+								currentObj.name = loc;
+								currentObj.path = pathArray.join("/");
+							}
 						});
 						return finalObj;
 					}
     		});
-				self.structure = mappedStructure;
-    		d.resolve(mappedStructure);
+				self.structure = combineLikeObjs(mappedStructure);
+    		d.resolve(self.structure);
     	});
     	return d.promise;
 	  },
@@ -383,6 +377,7 @@ angular.module('hypercube.application.editor')
 	  }
 	});
 }])
+//Returns a extended Files array provided app name
 .factory('Files', ['fbutil', 'FilesFactory', function (fbutil, FilesFactory) {
 	return function (appName){
 		var ref = fbutil.ref(filesLocation, appName);
@@ -416,7 +411,26 @@ function extToContentType(ext){
 	}
 	return contentType;
 }
+//Convert file extension to fileType
 function extToFileType(ext){
 	//Default content type
 	return extToContentType(ext).split("/")[1];
+}
+//Recursivley combine children of object's that have the same names
+function combineLikeObjs(mappedArray){
+	var takenNames = [];
+	var finishedArray = [];
+	_.each(mappedArray, function(obj, ind, list){
+		if(takenNames.indexOf(obj.name) == -1){
+			takenNames.push(obj.name);
+			finishedArray.push(obj);
+		} else {
+			var likeObj = _.findWhere(mappedArray, {name:obj.name});
+			//Combine children of like objects
+			likeObj.children = _.union(obj.children, likeObj.children);
+			likeObj.children = combineLikeObjs(likeObj.children);
+			console.log('extended obj:',likeObj);
+		}
+	});
+	return finishedArray;
 }

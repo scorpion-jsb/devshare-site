@@ -3,20 +3,26 @@ angular.module('hypercube.application.editor')
 	$scope.data = {createMode:null, newFileName:null};
   $scope.file = {};
   //TODO: Save expanded nodes and open file
-  $scope.tree = {};
-  $scope.tree.opts = {
-    isLeaf:function(node){
-    return node.type == "file";
+    $scope.tree = { opts:{
+      isLeaf:function(node){
+        return node.type == "file";
+      }
     }
   };
-  // TODO: Should this inherit down scopes like this or use application resolve
   Editor.application = $scope.application;
   Editor.getStructure().then(function(structure){
     $scope.structure = structure;
+    $scope.$watch('structure', function(val){
+      $log.debug('structure watch:', val)
+    })
     $log.warn('getStructure returned', structure);
   });
 	$scope.aceLoaded = function(_editor) {
       Editor.setAce(_editor);
+    //TODO: Load saved list of expanded tree nodes
+    // if(Editor.expandedNodes){
+    //   $scope.tree.expandedNodes = Editor.expandedNodes;
+    // }
     //TODO: load already exisiting session
     // if(!Editor.ace){
     // } else {
@@ -29,11 +35,16 @@ angular.module('hypercube.application.editor')
     //TODO: Open node from synced db
     if(node.type == "file") {
       Editor.openFile(node).then(function (openedFile){
-        $log.log('file opened:', openedFile);
-        $scope.currentFile = openedFile;
+        // $log.log('file opened:', openedFile);
+        // $scope.currentFile = openedFile;
+        Editor.getStructure().then(function(structure){
+          $scope.structure = structure;
+          $scope.tree.expandedNodes.push(node);
+        });
       });
     } else {
-
+      // $scope.tree.expandedNodes.push(node);
+      // Editor.expandedNodes = $scope.tree.expandedNodes;
     }
   };
   $scope.createNew = function(){

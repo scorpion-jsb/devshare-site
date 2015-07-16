@@ -9,7 +9,8 @@ angular.module('hypercube.applications')
 				d.reject({message:'Name required to create new application'});
 			}
 			AuthService.getCurrentUser().then(function(currentUser){
-				applicationData.owner = currentUser._id;
+				$log.debug('currentUser loaded:', currentUser);
+				applicationData.owner = currentUser.id;
 				$http.post(ENV.serverUrl + '/apps', applicationData)
 				.then(function (apiRes){
 					d.resolve(apiRes.data);

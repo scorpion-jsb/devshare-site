@@ -3,20 +3,30 @@ var filesLocation = 'appFiles';
 angular.module('hypercube.application.editor')
 
 .service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'File', 'AuthService', '$rootScope', '$s3', '$firebaseObject', 'fbutil', function ($http, $log, $q, ENV, Files, File, AuthService, $rootScope, $s3, $firebaseObject, fbutil){
+	//Set Editor.ace and set secondary settings
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
+		this.session = aceEditor.getSession();
 		this.ace.setTheme('ace/theme/monokai');
 		this.ace.$blockScrolling = Infinity; //Disable warning message
 	};
-	this.setApplication = function(applicationData){
-		this.application = applicationData;
+	//Get current application
+	this.getApplication = function(){
+		if(this.application){
+			return this.application;
+		} else {
+			$log.error('[Editor.getAce()] No current ace editor available.');
+			return null;
+		}
 		// $log.log('[Editor.setApplication] Application data set in editor', this.application);
 	};
+	//Get current Ace instance
 	this.getAce = function(){
 		if(this.ace){
 			return this.ace;
 		} else {
 			$log.error('[Editor.getAce()] No current ace editor available.');
+			return null;
 		}
 	};
 	//Get firebase array of file structure
@@ -59,6 +69,7 @@ angular.module('hypercube.application.editor')
 		});
 		return d.promise;
 	}
+	//Set editors file mode from provided type
 	this.setFileType = function(type){
 		$log.log('[Editor.setFileType()] Called with type:', type);
 		if(!type){
@@ -72,6 +83,7 @@ angular.module('hypercube.application.editor')
 			return this.ace.getSession().setMode(setType);
 		}
 	};
+	//Open a file in the editor while safley emptying it if it had contents
 	this.openFile = function(file){
 		$log.log('Editor.openFile()', file);
 		var d = $q.defer();
@@ -84,6 +96,10 @@ angular.module('hypercube.application.editor')
       // Empty out editor
       this.ace.getSession().setValue(null);
     }
+		//If file is not a file, make it one
+		if(!(file instanceof File)){
+			file = new File(file);
+		}
     //Set Default Editor text
 		if(file.fileType == "javascript"){
 			aceOptions.defaultText = '// ' + file.name;
@@ -106,27 +122,28 @@ angular.module('hypercube.application.editor')
 		this.setFileType(file.fileType);
   	this.currentFile = file;
 		//Set firepad
-		if(_.isFunction(file.$ref)){
+		if(_.isFunction(file.$ref)){ //file is already a Firebase object
   		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
-		} else {
+		} else { //file is not a firebase object
+			//Create firebase object by locating in Files array
 			var structureArray = Files(this.application.name);
 			structureArray.$loaded().then(function(){
 				var fbFile = _.findWhere(structureArray, {path:file.path});
 				console.log('fbFIle:', fbFile);
+				self.currentFile = fbFile;
 				self.firepad = Firepad.fromACE(fbFile.$ref(), self.ace, aceOptions);
-  			d.resolve(file);
+  			d.resolve(self.currentFile);
 			});
 		}
 		return d.promise;
 	};
+	//Publish the current file loaded in the editor to S3
 	this.publishCurrent = function(){
-		$log.log('Editor.publishFile()');
+		$log.log('Editor.publishCurrent()');
 		var d = $q.defer();
-		console.log('File text:',this.firepad.getText());
 		if(!this.currentFile){
 			d.reject({message:'A file needs to be open to publish'});
 		}
-		//TODO:Make key work with file path
 		$http.post(ENV.serverUrl + '/apps/'+ this.application.name + '/publish', {content:this.firepad.getText(), key:this.currentFile.path, contentType:this.currentFile.contentType}).then(function (){
 			$log.info('File published successfully');
 			d.resolve();
@@ -136,6 +153,7 @@ angular.module('hypercube.application.editor')
 		});
 		return d.promise;
 	};
+	//Publish whole application to S3
 	this.publish = function(){
 		$log.log('Editor.publish()');
 		//TODO: Have this publish whole application structure
@@ -143,7 +161,7 @@ angular.module('hypercube.application.editor')
 		return d.promise;
 	};
 }])
-//Folder Object 
+//Folder Object
 .factory('Folder', ['$firebaseObject', '$firebaseArray', 'File', function ($firebaseObject, $firebaseArray, File){
 	function Folder(snap){
 		//Check that snap is a snapshot
@@ -167,7 +185,7 @@ angular.module('hypercube.application.editor')
 	return Folder;
 }])
 //File Object 
-.factory('File', ['$firebaseObject', '$firebaseUtils', 'fbutil', '$q', function ($firebaseObject, $firebaseUtils, fbutil, $q){
+.factory('File', ['$firebaseObject', '$firebaseUtils', 'fbutil', '$q', '$log', function ($firebaseObject, $firebaseUtils, fbutil, $q, $log){
 	function File(snap){
 		//Check that snap is a snapshot
 		if(_.isFunction(snap.val)){ //Snap is a snapshot
@@ -177,9 +195,9 @@ angular.module('hypercube.application.editor')
 			if(this.type == 'folder' && !this.children){ //Fill children parameter if folder without children
 				this.children = ['mock child'];
 			}
-			// this.makeKey();
 		} else { //Snap is not a snapshot
 			angular.extend(this, snap);
+			this.getTypes();
 		}
 		if(!this.type){
 			this.type = "file";
@@ -187,36 +205,33 @@ angular.module('hypercube.application.editor')
 		// this.setDefaults(snap);
 	}
 	File.prototype = {
-    setDefaults: function(snapshot) {
-      var oldData = angular.extend({}, this.data);
-      // add a parsed date to our widget
-      // this._date = new Date(this.data.date);
-			if(!this.filetype){
-				this.filetype = "javascript";
-			}
-    },
+    //Get extension based on path
   	getExt:function(path){
     	var re = /(?:\.([^.]+))?$/;
     	var fileName = _.last(this.path.split("/")) || path;
-    	console.warn('Get ext calling with: ' + re.exec(fileName)[1]);
+    	$log.info('[File.getExt()]: Get ext calling with: ' + re.exec(fileName)[1]);
     	return re.exec(fileName)[1];
     },
+    //Get fileType and contentType based on ext
     getTypes:function(){
-    	this.contentType = extToContentType(this.getExt());
-    	this.fileType = extToFileType(this.getExt());
+    	var ext = this.getExt();
+    	this.contentType = extToContentType(ext);
+    	this.fileType = extToFileType(ext);
     },
-    // makeKey:function(){
-    // 	console.log('makeKey called with:', this);
-    // 	if(_.has(this, 'name')){
-    // 		var name = this.name;
-    // 		return name.replace(".", ":");
-    // 	} else if(_.has(this, 'path')){
-    // 		var pathArray = this.path.split("/");
-    // 		var name = _.last(pathArray);
-    // 		this.name = name;
-    // 		return name.replace(".", ":");
-    // 	}
-    // },
+    //Create a string that is usable as a Firebase key
+    makeKey:function(){
+    	// TODO: Handle more than one period
+    	$log.log('[File.MakeKey] called with:', this);
+    	if(_.has(this, 'name')){
+    		var name = this.name;
+    		return name.replace(".", ":");
+    	} else if(_.has(this, 'path')){
+    		var pathArray = this.path.split("/");
+    		var name = _.last(pathArray);
+    		this.name = name;
+    		return name.replace(".", ":");
+    	}
+    },
     //Make File a Firebase object and combine its current data with data in Firebase
     addFbObj:function(appName){
 			var ref = fbutil.ref(filesLocation, appName);
@@ -242,37 +257,7 @@ angular.module('hypercube.application.editor')
     }
 	};
 	return File;
-	//----------- Utility functions ------------//
-	//Convert File extension to contentType
-  function extToContentType(ext){
-  	//Default content type
-    var contentType = 'text/plain';
-    //File type if statements
-		if (ext=='html') {
-			contentType = 'text/html'
-		} else if(ext=='js') {
-			contentType = 'application/javascript'
-		} else if(ext=='css') {
-			contentType = 'text/css'
-		} else if(ext=='json') {
-			contentType = 'application/json'
-		} else if(ext=='jpg'||ext=='jpeg'||ext=='jpe') {
-			contentType = 'image/jpeg'
-		} else if(ext=='png') {
-			contentType = 'image/png'
-		} else if(ext=='gif') {
-			contentType = 'image/gif'
-		} else if(ext=='svg') {
-			contentType = 'image/svg+xml'
-		} else {
-			contentType = 'application/octet-stream'
-		}
-		return contentType;
-  }
-  function extToFileType(ext){
-  	//Default content type
-  	return extToContentType(ext).split("/")[1];
-  }
+
 }])
 //Accepts Firebase ref and returns extended firebaseArray
 .factory("FilesFactory", ['$firebaseArray', 'File', 'Folder', '$firebaseObject', '$q', '$log', function ($firebaseArray, File, Folder, $firebaseObject, $q, $log) {
@@ -305,6 +290,7 @@ angular.module('hypercube.application.editor')
     	});
     	return d.promise;
     },
+    //Add folder
     $addFolder:function(folderData){
     	//TODO: Handle path
     	var pathArray = folderData.path.split("/");
@@ -312,6 +298,7 @@ angular.module('hypercube.application.editor')
     	var self = $firebaseObject(this.$ref());
     	var d = $q.defer();
     	self.$loaded().then(function(){
+    		// _.findWhere(self, {name:folder.name})
     		var key = folder.name;
     		//Check to make sure name is not taken
     		if(_.has(self, key)){
@@ -331,9 +318,8 @@ angular.module('hypercube.application.editor')
     	});
     	return d.promise;
     },
+    //Get files array in "children" format to be used with structure tree directive
     $getStructure:function(){
-    	//TODO: Create ref based on path
-    	//folder/index.html
     	var d = $q.defer();
     	var self = this;
     	self.$loaded().then(function(structureArray){
@@ -375,9 +361,8 @@ angular.module('hypercube.application.editor')
     	});
     	return d.promise;
 	  },
+	  //Make File a Firebase object and combine its current data with data in Firebase
 	  $saveFbObj:function(saveData){
-	    //Make File a Firebase object and combine its current data with data in Firebase
-			//Make file a Firebase object
 			var fbObj = $firebaseObject(this.$ref());
 			var d = $q.defer();
     	fbObj.$loaded().then(function(){
@@ -404,3 +389,34 @@ angular.module('hypercube.application.editor')
   	return FilesFactory(ref);
 	}
 }]);
+//----------- Utility functions ------------//
+//Convert File extension to contentType
+function extToContentType(ext){
+	//Default content type
+  var contentType = 'text/plain';
+  //File type if statements
+	if (ext=='html') {
+		contentType = 'text/html'
+	} else if(ext=='js') {
+		contentType = 'application/javascript'
+	} else if(ext=='css') {
+		contentType = 'text/css'
+	} else if(ext=='json') {
+		contentType = 'application/json'
+	} else if(ext=='jpg'||ext=='jpeg'||ext=='jpe') {
+		contentType = 'image/jpeg'
+	} else if(ext=='png') {
+		contentType = 'image/png'
+	} else if(ext=='gif') {
+		contentType = 'image/gif'
+	} else if(ext=='svg') {
+		contentType = 'image/svg+xml'
+	} else {
+		contentType = 'application/octet-stream'
+	}
+	return contentType;
+}
+function extToFileType(ext){
+	//Default content type
+	return extToContentType(ext).split("/")[1];
+}

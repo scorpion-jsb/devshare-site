@@ -2,16 +2,26 @@ angular.module('hypercube.application.editor')
 .controller('EditorCtrl', ['$rootScope', '$scope', '$log', 'Editor',  'application', function ($rootScope, $scope, $log, Editor, application){
 	$scope.data = {createMode:null, newFileName:null};
   $scope.file = {};
+  //TODO: Save expanded nodes and open file
+  $scope.tree = {};
+  $scope.tree.opts = {
+    isLeaf:function(node){
+    return node.type == "file";
+    }
+  };
   // TODO: Should this inherit down scopes like this or use application resolve
-  Editor.setApplication($scope.application);
+  Editor.application = $scope.application;
   Editor.getStructure().then(function(structure){
     $scope.structure = structure;
     $log.warn('getStructure returned', structure);
-  })
-  //TODO: Change file mode dynamically (editor service)
+  });
 	$scope.aceLoaded = function(_editor) {
-    // Options
-    Editor.setAce(_editor);
+      Editor.setAce(_editor);
+    //TODO: load already exisiting session
+    // if(!Editor.ace){
+    // } else {
+    //   _editor.setSession(Editor.session);
+    // }
   };
   $scope.aceChanged = function(e) {
   };
@@ -22,6 +32,8 @@ angular.module('hypercube.application.editor')
         $log.log('file opened:', openedFile);
         $scope.currentFile = openedFile;
       });
+    } else {
+
     }
   };
   $scope.createNew = function(){

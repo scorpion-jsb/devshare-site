@@ -86,7 +86,7 @@ angular.module('hypercube.applications')
 function nameIsInvalid(name){
 	//TODO: Make sure that name doesn't have spaces
 	var notAllowedChars = [' ', '/', '.'];
-	return _.every(notAllowedChars, function(char){
-    return !_.contains(name, char);
+	return _.some(notAllowedChars, function(char){
+    return _.contains(name, char);
 	});
 }

@@ -14,13 +14,23 @@
   </md-sidenav>
   <div id="iframe-container" class="hc-background" layout="column" layout-fill  layout-padding>
     <div layout="column"  class="hc-background" layout-fill  layout-padding layout-align="center">
-      <div layout="row" flex layout-align="center">
+      <div layout-align="center" layout="row"  ng-if="!application.frontend.url.length" flex>
+      <div layout="column" layout-align="center">
+        <div flex>
+          <span>Hosted preview is not available until you deploy</span>
+        </div>
+        <md-button ng-click="addHosting()">Click here to Deploy</md-button>
+      </div>
+
+      </div>
+      <div layout="row" flex layout-align="center" ng-if="application.frontend.url.length > 1">
         <md-input-container flex="45" ng-click="goTo(application.frontend.siteUrl)">
           <label>App Url</label>
           <input ng-model="application.frontend.siteUrl" disabled>
         </md-input-container>
       </div>
-      <div flex layout-align="center" layout="row">
+
+      <div flex layout-align="center" layout="row" ng-if="application.frontend.url.length > 1">
         <div class="marvel-device" ng-class="{'iphone6 black':previewData.device == 'iphone6', 'iphone5s black':previewData.device == 'iphone5'}" ng-if="previewData.device == 'iphone6' || previewData.device == 'iphone5'">
           <div class="top-bar"></div>
           <div class="sleep"></div>

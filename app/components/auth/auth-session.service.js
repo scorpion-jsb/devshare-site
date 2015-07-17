@@ -1,5 +1,5 @@
 angular.module('hypercube.auth')
-.service('Session', ['$log', '$sessionStorage', '$rootScope','jwtHelper',  function ($log, $sessionStorage, $rootScope, jwtHelper) {
+.service('Session', ['$log', '$sessionStorage', '$rootScope','jwtHelper', '$q', '$aws', function ($log, $sessionStorage, $rootScope, jwtHelper, $q, $aws) {
   this.exists = function(){
     return angular.isDefined($sessionStorage.token);
   };
@@ -15,11 +15,11 @@ angular.module('hypercube.auth')
   this.token = function(){
     return angular.isDefined($sessionStorage.token) ? $sessionStorage.token : null;
   };
-  this.create = function (token) {
+  this.create = function (token, awsToken) {
     $sessionStorage.token = token;
     this.tokenData = jwtHelper.decodeToken(token);
     this.role = this.tokenData.role;
-    // this.id = sessionId;
+    $aws.updateConfig();
   };
   this.destroy = function () {
     //TODO: Revoke token on server?

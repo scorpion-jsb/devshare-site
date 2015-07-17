@@ -1,4 +1,6 @@
 module.exports = {
+		// 'bower/firepad/dist/firepad.css',
+
 	styles:[
 		'bower/angular-material/angular-material.min.css',
 		'bower/font-awesome/css/font-awesome.min.css',
@@ -24,8 +26,8 @@ module.exports = {
 		'bower/firebase/firebase.js',
 		'bower/angularfire/dist/angularfire.js',
 		'bower/firepad/dist/firepad.min.js',
+		'bower/aws-sdk-js/dist/aws-sdk.js',
 		'bower/angular-tree-control/angular-tree-control.js'
-
 	],
 	app: [
 		'app.js',
@@ -44,6 +46,8 @@ module.exports = {
 
 		'components/nav/nav.module.js',
 		'components/nav/nav.controller.js',
+
+		'components/aws/aws.module.js',
 
 		'home/home.module.js',
 		'home/home.controller.js',

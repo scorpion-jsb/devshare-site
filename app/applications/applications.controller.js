@@ -23,7 +23,7 @@ angular.module('hypercube')
 				$log.log('Application created successfully:', newApp);
 				$state.go('app.settings', {name:newApp.name});
 			}, function(err){
-				$log.error('[ApplicationsCtrl.create()] Error loading applications', err);
+				$log.error('[ApplicationsCtrl.create()] Error creating application:', err);
 				$scope.data.loading = false;
 				$scope.data.error = err;
 				$scope.showToast('Error: ' + err.message || err);

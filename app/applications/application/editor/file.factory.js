@@ -1,7 +1,7 @@
 angular.module('hypercube.application.editor')
 
 //File Object 
-.factory('File', ['$firebaseObject', '$firebaseUtils', function ($firebaseObject, $firebaseUtils){
+.factory('File', ['$firebaseObject', '$firebaseUtils', 'fbutil', '$q', '$log', function ($firebaseObject, $firebaseUtils, fbutil, $q, $log){
   function File(snap){
     //Check that snap is a snapshot
     if(_.isFunction(snap.val)){ //Snap is a snapshot
@@ -11,9 +11,9 @@ angular.module('hypercube.application.editor')
       if(this.type == 'folder' && !this.children){ //Fill children parameter if folder without children
         this.children = ['mock child'];
       }
-      this.makeKey();
     } else { //Snap is not a snapshot
       angular.extend(this, snap);
+      this.getTypes();
     }
     if(!this.type){
       this.type = "file";
@@ -21,26 +21,23 @@ angular.module('hypercube.application.editor')
     // this.setDefaults(snap);
   }
   File.prototype = {
-    setDefaults: function(snapshot) {
-      var oldData = angular.extend({}, this.data);
-      // add a parsed date to our widget
-      // this._date = new Date(this.data.date);
-      if(!this.filetype){
-        this.filetype = "javascript";
-      }
-    },
+    //Get extension based on path
     getExt:function(path){
       var re = /(?:\.([^.]+))?$/;
       var fileName = _.last(this.path.split("/")) || path;
-      console.warn('Get ext calling with: ' + re.exec(fileName)[1]);
+      $log.info('[File.getExt()]: Get ext calling with: ' + re.exec(fileName)[1]);
       return re.exec(fileName)[1];
     },
+    //Get fileType and contentType based on ext
     getTypes:function(){
-      this.contentType = extToContentType(this.getExt());
-      this.fileType = extToFileType(this.getExt());
+      var ext = this.getExt();
+      this.contentType = extToContentType(ext);
+      this.fileType = extToFileType(ext);
     },
+    //Create a string that is usable as a Firebase key
     makeKey:function(){
-      console.log('makeKey called with:', this);
+      // TODO: Handle more than one period
+      $log.log('[File.MakeKey] called with:', this);
       if(_.has(this, 'name')){
         var name = this.name;
         return name.replace(".", ":");
@@ -51,30 +48,34 @@ angular.module('hypercube.application.editor')
         return name.replace(".", ":");
       }
     },
-    makeRef:function(appRef){
-      //TODO: Create ref based on path
-      //folder/index.html
-      var pathArray = this.path.split("/");
-      console.log('pathArray:', pathArray);
+    //Make File a Firebase object and combine its current data with data in Firebase
+    addFbObj:function(appName){
+      var ref = fbutil.ref(filesLocation, appName);
+      //Make file a Firebase object
       var self = this;
-      if(pathArray.length == 1){
-        return appRef.child(self.makeKey());
-      } else {
-        var finalRef = appRef;
-        _.each(pathArray, function (loc, ind, list){
-          //TODO: Handle more than one period here
-          if(ind != list.length - 1){
-            finalRef = finalRef.child(loc).child('children');
-          } else {
-            finalRef = finalRef.child(loc.replace(".", ":"));
-          }
+      var fbSelf = _.extend({}, $firebaseObject(ref.push()));
+      var d = $q.defer();
+      fbSelf.$loaded().then(function(){
+        //Set by key within structure
+        fbSelf.$value = _.clone(self);
+        //Save current value into fb object
+        fbSelf.$save().then(function(){
+          d.resolve();
+        }, function (err){
+          $log.log('Error adding files:', err);
+          d.reject(err);
         });
-        console.log('finalRef:', finalRef);
-        return finalRef;
-      }
+      }, function (err){
+        $log.log('Error adding files:', err);
+        d.reject(err);
+      });
+      return d.promise;
     }
   };
   return File;
+
+}])
+
   //Utility functions
   //Convert File extension to contentType
   function extToContentType(ext){
@@ -108,4 +109,3 @@ angular.module('hypercube.application.editor')
     console.log("Ext: " + ext + "File Type: " + extToContentType(ext).split("/")[1]);
     return extToContentType(ext).split("/")[1];
   }
-}])

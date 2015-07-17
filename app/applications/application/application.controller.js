@@ -19,9 +19,10 @@ angular.module('hypercube.applications')
 		$scope.update = function(){
 			$scope.data.editing = false;
 			$scope.data.loading = true;
+			//TODO: Run update on application object
 			applicationsService.update($stateParams.name, $scope.application)
 			.then(function (appData){
-				$log.log('application Detail Ctrl: application data loaded:', appData);
+				// $log.log('[$scope.update()] application data loaded:', appData);
 				$scope.application = application;
 			}).catch(function (err){
 				$log.error('Error loading applications', err);
@@ -31,7 +32,7 @@ angular.module('hypercube.applications')
 			});
 		};
 		$scope.goTo = function(path){
-			$log.log('going to path: '+ path);
+			// $log.log('going to path: '+ path);
 			$window.open("http://" + path);
 		};
 }]);

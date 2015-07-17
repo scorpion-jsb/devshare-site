@@ -1,6 +1,6 @@
 angular.module('hypercube.application.editor')
 
-//Folder Object 
+//Folder Object
 .factory('Folder', ['$firebaseObject', '$firebaseArray', 'File', function ($firebaseObject, $firebaseArray, File){
 	function Folder(snap){
 		//Check that snap is a snapshot
@@ -22,4 +22,4 @@ angular.module('hypercube.application.editor')
 	Folder.prototype = {
 	};
 	return Folder;
-}])
+}]);

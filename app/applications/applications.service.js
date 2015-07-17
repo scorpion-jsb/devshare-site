@@ -7,7 +7,7 @@ angular.module('hypercube.applications')
 			if(!applicationData){
 				$log.error('[ApplicationsService.add()] Name required to create application');
 				d.reject({message:'Name required to create new application'});
-			} else if (nameIsInvalid(name)){
+			} else if (nameIsInvalid(applicationData.name)){
 				d.reject({message:'Invalid Name. Names can not include spaces or special characters.'});
 			} else {
 				AuthService.getCurrentUser().then(function(currentUser){

@@ -97,6 +97,9 @@ angular.module('hypercube.application.editor')
                 currentObj.type = "file";
                 currentObj.name = loc;
                 currentObj.path = pathArray.join("/");
+                if(file.$id){
+                  currentObj.$id = file.$id;
+                }
               }
             });
             return finalObj;

@@ -8,7 +8,10 @@ ngAnnotate = require('gulp-ng-annotate'),
 concat = require('gulp-concat'),
 rename = require('gulp-rename'),
 clean = require('gulp-clean'),
-cssmin = require('gulp-cssmin');
+cssmin = require('gulp-cssmin'),
+stripDebug = require('gulp-strip-debug'),
+stripNgLog = require('gulp-strip-ng-log');
+
 var _ = require('underscore');
 var pkg = require('./package.json');
 var conf = require('./config.json');
@@ -68,6 +71,8 @@ gulp.task('assets:vendorLib', function () {
 gulp.task('assets:app', function () {
   return gulp.src(locatedAppAssets)
     .pipe(ngAnnotate())
+    .pipe(stripDebug()) //Remove all console.logs
+    // .pipe(stripNgLog()) //Remove $logs (used with trackjs in production)
     .pipe(concat('hypercube.js'))
     .pipe(gulp.dest(conf.distFolder));
 });

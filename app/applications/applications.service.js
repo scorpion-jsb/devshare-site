@@ -5,22 +5,25 @@ angular.module('hypercube.applications')
 		add:function(applicationData){
 			var d = $q.defer();
 			if(!applicationData){
-				$log.warn('[ApplicationsService.add()] No application data');
+				$log.error('[ApplicationsService.add()] Name required to create application');
 				d.reject({message:'Name required to create new application'});
-			}
-			AuthService.getCurrentUser().then(function(currentUser){
-				applicationData.owner = currentUser._id;
-				$log.debug('requesting new app with:', applicationData);
-				$http.post(ENV.serverUrl + '/apps', applicationData)
-				.then(function (apiRes){
-					d.resolve(apiRes.data);
-				})
-				.catch(function (errRes){
-					//TODO: Handle different error response codes
-					$log.error('Error adding application: ', errRes.data);
-					d.reject({message:errRes.data});
+			} else if (nameIsInvalid(name)){
+				d.reject({message:'Invalid Name. Names can not include spaces or special characters.'});
+			} else {
+				AuthService.getCurrentUser().then(function(currentUser){
+					$log.debug('currentUser loaded:', currentUser);
+					applicationData.owner = currentUser.id;
+					$http.post(ENV.serverUrl + '/apps', applicationData)
+					.then(function (apiRes){
+						d.resolve(apiRes.data);
+					})
+					.catch(function (errRes){
+						//TODO: Handle different error response codes
+						$log.error('Error adding application: ', errRes.data);
+						d.reject({message:errRes.data});
+					});
 				});
-			});
+			}
 			return d.promise;
 		},
 		update:function(applicationId, applicationData){
@@ -37,7 +40,7 @@ angular.module('hypercube.applications')
 		},
 		get:function(applicationName){
 			var deferred = $q.defer();
-			// console.log('Loading application with ID:', applicationName);
+			// $log.log('Loading application with ID:', applicationName);
 			var endpointUrl = ENV.serverUrl + "/apps";
 			var isList = true;
 			if(applicationName){
@@ -80,3 +83,10 @@ angular.module('hypercube.applications')
 		}
 	};
 }])
+function nameIsInvalid(name){
+	//TODO: Make sure that name doesn't have spaces
+	var notAllowedChars = [' ', '/', '.'];
+	return _.some(notAllowedChars, function(char){
+    return _.contains(name, char);
+	});
+}

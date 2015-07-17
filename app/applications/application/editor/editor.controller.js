@@ -9,7 +9,7 @@ angular.module('hypercube.application.editor')
       }
     }
   };
-  Editor.application = $scope.application;
+  Editor.application = application;
   Editor.getStructure().then(function(structure){
     $scope.structure = structure;
     $scope.$watch('structure', function(val){
@@ -18,7 +18,7 @@ angular.module('hypercube.application.editor')
     $log.warn('getStructure returned', structure);
   });
 	$scope.aceLoaded = function(_editor) {
-      Editor.setAce(_editor);
+    Editor.setAce(_editor);
     //TODO: Load saved list of expanded tree nodes
     // if(Editor.expandedNodes){
     //   $scope.tree.expandedNodes = Editor.expandedNodes;
@@ -39,7 +39,6 @@ angular.module('hypercube.application.editor')
         // $scope.currentFile = openedFile;
         Editor.getStructure().then(function(structure){
           $scope.structure = structure;
-          $scope.tree.expandedNodes.push(node);
         });
       });
     } else {
@@ -59,9 +58,9 @@ angular.module('hypercube.application.editor')
         // $scope.openFile();
         //TODO: There is a better way to do this
         //Reload structure
-        Editor.getFiles().then(function(fileStructure){
-          $scope.files = fileStructure;
-          $log.info('Structure set:', $scope.files);
+        Editor.getStructure().then(function(structure){
+          $scope.structure = structure;
+          $scope.tree.expandedNodes.push(node);
         });
       });
     }

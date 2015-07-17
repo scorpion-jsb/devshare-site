@@ -65,6 +65,10 @@ module.exports = {
 		'applications/application/editor/editor.module.js',
 		'applications/application/editor/editor.controller.js',
 		'applications/application/editor/editor.service.js',
+		'applications/application/editor/files.factory.js',
+		'applications/application/editor/file.factory.js',
+		'applications/application/editor/folder.factory.js',
+
 
 		'applications/application/settings/settings.module.js',
 		'applications/application/settings/settings.controller.js',

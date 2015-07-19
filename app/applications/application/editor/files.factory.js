@@ -66,47 +66,11 @@ angular.module('hypercube.application.editor')
     $getStructure:function(){
       var d = $q.defer();
       var self = this;
-      self.$loaded().then(function(structureArray){
-        var finalArray = [];
-        var mappedStructure = structureArray.map(function (file){
-          var pathArray = file.path.split("/");
-          var currentObj = file;
-          var currentLevel = {};
-          if(pathArray.length == 1){
-            currentObj.name = pathArray[0];
-            if(!_.has(currentObj,'type')){
-              currentObj.type = "file";
-            } 
-            currentObj.path = pathArray[0];
-            return currentObj;
-          } else {
-            var finalObj = {};
-            _.each(pathArray, function (loc, ind, list){
-              // $log.debug('loop:', loc, ind, currentObj);
-              if(ind != list.length - 1){ //Not the last loc
-                currentObj.name = loc;
-                currentObj.path = _.first(list, ind + 1).join("/");
-                currentObj.type = "folder";
-                currentObj.children = [{}];
-                //TODO: Find out why this works
-                if(ind == 0 ){
-                  finalObj = currentObj;
-                }
-                currentObj = currentObj.children[0];
-              } else {
-                currentObj.type = "file";
-                currentObj.name = loc;
-                currentObj.path = pathArray.join("/");
-                if(file.$id){
-                  currentObj.$id = file.$id;
-                }
-              }
-            });
-            return finalObj;
-          }
-        });
-        self.structure = combineLikeObjs(mappedStructure);
+      self.$loaded().then(function (structureArray){
+        self.structure = childStructureFromArray(structureArray);
         d.resolve(self.structure);
+      }, function (err){
+        d.reject(err);
       });
       return d.promise;
     },
@@ -134,7 +98,52 @@ angular.module('hypercube.application.editor')
 }])
 
 //----------- Utility functions ------------//
-
+//Convert from array file structure (from S3) to "children" structure used in Editor GUI (angular-tree-control)
+//Examples for two files (index.html and /testFolder/file.js):
+//Array structure: [{path:"index.html"}, {path:"testFolder/file.js"}]
+//Children Structure [{type:"folder", name:"testfolder", children:[{path:"testFolder/file.js", name:"file.js", filetype:"javascript", contentType:"application/javascript"}]}]
+function childStructureFromArray(fileArray){
+  console.log('childStructureFromArray', fileArray);
+  //Create a object for each file that stores the file in the correct "children" level
+  var mappedStructure = fileArray.map(function (file){
+    var pathArray = file.path.split("/");
+    var currentObj = file;
+    var currentLevel = {};
+    if(pathArray.length == 1){
+      currentObj.name = pathArray[0];
+      if(!_.has(currentObj,'type')){
+        currentObj.type = "file";
+      } 
+      currentObj.path = pathArray[0];
+      return currentObj;
+    } else {
+      var finalObj = {};
+      _.each(pathArray, function (loc, ind, list){
+        // $log.debug('loop:', loc, ind, currentObj);
+        if(ind != list.length - 1){ //Not the last loc
+          currentObj.name = loc;
+          currentObj.path = _.first(list, ind + 1).join("/");
+          currentObj.type = "folder";
+          currentObj.children = [{}];
+          //TODO: Find out why this works
+          if(ind == 0 ){
+            finalObj = currentObj;
+          }
+          currentObj = currentObj.children[0];
+        } else {
+          currentObj.type = "file";
+          currentObj.name = loc;
+          currentObj.path = pathArray.join("/");
+          if(file.$id){
+            currentObj.$id = file.$id;
+          }
+        }
+      });
+      return finalObj;
+    }
+  });
+  return combineLikeObjs(mappedStructure);
+}
 //Recursivley combine children of object's that have the same names
 function combineLikeObjs(mappedArray){
   var takenNames = [];

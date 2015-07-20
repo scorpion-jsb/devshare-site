@@ -61,10 +61,10 @@ angular.module('hypercube.application.editor')
         // $scope.openFile();
         //TODO: There is a better way to do this
         //Reload structure
-        // Editor.getStructure().then(function(structure){
-        //   $scope.structure = structure;
-        //   // $scope.tree.expandedNodes.push(node);
-        // });
+        Editor.getStructure().then(function(structure){
+          $scope.structure = structure;
+          // $scope.tree.expandedNodes.push(node);
+        });
       });
     }
     $scope.data = {newName: null, createMode:null};

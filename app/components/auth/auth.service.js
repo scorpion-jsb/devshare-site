@@ -75,10 +75,12 @@ angular.module('hypercube.auth')
 			var self = this;
 			// $log.log('[AuthService.login()] Login called with:', loginData);
 			//TODO: Login with username or email
-			$http.put(ENV.serverUrl + '/login', {
-	      username: loginData.username,
-	      password: loginData.password
-	    })
+			if(_.has(loginData, 'password')){
+			//Check if email was entered instead of username
+			if(validateEmail(loginData.username)){
+				loginData = {email:loginData.username, password:loginData.password};
+			} 
+			$http.put(ENV.serverUrl + '/login', loginData)
 	    .then(function (successRes){
 	    	$log.log('[AuthService.login()] Login successful:', successRes);
 	    	Session.create(successRes.data.token);
@@ -94,6 +96,10 @@ angular.module('hypercube.auth')
       	}
 	      deferred.reject(errRes.data);
 	    });
+			}
+	    else {
+	    	d.reject({message:'Username/Email and password required to login.'});
+	    }
 	    return deferred.promise;
 		},
 		logout:function (){
@@ -148,3 +154,7 @@ angular.module('hypercube.auth')
     }
   };
 });
+function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}

@@ -13,11 +13,14 @@ angular.module('hypercube.application.editor')
       }
     } else { //Snap is not a snapshot
       angular.extend(this, snap);
-      this.getTypes();
     }
     if(!this.type){
       this.type = "file";
     }
+    if(!_.has(this, 'name')){
+      this.getName();
+    }
+    this.getTypes();
     // this.setDefaults(snap);
   }
   File.prototype = {
@@ -34,6 +37,9 @@ angular.module('hypercube.application.editor')
       this.contentType = extToContentType(ext);
       this.fileType = extToFileType(ext);
     },
+    getName:function(){
+      this.name = _.last(this.path.split("/"));
+    },
     //Create a string that is usable as a Firebase key
     makeKey:function(){
       // TODO: Handle more than one period
@@ -48,12 +54,35 @@ angular.module('hypercube.application.editor')
         return name.replace(".", ":");
       }
     },
+    makeRef:function(appRef){
+      //TODO: Create ref based on path
+      //folder/index.html
+      var pathArray = this.path.split("/");
+      console.log('pathArray:', pathArray);
+      var self = this;
+      if(pathArray.length == 1){
+        return appRef.child(self.makeKey());
+      } else {
+        var finalRef = appRef;
+        console.log('appRef:', appRef);
+        _.each(pathArray, function (loc, ind, list){
+          //TODO: Handle more than one period here
+          if(ind != list.length - 1){
+            finalRef = finalRef.child(loc).child('children');
+          } else {
+            finalRef = finalRef.child(loc.replace(".", ":"));
+          }
+        });
+        console.log('finalRef:', finalRef);
+        return finalRef;
+      }
+    },
     //Make File a Firebase object and combine its current data with data in Firebase
     addFbObj:function(appName){
       var ref = fbutil.ref(filesLocation, appName);
       //Make file a Firebase object
       var self = this;
-      var fbSelf = _.extend({}, $firebaseObject(ref.push()));
+      var fbSelf = _.extend({}, $firebaseObject(this.makeRef()));
       var d = $q.defer();
       fbSelf.$loaded().then(function(){
         //Set by key within structure

@@ -8,14 +8,7 @@ angular.module('hypercube.applications')
 		$scope.applications = applications;
 		$scope.application = application;
 		//Set tab to correct page when state changes
-		$rootScope.$on('$stateChangeStart', function (event, next) {
-		  var tabStates = ["app.editor", "app.preview", "app.settings"];
-			_.each(tabStates, function(state, ind){
-				if($scope.stateName == state){
-					$scope.currentTabInd = ind;
-				}
-			});
-	  });
+
 		$scope.update = function(){
 			$scope.data.editing = false;
 			$scope.data.loading = true;

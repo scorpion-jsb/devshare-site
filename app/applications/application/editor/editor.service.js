@@ -1,6 +1,6 @@
 angular.module('hypercube.application.editor')
 
-.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'File', 'AuthService', '$rootScope', '$s3', '$firebaseObject', 'fbutil', function ($http, $log, $q, ENV, Files, File, AuthService, $rootScope, $s3, $firebaseObject, fbutil){
+.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'File', 'AuthService', '$rootScope', '$s3', '$firebaseObject', 'fbutil', 'FileStructure', function ($http, $log, $q, ENV, Files, File, AuthService, $rootScope, $s3, $firebaseObject, fbutil, FileStructure){
 	//Set Editor.ace and set secondary settings
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;
@@ -54,17 +54,18 @@ angular.module('hypercube.application.editor')
 	//Get File structure in "children" format to be used with tree viewing/control
 	this.getStructure = function(){
 		var d = $q.defer();
+		this.structure = FileStructure(this.application.name);
 		var self = this;
-		self.getFiles().then(function (files){
-			files.$getStructure().then(function (structure){
-				$log.debug('[Editor.getStructure()]:', structure, files);
+		// self.files.$loaded().then(function (files){
+			self.structure.$loaded().then(function (structure){
+				$log.debug('[Editor.getStructure()]:', structure);
 				d.resolve(structure);
-			}, function(err){
+			}, function (err){
 				d.reject(err);
 			});
-		}, function(err){
-			d.reject(err);
-		});
+		// }, function (err){
+		// 	d.reject(err);
+		// });
 		return d.promise;
 	}
 	//Set editors file mode from provided type
@@ -122,13 +123,12 @@ angular.module('hypercube.application.editor')
 		//Set firepad
 		if(_.isFunction(file.$ref)){ //file is already a Firebase object
   		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
+  		d.resolve(file);
 		} else { //file is not a firebase object
-			//Create firebase object by locating in Files array
-			self.getFiles().then(function(filesArray){
-				var fbFile = _.findWhere(filesArray, {path:file.path});
-				console.log('fbFile:', fbFile);
-				self.firepad = Firepad.fromACE(fbFile.$ref(), self.ace, aceOptions);
-  			d.resolve(file);
+			self.getStructure().then(function(files){
+				console.log('index for:', files.$ref());
+				self.firepad = Firepad.fromACE(file.makeRef(files.$ref()), self.ace, aceOptions);
+				d.resolve(file);
 			});
 		}
 		return d.promise;
@@ -154,6 +154,18 @@ angular.module('hypercube.application.editor')
 		$log.log('Editor.publish()');
 		//TODO: Have this publish whole application structure
 		var d = $q.defer();
+		return d.promise;
+	};
+	this.addFile = function(fileData){
+		//Add file to files list then to structure
+		var d = $q.defer();
+		this.files.$add(fileData).then(function (files){
+			this.structure.$addFile(fileData).then(function(){
+				d.resolve();
+			});
+		}, function (err){
+			d.reject(err);
+		})
 		return d.promise;
 	};
 }]);

@@ -68,6 +68,8 @@ module.exports = {
 		'applications/application/editor/files.factory.js',
 		'applications/application/editor/file.factory.js',
 		'applications/application/editor/folder.factory.js',
+		'applications/application/editor/fileStructure.factory.js',
+
 
 
 		'applications/application/settings/settings.module.js',

@@ -62,12 +62,16 @@ angular.module('hypercube', [
         //Pass this to trackjs
         var args = [].slice.call(arguments);
         //Handle argument not being a string
-        if(!_.isString(args[0])){
-          args[0] = JSON.stringify(args[0]);
-        }
-        $window.trackJs.console.error.apply(null, args);
+        var mappedArgs = _.map(args, function(arg){
+          if(_.isObject(arg) || !_.isString(arg)){
+            return JSON.stringify(arg, null, 2);
+          }
+          return arg;
+        });
+        $window.trackJs.console.error.apply(null, mappedArgs);
       };
      } else {
+      //Local 
       // $delegate.debug = function () {
       //   var args = [].slice.call(arguments);
       //   args[0] = [new Date().toString(), ': ', args[0]].join('');
@@ -75,19 +79,23 @@ angular.module('hypercube', [
       //   // Send on our enhanced message to the original debug method.
       //   origDebug.apply(null, args);
       // };
-     }
-    return $delegate;
-  }])
+
+      };
+      return $delegate;
+     }]);
   $provide.decorator('$exceptionHandler', ["$delegate", "$window", function ($delegate, $window) {
     return function (exception, cause) {
       console.log('$window.location:', $window.location.host);
       if($window.location.host.split(":")[0] != "localhost") {
+        console.warn('exception:', exception, cause);
         if($window.trackJs){
           $window.trackJs.track(exception);
         }
       }
       //Running locally
-      else { 
+      else {
+        console.log('exception:', exception, cause);
+
         $delegate(exception, cause);
       } 
     }; 

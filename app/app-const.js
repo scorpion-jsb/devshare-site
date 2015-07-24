@@ -8,7 +8,7 @@ angular.module("hypercube.const", [])
 		"FB_URL": "https://pruvit.firebaseio.com/hypercube"
 	},
 	"production": {
-		"SERVER_URL": "http://hyper-cube.herokuapp.com",
+		"SERVER_URL": "http://hypercube.elasticbeanstalk.com",
 		"FB_URL": "https://pruvit.firebaseio.com/hypercube"
 	}
 })

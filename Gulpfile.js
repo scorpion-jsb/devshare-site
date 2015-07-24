@@ -160,8 +160,8 @@ gulp.task('buildEnv', function () {
 */
 gulp.task('s3Upload', function() {
 	var s3Config = {
-		key:process.env.HYPERCUBE_SERVER_S3_KEY || process.env.AWS_ACCESS_KEY_ID,
-		secret:process.env.HYPERCUBE_SERVER_S3_SECRET || process.env.AWS_SECRET_ACCESS_KEY,
+		key:process.env.HYPERCUBE_S3_KEY || process.env.AWS_ACCESS_KEY_ID,
+		secret:process.env.HYPERCUBE_S3_SECRET || process.env.AWS_SECRET_ACCESS_KEY,
 		bucket:conf.s3.bucket,
 		region:conf.s3.region || "us-east-1"
 	};

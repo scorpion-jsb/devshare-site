@@ -71,7 +71,6 @@ Coming Soon
 * Click to publish whole app
 * Realtime Preview
 * Make collaborators work
-* Implement amazon cognito so most AWS actions can be moved to client side
 * Intro documentation (How it uses AWS/S3 and automatically sets you up with that as well as other industry standard tools)
 * Import Code from Squarespace
 * Create a template from the current project (custom templates)

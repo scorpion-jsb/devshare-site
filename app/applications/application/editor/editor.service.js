@@ -54,18 +54,14 @@ angular.module('hypercube.application.editor')
 	//Get File structure in "children" format to be used with tree viewing/control
 	this.getStructure = function(){
 		var d = $q.defer();
-		this.structure = FileStructure(this.application.name);
-		var self = this;
-		// self.files.$loaded().then(function (files){
-			self.structure.$loaded().then(function (structure){
-				$log.debug('[Editor.getStructure()]:', structure);
-				d.resolve(structure);
-			}, function (err){
-				d.reject(err);
-			});
-		// }, function (err){
-		// 	d.reject(err);
-		// });
+		this.files = Files(this.application.name);
+		this.files.$getStructure(this.application.frontend.bucketName).then(function (structure){
+			$log.debug('[Editor.getStructure()]:', structure);
+			d.resolve(structure);
+		}, function (err){
+			$log.debug('[Editor.getStructure()] Error getting structure:', err);
+			d.reject(err);
+		});
 		return d.promise;
 	}
 	//Set editors file mode from provided type
@@ -125,11 +121,10 @@ angular.module('hypercube.application.editor')
   		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
   		d.resolve(file);
 		} else { //file is not a firebase object
-			self.getStructure().then(function(files){
-				console.log('index for:', files.$ref());
-				self.firepad = Firepad.fromACE(file.makeRef(files.$ref()), self.ace, aceOptions);
-				d.resolve(file);
-			});
+				console.log('index for:', this.files.$ref());
+				// self.firepad = Firepad.fromACE(this.files.makeRef(files.$ref()), self.ace, aceOptions);
+				// d.resolve(file);
+			// });
 		}
 		return d.promise;
 	};

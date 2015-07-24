@@ -10,14 +10,14 @@ angular.module('hypercube.applications')
 			} else if (nameIsInvalid(applicationData.name)){
 				d.reject({message:'Invalid Name. Names can not include spaces or special characters.'});
 			} else {
+				applicationData.template = "template1";
 				AuthService.getCurrentUser().then(function(currentUser){
 					$log.debug('currentUser loaded:', currentUser);
 					applicationData.owner = currentUser.id;
 					$http.post(ENV.serverUrl + '/apps', applicationData)
 					.then(function (apiRes){
 						d.resolve(apiRes.data);
-					})
-					.catch(function (errRes){
+					}, function (errRes){
 						//TODO: Handle different error response codes
 						$log.error('Error adding application: ', errRes.data);
 						d.reject({message:errRes.data});
@@ -31,8 +31,7 @@ angular.module('hypercube.applications')
 			$http.put(ENV.serverUrl + '/apps/'+ applicationId, applicationData)
 			.then(function (apiRes){
 				deferred.resolve(apiRes.data);
-			})
-			.catch(function (errRes){
+			}, function (errRes){
 				//TODO: Handle different error response codes
 				deferred.reject(errRes.data);
 			});
@@ -55,8 +54,7 @@ angular.module('hypercube.applications')
 					//TODO: Update application in list
 				}
 				deferred.resolve(apiRes.data);
-			})
-			.catch(function (errRes){
+			}, function (errRes){
 				//TODO: Handle different error response codes
 				$log.error('Error loading application data', errRes.data);
 				deferred.reject(errRes.data);
@@ -65,6 +63,7 @@ angular.module('hypercube.applications')
 		},
 		del:function(applicationName){
 			var deferred = $q.defer();
+			var endpointUrl;
 			// $log.log('Loading application with ID:', applicationName);
 			if(applicationName){
 				endpointUrl =  ENV.serverUrl + "/apps/" + applicationName;
@@ -73,8 +72,7 @@ angular.module('hypercube.applications')
 			.then(function (apiRes){
 				// applications = apiRes.data;
 				deferred.resolve(apiRes.data);
-			})
-			.catch(function (errRes){
+			}, function (errRes){
 				//TODO: Handle different error response codes
 				$log.error('Error deleting application', errRes.data);
 				deferred.reject(errRes.data);

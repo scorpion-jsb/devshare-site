@@ -7,7 +7,7 @@ angular.module('hypercube.application.editor')
 		//Check that snap is a snapshot
 		if(_.isFunction(snap.val)){ //Snap is a snapshot
 			angular.extend(this, snap.val()); //Add current value from Firebase
-			_.extend(this,$firebaseObject(snap.ref())); //Add firebaseObject functionality
+			_.extend(this,$firebaseArray(snap.ref())); //Add firebaseObject functionality
 			console.warn('folder:', this);
 			if(!_.has(this, 'children')){ //Fill children parameter if folder without children
 				this.children = [{}];

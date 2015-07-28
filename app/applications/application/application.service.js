@@ -20,7 +20,10 @@ angular.module('hypercube.application')
 				var updatedApp = _.extend(self, applicationData);
 				console.log('Extended application', updatedApp);
 				d.resolve(updatedApp);
-			})
+			}, function (err){
+				$log.error('Error saving application:', err);
+				d.reject(err);
+			});
 			return d.promise;
 		},
 		get: function(){
@@ -29,7 +32,10 @@ angular.module('hypercube.application')
 			applicationsService.get(self.name).then(function (applicationData){
 				var app = new Application(applicationData);
 				d.resolve(app);
-			})
+			}, function (err){
+				$log.error('Error getting application:', err);
+				d.reject(err);
+			});
 			return d.promise;
 		}
 	};

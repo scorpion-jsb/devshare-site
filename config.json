@@ -4,6 +4,7 @@
 	"distFolder":"dist",
 	"s3":{
 		"bucket":"hypercube.kyper.io",
+		"stagingBucket":"hypercube-platform",
 		"region":"us-east-1"
 	},
 	"envs":{

@@ -168,6 +168,18 @@ gulp.task('s3Upload', function() {
     .pipe(s3(s3Config));
 });
 
+/** Upload dist folder to staging S3
+*/
+gulp.task('s3:staging', function() {
+  var s3Config = {
+    key:process.env.HYPERCUBE_S3_KEY || process.env.AWS_ACCESS_KEY_ID,
+    secret:process.env.HYPERCUBE_S3_SECRET || process.env.AWS_SECRET_ACCESS_KEY,
+    bucket:conf.s3.stagingBucket,
+    region:conf.s3.region || "us-east-1"
+  };
+  return gulp.src('./' + conf.distFolder + '/**')
+    .pipe(s3(s3Config));
+});
 /** Run local server to host app folder
 */
 gulp.task('connect:dev', function() {
@@ -184,7 +196,7 @@ gulp.task('connect:dist', function() {
   connect.server({
     root: conf.distFolder || 'dist',
     // livereload: true,
-    port: conf.port || 3000
+    port: conf.port + 1 || 3001
   });
 });
 
@@ -206,6 +218,9 @@ gulp.task('assets', ['copyHtml', 'copyBower', 'copyStyles', 'assets:vendor','ass
 gulp.task('build', ['buildEnv', 'assets']);
 
 gulp.task('upload', ['build','s3Upload']);
+
+gulp.task('stage', ['build','connect:dist', 's3:staging']);
+
 
 gulp.task('default', ['build', 'watch-assets', 'watch-html', 'connect:dev']);
 

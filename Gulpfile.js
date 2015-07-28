@@ -97,11 +97,10 @@ gulp.task('copyBower', function(){
     'bower/angular-material/demos',
     'bower/angular-material/modules'
   ]
-  ignoreArray = ignoreDirs.map(function (ref){
+  var ignoreArray = ignoreDirs.map(function (ref){
     return '!'+ conf.devFolder + '/' + ref + "/**";
   });
-  console.log('bower ignore array:', ignoreArray);
-    return gulp.src([conf.devFolder + '/bower/**'].concat(ignoreArray), {base:'./'+conf.devFolder+'/'})
+  return gulp.src([conf.devFolder + '/bower/**'].concat(ignoreArray), {base:'./'+conf.devFolder+'/'})
     .pipe(gulp.dest(conf.distFolder));
 });
 /** Copy Favicon and other style assets to distFolder in respective locations

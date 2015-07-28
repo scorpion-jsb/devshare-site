@@ -1,15 +1,9 @@
 angular.module('hypercube.application.editor')
-.controller('SettingsCtrl', ['$rootScope', '$scope', '$log','$q', function($rootScope, $scope, $log, $q){
-	// $scope.aceConfig = {
-	//   useWrapMode : true,
-	//   theme:'monokai',
-	//   mode: ,
-	//   onLoad: aceLoaded,
-	//   onChange: aceChanged,
-	//   advanced:{
-	//   	enableLiveAutocompletion:true
-	//   }
-	// }
+.controller('SettingsCtrl', ['$rootScope', '$scope', '$log','$q', 'application', function($rootScope, $scope, $log, $q, application){
+  //Copy application data into scope
+  console.log('application loaded:', $scope.application);
+  $scope.application = _.extend({},application);
+  
   //TODO: Load users for collaborators options
   // usersService.get().then(function(usersList){
   //   $log('users service loaded:', usersList);
@@ -44,27 +38,5 @@ angular.module('hypercube.application.editor')
       });
     }
   };
-	$scope.aceLoaded = function(_editor) {
-    // Options
-    // _editor.setReadOnly(true);
-    _editor.setTheme('ace/theme/monokai');
-    _editor.getSession().setMode("ace/mode/javascript");
-  };
 
-  $scope.aceChanged = function(e) {
-    //
-  };
-  $scope.setFileType = function(){
-  	return "js";
-  };
-  function getFileMode(argFile){
-    var fileMode = 'ace/mode/';
-    // [TODO] add regex for file type
-    if(argFile.hasOwnProperty('filetype')){
-      fileMode = fileMode + argFile.filetype;
-    } else {
-    	fileMode = fileMode + "javascript";
-    }
-    return fileMode;
-  }
 }])

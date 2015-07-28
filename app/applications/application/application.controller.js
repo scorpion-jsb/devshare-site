@@ -13,15 +13,14 @@ angular.module('hypercube.applications')
 			$scope.data.editing = false;
 			$scope.data.loading = true;
 			//TODO: Run update on application object
-			applicationsService.update($stateParams.name, $scope.application)
-			.then(function (appData){
-				// $log.log('[$scope.update()] application data loaded:', appData);
-				$scope.application = application;
+			$scope.application.save().then(function (appData){
+				$log.log('[$scope.update()] application data loaded:', appData);
+				$scope.application = appData;
 			}).catch(function (err){
 				$log.error('Error loading applications', err);
-				$scope.data.error = err;
-			}).finally(function(){
 				$scope.data.loading = false;
+				$scope.data.error = err;
+				$scope.showToast('Error updating application');
 			});
 		};
 		$scope.goTo = function(path){

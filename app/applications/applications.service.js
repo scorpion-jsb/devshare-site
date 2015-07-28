@@ -30,9 +30,11 @@ angular.module('hypercube.applications')
 			var deferred = $q.defer();
 			$http.put(ENV.serverUrl + '/apps/'+ applicationId, applicationData)
 			.then(function (apiRes){
+				$log.info('[applicationsService.update()] Update successful:', apiRes);
 				deferred.resolve(apiRes.data);
 			}, function (errRes){
 				//TODO: Handle different error response codes
+				$log.error('[applicationsService.update()] Error updating:', errRes);
 				deferred.reject(errRes.data);
 			});
 			return deferred.promise;

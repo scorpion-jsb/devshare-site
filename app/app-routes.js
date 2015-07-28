@@ -54,9 +54,10 @@ angular.module('hypercube')
             });
           });
         },
-        application:function(applicationsService, $q, $stateParams, $log){
+        application:function(Application, $q, $stateParams, $log){
           return $q(function(resolve, reject){
-            applicationsService.get($stateParams.name).then(function (applicationData){
+            var application = new Application($stateParams.name);
+            application.get().then(function (applicationData){
               // $log.log('application Detail Ctrl: application data loaded:', applicationData);
               resolve(applicationData);
             }, function (err){

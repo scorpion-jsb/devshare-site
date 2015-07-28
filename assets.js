@@ -60,6 +60,7 @@ module.exports = {
 		'applications/applications.controller.js',
 
 		'applications/application/application.module.js',
+		'applications/application/application.service.js',
 		'applications/application/application.controller.js',
 
 		'applications/application/editor/editor.module.js',

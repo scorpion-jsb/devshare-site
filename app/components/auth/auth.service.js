@@ -62,8 +62,7 @@ angular.module('hypercube.auth')
 					$log.error('[AuthService.signup()] Error Logging in as new user:', err);
 	    		deferred.reject(err);
 	    	});
-	    })
-	    .catch(function (apiResponse) {
+	    }, function (apiResponse) {
 	      $log.error('[AuthService.signup()] Error signing up:', apiResponse);
 	      deferred.reject(apiResponse.data);
 	      // TODO: Handle Invalid username / password combination.
@@ -76,26 +75,29 @@ angular.module('hypercube.auth')
 			// $log.log('[AuthService.login()] Login called with:', loginData);
 			//TODO: Login with username or email
 			if(_.has(loginData, 'password')){
-			//Check if email was entered instead of username
-			if(validateEmail(loginData.username)){
-				loginData = {email:loginData.username, password:loginData.password};
-			} 
-			$http.put(ENV.serverUrl + '/login', loginData)
-	    .then(function (successRes){
-	    	$log.log('[AuthService.login()] Login successful:', successRes);
-	    	Session.create(successRes.data.token);
-	    	$rootScope.currentUser = successRes.data.user;
-	    	$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-	    	deferred.resolve($rootScope.currentUser);
-	    })
-	    .catch(function (errRes) {
-	      $log.error('Error logging in:', errRes);
-	    	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-	      if (errRes.status === 401) {
-    			$log.error('invalid email/password combo', errRes);
-      	}
-	      deferred.reject(errRes.data);
-	    });
+				//Check if email was entered instead of username
+				if(validateEmail(loginData.username)){
+					loginData = {email:loginData.username, password:loginData.password};
+				} 
+				$http.put(ENV.serverUrl + '/login', loginData)
+		    .then(function (successRes){
+		    	$log.log('[AuthService.login()] Login successful:', successRes);
+		    	Session.create(successRes.data.token);
+		    	$rootScope.currentUser = successRes.data.user;
+		    	$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+		    	deferred.resolve($rootScope.currentUser);
+		    }, function (errRes) {
+		      $log.error('[AuthService.login()] Error logging in:', errRes);
+		    	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+		      if (errRes.status === 401) {
+	    			$log.error('invalid email/password combo', errRes);
+		      	deferred.reject(errRes.data);
+	      	} else if(errRes.status === 500 || errRes.status === 0) {
+	      		deferred.reject({message:'Server Error'});
+	      	} else {
+		      	deferred.reject(errRes.data);
+	      	}
+		    });
 			}
 	    else {
 	    	d.reject({message:'Username/Email and password required to login.'});

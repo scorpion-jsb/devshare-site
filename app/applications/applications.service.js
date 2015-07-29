@@ -10,7 +10,7 @@ angular.module('hypercube.applications')
 			} else if (nameIsInvalid(applicationData.name)){
 				d.reject({message:'Invalid Name. Names can not include spaces or special characters.'});
 			} else {
-				applicationData.template = "template1";
+				applicationData.template = "default";
 				AuthService.getCurrentUser().then(function(currentUser){
 					$log.debug('currentUser loaded:', currentUser);
 					applicationData.owner = currentUser.id;

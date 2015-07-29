@@ -68,6 +68,10 @@ angular.module('hypercube.auth')
       // if(response.status == 401){
       //   return $q.resolve(response);
       // }
+      if(response.status == 0){
+        console.warn('status is 0')
+        $q.reject({message:'Server Error'});
+      }
       return $q.reject(response);
     }
   };

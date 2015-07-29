@@ -29,8 +29,9 @@ angular.module('hypercube.account')
 			}, function (err){
 				$scope.loginData = {loading:false, username:null, password:null};
 				var msg = "Login Error: ";
+				console.warn('err:', err);
 				if(err){
-					msg += err;
+					msg += err.message;
 				}
 				$scope.showToast(msg);
 			});

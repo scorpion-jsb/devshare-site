@@ -21,7 +21,5 @@ angular.module('hypercube.application.preview')
       $scope.previewData.height = $window.innerHeight;
     }
 	};
-  $scope.addHosting = function(){
-    //TODO: Call to application service to add hosting
-  };
+
 }])

@@ -37,6 +37,19 @@ angular.module('hypercube.application')
 				d.reject(err);
 			});
 			return d.promise;
+		},
+		addStorage:function(){
+			var d = $q.defer();
+			var endpointUrl = ENV.serverUrl + "/apps/" + this.name + "/storage";
+			$http.post(endpointUrl, {}).then(function (applicationData){
+				$log.log('Adding storage successful:', applicationData);
+				var app = new Application(applicationData);
+				d.resolve(app);
+			}, function (err){
+				$log.error('[Application.addStorage()] Error getting application:', err);
+				d.reject(err);
+			});
+			return d.promise;
 		}
 	};
 	return Application;

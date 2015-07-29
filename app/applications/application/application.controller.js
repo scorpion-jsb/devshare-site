@@ -27,4 +27,7 @@ angular.module('hypercube.applications')
 			// $log.log('going to path: '+ path);
 			$window.open("http://" + path);
 		};
+		$scope.addHosting = function(){
+	    //TODO: Call to application service to add hosting
+	  };
 }]);

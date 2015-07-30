@@ -24,22 +24,11 @@
       </md-grid-tile>
       <!-- New app Tile -->
       <md-grid-tile class="apps-tile" md-colspan="2" md-rowspan-sm="1" md-rowspan-md="2" md-rowspan-gt-md="3">
-        <md-card layout="column" layout-fill  layout-padding>
-          <md-card-content>
-            <h4 class="title">New App</h4>
-            <md-input-container>
-              <label>App name</label>
-              <input ng-model="newApp.name" type="text" required>
-            </md-input-container>
+        <md-card class="new-app-card" layout="column"  layout-fill layout-align="center center" ng-click="startNew()">
+          <md-card-content class="new-app-card-content">
+            <h4 class="title top">Create New</h4>
+            <h4 class="title">Application</h4>
           </md-card-content>
-          <div class="md-actions" layout="row" layout-align="end end" flex>
-            <div>
-              <md-progress-circular class="primary" md-mode="indeterminate" ng-if="data.loading"></md-progress-circular>
-              <md-button class="md-fab md-primary hc-btn" aria-label="Create" ng-click="create(newApp)" ng-hide="data.loading">
-                <i class="fa fa-plus"></i>
-              </md-button>
-            </div>
-          </div>
         </md-card>
       </md-grid-tile>
     </md-grid-list>

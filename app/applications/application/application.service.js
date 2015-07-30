@@ -1,5 +1,5 @@
 angular.module('hypercube.application')
-.service('Application', ['applicationsService', '$q', function (applicationsService, $q){
+.service('Application', ['applicationsService', '$q', '$log', function (applicationsService, $q, $log){
 	function Application(appData){
 		if(_.isString(appData)){
 			this.name = appData;

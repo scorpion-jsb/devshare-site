@@ -1,6 +1,6 @@
 angular.module('hypercube.application.editor')
 
-.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'File', 'AuthService', '$rootScope', '$s3', '$firebaseObject', 'fbutil', 'FileStructure', function ($http, $log, $q, ENV, Files, File, AuthService, $rootScope, $s3, $firebaseObject, fbutil, FileStructure){
+.service('Editor', [ '$http', '$log', '$q', 'ENV', 'Files', 'File', 'AuthService', '$rootScope', '$s3', '$firebaseObject', 'fbutil',  function ($http, $log, $q, ENV, Files, File, AuthService, $rootScope, $s3, $firebaseObject, fbutil){
 	//Set Editor.ace and set secondary settings
 	this.setAce = function(aceEditor){
 		this.ace = aceEditor;

@@ -14,7 +14,7 @@ angular.module('hypercube.application.editor')
     } else { //Snap is not a snapshot
       angular.extend(this, snap);
     }
-    if(!this.type){
+    if(!_.has(this, 'type')){
       this.type = "file";
     }
     if(!_.has(this, 'name')){

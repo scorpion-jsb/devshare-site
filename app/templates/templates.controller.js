@@ -5,4 +5,4 @@ angular.module('hypercube.templates')
 		Templates.get().then(function (templates){
 			$scope.templates = templates;
 		});
-}])
+}]);

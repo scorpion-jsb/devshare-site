@@ -52,10 +52,10 @@ angular.module('hypercube.application.editor')
   $scope.createNew = function(){
     var newObj = {path:$scope.data.newName};
     if($scope.data.createMode == "folder"){
-      Editor.structure.$addFolder(newObj);
+      $scope.structure.$addFolder(newObj);
       // $log.log('[EditorCtrl.createNew()] New folder added:', $scope.files);
     } else {
-      Editor.structure.$addFile(newObj).then(function(file){
+      $scope.structure.$addFile(newObj).then(function(file){
         $log.log('[EditorCtrl.createNew()] Add file successful:', file);
         //TODO: Open newly created file
         // $scope.openFile();

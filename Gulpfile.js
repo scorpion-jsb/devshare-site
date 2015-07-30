@@ -164,7 +164,7 @@ gulp.task('s3Upload', function() {
 		bucket:conf.s3.bucket,
 		region:conf.s3.region || "us-east-1"
 	};
-	return gulp.src('./' + conf.devFolder + '/**')
+	return gulp.src('./' + conf.distFolder + '/**')
     .pipe(s3(s3Config));
 });
 
@@ -219,7 +219,8 @@ gulp.task('build', ['buildEnv', 'assets']);
 
 gulp.task('upload', ['build','s3Upload']);
 
-gulp.task('stage', ['build','connect:dist', 's3:staging']);
+
+gulp.task('stage', ['build', 's3:staging']);
 
 
 gulp.task('default', ['build', 'watch-assets', 'watch-html', 'connect:dev']);

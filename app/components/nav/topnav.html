@@ -7,6 +7,9 @@
         </a>
     </h2>
     <span flex></span>
+    <div nf-if="navButtons" class="navbtn-wrapper" layout="row" ng-repeat="btn in navButtons" >
+      <md-button class="nav-buttons outline" ng-click="clickBtn($index)">{{btn.text}}</md-button>
+    </div>
     <div ng-if="!currentUser" layout="row">
       <md-button class="nav-buttons outline-green" ui-sref="login" >Login</md-button>
       <md-button class="nav-buttons outline-blue" ui-sref="signup">Signup</md-button>

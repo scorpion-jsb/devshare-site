@@ -1,0 +1,1 @@
+angular.module('hypercube.templates', ['hypercube.const']);

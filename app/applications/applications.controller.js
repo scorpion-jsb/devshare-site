@@ -17,13 +17,31 @@ angular.module('hypercube')
 		});
 		$scope.startNew = function(ev){
 			$mdDialog.show({
-				controller: function($scope, $mdDialog){
+				controller: function($scope, $mdDialog, Templates, $q){
+					$scope.data = {minLength:1}; //Hide search dropdown initially
+					Templates.get().then(function(templates){
+						$scope.templates = templates;
+						$scope.data.minLength = 0; //Show results with no search
+					});
+					
 					$scope.create = function(newAppData){
 						$mdDialog.answer(newAppData);
 					};
 					$scope.cancel = function(){
 						$mdDialog.cancel();
 					};
+					$scope.querySearch = function(searchText){
+						if(!$scope.templates){
+							return [];
+						}
+						return _.filter($scope.templates, function(template){
+			        if(template.name.indexOf(searchText) != -1){
+			        	return true;
+			        } else {
+			        	return false;
+			        }
+			      })
+					}
 				},
 	      templateUrl: 'applications/applications-new.html',
 	      parent: angular.element(document.body),

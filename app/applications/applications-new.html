@@ -5,7 +5,7 @@
         <h2>New Application</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="answer('not applicable')">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+          <i class="fa fa-close" aria-label="Close dialog" ng-click="cancel()" style="font-size:1.5em;"></i>
         </md-button>
       </div>
     </md-toolbar>
@@ -27,7 +27,7 @@
                 md-selected-item-change="selectedItemChange(item)"
                 md-items="template in querySearch(data.searchText)"
                 md-item-text="template.name"
-                md-min-length="0"
+                md-min-length="data.minLength"
                 placeholder="Search Templates" style="" layout-fill>
               <md-item-template>
                 <span md-highlight-text="data.searchText" md-highlight-flags="^i">{{template.name}}</span>

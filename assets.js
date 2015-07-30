@@ -79,5 +79,11 @@ module.exports = {
 		'applications/application/preview/preview.module.js',
 		'applications/application/preview/preview.controller.js',
 
+
+		'templates/templates.module.js',
+		'templates/templates.service.js',
+		'templates/templates.controller.js'
+
+
 	]
 };

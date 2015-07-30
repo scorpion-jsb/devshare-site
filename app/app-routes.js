@@ -88,6 +88,12 @@ angular.module('hypercube')
       templateUrl:'account/account-index.html',
       controller:'AccountCtrl'
     })
+    .state('templates', {
+      parent:'nav',
+      url:'/templates',
+      templateUrl:'templates/templates.html',
+      controller:'TemplatesCtrl'
+    })
     .state('signup', {
       parent:'nav',
       url:'/signup',

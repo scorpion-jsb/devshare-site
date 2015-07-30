@@ -1,1 +1,1 @@
-angular.module('hypercube.applications', ['hypercube.const'])
+angular.module('hypercube.applications', ['hypercube.const', 'hypercube.templates'])

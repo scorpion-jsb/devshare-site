@@ -14,3 +14,20 @@ md-sidenav.md-closed.md-locked-open-add-active {
 .hc-title {
 	font-size:1.4em;
 }
+.outline-green {
+	background:none !important;
+	border: 2px solid rgb(0,180,23);
+}
+.outline-blue {
+	background:none !important;
+	border: 2px solid rgb(33,150,243);
+}
+.outline {
+	background:none !important;
+	border: 2px solid;
+	border-radius:4px;
+}
+.navbtn-wrapper {
+	margin-right:40px;
+	margin-left:40px;
+}

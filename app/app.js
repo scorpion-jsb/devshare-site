@@ -12,8 +12,8 @@ angular.module('hypercube', [
     'hypercube.account',
     'hypercube.home',
     'hypercube.applications',
-    'hypercube.application'
-
+    'hypercube.application',
+    'hypercube.templates'
   ])
 .directive('stopEvent', function () {
   return {

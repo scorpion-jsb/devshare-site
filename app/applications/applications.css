@@ -24,3 +24,33 @@
 .page-icon {
 	font-size:1.3em;
 }
+
+.new-app-card {
+	background:none;
+	border-style:dotted;
+	border-size:1px;
+	border-radius:3px;
+	box-sizing:border-box;
+	transition:  background .2s,box-shadow .2s;
+	font-size:1em;
+	font-weight:200;
+
+}
+.new-app-card:hover  {
+	background:white;
+	border-size:1px;
+	border-style:none;
+	border-radius:3px;
+	transition:border .3s, background .3s, box-shadow .3s;
+	box-shadow:0 1px 8px rgba(9,26,35,.2);
+	cursor: pointer;
+}
+.new-app-card .title {
+	margin:10px;
+}
+.new-app-card:hover .title {
+	font-weight:200;
+	border-bottom:2px solid;
+}
+.new-app-card:hover .title.top {
+}

@@ -1,5 +1,5 @@
 angular.module('hypercube')
-.controller('ApplicationsCtrl', ['$scope', '$http', '$state', '$log', 'applicationsService', function($scope, $http, $state, $log, applicationsService){
+.controller('ApplicationsCtrl', ['$scope', '$http', '$state', '$log', 'applicationsService', '$mdDialog', function ($scope, $http, $state, $log, applicationsService, $mdDialog){
 		// $log.log('ApplicationsCtrl');
 		$scope.data = {
 			loading:false,
@@ -15,8 +15,28 @@ angular.module('hypercube')
 			$scope.data.error = err;
 			$scope.showToast('Error: ' + err.message || err);
 		});
+		$scope.startNew = function(ev){
+			$mdDialog.show({
+				controller: function($scope, $mdDialog){
+					$scope.create = function(newAppData){
+						$mdDialog.answer(newAppData);
+					};
+					$scope.cancel = function(){
+						$mdDialog.cancel();
+					};
+				},
+	      templateUrl: 'applications/applications-new.html',
+	      parent: angular.element(document.body),
+	      targetEvent: ev,
+			}).then(function(answer) {
+				$log.info('Create answered:', answer);
+	      $scope.createApp(answer);
+	    }, function() {
+	    	$log.log('New Dialog was canceled');
+	    });
+		};
 
-		$scope.create = function(appData){
+		$scope.createApp = function(appData){
 			$scope.data.loading = true;
 			applicationsService.add(appData).then(function (newApp){
 				$scope.data.loading = false;

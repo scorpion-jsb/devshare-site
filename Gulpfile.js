@@ -164,7 +164,7 @@ gulp.task('s3Upload', function() {
 		bucket:conf.s3.bucket,
 		region:conf.s3.region || "us-east-1"
 	};
-	return gulp.src('./' + conf.distFolder + '/**')
+	return gulp.src('./' + conf.devFolder + '/**')
     .pipe(s3(s3Config));
 });
 

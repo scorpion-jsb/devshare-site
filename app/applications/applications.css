@@ -1,18 +1,24 @@
-.apps-tile {
-
+.apps-tile:hover {
+	cursor: pointer;
+	transition:box-shadow .2s;
+	    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
 }	
 .apps-tile .title {
-	padding-top:0px;
-	padding-bottom:0px;
-	margin-top:0px;
-	margin-bottom:0px;
+	padding:0px;
+	margin:0px;
 	font-weight:300;
 	font-size:1.3em;
-	margin-left:0px; 
-	padding-left:0px;
 }
-.apps-tile .name-input{
-
+.apps-tile:hover .title {
+	color:rgb(33,150,243);
+	/*text-decoration: underline;*/
+	border-bottom:2px;
+}
+.apps-tile .details{
+	margin:0px;
+	margin-top:10px;
 }
 
 .apps-tile .md-actions{
@@ -25,32 +31,35 @@
 	font-size:1.3em;
 }
 
-.new-app-card {
+.new-app-tile {
 	background:none;
 	border-style:dotted;
 	border-size:1px;
 	border-radius:3px;
 	box-sizing:border-box;
-	transition:  background .2s,box-shadow .2s;
+	transition: background .3s,box-shadow .3s;
 	font-size:1em;
 	font-weight:200;
+	box-shadow:none !important;
+}
 
-}
-.new-app-card:hover  {
+.new-app-tile:hover  {
 	background:white;
-	border-size:1px;
-	border-style:none;
-	border-radius:3px;
-	transition:border .3s, background .3s, box-shadow .3s;
-	box-shadow:0 1px 8px rgba(9,26,35,.2);
+	border: 1px solid #fff;
+	transition:background .3s, box-shadow .3s;
 	cursor: pointer;
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084); 
 }
-.new-app-card .title {
+.new-app-tile .title {
 	margin:10px;
+	font-size:1.2em;
+	font-weight:400;
 }
-.new-app-card:hover .title {
-	font-weight:200;
-	border-bottom:2px solid;
+.new-app-tile:hover .title {
+	color:rgb(33,150,243);
+	margin-top:.45em;
+	/*border-bottom:0px;*/
+	/*text-decoration: underline;*/
 }
-.new-app-card:hover .title.top {
+.new-app-tile:hover .title.top {
 }

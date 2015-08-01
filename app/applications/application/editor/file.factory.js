@@ -1,7 +1,7 @@
 angular.module('hypercube.application.editor')
 
 //File Object 
-.factory('File', ['$firebaseObject', '$firebaseUtils', 'fbutil', '$q', '$log', function ($firebaseObject, $firebaseUtils, fbutil, $q, $log){
+.factory('File', ['$firebaseObject', '$firebaseUtils', 'fbutil', '$q', '$log', '$s3', function ($firebaseObject, $firebaseUtils, fbutil, $q, $log, $s3){
   function File(snap){
     //Check that snap is a snapshot
     if(_.isFunction(snap.val)){ //Snap is a snapshot
@@ -99,7 +99,46 @@ angular.module('hypercube.application.editor')
         d.reject(err);
       });
       return d.promise;
-    }
+    },
+    getDefaultText:function(){
+      //Set Default Editor text
+      var indexTemplate = '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\n\t</head>\n\t<body>\n\n\t</body>\n</html>';
+      var htmlDefault = '<!-- '+ this.name +' -->';
+      var jsDefault = '// ' + this.name;
+      var otherDefault = '// ' + this.name;
+
+      if(this.fileType == "html"){
+        if(this.name == "index.html"){
+          return indexTemplate
+        } else {
+          return htmlDefault;
+        }
+      }  else if(this.fileType == "javascript"){
+        return jsDefault;
+      } else {
+        return otherDefault;
+      }
+    },
+    // getContents:function(bucketName){
+    //   //TODO: Check if there are contents on S3 - then check firebase for history parameter
+    //   var d = $q.defer();
+      
+    //   $s3.getFile(bucketName, this.path).then(function(fileContents){
+    //     $log.warn('$s3.getFile returned:', fileContents);
+    //     if(!fileContents){
+          
+    //     }
+    //     d.resolve(fileContents);
+    //   });
+    //   return d.promise;
+    // },
+    // open:function(appRef, ace){
+    //   //TODO: Open file in ace editor
+    //   var aceOptions = {};
+    //   aceOptions.defaultText = this.getDefaultText();
+    //   var self = this;
+    //   return Firepad.fromACE(self.makeRef(), ace, aceOptions);
+    // }
   };
   return File;
 

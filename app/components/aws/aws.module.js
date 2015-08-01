@@ -54,6 +54,30 @@ angular.module('hypercube.aws', ['ngStorage', 'hypercube.auth'])
 			});
 			return d.promise;
 		};
+		this.getFile = function(bucketName, fileKey){
+			var d = $q.defer();
+			if(!bucketName){
+				d.reject({message:'Bucket name required to get objects'});
+			}
+			//If AWS Credential do not exist, set them
+			if(typeof AWS.config.credentials == "undefined" || !AWS.config.credentials){
+				// $log.info('AWS creds are being updated to make request');
+				$aws.updateConfig();
+			}
+			var s3 = new AWS.S3();
+			var getParams = {Bucket:bucketName, Key:fileKey};
+			s3.getObject(getParams, function(err, data){
+				if (err) {
+					$log.error('Error getting file from s3:', err); // an error occurred
+  				d.reject(err);
+  			}
+  			else {
+					$log.warn('File loaded from s3:', data); // an error occurred
+					d.resolve(data.Body.toString());
+				}
+			});
+			return d.promise;
+		};
 		this.saveFile = function(fileData){
 		  var d = q.defer();
 		  var saveParams = {Bucket:bucketName, Key:fileData.key,  Body: fileData.content, ACL:'public-read'};

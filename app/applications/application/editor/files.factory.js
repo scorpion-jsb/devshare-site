@@ -32,7 +32,7 @@ angular.module('hypercube.application.editor')
       var self = this;
       $s3.getObjects(bucketName).then(function (structureArray){
         var childStructure = childStructureFromArray(structureArray);
-        $log.warn('childStructure from s3:', structureArray);
+        $log.info('childStructure from s3:', structureArray);
         self.$saveFbObj(childStructure).then(function(newArray){
           $log.warn('structure save:', newArray);
           d.resolve(newArray);
@@ -54,9 +54,10 @@ angular.module('hypercube.application.editor')
         if(!_.isArray(saveData)){
           fbObj.$value = _.extend({},saveData);
         } else {
-          //Save all no existing keys based on name
+          //Save all non existing keys based on name
           _.each(saveData, function(fileObj){
-            var objName = fileObj.name.replace(".", ":")
+            //TODO: Handle more than one period here
+            var objName = fileObj.name.replace(".", ":");
             if(!_.has(fbObj, objName)){
               fbObj[objName] = fileObj;
             }
@@ -67,15 +68,15 @@ angular.module('hypercube.application.editor')
           self.$loaded().then(function(){
             d.resolve(self.$list);
           }, function(err){
-            $log.error('Error loading files Firebase object:', err);
+            $log.error('[FilesList.$saveFbObj]Error loading files Firebase object:', err);
             d.reject(err);
           });
         }, function (err){
-          $log.error('Error Saving files:', err);
+          $log.error('[FilesList.$saveFbObj]Error Saving files:', err);
           d.reject(err);
         });
       }, function (err){
-        $log.error('Error loading files as Firebase object:', err);
+        $log.error('[FilesList.$saveFbObj]Error loading files as Firebase object:', err);
         d.reject(err);
       });
       return d.promise;
@@ -96,12 +97,13 @@ angular.module('hypercube.application.editor')
         //Check to make sure name is not taken
         var key = file.makeKey();
         if(_.has(fileObj, key)){
+          //TODO: Check and keep modifying until key doesn't exist
           key += "-1";
         }
         //Set by key within structure
         fileObj.$value = file;
         fileObj.$save().then(function(){
-          d.resolve();
+          d.resolve(file);
         }, function (err){
           $log.error('Error adding file:', err);
           d.reject(err);
@@ -114,7 +116,7 @@ angular.module('hypercube.application.editor')
     },
     //Add folder
     $addFolder:function(folderData){
-      //TODO: Handle path
+      //TODO: Handle non-existing/malformed
       var pathArray = folderData.path.split("/");
       var folder = new Folder({name:_.last(pathArray), path:folderData.path});
       var self = $firebaseObject(this.$ref());
@@ -148,7 +150,7 @@ angular.module('hypercube.application.editor')
 //
 function buildStructureObject(file){
   var pathArray;
-  // console.log('buildStructure with:', file);
+  console.log('buildStructure with:', file);
   if(_.has(file, 'path')){
     //Coming from files already having path (structure)
     pathArray = file.path.split("/");

@@ -196,7 +196,7 @@ gulp.task('connect:dist', function() {
   connect.server({
     root: conf.distFolder || 'dist',
     // livereload: true,
-    port: conf.port + 1 || 3001
+    port: parseInt(conf.port) + 1 || 3001
   });
 });
 

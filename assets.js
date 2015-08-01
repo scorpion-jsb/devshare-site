@@ -81,7 +81,11 @@ module.exports = {
 
 		'templates/templates.module.js',
 		'templates/templates.service.js',
-		'templates/templates.controller.js'
+		'templates/templates.controller.js',
+
+		'docs/docs.module.js',
+		// 'docs/docs.service.js',
+		'docs/docs.controller.js'
 
 
 	]

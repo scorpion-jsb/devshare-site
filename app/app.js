@@ -13,7 +13,8 @@ angular.module('hypercube', [
     'hypercube.home',
     'hypercube.applications',
     'hypercube.application',
-    'hypercube.templates'
+    'hypercube.templates',
+    'hypercube.docs'
   ])
 .directive('stopEvent', function () {
   return {
@@ -43,6 +44,7 @@ angular.module('hypercube', [
     // Keep track of the original debug method, we'll need it later.
     var origDebug = $delegate.debug;
     var origLog = $delegate.log;
+    var origInfo = $delegate.info;
     var origError = $delegate.error;
 
     /*

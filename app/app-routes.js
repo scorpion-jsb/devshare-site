@@ -94,6 +94,12 @@ angular.module('hypercube')
       templateUrl:'templates/templates.html',
       controller:'TemplatesCtrl'
     })
+    .state('docs', {
+      parent:'nav',
+      url:'/docs',
+      templateUrl:'docs/docs.html',
+      controller:'DocsCtrl'
+    })
     .state('signup', {
       parent:'nav',
       url:'/signup',

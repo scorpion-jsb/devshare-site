@@ -29,21 +29,10 @@ angular.module('hypercube.application.editor')
 	//Get firebase array of file structure
 	this.getFiles = function(){
 		var d = $q.defer();
-		console.log("get files called with:", this);
 		this.files = Files(this.application.name);
 		var self = this;
 		var filesObj = _.extend({}, $firebaseObject(self.files.$ref()));
 		this.files.$loaded().then(function(files){
-			//Get s3 objects and save the data to firebase
-			// $s3.getObjects(self.application.frontend.bucketName).then(function(s3Files){
-			// 	//TODO: Compare here and add missing files to firebase
-			// 	$log.info('[Editor.getFiles()] s3.getObjects:', s3Files);
-			// 	files.$saveFbObj(s3Files).then(function(){
-			// 		d.resolve(files);
-			// 	}, function (err){
-			// 		d.reject(err);
-			// 	});
-			// });
 			d.resolve(files);
 		}, function (err){
 			$log.error('[Editor.getFiles()] Error loading files array:', err);
@@ -54,12 +43,14 @@ angular.module('hypercube.application.editor')
 	//Get File structure in "children" format to be used with tree viewing/control
 	this.getStructure = function(){
 		var d = $q.defer();
-		this.files = Files(this.application.name);
+		if(!_.has(this, 'files')){
+			this.files = Files(this.application.name);
+		}
 		this.files.$getStructure(this.application.frontend.bucketName).then(function (structure){
 			$log.debug('[Editor.getStructure()]:', structure);
 			d.resolve(structure);
 		}, function (err){
-			$log.debug('[Editor.getStructure()] Error getting structure:', err);
+			$log.error('[Editor.getStructure()] Error getting structure:', err);
 			d.reject(err);
 		});
 		return d.promise;
@@ -95,16 +86,7 @@ angular.module('hypercube.application.editor')
 		if(!(file instanceof File)){
 			file = new File(file);
 		}
-    //Set Default Editor text
-		if(file.fileType == "javascript"){
-			aceOptions.defaultText = '// ' + file.name;
-		} else if(file.fileType == "html"){
-			if(file.name == "index.html"){
-				aceOptions.defaultText = '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\n\t</head>\n\t<body>\n\n\t</body>\n</html>';
-			} else {
-				aceOptions.defaultText = '<!-- '+ file.name +' -->';
-			}
-		}
+
 		//Add current user information
 		//User info loaded from AuthService
 		// AuthService.getCurrentUser().then(function (currentUser){
@@ -117,15 +99,36 @@ angular.module('hypercube.application.editor')
 		this.setFileType(file.fileType);
   	this.currentFile = file;
 		//Set firepad
+		var self = this;
+		var ref;
 		if(_.isFunction(file.$ref)){ //file is already a Firebase object
-  		this.firepad = Firepad.fromACE(file.$ref(), this.ace, aceOptions);
-  		d.resolve(file);
-		} else { //file is not a firebase object
-				console.log('index for:', this.files.$ref());
-				// self.firepad = Firepad.fromACE(this.files.makeRef(files.$ref()), self.ace, aceOptions);
-				// d.resolve(file);
-			// });
+			//TODO: Check S3 for contents of file and make it the default text
+			ref = file.$ref();
+		} else { //file is not a Firebase object
+			ref = file.makeRef(self.files.$ref());
 		}
+		$s3.getFile(this.application.frontend.bucketName, file.path).then(function (fileContents){
+			self.firepad = Firepad.fromACE(ref, self.ace);
+			self.firepad.on('ready', function(){
+				//Make sure there is no history in Firebase
+				if(self.firepad.isHistoryEmpty()){
+					if(fileContents){
+						//Setting text to s3 contents
+	  				self.firepad.setText(fileContents);
+					} else {
+						//Setting content to default text
+						self.firepad.setText(file.getDefaultText());
+					}
+				} else {
+					//Using Firebase history
+					//TODO: Compare updated time
+					d.resolve(file);
+				}
+			});
+		}, function (err){
+			console.warn('can be handled with error');
+			d.reject(err);
+		});
 		return d.promise;
 	};
 	//Publish the current file loaded in the editor to S3

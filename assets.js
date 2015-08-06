@@ -27,7 +27,8 @@ module.exports = {
 		'bower/angularfire/dist/angularfire.js',
 		'bower/firepad/dist/firepad.min.js',
 		'bower/aws-sdk-js/dist/aws-sdk.js',
-		'bower/angular-tree-control/angular-tree-control.js'
+		'bower/angular-tree-control/angular-tree-control.js',
+		'bower/ng-file-upload/ng-file-upload-all.min.js'
 	],
 	app: [
 		'app.js',

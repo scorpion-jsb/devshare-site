@@ -5,7 +5,8 @@ angular.module('hypercube.application.editor', [
 	'treeControl',
 	'hypercube.const',
 	'hypercube.auth',
-	'hypercube.aws'
+	'hypercube.aws',
+	'ngFileUpload'
 ])
 
 .constant('FILES_LOCATION', 'appFiles');

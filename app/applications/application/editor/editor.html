@@ -27,6 +27,26 @@
           {{node.name}}
         </treecontrol>
         <span ng-if="!file || files.length < 1">Hover over <i class="fa fa-plus"></i> to add a file or folder</span>
+        <!-- File Upload -->
+        <div layout="column" layout-fill>
+          <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+          ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+          accept="image/*,application/pdf" style="font-size:.4em;">
+            Drop files here to add
+          </div>
+          <div ngf-no-file-drop>
+            File Drag/Drop is not supported for this browser
+          </div>
+          <div ng-if="files && files.length > 0" style="font-size:.5em;">
+            <span>Files:</span>
+            <ul>
+              <li ng-repeat="f in files" style="font:smaller">{{f.name}}</li>
+            </ul>
+          </div>
+          <!-- Upload Log:
+          <pre>{{log}}</pre> -->
+        </div>
+
       </div>
       <div flex style="height:150px;"></div>
       <div layout="row" layout-align="center">

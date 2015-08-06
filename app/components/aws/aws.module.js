@@ -34,24 +34,26 @@ angular.module('hypercube.aws', ['ngStorage', 'hypercube.auth'])
 		this.getObjects = function(bucketName){
 			var d = $q.defer();
 			if(!bucketName){
+		  	$log.error("[$s3.getObjects] Attempting to get objects for bucket without name.");
 				d.reject({message:'Bucket name required to get objects'});
-			}
-			//If AWS Credential do not exist, set them
-			if(typeof AWS.config.credentials == "undefined" || !AWS.config.credentials){
-				// $log.info('AWS creds are being updated to make request');
-				$aws.updateConfig();
-			}
-			var s3 = new AWS.S3();
-			s3.listObjects({Bucket:bucketName}, function(err, data) {
-			  if (err) { 
-			  	$log.error("[$s3.getObjects] Error listing objects:", err);
-				  d.reject(err);
+			} else {
+				//If AWS Credential do not exist, set them
+				if(typeof AWS.config.credentials == "undefined" || !AWS.config.credentials){
+					// $log.info('AWS creds are being updated to make request');
+					$aws.updateConfig();
 				}
-			  else {
-			  	// $log.log("[$s3.getObjects] listObjects returned:", data);
-			    d.resolve(data.Contents);
-			  }
-			});
+				var s3 = new AWS.S3();
+				s3.listObjects({Bucket:bucketName}, function(err, data) {
+				  if (err) { 
+				  	$log.error("[$s3.getObjects] Error listing objects:", err);
+					  d.reject(err);
+					}
+				  else {
+				  	// $log.log("[$s3.getObjects] listObjects returned:", data);
+				    d.resolve(data.Contents);
+				  }
+				});
+			}
 			return d.promise;
 		};
 		this.getFile = function(bucketName, fileKey){

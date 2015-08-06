@@ -208,10 +208,10 @@ gulp.task('connect:dist', function() {
 // });
 
 gulp.task('watch-assets', function(){
-  gulp.watch(['./assets.js'], ['assets']);
+  gulp.watch(['assets.js'], ['assets']);
 });
 gulp.task('watch-html', function(){
-  gulp.watch([conf.devFolder + '/**/*.html'], ['copyHtml']);
+  gulp.watch([conf.devFolder + '/**/*.html'], ['assets']);
 });
 gulp.task('assets', ['copyHtml', 'copyBower', 'copyStyles', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
 
@@ -223,6 +223,6 @@ gulp.task('upload', ['build','s3Upload']);
 gulp.task('stage', ['build', 's3:staging']);
 
 
-gulp.task('default', ['build', 'watch-assets', 'watch-html', 'connect:dev']);
+gulp.task('default', ['watch-assets', 'build','watch-html', 'connect:dev']);
 
 gulp.task('dist', ['build', 'connect:dist']);

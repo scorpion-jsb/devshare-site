@@ -12,6 +12,9 @@ cssmin = require('gulp-cssmin'),
 stripDebug = require('gulp-strip-debug'),
 stripNgLog = require('gulp-strip-ng-log');
 
+var browserSync = require('browser-sync').create();
+var reload = browserSync.reload;
+
 var _ = require('underscore');
 var pkg = require('./package.json');
 var conf = require('./config.json');
@@ -102,6 +105,7 @@ gulp.task('copyBower', function(){
   });
   return gulp.src([conf.devFolder + '/bower/**'].concat(ignoreArray), {base:'./'+conf.devFolder+'/'})
     .pipe(gulp.dest(conf.distFolder));
+
 });
 /** Copy Favicon and other style assets to distFolder in respective locations
  */
@@ -118,6 +122,7 @@ gulp.task('assetTags:dev', function () {
     // Writes script reference to index.html dist/ folder
     .pipe(rename('index.html'))
     .pipe(gulp.dest(conf.devFolder));
+    
 });
 
 /** Build script and style tags to place into HTML in dist folder
@@ -183,11 +188,19 @@ gulp.task('s3:staging', function() {
 /** Run local server to host app folder
 */
 gulp.task('connect:dev', function() {
-  connect.server({
-    root: conf.devFolder || 'app',
-    // livereload: true,
-    port: conf.port || 3000
+  // connect.server({
+  //   root: conf.devFolder || 'app',
+  //   // livereload: true,
+  //   port: conf.port || 3000
+  // });
+  browserSync.init({
+    port:conf.port || 3000,
+    server: {
+      baseDir: 'app'
+    }
   });
+  gulp.watch(['assets.js'], ['assets'], reload);
+  gulp.watch([conf.devFolder + '/**/*.html'], reload);
 });
 
 /** Run local server to host dist folder
@@ -207,12 +220,10 @@ gulp.task('connect:dist', function() {
 //   .pipe(clean());
 // });
 
-gulp.task('watch-assets', function(){
-  gulp.watch(['assets.js'], ['assets']);
+gulp.task('watch', function(){
+
 });
-gulp.task('watch-html', function(){
-  gulp.watch([conf.devFolder + '/**/*.html'], ['assets']);
-});
+
 gulp.task('assets', ['copyHtml', 'copyBower', 'copyStyles', 'assets:vendor','assets:app', 'assets:style', 'assetTags:dev', 'assetTags:prod']);//TODO: Have this build for prod env
 
 gulp.task('build', ['buildEnv', 'assets']);
@@ -223,6 +234,6 @@ gulp.task('upload', ['build','s3Upload']);
 gulp.task('stage', ['build', 's3:staging']);
 
 
-gulp.task('default', ['watch-assets', 'build','watch-html', 'connect:dev']);
+gulp.task('default', ['build','connect:dev']);
 
 gulp.task('dist', ['build', 'connect:dist']);

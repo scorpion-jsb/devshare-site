@@ -200,7 +200,7 @@ gulp.task('connect:dev', function() {
     }
   });
   gulp.watch(['assets.js'], ['assets'], reload);
-  gulp.watch([conf.devFolder + '/**/*.html'], reload);
+  gulp.watch([conf.devFolder + '/**/*.html', conf.devFolder + '/**/*.css'], reload);
 });
 
 /** Run local server to host dist folder

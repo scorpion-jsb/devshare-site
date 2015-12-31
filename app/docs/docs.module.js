@@ -1,1 +1,0 @@
-angular.module('hypercube.docs', []);

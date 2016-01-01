@@ -1,11 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import CarsList from '../../components/CarsList/CarsList';
-import * as Actions from '../../actions/cars';
-import './Cars.scss';
 
-class Cars extends Component {
+import './Account.scss';
+
+class Account extends Component {
   constructor(props){
     super(props);
   }
@@ -14,9 +13,8 @@ class Cars extends Component {
   };
   render(){
     return (
-      <div className="Cars">
-        <h2>Cars</h2>
-        <CarsList cars={ this.props.cars } onCarAddClick={ this.props.addCar }/>
+      <div className="Account">
+
       </div>
     );
   }
@@ -24,7 +22,6 @@ class Cars extends Component {
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   return {
-    cars: state.cars,
     router: state.router
   };
 }
@@ -32,4 +29,4 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch);
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Cars);
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

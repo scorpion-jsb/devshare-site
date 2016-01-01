@@ -13,8 +13,8 @@ class Navbar extends Component {
     onLogoutClick: PropTypes.func
   };
   render() {
-    let brandLinkLoc = (this.props.account && this.props.account.username) ? '/cars' : '/';
-    let brandLink = <Link to={ brandLinkLoc }>hypercube</Link>
+    let brandLinkLoc = (this.props.account && this.props.account.username) ? '/account' : '/';
+    let brandLink = <Link to={ brandLinkLoc }>Hypercube</Link>
     return (
       <div className="Navbar">
         <div className="Navbar-Brand">

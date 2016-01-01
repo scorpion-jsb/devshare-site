@@ -1,20 +1,15 @@
-var webpack = require("webpack")
-
 module.exports = {
-  entry: './app.js'
-    output: {
-        path: __dirname,
-        filename: "bundle.js"
-    },
-
-    module: {
-        loaders: [
-          {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loaders: ['babel']
-          }
-
-        ]
-    }
-};
+  entry: './app/index.js',
+  output: {
+    filename: 'public/bundle.js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel'
+      }
+    ]
+  }
+}

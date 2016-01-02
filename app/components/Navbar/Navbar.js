@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+// import './Navbar.scss';
+import { Actions } from 'redux-grout';
+import { Link, pushState } from 'react-router';
 
-import './Navbar.scss';
-//React Components
 import AppBar from 'material-ui/lib/app-bar';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
@@ -10,26 +10,39 @@ import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
-class Navbar extends Component {
+export default class Navbar extends Component {
   constructor(props) {
     super(props);
+    this.selectItem = this.selectItem.bind(this);
   }
   static propTypes = {
     account: PropTypes.object,
+    onMenuClick: PropTypes.func,
     onLogoutClick: PropTypes.func
   };
+  selectItem(e, item) {
+    console.log('item selected', item);
+    if(item === 'logout' && this.props.onLogoutClick){
+      return this.props.onLogoutClick();
+    }
+    if(this.props.onMenuClick) {
+      this.props.onMenuClick(item);
+    }
+  }
   render() {
     let brandLinkLoc = (this.props.account && this.props.account.username) ? '/projects' : '/';
     let brandLink = <Link to={ brandLinkLoc }>Hypercube</Link>
     let iconButton = (<IconButton><MoreVertIcon /></IconButton>);
-    let rightMenu = (<IconMenu
+    let rightMenu = (
+      <IconMenu
         iconButtonElement={ iconButton }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        onChange={ this.selectItem }
       >
-        <MenuItem primaryText="Refresh" />
-        <MenuItem primaryText="Help" />
-        <MenuItem primaryText="Sign out" />
+        <MenuItem primaryText="Account" value="account" />
+        <MenuItem primaryText="Help" value="help"/>
+        <MenuItem primaryText="Sign out" value="logout"/>
       </IconMenu>
     );
     return (
@@ -41,4 +54,3 @@ class Navbar extends Component {
     )
   }
 }
-export default Navbar;

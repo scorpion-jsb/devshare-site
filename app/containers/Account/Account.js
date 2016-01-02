@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import { Actions } from 'redux-grout';
 
 import './Account.scss';
 
@@ -27,6 +28,6 @@ function mapStateToProps(state) {
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch);
+  return bindActionCreators(Actions.account, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

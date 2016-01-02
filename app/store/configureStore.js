@@ -1,22 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
-import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-router';
-import { devTools } from 'redux-devtools';
-import thunkMiddleware from 'redux-thunk';
-import createHistory from 'history/lib/createBrowserHistory';
+import thunk from 'redux-thunk';
 import routes from '../routes';
 import { createMiddleware } from 'redux-grout';
-let matterMiddleware = createMiddleware('hypercube', {logLevel: 'error'});
-const createStoreWithMiddleware = compose(
-  // Save for redux middleware
-  applyMiddleware(thunkMiddleware, matterMiddleware),
-  reduxReactRouter({
-    createHistory
-  }),
-  typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-)(createStore);
+let groutMiddleware = createMiddleware('tessellate', {logLevel: 'trace'});
 
-export default function configureStore(initialState) {
+export default function configureStore(initialState, reduxReactRouter, createHistory) {
+  const createStoreWithMiddleware = compose(
+    applyMiddleware(thunk, groutMiddleware),
+    reduxReactRouter({
+      routes,
+      createHistory
+    }),
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+  )(createStore);
   const store = createStoreWithMiddleware(rootReducer, initialState);
 
   if (module.hot) {

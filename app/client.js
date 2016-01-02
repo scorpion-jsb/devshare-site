@@ -1,14 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { reduxReactRouter } from 'redux-router';
-import { createHistory } from 'history';
-import { getGrout } from 'redux-grout';
 import Root from './root';
 import configureStore from './store/configureStore';
+import { reduxReactRouter } from 'redux-router';
+import createHistory from 'history/lib/createBrowserHistory';
+import Grout from 'kyper-grout';
 
-let grout = getGrout();
+let grout = new Grout();
+let initialData = {entities: {accounts:{}}, account: {}};
 
-const store = configureStore({account: grout.currentUser, entities: {projects:[]}}, reduxReactRouter, createHistory);
+if(grout.currentUser){
+  initialData.account = grout.currentUser;
+  initialData.entities.accounts[grout.currentUser.id] = grout.currentUser;
+}
+const initialState = window.__INITIAL_STATE__ || initialData;
+
+const store = configureStore(initialState, reduxReactRouter, createHistory);
 
 let rootElement = document.getElementById('root');
 

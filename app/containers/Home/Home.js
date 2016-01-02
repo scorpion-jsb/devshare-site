@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './Home.scss';
+//React Components
+import RaisedButton from 'material-ui/lib/raised-button';
 
 export default class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <h2>Starter Project</h2>
-        <p>Example application built with React, Redux, and Matter. </p>
-        <p>Webpack is used to supply hot reloading for modules during development.</p>
+        <h2>Hypercube</h2>
+
+        <a href="https://github.com/prescottprue/hypercube">
+          <RaisedButton label="View code on GitHub" />
+        </a>
       </div>
     )
   }

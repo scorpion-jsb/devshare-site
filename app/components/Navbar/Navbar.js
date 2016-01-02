@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-// import './Navbar.scss';
+import './Navbar.scss';
 import { Actions } from 'redux-grout';
 import { Link, pushState } from 'react-router';
 
@@ -9,7 +9,7 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-
+import FlatButton from 'material-ui/lib/flat-button';
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ export default class Navbar extends Component {
     let brandLinkLoc = (this.props.account && this.props.account.username) ? '/projects' : '/';
     let brandLink = <Link to={ brandLinkLoc }>Hypercube</Link>
     let iconButton = (<IconButton><MoreVertIcon /></IconButton>);
-    let rightMenu = (
+    let rightMenu = this.props.account.username ? (
       <IconMenu
         iconButtonElement={ iconButton }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -44,7 +44,7 @@ export default class Navbar extends Component {
         <MenuItem primaryText="Help" value="help"/>
         <MenuItem primaryText="Sign out" value="logout"/>
       </IconMenu>
-    );
+    ): <FlatButton label="Login" onClick={ this.selectItem.bind(this, null, 'login')}/>;
     return (
       <AppBar
         title={<Link to={ brandLinkLoc }>Hypercube</Link>}

@@ -9,7 +9,7 @@ import './Login.scss';
  class Login extends Component {
   constructor(props) {
     super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLoginClick.bind(this);
   }
   handleLoginClick(loginData) {
     this.props.login(loginData);
@@ -18,7 +18,7 @@ import './Login.scss';
     return (
       <div className="Login">
         <h2>Login</h2>
-        <LoginForm onLoginClick={ loginData => this.handleLoginClick(loginData) }/>
+        <LoginForm onLoginClick={ this.handleLoginClick }/>
       </div>
     )
   }
@@ -26,7 +26,7 @@ import './Login.scss';
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   return {
-    account: state.account ? state.entities.accounts[state.account.id] : null,
+    account: state.account,
     router: state.router
   };
 }

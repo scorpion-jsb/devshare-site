@@ -5,7 +5,7 @@ import { devTools } from 'redux-devtools';
 import thunkMiddleware from 'redux-thunk';
 import createHistory from 'history/lib/createBrowserHistory';
 import routes from '../routes';
-import { createMiddleware } from 'redux-matter';
+import { createMiddleware } from 'redux-grout';
 let matterMiddleware = createMiddleware('hypercube', {logLevel: 'error'});
 const createStoreWithMiddleware = compose(
   // Save for redux middleware

@@ -25,6 +25,7 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
     "history": "1.13.0",
+    "kyper-grout": "^0.1.4",
     "kyper-matter": "^0.1.7",
     "lodash": "^3.10.1",
     "material-ui": "^0.14.0",

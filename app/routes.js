@@ -5,10 +5,10 @@ import {
     Home,
     About,
     Account,
+    Projects,
     Login,
     Signup,
-    NotFound,
-    Cars
+    NotFound
   } from './containers';
 export default (
   <Route path="/" component={ App }>
@@ -17,7 +17,7 @@ export default (
     <Route path="signup" component={ Signup }/>
     <Route path="about" component={ About } />
     <Route path="account" component={ Account } />
-    <Route path="cars" component={ Cars } />
+    <Route path="projects" component={ Projects } />
     <Route path="*" component={ NotFound } />
   </Route>
 );

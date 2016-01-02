@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { reduxReactRouter } from 'redux-router';
 import { createHistory } from 'history';
-import { getMatter } from 'redux-matter';
+import { getGrout } from 'redux-grout';
 import Root from './root';
 import configureStore from './store/configureStore';
 
-let matter = getMatter();
+let grout = getGrout();
 
-const store = configureStore({account: matter.currentUser}, reduxReactRouter, createHistory);
+const store = configureStore({account: grout.currentUser, entities: {projects:[]}}, reduxReactRouter, createHistory);
 
 let rootElement = document.getElementById('root');
 

@@ -19,26 +19,25 @@ class Navbar extends Component {
     onLogoutClick: PropTypes.func
   };
   render() {
-    let brandLinkLoc = (this.props.account && this.props.account.username) ? '/account' : '/';
+    let brandLinkLoc = (this.props.account && this.props.account.username) ? '/projects' : '/';
     let brandLink = <Link to={ brandLinkLoc }>Hypercube</Link>
     let iconButton = (<IconButton><MoreVertIcon /></IconButton>);
+    let rightMenu = (<IconMenu
+        iconButtonElement={ iconButton }
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
+        <MenuItem primaryText="Refresh" />
+        <MenuItem primaryText="Help" />
+        <MenuItem primaryText="Sign out" />
+      </IconMenu>
+    );
     return (
       <AppBar
-        title="Hypercube"
-        iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-        iconElementRight={
-          <IconMenu
-            iconButtonElement={ iconButton }
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-          >
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
-          </IconMenu>
-        }
+        title={<Link to={ brandLinkLoc }>Hypercube</Link>}
+        showMenuIconButton={ false }
+        iconElementRight={rightMenu}
       />
-
     )
   }
 }

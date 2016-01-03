@@ -2,9 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import LoginForm from '../../components/LoginForm/LoginForm';
 import { Actions } from 'redux-grout';
 import './Login.scss';
+import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
+
 
  class Login extends Component {
    constructor(props) {
@@ -29,8 +31,21 @@ import './Login.scss';
   render() {
     return (
       <div className="Login">
-        <h2>Login</h2>
-        <LoginForm onLoginClick={ this.props.login }/>
+        <form className="Login-Form" onSubmit={this.handleLogin}>
+          <TextField hintText="some@email.com" floatingLabelText="Username/Email" />
+          <TextField hintText="password" floatingLabelText="Password" type="password" />
+          <div className="Submit-Login-Form">
+            <RaisedButton label="Login" primary={true} />
+          </div>
+        </form>
+        <div className="Login-GoTo-Signup">
+          <span className="Login-GoTo-Signup-Label">
+            Need an account?
+          </span>
+          <Link className="Login-GoTo-Signup-Link" to="/signup">
+            Sign Up
+          </Link>
+        </div>
       </div>
     )
   }

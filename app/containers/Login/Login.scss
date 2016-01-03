@@ -1,7 +1,40 @@
 .Login {
-  width: 100%;
   display: flex;
   flex-direction:column;
   align-items: center;
   justify-content: center;
+  padding-top: 2rem;
+  &-Form {
+    flex-grow:1;
+    flex-basis: 35%;
+    min-width: 250px;
+    font-size: 1.4rem;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+  }
+  &-GoTo-Signup {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+  }
+  &-GoTo-Signup-Label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #979797;
+  }
+  &-GoTo-Signup-Link {
+    font-size: 1rem;
+    margin-top: .4rem;
+    &:hover {
+      color: #00bcd4;
+    }
+  }
+}
+
+.Submit-Login-Form {
+  padding-top: 1.75rem;
+  padding-bottom: 3rem;
 }

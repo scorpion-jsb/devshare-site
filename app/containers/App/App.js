@@ -11,9 +11,14 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
   handleClick(loc) {
     this.props.history.pushState(null, `/${loc}`);
+  }
+  handleLogout() {
+    this.props.logout();
+    this.props.history.pushState(null, `/`);
   }
   render() {
     return (
@@ -21,7 +26,7 @@ class Main extends Component {
         <Navbar
           account={ this.props.account }
           onMenuClick={ this.handleClick }
-          onLogoutClick={ this.props.logout }
+          onLogoutClick={ this.handleLogout }
         />
         { this.props.children }
       </div>

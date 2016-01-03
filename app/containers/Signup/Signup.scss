@@ -13,6 +13,7 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 2rem;
   }
   &-GoTo-Login {
     display: flex;
@@ -35,6 +36,10 @@
 }
 
 .Submit-Signup-Form {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
   padding-top: 1.75rem;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
 }

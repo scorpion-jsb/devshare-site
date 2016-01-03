@@ -13,6 +13,9 @@ import RaisedButton from 'material-ui/lib/raised-button';
      super(props);
      this.handleLogin = this.handleLogin.bind(this);
      this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
+     this.handleInputChange = this.handleInputChange.bind(this);
+     this.handlePrivateChange = this.handlePrivateChange.bind(this);
+     this.state = {errors:{username:null, password:null}};
    }
    //TODO: Replace this with redux-rx
    goAfterLoggedIn(newState) {
@@ -22,20 +25,71 @@ import RaisedButton from 'material-ui/lib/raised-button';
        } else {
          this.goAfterLoggedIn(newState);
        }
-     }, 700);
+     }, 500);
    }
-   handleLogin(loginData) {
-     this.props.login(loginData);
-     this.goAfterLoggedIn('/projects');
+   /**
+   * @function handleInputChange
+   * @description Update the state with the values from the form inputs.
+   * @fires context#setState
+   */
+  handleInputChange(name, e) {
+    e.preventDefault();
+    this.setState({
+      [name]: e.target.value
+    });
+  }
+  /**
+   * @function handlePrivateChange
+   * @description Store data in object instead of state
+   */
+  handlePrivateChange(name, e) {
+    e.preventDefault();
+    this[name] = e.target.value;
+  }
+  handleLogin(e) {
+    if(e && typeof e.preventDefault === 'function'){
+      e.preventDefault();
+    }
+    let error;
+    if(!this.state.username || this.state.username == ''){
+      error.username = 'Username required';
+      return;
+    }
+    if(!this.password || this.password == ''){
+      error.password = 'Password required';
+      return;
+    }
+    if(error){
+      this.setState({
+        error
+      });
+      return;
+    }
+    let loginData = {username:this.state.username, password: this.password};
+    this.props.login(loginData);
+    this.goAfterLoggedIn('/projects');
    }
   render() {
     return (
       <div className="Login">
-        <form className="Login-Form" onSubmit={this.handleLogin}>
-          <TextField hintText="some@email.com" floatingLabelText="Username/Email" />
-          <TextField hintText="password" floatingLabelText="Password" type="password" />
+        <form className="Login-Form" onSubmit={ this.handleLogin }>
+          <TextField
+            hintText="some@email.com"
+            floatingLabelText="Username/Email"
+            onChange={this.handleInputChange.bind(this, 'username')}
+            errorText={ this.state.errors.username }
+            required
+          />
+          <TextField
+            hintText="password"
+            floatingLabelText="Password"
+            type="password"
+            onChange={this.handlePrivateChange.bind(this, 'password')}
+            errorText={ this.state.errors.password }
+            required
+          />
           <div className="Submit-Login-Form">
-            <RaisedButton label="Login" primary={true} />
+            <RaisedButton label="Login" primary={true} type="submit"/>
           </div>
         </form>
         <div className="Login-GoTo-Signup">

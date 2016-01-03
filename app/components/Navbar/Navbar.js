@@ -22,7 +22,6 @@ export default class Navbar extends Component {
     onLogoutClick: PropTypes.func
   };
   selectItem(e, item) {
-    console.log('item selected', item);
     if(item === 'logout' && this.props.onLogoutClick){
       return this.props.onLogoutClick();
     }

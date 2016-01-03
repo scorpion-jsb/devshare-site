@@ -13,6 +13,38 @@ class Signup extends Component {
     super(props);
     this.handleSignup = this.handleSignup.bind(this);
     this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
+    this.state = {errors:{username: null, email: null, name:null, password:null}};
+  }
+  /**
+   * @function handleSignup
+   * @description Fire onLoginClick function provided to component when login is clicked
+   */
+  handleSignup(event) {
+    event.preventDefault();
+    let newAccountData = this.getState();
+    newAccountData.password = this.password ? this.password : '';
+    this.props.signup(newAccountData);
+    this.goAfterLoggedIn('/projects');
+  }
+  /**
+   * @function handleInputChange
+   * @description Update the state with the values from the form inputs.
+   * @fires context#setState
+   */
+  handleInputChange(name, e) {
+    e.preventDefault();
+    this.setState({
+      [name]: e.target.value
+    });
+  }
+  /**
+   * @function handlePrivateChange
+   * @description Store private values.
+   * @fires context#setState
+   */
+  handlePrivateChange(name, e) {
+    e.preventDefault();
+    this[name] = e.target.value;
   }
   //TODO: Replace this with redux-rx
   goAfterLoggedIn(newState) {
@@ -22,37 +54,43 @@ class Signup extends Component {
       } else {
         this.goAfterLoggedIn(newState);
       }
-    }, 700);
-  }
-  handleSignup(signupData) {
-    this.props.signup(signupData);
-    this.goAfterLoggedIn('/projects');
+    }, 500);
   }
   render() {
     return (
       <div className="Signup">
-
-        <form className="Signup-Form">
-            <TextField
+        <form className="Signup-Form" onSubmit={ this.handleSignup }>
+          <TextField
             hintText="username"
-            floatingLabelText="Username" />
-            <TextField
-              hintText="email"
-              floatingLabelText="Email" />
-            <TextField
-              hintText="name"
-              floatingLabelText="Name" />
-            <TextField
-              hintText="password"
-              floatingLabelText="Password" />
-            <TextField
-              hintText="confirm password"
-              floatingLabelText="Confirm Password" />
-            <div className="Submit-Signup-Form">
-              <RaisedButton label="Sign Up" primary={true} />
-            </div>
+            floatingLabelText="Username"
+            onChange={this.handleInputChange.bind(this, 'username')}
+          />
+          <TextField
+            hintText="email"
+            floatingLabelText="Email"
+            onChange={this.handleInputChange.bind(this, 'email')}
+          />
+          <TextField
+            hintText="name"
+            floatingLabelText="Name"
+            onChange={this.handleInputChange.bind(this, 'name')}
+          />
+          <TextField
+            hintText="password"
+            floatingLabelText="Password"
+            onChange={this.handlePrivateChange.bind(this, 'password')}
+            required
+          />
+          <TextField
+            hintText="password"
+            floatingLabelText="Confirm Password"
+            onChange={this.handlePrivateChange.bind(this, 'confirm')}
+          />
+          <div className="Submit-Signup-Form">
+            <RaisedButton label="Sign Up" primary={true} type="submit"/>
+          </div>
+          <RaisedButton label="Cancel" type="reset"/>
         </form>
-
         <div className="Signup-GoTo-Login">
           <span className="Signup-GoTo-Login-Label">
             Already have an account?

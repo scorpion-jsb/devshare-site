@@ -1,0 +1,11 @@
+.TreeFolder {
+  cursor: pointer;
+  &-Children {
+    list-style-type:none;
+    padding-left:10px;
+  }
+  &-Icon {
+    margin-right:10px;
+    display: inline-block;
+  }
+}

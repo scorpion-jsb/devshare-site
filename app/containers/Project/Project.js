@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'redux-grout';
+import Workspace from '../Workspace/Workspace';
 import './Project.scss';
 
 class Project extends Component {
@@ -11,8 +12,11 @@ class Project extends Component {
   render(){
     return (
       <div className="Project">
-        <span> Name: {this.props.project.name || 'No Name'}</span>
-        <span> Owner: {this.props.project.owner.username || 'No Name'}</span>
+        <Workspace
+          projectName={ this.props.projectName }
+          showButtons={ true }
+          hideName={ false }
+        />
       </div>
     );
   }

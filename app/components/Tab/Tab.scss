@@ -1,0 +1,43 @@
+/*TODO: extract height into local variable and colors into global variable*/
+@import '../../variables';
+
+.Tab {
+  display: inline-block;
+  position: relative;
+  flex-grow: 1;
+  line-height: 33px;
+  border: none;
+  height: 100%;
+  color: $darkGray;
+  background-color: $lightGray;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    .Tab-Close {
+      display: block;
+    }
+  }
+  &.active {
+    background-color: $darkGray;
+    color: $lightGray;
+    z-index: 1;
+  }
+}
+
+.Tab-Title {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.Tab-Close {
+  position: absolute;
+  display: none;
+  top: 0;
+  right: 10px;
+  z-index: 3;
+  text-align: right;
+  cursor: pointer;
+  font-size: 1.1rem;
+}

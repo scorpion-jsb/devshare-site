@@ -32,8 +32,13 @@ export default class Navbar extends Component {
   }
   render() {
     let brandLinkLoc = (this.props.account && this.props.account.username) ? '/projects' : '/';
-    let brandLink = <Link to={ brandLinkLoc }>Hypercube</Link>
     let iconButton = (<IconButton><MoreVertIcon /></IconButton>);
+    let mainMenu = (
+      <div className="Navbar-Main-Menu">
+        <FlatButton label="Signup" onClick={ this.selectItem.bind(this, null, 'signup')} />
+        <FlatButton label="Login" onClick={ this.selectItem.bind(this, null, 'login')} />
+      </div>
+    );
     let rightMenu = this.props.account.username ? (
       <IconMenu
         iconButtonElement={ iconButton }
@@ -45,7 +50,7 @@ export default class Navbar extends Component {
         <MenuItem primaryText="Help" value="help"/>
         <MenuItem primaryText="Sign out" value="logout"/>
       </IconMenu>
-    ): <FlatButton label="Login" onClick={ this.selectItem.bind(this, null, 'login')}/>;
+    ) : mainMenu;
     return (
       <AppBar
         title={<Link to={ brandLinkLoc }>Hypercube</Link>}

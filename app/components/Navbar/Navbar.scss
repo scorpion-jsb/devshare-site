@@ -1,7 +1,11 @@
 .Navbar {
-  &-Button {
-    color: white;
-    margin: 0;
-    padding: 0;
+  &-Main-Menu {
+    margin-top: 6px;
+    button {
+      span {
+        text-decoration: none;
+        color: white;
+      }
+    }
   }
 }

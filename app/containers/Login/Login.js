@@ -7,9 +7,25 @@ import { Actions } from 'redux-grout';
 import './Login.scss';
 
  class Login extends Component {
-  constructor(props) {
-    super(props);
-  }
+   constructor(props) {
+     super(props);
+     this.handleLogin = this.handleLogin.bind(this);
+     this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
+   }
+   //TODO: Replace this with redux-rx
+   goAfterLoggedIn(newState) {
+     setTimeout(() => {
+       if(this.props.account && this.props.account.username){
+         this.props.history.pushState(null, newState);
+       } else {
+         this.goAfterLoggedIn(newState);
+       }
+     }, 700);
+   }
+   handleLogin(loginData) {
+     this.props.login(loginData);
+     this.goAfterLoggedIn('/projects');
+   }
   render() {
     return (
       <div className="Login">

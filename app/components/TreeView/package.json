@@ -1,0 +1,6 @@
+{
+  "name": "TreeView",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TreeView.js"
+}

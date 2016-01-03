@@ -1,0 +1,28 @@
+@import '../../variables';
+
+.TreeFile {
+  background-color: transparent;
+  cursor: pointer;
+  line-height: 40px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  &-Name {
+    display: flex;
+    align-self: flex-start;
+    flex-grow: 1;
+  }
+  &-Users {
+    display: flex;
+    align-self: flex-end;
+  }
+  &-User {
+    width: 1.2rem;
+    text-align: center;
+  }
+  &.active{
+    background-color: $editorBackground;
+    color:blue;
+  }
+}

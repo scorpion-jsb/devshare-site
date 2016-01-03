@@ -20,7 +20,6 @@ class Projects extends Component {
     }) : <span>No Projects</span>;
     return (
       <div className="Projects">
-        <h2>Projects page</h2>
         <div className="Projects-Tiles">
           { projects }
         </div>

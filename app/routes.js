@@ -6,6 +6,7 @@ import {
     About,
     Account,
     Projects,
+    Project,
     Login,
     Signup,
     NotFound
@@ -18,6 +19,7 @@ export default (
     <Route path="about" component={ About } />
     <Route path="account" component={ Account } />
     <Route path="projects" component={ Projects } />
+    <Route path="projects/:projectName" component={ Project } />
     <Route path="*" component={ NotFound } />
   </Route>
 );

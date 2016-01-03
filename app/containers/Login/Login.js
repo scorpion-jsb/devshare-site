@@ -1,24 +1,20 @@
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import { Actions } from 'redux-matter';
+import { Actions } from 'redux-grout';
 import './Login.scss';
 
  class Login extends Component {
   constructor(props) {
     super(props);
-    this.handleLoginClick.bind(this);
-  }
-  handleLoginClick(loginData) {
-    this.props.login(loginData);
   }
   render() {
     return (
       <div className="Login">
         <h2>Login</h2>
-        <LoginForm onLoginClick={ this.handleLoginClick }/>
+        <LoginForm onLoginClick={ this.props.login }/>
       </div>
     )
   }
@@ -32,7 +28,7 @@ function mapStateToProps(state) {
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch);
+  return bindActionCreators(Actions.account, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

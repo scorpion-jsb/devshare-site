@@ -1,6 +1,8 @@
+import { toArray } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import { Link } from 'react-router';
 import Paper from 'material-ui/lib/paper';
 import { Actions } from 'redux-grout';
 import './Projects.scss';
@@ -13,22 +15,32 @@ class Projects extends Component {
     this.props.getProjects();
   }
   render(){
-    console.log('this.props.projects', this.props.projects);
-    let projects = this.props.projects ? this.props.projects.map((project) => {
-      return (<Paper>{ project.name }</Paper>);
+    let projects = this.props.projects ? this.props.projects.map((project, i) => {
+      return renderProjectTile(project, i);
     }) : <span>No Projects</span>;
     return (
       <div className="Projects">
         <h2>Projects page</h2>
-        { projects }
+        <div className="Projects-Tiles">
+          { projects }
+        </div>
       </div>
     );
   }
 }
+function renderProjectTile(project, i) {
+  return (
+    <Paper key={`Project-${i}`} className="Projects-Tile">
+      <Link to={`/projects/${project.name}`}>{ project.name }</Link>
+    </Paper>
+  );
+}
 //Place state of redux store into props of component
 function mapStateToProps(state) {
+  //TODO: LOAD PROJECTS FROM
   return {
-    projects: state.entities.projects,
+    account: state.account,
+    projects: toArray(state.entities.projects) || [],
     router: state.router
   };
 }

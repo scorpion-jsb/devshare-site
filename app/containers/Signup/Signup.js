@@ -11,16 +11,12 @@ import './Signup.scss';
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.handleSignupClick = this.handleSignupClick.bind(this);
-  }
-  handleSignupClick(signupData) {
-    this.props.signup(signupData);
   }
   render() {
     return (
       <div className="Signup">
         <h2>Signup</h2>
-        <SignupForm onLoginClick={ signupData => this.handleSignupClick(signupData) }/>
+        <SignupForm onLoginClick={ this.props.signup }/>
       </div>
     )
   }
@@ -33,6 +29,6 @@ function mapStateToProps(state) {
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch);
+  return bindActionCreators(Actions.account, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

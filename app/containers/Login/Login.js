@@ -7,7 +7,6 @@ import './Login.scss';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
-
  class Login extends Component {
    constructor(props) {
      super(props);
@@ -89,7 +88,12 @@ import RaisedButton from 'material-ui/lib/raised-button';
             required
           />
           <div className="Submit-Login-Form">
-            <RaisedButton label="Login" primary={true} type="submit"/>
+            <RaisedButton
+              label="Login"
+              primary={true}
+              type="submit"
+              disabled={ this.props.account && this.props.account.isFetching}
+            />
           </div>
         </form>
         <div className="Login-GoTo-Signup">

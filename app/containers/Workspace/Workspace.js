@@ -6,16 +6,14 @@ import Modal from 'react-modal';
 import { Actions } from 'redux-grout';
 import Rebase from 're-base';
 import RaisedButton from 'material-ui/lib/raised-button';
-import * as WorkspaceActions from '../../actions/workspaces';
 import * as TabActions from '../../actions/tabs';
-import * as FileActions from '../../actions/files';
 import SideBar from '../../components/SideBar/SideBar';
 import Pane from '../../components/Pane/Pane';
 let base = Rebase.createClass('https://kyper-tech.firebaseio.com/tessellate/files');
 
 import './Workspace.scss';
 
-let CombinedActions = merge(WorkspaceActions, TabActions, FileActions, Actions.account);
+let CombinedActions = merge(TabActions, Actions.files, Actions.account);
 
 class Workspace extends Component {
   constructor() {
@@ -23,6 +21,7 @@ class Workspace extends Component {
     this.state = {inputVisible: false, settingsOpen: false, files: []};
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.openFile = this.openFile.bind(this);
+    this.addFile = this.addFile.bind(this);
     this.selectTab = this.selectTab.bind(this);
     this.closeTab = this.closeTab.bind(this);
     this.loadCodeSharing = this.loadCodeSharing.bind(this);
@@ -45,8 +44,12 @@ class Workspace extends Component {
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
+  addFile(addData) {
+    console.log('add file called with:', addData);
+    this.props.addFile(addData);
+  }
   openFile(fileData){
-    this.props.openFileInTab({projectName: this.projectName, file: fileData});
+    this.props.openFileInTab({projectName: this.props.projectName, file: fileData});
   }
   toggleSettingsModal(name) {
     this.setState({
@@ -65,14 +68,14 @@ class Workspace extends Component {
     // }
   }
   selectTab(ind){
-    this.props.navigateToTab({projectName: this.projectName, index: ind});
+    this.props.navigateToTab({projectName: this.props.projectName, index: ind});
   }
   closeTab(ind){
-    this.props.closeTab({projectName: this.projectName, index: ind});
+    this.props.closeTab({projectName: this.props.projectName, index: ind});
   }
   onFilesDrop(files) {
     console.log('files dropped:', files);
-    this.props.addFiles({projectName: this.projectName, files});
+    this.props.addFiles({projectName: this.props.projectName, files});
   }
   renderSettingsModal() {
     // console.log('render settings', this.state.settingsModal);
@@ -96,7 +99,7 @@ class Workspace extends Component {
           projectName={ this.props.projectName }
           onFileClick={ this.openFile }
           onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
-          addFile={ this.props.addFile }
+          addFile={ this.addFile }
           onFilesDrop={ this.onFilesDrop }
         />
         <Pane

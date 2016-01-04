@@ -87,7 +87,12 @@ class Signup extends Component {
             onChange={this.handlePrivateChange.bind(this, 'confirm')}
           />
           <div className="Submit-Signup-Form">
-            <RaisedButton label="Sign Up" primary={true} type="submit"/>
+            <RaisedButton
+              label="Sign Up"
+              primary={true}
+              type="submit"
+              disabled={ this.props.account && this.props.account.isFetching}
+            />
           </div>
           <RaisedButton label="Cancel" type="reset"/>
         </form>
@@ -97,7 +102,6 @@ class Signup extends Component {
           </span>
           <Link className="Signup-GoTo-Login-Link" to="/login">Login</Link>
         </div>
-
       </div>
     )
   }

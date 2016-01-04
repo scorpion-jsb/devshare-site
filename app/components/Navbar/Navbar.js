@@ -46,7 +46,7 @@ export default class Navbar extends Component {
         onChange={ this.selectItem }
       >
         <MenuItem primaryText="Account" value="account" />
-        <MenuItem primaryText="Help" value="help"/>
+        <MenuItem primaryText="About" value="about"/>
         <MenuItem primaryText="Sign out" value="logout"/>
       </IconMenu>
     ) : mainMenu;

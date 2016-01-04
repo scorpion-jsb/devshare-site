@@ -8,27 +8,16 @@ export default class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <span className="home-one">
+        <span className="Home-Hero">
           <h1>Hypercube</h1>
-          <h2>a web-based collaborataive code editor & project building environment</h2>
+          <h3>An open-source web-based collaborataive code editor & project building environment</h3>
         </span>
-        <span className="home-two">
-          <h3>Hypercube is built using the following frameworks & libraries:</h3>
-          <ul>
-            <li>React - View Rendering</li>
-            <li>Redux - State management</li>
-            <li>Matter - Authentication through Tessellate</li>
-            <li>Grout - Application building/management communication with Tessellate</li>
-          </ul>
-        </span>
-        <span className="home-three"></span>
-
-        <a href="#">
-          <RaisedButton label="Learn More" />
-        </a>
-        <a href="https://github.com/prescottprue/hypercube">
-          <RaisedButton label="View code on GitHub" />
-        </a>
+        <RaisedButton label="Try Now"
+          containerElement={ <Link to='/try' /> }
+        />
+        <RaisedButton label="View code on GitHub"
+          containerElement={ <a href="https://github.com/prescottprue/hypercube"></a> }
+        />
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'redux-grout';
@@ -23,12 +23,13 @@ class Project extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  let project;
-  if(state.entities && state.entities.projects && state.router.params.projectName){
-    state.entities.projects[state.router.params.projectName];
-  }
+  // let project;
+  // if(state.entities && state.entities.projects && state.router.params.projectName){
+  //   state.entities.projects[state.router.params.projectName];
+  // }
   return {
-    project,
+    projectName: state.router.params.appName,
+    account: state.account,
     router: state.router
   };
 }

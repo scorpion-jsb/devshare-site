@@ -14,23 +14,26 @@
     align-items: center;
     justify-content: center;
   }
-  &-GoTo-Signup {
+  &-Signup {
     display: flex;
     flex-direction:column;
     align-items: center;
     justify-content: center;
   }
-  &-GoTo-Signup-Label {
+  &-Signup-Label {
     font-size: 1rem;
     font-weight: bold;
     color: #979797;
   }
-  &-GoTo-Signup-Link {
+  &-Signup-Link {
     font-size: 1rem;
     margin-top: .4rem;
     &:hover {
       color: #00bcd4;
     }
+  }
+  &-Progress {
+    margin-top: 5rem;
   }
 }
 

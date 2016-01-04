@@ -1,3 +1,4 @@
+import { capitalize, find } from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -5,6 +6,7 @@ import { Link } from 'react-router';
 import { Actions } from 'redux-grout';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
+import CircularProgress from 'material-ui/lib/circular-progress';
 
 import './Signup.scss';
 
@@ -13,18 +15,53 @@ class Signup extends Component {
     super(props);
     this.handleSignup = this.handleSignup.bind(this);
     this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
-    this.state = {errors:{username: null, email: null, name:null, password:null}};
+    this.requireInputs = this.requireInputs.bind(this);
+    this.reset = this.reset.bind(this);
+    this.state = {errors:{}};
+  }
+  reset() {
+    return this.setState({
+      errors:{},
+      username: null,
+      email: null,
+      name: null
+    });
   }
   /**
    * @function handleSignup
    * @description Fire onLoginClick function provided to component when login is clicked
    */
-  handleSignup(event) {
-    event.preventDefault();
-    let newAccountData = this.getState();
-    newAccountData.password = this.password ? this.password : '';
-    this.props.signup(newAccountData);
-    this.goAfterLoggedIn('/projects');
+  handleSignup(e) {
+    e.preventDefault();
+    let newAccountData = this.state;
+    this.requireInputs('confirm', this.confirm);
+    if(this.requireInputs()){
+      newAccountData.password = this.password;
+      newAccountData.confirm = this.confirm;
+      this.props.signup(newAccountData);
+      this.goAfterLoggedIn('/projects');
+    }
+  }
+  requireInputs() {
+    const requiredInputs = [
+      {name: 'username', val: this.state.username},
+      {name: 'email', val: this.state.email},
+      {name: 'name', val: this.state.name},
+      {name: 'password', val: this.password},
+      {name: 'confirm', val: this.confirm},
+    ];
+    const firstError = find(requiredInputs, (input) => {
+      if(!input.val || input.val == ''){
+        return true;
+      }
+    });
+    if(firstError){
+      let errors = {};
+      errors[firstError.name] = `${capitalize(firstError.name)} is required`;
+      this.setState({errors});
+      return false;
+    }
+    return true;
   }
   /**
    * @function handleInputChange
@@ -57,58 +94,73 @@ class Signup extends Component {
     }, 500);
   }
   render() {
-    return (
-      <div className="Signup">
-        <form className="Signup-Form" onSubmit={ this.handleSignup }>
-          <TextField
-            hintText="username"
-            floatingLabelText="Username"
-            onChange={this.handleInputChange.bind(this, 'username')}
-          />
-          <TextField
-            hintText="email"
-            floatingLabelText="Email"
-            onChange={this.handleInputChange.bind(this, 'email')}
-          />
-          <TextField
-            hintText="name"
-            floatingLabelText="Name"
-            onChange={this.handleInputChange.bind(this, 'name')}
-          />
-          <TextField
-            hintText="password"
-            floatingLabelText="Password"
-            onChange={this.handlePrivateChange.bind(this, 'password')}
-            required
-          />
-          <TextField
-            hintText="password"
-            floatingLabelText="Confirm Password"
-            onChange={this.handlePrivateChange.bind(this, 'confirm')}
-          />
-          <div className="Submit-Signup-Form">
-            <RaisedButton
-              label="Sign Up"
-              primary={true}
-              type="submit"
-              disabled={ this.props.account && this.props.account.isFetching}
+    if(!this.props.account.isFetching){
+      return (
+        <div className="Signup">
+          <form className="Signup-Form" onSubmit={ this.handleSignup }>
+            <TextField
+              hintText="username"
+              floatingLabelText="Username"
+              onChange={this.handleInputChange.bind(this, 'username')}
+              errorText={ this.state.errors.username }
             />
+            <TextField
+              hintText="email"
+              floatingLabelText="Email"
+              onChange={this.handleInputChange.bind(this, 'email')}
+              errorText={ this.state.errors.email }
+            />
+            <TextField
+              hintText="name"
+              floatingLabelText="Name"
+              onChange={this.handleInputChange.bind(this, 'name')}
+              errorText={ this.state.errors.name }
+            />
+            <TextField
+              hintText="password"
+              floatingLabelText="Password"
+              onChange={this.handlePrivateChange.bind(this, 'password')}
+              errorText={ this.state.errors.password }
+            />
+            <TextField
+              hintText="confirm"
+              floatingLabelText="Confirm Password"
+              onChange={this.handlePrivateChange.bind(this, 'confirm')}
+              errorText={ this.state.errors.confirm }
+            />
+            <div className="Submit-Signup-Form">
+              <RaisedButton
+                label="Sign Up"
+                primary={true}
+                type="submit"
+                disabled={ this.props.account && this.props.account.isFetching}
+              />
+            </div>
+            <RaisedButton label="Cancel" type="reset" onClick={ this.reset }/>
+          </form>
+          <div className="Signup-Login">
+            <span className="Signup-Login-Label">
+              Already have an account?
+            </span>
+            <Link className="Signup-Login-Link" to="/login">Login</Link>
           </div>
-          <RaisedButton label="Cancel" type="reset"/>
-        </form>
-        <div className="Signup-GoTo-Login">
-          <span className="Signup-GoTo-Login-Label">
-            Already have an account?
-          </span>
-          <Link className="Signup-GoTo-Login-Link" to="/login">Login</Link>
         </div>
-      </div>
-    )
+      );
+    } else {
+      return (
+        <div className="Signup">
+          <div className="Signup-Progress">
+            <CircularProgress  mode="indeterminate" />
+          </div>
+        </div>
+      );
+    }
   }
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   return {
+    account: state.account,
     router: state.router
   };
 }

@@ -9,7 +9,8 @@ import {
     Project,
     Login,
     Signup,
-    NotFound
+    NotFound,
+    Try
   } from './containers';
 export default (
   <Route path="/" component={ App }>
@@ -20,6 +21,7 @@ export default (
     <Route path="account" component={ Account } />
     <Route path="projects" component={ Projects } />
     <Route path="projects/:projectName" component={ Project } />
+    <Route path="try/:projectName" component={ Try } />
     <Route path="*" component={ NotFound } />
   </Route>
 );

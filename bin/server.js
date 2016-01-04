@@ -45,7 +45,7 @@ function handleRender(req, res) {
       }));
     });
   } else {
-    console.log('Handle render tried to run and is not a function');
+    console.log('Handle render tried to run and renderApp is not a function');
   }
 }
 

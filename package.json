@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "main": "bin/server.js",
   "scripts": {
-    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run build-copy",
+    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
     "build-bundle": "webpack --stats --progress --config webpack-production.config",
     "build-server": "webpack --stats --progress --config webpack-server-production.config",
-    "build-copy": "cp -a assets build",
+    "copy-assets": "cp -a assets build",
+    "copy-stats": "node ./lib/copy-stats",
+    "copy" : "npm run copy-assets && npm run copy-stats",
     "clean": "rimraf build",
     "start": "node bin/dev-server",
     "production": "node bin/server"
@@ -52,6 +54,7 @@
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.1.18",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "babel-loader": "^6.2.0",
     "css-loader": "^0.16.0",
     "eslint": "^1.4.1",

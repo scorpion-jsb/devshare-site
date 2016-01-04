@@ -34,7 +34,6 @@ class Signup extends Component {
   handleSignup(e) {
     e.preventDefault();
     let newAccountData = this.state;
-    this.requireInputs('confirm', this.confirm);
     if(this.requireInputs()){
       newAccountData.password = this.password;
       newAccountData.confirm = this.confirm;
@@ -42,6 +41,11 @@ class Signup extends Component {
       this.goAfterLoggedIn('/projects');
     }
   }
+  /**
+   * @function requireInputs
+   * @description Confirm that all required inputs have values
+   * @return {Boolean}
+   */
   requireInputs() {
     const requiredInputs = [
       {name: 'username', val: this.state.username},

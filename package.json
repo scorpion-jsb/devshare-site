@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "main": "bin/server.js",
   "scripts": {
-    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run build-copy",
+    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
     "build-bundle": "webpack --stats --progress --config webpack-production.config",
     "build-server": "webpack --stats --progress --config webpack-server-production.config",
-    "build-copy": "cp -a assets build",
+    "copy-assets": "cp -a assets build",
+    "copy-stats": "node ./lib/copy-stats",
+    "copy" : "npm run copy-assets && npm run copy-stats",
     "clean": "rimraf build",
     "start": "node bin/dev-server",
     "production": "node bin/server"

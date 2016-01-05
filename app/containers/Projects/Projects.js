@@ -36,10 +36,10 @@ function renderProjectTile(project, i) {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  //TODO: LOAD PROJECTS FROM
+    let projects = toArray(state.entities.projects) || []
   return {
     account: state.account,
-    projects: toArray(state.entities.projects) || [],
+    projects,
     router: state.router
   };
 }

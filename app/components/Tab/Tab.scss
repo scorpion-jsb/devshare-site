@@ -5,39 +5,49 @@
   display: inline-block;
   position: relative;
   flex-grow: 1;
-  line-height: 33px;
+  line-height: 35px;
   border: none;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   height: 100%;
-  color: $blackGray;
-  background-color: $lightGray;
+  font-weight: 300;
+  color: $lightGray;
+  background-color: $Tab;
   cursor: pointer;
   overflow: hidden;
   &:hover {
-    .Tab-Close {
-      display: block;
-    }
+    color: white;
+    // .Tab-Close {
+    //   display: block;
+    // }
   }
   &.active {
-    background-color: $darkGray;
-    color: $lightGray;
+    z-index: 1;
+    .Tab-Indicator {
+      background-color: $activeTab;
+    }
+  }
+  &-Indicator {
+    background-color: $blackGray;
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    bottom: 0;
+  }
+  &-Title {
+    position: relative;
+    text-align: center;
+    width: 100%;
     z-index: 1;
   }
-}
-
-.Tab-Title {
-  position: relative;
-  text-align: center;
-  width: 100%;
-  z-index: 1;
-}
-
-.Tab-Close {
-  position: absolute;
-  display: none;
-  top: 0;
-  right: 10px;
-  z-index: 3;
-  text-align: right;
-  cursor: pointer;
-  font-size: 1.1rem;
+  &-Close {
+    position: absolute;
+    // display: none;
+    bottom: 0;
+    right: 10px;
+    z-index: 3;
+    text-align: right;
+    vertical-align: center;
+    cursor: pointer;
+  }
 }

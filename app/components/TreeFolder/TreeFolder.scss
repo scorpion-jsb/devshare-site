@@ -1,11 +1,18 @@
 .TreeFolder {
   cursor: pointer;
+  vertical-align: center;
+  font-weight: 300;
+  &-Info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
   &-Children {
     list-style-type:none;
     padding-left:10px;
   }
-  &-Icon {
-    margin-right:10px;
-    display: inline-block;
+  &-Name {
+    height:100%;
   }
 }

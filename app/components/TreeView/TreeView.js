@@ -126,7 +126,7 @@ class TreeView extends Component {
           <TreeFolder
             key={ `child-Folder-${i}-${entry.meta.name}` }
             index={ i }
-            name={ entry.meta.name }
+            data={ entry.meta }
             isCollapsed={ entry.isCollapsed }
             children={ entry.children }
             onFileClick={ this.props.onFileClick }

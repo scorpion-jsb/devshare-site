@@ -9,6 +9,9 @@
 	margin: .5rem 0;
 	display: flex;
 	flex-direction: column;
+	li {
+		padding-left: 10px;
+	}
 	&-Structure {
 		list-style-type: none;
 		font-size: 1.4rem;
@@ -45,10 +48,6 @@
 			font-weight: 500;
 		}
 	}
-
-	li {
-		padding-left: 20px;
-	}
 	&-Upload {
 		display: flex;
 		flex-direction: row;
@@ -70,7 +69,6 @@
 		list-style: none;
 		background-color: $lightGray;
 		cursor: pointer;
-
 		li {
 			 padding: 10px;
 			 font-size: .8rem;

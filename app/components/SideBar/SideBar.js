@@ -11,7 +11,6 @@ export default class SideBar extends Component {
   }
   static propTypes = {
     files: PropTypes.array,
-    projectName: PropTypes.string,
     onFileClick: PropTypes.func,
     onPublishClick: PropTypes.func,
     onNewFileClick: PropTypes.func,
@@ -39,7 +38,6 @@ export default class SideBar extends Component {
     let projectName = (this.props && this.props.projectName && !this.props.hideName) ? this.props.projectName : '';
     return (
       <div className="SideBar">
-        <h3 className="SideBar-Name">{ projectName }</h3>
         <TreeView
           account={ this.props.account }
           fileStructure={ files }

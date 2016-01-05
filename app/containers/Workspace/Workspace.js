@@ -3,15 +3,16 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Modal from 'react-modal';
-import { Actions } from 'redux-grout';
 import Rebase from 're-base';
+import { Actions } from 'redux-grout';
+import * as TabActions from '../../actions/tabs';
 import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 import TextField from 'material-ui/lib/text-field';
-import * as TabActions from '../../actions/tabs';
 import SideBar from '../../components/SideBar/SideBar';
 import Pane from '../../components/Pane/Pane';
+
 let base = Rebase.createClass('https://kyper-tech.firebaseio.com/tessellate/files');
 
 import './Workspace.scss';
@@ -32,12 +33,22 @@ class Workspace extends Component {
     this.onFilesDrop = this.onFilesDrop.bind(this);
   }
   static propTypes = {
+    projectName: PropTypes.string,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool
   };
   componentDidMount() {
     //Listen to files list on firebase
     this.ref = base.syncState(this.props.projectName, {
+      context: this,
+      state: 'files',
+      asArray: true
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    //Rebind files if props change (new project selected)
+    base.removeBinding(this.ref);
+    this.ref = base.syncState(nextProps.projectName, {
       context: this,
       state: 'files',
       asArray: true
@@ -117,7 +128,6 @@ class Workspace extends Component {
           showButtons={ this.props.showButtons }
           files={ this.state.files }
           hideName={ this.props.hideName }
-          projectName={ this.props.projectName }
           onFileClick={ this.openFile }
           onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
           addFile={ this.addFile }

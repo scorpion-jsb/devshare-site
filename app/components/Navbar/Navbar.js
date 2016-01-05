@@ -53,6 +53,7 @@ export default class Navbar extends Component {
     return (
       <AppBar
         title={<Link to={ brandLinkLoc }>Hypercube</Link>}
+        className="Navbar"
         showMenuIconButton={ false }
         iconElementRight={rightMenu}
       />

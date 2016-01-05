@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge, toArray } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -125,6 +125,9 @@ class Workspace extends Component {
           <TextField hintText="Git Url" />
         </Dialog>
         <SideBar
+          projects={ this.props.projects }
+          projectName={ this.props.projectName }
+          onProjectSelect={ this.props.onProjectSelect }
           showButtons={ this.props.showButtons }
           files={ this.state.files }
           hideName={ this.props.hideName }
@@ -149,6 +152,7 @@ function mapStateToProps(state) {
   let tabs = (state.tabs[projectName] && state.tabs[projectName]) ? state.tabs[projectName] : {};//Tab data
   return {
     projectName: projectName,
+    projects: toArray(state.entities.projects),
     tabs: tabs,
     account: state.account,
     router: state.router

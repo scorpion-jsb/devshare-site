@@ -61,8 +61,18 @@ class Workspace extends Component {
     console.log('add file called with:', addData);
     this.props.addFile(addData);
   }
-  openFile(fileData){
-    this.props.openFileInTab({projectName: this.props.projectName, file: fileData});
+  openFile(file){
+    let tabData = {
+      projectName: this.props.projectName,
+      title: file.name || file.path.split('/')[file.path.split('/').length - 1],
+      type: 'file',
+      file,
+    };
+    this.props.openTab(tabData);
+    if(this.props.tabs.list){
+      //Select last tab
+      this.props.selectTab(this.props.tabs.list.length - 1);
+    }
   }
   toggleSettingsModal(name) {
     this.setState({
@@ -75,6 +85,7 @@ class Workspace extends Component {
     this.toggleSettingsModal.bind(this, 'settingsOpen');
   }
   loadCodeSharing(editor){
+    console.log('load code sharing called:', editor);
     let file = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
     // console.log('calling load code sharing', editor);
     // if(!editor.firepad && !beenCalled[file.name || file.path]){
@@ -153,7 +164,7 @@ function mapStateToProps(state) {
   return {
     projectName: projectName,
     projects: toArray(state.entities.projects),
-    tabs: tabs,
+    tabs,
     account: state.account,
     router: state.router
   };

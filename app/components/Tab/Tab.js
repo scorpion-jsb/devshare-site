@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-
+import IconButton from 'material-ui/lib/icon-button';
+import FontIcon from 'material-ui/lib/font-icon';
 import './Tab.scss';
 
 class Tab extends Component {
@@ -30,13 +31,18 @@ class Tab extends Component {
   }
   render() {
     let className = (this.props.active) ? 'Tab active' : 'Tab';
-    let iconStyle = {fill: "#aaaaaa"};
-    let iconSize = "12";
+    const iconSize = "18";
+    const iconStyle = {color: "#aaaaaa", fontSize: iconSize};
     return (
       <li className={ className }>
         <div className="Tab-Title" onClick={ this.handleTabClick }>{ this.props.title }</div>
         <div className="Tab-Close" onClick={ this.handleCloseClick }>
-          x
+          <FontIcon className="material-icons"
+            style={iconStyle}>
+            close
+          </FontIcon>
+        </div>
+        <div className="Tab-Indicator">
         </div>
       </li>
     );

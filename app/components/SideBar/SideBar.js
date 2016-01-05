@@ -43,13 +43,10 @@ export default class SideBar extends Component {
         </div>
       );
     }
-    return;
   }
   render() {
     let files = (this.props && this.props.files) ? this.props.files : [];
     let buttons = this.buildButtons();
-    console.log('props in sidebar:', this.props.projectName);
-    console.log('props in sidebar:', this.props.projects);
     let projectsMenu;
     if(this.props.projects){
       projectsMenu = this.props.projects.map((project, i) => {

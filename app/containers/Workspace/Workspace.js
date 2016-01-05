@@ -5,7 +5,10 @@ import {connect} from 'react-redux';
 import Modal from 'react-modal';
 import { Actions } from 'redux-grout';
 import Rebase from 're-base';
+import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
+import FlatButton from 'material-ui/lib/flat-button';
+import TextField from 'material-ui/lib/text-field';
 import * as TabActions from '../../actions/tabs';
 import SideBar from '../../components/SideBar/SideBar';
 import Pane from '../../components/Pane/Pane';
@@ -25,7 +28,6 @@ class Workspace extends Component {
     this.selectTab = this.selectTab.bind(this);
     this.closeTab = this.closeTab.bind(this);
     this.loadCodeSharing = this.loadCodeSharing.bind(this);
-    this.renderSettingsModal = this.renderSettingsModal.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
     this.onFilesDrop = this.onFilesDrop.bind(this);
   }
@@ -58,6 +60,8 @@ class Workspace extends Component {
   }
   saveSettings(updatedSettings) {
     this.props.updateProject(updatedSettings);
+    //TODO: Show popup of save success/failure
+    this.toggleSettingsModal.bind(this, 'settingsOpen');
   }
   loadCodeSharing(editor){
     let file = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
@@ -67,31 +71,48 @@ class Workspace extends Component {
     //   this.props.syncEditor({projectName: this.projectName, editor: editor, file: file});
     // }
   }
-  selectTab(ind){
-    this.props.navigateToTab({projectName: this.props.projectName, index: ind});
+  selectTab(index){
+    this.props.navigateToTab({projectName: this.props.projectName, index});
   }
-  closeTab(ind){
-    this.props.closeTab({projectName: this.props.projectName, index: ind});
+  closeTab(index){
+    this.props.closeTab({projectName: this.props.projectName, index});
+    //TODO: Dispose Firepad
   }
   onFilesDrop(files) {
     console.log('files dropped:', files);
     this.props.addFiles({projectName: this.props.projectName, files});
   }
-  renderSettingsModal() {
-    // console.log('render settings', this.state.settingsModal);
-    return (
-      <Modal
-        isOpen={this.state.settingsOpen}
-        onRequestClose={ this.toggleSettingsModal.bind(this, 'settingsOpen') }>
-        <RaisedButton label="Save " primary={true} />
-      </Modal>
-    );
-  }
   render() {
-    let settingsModal = this.renderSettingsModal();
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        secondary={true}
+        onTouchTap={this.toggleSettingsModal.bind(this, 'settingsOpen')}
+      />,
+      <FlatButton
+        label="Save"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.saveSettings}
+      />
+    ];
     return (
       <div className="Workspace">
-        { settingsModal }
+        <Dialog
+          title="Settings"
+          actions={actions}
+          modal={false}
+          open={this.state.settingsOpen}
+          onRequestClose={this.toggleSettingsModal.bind(this, 'settingsOpen')}
+          bodyClassName="Workspace-Settings"
+          titleClassName="Workspace-Settings-Title"
+          contentStyle={{'width': '30%'}}
+          >
+          <TextField hintText="Project Name" />
+          <TextField hintText="Owner" />
+          <TextField hintText="Project Url" />
+          <TextField hintText="Git Url" />
+        </Dialog>
         <SideBar
           showButtons={ this.props.showButtons }
           files={ this.state.files }

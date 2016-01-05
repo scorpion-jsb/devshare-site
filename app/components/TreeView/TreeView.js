@@ -133,17 +133,16 @@ class TreeView extends Component {
           />
         );
       }
-
       let mappedUsers = entry.users ? map(entry.users, (user, key) => {
         user.username = key;
         return user;
       }) : null;
       // //Remove current user from file's users array
-      // if(hideCurrentUser){
-      //   mappedUsers = mappedUsers ? filter(mappedUsers, (user) => {
-      //     return (user.username !== this.props.account.username);
-      //   }) : null;
-      // }
+      if(hideCurrentUser && this.props.account && this.props.account.username){
+        mappedUsers = mappedUsers ? filter(mappedUsers, (user) => {
+          return (user.username !== this.props.account.username);
+        }) : null;
+      }
       return (
         <TreeFile
           key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }

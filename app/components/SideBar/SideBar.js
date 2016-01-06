@@ -71,6 +71,7 @@ export default class SideBar extends Component {
           addFile={ this.props.addFile }
           projectName={ this.props.projectName }
           onFilesDrop={ this.props.onFilesDrop }
+          onFileDelete={ this.props.onFileDelete }
         />
         { buttons }
       </div>

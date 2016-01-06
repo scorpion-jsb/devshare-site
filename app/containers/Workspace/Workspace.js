@@ -88,8 +88,7 @@ class Workspace extends Component {
     console.log('load code sharing called:', editor);
     let file = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
     // console.log('calling load code sharing', editor);
-    // if(!editor.firepad && !beenCalled[file.name || file.path]){
-    //   beenCalled[file.name || file.path] = true;
+    // if(!editor.firepad){
     //   this.props.syncEditor({projectName: this.projectName, editor: editor, file: file});
     // }
   }
@@ -146,6 +145,7 @@ class Workspace extends Component {
           onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
           addFile={ this.addFile }
           onFilesDrop={ this.onFilesDrop }
+          onFileDelete={ this.props.deleteFile }
         />
         <Pane
           tabs={ this.props.tabs }

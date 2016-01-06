@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import Paper from 'material-ui/lib/paper';
+import Avatar from 'material-ui/lib/avatar';
+
+
 import './ProjectTile.scss';
 const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
 export default class ProjectTile extends Component {
@@ -16,8 +19,11 @@ export default class ProjectTile extends Component {
       collaborators = this.props.project.collaborators.map((user, i) => {
         return(
           <div key={`${this.props.project.name}-Collab-${i}`} className="ProjectTile-Collaborator">
-            <img className="ProjectTile-Collaborator-Img" src={ user.image ? user.image.url : stockPhotoUrl } />
-            <span className="ProjectTile-Collaborator-Username">{ user.username }</span>
+            <Avatar
+              className="ProjectTile-Collaborator-Avatar"
+              src={ user.image ? user.image.url : stockPhotoUrl }
+              size={60}
+            />
           </div>
         );
       });

@@ -1,0 +1,19 @@
+.NewProjectDialog {
+  padding: 2rem;
+  &-Inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    input {
+      width: 100%;
+    }
+  }
+  &-Buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -3,8 +3,11 @@ import React, {Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Dialog from 'material-ui/lib/dialog';
 import ProjectTile from '../../components/ProjectTile/ProjectTile';
 import NewProjectTile from '../../components/NewProjectTile/NewProjectTile';
+import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog';
+import TextField from 'material-ui/lib/text-field';
 import { Actions } from 'redux-grout';
 import './Projects.scss';
 
@@ -19,16 +22,14 @@ class Projects extends Component {
     this.props.getProjects();
   }
   handleCollabClick(user) {
-    if(this.props && this.props.onCollabClick) {
-      this.props.onCollabClick(user);
-    }
+    //TODO: Navigate to user's page
   }
   toggleModal(name) {
-    this.setState({
-      name: !this.state[`${name}Modal`] || false
-    });
+    let newState = {};
+    newState[`${name}Modal`] = !this.state[`${name}Modal`] || false
+    this.setState(newState);
   }
-  newClick(projectData) {
+  newSubmit(projectData) {
     this.props.addProject(projectData);
   }
   render(){
@@ -42,9 +43,14 @@ class Projects extends Component {
         />
       );
     }) : <span>Click the plus to start a project</span>;
-    projects.unshift(<NewProjectTile key="Project-New" onClick={ this.newClick}/>);
+    projects.unshift(<NewProjectTile key="Project-New" onClick={ this.toggleModal.bind(this, 'newProject')}/>);
     return (
       <div className="Projects">
+        <NewProjectDialog
+          open={ this.state.newProjectModal }
+          onRequestClose={ this.toggleModal.bind(this, 'newProject') }
+          onCreateClick={ this.newSubmit }
+        />
         <div className="Projects-Tiles">
           { projects }
         </div>

@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .ProjectTile {
   display: flex;
   flex-direction: column;
@@ -18,9 +20,16 @@
   &-Name {
     font-size: 2rem;
     font-weight: 300;
+    text-decoration: none;
+    color: $darkGray;
+    &:visited {
+      text-decoration: none;
+      color: $darkGray;
+    }
   }
   &-Owner {
     font-size: 1.2rem;
+    color: $darkGray;
   }
   &-Collaborators {
     display: flex;
@@ -35,17 +44,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-basis: 15%;
-    margin: .5rem;
+    flex-basis: 20%;
+    margin: .4rem;
     overflow: hidden;
-    text-overflow: ellipsis;
-    &-Img {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 2rem;
-    }
-    &-Username {
-      font-size: 1rem;
-    }
   }
 }

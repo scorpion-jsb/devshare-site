@@ -1,0 +1,51 @@
+.ProjectTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 200px;
+  min-width: 100px;
+  flex-basis: 25%;
+  margin: .5rem;
+  padding: 1.3rem;
+  overflow: hidden;
+  @media screen and (max-width: 600px){
+    flex-basis: 80%;
+  }
+  @media screen and (min-width:600px) and (max-width: 800px){
+    flex-basis: 40%;
+  }
+  &-Name {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+  &-Owner {
+    font-size: 1.2rem;
+  }
+  &-Collaborators {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  &-Collaborator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 15%;
+    margin: .5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &-Img {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 2rem;
+    }
+    &-Username {
+      font-size: 1rem;
+    }
+  }
+}

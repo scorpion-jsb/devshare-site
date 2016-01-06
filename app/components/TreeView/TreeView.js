@@ -21,7 +21,8 @@ class TreeView extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
     this.addInputBox = this.addInputBox.bind(this);
-    this.handleNewFileClick = this.handleNewFileClick.bind(this);
+    this.handleNewClick = this.handleNewClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.hideNewFileInput = this.hideNewFileInput.bind(this);
     this.inputKey = null;
   }
@@ -34,12 +35,12 @@ class TreeView extends Component {
     onFolderClick: PropTypes.func,
     addFile: PropTypes.func,
     projectName: PropTypes.string,
-    onFilesDrop: PropTypes.func
+    onFilesDrop: PropTypes.func,
+    onFileDelete: PropTypes.func
   };
-  handleNewFileClick() {
-    this.setState({
-      showNewFile: true
-    }, () => {
+  handleNewClick(type) {
+    let newState = type === 'file' ? {'newFile': true} : {'newFolder': true};
+    this.setState(newState, () => {
       this.refs.inputDialog.focus();
       window.addEventListener('keydown', this.hideNewFileInput);
     });
@@ -77,7 +78,6 @@ class TreeView extends Component {
     }
     let reactId = el.getAttribute('data-reactid');
     let key = reactId.split('-')[2];
-
     this.inputKey = key;
   }
   handleWindowClick() {
@@ -95,11 +95,26 @@ class TreeView extends Component {
   }
   handleNewSubmit(e) {
     e.preventDefault();
-    this.setState({
-      showNewFile: false
-    });
-    this.props.addFile({projectName: this.props.projectName, path: this.state.inputValue});
+    if(this.state.newFile){
+      this.setState({
+        newFile: false
+      });
+      this.props.addFile({projectName: this.props.projectName, path: this.state.inputValue});
+    } else {
+      this.setState({
+        newFolder: false
+      });
+      this.props.addFolder({projectName: this.props.projectName, path: this.state.inputValue});
+    }
     return false;
+  }
+  handleDeleteClick(e) {
+    e.preventDefault();
+    let fileData = this.props.fileStructure[this.inputKey].meta;
+    console.log('handle delete click:', fileData);
+    if(this.inputKey){
+      this.props.onFileDelete({projectName: this.props.projectName, path: fileData.path || fileData.name });
+    }
   }
   renderInputDialog(key) {
     if(this.state){
@@ -126,24 +141,23 @@ class TreeView extends Component {
           <TreeFolder
             key={ `child-Folder-${i}-${entry.meta.name}` }
             index={ i }
-            name={ entry.meta.name }
+            data={ entry.meta }
             isCollapsed={ entry.isCollapsed }
             children={ entry.children }
             onFileClick={ this.props.onFileClick }
           />
         );
       }
-
       let mappedUsers = entry.users ? map(entry.users, (user, key) => {
         user.username = key;
         return user;
       }) : null;
       // //Remove current user from file's users array
-      // if(hideCurrentUser){
-      //   mappedUsers = mappedUsers ? filter(mappedUsers, (user) => {
-      //     return (user.username !== this.props.account.username);
-      //   }) : null;
-      // }
+      if(hideCurrentUser && this.props.account && this.props.account.username){
+        mappedUsers = mappedUsers ? filter(mappedUsers, (user) => {
+          return (user.username !== this.props.account.username);
+        }) : null;
+      }
       return (
         <TreeFile
           key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }
@@ -191,8 +205,9 @@ class TreeView extends Component {
           </Dropzone>
         </div>
         <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
-          <li onClick={ this.handleNewFileClick }>Add new file</li>
-          <li>Add new folder</li>
+          <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
+          <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
+          <li onClick={ this.handleDeleteClick }>Delete File</li>
         </ul>
       </div>
     );

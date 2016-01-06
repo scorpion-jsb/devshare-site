@@ -1,4 +1,6 @@
+@import '../../variables';
 .Navbar {
+  background-color: $navbar !important;
   &-Main-Menu {
     margin-top: 6px;
     button {

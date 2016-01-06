@@ -1,8 +1,8 @@
 .Projects {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-grow:2;
   &-Tiles {
     display: -webkit-box;
@@ -11,16 +11,10 @@
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
-    justify-content: space-around;
-    flex-wrap:wrap;
-  }
-  &-Tile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 250px;
-    margin: 20px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 10%;
+    margin-left: 10%;
   }
 }

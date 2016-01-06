@@ -3,11 +3,22 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'redux-grout';
 import Workspace from '../Workspace/Workspace';
+
 import './Project.scss';
 
 class Project extends Component {
   constructor(props){
     super(props);
+    this.selectProject = this.selectProject.bind(this);
+  }
+  componentDidMount() {
+    if(!this.props.projects){
+      this.props.getProjects();
+    }
+  }
+  selectProject(name) {
+    console.log('new project selected', name);
+    this.props.history.pushState(null, `/projects/${name}`);
   }
   render(){
     return (
@@ -15,7 +26,7 @@ class Project extends Component {
         <Workspace
           projectName={ this.props.projectName }
           showButtons={ true }
-          hideName={ false }
+          onProjectSelect={ this.selectProject }
         />
       </div>
     );
@@ -23,12 +34,8 @@ class Project extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  // let project;
-  // if(state.entities && state.entities.projects && state.router.params.projectName){
-  //   state.entities.projects[state.router.params.projectName];
-  // }
   return {
-    projectName: state.router.params.appName,
+    projectName: state.router.params.projectName,
     account: state.account,
     router: state.router
   };

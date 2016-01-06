@@ -1,0 +1,21 @@
+.NewProjectTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  min-width: 100px;
+  flex-basis: 25%;
+  margin: .5rem;
+  padding: 1.3rem;
+  @media screen and (max-width: 600px){
+    flex-basis: 80%;
+  }
+  @media screen and (min-width:600px) and (max-width: 800px){
+    flex-basis: 40%;
+  }
+  &-Name {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+}

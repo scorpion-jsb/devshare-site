@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Link } from 'react-router';
 import Paper from 'material-ui/lib/paper';
+import ProjectTile from '../../components/ProjectTile/ProjectTile';
 import { Actions } from 'redux-grout';
 import './Projects.scss';
 
@@ -16,7 +17,7 @@ class Projects extends Component {
   }
   render(){
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
-      return renderProjectTile(project, i);
+      return <ProjectTile project={ project } />
     }) : <span>No Projects</span>;
     return (
       <div className="Projects">
@@ -27,19 +28,30 @@ class Projects extends Component {
     );
   }
 }
-function renderProjectTile(project, i) {
-  return (
-    <Paper key={`Project-${i}`} className="Projects-Tile">
-      <Link to={`/projects/${project.name}`}>{ project.name }</Link>
-    </Paper>
-  );
-}
+
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-    let projects = toArray(state.entities.projects) || []
+  const {
+    entities: { projects, accounts }
+  } = state;
+  let projectsArray = toArray(projects);
+  //Populate project owners and collaborators
+  if(accounts){
+    projectsArray.map((project) => {
+      if(project.owner){
+        project.owner = accounts[project.owner] || project.owner;
+      }
+      if(project.collaborators){
+        project.collaborators = project.collaborators.map((userId) => {
+          return accounts[userId] || userId;
+        });
+      }
+      return project;
+    });
+  }
   return {
     account: state.account,
-    projects,
+    projects: projectsArray,
     router: state.router
   };
 }

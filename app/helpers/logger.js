@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 //Set default log level to debug
 let logLevel = 'debug';
-//Set log level from config
 
 let logger = {
 	log(logData) {

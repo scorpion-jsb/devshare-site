@@ -11,8 +11,10 @@
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
+    margin-left: 10%;
+    margin-left: 10%;
   }
 }

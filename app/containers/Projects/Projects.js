@@ -1,24 +1,45 @@
 import { toArray } from 'lodash';
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Paper from 'material-ui/lib/paper';
 import ProjectTile from '../../components/ProjectTile/ProjectTile';
+import NewProjectTile from '../../components/NewProjectTile/NewProjectTile';
 import { Actions } from 'redux-grout';
 import './Projects.scss';
 
 class Projects extends Component {
   constructor(props){
     super(props);
+    this.handleCollabClick = this.handleCollabClick.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.state = {addCollabModal: false, newProjectModal: false};
   }
   componentDidMount() {
     this.props.getProjects();
   }
+  handleCollabClick(user) {
+    if(this.props && this.props.onCollabClick) {
+      this.props.onCollabClick(user);
+    }
+  }
+  toggleModal(name) {
+    this.setState({
+      name: !this.state[`${name}Modal`] || false
+    });
+  }
   render(){
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
-      return <ProjectTile project={ project } />
-    }) : <span>No Projects</span>;
+      return (
+        <ProjectTile
+          key={`${project.name}-Collab-${i}`}
+          project={ project }
+          onCollabClick={ this.handleCollabClick }
+          onAddCollabClick={ this.toggleModal.bind(this, 'addCollab') }
+        />
+      );
+    }) : <span>Click the plus to start a project</span>;
+    projects.unshift(<NewProjectTile key="new" onClick={ this.newClick}/>);
     return (
       <div className="Projects">
         <div className="Projects-Tiles">

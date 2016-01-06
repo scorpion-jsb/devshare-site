@@ -10,6 +10,8 @@ import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import FlatButton from 'material-ui/lib/flat-button';
+import Avatar from 'material-ui/lib/avatar';
+const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -31,7 +33,13 @@ export default class Navbar extends Component {
   }
   render() {
     let brandLinkLoc = (this.props.account && this.props.account.username) ? '/projects' : '/';
-    let iconButton = (<IconButton><MoreVertIcon /></IconButton>);
+    let iconButton = (
+        <Avatar
+          className="Navbar-Avatar"
+          src={ this.props.account.image ? this.props.account.image.url : stockPhotoUrl }
+          size={50}
+        />
+      );
     let mainMenu = (
       <div className="Navbar-Main-Menu">
         <FlatButton label="Signup" onClick={ this.selectItem.bind(this, null, 'signup')} />

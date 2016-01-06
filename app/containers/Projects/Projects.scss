@@ -4,6 +4,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-grow:2;
+  box-sizing: border-box;
   &-Tiles {
     display: -webkit-box;
     display: -moz-box;

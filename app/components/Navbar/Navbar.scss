@@ -1,6 +1,10 @@
 @import '../../variables';
 .Navbar {
   background-color: $navbar !important;
+  box-sizing: border-box;
+  &-Avatar {
+    margin-right: 1rem;
+  }
   &-Main-Menu {
     margin-top: 6px;
     button {

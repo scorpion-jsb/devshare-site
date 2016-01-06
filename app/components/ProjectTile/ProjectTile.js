@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import Paper from 'material-ui/lib/paper';
 import Avatar from 'material-ui/lib/avatar';
 
-
 import './ProjectTile.scss';
 const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
 export default class ProjectTile extends Component {

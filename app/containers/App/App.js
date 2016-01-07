@@ -2,10 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'redux-grout';
-
-import './App.scss';
-
 import Navbar from '../../components/Navbar/Navbar';
+import './App.scss';
 
 class Main extends Component {
   constructor(props) {

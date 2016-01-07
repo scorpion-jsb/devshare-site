@@ -7,22 +7,34 @@ import { Actions } from 'redux-grout';
 import './Home.scss';
 //React Components
 import RaisedButton from 'material-ui/lib/raised-button';
+import IconButton from 'material-ui/lib/icon-button';
 
 class Home extends Component {
+
   render() {
+    const buttonStyle = {margin: '1rem'};
     return (
       <div className="Home">
-        <span className="Home-Hero">
-          <h1>Hypercube</h1>
-          <h3>An open-source web-based collaborataive code editor & project building environment</h3>
-        </span>
+        <div className="Home-Hero">
+          <span className="Home-Name">Hypercube</span>
+          <span className="Home-Description">
+            An open-source web-based collaborataive code editor & project building environment
+          </span>
+        </div>
         <div className="Home-Buttons">
-          <RaisedButton label="Try Now"
+          <RaisedButton
+            style={ buttonStyle }
+            label="Try Now"
             containerElement={ <Link to={ `/try/${randomProjectId()}` } /> }
           />
-          <RaisedButton label="View code on GitHub"
-            containerElement={ <a href="https://github.com/prescottprue/hypercube"></a> }
+          <RaisedButton
+            style={ buttonStyle }
+            label="My Projects"
+            containerElement={ <Link to="/login" /> }
           />
+        </div>
+        <div className="Home-Preview">
+          <img src="assets/Hypercube-Editor-Example.png" alt="Editor Preview"/>
         </div>
       </div>
     )

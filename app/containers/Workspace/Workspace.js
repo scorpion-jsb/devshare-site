@@ -1,4 +1,4 @@
-import { merge, toArray } from 'lodash';
+import { merge, toArray, find } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -70,11 +70,21 @@ class Workspace extends Component {
       type: 'file',
       file,
     };
-    this.props.openTab(tabData);
-    if(this.props.tabs.list){
+    const matchingTab = find(this.props.tabs.list, {title: tabData.title});
+    //TODO: Only open tab if file is not already open
+    if(this.props.tabs.list && !matchingTab){
       //Select last tab
-      this.props.selectTab(this.props.tabs.list.length - 1);
+      this.props.openTab(tabData);
+      this.props.navigateToTab({projectName: this.props.projectName, index: this.props.tabs.list.length - 1});
+    } else {
+      const fileInd = findIndex(this.props.tabs.list, {title: tabData.title});
+      console.warn('A tab with matching file data already exists', matchingTab, fileInd);
+      this.props.navigateToTab({
+        projectName: this.props.projectName,
+        index: fileInd
+      })
     }
+
   }
   toggleSettingsModal(name) {
     this.setState({
@@ -89,7 +99,7 @@ class Workspace extends Component {
   loadCodeSharing(editor){
     let fileData = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
     console.log('calling load code sharing', editor, fileData);
-    if(!editor.firepad){
+    if(typeof editor.firepad === 'undefined' && !this.activeFirepads[file.path]){
       let file = grout.Project(this.props.projectName).File(fileData);
       console.warn('file object created:', file);
       let firepad = createFirepad(file.fbRef, editor, {userId: grout.currentUser.username});
@@ -97,7 +107,7 @@ class Workspace extends Component {
         console.warn('Firepad is ready:', firepad);
         this.activeFirepads[file.path] = firepad;
         firepad.off('ready', () => {
-          console.warn('Firepad is ready:', firepad);
+          console.warn('Firepad off listener fired.', firepad);
         });
       });
     }

@@ -12,7 +12,8 @@ import FlatButton from 'material-ui/lib/flat-button';
 import TextField from 'material-ui/lib/text-field';
 import SideBar from '../../components/SideBar/SideBar';
 import Pane from '../../components/Pane/Pane';
-
+import Grout from 'kyper-grout';
+let grout = new Grout();
 let base = Rebase.createClass('https://kyper-tech.firebaseio.com/tessellate/files');
 
 import './Workspace.scss';
@@ -31,6 +32,7 @@ class Workspace extends Component {
     this.loadCodeSharing = this.loadCodeSharing.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
     this.onFilesDrop = this.onFilesDrop.bind(this);
+    this.activeFirepads = {};
   }
   static propTypes = {
     projectName: PropTypes.string,
@@ -85,19 +87,31 @@ class Workspace extends Component {
     this.toggleSettingsModal.bind(this, 'settingsOpen');
   }
   loadCodeSharing(editor){
-    console.log('load code sharing called:', editor);
-    let file = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
-    // console.log('calling load code sharing', editor);
-    // if(!editor.firepad){
-    //   this.props.syncEditor({projectName: this.projectName, editor: editor, file: file});
-    // }
+    let fileData = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
+    console.log('calling load code sharing', editor, fileData);
+    if(!editor.firepad){
+      let file = grout.Project(this.props.projectName).File(fileData);
+      console.warn('file object created:', file);
+      let firepad = createFirepad(file.fbRef, editor, {userId: grout.currentUser.username});
+      firepad.on('ready', () => {
+        console.warn('Firepad is ready:', firepad);
+        this.activeFirepads[file.path] = firepad;
+        firepad.off('ready', () => {
+          console.warn('Firepad is ready:', firepad);
+        });
+      });
+    }
   }
   selectTab(index){
     this.props.navigateToTab({projectName: this.props.projectName, index});
   }
   closeTab(index){
+    console.log('closing tab:', this.props.tabs.list[index]);
+    let file = this.props.tabs.list[index].file;
+    if(this.activeFirepads[file.path]){
+      this.activeFirepads[file.path].dispose();
+    }
     this.props.closeTab({projectName: this.props.projectName, index});
-    //TODO: Dispose Firepad
   }
   onFilesDrop(files) {
     console.log('files dropped:', files);

@@ -19,10 +19,7 @@ class Views extends Component {
     }
   }
   handleUnload(unloadData) {
-    console.log('handle unload called ', unloadData);
-    if(this.props && this.props.onActiveLoad){
-      this.props.onUnload(unloadData);
-    }
+    console.warn('handle unload called ', unloadData);
   }
   render() {
     const defaultView = {

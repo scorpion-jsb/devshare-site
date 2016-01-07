@@ -11,7 +11,7 @@ export default class ProjectTile extends Component {
   }
   static propTypes = {
     project: PropTypes.object
-  }
+  };
   render(){
     let collaborators;
     if(this.props.project.collaborators){

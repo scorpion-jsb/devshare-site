@@ -13,7 +13,7 @@ class TreeFile extends Component {
     data: PropTypes.object.isRequired,
     active: PropTypes.bool,
     onClick: PropTypes.func
-  }
+  };
   render() {
     let className = (this.props.active) ? 'TreeFile active noselect' : 'TreeFile noselect';
     let name = this.props.data.name || this.props.data.path.split('/')[this.props.data.path.split('/').length - 1];

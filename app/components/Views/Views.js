@@ -6,6 +6,7 @@ class Views extends Component {
   constructor() {
     super();
     this.handleLoad = this.handleLoad.bind(this);
+    this.handleUnload = this.handleUnload.bind(this);
   }
   static propTypes = {
     views: PropTypes.array,
@@ -17,8 +18,14 @@ class Views extends Component {
       this.props.onActiveLoad(loadedViewData);
     }
   }
+  handleUnload(unloadData) {
+    console.log('handle unload called ', unloadData);
+    if(this.props && this.props.onActiveLoad){
+      this.props.onUnload(unloadData);
+    }
+  }
   render() {
-    let defaultView = {
+    const defaultView = {
       title: 'view1',
       type: 'default'
     };
@@ -26,9 +33,25 @@ class Views extends Component {
     let currentIndex = this.props.currentIndex || 0;
     let views = viewsArray.map((view, i) => {
       if (i === currentIndex) {
-        return <View key={ i } viewData={ view } visible={ true } index={ i } onLoad={ this.handleLoad }/>
+        return (
+          <View
+            key={ i }
+            index={ i }
+            viewData={ view }
+            visible={ true }
+            onLoad={ this.handleLoad }
+          />
+        );
       }
-      return <View key={ i } viewData={ view } visible={ false } index={ i } />
+      return (
+        <View
+          index={ i }
+          key={ i }
+          viewData={ view }
+          visible={ false }
+          onLoad={ this.handleUnload }
+        />
+      );
     });
     return (
       <div className="Views">

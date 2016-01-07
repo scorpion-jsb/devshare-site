@@ -16,7 +16,7 @@ class Tab extends Component {
     active: PropTypes.bool,
     onSelect: PropTypes.func,
     onClose: PropTypes.func
-  }
+  };
   handleCloseClick(event) {
     this._handleClick();
     if(this.props.onClose){

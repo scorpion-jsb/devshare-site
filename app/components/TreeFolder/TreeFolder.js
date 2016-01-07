@@ -19,7 +19,7 @@ class TreeFolder extends Component {
     onOpenClick: PropTypes.func,
     onClosedClick: PropTypes.func,
     onFileClick: PropTypes.func
-  }
+  };
   render() {
     let className = (this.state.isCollapsed) ? 'TreeFolder collapsed noselect' : 'TreeFolder noselect';
     const iconSize = "1.7rem";

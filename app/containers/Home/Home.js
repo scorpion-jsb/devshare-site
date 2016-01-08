@@ -10,7 +10,6 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import IconButton from 'material-ui/lib/icon-button';
 
 class Home extends Component {
-
   render() {
     const buttonStyle = {margin: '1rem'};
     return (

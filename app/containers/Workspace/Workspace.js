@@ -1,4 +1,4 @@
-import { merge, toArray, find } from 'lodash';
+import { merge, toArray, find, findIndex } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -70,18 +70,17 @@ class Workspace extends Component {
       type: 'file',
       file,
     };
-    const matchingTab = find(this.props.tabs.list, {title: tabData.title});
+    const matchingInd = findIndex(this.props.tabs.list, {title: tabData.title});
     //TODO: Only open tab if file is not already open
-    if(this.props.tabs.list && !matchingTab){
+    if(this.props.tabs.list && matchingInd !== -1){
       //Select last tab
       this.props.openTab(tabData);
       this.props.navigateToTab({projectName: this.props.projectName, index: this.props.tabs.list.length - 1});
     } else {
-      const fileInd = findIndex(this.props.tabs.list, {title: tabData.title});
-      console.warn('A tab with matching file data already exists', matchingTab, fileInd);
+      console.warn('A tab with matching file data already exists', matchingInd);
       this.props.navigateToTab({
         projectName: this.props.projectName,
-        index: fileInd
+        index: matchingInd
       })
     }
 
@@ -160,6 +159,7 @@ class Workspace extends Component {
         </Dialog>
         <SideBar
           projects={ this.props.projects }
+          showProjects={ this.props.showProjects }
           projectName={ this.props.projectName }
           onProjectSelect={ this.props.onProjectSelect }
           showButtons={ this.props.showButtons }

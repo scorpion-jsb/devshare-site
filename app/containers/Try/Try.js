@@ -15,26 +15,13 @@ let CombinedActions = merge(Actions.projects, TabActions);
 class Try extends Component {
   constructor() {
     super();
-    // this.handleNewClick = this.handleNewClick.bind(this);
-    this.openFile = this.openFile.bind(this);
-    this.selectTab = this.selectTab.bind(this);
-    this.closeTab = this.closeTab.bind(this);
-  }
-  openFile(file){
-    // this.props.openFileInTab({project: 'Try', file: fileData});
-    this.props.openContentInTab({projectname: this.props.projectName, title: file.name, file});
-  }
-  selectTab(index){
-    this.props.selectTab({projectname: this.props.projectName, index});
-  }
-  closeTab(index){
-    this.props.closeTab({projectname: this.props.projectName, index});
   }
   render() {
     return (
       <div className="Try">
         <Workspace
           projectName={ this.props.projectName }
+          showProjects={ false }
           showButtons={ true }
           hideName={ false }
         />

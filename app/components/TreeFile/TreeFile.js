@@ -42,6 +42,7 @@ class TreeFile extends Component {
     event.preventDefault();
     if(this.props){
       if(this.props.onClick){
+        console.log('running on click in tree file:', this.props.data);
         this.props.onClick(this.props.data);
       }
     }

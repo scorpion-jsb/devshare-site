@@ -72,10 +72,12 @@ class Workspace extends Component {
     };
     const matchingInd = findIndex(this.props.tabs.list, {title: tabData.title});
     //TODO: Only open tab if file is not already open
-    if(this.props.tabs.list && matchingInd !== -1){
+    if(matchingInd === -1){
       //Select last tab
       this.props.openTab(tabData);
-      this.props.navigateToTab({projectName: this.props.projectName, index: this.props.tabs.list.length - 1});
+      let newInd =  this.props.tabs.list ? this.props.tabs.list.length - 1 : 0;
+      console.log('navigating to new tab:', tabData);
+      this.props.navigateToTab({projectName: this.props.projectName, index: newInd});
     } else {
       console.warn('A tab with matching file data already exists', matchingInd);
       this.props.navigateToTab({
@@ -96,19 +98,22 @@ class Workspace extends Component {
     this.toggleSettingsModal.bind(this, 'settingsOpen');
   }
   loadCodeSharing(editor){
-    let fileData = this.props.tabs.list[this.props.tabs.currentIndex || 0].file;
-    console.log('calling load code sharing', editor, fileData);
-    if(typeof editor.firepad === 'undefined' && !this.activeFirepads[file.path]){
-      let file = grout.Project(this.props.projectName).File(fileData);
-      console.warn('file object created:', file);
-      let firepad = createFirepad(file.fbRef, editor, {userId: grout.currentUser.username});
-      firepad.on('ready', () => {
-        console.warn('Firepad is ready:', firepad);
-        this.activeFirepads[file.path] = firepad;
-        firepad.off('ready', () => {
-          console.warn('Firepad off listener fired.', firepad);
+    let tabs = this.props.tabs;
+    if(tabs.list && tabs.list[tabs.currentIndex || 0].file){
+      let fileData = tabs.list[tabs.currentIndex].file;
+      console.log('calling load code sharing', editor, fileData);
+      if(typeof editor.firepad === 'undefined' && !this.activeFirepads[fileData.path]){
+        let file = grout.Project(this.props.projectName).File(fileData);
+        console.warn('file object created:', file);
+        let firepad = createFirepad(file.fbRef, editor, {userId: grout.currentUser.username});
+        firepad.on('ready', () => {
+          console.warn('Firepad is ready:', firepad);
+          this.activeFirepads[file.path] = firepad;
+          firepad.off('ready', () => {
+            console.warn('Firepad off listener fired.', firepad);
+          });
         });
-      });
+      }
     }
   }
   selectTab(index){
@@ -119,6 +124,7 @@ class Workspace extends Component {
     let file = this.props.tabs.list[index].file;
     if(this.activeFirepads[file.path]){
       this.activeFirepads[file.path].dispose();
+      delete this.activeFirepads[file.path];
     }
     this.props.closeTab({projectName: this.props.projectName, index});
   }

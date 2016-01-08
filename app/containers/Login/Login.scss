@@ -1,16 +1,19 @@
+@import '../../variables';
 .Login {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-weight: 400;
   padding-top: 2rem;
-  &-Form {
-    flex-grow:1;
-    flex-basis: 35%;
+  &-Panel {
+    padding: 2rem;
+    width: 45%;
     min-width: 250px;
-    font-size: 1.4rem;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -19,25 +22,19 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
-  }
-  &-Signup-Label {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #979797;
-  }
-  &-Signup-Link {
-    font-size: 1rem;
-    margin-top: .4rem;
-    &:hover {
-      color: #00bcd4;
+    margin-top: 1rem;
+    &-Link {
+      color: $linkBlue;
+      font-size: 1.2rem;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &-Label {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #979797;
+      font-weight: 400;
     }
   }
-  &-Progress {
-    margin-top: 5rem;
-  }
-}
-
-.Submit-Login-Form {
-  padding-top: 1.75rem;
-  padding-bottom: 3rem;
 }

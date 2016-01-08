@@ -4,92 +4,38 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Actions } from 'redux-grout';
 import './Login.scss';
-import TextField from 'material-ui/lib/text-field';
-import RaisedButton from 'material-ui/lib/raised-button';
+import Paper from 'material-ui/lib/paper';
 import CircularProgress from 'material-ui/lib/circular-progress';
+import LoginForm from '../../components/LoginForm/LoginForm';
+
  class Login extends Component {
    constructor(props) {
-     super(props);
-     this.handleLogin = this.handleLogin.bind(this);
-     this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
-     this.handleInputChange = this.handleInputChange.bind(this);
-     this.handlePrivateChange = this.handlePrivateChange.bind(this);
-     this.state = {errors:{username:null, password:null}};
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
+    this.state = {errors:{username:null, password:null}};
    }
    //TODO: Replace this with redux-rx
-   goAfterLoggedIn(newState) {
-     setTimeout(() => {
-       if(this.props.account && this.props.account.username){
-         this.props.history.pushState(null, newState);
-       } else {
-         this.goAfterLoggedIn(newState);
-       }
-     }, 500);
-   }
-   /**
-   * @function handleInputChange
-   * @description Update the state with the values from the form inputs.
-   * @fires context#setState
-   */
-  handleInputChange(name, e) {
-    e.preventDefault();
-    this.setState({
-      [name]: e.target.value
-    });
+  goAfterLoggedIn(newState) {
+    setTimeout(() => {
+      if(this.props.account && this.props.account.username){
+        this.props.history.pushState(null, newState);
+      } else {
+        this.goAfterLoggedIn(newState);
+      }
+    }, 500);
   }
-  /**
-   * @function handlePrivateChange
-   * @description Store data in object instead of state
-   */
-  handlePrivateChange(name, e) {
-    e.preventDefault();
-    this[name] = e.target.value;
-  }
-  handleLogin(e) {
-    if(e && typeof e.preventDefault === 'function'){
-      e.preventDefault();
-    }
-    if(!this.state.username || this.state.username == ''){
-      return this.setState({
-        errors: {username: 'Username required'}
-      });
-    }
-    if(!this.password || this.password == ''){
-      return this.setState({
-        errors: {password: 'Password required'}
-      });
-    }
-    let loginData = {username:this.state.username, password: this.password};
+  handleLogin(loginData) {
     this.props.login(loginData);
     this.goAfterLoggedIn('/projects');
-   }
+  }
   render() {
     if(!this.props.account.isFetching){
       return (
         <div className="Login">
-          <form className="Login-Form" onSubmit={ this.handleLogin }>
-            <TextField
-              hintText="some@email.com"
-              floatingLabelText="Username/Email"
-              onChange={this.handleInputChange.bind(this, 'username')}
-              errorText={ this.state.errors.username }
-            />
-            <TextField
-              hintText="password"
-              floatingLabelText="Password"
-              type="password"
-              onChange={this.handlePrivateChange.bind(this, 'password')}
-              errorText={ this.state.errors.password }
-            />
-            <div className="Submit-Login-Form">
-              <RaisedButton
-                label="Login"
-                primary={true}
-                type="submit"
-                disabled={ this.props.account && this.props.account.isFetching}
-              />
-            </div>
-          </form>
+          <Paper className="Login-Panel">
+            <LoginForm onLogin={ this.handleLogin } />
+          </Paper>
           <div className="Login-Signup">
             <span className="Login-Signup-Label">
               Need an account?

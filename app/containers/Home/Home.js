@@ -27,11 +27,7 @@ class Home extends Component {
             label="Try Now"
             containerElement={ <Link to={ `/try/${randomProjectId()}` } /> }
           />
-          <RaisedButton
-            style={ buttonStyle }
-            label="My Projects"
-            containerElement={ <Link to="/login" /> }
-          />
+
         </div>
         <div className="Home-Preview">
           <img src="assets/Hypercube-Editor-Example.png" alt="Editor Preview"/>
@@ -40,6 +36,11 @@ class Home extends Component {
     )
   }
 }
+// <RaisedButton
+//   style={ buttonStyle }
+//   label="My Projects"
+//   containerElement={ <Link to="/login" /> }
+// />
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   return {

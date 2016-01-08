@@ -1,0 +1,39 @@
+@import '../../variables';
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  &-Submit {
+    margin-top: 1rem;
+    text-align: center;
+    width: 80%;
+    color: $linkBlue;
+  }
+  &-Buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+  }
+  &-Remember {
+    display:flex;
+    flex-direction:row;
+    flex-basis: 50%;
+  }
+  &-Recover-Link {
+    display: inline;
+    font-size: .8rem;
+    color: $linkBlue;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &-Progress {
+    margin-top: 5rem;
+  }
+}

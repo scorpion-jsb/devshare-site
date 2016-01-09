@@ -13,6 +13,10 @@ a {
   height: 100%;
 }
 
+input,textarea,select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
 .Button {
   font-size:1.5rem;
   font-weight:300;

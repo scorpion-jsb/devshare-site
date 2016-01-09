@@ -24,7 +24,7 @@
   &.active {
     z-index: 1;
     .Tab-Indicator {
-      background-color: $activeTab;
+      background-color: $accentColor;
     }
   }
   &-Indicator {

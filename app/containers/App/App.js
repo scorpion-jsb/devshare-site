@@ -5,12 +5,25 @@ import { Actions } from 'redux-grout';
 import Navbar from '../../components/Navbar/Navbar';
 import './App.scss';
 
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import Theme from '../../theme';
+
 class Main extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.getChildContext = () => {
+      return {
+        muiTheme: ThemeManager.getMuiTheme(Theme),
+      };
+    };
   }
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object,
+  };
+
   handleClick(loc) {
     this.props.history.pushState(null, `/${loc}`);
   }

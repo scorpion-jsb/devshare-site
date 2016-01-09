@@ -8,8 +8,20 @@ import './Home.scss';
 //React Components
 import RaisedButton from 'material-ui/lib/raised-button';
 import IconButton from 'material-ui/lib/icon-button';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import Theme from '../../theme';
 
 class Home extends Component {
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object,
+  };
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getMuiTheme(Theme),
+    };
+  };
 
   render() {
     const buttonStyle = {margin: '1rem'};

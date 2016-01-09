@@ -12,17 +12,7 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import Theme from '../../theme';
 
 class Home extends Component {
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  };
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getMuiTheme(Theme),
-    };
-  };
-
+  
   render() {
     const buttonStyle = {margin: '1rem'};
     return (

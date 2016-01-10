@@ -42,6 +42,7 @@ class Tab extends Component {
             close
           </FontIcon>
         </div>
+        /* TODO: Make tab indicator :after css class*/
         <div className="Tab-Indicator">
         </div>
       </li>

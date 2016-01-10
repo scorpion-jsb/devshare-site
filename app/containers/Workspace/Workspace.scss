@@ -1,7 +1,9 @@
 .Workspace {
   display: flex;
+  position: absolute;
   flex-direction: row;
   height: 100%;
+  width: 100%;
   &-Settings {
     display: flex;
     flex-direction: column;

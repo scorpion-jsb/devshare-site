@@ -22,29 +22,11 @@
   }
   &-Buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
   }
-  &-Button, .AccountDropdown-Button {
-    flex-grow:2;
-    width: 100%;
-    background-color: $lightGray;
-    height: 70px;
-    border: none;
-    border-top: 1px solid white;
-    font-size:1.5rem;
-    cursor:pointer;
-    outline: none;
-    &-First {
-      border: none;
-    }
-    &:hover {
-      background-color: $primary;
-      color:white;
-      &-Label {
-        color: white;
-      }
-    }
+  &-Button {
+    // width: 40%;
   }
   &-Name {
     width: 100%;

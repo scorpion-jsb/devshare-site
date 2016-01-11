@@ -8,6 +8,8 @@ import Paper from 'material-ui/lib/paper';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import SignupForm from '../../components/SignupForm/SignupForm';
+import Snackbar from 'material-ui/lib/snackbar';
+
 import './Signup.scss';
 
 class Signup extends Component {
@@ -16,14 +18,20 @@ class Signup extends Component {
     this.handleSignup = this.handleSignup.bind(this);
     this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
     this.reset = this.reset.bind(this);
-    this.state = {errors:{}};
+    this.state = {errors:{}, snackCanOpen: true};
   }
+  handleRequestClose = () => {
+    this.setState({
+     snackOpen: false,
+    });
+  };
   reset() {
     return this.setState({
       errors:{},
       username: null,
       email: null,
-      name: null
+      name: null,
+      snackOpen: false
     });
   }
   /**
@@ -31,6 +39,9 @@ class Signup extends Component {
    * @description Fire onLoginClick function provided to component when login is clicked
    */
   handleSignup(signupData) {
+    this.setState({
+      snackCanOpen: true
+    });
     this.props.signup(signupData);
     this.goAfterLoggedIn('/projects');
   }
@@ -57,6 +68,13 @@ class Signup extends Component {
             </span>
             <Link className="Signup-Login-Link" to="/login">Login</Link>
           </div>
+          <Snackbar
+            open={ typeof this.props.account.error !== 'undefined' && this.props.account.error !== null && this.state.snackCanOpen }
+            message={ this.props.account.error || '' }
+            action="close"
+            autoHideDuration={ 3000 }
+            onRequestClose={ this.handleRequestClose }
+          />
         </div>
       );
     } else {

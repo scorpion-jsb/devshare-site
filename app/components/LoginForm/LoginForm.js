@@ -57,6 +57,7 @@ export default class LoginForm extends Component {
   }
   render(){
     const fieldStyle = {width: '80%'};
+    const buttonStyle = {width: '80%'};
     return (
       <form className="LoginForm" onSubmit={ this.handleLogin }>
         <TextField
@@ -95,7 +96,7 @@ export default class LoginForm extends Component {
             primary={true}
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}
-            style={ fieldStyle }
+            style={ buttonStyle }
           />
         </div>
       </form>

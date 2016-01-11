@@ -63,6 +63,12 @@ class Workspace extends Component {
     console.log('add file called with:', addData);
     this.props.addFile(addData);
   }
+  deleteFile(data) {
+    console.log('add file called with:', data);
+    if(!data.path){
+      this.props.deleteFile({project: {name: this.props.projectName}, data});
+    }
+  }
   openFile(file){
     let tabData = {
       projectName: this.props.projectName,
@@ -175,7 +181,7 @@ class Workspace extends Component {
           onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
           addFile={ this.addFile }
           onFilesDrop={ this.onFilesDrop }
-          onFileDelete={ this.props.deleteFile }
+          onFileDelete={ this.deleteFile }
         />
         <Pane
           tabs={ this.props.tabs }

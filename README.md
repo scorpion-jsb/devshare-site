@@ -1,6 +1,8 @@
-# Hypercube
+# Devshare
 
-Collaborative editor and project building/management tool. Uses [Tessellate](http://tessellate.kyper.io) for application data management with [Redux-Grout](https://github.com/KyperTech/redux-grout)/[Grout](https://github.com/prescottprue/hypercube) to handle API calls.
+Collaborative editor and project building/management tool. Visit [devshare.io](http://devshare.io) to begin sharing you development.
+
+Uses [Tessellate](http://tessellate.kyper.io) for application data management with [Redux-Grout](https://github.com/KyperTech/redux-grout)/[Grout](https://github.com/prescottprue/hypercube) to handle API calls.
 
 ## Local Development
 

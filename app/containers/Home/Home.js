@@ -12,13 +12,13 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import Theme from '../../theme';
 
 class Home extends Component {
-  
+
   render() {
     const buttonStyle = {margin: '1rem'};
     return (
       <div className="Home">
         <div className="Home-Hero">
-          <span className="Home-Name">Hypercube</span>
+          <span className="Home-Name">Devshare</span>
           <span className="Home-Description">
             An open-source web-based collaborataive code editor & project building environment
           </span>
@@ -29,7 +29,6 @@ class Home extends Component {
             label="Try Now"
             containerElement={ <Link to={ `/try/${randomProjectId()}` } /> }
           />
-
         </div>
         <div className="Home-Preview">
           <img src="assets/Hypercube-Editor-Example.png" alt="Editor Preview"/>

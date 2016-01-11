@@ -27,6 +27,7 @@ class Workspace extends Component {
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.openFile = this.openFile.bind(this);
     this.addFile = this.addFile.bind(this);
+    this.deleteFile = this.deleteFile.bind(this);
     this.selectTab = this.selectTab.bind(this);
     this.closeTab = this.closeTab.bind(this);
     this.loadCodeSharing = this.loadCodeSharing.bind(this);
@@ -62,6 +63,10 @@ class Workspace extends Component {
   addFile(addData) {
     console.log('add file called with:', addData);
     this.props.addFile(addData);
+  }
+  deleteFile(data) {
+    console.log('add file called with:', data);
+    this.props.deleteFile({project: {name: this.props.projectName}, data});
   }
   openFile(file){
     let tabData = {

@@ -42,7 +42,7 @@ export default class Navbar extends Component {
       );
     let mainMenu = (
       <div className="Navbar-Main-Menu">
-        <FlatButton label="Signup" onClick={ this.selectItem.bind(this, null, 'signup') } />
+        <FlatButton label="Sign Up" onClick={ this.selectItem.bind(this, null, 'signup') } />
         <FlatButton label="Login" onClick={ this.selectItem.bind(this, null, 'login') } />
       </div>
     );

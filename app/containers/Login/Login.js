@@ -7,14 +7,20 @@ import './Login.scss';
 import Paper from 'material-ui/lib/paper';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import Snackbar from 'material-ui/lib/snackbar';
 
  class Login extends Component {
    constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
-    this.state = {errors:{username:null, password:null}};
+    this.state = {errors:{username:null, password:null}, snackCanOpen: false};
    }
+   handleRequestClose = () => {
+    this.setState({
+      snackCanOpen: false,
+    });
+   };
    //TODO: Replace this with redux-rx
   goAfterLoggedIn(newState) {
     setTimeout(() => {
@@ -26,6 +32,9 @@ import LoginForm from '../../components/LoginForm/LoginForm';
     }, 500);
   }
   handleLogin(loginData) {
+    this.setState({
+      snackCanOpen: true
+    })
     this.props.login(loginData);
     this.goAfterLoggedIn('/projects');
   }
@@ -44,6 +53,13 @@ import LoginForm from '../../components/LoginForm/LoginForm';
               Sign Up
             </Link>
           </div>
+          <Snackbar
+            open={ typeof this.props.account.error !== 'undefined' && this.props.account.account !== null && this.state.snackCanOpen }
+            message={ this.props.account.error || '' }
+            action="close"
+            autoHideDuration={ 3000 }
+            onRequestClose={ this.handleRequestClose }
+          />
         </div>
       );
     } else {

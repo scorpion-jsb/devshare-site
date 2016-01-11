@@ -8,13 +8,14 @@ import Paper from 'material-ui/lib/paper';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CircularProgress from 'material-ui/lib/circular-progress';
+import Snackbar from 'material-ui/lib/snackbar';
 
 class Recover extends Component {
   constructor(props) {
     super(props);
     this.handleRecover = this.handleRecover.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.state = {errors: {username: null}};
+    this.state = {errors: {username: null}, open: false};
   }
   /**
    * @function handleInputChange
@@ -28,15 +29,22 @@ class Recover extends Component {
       errors: {username: null}
     });
   }
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
   handleRecover(e) {
     e.preventDefault();
     if(!this.state.username){
       return this.setState({
-        errors: {username: 'Username or Email required'}
+        errors: {username: 'Email or Username required'}
       });
     }
-    console.log('recover called:', this.state.username);
     this.props.recover(this.state.username);
+    this.setState({
+      open: true
+    })
   }
   render() {
     const fieldStyle = {width: '80%'};
@@ -47,7 +55,7 @@ class Recover extends Component {
           <Paper className="Recover-Panel">
             <TextField
               hintText="some@email.com"
-              floatingLabelText="Username/Email"
+              floatingLabelText="Email or Username"
               errorText={ this.state.errors.username }
               onChange={this.handleInputChange.bind(this, 'username')}
               style={ fieldStyle }
@@ -71,6 +79,13 @@ class Recover extends Component {
               Sign Up
             </Link>
           </div>
+          <Snackbar
+            open={ typeof this.props.account.error !== 'undefined' && this.state.open }
+            message={ this.props.account.error || 'Email sent' }
+            action="close"
+            autoHideDuration={ 3000 }
+            onRequestClose={ this.handleRequestClose }
+          />
         </div>
       );
     } else {

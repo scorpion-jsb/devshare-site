@@ -68,14 +68,13 @@ export default class SideBar extends Component {
         />
 
         <div className="SideBar-Buttons">
-          <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={{ width: '100px', height: '100px' }} iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Send feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
+          <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={{ width: '90px', height: '90px' }} iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
+            <MenuItem primaryText="Add file" />
+            <MenuItem primaryText="Add folder" />
+            <MenuItem primaryText="Add files from Github" />
+            <MenuItem primaryText="Upload files" />
           </IconMenu>
-          <IconButton style={{ width: '100px', height: '100px' }} iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
+          <IconButton style={{ width: '90px', height: '90px' }} iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
             <SettingsIcon />
           </IconButton>
         </div>

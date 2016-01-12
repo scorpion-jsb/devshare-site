@@ -7,6 +7,10 @@ import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import SelectField from 'material-ui/lib/select-field';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import IconButton from 'material-ui/lib/icon-button';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import AddIcon from 'material-ui/lib/svg-icons/content/add-circle';
+import SettingsIcon from 'material-ui/lib/svg-icons/action/settings';
 import './SideBar.scss';
 
 export default class SideBar extends Component {
@@ -62,13 +66,18 @@ export default class SideBar extends Component {
           onFilesDrop={ this.props.onFilesDrop }
           onFileDelete={ this.props.onFileDelete }
         />
-        { this.props.showButtons ?
-          <div className="SideBar-Buttons">
-            <button className="SideBar-Button" onClick={ this.props.onSettingsClick }>
-              <span className="SideBar-Button-Label">Settings</span>
-            </button>
-          </div> : null
-        }
+
+        <div className="SideBar-Buttons">
+          <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={{ width: '90px', height: '90px' }} iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
+            <MenuItem primaryText="Add file" />
+            <MenuItem primaryText="Add folder" />
+            <MenuItem primaryText="Add files from Github" />
+            <MenuItem primaryText="Upload files" />
+          </IconMenu>
+          <IconButton style={{ width: '90px', height: '90px' }} iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
+            <SettingsIcon />
+          </IconButton>
+        </div>
       </div>
     );
   }

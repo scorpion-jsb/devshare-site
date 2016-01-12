@@ -59,6 +59,7 @@ class TreeView extends Component {
   }
   handleRightClick(e) {
     e.preventDefault();
+    console.log(e.screenX, e.screenY);
     this.addInputBox(e.target);
     this.setState({
       contextMenu: {
@@ -179,11 +180,12 @@ class TreeView extends Component {
     var noFiles;
     if (structure.length < 1) {
       noFiles = (
-        <p className="TreeView-None" key="NotFound-1">
-          <strong>Right click</strong><br/>
-            to get started <br/>
-          <strong>OR</strong> <br/>
-        </p>
+        <li className="TreeView-None" key="NotFound-1">
+          <div>
+            <strong>Right click</strong><br/>
+              to get started <br/>
+          </div>
+        </li>
       )
     } else {
       noFiles = null;
@@ -194,22 +196,17 @@ class TreeView extends Component {
       left: this.state.contextMenu.left
     }
     return (
-      <div className="TreeView">
+      <Dropzone className="TreeView" onDrop={ this.props.onFilesDrop } multiple={ true } style={{ border: 'none' }} disableClick={ true } >
         <ol className="TreeView-Structure" onContextMenu={ this.handleRightClick.bind(this) }>
           { noFiles }
           { structure }
         </ol>
-        <div className="TreeView-Upload">
-          <Dropzone onDrop={ this.props.onFilesDrop } multiple={ true }>
-            <div className="TreeView-DropZone">Drag to Upload</div>
-          </Dropzone>
-        </div>
         <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
           <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
           <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
           <li onClick={ this.handleDeleteClick }>Delete File</li>
         </ul>
-      </div>
+      </Dropzone>
     );
   }
 }

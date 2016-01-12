@@ -181,8 +181,10 @@ class TreeView extends Component {
     if (structure.length < 1) {
       noFiles = (
         <li className="TreeView-None" key="NotFound-1">
-          <strong>Right click</strong><br/>
-            to get started <br/>
+          <div>
+            <strong>Right click</strong><br/>
+              to get started <br/>
+          </div>
         </li>
       )
     } else {

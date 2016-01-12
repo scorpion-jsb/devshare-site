@@ -103084,28 +103084,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _reactDropzone2.default,
 	        { className: 'TreeView', onDrop: this.props.onFilesDrop, multiple: true, style: { border: 'none' }, disableClick: true },
 	        _react2.default.createElement(
-	          'ol',
-	          { className: 'TreeView-Structure', onContextMenu: this.handleRightClick.bind(this) },
-	          noFiles,
-	          structure
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { style: contextMenuStyle, className: 'TreeView-ContextMenu' },
+	          'div',
+	          null,
 	          _react2.default.createElement(
-	            'li',
-	            { onClick: this.handleNewClick.bind(this, 'file') },
-	            'Add new file'
+	            'ol',
+	            { className: 'TreeView-Structure', onContextMenu: this.handleRightClick.bind(this) },
+	            noFiles,
+	            structure
 	          ),
 	          _react2.default.createElement(
-	            'li',
-	            { onClick: this.handleNewClick.bind(this, 'folder') },
-	            'Add new folder'
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            { onClick: this.handleDeleteClick },
-	            'Delete File'
+	            'ul',
+	            { style: contextMenuStyle, className: 'TreeView-ContextMenu' },
+	            _react2.default.createElement(
+	              'li',
+	              { onClick: this.handleNewClick.bind(this, 'file') },
+	              'Add new file'
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { onClick: this.handleNewClick.bind(this, 'folder') },
+	              'Add new folder'
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { onClick: this.handleDeleteClick },
+	              'Delete File'
+	            )
 	          )
 	        )
 	      );

@@ -197,15 +197,17 @@ class TreeView extends Component {
     }
     return (
       <Dropzone className="TreeView" onDrop={ this.props.onFilesDrop } multiple={ true } style={{ border: 'none' }} disableClick={ true } >
-        <ol className="TreeView-Structure" onContextMenu={ this.handleRightClick.bind(this) }>
-          { noFiles }
-          { structure }
-        </ol>
-        <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
-          <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
-          <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
-          <li onClick={ this.handleDeleteClick }>Delete File</li>
-        </ul>
+        <div>
+          <ol className="TreeView-Structure" onContextMenu={ this.handleRightClick.bind(this) }>
+            { noFiles }
+            { structure }
+          </ol>
+          <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
+            <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
+            <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
+            <li onClick={ this.handleDeleteClick }>Delete File</li>
+          </ul>
+        </div>
       </Dropzone>
     );
   }

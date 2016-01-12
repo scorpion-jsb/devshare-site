@@ -6,43 +6,46 @@ import {
 import {merge, union, clone} from 'lodash';
 export default function tabs(state = {
 }, action) {
+  let newState, projectKey;
   switch (action.type) {
   case TAB_OPEN:
     //TODO: Use another method that doesn't directly modifiy state
-    if(!action.projectName){
+    if(!action.project || !action.project.name){
       console.error('Project name needed to open tab');
+      return;
     }
-    let newState = clone(state);
-    if(!newState[action.projectName]){
-      newState[action.projectName] = {};
+    newState = clone(state);
+    projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
+    if(!newState[projectKey]){
+      newState[projectKey] = {list: [], currentIndex: 0};
     }
-    if(!newState[action.projectName].list){
-      newState[action.projectName].list = [];
+    if(!newState[projectKey].list){
+      newState[projectKey].list = [];
     }
-    if(!newState[action.projectName].currentIndex){
-      newState[action.projectName].currentIndex = 0;
+    if(!newState[projectKey].currentIndex){
+      newState[projectKey].currentIndex = 0;
     }
-    newState[action.projectName].list.push({title: action.title, file: action.payload});
+    newState[projectKey].list.push({title: action.title, file: action.payload});
     return merge({}, state, newState); //push would not work
     break;
   case TAB_CLOSE:
-    //TODO: Use another method that doesn't directly modifiy state
     // console.log('tab close called with', action);
-    let stateWithoutTab = clone(state);
-    stateWithoutTab[action.projectName].list.splice(action.index, 1);
-    let newInd = (action.index > 0) ? action.index - 1 : 0;
-    stateWithoutTab[action.projectName].currentIndex = newInd;
-    return merge({}, stateWithoutTab);
+    newState = clone(state);
+    projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
+    newState[projectKey].list.splice(action.index, 1);
+    const newInd = (action.index > 0) ? action.index - 1 : 0;
+    newState[projectKey].currentIndex = newInd;
+    return merge({}, newState);
     break;
   case SET_ACTIVE_TAB:
-    //TODO: Use another method that doesn't directly modifiy state
-    let changedState = clone(state);
-    if(!state[action.projectName]){
-      changedState[action.projectName] = {};
+    newState = clone(state);
+    projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
+    if(!state[projectKey]){
+      newState[projectKey] = {};
     }
-    changedState[action.projectName].currentIndex = action.index;
-    console.log('changed state in set active tab', changedState);
-    return merge({}, state, changedState);
+    newState[projectKey].currentIndex = action.index;
+    console.log('changed state in set active tab', newState);
+    return merge({}, state, newState);
     break;
   default:
     return state;

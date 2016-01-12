@@ -6,11 +6,9 @@ import Modal from 'react-modal';
 import Rebase from 're-base';
 import { Actions } from 'redux-grout';
 import * as TabActions from '../../actions/tabs';
-import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
-import FlatButton from 'material-ui/lib/flat-button';
-import TextField from 'material-ui/lib/text-field';
 import SideBar from '../../components/SideBar/SideBar';
+import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
 import Pane from '../../components/Pane/Pane';
 import Grout from 'kyper-grout';
 import './Workspace.scss';
@@ -95,11 +93,6 @@ class Workspace extends Component {
       settingsOpen: !this.state.settingsOpen
     });
   };
-  saveSettings = (data) => {
-    this.props.updateProject({project: this.props.project, data});
-    //TODO: Show popup of save success/failure
-    this.toggleSettingsModal.bind(this, 'settingsOpen');
-  };
   loadCodeSharing = (editor) => {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
@@ -126,36 +119,9 @@ class Workspace extends Component {
     this.props.addFiles({project: this.props.project, files});
   };
   render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        secondary={true}
-        onTouchTap={this.toggleSettingsModal.bind(this, 'settingsOpen')}
-      />,
-      <FlatButton
-        label="Save"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.saveSettings}
-      />
-    ];
     return (
       <div className="Workspace">
-        <Dialog
-          title="Settings"
-          actions={actions}
-          modal={false}
-          open={this.state.settingsOpen}
-          onRequestClose={this.toggleSettingsModal.bind(this, 'settingsOpen')}
-          bodyClassName="Workspace-Settings"
-          titleClassName="Workspace-Settings-Title"
-          contentStyle={{'width': '30%'}}
-          >
-          <TextField hintText="Project Name" />
-          <TextField hintText="Owner" />
-          <TextField hintText="Project Url" />
-          <TextField hintText="Git Url" />
-        </Dialog>
+        <ProjectSettingsDialog />
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }

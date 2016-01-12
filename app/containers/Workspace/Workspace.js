@@ -195,10 +195,11 @@ class Workspace extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  let projectName = state.router.params ? state.router.params.projectName : null;
-  let tabs = (state.tabs[projectName] && state.tabs[projectName]) ? state.tabs[projectName] : {};//Tab data
+  let owner = state.router.params ? state.router.params.owner : null;
+  let name = state.router.params ? state.router.params.projectName : null;
+  let tabs = (state.tabs[name] && state.tabs[name]) ? state.tabs[name] : {};//Tab data
   return {
-    projectName: projectName,
+    project: { name, owner },
     projects: toArray(state.entities.projects),
     tabs,
     account: state.account,

@@ -43,15 +43,15 @@ class Signup extends Component {
       snackCanOpen: true
     });
     this.props.signup(signupData);
-    this.goAfterLoggedIn('/projects');
+    this.goAfterLoggedIn();
   }
   //TODO: Replace this with redux-rx
-  goAfterLoggedIn(newState) {
+  goAfterLoggedIn() {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.props.history.pushState(null, newState);
+        this.props.history.pushState(null, `/${this.props.account.username}`);
       } else {
-        this.goAfterLoggedIn(newState);
+        this.goAfterLoggedIn();
       }
     }, 500);
   }

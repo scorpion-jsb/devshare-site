@@ -22,12 +22,12 @@ import Snackbar from 'material-ui/lib/snackbar';
     });
    };
    //TODO: Replace this with redux-rx
-  goAfterLoggedIn(newState) {
+  goAfterLoggedIn() {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.props.history.pushState(null, newState);
+        this.props.history.pushState(null, `/${this.props.account.username}`);
       } else {
-        this.goAfterLoggedIn(newState);
+        this.goAfterLoggedIn();
       }
     }, 500);
   }
@@ -36,7 +36,7 @@ import Snackbar from 'material-ui/lib/snackbar';
       snackCanOpen: true
     })
     this.props.login(loginData);
-    this.goAfterLoggedIn('/projects');
+    this.goAfterLoggedIn();
   }
   render() {
     if(!this.props.account.isFetching){

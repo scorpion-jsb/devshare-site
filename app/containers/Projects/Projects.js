@@ -32,6 +32,10 @@ class Projects extends Component {
   newSubmit(projectData) {
     this.props.addProject(projectData);
   }
+  openProject = (project) => {
+    console.log('opening project:', project);
+    this.props.history.pushState(null, `/${project.owner.username}/${project.name}`);
+  };
   render(){
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (
@@ -40,6 +44,7 @@ class Projects extends Component {
           project={ project }
           onCollabClick={ this.handleCollabClick }
           onAddCollabClick={ this.toggleModal.bind(this, 'addCollab') }
+          onSelect={ this.openProject }
         />
       );
     }) : <span>Click the plus to start a project</span>;

@@ -59,6 +59,7 @@ class TreeView extends Component {
   }
   handleRightClick(e) {
     e.preventDefault();
+    console.log(e.screenX, e.screenY);
     this.addInputBox(e.target);
     this.setState({
       contextMenu: {

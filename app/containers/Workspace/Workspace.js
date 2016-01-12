@@ -9,6 +9,7 @@ import * as TabActions from '../../actions/tabs';
 import RaisedButton from 'material-ui/lib/raised-button';
 import SideBar from '../../components/SideBar/SideBar';
 import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
+import SharingDialog from '../../components/SharingDialog/SharingDialog';
 import Pane from '../../components/Pane/Pane';
 import Grout from 'kyper-grout';
 import './Workspace.scss';
@@ -22,7 +23,7 @@ class Workspace extends Component {
     super();
   }
 
-  state = {inputVisible: false, settingsOpen: false, files: []};
+  state = {inputVisible: false, settingsOpen: false, sharingOpen: false, files: []};
 
   static propTypes = {
     project: PropTypes.object,
@@ -66,6 +67,12 @@ class Workspace extends Component {
   toggleSettingsModal = () => {
     this.setState({
       settingsOpen: !this.state.settingsOpen
+    })
+  };
+
+  toggleSharingModal = () => {
+    this.setState({
+      sharingOpen: !this.state.sharingOpen
     })
   };
 
@@ -144,6 +151,7 @@ class Workspace extends Component {
     return (
       <div className="Workspace">
         <ProjectSettingsDialog modalOpen={ this.state.settingsOpen } toggleModal={ this.toggleSettingsModal } />
+        <SharingDialog modalOpen={ this.state.sharingOpen } toggleModal={ this.toggleSharingModal } />
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
@@ -154,6 +162,7 @@ class Workspace extends Component {
           hideName={ this.props.hideName }
           onFileClick={ this.openFile }
           onSettingsClick={ this.toggleSettingsModal  }
+          onSharingClick={ this.toggleSharingModal  }
           addFile={ this.addFile }
           addFile={ this.addFolder }
           onFilesDrop={ this.onFilesDrop }

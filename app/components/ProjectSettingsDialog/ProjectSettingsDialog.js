@@ -9,30 +9,18 @@ class ProjectSettingsDialog extends Component {
     super(props);
   }
 
-  state = {
-    settingsOpen: false
+  static propTypes = {
+    modalOpen: PropTypes.bool,
+    toggleModal: PropTypes.func
   };
 
-  toggleSettingsModal = () => {
-    this.setState((state) => {
-      return {
-        settingsOpen: !state.settingsOpen
-      }
-    })
-  };
-
-  saveSettings = (data) => {
-    this.props.updateProject({project: this.props.project, data});
-    //TODO: Show popup of save success/failure
-    this.toggleSettingsModal();
-  };
 
   render(){
     const actions = [
       <FlatButton
         label="Cancel"
         secondary={true}
-        onTouchTap={ this.toggleSettingsModal }
+        onTouchTap={ this.props.toggleModal }
       />,
       <FlatButton
         label="Save"
@@ -47,8 +35,8 @@ class ProjectSettingsDialog extends Component {
         className="ProjectSettingsDialog"
         actions={ actions }
         modal={false}
-        open={ this.state.settingsOpen }
-        onRequestClose={ this.toggleSettingsModal }
+        open={ this.props.modalOpen }
+        onRequestClose={ this.props.toggleModal }
         bodyClassName="ProjectSettingsDialog-Settings"
         titleClassName="ProjectSettingsDialog-Settings-Title"
         contentStyle={{'width': '30%'}}

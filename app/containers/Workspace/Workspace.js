@@ -17,15 +17,19 @@ let activeFirepads = {};
 let grout = new Grout();
 
 class Workspace extends Component {
+
   constructor() {
     super();
-    this.state = {inputVisible: false, settingsOpen: false, files: []};
   }
+
+  state = {inputVisible: false, settingsOpen: false, files: []};
+
   static propTypes = {
     project: PropTypes.object,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool
   };
+
   componentDidMount() {
     this.project = this.props.project ? grout.Project(this.props.project) : null;
     const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
@@ -37,6 +41,7 @@ class Workspace extends Component {
       asArray: true
     });
   }
+
   componentWillReceiveProps(nextProps) {
     //Rebind files if props change (new project selected)
     if(this.fb){
@@ -50,21 +55,38 @@ class Workspace extends Component {
       });
     }
   }
+
   componentWillUnmount() {
     //Unbind files list from Firebase
     if(this.fb && isFunction(this.fb.removeBinding)){
       this.fb.removeBinding(this.ref);
     }
   }
+
+  toggleSettingsModal = () => {
+    this.setState({
+      settingsOpen: !this.state.settingsOpen
+    })
+  };
+
+  saveSettings = (data) => {
+    this.props.updateProject({project: this.props.project, data});
+    //TODO: Show popup of save success/failure
+    this.toggleSettingsModal();
+  };
+
   addFile = (file) => {
     this.props.addFile({project: this.props.project, file});
   };
+
   addFolder = (file) => {
     this.props.addFolder({project: this.props.project, file});
   };
+
   deleteFile = (file) => {
     this.props.deleteFile({project: this.props.project, file});
   };
+
   openFile = (file) => {
     let tabData = {
       project: this.props.project,
@@ -88,11 +110,7 @@ class Workspace extends Component {
       })
     }
   };
-  toggleSettingsModal = (name) => {
-    this.setState({
-      settingsOpen: !this.state.settingsOpen
-    });
-  };
+
   loadCodeSharing = (editor) => {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
@@ -102,9 +120,11 @@ class Workspace extends Component {
       loadFirepadCodeshare(fileObj, editor);
     }
   };
+
   selectTab = (index) => {
     this.props.navigateToTab({project: this.props.project, index});
   };
+
   closeTab = (index) => {
     // console.log('closing tab:', this.props.tabs.list[index]);
     let file = this.props.tabs.list[index].file;
@@ -114,14 +134,16 @@ class Workspace extends Component {
     }
     this.props.closeTab({project: this.props.project, index});
   };
+
   onFilesDrop = (files) => {
     console.log('files dropped:', files);
     this.props.addFiles({project: this.props.project, files});
   };
+
   render() {
     return (
       <div className="Workspace">
-        <ProjectSettingsDialog />
+        <ProjectSettingsDialog modalOpen={ this.state.settingsOpen } toggleModal={ this.toggleSettingsModal } />
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
@@ -131,7 +153,7 @@ class Workspace extends Component {
           files={ this.state.files }
           hideName={ this.props.hideName }
           onFileClick={ this.openFile }
-          onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
+          onSettingsClick={ this.toggleSettingsModal  }
           addFile={ this.addFile }
           addFile={ this.addFolder }
           onFilesDrop={ this.onFilesDrop }

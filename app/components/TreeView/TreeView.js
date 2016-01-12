@@ -100,12 +100,12 @@ class TreeView extends Component {
       this.setState({
         newFile: false
       });
-      this.props.addFile({projectName: this.props.projectName, path: this.state.inputValue});
+      this.props.addFile({path: this.state.inputValue});
     } else {
       this.setState({
         newFolder: false
       });
-      this.props.addFolder({projectName: this.props.projectName, path: this.state.inputValue});
+      this.props.addFolder({path: this.state.inputValue});
     }
     return false;
   }

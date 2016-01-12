@@ -32,7 +32,7 @@ export default class Navbar extends Component {
     }
   }
   render() {
-    let brandLinkLoc = (this.props.account && this.props.account.username) ? '/projects' : '/';
+    let brandLinkLoc = (this.props.account && this.props.account.username) ? `/${this.props.account.username}` : '/';
     let iconButton = (
         <Avatar
           className="Navbar-Avatar"

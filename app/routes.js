@@ -18,12 +18,12 @@ export default (
     <IndexRoute component={ Home } />
     <Route path="account" component={ Account } />
     <Route path="login" component={ Login }/>
-    <Route path="projects/:projectName" component={ Project } />
-    <Route path="projects" component={ Projects } />
     <Route path="recover" component={ Recover } />
     <Route path="signup" component={ Signup }/>
     <Route path="about" component={ About } />
     <Route path="try/:projectName" component={ Try } />
+    <Route path=":owner/:projectName" component={ Project } />
+    <Route path=":owner" component={ Projects } />
     <Route path="*" component={ NotFound } />
   </Route>
 );

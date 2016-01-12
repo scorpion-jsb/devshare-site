@@ -7,35 +7,60 @@ export const TAB_ERR = 'TAB_ERR';
 
 export function navigateToTab(tabData) {
   // console.log('navigate to tab called with', tabData);
- return {
-   type: SET_ACTIVE_TAB,
-   index: tabData.index || 0,
-   projectName: tabData.projectName
- };
+  const { index, project } = tabData;
+  if(!project || !project.name){
+    console.error('Project name is requried to navigate to tab')
+    throw new Error('Project name is requried to navigate to tab');
+    return;
+  }
+  return {
+    type: SET_ACTIVE_TAB,
+    index: index || 0,
+    project
+  };
 }
 export function closeTab(tabData) {
   // console.log('close tab called with', tabData);
+  const { index, project } = tabData;
+  if(!project || !project.name){
+    console.error('Project name is requried to navigate to tab')
+    throw new Error('Project name is requried to navigate to tab');
+    return;
+  }
  return {
    type: TAB_CLOSE,
-   index: tabData.index,
-   projectName: tabData.projectName
+   index,
+   project
  };
 }
 export function openTab(tabData) {
- return {
-   type: TAB_OPEN,
-   title: tabData.title,
-   tabType: tabData.type || 'file',
-   projectName: tabData.projectName,
-   payload: tabData.file || tabData.data || {}
- };
+  console.log('open tab called with', tabData);
+  const { index, project, title, type, file, data } = tabData;
+  if(!project || !project.name){
+    console.error('Project name is requried to open a tab')
+    throw new Error('Project name is requried to open a tab');
+    return;
+  }
+  return {
+    type: TAB_OPEN,
+    title,
+    tabType: type || 'file',
+    project,
+    payload: file || data || {}
+  };
 }
 export function openContentInTab(tabData) {
+  const { index, project, title, type, file, data } = tabData;
+  if(!project || !project.name){
+    console.error('Project name is requried to navigate to tab')
+    throw new Error('Project name is requried to navigate to tab');
+    return;
+  }
  return {
    type: TAB_OPEN,
-   title: tabData.title,
-   tabType: tabData.type || 'file',
-   projectName: tabData.projectName,
-   payload: tabData.data || tabData.file || {}
+   title,
+   tabType: type || 'file',
+   project,
+   payload: data || file || {}
  };
 }

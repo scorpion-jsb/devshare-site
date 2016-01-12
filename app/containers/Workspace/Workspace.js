@@ -1,4 +1,4 @@
-import { merge, toArray, find, findIndex } from 'lodash';
+import { merge, toArray, find, findIndex, isFunction, isUndefined, isString } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -13,35 +13,27 @@ import TextField from 'material-ui/lib/text-field';
 import SideBar from '../../components/SideBar/SideBar';
 import Pane from '../../components/Pane/Pane';
 import Grout from 'kyper-grout';
-let grout = new Grout();
-let base = Rebase.createClass('https://kyper-tech.firebaseio.com/tessellate/files');
-
 import './Workspace.scss';
 
-let CombinedActions = merge(TabActions, Actions.files, Actions.account);
+let activeFirepads = {};
+let grout = new Grout();
 
 class Workspace extends Component {
   constructor() {
     super();
     this.state = {inputVisible: false, settingsOpen: false, files: []};
-    this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
-    this.openFile = this.openFile.bind(this);
-    this.addFile = this.addFile.bind(this);
-    this.selectTab = this.selectTab.bind(this);
-    this.closeTab = this.closeTab.bind(this);
-    this.loadCodeSharing = this.loadCodeSharing.bind(this);
-    this.saveSettings = this.saveSettings.bind(this);
-    this.onFilesDrop = this.onFilesDrop.bind(this);
-    this.activeFirepads = {};
   }
   static propTypes = {
-    projectName: PropTypes.string,
+    project: PropTypes.object,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool
   };
   componentDidMount() {
-    //Listen to files list on firebase
-    this.ref = base.syncState(this.props.projectName, {
+    this.project = this.props.project ? grout.Project(this.props.project) : null;
+    const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
+    this.fb = Rebase.createClass(userUrl);
+    //Bind to files list on firebase
+    this.ref = this.fb.syncState(this.props.project.name, {
       context: this,
       state: 'files',
       asArray: true
@@ -49,95 +41,90 @@ class Workspace extends Component {
   }
   componentWillReceiveProps(nextProps) {
     //Rebind files if props change (new project selected)
-    base.removeBinding(this.ref);
-    this.ref = base.syncState(nextProps.projectName, {
-      context: this,
-      state: 'files',
-      asArray: true
-    });
-  }
-  componentWillUnmount() {
-    base.removeBinding(this.ref);
-  }
-  addFile(addData) {
-    console.log('add file called with:', addData);
-    this.props.addFile(addData);
-  }
-  deleteFile(data) {
-    console.log('add file called with:', data);
-    if(!data.path){
-      this.props.deleteFile({project: {name: this.props.projectName}, data});
+    if(this.fb){
+      if(isFunction(this.fb.removeBinding)){
+        this.fb.removeBinding(this.ref);
+      }
+      this.ref = this.fb.syncState(this.props.project.name, {
+        context: this,
+        state: 'files',
+        asArray: true
+      });
     }
   }
-  openFile(file){
+  componentWillUnmount() {
+    //Unbind files list from Firebase
+    if(this.fb && isFunction(this.fb.removeBinding)){
+      this.fb.removeBinding(this.ref);
+    }
+  }
+  addFile = (file) => {
+    this.props.addFile({project: this.props.project, file});
+  };
+  addFolder = (file) => {
+    this.props.addFolder({project: this.props.project, file});
+  };
+  deleteFile = (file) => {
+    this.props.deleteFile({project: this.props.project, file});
+  };
+  openFile = (file) => {
     let tabData = {
-      projectName: this.props.projectName,
+      project: this.props.project,
       title: file.name || file.path.split('/')[file.path.split('/').length - 1],
       type: 'file',
       file,
     };
+    //Search for already matching title
+    //TODO: Search by matching path instead of tab title
     const matchingInd = findIndex(this.props.tabs.list, {title: tabData.title});
-    //TODO: Only open tab if file is not already open
+    //Only open tab if file is not already open
     if(matchingInd === -1){
-      //Select last tab
       this.props.openTab(tabData);
+      //Select last tab
       let newInd =  this.props.tabs.list ? this.props.tabs.list.length - 1 : 0;
-      console.log('navigating to new tab:', tabData);
-      this.props.navigateToTab({projectName: this.props.projectName, index: newInd});
+      this.props.navigateToTab({project: this.props.project, index: newInd});
     } else {
-      console.warn('A tab with matching file data already exists', matchingInd);
       this.props.navigateToTab({
-        projectName: this.props.projectName,
+        project: this.props.project,
         index: matchingInd
       })
     }
-
-  }
-  toggleSettingsModal(name) {
+  };
+  toggleSettingsModal = (name) => {
     this.setState({
       settingsOpen: !this.state.settingsOpen
     });
-  }
-  saveSettings(updatedSettings) {
-    this.props.updateProject(updatedSettings);
+  };
+  saveSettings = (data) => {
+    this.props.updateProject({project: this.props.project, data});
     //TODO: Show popup of save success/failure
     this.toggleSettingsModal.bind(this, 'settingsOpen');
-  }
-  loadCodeSharing(editor){
-    let tabs = this.props.tabs;
-    if(tabs.list && tabs.list[tabs.currentIndex || 0].file){
-      let fileData = tabs.list[tabs.currentIndex].file;
-      console.log('calling load code sharing', editor, fileData);
-      if(typeof editor.firepad === 'undefined' && !this.activeFirepads[fileData.path]){
-        let file = grout.Project(this.props.projectName).File(fileData);
-        console.warn('file object created:', file);
-        let firepad = createFirepad(file.fbRef, editor, {userId: grout.currentUser.username});
-        firepad.on('ready', () => {
-          console.warn('Firepad is ready:', firepad);
-          this.activeFirepads[file.path] = firepad;
-          firepad.off('ready', () => {
-            console.warn('Firepad off listener fired.', firepad);
-          });
-        });
-      }
+  };
+  loadCodeSharing = (editor) => {
+    let { list, currentIndex } = this.props.tabs;
+    if(list && list[currentIndex || 0].file){
+      const { file } = list[currentIndex || 0];
+      let fileObj = grout.Project(this.props.project).File(file);
+      // console.log('calling load code sharing', editor, fileData);
+      loadFirepadCodeshare(fileObj, editor);
     }
-  }
-  selectTab(index){
-    this.props.navigateToTab({projectName: this.props.projectName, index});
-  }
-  closeTab(index){
-    console.log('closing tab:', this.props.tabs.list[index]);
+  };
+  selectTab = (index) => {
+    this.props.navigateToTab({project: this.props.project, index});
+  };
+  closeTab = (index) => {
+    // console.log('closing tab:', this.props.tabs.list[index]);
     let file = this.props.tabs.list[index].file;
-    if(this.activeFirepads[file.path]){
-      this.activeFirepads[file.path].dispose();
-      delete this.activeFirepads[file.path];
+    if(activeFirepads[file.path]){
+      activeFirepads[file.path].dispose();
+      delete activeFirepads[file.path];
     }
-    this.props.closeTab({projectName: this.props.projectName, index});
-  }
-  onFilesDrop(files) {
+    this.props.closeTab({project: this.props.project, index});
+  };
+  onFilesDrop = (files) => {
     console.log('files dropped:', files);
-    this.props.addFiles({projectName: this.props.projectName, files});
-  }
+    this.props.addFiles({project: this.props.project, files});
+  };
   render() {
     const actions = [
       <FlatButton
@@ -172,7 +159,7 @@ class Workspace extends Component {
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
-          projectName={ this.props.projectName }
+          project={ this.props.project }
           onProjectSelect={ this.props.onProjectSelect }
           showButtons={ this.props.showButtons }
           files={ this.state.files }
@@ -180,6 +167,7 @@ class Workspace extends Component {
           onFileClick={ this.openFile }
           onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
           addFile={ this.addFile }
+          addFile={ this.addFolder }
           onFilesDrop={ this.onFilesDrop }
           onFileDelete={ this.deleteFile }
         />
@@ -195,18 +183,51 @@ class Workspace extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  let projectName = state.router.params ? state.router.params.projectName : null;
-  let tabs = (state.tabs[projectName] && state.tabs[projectName]) ? state.tabs[projectName] : {};//Tab data
+  let owner = state.router.params ? state.router.params.owner : null;
+  let name = state.router.params ? state.router.params.projectName : null;
+  let key = owner ? `${owner}/${name}` : name;
+  let tabs = (state.tabs[key] && state.tabs[key]) ? state.tabs[key] : {};//Tab data
+  //Populate owner param
+  let projects = toArray(state.entities.projects).map((project) => {
+    if(project.owner && isString(project.owner) && state.entities.accounts[project.owner]){
+      project.owner = state.entities.accounts[project.owner];
+    }
+    return project;
+  });
   return {
-    projectName: projectName,
-    projects: toArray(state.entities.projects),
+    project: { name, owner },
+    projects,
     tabs,
     account: state.account,
     router: state.router
   };
 }
+let CombinedActions = merge(TabActions, Actions.files, Actions.account);
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(CombinedActions, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
+
+function loadFirepadCodeshare(file, editor) {
+  if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
+    // console.warn('firepad is not already existant. creating it');
+    let editorSettings = grout.currentUser ? {userId: grout.currentUser.username} : {};
+    //Load file content
+    try {
+      let firepad = createFirepad(file.fbRef, editor, editorSettings);
+      firepad.on('ready', () => {
+        activeFirepads[file.path] = firepad;
+        if(firepad.isHistoryEmpty()){
+          file.get().then(fileRes => {
+            if(fileRes.content){
+              firepad.setText(fileRes.content);
+            }
+          });
+        }
+      });
+    } catch(err) {
+      console.warn('Load firepad error:', err);
+    }
+  }
+}

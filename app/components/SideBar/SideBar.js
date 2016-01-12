@@ -1,4 +1,4 @@
-import { isArray, isUndefined } from 'lodash';
+import { isArray, isUndefined, find, isString } from 'lodash';
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import TreeView from '../TreeView';
@@ -20,7 +20,7 @@ export default class SideBar extends Component {
   }
   static propTypes = {
     projects: PropTypes.array,
-    projectName: PropTypes.string,
+    project: PropTypes.object,
     files: PropTypes.array,
     onFileClick: PropTypes.func,
     onPublishClick: PropTypes.func,
@@ -33,7 +33,8 @@ export default class SideBar extends Component {
   };
   selectProject(e, i, name) {
     if(this.props && this.props.onProjectSelect){
-      this.props.onProjectSelect(name, i);
+      let proj = find(this.props.projects, { name });
+      this.props.onProjectSelect(proj, i);
     }
   }
   render() {
@@ -51,7 +52,7 @@ export default class SideBar extends Component {
             style={{width: '80%', marginLeft: '10%'}}
             labelStyle={{fontSize: '1.5rem', fontWeight: '300'}}
             autoWidth={ true }
-            value={ this.props.projectName }
+            value={ this.props.project.name }
             children={ projectsMenu }
             onChange={ this.selectProject }
           /> : null
@@ -62,7 +63,7 @@ export default class SideBar extends Component {
           onFileClick={ this.props.onFileClick }
           onNewFileClick={ this.props.onNewFileClick }
           addFile={ this.props.addFile }
-          projectName={ this.props.projectName }
+          projectName={ this.props.project.name }
           onFilesDrop={ this.props.onFilesDrop }
           onFileDelete={ this.props.onFileDelete }
         />

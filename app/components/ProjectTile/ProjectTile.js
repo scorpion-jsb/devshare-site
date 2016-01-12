@@ -10,7 +10,14 @@ export default class ProjectTile extends Component {
     super(props);
   }
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    onSelect: PropTypes.func
+  };
+  handleSelect = (e) => {
+    e.preventDefault();
+    if(this.props && this.props.onSelect){
+      this.props.onSelect(this.props.project);
+    }
   };
   render(){
     let collaborators;
@@ -29,9 +36,9 @@ export default class ProjectTile extends Component {
     }
     return (
       <Paper key={`Project-${this.props.project.name}`} className="ProjectTile">
-        <Link className="ProjectTile-Name" to={`/projects/${this.props.project.name}`}>
+        <span className="ProjectTile-Name" onClick={ this.handleSelect }>
           { this.props.project.name }
-        </Link>
+        </span>
         <span className="ProjectTile-Owner">
           { this.props.project.owner.username || 'No Owner' }
         </span>

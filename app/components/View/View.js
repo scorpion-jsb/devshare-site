@@ -1,9 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import _ from 'lodash';
 import Editor from '../Editor';
 import './View.scss';
 
-class View extends Component {
+export default class View extends Component {
   constructor(props){
     super(props);
   }
@@ -15,11 +14,11 @@ class View extends Component {
   };
   render(){
     let style = this.props.visible ? { display: 'block' } : { display: 'none' };
-    let name = `ace-editor-${this.props.index}`;
+    const name = `ace-editor-${this.props.index}`;
     // TODO: Switch view type based on provided type instead of availability of editor data
     if(this.props.viewData && this.props.viewData.file){
-      let file = this.props.viewData.file;
-      console.warn('file in view:', file);
+      const { file } = this.props.viewData;
+      // console.warn('file in view:', file);
       return (
         <div className="View" style={ style }>
           <Editor
@@ -41,5 +40,3 @@ class View extends Component {
 
   }
 }
-
-export default View;

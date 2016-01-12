@@ -1,5 +1,10 @@
+@import '../../variables';
 .Navbar {
   box-sizing: border-box;
+  &-Brand {
+    color: $navbarText;
+    font-weight: 300;
+  }
   &-Avatar {
     margin-right: 1rem;
   }
@@ -7,8 +12,9 @@
     margin-top: 6px;
     button {
       span {
+        font-weight: 300;
         text-decoration: none;
-        color: white;
+        color: $navbarText;
       }
     }
   }

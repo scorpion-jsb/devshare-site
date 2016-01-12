@@ -42,8 +42,8 @@ export default class Navbar extends Component {
       );
     let mainMenu = (
       <div className="Navbar-Main-Menu">
-        <FlatButton label="Signup" onClick={ this.selectItem.bind(this, null, 'signup')} />
-        <FlatButton label="Login" onClick={ this.selectItem.bind(this, null, 'login')} />
+        <FlatButton label="Sign Up" onClick={ this.selectItem.bind(this, null, 'signup') } />
+        <FlatButton label="Login" onClick={ this.selectItem.bind(this, null, 'login') } />
       </div>
     );
     let rightMenu = this.props.account.username ? (
@@ -60,7 +60,7 @@ export default class Navbar extends Component {
     ) : mainMenu;
     return (
       <AppBar
-        title={<Link to={ brandLinkLoc }>Hypercube</Link>}
+        title={<Link className="Navbar-Brand" to={ brandLinkLoc }>Devshare</Link>}
         className="Navbar"
         showMenuIconButton={ false }
         iconElementRight={rightMenu}

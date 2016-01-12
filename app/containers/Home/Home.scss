@@ -1,25 +1,43 @@
 .Home {
-  display:flex;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: rgba(50,50,50,0.05);
   padding-top: 1rem;
   height: 100%;
+  &-Preview {
+    width: 80%;
+    &-Img {
+      width: 100%;
+      height: auto;
+    }
+  }
   &-Hero {
-    display:flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
   &-Name {
     font-size: 5rem;
-    font-weight: 300;
+    font-weight: 100;
+    text-decoration: bold;
+    text-transform: uppercase;
   }
   &-Description {
     margin-top: 1rem;
     font-size: 1.5rem;
     font-weight: 300;
+    text-align: center;
   }
   &-Buttons {
     display:flex;

@@ -1,5 +1,5 @@
 {
-  "name": "hypercube",
+  "name": "devshare",
   "version": "0.0.1",
   "main": "bin/server.js",
   "scripts": {

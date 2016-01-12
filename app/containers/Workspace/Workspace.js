@@ -209,33 +209,24 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
 
 function loadFirepadCodeshare(file, editor) {
-  setTimeout(() => {
-    if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
-      // console.warn('firepad is not already existant. creating it');
-      let editorSettings = grout.currentUser ? {userId: grout.currentUser.username} : {};
-      //Load file content
-      try {
-        file.get().then(fileRes => {
-          if(fileRes.content && !fileRes.history){
-            editorSettings.defaultText = fileRes.content;
-          }
-          try {
-            let firepad = createFirepad(file.fbRef, editor, editorSettings);
-            firepad.on('ready', () => {
-              activeFirepads[file.path] = firepad;
-              // firepad.off('ready', () => {
-              //  console.warn('Firepad off listener fired.', firepad);
-              // });
-            });
-          } catch(err) {
-            console.warn('Firepad called when already loaded');
-          }
-        }, err => {
-          console.error('Error getting file data.', err);
-        });
-      } catch(err) {
-        console.warn('Load firepad threw', err);
-      }
+  if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
+    // console.warn('firepad is not already existant. creating it');
+    let editorSettings = grout.currentUser ? {userId: grout.currentUser.username} : {};
+    //Load file content
+    try {
+      let firepad = createFirepad(file.fbRef, editor, editorSettings);
+      firepad.on('ready', () => {
+        activeFirepads[file.path] = firepad;
+        if(firepad.isHistoryEmpty()){
+          file.get().then(fileRes => {
+            if(fileRes.content){
+              firepad.setText(fileRes.content);
+            }
+          });
+        }
+      });
+    } catch(err) {
+      console.warn('Load firepad error:', err);
     }
-  }, 300)
+  }
 }

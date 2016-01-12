@@ -183,6 +183,8 @@ class TreeView extends Component {
         <li className="TreeView-None" key="NotFound-1">
           <div>
             <strong>Right click</strong><br/>
+              OR <br/>
+            <strong>Drop files</strong><br/>
               to get started <br/>
           </div>
         </li>

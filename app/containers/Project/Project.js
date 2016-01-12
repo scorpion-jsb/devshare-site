@@ -16,15 +16,15 @@ class Project extends Component {
       this.props.getProjects();
     }
   }
-  selectProject(name) {
-    console.log('new project selected', name);
-    this.props.history.pushState(null, `/projects/${name}`);
+  selectProject(proj) {
+    console.log('new project selected', proj);
+    this.props.history.pushState(null, `/${proj.owner.username}/${proj.name}`);
   }
   render(){
     return (
       <div className="Project">
         <Workspace
-          projectName={ this.props.projectName }
+          project={ this.props.project }
           showButtons={ true }
           onProjectSelect={ this.selectProject }
         />
@@ -34,8 +34,10 @@ class Project extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
+  let name = state.router.params.projectName;
+  let owner = state.router.params.owner;
   return {
-    projectName: state.router.params.projectName,
+    project: { name, owner },
     account: state.account,
     router: state.router
   };

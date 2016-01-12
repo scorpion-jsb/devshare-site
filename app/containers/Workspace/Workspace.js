@@ -1,4 +1,4 @@
-import { merge, toArray, find, findIndex, isFunction, isUndefined } from 'lodash';
+import { merge, toArray, find, findIndex, isFunction, isUndefined, isString } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -13,19 +13,18 @@ import TextField from 'material-ui/lib/text-field';
 import SideBar from '../../components/SideBar/SideBar';
 import Pane from '../../components/Pane/Pane';
 import Grout from 'kyper-grout';
-let grout = new Grout();
-
 import './Workspace.scss';
 
-let CombinedActions = merge(TabActions, Actions.files, Actions.account);
 let activeFirepads = {};
+let grout = new Grout();
+
 class Workspace extends Component {
   constructor() {
     super();
     this.state = {inputVisible: false, settingsOpen: false, files: []};
   }
   static propTypes = {
-    projectName: PropTypes.string,
+    project: PropTypes.object,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool
   };
@@ -33,7 +32,7 @@ class Workspace extends Component {
     this.project = this.props.project ? grout.Project(this.props.project) : null;
     const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
     this.fb = Rebase.createClass(userUrl);
-    //Listen to files list on firebase
+    //Bind to files list on firebase
     this.ref = this.fb.syncState(this.props.project.name, {
       context: this,
       state: 'files',
@@ -46,7 +45,7 @@ class Workspace extends Component {
       if(isFunction(this.fb.removeBinding)){
         this.fb.removeBinding(this.ref);
       }
-      this.ref = this.fb.syncState(nextProps.projectName, {
+      this.ref = this.fb.syncState(this.props.project.name, {
         context: this,
         state: 'files',
         asArray: true
@@ -54,25 +53,19 @@ class Workspace extends Component {
     }
   }
   componentWillUnmount() {
+    //Unbind files list from Firebase
     if(this.fb && isFunction(this.fb.removeBinding)){
       this.fb.removeBinding(this.ref);
     }
   }
-  addFile = (addData) => {
-    // console.log('add file called with:', addData);
-    const { path } = addData;
-    this.props.addFile({project: this.props.project, path});
+  addFile = (file) => {
+    this.props.addFile({project: this.props.project, file});
   };
-  addFolder = (addData) => {
-    // console.log('add file called with:', addData);
-    const { path } = addData;
-    this.props.addFolder({project: this.props.project, path});
+  addFolder = (file) => {
+    this.props.addFolder({project: this.props.project, file});
   };
-  deleteFile = (data) => {
-    // console.log('add file called with:', data);
-    if(!data.path){
-      this.props.deleteFile({project: this.props.project, data});
-    }
+  deleteFile = (file) => {
+    this.props.deleteFile({project: this.props.project, file});
   };
   openFile = (file) => {
     let tabData = {
@@ -81,16 +74,16 @@ class Workspace extends Component {
       type: 'file',
       file,
     };
+    //Search for already matching title
+    //TODO: Search by matching path instead of tab title
     const matchingInd = findIndex(this.props.tabs.list, {title: tabData.title});
-    //TODO: Only open tab if file is not already open
+    //Only open tab if file is not already open
     if(matchingInd === -1){
-      //Select last tab
       this.props.openTab(tabData);
+      //Select last tab
       let newInd =  this.props.tabs.list ? this.props.tabs.list.length - 1 : 0;
-      // console.log('navigating to new tab:', tabData);
-      // this.props.navigateToTab({project: this.props.project, index: newInd});
+      this.props.navigateToTab({project: this.props.project, index: newInd});
     } else {
-      // console.warn('A tab with matching file data already exists', matchingInd);
       this.props.navigateToTab({
         project: this.props.project,
         index: matchingInd
@@ -166,7 +159,7 @@ class Workspace extends Component {
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
-          projectName={ this.props.projectName }
+          project={ this.props.project }
           onProjectSelect={ this.props.onProjectSelect }
           showButtons={ this.props.showButtons }
           files={ this.state.files }
@@ -194,14 +187,22 @@ function mapStateToProps(state) {
   let name = state.router.params ? state.router.params.projectName : null;
   let key = owner ? `${owner}/${name}` : name;
   let tabs = (state.tabs[key] && state.tabs[key]) ? state.tabs[key] : {};//Tab data
+  //Populate owner param
+  let projects = toArray(state.entities.projects).map((project) => {
+    if(project.owner && isString(project.owner) && state.entities.accounts[project.owner]){
+      project.owner = state.entities.accounts[project.owner];
+    }
+    return project;
+  });
   return {
     project: { name, owner },
-    projects: toArray(state.entities.projects),
+    projects,
     tabs,
     account: state.account,
     router: state.router
   };
 }
+let CombinedActions = merge(TabActions, Actions.files, Actions.account);
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(CombinedActions, dispatch);

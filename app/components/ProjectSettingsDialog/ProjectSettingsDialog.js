@@ -4,7 +4,7 @@ import Dialog from 'material-ui/lib/dialog';
 import TextField from 'material-ui/lib/text-field';
 import './ProjectSettingsDialog.scss';
 
-class ProjectSettingsDialog extends Component {
+export default class ProjectSettingsDialog extends Component {
   constructor(props){
     super(props);
   }
@@ -39,7 +39,6 @@ class ProjectSettingsDialog extends Component {
     return (
       <Dialog
         title="Settings"
-        className="ProjectSettingsDialog"
         actions={ actions }
         modal={false}
         open={ this.props.modalOpen }
@@ -48,13 +47,11 @@ class ProjectSettingsDialog extends Component {
         titleClassName="ProjectSettingsDialog-Settings-Title"
         contentStyle={{'width': '30%'}}
         >
-        <TextField hintText="Project name" />
-        <TextField hintText="Owner" />
-        <TextField hintText="Deployment url" />
-        <TextField hintText="Git url" />
+        <TextField hintText="Project name" floatingLabelText="Project name" />
+        <TextField hintText="Owner" floatingLabelText="Owner" disabled={true} />
+        <TextField hintText="Deployment url" floatingLabelText="Deployment Url"/>
+        <TextField hintText="Git url" floatingLabelText="Git url"/>
       </Dialog>
     );
   }
 }
-
-export default ProjectSettingsDialog

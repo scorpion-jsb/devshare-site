@@ -61,7 +61,7 @@ class SharingDialog extends Component {
             <ListItem
               leftAvatar={<Avatar
                 icon={ <PersonIcon /> }
-                src={ user.image.url || '' }
+                src={ (user.image && user.image.url) ? user.image.url : null }
               />}
               rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
               primaryText="Scott Prue"
@@ -69,7 +69,7 @@ class SharingDialog extends Component {
             <ListItem
               leftAvatar={<Avatar
                 icon={ <PersonIcon /> }
-                src={ user.image.url || '' }
+                src={ (user.image && user.image.url) ? user.image.url : null }
               />}
               rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
               primaryText="Mel van Londen"
@@ -77,7 +77,7 @@ class SharingDialog extends Component {
             <ListItem
               leftAvatar={<Avatar
                 icon={ <PersonIcon /> }
-                src={ user.image.url || '' }
+                src={ (user.image && user.image.url) ? user.image.url : null }
               />}
               rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
               primaryText="John Cusak"

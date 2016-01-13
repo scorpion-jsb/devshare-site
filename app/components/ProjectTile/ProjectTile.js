@@ -28,7 +28,7 @@ export default class ProjectTile extends Component {
           <div key={`${this.props.project.name}-Collab-${i}`} className="ProjectTile-Collaborator">
             <Avatar
               className="ProjectTile-Collaborator-Avatar"
-              src={ user.image.url || '' }
+              src={ (user.image && user.image.url) ? user.image.url : null }
               icon={ <PersonIcon /> }
               size={60}
             />

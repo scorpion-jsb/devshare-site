@@ -82376,7 +82376,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onDragEnter: _react2['default'].PropTypes.func,
 	  onDragLeave: _react2['default'].PropTypes.func,
 	
-	  children: _react2['default'].PropTypes.node,
+	  children: _react2['default'].PropTypes.element,
 	  style: _react2['default'].PropTypes.object,
 	  activeStyle: _react2['default'].PropTypes.object,
 	  rejectStyle: _react2['default'].PropTypes.object,
@@ -82395,6 +82395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports['default'] = Dropzone;
 	module.exports = exports['default'];
+
 
 /***/ },
 /* 300 */
@@ -83166,7 +83167,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = RaisedButton;
-	module.exports = exports['default'];
 
 /***/ },
 /* 304 */
@@ -83226,7 +83226,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _styles2.default.prepareStyles.apply(_styles2.default, [this.state && this.state.muiTheme || this.context.muiTheme].concat([].slice.apply(arguments)));
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 305 */
@@ -83275,7 +83274,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return (0, _reactAddonsUpdate2.default)(array, { $splice: [[0, 1]] });
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 306 */
@@ -83514,7 +83512,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _autoPrefix2.default.all(flipped);
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 309 */
@@ -83594,7 +83591,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return prefixes ? prefixes[0] : key;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 310 */
@@ -84617,7 +84613,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return property + ' ' + duration + ' ' + easeFunction + ' ' + delay;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 323 */
@@ -84800,7 +84795,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 324 */
@@ -84855,7 +84849,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }) : children;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 325 */
@@ -84971,7 +84964,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	exports.default = new Typography();
-	module.exports = exports['default'];
 
 /***/ },
 /* 328 */
@@ -85269,7 +85261,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  darkWhite: 'rgba(255, 255, 255, 0.87)',
 	  lightWhite: 'rgba(255, 255, 255, 0.54)'
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 329 */
@@ -85608,7 +85599,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = EnhancedButton;
-	module.exports = exports['default'];
 
 /***/ },
 /* 330 */
@@ -85739,7 +85729,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return ['keydown', 'keypress', 'keyup'].indexOf(e.type) !== -1;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 334 */
@@ -85760,7 +85749,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  TAB: 9,
 	  UP: 38
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 335 */
@@ -85918,7 +85906,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FocusRipple;
-	module.exports = exports['default'];
 
 /***/ },
 /* 336 */
@@ -86054,7 +86041,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ScaleIn;
-	module.exports = exports['default'];
 
 /***/ },
 /* 337 */
@@ -86542,7 +86528,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ScaleInChild;
-	module.exports = exports['default'];
 
 /***/ },
 /* 341 */
@@ -86556,21 +86541,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _lightBaseTheme = __webpack_require__(342);
 	
-	var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = _lightBaseTheme2.default;
-	
-	// import deprecatedExport from '../../utils/deprecatedExport';
-	
-	// export default deprecatedExport(
-	//   lightBaseTheme,
-	//   'material-ui/lib/styles/raw-themes/light-raw-theme',
-	//   'material-ui/lib/styles/baseThemes/lightBaseTheme'
-	// );
-	
-	module.exports = exports['default'];
+	Object.defineProperty(exports, 'default', {
+	  enumerable: true,
+	  get: function get() {
+	    return _lightBaseTheme.default;
+	  }
+	});
 
 /***/ },
 /* 342 */
@@ -86621,7 +86597,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    clockCircleColor: _colorManipulator2.default.fade(_colors2.default.darkBlack, 0.07)
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 343 */
@@ -86646,7 +86621,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  desktopSubheaderHeight: 48,
 	  desktopToolbarHeight: 56
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 344 */
@@ -86691,8 +86665,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	//  'material-ui/lib/styles/theme-manager',
 	//  'material-ui/lib/styles/themeManager'
 	//);
-	
-	module.exports = exports['default'];
 
 /***/ },
 /* 345 */
@@ -86700,11 +86672,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+	
 	function isObject(obj) {
 	  return (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' && obj !== null;
 	}
@@ -86752,7 +86725,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	exports.default = extend;
-	module.exports = exports['default'];
 
 /***/ },
 /* 346 */
@@ -86956,8 +86928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      stripeColor: _colorManipulator2.default.lighten(palette.primary1Color, 0.55),
 	      selectedColor: palette.borderColor,
 	      textColor: palette.textColor,
-	      borderColor: palette.borderColor,
-	      height: 48
+	      borderColor: palette.borderColor
 	    },
 	    tableRowColumn: {
 	      height: 48,
@@ -87010,7 +86981,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, muiTheme);
 	}
-	module.exports = exports['default'];
 
 /***/ },
 /* 347 */
@@ -88938,7 +88908,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  snackbar: 2900,
 	  tooltip: 3000
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 365 */
@@ -89133,7 +89102,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = TouchRipple;
-	module.exports = exports['default'];
 
 /***/ },
 /* 366 */
@@ -89210,7 +89178,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    el.style.transition = originalTransition;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 367 */
@@ -89337,7 +89304,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = CircleRipple;
-	module.exports = exports['default'];
 
 /***/ },
 /* 368 */
@@ -89387,35 +89353,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'Paper',
 	
 	  propTypes: {
-	    /**
-	     * Children passed into the paper element.
-	     */
 	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Set to true to generate a circlular paper container.
-	     */
 	    circle: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * By default, the paper container will have a border radius.
-	     * Set this to false to generate a container with sharp corners.
-	     */
 	    rounded: _react2.default.PropTypes.bool,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Set to false to disable CSS transitions for the paper element.
-	     */
 	    transitionEnabled: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * This number represents the zDepth of the paper shadow.
-	     */
 	    zDepth: _propTypes2.default.zDepth
 	  },
 	
@@ -89490,7 +89436,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Paper;
-	module.exports = exports['default'];
 
 /***/ },
 /* 369 */
@@ -89531,7 +89476,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  zDepth: _react2.default.PropTypes.oneOf([0, 1, 2, 3, 4, 5])
 	
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 370 */
@@ -89550,7 +89494,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _TextField2.default;
-	module.exports = exports['default'];
 
 /***/ },
 /* 371 */
@@ -89569,7 +89512,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _TextField2.default;
-	module.exports = exports['default'];
 
 /***/ },
 /* 372 */
@@ -90032,7 +89974,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = TextField;
-	module.exports = exports['default'];
 
 /***/ },
 /* 373 */
@@ -90050,7 +89991,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return 'mui-id-' + index++;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 374 */
@@ -90258,7 +90198,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = EnhancedTextarea;
-	module.exports = exports['default'];
 
 /***/ },
 /* 375 */
@@ -90328,7 +90267,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return true;
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 376 */
@@ -90336,12 +90274,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = shallowEqual;
+	
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+	
 	function shallowEqual(objA, objB) {
 	  if (objA === objB) {
 	    return true;
@@ -90368,7 +90307,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return true;
 	}
-	module.exports = exports['default'];
 
 /***/ },
 /* 377 */
@@ -90449,7 +90387,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	TextFieldHint.defaultProps = defaultProps;
 	
 	exports.default = TextFieldHint;
-	module.exports = exports['default'];
 
 /***/ },
 /* 378 */
@@ -90563,7 +90500,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	TextFieldLabel.defaultProps = defaultProps;
 	
 	exports.default = TextFieldLabel;
-	module.exports = exports['default'];
 
 /***/ },
 /* 379 */
@@ -90703,7 +90639,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	TextFieldUnderline.defaultProps = defaultProps;
 	
 	exports.default = TextFieldUnderline;
-	module.exports = exports['default'];
 
 /***/ },
 /* 380 */
@@ -91401,7 +91336,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = AppBar;
-	module.exports = exports['default'];
 
 /***/ },
 /* 386 */
@@ -91740,7 +91674,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = IconButton;
-	module.exports = exports['default'];
 
 /***/ },
 /* 387 */
@@ -91782,25 +91715,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'FontIcon',
 	
 	  propTypes: {
-	    /**
-	     * This is the font color of the font icon. If not specified,
-	     * this component will default to muiTheme.palette.textColor.
-	     */
 	    color: _react2.default.PropTypes.string,
-	
-	    /**
-	     * This is the icon color when the mouse hovers over the icon.
-	     */
 	    hoverColor: _react2.default.PropTypes.string,
-	
-	    /**
-	     * Function called when mouse enters this element.
-	     */
 	    onMouseEnter: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Function called when mouse leaves this element.
-	     */
 	    onMouseLeave: _react2.default.PropTypes.func,
 	
 	    /**
@@ -91820,12 +91737,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  mixins: [_stylePropable2.default],
 	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      onMouseEnter: function onMouseEnter() {},
-	      onMouseLeave: function onMouseLeave() {}
-	    };
-	  },
 	  getInitialState: function getInitialState() {
 	    return {
 	      hovered: false,
@@ -91890,7 +91801,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FontIcon;
-	module.exports = exports['default'];
 
 /***/ },
 /* 388 */
@@ -92099,7 +92009,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Tooltip;
-	module.exports = exports['default'];
 
 /***/ },
 /* 389 */
@@ -92140,7 +92049,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationMenu;
-	module.exports = exports['default'];
 
 /***/ },
 /* 390 */
@@ -92182,46 +92090,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'SvgIcon',
 	
 	  propTypes: {
-	    /**
-	     * Elements passed into the SVG Icon.
-	     */
 	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * This is the fill color of the svg icon.
-	     * If not specified, this component will default
-	     * to muiTheme.palette.textColor.
-	     */
 	    color: _react2.default.PropTypes.string,
-	
-	    /**
-	     * This is the icon color when the mouse hovers over the icon.
-	     */
 	    hoverColor: _react2.default.PropTypes.string,
-	
-	    /**
-	     * Function called when mouse enters this element.
-	     */
 	    onMouseEnter: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Function called when mouse leaves this element.
-	     */
 	    onMouseLeave: _react2.default.PropTypes.func,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Allows you to redifine what the coordinates
-	     * without units mean inside an svg element. For example,
-	     * if the SVG element is 500(width) by 200(height), and you
-	     * pass viewBox="0 0 50 20", this means that the coordinates inside
-	     * the svg will go from the top left corner (0,0) to bottom right (50,20)
-	     * and each unit will be worth 10px.
-	     */
 	    viewBox: _react2.default.PropTypes.string
 	  },
 	
@@ -92311,7 +92189,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = SvgIcon;
-	module.exports = exports['default'];
 
 /***/ },
 /* 391 */
@@ -92352,7 +92229,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationClose;
-	module.exports = exports['default'];
 
 /***/ },
 /* 392 */
@@ -92670,7 +92546,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = IconMenu;
-	module.exports = exports['default'];
 
 /***/ },
 /* 393 */
@@ -92748,113 +92623,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'Menu',
 	
 	  propTypes: {
-	    /**
-	     * If true, the menu will apply transitions when added it
-	     * gets added to the DOM. In order for transitions to
-	     * work, wrap the menu inside a ReactTransitionGroup.
-	     */
 	    animated: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * If true, the width will automatically be
-	     * set according to the items inside the menu
-	     * using the proper keyline increment.
-	     */
 	    autoWidth: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Children for the Menu. Usually MenuItems.
-	     */
 	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Indicates if the menu should render with compact desktop styles.
-	     */
 	    desktop: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * True if this item should be focused by the keyboard initially.
-	     */
 	    initiallyKeyboardFocused: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * The style object to use to override underlying list style.
-	     */
 	    listStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The maxHeight of the menu in pixels. If
-	     * specified, the menu will scroll if larger than the maxHeight.
-	     */
 	    maxHeight: _react2.default.PropTypes.number,
-	
-	    /**
-	     * If true, the value can an array and allow the menu to be a multi-select.
-	     */
 	    multiple: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Fired when a menu item is touchTapped and the menu item
-	     * value is not equal to the current menu value.
-	     */
-	    onChange: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Fired when an Esc key is keyed down.
-	     */
 	    onEscKeyDown: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Fired when a menu item is touchTapped.
-	     */
 	    onItemTouchTap: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Fired when a key is pressed.
-	     */
 	    onKeyDown: _react2.default.PropTypes.func,
-	
-	    /**
-	     * This is the placement of the menu relative to the IconButton.
-	     */
 	    openDirection: _propTypes2.default.corners,
-	
-	    /**
-	     * Style for the selected Menu Item.
-	     */
 	    selectedMenuItemStyle: _react2.default.PropTypes.object,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The value of the selected menu item. If passed in,
-	     * this will make the menu a controlled component.
-	     * This component also supports valueLink.
-	     */
 	    value: _react2.default.PropTypes.any,
-	
-	    /**
-	     * ValueLink for this component when controlled.
-	     */
 	    valueLink: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Sets the width of the menu. If not specified, the menu
-	     * width will be dictated by its children. The rendered
-	     * width will always be a keyline increment
-	     * (64px for desktop, 56px otherwise).
-	     */
 	    width: _propTypes2.default.stringOrNumber,
-	
-	    /**
-	     * Sets the width of the menu. If not specified,
-	     * the menu width will be dictated by its children.
-	     * The rendered width will always be a keyline increment
-	     * (64px for desktop, 56px otherwise).
-	     */
 	    zDepth: _propTypes2.default.zDepth
 	  },
 	
@@ -92873,10 +92662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	      animated: false,
 	      autoWidth: true,
-	      desktop: false,
-	      initiallyKeyboardFocused: false,
 	      maxHeight: null,
-	      multiple: false,
 	      onEscKeyDown: function onEscKeyDown() {},
 	      onItemTouchTap: function onItemTouchTap() {},
 	      onKeyDown: function onKeyDown() {},
@@ -93296,7 +93082,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Menu;
-	module.exports = exports['default'];
 
 /***/ },
 /* 394 */
@@ -93337,7 +93122,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 395 */
@@ -93396,7 +93180,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _events2.default.off(document, 'touchend', this._checkClickAway);
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 396 */
@@ -93450,35 +93233,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'List',
 	
 	  propTypes: {
-	    /**
-	     * These are usually ListItems that are passed to
-	     * be part of the list.
-	     */
 	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * If true, the subheader will be indented by 72px.
-	     */
 	    insetSubheader: _react2.default.PropTypes.bool,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The subheader string that will be displayed at the top of the list.
-	     */
 	    subheader: _react2.default.PropTypes.node,
-	
-	    /**
-	     * The style object to override subheader styles.
-	     */
 	    subheaderStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The zDepth prop passed to the Paper element inside list.
-	     */
 	    zDepth: _propTypes2.default.zDepth
 	  },
 	
@@ -93495,7 +93258,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      insetSubheader: false,
 	      zDepth: 0
 	    };
 	  },
@@ -93565,7 +93327,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = List;
-	module.exports = exports['default'];
 
 /***/ },
 /* 397 */
@@ -93934,13 +93695,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ref: 'layer',
 	      open: this.state.open,
 	      componentClickAway: this.componentClickAway,
-	      useLayerForClickAway: this.props.useLayerForClickAway,
 	      render: this.renderLayer });
 	  }
 	});
 	
 	exports.default = Popover;
-	module.exports = exports['default'];
 
 /***/ },
 /* 398 */
@@ -93976,7 +93735,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 399 */
@@ -94155,7 +93913,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = RenderToLayer;
-	module.exports = exports['default'];
 
 /***/ },
 /* 400 */
@@ -94819,7 +94576,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = PopoverDefaultAnimation;
-	module.exports = exports['default'];
 
 /***/ },
 /* 404 */
@@ -94860,7 +94616,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationMoreVert;
-	module.exports = exports['default'];
 
 /***/ },
 /* 405 */
@@ -94930,76 +94685,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'MenuItem',
 	
 	  propTypes: {
-	    /**
-	     * If true, a left check mark will be rendered.
-	     */
 	    checked: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Elements passed as children to inner ListItem.
-	     */
 	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Indicates if the menu should render with compact desktop styles.
-	     */
 	    desktop: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Disables a menu item.
-	     */
 	    disabled: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Prop passed down to ListItem that tells it what kind of focus it has.
-	     */
 	    focusState: _react2.default.PropTypes.oneOf(['none', 'focused', 'keyboard-focused']),
-	
-	    /**
-	     * Style overrides for the inner div.
-	     */
 	    innerDivStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * If true, the children will be indented.
-	     * Only needed when there is no leftIcon.
-	     */
 	    insetChildren: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * This is the SvgIcon or FontIcon to be displayed on the left side.
-	     */
 	    leftIcon: _react2.default.PropTypes.element,
-	
-	    /**
-	     * Nested MenuItems for this MenuItem. Used to make nested menus.
-	     */
 	    menuItems: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Fired when the element is touchTapped.
-	     */
 	    onTouchTap: _react2.default.PropTypes.func,
-	
-	    /**
-	     * This is the SvgIcon or FontIcon to be displayed on the right side.
-	     */
 	    rightIcon: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the block element that contains the secondary text.
-	     * If a string is passed in, a div tag will be rendered.
-	     */
 	    secondaryText: _react2.default.PropTypes.node,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The value of the menu item.
-	     */
 	    value: _react2.default.PropTypes.any
 	  },
 	
@@ -95016,11 +94718,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      checked: false,
-	      desktop: false,
-	      disabled: false,
-	      focusState: 'none',
-	      insetChildren: false
+	      focusState: 'none'
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -95217,7 +94915,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = MenuItem;
-	module.exports = exports['default'];
 
 /***/ },
 /* 406 */
@@ -95258,7 +94955,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationCheck;
-	module.exports = exports['default'];
 
 /***/ },
 /* 407 */
@@ -95340,151 +95036,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'ListItem',
 	
 	  propTypes: {
-	    /**
-	     * Generate a nested list indicator icon when
-	     * nested list items are detected. Set to false
-	     * if you do not want an indicator auto-generated.
-	     * Note that an indicator will not be created if a
-	     * rightIcon/Button has been specified.
-	     */
 	    autoGenerateNestedIndicator: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Children passed into the ListItem.
-	     */
 	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Does not allow the element to be focused by the keyboard.
-	     */
 	    disableKeyboardFocus: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * If true, the list-item will not be clickable
-	     * and will not display hover affects.
-	     * This is automatically disabled if leftCheckbox
-	     * or rightToggle is set.
-	     */
 	    disabled: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Controls whether or not the child ListItems are initially displayed.
-	     */
 	    initiallyOpen: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Style prop for the innder div element.
-	     */
 	    innerDivStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * If true, the children will be indented by 72px.
-	     * Only needed if there is no left avatar or left icon.
-	     */
+	    innerStyle: _react2.default.PropTypes.object,
 	    insetChildren: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * This is the Avatar element to be displayed on the left side.
-	     */
 	    leftAvatar: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the Checkbox element to be displayed on the left side.
-	     */
 	    leftCheckbox: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the SvgIcon or FontIcon to be displayed on the left side.
-	     */
 	    leftIcon: _react2.default.PropTypes.element,
-	
-	    /**
-	     * An array of ListItems to nest underneath the current ListItem.
-	     */
 	    nestedItems: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.element),
-	
-	    /**
-	     * Controls how deep a ListItem appears.
-	     * This property is automatically managed so modify at your own risk.
-	     */
 	    nestedLevel: _react2.default.PropTypes.number,
-	
-	    /**
-	     * Called when the ListItem has keyboard focus.
-	     */
 	    onKeyboardFocus: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Called when the mouse is over the ListItem.
-	     */
 	    onMouseEnter: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Called when the mouse is no longer over the ListItem.
-	     */
 	    onMouseLeave: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Called when the ListItem toggles its nested ListItems.
-	     */
 	    onNestedListToggle: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Called when touches start.
-	     */
 	    onTouchStart: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Called when a touch tap event occures on the component.
-	     */
 	    onTouchTap: _react2.default.PropTypes.func,
-	
-	    /**
-	     * This is the block element that contains the primary text.
-	     * If a string is passed in, a div tag will be rendered.
-	     */
 	    primaryText: _react2.default.PropTypes.node,
-	
-	    /**
-	     * If provided, tapping on the primary text
-	     * of the item toggles the nested list.
-	     */
 	    primaryTogglesNestedList: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * This is the avatar element to be displayed on the right side.
-	     */
 	    rightAvatar: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the SvgIcon or FontIcon to be displayed on the right side.
-	     */
 	    rightIcon: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the IconButton to be displayed on the right side.
-	     * Hovering over this button will remove the ListItem hover.
-	     * Also, clicking on this button will not trigger a
-	     * ListItem ripple. The event will be stopped and prevented
-	     * from bubbling up to cause a ListItem click.
-	     */
 	    rightIconButton: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the Toggle element to display on the right side.
-	     */
 	    rightToggle: _react2.default.PropTypes.element,
-	
-	    /**
-	     * This is the block element that contains the secondary text.
-	     * If a string is passed in, a div tag will be rendered.
-	     */
 	    secondaryText: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Can be 1 or 2. This is the number of secondary
-	     * text lines before ellipsis will show.
-	     */
 	    secondaryTextLines: _react2.default.PropTypes.oneOf([1, 2]),
 	
 	    /**
@@ -95507,10 +95084,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      autoGenerateNestedIndicator: true,
-	      disableKeyboardFocus: false,
-	      disabled: false,
 	      initiallyOpen: false,
-	      insetChildren: false,
 	      nestedItems: [],
 	      nestedLevel: 0,
 	      onKeyboardFocus: function onKeyboardFocus() {},
@@ -95905,7 +95479,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ListItem;
-	module.exports = exports['default'];
 
 /***/ },
 /* 408 */
@@ -95946,7 +95519,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationArrowDropUp;
-	module.exports = exports['default'];
 
 /***/ },
 /* 409 */
@@ -95987,7 +95559,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationArrowDropDown;
-	module.exports = exports['default'];
 
 /***/ },
 /* 410 */
@@ -96059,7 +95630,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NestedList;
-	module.exports = exports['default'];
 
 /***/ },
 /* 411 */
@@ -96315,7 +95885,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FlatButton;
-	module.exports = exports['default'];
 
 /***/ },
 /* 412 */
@@ -96420,7 +95989,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FlatButtonLabel;
-	module.exports = exports['default'];
 
 /***/ },
 /* 413 */
@@ -96608,7 +96176,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Avatar;
-	module.exports = exports['default'];
 
 /***/ },
 /* 414 */
@@ -97244,45 +96811,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'CircularProgress',
 	
 	  propTypes: {
-	    /**
-	     * Override the progress's color.
-	     */
 	    color: _react2.default.PropTypes.string,
-	
-	    /**
-	     * Style for inner wrapper div.
-	     */
 	    innerStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The max value of progress, only works in determinate mode.
-	     */
 	    max: _react2.default.PropTypes.number,
-	
-	    /**
-	     * The min value of progress, only works in determinate mode.
-	     */
 	    min: _react2.default.PropTypes.number,
-	
-	    /**
-	     * The mode of show your progress, indeterminate
-	     * for when there is no value for progress.
-	     */
 	    mode: _react2.default.PropTypes.oneOf(['determinate', 'indeterminate']),
-	
-	    /**
-	     * The size of the progress.
-	     */
 	    size: _react2.default.PropTypes.number,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The value of progress, only works in determinate mode.
-	     */
 	    value: _react2.default.PropTypes.number
 	  },
 	
@@ -97470,7 +97009,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = CircularProgress;
-	module.exports = exports['default'];
 
 /***/ },
 /* 424 */
@@ -97855,7 +97393,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Checkbox;
-	module.exports = exports['default'];
 
 /***/ },
 /* 426 */
@@ -98331,7 +97868,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = EnhancedSwitch;
-	module.exports = exports['default'];
 
 /***/ },
 /* 427 */
@@ -98397,7 +97933,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	exports.default = ClearFix;
-	module.exports = exports['default'];
 
 /***/ },
 /* 428 */
@@ -98554,7 +98089,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = BeforeAfterWrapper;
-	module.exports = exports['default'];
 
 /***/ },
 /* 429 */
@@ -98595,7 +98129,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ToggleCheckBoxOutlineBlank;
-	module.exports = exports['default'];
 
 /***/ },
 /* 430 */
@@ -98636,7 +98169,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ToggleCheckBox;
-	module.exports = exports['default'];
 
 /***/ },
 /* 431 */
@@ -98747,13 +98279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onDismiss: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.func, 'Instead, use the open property to control the component.'),
 	
 	    /**
-	     * Fired when the `Snackbar` is requested to be closed by a click outside the `Snackbar`, or after the
-	     * `autoHideDuration` timer expires.
-	      * Typically `onRequestClose` is used to set state in the parent component, which is used to control the `Snackbar`
-	     * `open` prop.
-	      * `onRequestClose` is called with an additional parameter: `reason`, which can be:`"timeout"` (autoHideDuration)
-	     * or: `"clickaway"`
-	      * This can optionally be used to control the response to `onRequestClose`, for example ignoring `clickaway`.
+	     * Fired when the `Snackbar` is requested to be closed by a click outside or when the time runs out.
 	     */
 	    onRequestClose: _react2.default.PropTypes.func.isRequired,
 	
@@ -99055,7 +98581,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Snackbar;
-	module.exports = exports['default'];
 
 /***/ },
 /* 433 */
@@ -99119,7 +98644,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _events2.default.off(window, 'resize', this._updateDeviceSize);
 	  }
 	};
-	module.exports = exports['default'];
 
 /***/ },
 /* 434 */
@@ -99147,7 +98671,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return propType(props, propName, componentName);
 	  };
 	}
-	module.exports = exports['default'];
 
 /***/ },
 /* 435 */
@@ -99267,7 +98790,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Project).call(this, props));
 	
-	    _this.selectProject = _this.selectProject.bind(_this);
+	    _this.selectProject = function (proj) {
+	      _this.props.history.pushState(null, '/' + proj.owner.username + '/' + proj.name);
+	    };
+	
 	    return _this;
 	  }
 	
@@ -99277,12 +98803,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!this.props.projects) {
 	        this.props.getProjects();
 	      }
-	    }
-	  }, {
-	    key: 'selectProject',
-	    value: function selectProject(proj) {
-	      console.log('new project selected', proj);
-	      this.props.history.pushState(null, '/' + proj.owner.username + '/' + proj.name);
 	    }
 	  }, {
 	    key: 'render',
@@ -99515,7 +99035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if ((0, _lodash.isFunction)(this.fb.removeBinding)) {
 	          this.fb.removeBinding(this.ref);
 	        }
-	        this.ref = this.fb.syncState(this.props.project.name, {
+	        this.ref = this.fb.syncState(nextProps.project.name, {
 	          context: this,
 	          state: 'files',
 	          asArray: true
@@ -99536,8 +99056,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'Workspace' },
-	        _react2.default.createElement(_ProjectSettingsDialog2.default, { modalOpen: this.state.settingsOpen, toggleModal: this.toggleSettingsModal }),
-	        _react2.default.createElement(_SharingDialog2.default, { modalOpen: this.state.sharingOpen, toggleModal: this.toggleSharingModal }),
+	        _react2.default.createElement(_ProjectSettingsDialog2.default, {
+	          project: this.props.project,
+	          modalOpen: this.state.settingsOpen,
+	          toggleModal: this.toggleSettingsModal
+	        }),
+	        _react2.default.createElement(_SharingDialog2.default, {
+	          project: this.props.project,
+	          modalOpen: this.state.sharingOpen,
+	          toggleModal: this.toggleSharingModal
+	        }),
 	        _react2.default.createElement(_SideBar2.default, {
 	          projects: this.props.projects,
 	          showProjects: this.props.showProjects,
@@ -99585,8 +99113,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    return project;
 	  });
+	  //Populate owner param
+	  //TODO: Change namespacing to key instead of name
+	  var collaboratorsList = state.entities.projects && state.entities.projects[name] && state.entities.projects[name].collaborators ? state.entities.projects[name].collaborators : [];
+	  var collaborators = [];
+	  if (collaboratorsList.length > 0) {
+	    collaborators = collaboratorsList.map(function (collabId) {
+	      if (state.entities.accounts && state.entities.accounts[collabId]) {
+	        return state.entities.accounts[collabId];
+	      }
+	      return collabId;
+	    });
+	  }
 	  return {
-	    project: { name: name, owner: owner },
+	    project: { name: name, owner: owner, collaborators: collaborators },
 	    projects: projects,
 	    tabs: tabs,
 	    account: state.account,
@@ -102466,12 +102006,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          ),
 	          _react2.default.createElement(
 	            _iconButton2.default,
-	            { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSettingsClick },
+	            { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSharingClick },
 	            _react2.default.createElement(_group2.default, null)
 	          ),
 	          _react2.default.createElement(
 	            _iconButton2.default,
-	            { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSharingClick },
+	            { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSettingsClick },
 	            _react2.default.createElement(_settings2.default, null)
 	          )
 	        )
@@ -103128,7 +102668,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _DropDownMenu2.default;
-	module.exports = exports['default'];
 
 /***/ },
 /* 471 */
@@ -103609,7 +103148,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = DropDownMenu;
-	module.exports = exports['default'];
 
 /***/ },
 /* 472 */
@@ -103754,7 +103292,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = PopoverAnimationFromTop;
-	module.exports = exports['default'];
 
 /***/ },
 /* 473 */
@@ -103882,7 +103419,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Toolbar;
-	module.exports = exports['default'];
 
 /***/ },
 /* 474 */
@@ -104132,7 +103668,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ToolbarGroup;
-	module.exports = exports['default'];
 
 /***/ },
 /* 475 */
@@ -104151,7 +103686,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _SelectField2.default;
-	module.exports = exports['default'];
 
 /***/ },
 /* 476 */
@@ -104170,7 +103704,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _SelectField2.default;
-	module.exports = exports['default'];
 
 /***/ },
 /* 477 */
@@ -104472,7 +104005,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = SelectField;
-	module.exports = exports['default'];
 
 /***/ },
 /* 478 */
@@ -104513,7 +104045,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ContentAddCircle;
-	module.exports = exports['default'];
 
 /***/ },
 /* 479 */
@@ -104554,7 +104085,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ActionSettings;
-	module.exports = exports['default'];
 
 /***/ },
 /* 480 */
@@ -104595,7 +104125,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = SocialGroup;
-	module.exports = exports['default'];
 
 /***/ },
 /* 481 */
@@ -104677,7 +104206,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _dialog2.default,
 	        {
 	          title: 'Settings',
-	          className: 'ProjectSettingsDialog',
 	          actions: actions,
 	          modal: false,
 	          open: this.props.modalOpen,
@@ -104686,10 +104214,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	          titleClassName: 'ProjectSettingsDialog-Settings-Title',
 	          contentStyle: { 'width': '30%' }
 	        },
-	        _react2.default.createElement(_textField2.default, { hintText: 'Project name' }),
-	        _react2.default.createElement(_textField2.default, { hintText: 'Owner' }),
-	        _react2.default.createElement(_textField2.default, { hintText: 'Deployment url' }),
-	        _react2.default.createElement(_textField2.default, { hintText: 'Git url' })
+	        _react2.default.createElement(_textField2.default, {
+	          hintText: 'Project name',
+	          floatingLabelText: 'Project name',
+	          defaultValue: this.props.project.name
+	        }),
+	        _react2.default.createElement(_textField2.default, {
+	          hintText: 'Owner',
+	          floatingLabelText: 'Owner',
+	          defaultValue: this.props.project.owner.username || this.props.project.owner,
+	          disabled: true
+	        }),
+	        _react2.default.createElement(_textField2.default, {
+	          hintText: 'Site url',
+	          floatingLabelText: 'Site url',
+	          disabled: true
+	        }),
+	        _react2.default.createElement(_textField2.default, {
+	          hintText: 'Git url',
+	          floatingLabelText: 'Git url'
+	        })
 	      );
 	    }
 	  }]);
@@ -105354,7 +104898,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Dialog;
-	module.exports = exports['default'];
 
 /***/ },
 /* 484 */
@@ -105496,7 +105039,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Overlay;
-	module.exports = exports['default'];
 
 /***/ },
 /* 485 */
@@ -105540,17 +105082,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _autoComplete2 = _interopRequireDefault(_autoComplete);
 	
-	var _info = __webpack_require__(490);
-	
-	var _info2 = _interopRequireDefault(_info);
-	
 	var _avatar = __webpack_require__(413);
 	
 	var _avatar2 = _interopRequireDefault(_avatar);
 	
-	var _folder = __webpack_require__(491);
+	var _person = __webpack_require__(490);
 	
-	var _folder2 = _interopRequireDefault(_folder);
+	var _person2 = _interopRequireDefault(_person);
+	
+	var _removeCircle = __webpack_require__(491);
+	
+	var _removeCircle2 = _interopRequireDefault(_removeCircle);
+	
+	var _colors = __webpack_require__(328);
+	
+	var _colors2 = _interopRequireDefault(_colors);
 	
 	__webpack_require__(492);
 	
@@ -105562,6 +105108,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
+	
 	var SharingDialog = function (_Component) {
 	  _inherits(SharingDialog, _Component);
 	
@@ -105571,7 +105119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SharingDialog).call(this, props));
 	
 	    _this.state = {
-	      autocompleteField: ''
+	      autocompleteField: []
 	    };
 	    return _this;
 	  }
@@ -105579,7 +105127,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(SharingDialog, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log('sharing rendering');
+	      var _this2 = this;
+	
+	      var user = {
+	        image: {
+	          url: null
+	        }
+	      };
+	      var collabsList = this.props.project && this.props.project.collaborators ? this.props.project.collaborators.map(function (collaborator, i) {
+	        return _react2.default.createElement(_listItem2.default, {
+	          key: _this2.props.project.name + '-Collab-' + i,
+	          leftAvatar: _react2.default.createElement(_avatar2.default, {
+	            icon: _react2.default.createElement(_person2.default, null),
+	            src: user.image && user.image.url ? user.image.url : null
+	          }),
+	          rightIcon: _react2.default.createElement(_removeCircle2.default, { color: _colors2.default.red500, hoverColor: _colors2.default.red800 }),
+	          primaryText: collaborator.username,
+	          secondaryText: 'Read, Write'
+	        });
+	      }) : null;
 	      var actions = [_react2.default.createElement(_flatButton2.default, {
 	        label: 'Cancel',
 	        secondary: true,
@@ -105599,35 +105165,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	          modal: false,
 	          open: this.props.modalOpen,
 	          onRequestClose: this.props.toggleModal,
-	          bodyClassName: 'SharingDialog-Settings',
-	          titleClassName: 'SharingDialog-Settings-Title',
+	          bodyClassName: 'SharingDialog-Content',
+	          titleClassName: 'SharingDialog-Content-Title',
 	          contentStyle: { 'width': '30%' }
 	        },
-	        _react2.default.createElement(
+	        this.props.project && this.props.project.collaborators ? _react2.default.createElement(
 	          _list2.default,
-	          { subheader: 'Folders', insetSubheader: true },
-	          _react2.default.createElement(_listItem2.default, {
-	            leftAvatar: _react2.default.createElement(_avatar2.default, { icon: _react2.default.createElement(_folder2.default, null) }),
-	            rightIcon: _react2.default.createElement(_info2.default, null),
-	            primaryText: 'Scott Prue',
-	            secondaryText: 'Read, Write' }),
-	          _react2.default.createElement(_listItem2.default, {
-	            leftAvatar: _react2.default.createElement(_avatar2.default, { icon: _react2.default.createElement(_folder2.default, null) }),
-	            rightIcon: _react2.default.createElement(_info2.default, null),
-	            primaryText: 'Mel van Londen',
-	            secondaryText: 'Read, Write' }),
-	          _react2.default.createElement(_listItem2.default, {
-	            leftAvatar: _react2.default.createElement(_avatar2.default, { icon: _react2.default.createElement(_folder2.default, null) }),
-	            rightIcon: _react2.default.createElement(_info2.default, null),
-	            primaryText: 'John Cusak',
-	            secondaryText: 'Read' })
+	          null,
+	          collabsList
+	        ) : _react2.default.createElement(
+	          'div',
+	          { className: 'SharingDialog-No-Collabs' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'No current collaborators'
+	          )
 	        ),
-	        _react2.default.createElement(_autoComplete2.default, {
-	          hintText: 'Add collaborator',
-	          dataSource: this.state.autocompleteField,
-	          onUpdateInput: this.handleAutoCompleteChange,
-	          onNewRequest: this.handleAutoCompleteSubmit
-	        })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SharingDialog-AutoComplete-Container' },
+	          _react2.default.createElement(_autoComplete2.default, {
+	            className: 'SharingDialog-Autocomplete',
+	            hintText: 'Search users to add',
+	            floatingLabelText: 'Search users to add',
+	            fullWidth: true,
+	            dataSource: this.state.autocompleteField,
+	            onUpdateInput: this.handleAutoCompleteChange,
+	            onNewRequest: this.handleAutoCompleteSubmit
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -105636,6 +105203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react.Component);
 	
 	SharingDialog.propTypes = {
+	  project: _react.PropTypes.object,
 	  modalOpen: _react.PropTypes.bool,
 	  toggleModal: _react.PropTypes.func
 	};
@@ -105649,8 +105217,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -105696,11 +105262,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _deprecatedPropType = __webpack_require__(434);
-	
-	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
@@ -105726,12 +105290,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onUpdateInput: _react2.default.PropTypes.func,
 	    open: _react2.default.PropTypes.bool,
 	    searchText: _react2.default.PropTypes.string,
-	    showAllItems: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.bool, 'showAllItems is deprecated, use noFilter instead'),
+	    showAllItems: _react2.default.PropTypes.bool,
 	    style: _react2.default.PropTypes.object,
 	    targetOrigin: _propTypes2.default.origin,
 	    touchTapCloseDelay: _react2.default.PropTypes.number,
-	    triggerUpdateOnFocus: _react2.default.PropTypes.bool,
-	    updateWhenFocused: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.bool, 'updateWhenFocused has been renamed to triggerUpdateOnFocus')
+	    updateWhenFocused: _react2.default.PropTypes.bool
 	  },
 	
 	  contextTypes: {
@@ -105753,15 +105316,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      animated: true,
 	      fullWidth: false,
 	      open: false,
+	      showAllItems: false,
 	      searchText: '',
 	      menuCloseDelay: 100,
 	      disableFocusRipple: true,
+	      updateWhenFocused: false,
 	      onUpdateInput: function onUpdateInput() {},
 	      onNewRequest: function onNewRequest() {},
 	      filter: function filter(searchText, key) {
-	        return searchText !== '' && key.includes(searchText);
-	      },
-	      triggerUpdateOnFocus: false
+	        return key.includes(searchText);
+	      }
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -105878,9 +105442,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var menuStyle = _props.menuStyle;
 	    var menuProps = _props.menuProps;
 	    var listStyle = _props.listStyle;
+	    var showAllItems = _props.showAllItems;
 	    var targetOrigin = _props.targetOrigin;
 	
-	    var other = _objectWithoutProperties(_props, ['anchorOrigin', 'animated', 'style', 'errorStyle', 'floatingLabelText', 'hintText', 'fullWidth', 'menuStyle', 'menuProps', 'listStyle', 'targetOrigin']);
+	    var other = _objectWithoutProperties(_props, ['anchorOrigin', 'animated', 'style', 'errorStyle', 'floatingLabelText', 'hintText', 'fullWidth', 'menuStyle', 'menuProps', 'listStyle', 'showAllItems', 'targetOrigin']);
 	
 	    var _state = this.state;
 	    var open = _state.open;
@@ -105915,24 +105480,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var mergedRootStyles = this.mergeAndPrefix(styles.root, style);
 	    var mergedMenuStyles = this.mergeStyles(styles.menu, menuStyle);
 	
+	    var displayFilter = showAllItems ? function () {
+	      return true;
+	    } : this.props.filter;
 	    var requestsList = [];
 	
 	    this.props.dataSource.map(function (item) {
-	      //showAllItems is deprecated, will be removed in the future
-	      if (_this2.props.showAllItems) {
-	        requestsList.push(item);
-	        return;
-	      }
-	
 	      switch (typeof item === 'undefined' ? 'undefined' : _typeof(item)) {
 	        case 'string':
-	          if (_this2.props.filter(_this2.state.searchText, item, item)) {
+	          if (displayFilter(_this2.state.searchText, item, item)) {
 	            requestsList.push(item);
 	          }
 	          break;
 	        case 'object':
 	          if (typeof item.text === 'string') {
-	            if (_this2.props.filter(_this2.state.searchText, item.text, item)) {
+	            if (displayFilter(_this2.state.searchText, item.text, item.value)) {
+	              requestsList.push(item);
+	            } else if (item.display) {
 	              requestsList.push(item);
 	            }
 	          }
@@ -105942,7 +105506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    this.requestsList = requestsList;
 	
-	    var menu = open && requestsList.length > 0 ? _react2.default.createElement(
+	    var menu = open && (this.state.searchText !== '' || showAllItems) && requestsList.length > 0 ? _react2.default.createElement(
 	      _menu2.default,
 	      _extends({}, menuProps, {
 	        ref: 'menu',
@@ -106012,8 +105576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (_this2.focusOnInput && open) _this2.refs.searchTextField.focus();
 	          },
 	          onFocus: function onFocus() {
-	            if (!open && (_this2.props.triggerUpdateOnFocus || _this2.props.updateWhenFocused //this line will be removed in the future
-	             || _this2.requestsList > 0)) {
+	            if (!open && (showAllItems || _this2.props.updateWhenFocused || _this2.state.searchText !== '')) {
 	              _this2._updateRequests(_this2.state.searchText);
 	            }
 	            _this2.focusOnInput = true;
@@ -106037,57 +105600,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	AutoComplete.levenshteinDistance = function (searchText, key) {
-	  var current = [],
-	      prev = undefined,
-	      value = undefined;
-	  for (var i = 0; i <= key.length; i++) {
-	    for (var j = 0; j <= searchText.length; j++) {
-	      if (i && j) {
-	        if (searchText.charAt(j - 1) === key.charAt(i - 1)) value = prev;else value = Math.min(current[j], current[j - 1], prev) + 1;
-	      } else {
-	        value = i + j;
-	      }
-	      prev = current[j];
-	      current[j] = value;
-	    }
-	  }
-	  return current.pop();
-	};
-	
-	AutoComplete.noFilter = function () {
-	  return true;
-	};
-	
-	AutoComplete.defaultFilter = AutoComplete.caseSensitiveFilter = function (searchText, key) {
-	  return searchText !== '' && key.includes(searchText);
-	};
-	
-	AutoComplete.caseInsensitiveFilter = function (searchText, key) {
-	  return key.toLowerCase().includes(searchText.toLowerCase());
-	};
-	
-	AutoComplete.levenshteinDistanceFilter = function (distanceLessThan) {
-	  if (distanceLessThan === undefined) return AutoComplete.levenshteinDistance;else if (typeof distanceLessThan !== 'number') {
-	    throw 'Error: AutoComplete.levenshteinDistanceFilter is a filter generator, not a filter!';
-	  }
-	  return function (s, k) {
-	    return AutoComplete.levenshteinDistance(s, k) < distanceLessThan;
-	  };
-	};
-	
-	AutoComplete.fuzzyFilter = function (searchText, key) {
-	  if (searchText.length === 0) return false;
-	  var subMatchKey = key.substring(0, searchText.length);
-	  var distance = AutoComplete.levenshteinDistance(searchText.toLowerCase(), subMatchKey.toLowerCase());
-	  return searchText.length > 3 ? distance < 2 : distance === 0;
-	};
-	
 	AutoComplete.Item = _menuItem2.default;
 	AutoComplete.Divider = _divider2.default;
 	
 	exports.default = AutoComplete;
-	module.exports = exports['default'];
 
 /***/ },
 /* 488 */
@@ -106165,7 +105681,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Divider = (0, _muiThemeable2.default)(Divider);
 	
 	exports.default = Divider;
-	module.exports = exports['default'];
 
 /***/ },
 /* 489 */
@@ -106216,7 +105731,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return MuiComponent;
 	}
-	module.exports = exports['default'];
 
 /***/ },
 /* 490 */
@@ -106242,8 +105756,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ActionInfo = _react2.default.createClass({
-	  displayName: 'ActionInfo',
+	var SocialPerson = _react2.default.createClass({
+	  displayName: 'SocialPerson',
 	
 	  mixins: [_reactAddonsPureRenderMixin2.default],
 	
@@ -106251,13 +105765,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2.default.createElement(
 	      _svgIcon2.default,
 	      this.props,
-	      _react2.default.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z' })
+	      _react2.default.createElement('path', { d: 'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z' })
 	    );
 	  }
 	});
 	
-	exports.default = ActionInfo;
-	module.exports = exports['default'];
+	exports.default = SocialPerson;
 
 /***/ },
 /* 491 */
@@ -106283,8 +105796,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var FileFolder = _react2.default.createClass({
-	  displayName: 'FileFolder',
+	var ContentRemoveCircle = _react2.default.createClass({
+	  displayName: 'ContentRemoveCircle',
 	
 	  mixins: [_reactAddonsPureRenderMixin2.default],
 	
@@ -106292,13 +105805,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2.default.createElement(
 	      _svgIcon2.default,
 	      this.props,
-	      _react2.default.createElement('path', { d: 'M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z' })
+	      _react2.default.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z' })
 	    );
 	  }
 	});
 	
-	exports.default = FileFolder;
-	module.exports = exports['default'];
+	exports.default = ContentRemoveCircle;
 
 /***/ },
 /* 492 */
@@ -107027,14 +106539,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Projects).call(this, props));
 	
+	    _this.state = { addCollabModal: false, newProjectModal: false };
+	
+	    _this.handleCollabClick = function (user) {
+	      //TODO: Navigate to user's page
+	    };
+	
+	    _this.toggleModal = function (name) {
+	      var newState = {};
+	      newState[name + 'Modal'] = !_this.state[name + 'Modal'] || false;
+	      _this.setState(newState);
+	    };
+	
+	    _this.newSubmit = function (projectData) {
+	      _this.props.addProject(projectData);
+	    };
+	
 	    _this.openProject = function (project) {
-	      console.log('opening project:', project);
 	      _this.props.history.pushState(null, '/' + project.owner.username + '/' + project.name);
 	    };
 	
-	    _this.handleCollabClick = _this.handleCollabClick.bind(_this);
-	    _this.toggleModal = _this.toggleModal.bind(_this);
-	    _this.state = { addCollabModal: false, newProjectModal: false };
 	    return _this;
 	  }
 	
@@ -107042,23 +106566,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.getProjects();
-	    }
-	  }, {
-	    key: 'handleCollabClick',
-	    value: function handleCollabClick(user) {
-	      //TODO: Navigate to user's page
-	    }
-	  }, {
-	    key: 'toggleModal',
-	    value: function toggleModal(name) {
-	      var newState = {};
-	      newState[name + 'Modal'] = !this.state[name + 'Modal'] || false;
-	      this.setState(newState);
-	    }
-	  }, {
-	    key: 'newSubmit',
-	    value: function newSubmit(projectData) {
-	      this.props.addProject(projectData);
 	    }
 	  }, {
 	    key: 'render',
@@ -107159,6 +106666,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _avatar2 = _interopRequireDefault(_avatar);
 	
+	var _person = __webpack_require__(490);
+	
+	var _person2 = _interopRequireDefault(_person);
+	
 	__webpack_require__(509);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -107202,7 +106713,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { key: _this2.props.project.name + '-Collab-' + i, className: 'ProjectTile-Collaborator' },
 	            _react2.default.createElement(_avatar2.default, {
 	              className: 'ProjectTile-Collaborator-Avatar',
-	              src: user.image ? user.image.url : stockPhotoUrl,
+	              src: user.image && user.image.url ? user.image.url : null,
+	              icon: _react2.default.createElement(_person2.default, { style: { width: '50%', height: '75%' } }),
 	              size: 60
 	            })
 	          );

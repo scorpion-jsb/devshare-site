@@ -22,6 +22,7 @@ class SharingDialog extends Component {
   };
 
   static propTypes = {
+    project: PropTypes.object,
     modalOpen: PropTypes.bool,
     toggleModal: PropTypes.func
   };
@@ -32,6 +33,20 @@ class SharingDialog extends Component {
         url: null
       }
     };
+    let collabsList = (this.props.project && this.props.project.collaborators) ? this.props.project.collaborators.map((collaborator, i) => {
+      return (
+        <ListItem
+          key={`${this.props.project.name}-Collab-${i}`}
+          leftAvatar={<Avatar
+            icon={ <PersonIcon /> }
+            src={ (user.image && user.image.url) ? user.image.url : null }
+          />}
+          rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
+          primaryText={ collaborator.username }
+          secondaryText="Read, Write"
+        />
+      )
+    }) : null;
     const actions = [
       <FlatButton
         label="Cancel"
@@ -57,41 +72,26 @@ class SharingDialog extends Component {
         titleClassName="SharingDialog-Content-Title"
         contentStyle={{'width': '30%'}}
         >
+        {
+          (this.props.project && this.props.project.collaborators) ?
           <List>
-            <ListItem
-              leftAvatar={<Avatar
-                icon={ <PersonIcon /> }
-                src={ (user.image && user.image.url) ? user.image.url : null }
-              />}
-              rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
-              primaryText="Scott Prue"
-              secondaryText="Read, Write" />
-            <ListItem
-              leftAvatar={<Avatar
-                icon={ <PersonIcon /> }
-                src={ (user.image && user.image.url) ? user.image.url : null }
-              />}
-              rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
-              primaryText="Mel van Londen"
-              secondaryText="Read, Write" />
-            <ListItem
-              leftAvatar={<Avatar
-                icon={ <PersonIcon /> }
-                src={ (user.image && user.image.url) ? user.image.url : null }
-              />}
-              rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
-              primaryText="John Cusak"
-              secondaryText="Read" />
+            { collabsList }
           </List>
-          <div className="SharingDialog-AutoComplete-Container">
-            <AutoComplete
-              className="SharingDialog-Autocomplete"
-              hintText="Add collaborator"
-              fullWidth={true}
-              dataSource={ this.state.autocompleteField }
-              onUpdateInput={ this.handleAutoCompleteChange }
-              onNewRequest={ this.handleAutoCompleteSubmit }
-            />
+          :
+          <div className="SharingDialog-No-Collabs">
+            <span>No current collaborators</span>
+          </div>
+        }
+        <div className="SharingDialog-AutoComplete-Container">
+          <AutoComplete
+            className="SharingDialog-Autocomplete"
+            hintText="Search users to add"
+            floatingLabelText="Search users to add"
+            fullWidth={true}
+            dataSource={ this.state.autocompleteField }
+            onUpdateInput={ this.handleAutoCompleteChange }
+            onNewRequest={ this.handleAutoCompleteSubmit }
+          />
         </div>
       </Dialog>
     );

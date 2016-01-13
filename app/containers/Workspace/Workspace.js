@@ -150,8 +150,16 @@ class Workspace extends Component {
   render() {
     return (
       <div className="Workspace">
-        <ProjectSettingsDialog modalOpen={ this.state.settingsOpen } toggleModal={ this.toggleSettingsModal } />
-        <SharingDialog modalOpen={ this.state.sharingOpen } toggleModal={ this.toggleSharingModal } />
+        <ProjectSettingsDialog
+          project={ this.props.project }
+          modalOpen={ this.state.settingsOpen }
+          toggleModal={ this.toggleSettingsModal }
+        />
+        <SharingDialog
+          project={ this.props.project }
+          modalOpen={ this.state.sharingOpen }
+          toggleModal={ this.toggleSharingModal }
+        />
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
@@ -191,8 +199,20 @@ function mapStateToProps(state) {
     }
     return project;
   });
+  //Populate owner param
+  //TODO: Change namespacing to key instead of name
+  const collaboratorsList = (state.entities.projects && state.entities.projects[name] && state.entities.projects[name].collaborators) ? state.entities.projects[name].collaborators : [];
+  let collaborators = [];
+  if(collaboratorsList.length > 0){
+    collaborators = collaboratorsList.map((collabId) => {
+      if(state.entities.accounts && state.entities.accounts[collabId]){
+        return state.entities.accounts[collabId];
+      }
+      return collabId;
+    });
+  }
   return {
-    project: { name, owner },
+    project: { name, owner, collaborators },
     projects,
     tabs,
     account: state.account,

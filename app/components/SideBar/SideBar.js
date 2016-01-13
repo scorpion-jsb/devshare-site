@@ -11,6 +11,7 @@ import IconButton from 'material-ui/lib/icon-button';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import AddIcon from 'material-ui/lib/svg-icons/content/add-circle';
 import SettingsIcon from 'material-ui/lib/svg-icons/action/settings';
+import GroupIcon from 'material-ui/lib/svg-icons/social/group';
 import './SideBar.scss';
 
 export default class SideBar extends Component {
@@ -29,7 +30,8 @@ export default class SideBar extends Component {
     onLogoutClick: PropTypes.func,
     addFile: PropTypes.func,
     loadFiles: PropTypes.func,
-    onFilesDrop: PropTypes.func
+    onFilesDrop: PropTypes.func,
+    onSharingClick: PropTypes.func,
   };
   selectProject(e, i, name) {
     if(this.props && this.props.onProjectSelect){
@@ -39,6 +41,7 @@ export default class SideBar extends Component {
   }
   render() {
     const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true;
+    const iconButtonStyle = { width: '60px', height: '60px' };
     let projectsMenu;
     if(isArray(this.props.projects) && this.props.projects.length > 0) {
       projectsMenu = this.props.projects.map((project, i) => {
@@ -69,13 +72,16 @@ export default class SideBar extends Component {
         />
 
         <div className="SideBar-Buttons">
-          <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={{ width: '90px', height: '90px' }} iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
+          <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
             <MenuItem primaryText="Add file" />
             <MenuItem primaryText="Add folder" />
             <MenuItem primaryText="Add files from Github" />
             <MenuItem primaryText="Upload files" />
           </IconMenu>
-          <IconButton style={{ width: '90px', height: '90px' }} iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
+          <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSharingClick }>
+            <GroupIcon />
+          </IconButton>
+          <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
             <SettingsIcon />
           </IconButton>
         </div>

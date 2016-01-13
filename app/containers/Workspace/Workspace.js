@@ -6,11 +6,10 @@ import Modal from 'react-modal';
 import Rebase from 're-base';
 import { Actions } from 'redux-grout';
 import * as TabActions from '../../actions/tabs';
-import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
-import FlatButton from 'material-ui/lib/flat-button';
-import TextField from 'material-ui/lib/text-field';
 import SideBar from '../../components/SideBar/SideBar';
+import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
+import SharingDialog from '../../components/SharingDialog/SharingDialog';
 import Pane from '../../components/Pane/Pane';
 import Grout from 'kyper-grout';
 import './Workspace.scss';
@@ -19,15 +18,19 @@ let activeFirepads = {};
 let grout = new Grout();
 
 class Workspace extends Component {
+
   constructor() {
     super();
-    this.state = {inputVisible: false, settingsOpen: false, files: []};
   }
+
+  state = {inputVisible: false, settingsOpen: false, sharingOpen: false, files: []};
+
   static propTypes = {
     project: PropTypes.object,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool
   };
+
   componentDidMount() {
     this.project = this.props.project ? grout.Project(this.props.project) : null;
     const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
@@ -39,34 +42,58 @@ class Workspace extends Component {
       asArray: true
     });
   }
+
   componentWillReceiveProps(nextProps) {
     //Rebind files if props change (new project selected)
     if(this.fb){
       if(isFunction(this.fb.removeBinding)){
         this.fb.removeBinding(this.ref);
       }
-      this.ref = this.fb.syncState(this.props.project.name, {
+      this.ref = this.fb.syncState(nextProps.project.name, {
         context: this,
         state: 'files',
         asArray: true
       });
     }
   }
+
   componentWillUnmount() {
     //Unbind files list from Firebase
     if(this.fb && isFunction(this.fb.removeBinding)){
       this.fb.removeBinding(this.ref);
     }
   }
+
+  toggleSettingsModal = () => {
+    this.setState({
+      settingsOpen: !this.state.settingsOpen
+    })
+  };
+
+  toggleSharingModal = () => {
+    this.setState({
+      sharingOpen: !this.state.sharingOpen
+    })
+  };
+
+  saveSettings = (data) => {
+    this.props.updateProject({project: this.props.project, data});
+    //TODO: Show popup of save success/failure
+    this.toggleSettingsModal();
+  };
+
   addFile = (file) => {
     this.props.addFile({project: this.props.project, file});
   };
+
   addFolder = (file) => {
     this.props.addFolder({project: this.props.project, file});
   };
+
   deleteFile = (file) => {
     this.props.deleteFile({project: this.props.project, file});
   };
+
   openFile = (file) => {
     let tabData = {
       project: this.props.project,
@@ -90,16 +117,7 @@ class Workspace extends Component {
       })
     }
   };
-  toggleSettingsModal = (name) => {
-    this.setState({
-      settingsOpen: !this.state.settingsOpen
-    });
-  };
-  saveSettings = (data) => {
-    this.props.updateProject({project: this.props.project, data});
-    //TODO: Show popup of save success/failure
-    this.toggleSettingsModal.bind(this, 'settingsOpen');
-  };
+
   loadCodeSharing = (editor) => {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
@@ -109,9 +127,11 @@ class Workspace extends Component {
       loadFirepadCodeshare(fileObj, editor);
     }
   };
+
   selectTab = (index) => {
     this.props.navigateToTab({project: this.props.project, index});
   };
+
   closeTab = (index) => {
     // console.log('closing tab:', this.props.tabs.list[index]);
     let file = this.props.tabs.list[index].file;
@@ -121,41 +141,25 @@ class Workspace extends Component {
     }
     this.props.closeTab({project: this.props.project, index});
   };
+
   onFilesDrop = (files) => {
     console.log('files dropped:', files);
     this.props.addFiles({project: this.props.project, files});
   };
+
   render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        secondary={true}
-        onTouchTap={this.toggleSettingsModal.bind(this, 'settingsOpen')}
-      />,
-      <FlatButton
-        label="Save"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.saveSettings}
-      />
-    ];
     return (
       <div className="Workspace">
-        <Dialog
-          title="Settings"
-          actions={actions}
-          modal={false}
-          open={this.state.settingsOpen}
-          onRequestClose={this.toggleSettingsModal.bind(this, 'settingsOpen')}
-          bodyClassName="Workspace-Settings"
-          titleClassName="Workspace-Settings-Title"
-          contentStyle={{'width': '30%'}}
-          >
-          <TextField hintText="Project Name" />
-          <TextField hintText="Owner" />
-          <TextField hintText="Project Url" />
-          <TextField hintText="Git Url" />
-        </Dialog>
+        <ProjectSettingsDialog
+          project={ this.props.project }
+          modalOpen={ this.state.settingsOpen }
+          toggleModal={ this.toggleSettingsModal }
+        />
+        <SharingDialog
+          project={ this.props.project }
+          modalOpen={ this.state.sharingOpen }
+          toggleModal={ this.toggleSharingModal }
+        />
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
@@ -165,7 +169,8 @@ class Workspace extends Component {
           files={ this.state.files }
           hideName={ this.props.hideName }
           onFileClick={ this.openFile }
-          onSettingsClick={ this.toggleSettingsModal.bind(this, 'settingsOpen')  }
+          onSettingsClick={ this.toggleSettingsModal  }
+          onSharingClick={ this.toggleSharingModal  }
           addFile={ this.addFile }
           addFile={ this.addFolder }
           onFilesDrop={ this.onFilesDrop }
@@ -194,8 +199,20 @@ function mapStateToProps(state) {
     }
     return project;
   });
+  //Populate owner param
+  //TODO: Change namespacing to key instead of name
+  const collaboratorsList = (state.entities.projects[name] && state.entities.projects[name].collaborators) ? state.entities.projects[name].collaborators : [];
+  let collaborators = [];
+  if(collaboratorsList.length > 0){
+    collaborators = collaboratorsList.map((collabId) => {
+      if(state.entities.accounts && state.entities.accounts[collabId]){
+        return state.entities.accounts[collabId];
+      }
+      return collabId;
+    });
+  }
   return {
-    project: { name, owner },
+    project: { name, owner, collaborators },
     projects,
     tabs,
     account: state.account,

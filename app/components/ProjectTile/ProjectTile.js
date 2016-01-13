@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import Paper from 'material-ui/lib/paper';
 import Avatar from 'material-ui/lib/avatar';
+import PersonIcon from 'material-ui/lib/svg-icons/social/person';
 
 import './ProjectTile.scss';
 const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
@@ -27,7 +28,8 @@ export default class ProjectTile extends Component {
           <div key={`${this.props.project.name}-Collab-${i}`} className="ProjectTile-Collaborator">
             <Avatar
               className="ProjectTile-Collaborator-Avatar"
-              src={ user.image ? user.image.url : stockPhotoUrl }
+              src={ (user.image && user.image.url) ? user.image.url : null }
+              icon={ <PersonIcon /> }
               size={60}
             />
           </div>

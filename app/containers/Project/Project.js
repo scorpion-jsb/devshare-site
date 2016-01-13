@@ -9,17 +9,18 @@ import './Project.scss';
 class Project extends Component {
   constructor(props){
     super(props);
-    this.selectProject = this.selectProject.bind(this);
   }
+
   componentDidMount() {
     if(!this.props.projects){
       this.props.getProjects();
     }
   }
-  selectProject(proj) {
-    console.log('new project selected', proj);
+
+  selectProject = (proj) => {
     this.props.history.pushState(null, `/${proj.owner.username}/${proj.name}`);
-  }
+  };
+  
   render(){
     return (
       <div className="Project">

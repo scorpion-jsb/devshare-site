@@ -25,6 +25,7 @@ class NewProjectDialog extends Component {
     e.preventDefault();
     if(this.props && this.props.onCreateClick){
       this.props.onCreateClick(this.state);
+      this.props.onRequestClose();
     }
   }
   render(){

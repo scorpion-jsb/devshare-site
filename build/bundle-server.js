@@ -80,13 +80,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _createMemoryHistory = __webpack_require__(517);
+	var _createMemoryHistory = __webpack_require__(527);
 	
 	var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
 	
-	var _server = __webpack_require__(530);
+	var _server = __webpack_require__(540);
 	
-	var _configureStore = __webpack_require__(540);
+	var _configureStore = __webpack_require__(550);
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
@@ -60344,7 +60344,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _appRouter2 = _interopRequireDefault(_appRouter);
 	
-	var _reactTapEventPlugin = __webpack_require__(513);
+	var _reactTapEventPlugin = __webpack_require__(523);
 	
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
 	
@@ -66415,19 +66415,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _Project3 = _interopRequireDefault(_Project2);
 	
-	var _Projects2 = __webpack_require__(497);
+	var _Projects2 = __webpack_require__(507);
 	
 	var _Projects3 = _interopRequireDefault(_Projects2);
 	
-	var _Recover2 = __webpack_require__(505);
+	var _Recover2 = __webpack_require__(515);
 	
 	var _Recover3 = _interopRequireDefault(_Recover2);
 	
-	var _Signup2 = __webpack_require__(507);
+	var _Signup2 = __webpack_require__(517);
 	
 	var _Signup3 = _interopRequireDefault(_Signup2);
 	
-	var _Try2 = __webpack_require__(511);
+	var _Try2 = __webpack_require__(521);
 	
 	var _Try3 = _interopRequireDefault(_Try2);
 	
@@ -82376,7 +82376,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onDragEnter: _react2['default'].PropTypes.func,
 	  onDragLeave: _react2['default'].PropTypes.func,
 	
-	  children: _react2['default'].PropTypes.element,
+	  children: _react2['default'].PropTypes.node,
 	  style: _react2['default'].PropTypes.object,
 	  activeStyle: _react2['default'].PropTypes.object,
 	  rejectStyle: _react2['default'].PropTypes.object,
@@ -82395,7 +82395,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports['default'] = Dropzone;
 	module.exports = exports['default'];
-
 
 /***/ },
 /* 300 */
@@ -83167,6 +83166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = RaisedButton;
+	module.exports = exports['default'];
 
 /***/ },
 /* 304 */
@@ -83226,6 +83226,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _styles2.default.prepareStyles.apply(_styles2.default, [this.state && this.state.muiTheme || this.context.muiTheme].concat([].slice.apply(arguments)));
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 305 */
@@ -83274,6 +83275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return (0, _reactAddonsUpdate2.default)(array, { $splice: [[0, 1]] });
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 306 */
@@ -83512,6 +83514,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _autoPrefix2.default.all(flipped);
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 309 */
@@ -83591,6 +83594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return prefixes ? prefixes[0] : key;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 310 */
@@ -84613,6 +84617,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return property + ' ' + duration + ' ' + easeFunction + ' ' + delay;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 323 */
@@ -84795,6 +84800,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 324 */
@@ -84849,6 +84855,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }) : children;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 325 */
@@ -84964,6 +84971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	exports.default = new Typography();
+	module.exports = exports['default'];
 
 /***/ },
 /* 328 */
@@ -85261,6 +85269,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  darkWhite: 'rgba(255, 255, 255, 0.87)',
 	  lightWhite: 'rgba(255, 255, 255, 0.54)'
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 329 */
@@ -85599,6 +85608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = EnhancedButton;
+	module.exports = exports['default'];
 
 /***/ },
 /* 330 */
@@ -85729,6 +85739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return ['keydown', 'keypress', 'keyup'].indexOf(e.type) !== -1;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 334 */
@@ -85749,6 +85760,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  TAB: 9,
 	  UP: 38
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 335 */
@@ -85906,6 +85918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FocusRipple;
+	module.exports = exports['default'];
 
 /***/ },
 /* 336 */
@@ -86041,6 +86054,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ScaleIn;
+	module.exports = exports['default'];
 
 /***/ },
 /* 337 */
@@ -86528,6 +86542,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ScaleInChild;
+	module.exports = exports['default'];
 
 /***/ },
 /* 341 */
@@ -86541,12 +86556,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _lightBaseTheme = __webpack_require__(342);
 	
-	Object.defineProperty(exports, 'default', {
-	  enumerable: true,
-	  get: function get() {
-	    return _lightBaseTheme.default;
-	  }
-	});
+	var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _lightBaseTheme2.default;
+	
+	// import deprecatedExport from '../../utils/deprecatedExport';
+	
+	// export default deprecatedExport(
+	//   lightBaseTheme,
+	//   'material-ui/lib/styles/raw-themes/light-raw-theme',
+	//   'material-ui/lib/styles/baseThemes/lightBaseTheme'
+	// );
+	
+	module.exports = exports['default'];
 
 /***/ },
 /* 342 */
@@ -86597,6 +86621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    clockCircleColor: _colorManipulator2.default.fade(_colors2.default.darkBlack, 0.07)
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 343 */
@@ -86621,6 +86646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  desktopSubheaderHeight: 48,
 	  desktopToolbarHeight: 56
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 344 */
@@ -86665,6 +86691,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	//  'material-ui/lib/styles/theme-manager',
 	//  'material-ui/lib/styles/themeManager'
 	//);
+	
+	module.exports = exports['default'];
 
 /***/ },
 /* 345 */
@@ -86672,12 +86700,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-	
 	function isObject(obj) {
 	  return (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' && obj !== null;
 	}
@@ -86725,6 +86752,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	exports.default = extend;
+	module.exports = exports['default'];
 
 /***/ },
 /* 346 */
@@ -86928,7 +86956,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      stripeColor: _colorManipulator2.default.lighten(palette.primary1Color, 0.55),
 	      selectedColor: palette.borderColor,
 	      textColor: palette.textColor,
-	      borderColor: palette.borderColor
+	      borderColor: palette.borderColor,
+	      height: 48
 	    },
 	    tableRowColumn: {
 	      height: 48,
@@ -86981,6 +87010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, muiTheme);
 	}
+	module.exports = exports['default'];
 
 /***/ },
 /* 347 */
@@ -88908,6 +88938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  snackbar: 2900,
 	  tooltip: 3000
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 365 */
@@ -89102,6 +89133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = TouchRipple;
+	module.exports = exports['default'];
 
 /***/ },
 /* 366 */
@@ -89178,6 +89210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    el.style.transition = originalTransition;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 367 */
@@ -89304,6 +89337,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = CircleRipple;
+	module.exports = exports['default'];
 
 /***/ },
 /* 368 */
@@ -89353,15 +89387,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'Paper',
 	
 	  propTypes: {
+	    /**
+	     * Children passed into the paper element.
+	     */
 	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Set to true to generate a circlular paper container.
+	     */
 	    circle: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * By default, the paper container will have a border radius.
+	     * Set this to false to generate a container with sharp corners.
+	     */
 	    rounded: _react2.default.PropTypes.bool,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Set to false to disable CSS transitions for the paper element.
+	     */
 	    transitionEnabled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * This number represents the zDepth of the paper shadow.
+	     */
 	    zDepth: _propTypes2.default.zDepth
 	  },
 	
@@ -89436,6 +89490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Paper;
+	module.exports = exports['default'];
 
 /***/ },
 /* 369 */
@@ -89476,6 +89531,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  zDepth: _react2.default.PropTypes.oneOf([0, 1, 2, 3, 4, 5])
 	
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 370 */
@@ -89494,6 +89550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _TextField2.default;
+	module.exports = exports['default'];
 
 /***/ },
 /* 371 */
@@ -89512,6 +89569,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _TextField2.default;
+	module.exports = exports['default'];
 
 /***/ },
 /* 372 */
@@ -89974,6 +90032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = TextField;
+	module.exports = exports['default'];
 
 /***/ },
 /* 373 */
@@ -89991,6 +90050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return 'mui-id-' + index++;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 374 */
@@ -90198,6 +90258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = EnhancedTextarea;
+	module.exports = exports['default'];
 
 /***/ },
 /* 375 */
@@ -90267,6 +90328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return true;
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 376 */
@@ -90274,13 +90336,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = shallowEqual;
-	
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-	
 	function shallowEqual(objA, objB) {
 	  if (objA === objB) {
 	    return true;
@@ -90307,6 +90368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return true;
 	}
+	module.exports = exports['default'];
 
 /***/ },
 /* 377 */
@@ -90387,6 +90449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	TextFieldHint.defaultProps = defaultProps;
 	
 	exports.default = TextFieldHint;
+	module.exports = exports['default'];
 
 /***/ },
 /* 378 */
@@ -90500,6 +90563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	TextFieldLabel.defaultProps = defaultProps;
 	
 	exports.default = TextFieldLabel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 379 */
@@ -90639,6 +90703,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	TextFieldUnderline.defaultProps = defaultProps;
 	
 	exports.default = TextFieldUnderline;
+	module.exports = exports['default'];
 
 /***/ },
 /* 380 */
@@ -90942,7 +91007,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        title: _react2.default.createElement(
 	          _reactRouter.Link,
 	          { className: 'Navbar-Brand', to: brandLinkLoc },
-	          'Devshare'
+	          'devShare'
 	        ),
 	        className: 'Navbar',
 	        showMenuIconButton: false,
@@ -91336,6 +91401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = AppBar;
+	module.exports = exports['default'];
 
 /***/ },
 /* 386 */
@@ -91674,6 +91740,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = IconButton;
+	module.exports = exports['default'];
 
 /***/ },
 /* 387 */
@@ -91715,9 +91782,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'FontIcon',
 	
 	  propTypes: {
+	    /**
+	     * This is the font color of the font icon. If not specified,
+	     * this component will default to muiTheme.palette.textColor.
+	     */
 	    color: _react2.default.PropTypes.string,
+	
+	    /**
+	     * This is the icon color when the mouse hovers over the icon.
+	     */
 	    hoverColor: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Function called when mouse enters this element.
+	     */
 	    onMouseEnter: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Function called when mouse leaves this element.
+	     */
 	    onMouseLeave: _react2.default.PropTypes.func,
 	
 	    /**
@@ -91737,6 +91820,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  mixins: [_stylePropable2.default],
 	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      onMouseEnter: function onMouseEnter() {},
+	      onMouseLeave: function onMouseLeave() {}
+	    };
+	  },
 	  getInitialState: function getInitialState() {
 	    return {
 	      hovered: false,
@@ -91801,6 +91890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FontIcon;
+	module.exports = exports['default'];
 
 /***/ },
 /* 388 */
@@ -92009,6 +92099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Tooltip;
+	module.exports = exports['default'];
 
 /***/ },
 /* 389 */
@@ -92049,6 +92140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationMenu;
+	module.exports = exports['default'];
 
 /***/ },
 /* 390 */
@@ -92090,16 +92182,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'SvgIcon',
 	
 	  propTypes: {
+	    /**
+	     * Elements passed into the SVG Icon.
+	     */
 	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * This is the fill color of the svg icon.
+	     * If not specified, this component will default
+	     * to muiTheme.palette.textColor.
+	     */
 	    color: _react2.default.PropTypes.string,
+	
+	    /**
+	     * This is the icon color when the mouse hovers over the icon.
+	     */
 	    hoverColor: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Function called when mouse enters this element.
+	     */
 	    onMouseEnter: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Function called when mouse leaves this element.
+	     */
 	    onMouseLeave: _react2.default.PropTypes.func,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Allows you to redifine what the coordinates
+	     * without units mean inside an svg element. For example,
+	     * if the SVG element is 500(width) by 200(height), and you
+	     * pass viewBox="0 0 50 20", this means that the coordinates inside
+	     * the svg will go from the top left corner (0,0) to bottom right (50,20)
+	     * and each unit will be worth 10px.
+	     */
 	    viewBox: _react2.default.PropTypes.string
 	  },
 	
@@ -92189,6 +92311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = SvgIcon;
+	module.exports = exports['default'];
 
 /***/ },
 /* 391 */
@@ -92229,6 +92352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationClose;
+	module.exports = exports['default'];
 
 /***/ },
 /* 392 */
@@ -92546,6 +92670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = IconMenu;
+	module.exports = exports['default'];
 
 /***/ },
 /* 393 */
@@ -92623,27 +92748,113 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'Menu',
 	
 	  propTypes: {
+	    /**
+	     * If true, the menu will apply transitions when added it
+	     * gets added to the DOM. In order for transitions to
+	     * work, wrap the menu inside a ReactTransitionGroup.
+	     */
 	    animated: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * If true, the width will automatically be
+	     * set according to the items inside the menu
+	     * using the proper keyline increment.
+	     */
 	    autoWidth: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Children for the Menu. Usually MenuItems.
+	     */
 	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Indicates if the menu should render with compact desktop styles.
+	     */
 	    desktop: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * True if this item should be focused by the keyboard initially.
+	     */
 	    initiallyKeyboardFocused: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * The style object to use to override underlying list style.
+	     */
 	    listStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The maxHeight of the menu in pixels. If
+	     * specified, the menu will scroll if larger than the maxHeight.
+	     */
 	    maxHeight: _react2.default.PropTypes.number,
+	
+	    /**
+	     * If true, the value can an array and allow the menu to be a multi-select.
+	     */
 	    multiple: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Fired when a menu item is touchTapped and the menu item
+	     * value is not equal to the current menu value.
+	     */
+	    onChange: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Fired when an Esc key is keyed down.
+	     */
 	    onEscKeyDown: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Fired when a menu item is touchTapped.
+	     */
 	    onItemTouchTap: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Fired when a key is pressed.
+	     */
 	    onKeyDown: _react2.default.PropTypes.func,
+	
+	    /**
+	     * This is the placement of the menu relative to the IconButton.
+	     */
 	    openDirection: _propTypes2.default.corners,
+	
+	    /**
+	     * Style for the selected Menu Item.
+	     */
 	    selectedMenuItemStyle: _react2.default.PropTypes.object,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The value of the selected menu item. If passed in,
+	     * this will make the menu a controlled component.
+	     * This component also supports valueLink.
+	     */
 	    value: _react2.default.PropTypes.any,
+	
+	    /**
+	     * ValueLink for this component when controlled.
+	     */
 	    valueLink: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Sets the width of the menu. If not specified, the menu
+	     * width will be dictated by its children. The rendered
+	     * width will always be a keyline increment
+	     * (64px for desktop, 56px otherwise).
+	     */
 	    width: _propTypes2.default.stringOrNumber,
+	
+	    /**
+	     * Sets the width of the menu. If not specified,
+	     * the menu width will be dictated by its children.
+	     * The rendered width will always be a keyline increment
+	     * (64px for desktop, 56px otherwise).
+	     */
 	    zDepth: _propTypes2.default.zDepth
 	  },
 	
@@ -92662,7 +92873,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	      animated: false,
 	      autoWidth: true,
+	      desktop: false,
+	      initiallyKeyboardFocused: false,
 	      maxHeight: null,
+	      multiple: false,
 	      onEscKeyDown: function onEscKeyDown() {},
 	      onItemTouchTap: function onItemTouchTap() {},
 	      onKeyDown: function onKeyDown() {},
@@ -93082,6 +93296,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Menu;
+	module.exports = exports['default'];
 
 /***/ },
 /* 394 */
@@ -93122,6 +93337,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 395 */
@@ -93180,6 +93396,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _events2.default.off(document, 'touchend', this._checkClickAway);
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 396 */
@@ -93233,15 +93450,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'List',
 	
 	  propTypes: {
+	    /**
+	     * These are usually ListItems that are passed to
+	     * be part of the list.
+	     */
 	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * If true, the subheader will be indented by 72px.
+	     */
 	    insetSubheader: _react2.default.PropTypes.bool,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The subheader string that will be displayed at the top of the list.
+	     */
 	    subheader: _react2.default.PropTypes.node,
+	
+	    /**
+	     * The style object to override subheader styles.
+	     */
 	    subheaderStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The zDepth prop passed to the Paper element inside list.
+	     */
 	    zDepth: _propTypes2.default.zDepth
 	  },
 	
@@ -93258,6 +93495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
+	      insetSubheader: false,
 	      zDepth: 0
 	    };
 	  },
@@ -93327,6 +93565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = List;
+	module.exports = exports['default'];
 
 /***/ },
 /* 397 */
@@ -93695,11 +93934,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ref: 'layer',
 	      open: this.state.open,
 	      componentClickAway: this.componentClickAway,
+	      useLayerForClickAway: this.props.useLayerForClickAway,
 	      render: this.renderLayer });
 	  }
 	});
 	
 	exports.default = Popover;
+	module.exports = exports['default'];
 
 /***/ },
 /* 398 */
@@ -93735,6 +93976,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 399 */
@@ -93913,6 +94155,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = RenderToLayer;
+	module.exports = exports['default'];
 
 /***/ },
 /* 400 */
@@ -94576,6 +94819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = PopoverDefaultAnimation;
+	module.exports = exports['default'];
 
 /***/ },
 /* 404 */
@@ -94616,6 +94860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationMoreVert;
+	module.exports = exports['default'];
 
 /***/ },
 /* 405 */
@@ -94685,23 +94930,76 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'MenuItem',
 	
 	  propTypes: {
+	    /**
+	     * If true, a left check mark will be rendered.
+	     */
 	    checked: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Elements passed as children to inner ListItem.
+	     */
 	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Indicates if the menu should render with compact desktop styles.
+	     */
 	    desktop: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Disables a menu item.
+	     */
 	    disabled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Prop passed down to ListItem that tells it what kind of focus it has.
+	     */
 	    focusState: _react2.default.PropTypes.oneOf(['none', 'focused', 'keyboard-focused']),
+	
+	    /**
+	     * Style overrides for the inner div.
+	     */
 	    innerDivStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * If true, the children will be indented.
+	     * Only needed when there is no leftIcon.
+	     */
 	    insetChildren: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * This is the SvgIcon or FontIcon to be displayed on the left side.
+	     */
 	    leftIcon: _react2.default.PropTypes.element,
+	
+	    /**
+	     * Nested MenuItems for this MenuItem. Used to make nested menus.
+	     */
 	    menuItems: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Fired when the element is touchTapped.
+	     */
 	    onTouchTap: _react2.default.PropTypes.func,
+	
+	    /**
+	     * This is the SvgIcon or FontIcon to be displayed on the right side.
+	     */
 	    rightIcon: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the block element that contains the secondary text.
+	     * If a string is passed in, a div tag will be rendered.
+	     */
 	    secondaryText: _react2.default.PropTypes.node,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The value of the menu item.
+	     */
 	    value: _react2.default.PropTypes.any
 	  },
 	
@@ -94718,7 +95016,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      focusState: 'none'
+	      checked: false,
+	      desktop: false,
+	      disabled: false,
+	      focusState: 'none',
+	      insetChildren: false
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -94915,6 +95217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = MenuItem;
+	module.exports = exports['default'];
 
 /***/ },
 /* 406 */
@@ -94955,6 +95258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationCheck;
+	module.exports = exports['default'];
 
 /***/ },
 /* 407 */
@@ -95036,32 +95340,151 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'ListItem',
 	
 	  propTypes: {
+	    /**
+	     * Generate a nested list indicator icon when
+	     * nested list items are detected. Set to false
+	     * if you do not want an indicator auto-generated.
+	     * Note that an indicator will not be created if a
+	     * rightIcon/Button has been specified.
+	     */
 	    autoGenerateNestedIndicator: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Children passed into the ListItem.
+	     */
 	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Does not allow the element to be focused by the keyboard.
+	     */
 	    disableKeyboardFocus: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * If true, the list-item will not be clickable
+	     * and will not display hover affects.
+	     * This is automatically disabled if leftCheckbox
+	     * or rightToggle is set.
+	     */
 	    disabled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Controls whether or not the child ListItems are initially displayed.
+	     */
 	    initiallyOpen: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Style prop for the innder div element.
+	     */
 	    innerDivStyle: _react2.default.PropTypes.object,
-	    innerStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * If true, the children will be indented by 72px.
+	     * Only needed if there is no left avatar or left icon.
+	     */
 	    insetChildren: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * This is the Avatar element to be displayed on the left side.
+	     */
 	    leftAvatar: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the Checkbox element to be displayed on the left side.
+	     */
 	    leftCheckbox: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the SvgIcon or FontIcon to be displayed on the left side.
+	     */
 	    leftIcon: _react2.default.PropTypes.element,
+	
+	    /**
+	     * An array of ListItems to nest underneath the current ListItem.
+	     */
 	    nestedItems: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.element),
+	
+	    /**
+	     * Controls how deep a ListItem appears.
+	     * This property is automatically managed so modify at your own risk.
+	     */
 	    nestedLevel: _react2.default.PropTypes.number,
+	
+	    /**
+	     * Called when the ListItem has keyboard focus.
+	     */
 	    onKeyboardFocus: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Called when the mouse is over the ListItem.
+	     */
 	    onMouseEnter: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Called when the mouse is no longer over the ListItem.
+	     */
 	    onMouseLeave: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Called when the ListItem toggles its nested ListItems.
+	     */
 	    onNestedListToggle: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Called when touches start.
+	     */
 	    onTouchStart: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Called when a touch tap event occures on the component.
+	     */
 	    onTouchTap: _react2.default.PropTypes.func,
+	
+	    /**
+	     * This is the block element that contains the primary text.
+	     * If a string is passed in, a div tag will be rendered.
+	     */
 	    primaryText: _react2.default.PropTypes.node,
+	
+	    /**
+	     * If provided, tapping on the primary text
+	     * of the item toggles the nested list.
+	     */
 	    primaryTogglesNestedList: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * This is the avatar element to be displayed on the right side.
+	     */
 	    rightAvatar: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the SvgIcon or FontIcon to be displayed on the right side.
+	     */
 	    rightIcon: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the IconButton to be displayed on the right side.
+	     * Hovering over this button will remove the ListItem hover.
+	     * Also, clicking on this button will not trigger a
+	     * ListItem ripple. The event will be stopped and prevented
+	     * from bubbling up to cause a ListItem click.
+	     */
 	    rightIconButton: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the Toggle element to display on the right side.
+	     */
 	    rightToggle: _react2.default.PropTypes.element,
+	
+	    /**
+	     * This is the block element that contains the secondary text.
+	     * If a string is passed in, a div tag will be rendered.
+	     */
 	    secondaryText: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Can be 1 or 2. This is the number of secondary
+	     * text lines before ellipsis will show.
+	     */
 	    secondaryTextLines: _react2.default.PropTypes.oneOf([1, 2]),
 	
 	    /**
@@ -95084,7 +95507,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      autoGenerateNestedIndicator: true,
+	      disableKeyboardFocus: false,
+	      disabled: false,
 	      initiallyOpen: false,
+	      insetChildren: false,
 	      nestedItems: [],
 	      nestedLevel: 0,
 	      onKeyboardFocus: function onKeyboardFocus() {},
@@ -95479,6 +95905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ListItem;
+	module.exports = exports['default'];
 
 /***/ },
 /* 408 */
@@ -95519,6 +95946,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationArrowDropUp;
+	module.exports = exports['default'];
 
 /***/ },
 /* 409 */
@@ -95559,6 +95987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NavigationArrowDropDown;
+	module.exports = exports['default'];
 
 /***/ },
 /* 410 */
@@ -95630,6 +96059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = NestedList;
+	module.exports = exports['default'];
 
 /***/ },
 /* 411 */
@@ -95885,6 +96315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FlatButton;
+	module.exports = exports['default'];
 
 /***/ },
 /* 412 */
@@ -95989,6 +96420,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = FlatButtonLabel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 413 */
@@ -96176,6 +96608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Avatar;
+	module.exports = exports['default'];
 
 /***/ },
 /* 414 */
@@ -96811,17 +97244,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'CircularProgress',
 	
 	  propTypes: {
+	    /**
+	     * Override the progress's color.
+	     */
 	    color: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Style for inner wrapper div.
+	     */
 	    innerStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The max value of progress, only works in determinate mode.
+	     */
 	    max: _react2.default.PropTypes.number,
+	
+	    /**
+	     * The min value of progress, only works in determinate mode.
+	     */
 	    min: _react2.default.PropTypes.number,
+	
+	    /**
+	     * The mode of show your progress, indeterminate
+	     * for when there is no value for progress.
+	     */
 	    mode: _react2.default.PropTypes.oneOf(['determinate', 'indeterminate']),
+	
+	    /**
+	     * The size of the progress.
+	     */
 	    size: _react2.default.PropTypes.number,
 	
 	    /**
 	     * Override the inline-styles of the root element.
 	     */
 	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The value of progress, only works in determinate mode.
+	     */
 	    value: _react2.default.PropTypes.number
 	  },
 	
@@ -97009,6 +97470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = CircularProgress;
+	module.exports = exports['default'];
 
 /***/ },
 /* 424 */
@@ -97393,6 +97855,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Checkbox;
+	module.exports = exports['default'];
 
 /***/ },
 /* 426 */
@@ -97868,6 +98331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = EnhancedSwitch;
+	module.exports = exports['default'];
 
 /***/ },
 /* 427 */
@@ -97933,6 +98397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	exports.default = ClearFix;
+	module.exports = exports['default'];
 
 /***/ },
 /* 428 */
@@ -98089,6 +98554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = BeforeAfterWrapper;
+	module.exports = exports['default'];
 
 /***/ },
 /* 429 */
@@ -98129,6 +98595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ToggleCheckBoxOutlineBlank;
+	module.exports = exports['default'];
 
 /***/ },
 /* 430 */
@@ -98169,6 +98636,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = ToggleCheckBox;
+	module.exports = exports['default'];
 
 /***/ },
 /* 431 */
@@ -98279,7 +98747,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onDismiss: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.func, 'Instead, use the open property to control the component.'),
 	
 	    /**
-	     * Fired when the `Snackbar` is requested to be closed by a click outside or when the time runs out.
+	     * Fired when the `Snackbar` is requested to be closed by a click outside the `Snackbar`, or after the
+	     * `autoHideDuration` timer expires.
+	      * Typically `onRequestClose` is used to set state in the parent component, which is used to control the `Snackbar`
+	     * `open` prop.
+	      * `onRequestClose` is called with an additional parameter: `reason`, which can be:`"timeout"` (autoHideDuration)
+	     * or: `"clickaway"`
+	      * This can optionally be used to control the response to `onRequestClose`, for example ignoring `clickaway`.
 	     */
 	    onRequestClose: _react2.default.PropTypes.func.isRequired,
 	
@@ -98581,6 +99055,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Snackbar;
+	module.exports = exports['default'];
 
 /***/ },
 /* 433 */
@@ -98644,6 +99119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _events2.default.off(window, 'resize', this._updateDeviceSize);
 	  }
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 434 */
@@ -98671,6 +99147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return propType(props, propName, componentName);
 	  };
 	}
+	module.exports = exports['default'];
 
 /***/ },
 /* 435 */
@@ -98772,7 +99249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _Workspace2 = _interopRequireDefault(_Workspace);
 	
-	__webpack_require__(496);
+	__webpack_require__(506);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -98878,27 +99355,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var TabActions = _interopRequireWildcard(_tabs);
 	
-	var _dialog = __webpack_require__(463);
-	
-	var _dialog2 = _interopRequireDefault(_dialog);
-	
 	var _raisedButton = __webpack_require__(303);
 	
 	var _raisedButton2 = _interopRequireDefault(_raisedButton);
 	
-	var _flatButton = __webpack_require__(411);
-	
-	var _flatButton2 = _interopRequireDefault(_flatButton);
-	
-	var _textField = __webpack_require__(370);
-	
-	var _textField2 = _interopRequireDefault(_textField);
-	
-	var _SideBar = __webpack_require__(465);
+	var _SideBar = __webpack_require__(463);
 	
 	var _SideBar2 = _interopRequireDefault(_SideBar);
 	
-	var _Pane = __webpack_require__(483);
+	var _ProjectSettingsDialog = __webpack_require__(482);
+	
+	var _ProjectSettingsDialog2 = _interopRequireDefault(_ProjectSettingsDialog);
+	
+	var _SharingDialog = __webpack_require__(486);
+	
+	var _SharingDialog2 = _interopRequireDefault(_SharingDialog);
+	
+	var _Pane = __webpack_require__(493);
 	
 	var _Pane2 = _interopRequireDefault(_Pane);
 	
@@ -98906,7 +99379,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _kyperGrout2 = _interopRequireDefault(_kyperGrout);
 	
-	__webpack_require__(495);
+	__webpack_require__(505);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -98928,6 +99401,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _classCallCheck(this, Workspace);
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Workspace).call(this));
+	
+	    _this.state = { inputVisible: false, settingsOpen: false, sharingOpen: false, files: [] };
+	
+	    _this.toggleSettingsModal = function () {
+	      _this.setState({
+	        settingsOpen: !_this.state.settingsOpen
+	      });
+	    };
+	
+	    _this.toggleSharingModal = function () {
+	      _this.setState({
+	        sharingOpen: !_this.state.sharingOpen
+	      });
+	    };
+	
+	    _this.saveSettings = function (data) {
+	      _this.props.updateProject({ project: _this.props.project, data: data });
+	      //TODO: Show popup of save success/failure
+	      _this.toggleSettingsModal();
+	    };
 	
 	    _this.addFile = function (file) {
 	      _this.props.addFile({ project: _this.props.project, file: file });
@@ -98965,18 +99458,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	
-	    _this.toggleSettingsModal = function (name) {
-	      _this.setState({
-	        settingsOpen: !_this.state.settingsOpen
-	      });
-	    };
-	
-	    _this.saveSettings = function (data) {
-	      _this.props.updateProject({ project: _this.props.project, data: data });
-	      //TODO: Show popup of save success/failure
-	      _this.toggleSettingsModal.bind(_this, 'settingsOpen');
-	    };
-	
 	    _this.loadCodeSharing = function (editor) {
 	      var _this$props$tabs = _this.props.tabs;
 	      var list = _this$props$tabs.list;
@@ -99010,7 +99491,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _this.props.addFiles({ project: _this.props.project, files: files });
 	    };
 	
-	    _this.state = { inputVisible: false, settingsOpen: false, files: [] };
 	    return _this;
 	  }
 	
@@ -99053,36 +99533,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var actions = [_react2.default.createElement(_flatButton2.default, {
-	        label: 'Cancel',
-	        secondary: true,
-	        onTouchTap: this.toggleSettingsModal.bind(this, 'settingsOpen')
-	      }), _react2.default.createElement(_flatButton2.default, {
-	        label: 'Save',
-	        primary: true,
-	        keyboardFocused: true,
-	        onTouchTap: this.saveSettings
-	      })];
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'Workspace' },
-	        _react2.default.createElement(
-	          _dialog2.default,
-	          {
-	            title: 'Settings',
-	            actions: actions,
-	            modal: false,
-	            open: this.state.settingsOpen,
-	            onRequestClose: this.toggleSettingsModal.bind(this, 'settingsOpen'),
-	            bodyClassName: 'Workspace-Settings',
-	            titleClassName: 'Workspace-Settings-Title',
-	            contentStyle: { 'width': '30%' }
-	          },
-	          _react2.default.createElement(_textField2.default, { hintText: 'Project Name' }),
-	          _react2.default.createElement(_textField2.default, { hintText: 'Owner' }),
-	          _react2.default.createElement(_textField2.default, { hintText: 'Project Url' }),
-	          _react2.default.createElement(_textField2.default, { hintText: 'Git Url' })
-	        ),
+	        _react2.default.createElement(_ProjectSettingsDialog2.default, { modalOpen: this.state.settingsOpen, toggleModal: this.toggleSettingsModal }),
+	        _react2.default.createElement(_SharingDialog2.default, { modalOpen: this.state.sharingOpen, toggleModal: this.toggleSharingModal }),
 	        _react2.default.createElement(_SideBar2.default, {
 	          projects: this.props.projects,
 	          showProjects: this.props.showProjects,
@@ -99092,7 +99547,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          files: this.state.files,
 	          hideName: this.props.hideName,
 	          onFileClick: this.openFile,
-	          onSettingsClick: this.toggleSettingsModal.bind(this, 'settingsOpen'),
+	          onSettingsClick: this.toggleSettingsModal,
+	          onSharingClick: this.toggleSharingModal,
 	          addFile: this.addFile,
 	          addFile: this.addFolder,
 	          onFilesDrop: this.onFilesDrop,
@@ -101873,6 +102329,2387 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _lodash = __webpack_require__(289);
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(179);
+	
+	var _TreeView = __webpack_require__(464);
+	
+	var _TreeView2 = _interopRequireDefault(_TreeView);
+	
+	var _DropDownMenu = __webpack_require__(470);
+	
+	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
+	
+	var _toolbar = __webpack_require__(473);
+	
+	var _toolbar2 = _interopRequireDefault(_toolbar);
+	
+	var _toolbarGroup = __webpack_require__(474);
+	
+	var _toolbarGroup2 = _interopRequireDefault(_toolbarGroup);
+	
+	var _selectField = __webpack_require__(475);
+	
+	var _selectField2 = _interopRequireDefault(_selectField);
+	
+	var _menuItem = __webpack_require__(405);
+	
+	var _menuItem2 = _interopRequireDefault(_menuItem);
+	
+	var _iconButton = __webpack_require__(386);
+	
+	var _iconButton2 = _interopRequireDefault(_iconButton);
+	
+	var _iconMenu = __webpack_require__(392);
+	
+	var _iconMenu2 = _interopRequireDefault(_iconMenu);
+	
+	var _addCircle = __webpack_require__(478);
+	
+	var _addCircle2 = _interopRequireDefault(_addCircle);
+	
+	var _settings = __webpack_require__(479);
+	
+	var _settings2 = _interopRequireDefault(_settings);
+	
+	var _group = __webpack_require__(480);
+	
+	var _group2 = _interopRequireDefault(_group);
+	
+	__webpack_require__(481);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SideBar = function (_Component) {
+	  _inherits(SideBar, _Component);
+	
+	  function SideBar(props) {
+	    _classCallCheck(this, SideBar);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SideBar).call(this, props));
+	
+	    _this.selectProject = _this.selectProject.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(SideBar, [{
+	    key: 'selectProject',
+	    value: function selectProject(e, i, name) {
+	      if (this.props && this.props.onProjectSelect) {
+	        var proj = (0, _lodash.find)(this.props.projects, { name: name });
+	        this.props.onProjectSelect(proj, i);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var showProjects = !(0, _lodash.isUndefined)(this.props.showProjects) ? this.props.showProjects : true;
+	      var iconButtonStyle = { width: '60px', height: '60px' };
+	      var projectsMenu = undefined;
+	      if ((0, _lodash.isArray)(this.props.projects) && this.props.projects.length > 0) {
+	        projectsMenu = this.props.projects.map(function (project, i) {
+	          return _react2.default.createElement(_menuItem2.default, { key: 'Project-' + i, label: project.name, value: project.name, primaryText: project.name });
+	        });
+	      }
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'SideBar' },
+	        projectsMenu && showProjects ? _react2.default.createElement(_selectField2.default, {
+	          style: { width: '80%', marginLeft: '10%' },
+	          labelStyle: { fontSize: '1.5rem', fontWeight: '300' },
+	          autoWidth: true,
+	          value: this.props.project.name,
+	          children: projectsMenu,
+	          onChange: this.selectProject
+	        }) : null,
+	        _react2.default.createElement(_TreeView2.default, {
+	          account: this.props.account,
+	          fileStructure: this.props.files,
+	          onFileClick: this.props.onFileClick,
+	          onNewFileClick: this.props.onNewFileClick,
+	          addFile: this.props.addFile,
+	          projectName: this.props.project.name,
+	          onFilesDrop: this.props.onFilesDrop,
+	          onFileDelete: this.props.onFileDelete
+	        }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SideBar-Buttons' },
+	          _react2.default.createElement(
+	            _iconMenu2.default,
+	            { className: 'SideBar-Button', iconButtonElement: _react2.default.createElement(
+	                _iconButton2.default,
+	                { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' } },
+	                _react2.default.createElement(_addCircle2.default, null)
+	              ) },
+	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add file' }),
+	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add folder' }),
+	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add files from Github' }),
+	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Upload files' })
+	          ),
+	          _react2.default.createElement(
+	            _iconButton2.default,
+	            { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSettingsClick },
+	            _react2.default.createElement(_group2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            _iconButton2.default,
+	            { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSharingClick },
+	            _react2.default.createElement(_settings2.default, null)
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return SideBar;
+	}(_react.Component);
+	
+	SideBar.propTypes = {
+	  projects: _react.PropTypes.array,
+	  project: _react.PropTypes.object,
+	  files: _react.PropTypes.array,
+	  onFileClick: _react.PropTypes.func,
+	  onPublishClick: _react.PropTypes.func,
+	  onNewFileClick: _react.PropTypes.func,
+	  showButtons: _react.PropTypes.bool,
+	  onLogoutClick: _react.PropTypes.func,
+	  addFile: _react.PropTypes.func,
+	  loadFiles: _react.PropTypes.func,
+	  onFilesDrop: _react.PropTypes.func,
+	  onSharingClick: _react.PropTypes.func
+	};
+	exports.default = SideBar;
+	module.exports = exports['default'];
+
+/***/ },
+/* 464 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _lodash = __webpack_require__(289);
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _TreeFolder = __webpack_require__(465);
+	
+	var _TreeFolder2 = _interopRequireDefault(_TreeFolder);
+	
+	var _TreeFile = __webpack_require__(466);
+	
+	var _TreeFile2 = _interopRequireDefault(_TreeFile);
+	
+	var _reactDropzone = __webpack_require__(299);
+	
+	var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+	
+	__webpack_require__(469);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var hideCurrentUser = true; //Display current user in file's connected users
+	
+	var TreeView = function (_Component) {
+	  _inherits(TreeView, _Component);
+	
+	  function TreeView() {
+	    _classCallCheck(this, TreeView);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TreeView).call(this));
+	
+	    _this.state = {
+	      contextMenu: {
+	        display: 'none',
+	        top: '0px',
+	        left: '0px'
+	      },
+	      newFile: false
+	    };
+	    _this.handleWindowClick = _this.handleWindowClick.bind(_this);
+	    _this.renderInputDialog = _this.renderInputDialog.bind(_this);
+	    _this.handleInputChange = _this.handleInputChange.bind(_this);
+	    _this.handleNewSubmit = _this.handleNewSubmit.bind(_this);
+	    _this.addInputBox = _this.addInputBox.bind(_this);
+	    _this.handleNewClick = _this.handleNewClick.bind(_this);
+	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
+	    _this.hideNewFileInput = _this.hideNewFileInput.bind(_this);
+	    _this.inputKey = null;
+	    return _this;
+	  }
+	
+	  _createClass(TreeView, [{
+	    key: 'handleNewClick',
+	    value: function handleNewClick(type) {
+	      var _this2 = this;
+	
+	      var newState = type === 'file' ? { 'newFile': true } : { 'newFolder': true };
+	      this.setState(newState, function () {
+	        _this2.refs.inputDialog.focus();
+	        window.addEventListener('keydown', _this2.hideNewFileInput);
+	      });
+	    }
+	  }, {
+	    key: 'hideNewFileInput',
+	    value: function hideNewFileInput(e) {
+	      if (e.keyCode == 27) {
+	        this.setState({
+	          showNewFile: false
+	        });
+	        window.removeEventListener('keydown', this.hideNewFileInput);
+	      } else if (e === 'blur') {
+	        this.setState({
+	          showNewFile: false
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'handleRightClick',
+	    value: function handleRightClick(e) {
+	      e.preventDefault();
+	      console.log(e.screenX, e.screenY);
+	      this.addInputBox(e.target);
+	      this.setState({
+	        contextMenu: {
+	          display: 'block',
+	          top: e.clientY,
+	          left: e.clientX
+	        }
+	      });
+	      window.addEventListener('click', this.handleWindowClick);
+	      return false;
+	    }
+	  }, {
+	    key: 'addInputBox',
+	    value: function addInputBox(el) {
+	      var i = 0;
+	      while (el.tagName !== 'LI' && i < 5) {
+	        el = el.parentNode;
+	        i++;
+	      }
+	      var reactId = el.getAttribute('data-reactid');
+	      var key = reactId.split('-')[2];
+	      this.inputKey = key;
+	    }
+	  }, {
+	    key: 'handleWindowClick',
+	    value: function handleWindowClick() {
+	      this.setState({
+	        contextMenu: {
+	          display: 'none'
+	        }
+	      });
+	      window.removeEventListener('click', this.handleWindowClick);
+	    }
+	  }, {
+	    key: 'handleInputChange',
+	    value: function handleInputChange(e) {
+	      this.setState({
+	        inputValue: e.target.value
+	      });
+	    }
+	  }, {
+	    key: 'handleNewSubmit',
+	    value: function handleNewSubmit(e) {
+	      e.preventDefault();
+	      if (this.state.newFile) {
+	        this.setState({
+	          newFile: false
+	        });
+	        this.props.addFile({ path: this.state.inputValue });
+	      } else {
+	        this.setState({
+	          newFolder: false
+	        });
+	        this.props.addFolder({ path: this.state.inputValue });
+	      }
+	      return false;
+	    }
+	  }, {
+	    key: 'handleDeleteClick',
+	    value: function handleDeleteClick(e) {
+	      e.preventDefault();
+	      var fileData = this.props.fileStructure[this.inputKey].meta;
+	      console.log('handle delete click:', fileData);
+	      if (this.inputKey) {
+	        this.props.onFileDelete({ projectName: this.props.projectName, path: fileData.path || fileData.name });
+	      }
+	    }
+	  }, {
+	    key: 'renderInputDialog',
+	    value: function renderInputDialog(key) {
+	      if (this.state) {
+	        return _react2.default.createElement(
+	          'li',
+	          { className: 'TreeView-NewInput', key: 'child-Folder-' + key + '-input' },
+	          _react2.default.createElement(
+	            'form',
+	            { onSubmit: this.handleNewSubmit },
+	            _react2.default.createElement('input', {
+	              className: 'Input',
+	              onChange: this.handleInputChange,
+	              ref: 'inputDialog',
+	              placeholder: 'newfile.js',
+	              onBlur: this.hideNewFileInput.bind(this, 'blur')
+	            })
+	          )
+	        );
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
+	
+	      var structure = this.props.fileStructure.map(function (entry, i) {
+	        if (entry.meta.type == "folder" || entry.children) {
+	          return _react2.default.createElement(_TreeFolder2.default, {
+	            key: 'child-Folder-' + i + '-' + entry.meta.name,
+	            index: i,
+	            data: entry.meta,
+	            isCollapsed: entry.isCollapsed,
+	            children: entry.children,
+	            onFileClick: _this3.props.onFileClick
+	          });
+	        }
+	        var mappedUsers = entry.users ? (0, _lodash.map)(entry.users, function (user, key) {
+	          user.username = key;
+	          return user;
+	        }) : null;
+	        // //Remove current user from file's users array
+	        if (hideCurrentUser && _this3.props.account && _this3.props.account.username) {
+	          mappedUsers = mappedUsers ? (0, _lodash.filter)(mappedUsers, function (user) {
+	            return user.username !== _this3.props.account.username;
+	          }) : null;
+	        }
+	        return _react2.default.createElement(_TreeFile2.default, {
+	          key: 'child-File-' + i + '-' + (entry.meta.name || entry.meta.path.split('/')[0]),
+	          index: i,
+	          data: entry.meta,
+	          active: entry.active,
+	          users: mappedUsers,
+	          onClick: _this3.props.onFileClick
+	        });
+	      });
+	      if (this.inputKey && this.state.showNewFile) {
+	        var inputDialog = this.renderInputDialog(this.inputKey);
+	        structure.splice(this.inputKey + 1, 0, inputDialog);
+	      } else if (this.state.showNewFile) {
+	        var inputDialog = this.renderInputDialog(this.inputKey);
+	        structure.push(inputDialog);
+	      }
+	      var noFiles;
+	      if (structure.length < 1) {
+	        noFiles = _react2.default.createElement(
+	          'li',
+	          { className: 'TreeView-None', key: 'NotFound-1' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'strong',
+	              null,
+	              'Right click'
+	            ),
+	            _react2.default.createElement('br', null),
+	            'OR ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'strong',
+	              null,
+	              'Drop files'
+	            ),
+	            _react2.default.createElement('br', null),
+	            'to get started ',
+	            _react2.default.createElement('br', null)
+	          )
+	        );
+	      } else {
+	        noFiles = null;
+	      }
+	      var contextMenuStyle = {
+	        display: this.state.contextMenu.display,
+	        top: this.state.contextMenu.top,
+	        left: this.state.contextMenu.left
+	      };
+	      return _react2.default.createElement(
+	        _reactDropzone2.default,
+	        { className: 'TreeView', onDrop: this.props.onFilesDrop, multiple: true, style: { border: 'none' }, disableClick: true },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'ol',
+	            { className: 'TreeView-Structure', onContextMenu: this.handleRightClick.bind(this) },
+	            noFiles,
+	            structure
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            { style: contextMenuStyle, className: 'TreeView-ContextMenu' },
+	            _react2.default.createElement(
+	              'li',
+	              { onClick: this.handleNewClick.bind(this, 'file') },
+	              'Add new file'
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { onClick: this.handleNewClick.bind(this, 'folder') },
+	              'Add new folder'
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { onClick: this.handleDeleteClick },
+	              'Delete File'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return TreeView;
+	}(_react.Component);
+	
+	TreeView.propTypes = {
+	  fileStructure: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+	    name: _react.PropTypes.string,
+	    path: _react.PropTypes.string
+	  })),
+	  onFileClick: _react.PropTypes.func,
+	  onFolderClick: _react.PropTypes.func,
+	  addFile: _react.PropTypes.func,
+	  projectName: _react.PropTypes.string,
+	  onFilesDrop: _react.PropTypes.func,
+	  onFileDelete: _react.PropTypes.func
+	};
+	exports.default = TreeView;
+	module.exports = exports['default'];
+
+/***/ },
+/* 465 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _fontIcon = __webpack_require__(387);
+	
+	var _fontIcon2 = _interopRequireDefault(_fontIcon);
+	
+	var _TreeFile = __webpack_require__(466);
+	
+	var _TreeFile2 = _interopRequireDefault(_TreeFile);
+	
+	__webpack_require__(468);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//Components
+	
+	//Styles
+	
+	var TreeFolder = function (_Component) {
+	  _inherits(TreeFolder, _Component);
+	
+	  function TreeFolder() {
+	    _classCallCheck(this, TreeFolder);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TreeFolder).call(this));
+	
+	    _this._onFolderClick = _this._onFolderClick.bind(_this);
+	    //TODO: Load this from redux
+	    _this.state = { isCollapsed: true };
+	    return _this;
+	  }
+	
+	  _createClass(TreeFolder, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var className = this.state.isCollapsed ? 'TreeFolder collapsed noselect' : 'TreeFolder noselect';
+	      var iconSize = "1.7rem";
+	      // let iconClass = (this.state.isCollapsed) ? 'octicon octicon-chevron-right ' : 'octicon octicon-chevron-down TreeFolder-Icon';
+	      var children = undefined;
+	      if (this.props.children) {
+	        children = this.props.children.map(function (entry, i) {
+	          if (entry.type == "folder" || entry.children) {
+	            return _react2.default.createElement(TreeFolder, {
+	              key: _this2.props.name + '-Folder-' + i,
+	              index: i,
+	              data: entry.meta,
+	              isCollapsed: entry.isCollapsed,
+	              children: entry.children,
+	              onFileClick: _this2.props.onFileClick
+	            });
+	          }
+	          return _react2.default.createElement(_TreeFile2.default, {
+	            key: _this2.props.name + '-File-' + i,
+	            index: i,
+	            data: entry,
+	            active: entry.active,
+	            onClick: _this2.props.onFileClick
+	          });
+	        });
+	      }
+	      var name = this.props.data.name || this.props.data.path;
+	      if (this.state.isCollapsed) {
+	        return _react2.default.createElement(
+	          'li',
+	          { className: className },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'TreeFolder-Info', onClick: this._onFolderClick },
+	            _react2.default.createElement(
+	              _fontIcon2.default,
+	              { className: 'material-icons',
+	                style: { 'fontSize': iconSize } },
+	              'keyboard_arrow_down'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'TreeFolder-Name' },
+	              name
+	            )
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'li',
+	          { className: className },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'TreeFolder-Info', onClick: this._onFolderClick },
+	            _react2.default.createElement(
+	              _fontIcon2.default,
+	              { className: 'material-icons',
+	                style: { 'fontSize': iconSize } },
+	              'keyboard_arrow_right'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'TreeFolder-Name' },
+	              name
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'ol',
+	            { className: 'TreeFolder-Children' },
+	            children
+	          )
+	        );
+	      }
+	    }
+	  }, {
+	    key: '_onFolderClick',
+	    value: function _onFolderClick(event) {
+	      if (event.button !== 0) {
+	        return;
+	      }
+	      // If modified event
+	      if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) {
+	        return;
+	      }
+	      var el = event.currentTarget;
+	      event.preventDefault();
+	      this.setState({
+	        isCollapsed: !this.state.isCollapsed
+	      });
+	      if (this.props) {
+	        if (this.props.onOpenClick && !this.state.isCollapsed) {
+	          // console.log('open folder clicked');
+	          this.props.onOpenClick();
+	        }
+	        if (this.props.onClosedClick && this.state.isCollapsed) {
+	          // console.log('closed folder clicked');
+	          this.props.onClosedClick();
+	        }
+	      }
+	    }
+	  }]);
+	
+	  return TreeFolder;
+	}(_react.Component);
+	
+	TreeFolder.propTypes = {
+	  data: _react.PropTypes.object,
+	  index: _react.PropTypes.number.isRequired,
+	  onOpenClick: _react.PropTypes.func,
+	  onClosedClick: _react.PropTypes.func,
+	  onFileClick: _react.PropTypes.func
+	};
+	exports.default = TreeFolder;
+	module.exports = exports['default'];
+
+/***/ },
+/* 466 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _lodash = __webpack_require__(289);
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(467);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TreeFile = function (_Component) {
+	  _inherits(TreeFile, _Component);
+	
+	  function TreeFile() {
+	    _classCallCheck(this, TreeFile);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TreeFile).call(this));
+	
+	    _this._onFileClick = _this._onFileClick.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(TreeFile, [{
+	    key: 'render',
+	    value: function render() {
+	      var className = this.props.active ? 'TreeFile active noselect' : 'TreeFile noselect';
+	      var name = this.props.data.name || this.props.data.path.split('/')[this.props.data.path.split('/').length - 1];
+	      var connectedUsers = this.props.users ? this.props.users.map(function (user, i) {
+	        var userStyle = { backgroundColor: user.color };
+	        return _react2.default.createElement(
+	          'div',
+	          { key: 'Connected-User-' + i, className: 'TreeFile-User', style: userStyle },
+	          user.username.charAt(0).toUpperCase()
+	        );
+	      }) : _react2.default.createElement('span', null);
+	      return _react2.default.createElement(
+	        'li',
+	        { onClick: this._onFileClick },
+	        _react2.default.createElement(
+	          'div',
+	          { className: className },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'TreeFile-Name' },
+	            name
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'TreeFile-Users' },
+	            connectedUsers
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: '_onFileClick',
+	    value: function _onFileClick(event) {
+	      if (event.button !== 0) {
+	        return;
+	      }
+	      // If modified event
+	      if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) {
+	        return;
+	      }
+	      var el = event.currentTarget;
+	      event.preventDefault();
+	      if (this.props) {
+	        if (this.props.onClick) {
+	          console.log('running on click in tree file:', this.props.data);
+	          this.props.onClick(this.props.data);
+	        }
+	      }
+	    }
+	  }]);
+	
+	  return TreeFile;
+	}(_react.Component);
+	
+	TreeFile.propTypes = {
+	  name: _react.PropTypes.string,
+	  index: _react.PropTypes.number.isRequired,
+	  data: _react.PropTypes.object.isRequired,
+	  active: _react.PropTypes.bool,
+	  onClick: _react.PropTypes.func
+	};
+	exports.default = TreeFile;
+	module.exports = exports['default'];
+
+/***/ },
+/* 467 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 468 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 469 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _DropDownMenu = __webpack_require__(471);
+	
+	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _DropDownMenu2.default;
+	module.exports = exports['default'];
+
+/***/ },
+/* 471 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _transitions = __webpack_require__(322);
+	
+	var _transitions2 = _interopRequireDefault(_transitions);
+	
+	var _arrowDropDown = __webpack_require__(409);
+	
+	var _arrowDropDown2 = _interopRequireDefault(_arrowDropDown);
+	
+	var _menu = __webpack_require__(393);
+	
+	var _menu2 = _interopRequireDefault(_menu);
+	
+	var _menuItem = __webpack_require__(405);
+	
+	var _menuItem2 = _interopRequireDefault(_menuItem);
+	
+	var _lightRawTheme = __webpack_require__(341);
+	
+	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
+	
+	var _clearfix = __webpack_require__(427);
+	
+	var _clearfix2 = _interopRequireDefault(_clearfix);
+	
+	var _themeManager = __webpack_require__(344);
+	
+	var _themeManager2 = _interopRequireDefault(_themeManager);
+	
+	var _popover = __webpack_require__(397);
+	
+	var _popover2 = _interopRequireDefault(_popover);
+	
+	var _popoverAnimationFromTop = __webpack_require__(472);
+	
+	var _popoverAnimationFromTop2 = _interopRequireDefault(_popoverAnimationFromTop);
+	
+	var _styles = __webpack_require__(308);
+	
+	var _styles2 = _interopRequireDefault(_styles);
+	
+	var _warning = __webpack_require__(380);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	var _deprecatedPropType = __webpack_require__(434);
+	
+	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var DropDownMenu = _react2.default.createClass({
+	  displayName: 'DropDownMenu',
+	
+	  // The nested styles for drop-down-menu are modified by toolbar and possibly
+	  // other user components, so it will give full access to its js styles rather
+	  // than just the parent.
+	  propTypes: {
+	    /**
+	     * The width will automatically be set according to the items inside the menu.
+	     * To control this width in css instead, set this prop to false.
+	     */
+	    autoWidth: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * The `MenuItem`s to populate the `Menu` with. If the `MenuItems` have the
+	     * prop `label` that value will be used to render the representation of that
+	     * item within the field.
+	     */
+	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * The css class name of the root element.
+	     */
+	    className: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Disables the menu.
+	     */
+	    disabled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * `DropDownMenu` will use this member to display
+	     * the name of the item.
+	     */
+	    displayMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'Instead, use composability.'),
+	
+	    /**
+	     * Overrides the styles of icon element.
+	     */
+	    iconStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * `DropDownMenu` will use this member to display
+	     * the name of the item on the label.
+	     */
+	    labelMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'Instead, use composability.'),
+	
+	    /**
+	     * Overrides the styles of label when the `DropDownMenu` is inactive.
+	     */
+	    labelStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The maximum height of the `Menu` when it is displayed.
+	     */
+	    maxHeight: _react2.default.PropTypes.number,
+	
+	    /**
+	     * JSON data representing all menu items in the dropdown.
+	     */
+	    menuItems: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.array, 'Instead, use composability.'),
+	
+	    /**
+	     * Overrides the styles of `Menu` when the `DropDownMenu` is displayed.
+	     */
+	    menuStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Fired when a menu item is clicked that is not the one currently selected.
+	     */
+	    onChange: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Set to true to have the `DropDownMenu` automatically open on mount.
+	     */
+	    openImmediately: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Index of the item selected.
+	     */
+	    selectedIndex: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.number, 'Use value instead to control the component.'),
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Overrides the inline-styles of the underline.
+	     */
+	    underlineStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The value that is currently selected.
+	     */
+	    value: _react2.default.PropTypes.any,
+	
+	    /**
+	     * Two-way binding link.
+	     */
+	    valueLink: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.object, 'It\'s deprecated by React too.'),
+	
+	    /**
+	     * `DropDownMenu` will use this member as the value representing an item.
+	     */
+	    valueMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'Instead, use composability.')
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      autoWidth: true,
+	      disabled: false,
+	      openImmediately: false,
+	      maxHeight: 500
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      open: this.props.openImmediately,
+	      selectedIndex: this._isControlled() ? null : this.props.selectedIndex || 0,
+	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    if (this.props.autoWidth) this._setWidth();
+	    if (this.props.hasOwnProperty('selectedIndex')) this._setSelectedIndex(this.props.selectedIndex);
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	    this.setState({ muiTheme: newMuiTheme });
+	
+	    if (this.props.autoWidth) this._setWidth();
+	    if (nextProps.hasOwnProperty('value') || nextProps.hasOwnProperty('valueLink')) {
+	      return;
+	    } else if (nextProps.hasOwnProperty('selectedIndex')) {
+	      this._setSelectedIndex(nextProps.selectedIndex);
+	    }
+	  },
+	  getStyles: function getStyles() {
+	    var disabled = this.props.disabled;
+	
+	    var spacing = this.state.muiTheme.rawTheme.spacing;
+	    var palette = this.state.muiTheme.rawTheme.palette;
+	    var accentColor = this.state.muiTheme.dropDownMenu.accentColor;
+	    return {
+	      control: {
+	        cursor: disabled ? 'not-allowed' : 'pointer',
+	        height: '100%',
+	        position: 'relative',
+	        width: '100%'
+	      },
+	      icon: {
+	        fill: accentColor,
+	        position: 'absolute',
+	        right: spacing.desktopGutterLess,
+	        top: (spacing.desktopToolbarHeight - 24) / 2
+	      },
+	      label: {
+	        color: disabled ? palette.disabledColor : palette.textColor,
+	        lineHeight: spacing.desktopToolbarHeight + 'px',
+	        opacity: 1,
+	        position: 'relative',
+	        paddingLeft: spacing.desktopGutter,
+	        paddingRight: spacing.iconSize + spacing.desktopGutterLess + spacing.desktopGutterMini,
+	        top: 0
+	      },
+	      labelWhenOpen: {
+	        opacity: 0,
+	        top: spacing.desktopToolbarHeight / 8
+	      },
+	      rootWhenOpen: {
+	        opacity: 1
+	      },
+	      root: {
+	        display: 'inline-block',
+	        fontSize: spacing.desktopDropDownMenuFontSize,
+	        height: spacing.desktopSubheaderHeight,
+	        fontFamily: this.state.muiTheme.rawTheme.fontFamily,
+	        outline: 'none',
+	        position: 'relative',
+	        transition: _transitions2.default.easeOut()
+	      },
+	      underline: {
+	        borderTop: 'solid 1px ' + accentColor,
+	        bottom: 1,
+	        left: 0,
+	        margin: '-1px ' + spacing.desktopGutter + 'px',
+	        right: 0,
+	        position: 'absolute'
+	      }
+	    };
+	  },
+	
+	  /**
+	   * This method is deprecated but still here because the TextField
+	   * need it in order to work. That will be addressed later.
+	   */
+	  getInputNode: function getInputNode() {
+	    var _this = this;
+	
+	    var root = this.refs.root;
+	    var item = this.props.menuItems && this.props.menuItems[this.state.selectedIndex];
+	    if (item) {
+	      root.value = item[this.props.displayMember || 'text'];
+	    }
+	
+	    root.focus = function () {
+	      if (!_this.props.disabled) {
+	        _this.setState({
+	          open: !_this.state.open,
+	          anchorEl: _this.refs.root
+	        });
+	      }
+	    };
+	
+	    return root;
+	  },
+	  _setWidth: function _setWidth() {
+	    var el = this.refs.root;
+	    if (!this.props.style || !this.props.style.hasOwnProperty('width')) {
+	      el.style.width = 'auto';
+	    }
+	  },
+	  _setSelectedIndex: function _setSelectedIndex(index) {
+	     false ? (0, _warning2.default)(index >= 0, 'Cannot set selectedIndex to a negative index.') : undefined;
+	    this.setState({ selectedIndex: index >= 0 ? index : 0 });
+	  },
+	  _onControlTouchTap: function _onControlTouchTap(event) {
+	    event.preventDefault();
+	    if (!this.props.disabled) {
+	      this.setState({
+	        open: !this.state.open,
+	        anchorEl: this.refs.root
+	      });
+	    }
+	  },
+	  _onMenuItemTouchTap: function _onMenuItemTouchTap(key, payload, e) {
+	    var _props = this.props;
+	    var onChange = _props.onChange;
+	    var menuItems = _props.menuItems;
+	    var value = _props.value;
+	    var valueLink = _props.valueLink;
+	    var valueMember = _props.valueMember;
+	
+	    if (menuItems && (this.state.selectedIndex !== key || e.target.value !== value)) {
+	      var selectedItem = menuItems[key];
+	      if (selectedItem) {
+	        e.target.value = selectedItem[valueMember || 'payload'];
+	      }
+	      this._onMenuRequestClose();
+	    }
+	
+	    if (valueLink) {
+	      valueLink.requestChange(e.target.value);
+	    } else if (onChange) {
+	      onChange(e, key, payload);
+	    }
+	
+	    this.setState({
+	      selectedIndex: key,
+	      open: false
+	    });
+	  },
+	  _onMenuRequestClose: function _onMenuRequestClose() {
+	    this.setState({
+	      open: false,
+	      anchorEl: null
+	    });
+	  },
+	  _isControlled: function _isControlled() {
+	    return this.props.hasOwnProperty('value') || this.props.hasOwnProperty('valueLink');
+	  },
+	  render: function render() {
+	    var _this2 = this;
+	
+	    var _props2 = this.props;
+	    var autoWidth = _props2.autoWidth;
+	    var children = _props2.children;
+	    var className = _props2.className;
+	    var displayMember = _props2.displayMember;
+	    var iconStyle = _props2.iconStyle;
+	    var labelMember = _props2.labelMember;
+	    var labelStyle = _props2.labelStyle;
+	    var maxHeight = _props2.maxHeight;
+	    var menuItems = _props2.menuItems;
+	    var menuStyle = _props2.menuStyle;
+	    var style = _props2.style;
+	    var underlineStyle = _props2.underlineStyle;
+	    var valueLink = _props2.valueLink;
+	    var _props2$valueMember = _props2.valueMember;
+	    var valueMember = _props2$valueMember === undefined ? 'payload' : _props2$valueMember;
+	
+	    var other = _objectWithoutProperties(_props2, ['autoWidth', 'children', 'className', 'displayMember', 'iconStyle', 'labelMember', 'labelStyle', 'maxHeight', 'menuItems', 'menuStyle', 'style', 'underlineStyle', 'valueLink', 'valueMember']);
+	
+	    var _state = this.state;
+	    var anchorEl = _state.anchorEl;
+	    var open = _state.open;
+	    var muiTheme = _state.muiTheme;
+	
+	    var styles = this.getStyles();
+	
+	    var value = undefined;
+	    var selectedIndex = this._isControlled() ? null : this.state.selectedIndex;
+	
+	    if (menuItems && typeof selectedIndex === 'number') {
+	       false ? (0, _warning2.default)(menuItems[selectedIndex], 'SelectedIndex of ' + selectedIndex + ' does not exist in menuItems.') : undefined;
+	    }
+	
+	    if (valueMember && this._isControlled()) {
+	      value = this.props.hasOwnProperty('value') ? this.props.value : valueLink.value;
+	      if (menuItems && value !== null && value !== undefined) {
+	        for (var i = 0; i < menuItems.length; i++) {
+	          if (menuItems[i][valueMember] === value) {
+	            selectedIndex = i;
+	          }
+	        }
+	      }
+	    }
+	
+	    var displayValue = '';
+	    if (menuItems) {
+	      var selectedItem = menuItems[selectedIndex];
+	      if (selectedItem) {
+	        displayValue = selectedItem[labelMember || 'text'] || selectedItem[displayMember || 'text'];
+	      }
+	    } else {
+	      _react2.default.Children.forEach(children, function (child) {
+	        if (value === child.props.value) {
+	          // This will need to be improved (in case primaryText is a node)
+	          displayValue = child.props.label || child.props.primaryText;
+	        }
+	      });
+	    }
+	
+	    var index = 0;
+	    var menuItemElements = menuItems ? menuItems.map(function (item, idx) {
+	      return _react2.default.createElement(_menuItem2.default, {
+	        key: idx,
+	        primaryText: item[displayMember || 'text'],
+	        value: item[valueMember],
+	        onTouchTap: _this2._onMenuItemTouchTap.bind(_this2, idx, item) });
+	    }) : _react2.default.Children.map(children, function (child) {
+	      var clone = _react2.default.cloneElement(child, {
+	        onTouchTap: _this2._onMenuItemTouchTap.bind(_this2, index, child.props.value)
+	      }, child.props.children);
+	      index += 1;
+	      return clone;
+	    });
+	
+	    var popoverStyle = undefined;
+	    if (anchorEl && !autoWidth) {
+	      popoverStyle = { width: anchorEl.clientWidth };
+	    }
+	
+	    return _react2.default.createElement(
+	      'div',
+	      _extends({}, other, {
+	        ref: 'root',
+	        className: className,
+	        style: _styles2.default.prepareStyles(muiTheme, styles.root, open && styles.rootWhenOpen, style)
+	      }),
+	      _react2.default.createElement(
+	        _clearfix2.default,
+	        { style: _styles2.default.merge(styles.control), onTouchTap: this._onControlTouchTap },
+	        _react2.default.createElement(
+	          'div',
+	          { style: _styles2.default.prepareStyles(muiTheme, styles.label, open && styles.labelWhenOpen, labelStyle) },
+	          displayValue
+	        ),
+	        _react2.default.createElement(_arrowDropDown2.default, { style: _styles2.default.merge(styles.icon, iconStyle) }),
+	        _react2.default.createElement('div', { style: _styles2.default.prepareStyles(muiTheme, styles.underline, underlineStyle) })
+	      ),
+	      _react2.default.createElement(
+	        _popover2.default,
+	        {
+	          anchorOrigin: { horizontal: 'left', vertical: 'top' },
+	          anchorEl: anchorEl,
+	          style: popoverStyle,
+	          animation: _popoverAnimationFromTop2.default,
+	          open: open,
+	          onRequestClose: this._onMenuRequestClose },
+	        _react2.default.createElement(
+	          _menu2.default,
+	          {
+	            maxHeight: maxHeight,
+	            desktop: true,
+	            value: value,
+	            style: menuStyle
+	          },
+	          menuItemElements
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = DropDownMenu;
+	module.exports = exports['default'];
+
+/***/ },
+/* 472 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _transitions = __webpack_require__(322);
+	
+	var _transitions2 = _interopRequireDefault(_transitions);
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(369);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _stylePropable = __webpack_require__(304);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _lightRawTheme = __webpack_require__(341);
+	
+	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
+	
+	var _themeManager = __webpack_require__(344);
+	
+	var _themeManager2 = _interopRequireDefault(_themeManager);
+	
+	var _paper = __webpack_require__(368);
+	
+	var _paper2 = _interopRequireDefault(_paper);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PopoverAnimationFromTop = _react2.default.createClass({
+	  displayName: 'PopoverAnimationFromTop',
+	
+	  propTypes: {
+	    children: _react2.default.PropTypes.node,
+	    className: _react2.default.PropTypes.string,
+	    open: _react2.default.PropTypes.bool.isRequired,
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object,
+	    targetOrigin: _propTypes2.default.origin,
+	    zDepth: _propTypes2.default.zDepth
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_stylePropable2.default],
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      style: {},
+	      zDepth: 1
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default),
+	      open: false
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.setState({ open: true }); //eslint-disable-line react/no-did-mount-set-state
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	
+	    this.setState({
+	      open: nextProps.open,
+	      muiTheme: newMuiTheme
+	    });
+	  },
+	  getStyles: function getStyles() {
+	    var targetOrigin = this.props.targetOrigin;
+	
+	    var horizontal = targetOrigin.horizontal.replace('middle', 'vertical');
+	
+	    return {
+	      base: {
+	        opacity: 0,
+	        transform: 'scaleY(0)',
+	        transformOrigin: horizontal + ' ' + targetOrigin.vertical,
+	        position: 'fixed',
+	        zIndex: this.state.muiTheme.zIndex.popover,
+	        transition: _transitions2.default.easeOut('450ms', ['transform', 'opacity']),
+	        maxHeight: '100%'
+	      }
+	
+	    };
+	  },
+	  getOpenStyles: function getOpenStyles() {
+	    return {
+	      base: {
+	        opacity: 1,
+	        transform: 'scaleY(1)'
+	      }
+	    };
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var className = _props.className;
+	    var style = _props.style;
+	    var zDepth = _props.zDepth;
+	
+	    var styles = this.getStyles();
+	    var openStyles = {};
+	    if (this.state.open) openStyles = this.getOpenStyles();
+	
+	    return _react2.default.createElement(
+	      _paper2.default,
+	      {
+	        style: this.mergeStyles(styles.base, style, openStyles.base),
+	        zDepth: zDepth,
+	        className: className },
+	      this.props.children
+	    );
+	  }
+	});
+	
+	exports.default = PopoverAnimationFromTop;
+	module.exports = exports['default'];
+
+/***/ },
+/* 473 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _stylePropable = __webpack_require__(304);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _lightRawTheme = __webpack_require__(341);
+	
+	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
+	
+	var _themeManager = __webpack_require__(344);
+	
+	var _themeManager2 = _interopRequireDefault(_themeManager);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var Toolbar = _react2.default.createClass({
+	  displayName: 'Toolbar',
+	
+	  propTypes: {
+	    /**
+	     * Can be a `ToolbarGroup` to render a group of related items.
+	     */
+	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * The css class name of the root element.
+	     */
+	    className: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Do not apply `desktopGutter` to the `Toolbar`.
+	     */
+	    noGutter: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_stylePropable2.default],
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      noGutter: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	
+	  //to update theme inside state whenever a new theme is passed down
+	  //from the parent / owner using context
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	    this.setState({ muiTheme: newMuiTheme });
+	  },
+	  getTheme: function getTheme() {
+	    return this.state.muiTheme.toolbar;
+	  },
+	  getSpacing: function getSpacing() {
+	    return this.state.muiTheme.rawTheme.spacing;
+	  },
+	  getStyles: function getStyles() {
+	    return {
+	      root: {
+	        boxSizing: 'border-box',
+	        WebkitTapHighlightColor: 'rgba(0,0,0,0)',
+	        backgroundColor: this.getTheme().backgroundColor,
+	        height: this.getTheme().height,
+	        width: '100%',
+	        padding: this.props.noGutter ? 0 : '0px ' + this.getSpacing().desktopGutter + 'px'
+	      }
+	    };
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var children = _props.children;
+	    var className = _props.className;
+	    var style = _props.style;
+	
+	    var other = _objectWithoutProperties(_props, ['children', 'className', 'style']);
+	
+	    var styles = this.getStyles();
+	
+	    return _react2.default.createElement(
+	      'div',
+	      _extends({}, other, { className: className, style: this.prepareStyles(styles.root, style) }),
+	      children
+	    );
+	  }
+	});
+	
+	exports.default = Toolbar;
+	module.exports = exports['default'];
+
+/***/ },
+/* 474 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _colors = __webpack_require__(328);
+	
+	var _colors2 = _interopRequireDefault(_colors);
+	
+	var _stylePropable = __webpack_require__(304);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _lightRawTheme = __webpack_require__(341);
+	
+	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
+	
+	var _themeManager = __webpack_require__(344);
+	
+	var _themeManager2 = _interopRequireDefault(_themeManager);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var ToolbarGroup = _react2.default.createClass({
+	  displayName: 'ToolbarGroup',
+	
+	  propTypes: {
+	    /**
+	     * Can be any node or number of nodes.
+	     */
+	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * The css class name of the root element.
+	     */
+	    className: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Set this to true for if the `ToolbarGroup` is the first child of `Toolbar`
+	     * to prevent setting the right gap.
+	     */
+	    firstChild: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Determines the side the `ToolbarGroup` will snap to. Either 'left' or 'right'.
+	     */
+	    float: _react2.default.PropTypes.oneOf(['left', 'right']),
+	
+	    /**
+	     * Set this to true for if the `ToolbarGroup` is the last child of `Toolbar`
+	     * to prevent setting the right gap.
+	     */
+	    lastChild: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_stylePropable2.default],
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      firstChild: false,
+	      float: 'left',
+	      lastChild: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	
+	  //to update theme inside state whenever a new theme is passed down
+	  //from the parent / owner using context
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	    this.setState({ muiTheme: newMuiTheme });
+	  },
+	  getTheme: function getTheme() {
+	    return this.state.muiTheme.toolbar;
+	  },
+	  getSpacing: function getSpacing() {
+	    return this.state.muiTheme.rawTheme.spacing;
+	  },
+	  getStyles: function getStyles() {
+	    var _props = this.props;
+	    var firstChild = _props.firstChild;
+	    var float = _props.float;
+	    var lastChild = _props.lastChild;
+	
+	    var marginHorizontal = this.getSpacing().desktopGutter;
+	    var marginVertical = (this.getTheme().height - this.state.muiTheme.button.height) / 2;
+	    var styles = {
+	      root: {
+	        float: float,
+	        position: 'relative',
+	        marginLeft: firstChild ? -marginHorizontal : undefined,
+	        marginRight: lastChild ? -marginHorizontal : undefined
+	      },
+	      dropDownMenu: {
+	        root: {
+	          float: 'left',
+	          color: _colors2.default.lightBlack, // removes hover color change, we want to keep it
+	          display: 'inline-block',
+	          marginRight: this.getSpacing().desktopGutter
+	        },
+	        controlBg: {
+	          backgroundColor: this.getTheme().menuHoverColor,
+	          borderRadius: 0
+	        },
+	        underline: {
+	          display: 'none'
+	        }
+	      },
+	      button: {
+	        float: 'left',
+	        margin: marginVertical + 'px ' + marginHorizontal + 'px',
+	        position: 'relative'
+	      },
+	      icon: {
+	        root: {
+	          float: 'left',
+	          cursor: 'pointer',
+	          color: this.getTheme().iconColor,
+	          lineHeight: this.getTheme().height + 'px',
+	          paddingLeft: this.getSpacing().desktopGutter
+	        },
+	        hover: {
+	          color: _colors2.default.darkBlack
+	        }
+	      },
+	      span: {
+	        float: 'left',
+	        color: this.getTheme().iconColor,
+	        lineHeight: this.getTheme().height + 'px'
+	      }
+	    };
+	
+	    return styles;
+	  },
+	  _handleMouseEnterDropDownMenu: function _handleMouseEnterDropDownMenu(e) {
+	    e.target.style.zIndex = this.getStyles().icon.hover.zIndex;
+	    e.target.style.color = this.getStyles().icon.hover.color;
+	  },
+	  _handleMouseLeaveDropDownMenu: function _handleMouseLeaveDropDownMenu(e) {
+	    e.target.style.zIndex = 'auto';
+	    e.target.style.color = this.getStyles().icon.root.color;
+	  },
+	  _handleMouseEnterFontIcon: function _handleMouseEnterFontIcon(e) {
+	    e.target.style.zIndex = this.getStyles().icon.hover.zIndex;
+	    e.target.style.color = this.getStyles().icon.hover.color;
+	  },
+	  _handleMouseLeaveFontIcon: function _handleMouseLeaveFontIcon(e) {
+	    e.target.style.zIndex = 'auto';
+	    e.target.style.color = this.getStyles().icon.root.color;
+	  },
+	  render: function render() {
+	    var _this = this;
+	
+	    var _props2 = this.props;
+	    var children = _props2.children;
+	    var className = _props2.className;
+	    var style = _props2.style;
+	
+	    var other = _objectWithoutProperties(_props2, ['children', 'className', 'style']);
+	
+	    var styles = this.getStyles();
+	    var newChildren = _react2.default.Children.map(children, function (currentChild) {
+	      if (!currentChild) {
+	        return null;
+	      }
+	      if (!currentChild.type) {
+	        return currentChild;
+	      }
+	      switch (currentChild.type.displayName) {
+	        case 'DropDownMenu':
+	          return _react2.default.cloneElement(currentChild, {
+	            style: _this.mergeStyles(styles.dropDownMenu.root, currentChild.props.style),
+	            styleControlBg: styles.dropDownMenu.controlBg,
+	            styleUnderline: styles.dropDownMenu.underline
+	          });
+	        case 'DropDownIcon':
+	          return _react2.default.cloneElement(currentChild, {
+	            style: _this.mergeStyles({ float: 'left' }, currentChild.props.style),
+	            iconStyle: styles.icon.root,
+	            onMouseEnter: _this._handleMouseEnterDropDownMenu,
+	            onMouseLeave: _this._handleMouseLeaveDropDownMenu
+	          });
+	        case 'RaisedButton':
+	        case 'FlatButton':
+	          return _react2.default.cloneElement(currentChild, {
+	            style: _this.mergeStyles(styles.button, currentChild.props.style)
+	          });
+	        case 'FontIcon':
+	          return _react2.default.cloneElement(currentChild, {
+	            style: _this.mergeStyles(styles.icon.root, currentChild.props.style),
+	            onMouseEnter: _this._handleMouseEnterFontIcon,
+	            onMouseLeave: _this._handleMouseLeaveFontIcon
+	          });
+	        case 'ToolbarSeparator':
+	        case 'ToolbarTitle':
+	          return _react2.default.cloneElement(currentChild, {
+	            style: _this.mergeStyles(styles.span, currentChild.props.style)
+	          });
+	        default:
+	          return currentChild;
+	      }
+	    }, this);
+	
+	    return _react2.default.createElement(
+	      'div',
+	      _extends({}, other, { className: className, style: this.prepareStyles(styles.root, style) }),
+	      newChildren
+	    );
+	  }
+	});
+	
+	exports.default = ToolbarGroup;
+	module.exports = exports['default'];
+
+/***/ },
+/* 475 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _SelectField = __webpack_require__(476);
+	
+	var _SelectField2 = _interopRequireDefault(_SelectField);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _SelectField2.default;
+	module.exports = exports['default'];
+
+/***/ },
+/* 476 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _SelectField = __webpack_require__(477);
+	
+	var _SelectField2 = _interopRequireDefault(_SelectField);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _SelectField2.default;
+	module.exports = exports['default'];
+
+/***/ },
+/* 477 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _stylePropable = __webpack_require__(304);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _textField = __webpack_require__(370);
+	
+	var _textField2 = _interopRequireDefault(_textField);
+	
+	var _DropDownMenu = __webpack_require__(470);
+	
+	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
+	
+	var _lightRawTheme = __webpack_require__(341);
+	
+	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
+	
+	var _themeManager = __webpack_require__(344);
+	
+	var _themeManager2 = _interopRequireDefault(_themeManager);
+	
+	var _contextPure = __webpack_require__(375);
+	
+	var _contextPure2 = _interopRequireDefault(_contextPure);
+	
+	var _deprecatedPropType = __webpack_require__(434);
+	
+	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var SelectField = _react2.default.createClass({
+	  displayName: 'SelectField',
+	
+	  propTypes: {
+	    /**
+	     * The width will automatically be set according to the
+	     * items inside the menu. To control this width in css
+	     * instead, set this prop to `false`.
+	     */
+	    autoWidth: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * The `MenuItem` elements to populate the `Menu` with.
+	     * If the MenuItems have the prop `label` that value will
+	     * be used to render the representation of that
+	     * item within the field.
+	     */
+	    children: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Disables the select field if set to true.
+	     */
+	    disabled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * The style object to use to override error styles.
+	     */
+	    errorStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The error content to display.
+	     */
+	    errorText: _react2.default.PropTypes.node,
+	
+	    /**
+	     * The style object to use to override floating label styles.
+	     */
+	    floatingLabelStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The content to use for the floating label element.
+	     */
+	    floatingLabelText: _react2.default.PropTypes.node,
+	
+	    /**
+	     * If true, the field receives the property width 100%.
+	     */
+	    fullWidth: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * The style object to use to override hint styles.
+	     */
+	    hintStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The hint content to display.
+	     */
+	    hintText: _react2.default.PropTypes.node,
+	
+	    /**
+	     * Overrides the styles of the icon element.
+	     */
+	    iconStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * `SelectField` will use text as default value,
+	     * with this property you can choose another name.
+	     */
+	    labelMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'to promote composability.'),
+	
+	    /**
+	     * Overrides the styles of label when the `SelectField` is inactive.
+	     */
+	    labelStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * JSON data representing all menu items in the dropdown.
+	     */
+	    menuItems: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.array, 'to promote composability.'),
+	
+	    /**
+	     * Callback function that is fired when the `SelectField` loses focus.
+	     */
+	    onBlur: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Callback function that is fired when the value changes.
+	     */
+	    onChange: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Callback function that is fired when the `SelectField` gains focus.
+	     */
+	    onFocus: _react2.default.PropTypes.func,
+	
+	    /**
+	     * The style object to use to override the `DropDownMenu`.
+	     */
+	    selectFieldRoot: _react2.default.PropTypes.object, // Must be changed!
+	
+	    /**
+	     * Index of the item selected.
+	     */
+	    selectedIndex: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.number, 'with menuItems.'),
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Override the inline-styles of the underline element when disabled.
+	     */
+	    underlineDisabledStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Override the inline-styles of the underline element when focused.
+	     */
+	    underlineFocusStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Overrides the styles of the underline element.
+	     */
+	    underlineStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * The value that is currently selected.
+	     */
+	    value: _react2.default.PropTypes.any
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_stylePropable2.default, _contextPure2.default],
+	
+	  statics: {
+	    getChildrenClasses: function getChildrenClasses() {
+	      return [_textField2.default, _DropDownMenu2.default];
+	    }
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      autoWidth: false,
+	      disabled: false,
+	      fullWidth: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	
+	  //to update theme inside state whenever a new theme is passed down
+	  //from the parent / owner using context
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	    this.setState({ muiTheme: newMuiTheme });
+	  },
+	  getStyles: function getStyles() {
+	    var floatingLabelText = this.props.floatingLabelText;
+	
+	    return {
+	      label: {
+	        paddingLeft: 0,
+	        top: floatingLabelText ? 6 : -4
+	      },
+	      icon: {
+	        right: 0,
+	        top: floatingLabelText ? 22 : 14
+	      },
+	      hideDropDownUnderline: {
+	        borderTop: 'none'
+	      }
+	    };
+	  },
+	  render: function render() {
+	    var styles = this.getStyles();
+	    var _props = this.props;
+	    var autoWidth = _props.autoWidth;
+	    var children = _props.children;
+	    var style = _props.style;
+	    var labelStyle = _props.labelStyle;
+	    var iconStyle = _props.iconStyle;
+	    var underlineDisabledStyle = _props.underlineDisabledStyle;
+	    var underlineFocusStyle = _props.underlineFocusStyle;
+	    var underlineStyle = _props.underlineStyle;
+	    var errorStyle = _props.errorStyle;
+	    var selectFieldRoot = _props.selectFieldRoot;
+	    var disabled = _props.disabled;
+	    var floatingLabelText = _props.floatingLabelText;
+	    var floatingLabelStyle = _props.floatingLabelStyle;
+	    var hintStyle = _props.hintStyle;
+	    var hintText = _props.hintText;
+	    var fullWidth = _props.fullWidth;
+	    var errorText = _props.errorText;
+	    var onFocus = _props.onFocus;
+	    var onBlur = _props.onBlur;
+	    var onChange = _props.onChange;
+	    var value = _props.value;
+	
+	    var other = _objectWithoutProperties(_props, ['autoWidth', 'children', 'style', 'labelStyle', 'iconStyle', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineStyle', 'errorStyle', 'selectFieldRoot', 'disabled', 'floatingLabelText', 'floatingLabelStyle', 'hintStyle', 'hintText', 'fullWidth', 'errorText', 'onFocus', 'onBlur', 'onChange', 'value']);
+	
+	    return _react2.default.createElement(
+	      _textField2.default,
+	      {
+	        style: style,
+	        floatingLabelText: floatingLabelText,
+	        floatingLabelStyle: floatingLabelStyle,
+	        hintStyle: hintStyle,
+	        hintText: !hintText && !floatingLabelText ? ' ' : hintText,
+	        fullWidth: fullWidth,
+	        errorText: errorText,
+	        underlineStyle: underlineStyle,
+	        errorStyle: errorStyle,
+	        onFocus: onFocus,
+	        onBlur: onBlur,
+	        underlineDisabledStyle: underlineDisabledStyle,
+	        underlineFocusStyle: underlineFocusStyle
+	      },
+	      _react2.default.createElement(
+	        _DropDownMenu2.default,
+	        _extends({
+	          disabled: disabled,
+	          style: selectFieldRoot,
+	          labelStyle: this.mergeStyles(styles.label, labelStyle),
+	          iconStyle: this.mergeStyles(styles.icon, iconStyle),
+	          underlineStyle: styles.hideDropDownUnderline,
+	          autoWidth: autoWidth,
+	          value: value,
+	          onChange: onChange
+	        }, other),
+	        children
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = SelectField;
+	module.exports = exports['default'];
+
+/***/ },
+/* 478 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsPureRenderMixin = __webpack_require__(330);
+	
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+	
+	var _svgIcon = __webpack_require__(390);
+	
+	var _svgIcon2 = _interopRequireDefault(_svgIcon);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ContentAddCircle = _react2.default.createClass({
+	  displayName: 'ContentAddCircle',
+	
+	  mixins: [_reactAddonsPureRenderMixin2.default],
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      _svgIcon2.default,
+	      this.props,
+	      _react2.default.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z' })
+	    );
+	  }
+	});
+	
+	exports.default = ContentAddCircle;
+	module.exports = exports['default'];
+
+/***/ },
+/* 479 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsPureRenderMixin = __webpack_require__(330);
+	
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+	
+	var _svgIcon = __webpack_require__(390);
+	
+	var _svgIcon2 = _interopRequireDefault(_svgIcon);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ActionSettings = _react2.default.createClass({
+	  displayName: 'ActionSettings',
+	
+	  mixins: [_reactAddonsPureRenderMixin2.default],
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      _svgIcon2.default,
+	      this.props,
+	      _react2.default.createElement('path', { d: 'M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z' })
+	    );
+	  }
+	});
+	
+	exports.default = ActionSettings;
+	module.exports = exports['default'];
+
+/***/ },
+/* 480 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsPureRenderMixin = __webpack_require__(330);
+	
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+	
+	var _svgIcon = __webpack_require__(390);
+	
+	var _svgIcon2 = _interopRequireDefault(_svgIcon);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SocialGroup = _react2.default.createClass({
+	  displayName: 'SocialGroup',
+	
+	  mixins: [_reactAddonsPureRenderMixin2.default],
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      _svgIcon2.default,
+	      this.props,
+	      _react2.default.createElement('path', { d: 'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z' })
+	    );
+	  }
+	});
+	
+	exports.default = SocialGroup;
+	module.exports = exports['default'];
+
+/***/ },
+/* 481 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 482 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _flatButton = __webpack_require__(411);
+	
+	var _flatButton2 = _interopRequireDefault(_flatButton);
+	
+	var _dialog = __webpack_require__(483);
+	
+	var _dialog2 = _interopRequireDefault(_dialog);
+	
+	var _textField = __webpack_require__(370);
+	
+	var _textField2 = _interopRequireDefault(_textField);
+	
+	__webpack_require__(485);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ProjectSettingsDialog = function (_Component) {
+	  _inherits(ProjectSettingsDialog, _Component);
+	
+	  function ProjectSettingsDialog(props) {
+	    _classCallCheck(this, ProjectSettingsDialog);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProjectSettingsDialog).call(this, props));
+	
+	    _this.handleAutoCompleteSubmit = function () {
+	      //TODO: Add collaborator
+	    };
+	
+	    _this.handleAutoCompleteChange = function () {
+	      //TODO: handle change
+	    };
+	
+	    return _this;
+	  }
+	
+	  _createClass(ProjectSettingsDialog, [{
+	    key: 'render',
+	    value: function render() {
+	      var actions = [_react2.default.createElement(_flatButton2.default, {
+	        label: 'Cancel',
+	        secondary: true,
+	        onTouchTap: this.props.toggleModal
+	      }), _react2.default.createElement(_flatButton2.default, {
+	        label: 'Save',
+	        primary: true,
+	        keyboardFocused: true,
+	        onTouchTap: this.saveSettings
+	      })];
+	      return _react2.default.createElement(
+	        _dialog2.default,
+	        {
+	          title: 'Settings',
+	          className: 'ProjectSettingsDialog',
+	          actions: actions,
+	          modal: false,
+	          open: this.props.modalOpen,
+	          onRequestClose: this.props.toggleModal,
+	          bodyClassName: 'ProjectSettingsDialog-Settings',
+	          titleClassName: 'ProjectSettingsDialog-Settings-Title',
+	          contentStyle: { 'width': '30%' }
+	        },
+	        _react2.default.createElement(_textField2.default, { hintText: 'Project name' }),
+	        _react2.default.createElement(_textField2.default, { hintText: 'Owner' }),
+	        _react2.default.createElement(_textField2.default, { hintText: 'Deployment url' }),
+	        _react2.default.createElement(_textField2.default, { hintText: 'Git url' })
+	      );
+	    }
+	  }]);
+	
+	  return ProjectSettingsDialog;
+	}(_react.Component);
+	
+	ProjectSettingsDialog.propTypes = {
+	  modalOpen: _react.PropTypes.bool,
+	  toggleModal: _react.PropTypes.func
+	};
+	exports.default = ProjectSettingsDialog;
+	module.exports = exports['default'];
+
+/***/ },
+/* 483 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -101907,7 +104744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _flatButton2 = _interopRequireDefault(_flatButton);
 	
-	var _overlay = __webpack_require__(464);
+	var _overlay = __webpack_require__(484);
 	
 	var _overlay2 = _interopRequireDefault(_overlay);
 	
@@ -102517,9 +105354,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Dialog;
+	module.exports = exports['default'];
 
 /***/ },
-/* 464 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -102658,174 +105496,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	
 	exports.default = Overlay;
-
-/***/ },
-/* 465 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _lodash = __webpack_require__(289);
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(179);
-	
-	var _TreeView = __webpack_require__(466);
-	
-	var _TreeView2 = _interopRequireDefault(_TreeView);
-	
-	var _DropDownMenu = __webpack_require__(472);
-	
-	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
-	
-	var _toolbar = __webpack_require__(475);
-	
-	var _toolbar2 = _interopRequireDefault(_toolbar);
-	
-	var _toolbarGroup = __webpack_require__(476);
-	
-	var _toolbarGroup2 = _interopRequireDefault(_toolbarGroup);
-	
-	var _selectField = __webpack_require__(477);
-	
-	var _selectField2 = _interopRequireDefault(_selectField);
-	
-	var _menuItem = __webpack_require__(405);
-	
-	var _menuItem2 = _interopRequireDefault(_menuItem);
-	
-	var _iconButton = __webpack_require__(386);
-	
-	var _iconButton2 = _interopRequireDefault(_iconButton);
-	
-	var _iconMenu = __webpack_require__(392);
-	
-	var _iconMenu2 = _interopRequireDefault(_iconMenu);
-	
-	var _addCircle = __webpack_require__(480);
-	
-	var _addCircle2 = _interopRequireDefault(_addCircle);
-	
-	var _settings = __webpack_require__(481);
-	
-	var _settings2 = _interopRequireDefault(_settings);
-	
-	__webpack_require__(482);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var SideBar = function (_Component) {
-	  _inherits(SideBar, _Component);
-	
-	  function SideBar(props) {
-	    _classCallCheck(this, SideBar);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SideBar).call(this, props));
-	
-	    _this.selectProject = _this.selectProject.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(SideBar, [{
-	    key: 'selectProject',
-	    value: function selectProject(e, i, name) {
-	      if (this.props && this.props.onProjectSelect) {
-	        var proj = (0, _lodash.find)(this.props.projects, { name: name });
-	        this.props.onProjectSelect(proj, i);
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var showProjects = !(0, _lodash.isUndefined)(this.props.showProjects) ? this.props.showProjects : true;
-	      var projectsMenu = undefined;
-	      if ((0, _lodash.isArray)(this.props.projects) && this.props.projects.length > 0) {
-	        projectsMenu = this.props.projects.map(function (project, i) {
-	          return _react2.default.createElement(_menuItem2.default, { key: 'Project-' + i, label: project.name, value: project.name, primaryText: project.name });
-	        });
-	      }
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'SideBar' },
-	        projectsMenu && showProjects ? _react2.default.createElement(_selectField2.default, {
-	          style: { width: '80%', marginLeft: '10%' },
-	          labelStyle: { fontSize: '1.5rem', fontWeight: '300' },
-	          autoWidth: true,
-	          value: this.props.project.name,
-	          children: projectsMenu,
-	          onChange: this.selectProject
-	        }) : null,
-	        _react2.default.createElement(_TreeView2.default, {
-	          account: this.props.account,
-	          fileStructure: this.props.files,
-	          onFileClick: this.props.onFileClick,
-	          onNewFileClick: this.props.onNewFileClick,
-	          addFile: this.props.addFile,
-	          projectName: this.props.project.name,
-	          onFilesDrop: this.props.onFilesDrop,
-	          onFileDelete: this.props.onFileDelete
-	        }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'SideBar-Buttons' },
-	          _react2.default.createElement(
-	            _iconMenu2.default,
-	            { className: 'SideBar-Button', iconButtonElement: _react2.default.createElement(
-	                _iconButton2.default,
-	                { style: { width: '90px', height: '90px' }, iconStyle: { width: '100%', height: '100%' } },
-	                _react2.default.createElement(_addCircle2.default, null)
-	              ) },
-	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add file' }),
-	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add folder' }),
-	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add files from Github' }),
-	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Upload files' })
-	          ),
-	          _react2.default.createElement(
-	            _iconButton2.default,
-	            { style: { width: '90px', height: '90px' }, iconStyle: { width: '100%', height: '100%' }, className: 'SideBar-Button', onClick: this.props.onSettingsClick },
-	            _react2.default.createElement(_settings2.default, null)
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return SideBar;
-	}(_react.Component);
-	
-	SideBar.propTypes = {
-	  projects: _react.PropTypes.array,
-	  project: _react.PropTypes.object,
-	  files: _react.PropTypes.array,
-	  onFileClick: _react.PropTypes.func,
-	  onPublishClick: _react.PropTypes.func,
-	  onNewFileClick: _react.PropTypes.func,
-	  showButtons: _react.PropTypes.bool,
-	  onLogoutClick: _react.PropTypes.func,
-	  addFile: _react.PropTypes.func,
-	  loadFiles: _react.PropTypes.func,
-	  onFilesDrop: _react.PropTypes.func
-	};
-	exports.default = SideBar;
 	module.exports = exports['default'];
 
 /***/ },
-/* 466 */
+/* 485 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -102836,25 +105516,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _lodash = __webpack_require__(289);
-	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TreeFolder = __webpack_require__(467);
+	var _flatButton = __webpack_require__(411);
 	
-	var _TreeFolder2 = _interopRequireDefault(_TreeFolder);
+	var _flatButton2 = _interopRequireDefault(_flatButton);
 	
-	var _TreeFile = __webpack_require__(468);
+	var _dialog = __webpack_require__(483);
 	
-	var _TreeFile2 = _interopRequireDefault(_TreeFile);
+	var _dialog2 = _interopRequireDefault(_dialog);
 	
-	var _reactDropzone = __webpack_require__(299);
+	var _list = __webpack_require__(396);
 	
-	var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+	var _list2 = _interopRequireDefault(_list);
 	
-	__webpack_require__(471);
+	var _listItem = __webpack_require__(407);
+	
+	var _listItem2 = _interopRequireDefault(_listItem);
+	
+	var _autoComplete = __webpack_require__(487);
+	
+	var _autoComplete2 = _interopRequireDefault(_autoComplete);
+	
+	var _info = __webpack_require__(490);
+	
+	var _info2 = _interopRequireDefault(_info);
+	
+	var _avatar = __webpack_require__(413);
+	
+	var _avatar2 = _interopRequireDefault(_avatar);
+	
+	var _folder = __webpack_require__(491);
+	
+	var _folder2 = _interopRequireDefault(_folder);
+	
+	__webpack_require__(492);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -102864,596 +105562,96 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var hideCurrentUser = true; //Display current user in file's connected users
+	var SharingDialog = function (_Component) {
+	  _inherits(SharingDialog, _Component);
 	
-	var TreeView = function (_Component) {
-	  _inherits(TreeView, _Component);
+	  function SharingDialog(props) {
+	    _classCallCheck(this, SharingDialog);
 	
-	  function TreeView() {
-	    _classCallCheck(this, TreeView);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TreeView).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SharingDialog).call(this, props));
 	
 	    _this.state = {
-	      contextMenu: {
-	        display: 'none',
-	        top: '0px',
-	        left: '0px'
-	      },
-	      newFile: false
+	      autocompleteField: ''
 	    };
-	    _this.handleWindowClick = _this.handleWindowClick.bind(_this);
-	    _this.renderInputDialog = _this.renderInputDialog.bind(_this);
-	    _this.handleInputChange = _this.handleInputChange.bind(_this);
-	    _this.handleNewSubmit = _this.handleNewSubmit.bind(_this);
-	    _this.addInputBox = _this.addInputBox.bind(_this);
-	    _this.handleNewClick = _this.handleNewClick.bind(_this);
-	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
-	    _this.hideNewFileInput = _this.hideNewFileInput.bind(_this);
-	    _this.inputKey = null;
 	    return _this;
 	  }
 	
-	  _createClass(TreeView, [{
-	    key: 'handleNewClick',
-	    value: function handleNewClick(type) {
-	      var _this2 = this;
-	
-	      var newState = type === 'file' ? { 'newFile': true } : { 'newFolder': true };
-	      this.setState(newState, function () {
-	        _this2.refs.inputDialog.focus();
-	        window.addEventListener('keydown', _this2.hideNewFileInput);
-	      });
-	    }
-	  }, {
-	    key: 'hideNewFileInput',
-	    value: function hideNewFileInput(e) {
-	      if (e.keyCode == 27) {
-	        this.setState({
-	          showNewFile: false
-	        });
-	        window.removeEventListener('keydown', this.hideNewFileInput);
-	      } else if (e === 'blur') {
-	        this.setState({
-	          showNewFile: false
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'handleRightClick',
-	    value: function handleRightClick(e) {
-	      e.preventDefault();
-	      console.log(e.screenX, e.screenY);
-	      this.addInputBox(e.target);
-	      this.setState({
-	        contextMenu: {
-	          display: 'block',
-	          top: e.clientY,
-	          left: e.clientX
-	        }
-	      });
-	      window.addEventListener('click', this.handleWindowClick);
-	      return false;
-	    }
-	  }, {
-	    key: 'addInputBox',
-	    value: function addInputBox(el) {
-	      var i = 0;
-	      while (el.tagName !== 'LI' && i < 5) {
-	        el = el.parentNode;
-	        i++;
-	      }
-	      var reactId = el.getAttribute('data-reactid');
-	      var key = reactId.split('-')[2];
-	      this.inputKey = key;
-	    }
-	  }, {
-	    key: 'handleWindowClick',
-	    value: function handleWindowClick() {
-	      this.setState({
-	        contextMenu: {
-	          display: 'none'
-	        }
-	      });
-	      window.removeEventListener('click', this.handleWindowClick);
-	    }
-	  }, {
-	    key: 'handleInputChange',
-	    value: function handleInputChange(e) {
-	      this.setState({
-	        inputValue: e.target.value
-	      });
-	    }
-	  }, {
-	    key: 'handleNewSubmit',
-	    value: function handleNewSubmit(e) {
-	      e.preventDefault();
-	      if (this.state.newFile) {
-	        this.setState({
-	          newFile: false
-	        });
-	        this.props.addFile({ path: this.state.inputValue });
-	      } else {
-	        this.setState({
-	          newFolder: false
-	        });
-	        this.props.addFolder({ path: this.state.inputValue });
-	      }
-	      return false;
-	    }
-	  }, {
-	    key: 'handleDeleteClick',
-	    value: function handleDeleteClick(e) {
-	      e.preventDefault();
-	      var fileData = this.props.fileStructure[this.inputKey].meta;
-	      console.log('handle delete click:', fileData);
-	      if (this.inputKey) {
-	        this.props.onFileDelete({ projectName: this.props.projectName, path: fileData.path || fileData.name });
-	      }
-	    }
-	  }, {
-	    key: 'renderInputDialog',
-	    value: function renderInputDialog(key) {
-	      if (this.state) {
-	        return _react2.default.createElement(
-	          'li',
-	          { className: 'TreeView-NewInput', key: 'child-Folder-' + key + '-input' },
-	          _react2.default.createElement(
-	            'form',
-	            { onSubmit: this.handleNewSubmit },
-	            _react2.default.createElement('input', {
-	              className: 'Input',
-	              onChange: this.handleInputChange,
-	              ref: 'inputDialog',
-	              placeholder: 'newfile.js',
-	              onBlur: this.hideNewFileInput.bind(this, 'blur')
-	            })
-	          )
-	        );
-	      }
-	    }
-	  }, {
+	  _createClass(SharingDialog, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
-	
-	      var structure = this.props.fileStructure.map(function (entry, i) {
-	        if (entry.meta.type == "folder" || entry.children) {
-	          return _react2.default.createElement(_TreeFolder2.default, {
-	            key: 'child-Folder-' + i + '-' + entry.meta.name,
-	            index: i,
-	            data: entry.meta,
-	            isCollapsed: entry.isCollapsed,
-	            children: entry.children,
-	            onFileClick: _this3.props.onFileClick
-	          });
-	        }
-	        var mappedUsers = entry.users ? (0, _lodash.map)(entry.users, function (user, key) {
-	          user.username = key;
-	          return user;
-	        }) : null;
-	        // //Remove current user from file's users array
-	        if (hideCurrentUser && _this3.props.account && _this3.props.account.username) {
-	          mappedUsers = mappedUsers ? (0, _lodash.filter)(mappedUsers, function (user) {
-	            return user.username !== _this3.props.account.username;
-	          }) : null;
-	        }
-	        return _react2.default.createElement(_TreeFile2.default, {
-	          key: 'child-File-' + i + '-' + (entry.meta.name || entry.meta.path.split('/')[0]),
-	          index: i,
-	          data: entry.meta,
-	          active: entry.active,
-	          users: mappedUsers,
-	          onClick: _this3.props.onFileClick
-	        });
-	      });
-	      if (this.inputKey && this.state.showNewFile) {
-	        var inputDialog = this.renderInputDialog(this.inputKey);
-	        structure.splice(this.inputKey + 1, 0, inputDialog);
-	      } else if (this.state.showNewFile) {
-	        var inputDialog = this.renderInputDialog(this.inputKey);
-	        structure.push(inputDialog);
-	      }
-	      var noFiles;
-	      if (structure.length < 1) {
-	        noFiles = _react2.default.createElement(
-	          'li',
-	          { className: 'TreeView-None', key: 'NotFound-1' },
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'strong',
-	              null,
-	              'Right click'
-	            ),
-	            _react2.default.createElement('br', null),
-	            'to get started ',
-	            _react2.default.createElement('br', null)
-	          )
-	        );
-	      } else {
-	        noFiles = null;
-	      }
-	      var contextMenuStyle = {
-	        display: this.state.contextMenu.display,
-	        top: this.state.contextMenu.top,
-	        left: this.state.contextMenu.left
-	      };
+	      console.log('sharing rendering');
+	      var actions = [_react2.default.createElement(_flatButton2.default, {
+	        label: 'Cancel',
+	        secondary: true,
+	        onTouchTap: this.props.toggleModal
+	      }), _react2.default.createElement(_flatButton2.default, {
+	        label: 'Save',
+	        primary: true,
+	        keyboardFocused: true,
+	        onTouchTap: this.saveSettings
+	      })];
 	      return _react2.default.createElement(
-	        _reactDropzone2.default,
-	        { className: 'TreeView', onDrop: this.props.onFilesDrop, multiple: true, style: { border: 'none' }, disableClick: true },
+	        _dialog2.default,
+	        {
+	          title: 'Sharing',
+	          className: 'SharingDialog',
+	          actions: actions,
+	          modal: false,
+	          open: this.props.modalOpen,
+	          onRequestClose: this.props.toggleModal,
+	          bodyClassName: 'SharingDialog-Settings',
+	          titleClassName: 'SharingDialog-Settings-Title',
+	          contentStyle: { 'width': '30%' }
+	        },
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'ol',
-	            { className: 'TreeView-Structure', onContextMenu: this.handleRightClick.bind(this) },
-	            noFiles,
-	            structure
-	          ),
-	          _react2.default.createElement(
-	            'ul',
-	            { style: contextMenuStyle, className: 'TreeView-ContextMenu' },
-	            _react2.default.createElement(
-	              'li',
-	              { onClick: this.handleNewClick.bind(this, 'file') },
-	              'Add new file'
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { onClick: this.handleNewClick.bind(this, 'folder') },
-	              'Add new folder'
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { onClick: this.handleDeleteClick },
-	              'Delete File'
-	            )
-	          )
-	        )
+	          _list2.default,
+	          { subheader: 'Folders', insetSubheader: true },
+	          _react2.default.createElement(_listItem2.default, {
+	            leftAvatar: _react2.default.createElement(_avatar2.default, { icon: _react2.default.createElement(_folder2.default, null) }),
+	            rightIcon: _react2.default.createElement(_info2.default, null),
+	            primaryText: 'Scott Prue',
+	            secondaryText: 'Read, Write' }),
+	          _react2.default.createElement(_listItem2.default, {
+	            leftAvatar: _react2.default.createElement(_avatar2.default, { icon: _react2.default.createElement(_folder2.default, null) }),
+	            rightIcon: _react2.default.createElement(_info2.default, null),
+	            primaryText: 'Mel van Londen',
+	            secondaryText: 'Read, Write' }),
+	          _react2.default.createElement(_listItem2.default, {
+	            leftAvatar: _react2.default.createElement(_avatar2.default, { icon: _react2.default.createElement(_folder2.default, null) }),
+	            rightIcon: _react2.default.createElement(_info2.default, null),
+	            primaryText: 'John Cusak',
+	            secondaryText: 'Read' })
+	        ),
+	        _react2.default.createElement(_autoComplete2.default, {
+	          hintText: 'Add collaborator',
+	          dataSource: this.state.autocompleteField,
+	          onUpdateInput: this.handleAutoCompleteChange,
+	          onNewRequest: this.handleAutoCompleteSubmit
+	        })
 	      );
 	    }
 	  }]);
 	
-	  return TreeView;
+	  return SharingDialog;
 	}(_react.Component);
 	
-	TreeView.propTypes = {
-	  fileStructure: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-	    name: _react.PropTypes.string,
-	    path: _react.PropTypes.string
-	  })),
-	  onFileClick: _react.PropTypes.func,
-	  onFolderClick: _react.PropTypes.func,
-	  addFile: _react.PropTypes.func,
-	  projectName: _react.PropTypes.string,
-	  onFilesDrop: _react.PropTypes.func,
-	  onFileDelete: _react.PropTypes.func
+	SharingDialog.propTypes = {
+	  modalOpen: _react.PropTypes.bool,
+	  toggleModal: _react.PropTypes.func
 	};
-	exports.default = TreeView;
+	exports.default = SharingDialog;
 	module.exports = exports['default'];
 
 /***/ },
-/* 467 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _fontIcon = __webpack_require__(387);
-	
-	var _fontIcon2 = _interopRequireDefault(_fontIcon);
-	
-	var _TreeFile = __webpack_require__(468);
-	
-	var _TreeFile2 = _interopRequireDefault(_TreeFile);
-	
-	__webpack_require__(470);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	//Components
-	
-	//Styles
-	
-	var TreeFolder = function (_Component) {
-	  _inherits(TreeFolder, _Component);
-	
-	  function TreeFolder() {
-	    _classCallCheck(this, TreeFolder);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TreeFolder).call(this));
-	
-	    _this._onFolderClick = _this._onFolderClick.bind(_this);
-	    //TODO: Load this from redux
-	    _this.state = { isCollapsed: true };
-	    return _this;
-	  }
-	
-	  _createClass(TreeFolder, [{
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      var className = this.state.isCollapsed ? 'TreeFolder collapsed noselect' : 'TreeFolder noselect';
-	      var iconSize = "1.7rem";
-	      // let iconClass = (this.state.isCollapsed) ? 'octicon octicon-chevron-right ' : 'octicon octicon-chevron-down TreeFolder-Icon';
-	      var children = undefined;
-	      if (this.props.children) {
-	        children = this.props.children.map(function (entry, i) {
-	          if (entry.type == "folder" || entry.children) {
-	            return _react2.default.createElement(TreeFolder, {
-	              key: _this2.props.name + '-Folder-' + i,
-	              index: i,
-	              data: entry.meta,
-	              isCollapsed: entry.isCollapsed,
-	              children: entry.children,
-	              onFileClick: _this2.props.onFileClick
-	            });
-	          }
-	          return _react2.default.createElement(_TreeFile2.default, {
-	            key: _this2.props.name + '-File-' + i,
-	            index: i,
-	            data: entry,
-	            active: entry.active,
-	            onClick: _this2.props.onFileClick
-	          });
-	        });
-	      }
-	      var name = this.props.data.name || this.props.data.path;
-	      if (this.state.isCollapsed) {
-	        return _react2.default.createElement(
-	          'li',
-	          { className: className },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'TreeFolder-Info', onClick: this._onFolderClick },
-	            _react2.default.createElement(
-	              _fontIcon2.default,
-	              { className: 'material-icons',
-	                style: { 'fontSize': iconSize } },
-	              'keyboard_arrow_down'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'TreeFolder-Name' },
-	              name
-	            )
-	          )
-	        );
-	      } else {
-	        return _react2.default.createElement(
-	          'li',
-	          { className: className },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'TreeFolder-Info', onClick: this._onFolderClick },
-	            _react2.default.createElement(
-	              _fontIcon2.default,
-	              { className: 'material-icons',
-	                style: { 'fontSize': iconSize } },
-	              'keyboard_arrow_right'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'TreeFolder-Name' },
-	              name
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'ol',
-	            { className: 'TreeFolder-Children' },
-	            children
-	          )
-	        );
-	      }
-	    }
-	  }, {
-	    key: '_onFolderClick',
-	    value: function _onFolderClick(event) {
-	      if (event.button !== 0) {
-	        return;
-	      }
-	      // If modified event
-	      if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) {
-	        return;
-	      }
-	      var el = event.currentTarget;
-	      event.preventDefault();
-	      this.setState({
-	        isCollapsed: !this.state.isCollapsed
-	      });
-	      if (this.props) {
-	        if (this.props.onOpenClick && !this.state.isCollapsed) {
-	          // console.log('open folder clicked');
-	          this.props.onOpenClick();
-	        }
-	        if (this.props.onClosedClick && this.state.isCollapsed) {
-	          // console.log('closed folder clicked');
-	          this.props.onClosedClick();
-	        }
-	      }
-	    }
-	  }]);
-	
-	  return TreeFolder;
-	}(_react.Component);
-	
-	TreeFolder.propTypes = {
-	  data: _react.PropTypes.object,
-	  index: _react.PropTypes.number.isRequired,
-	  onOpenClick: _react.PropTypes.func,
-	  onClosedClick: _react.PropTypes.func,
-	  onFileClick: _react.PropTypes.func
-	};
-	exports.default = TreeFolder;
-	module.exports = exports['default'];
-
-/***/ },
-/* 468 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _lodash = __webpack_require__(289);
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(469);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var TreeFile = function (_Component) {
-	  _inherits(TreeFile, _Component);
-	
-	  function TreeFile() {
-	    _classCallCheck(this, TreeFile);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TreeFile).call(this));
-	
-	    _this._onFileClick = _this._onFileClick.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(TreeFile, [{
-	    key: 'render',
-	    value: function render() {
-	      var className = this.props.active ? 'TreeFile active noselect' : 'TreeFile noselect';
-	      var name = this.props.data.name || this.props.data.path.split('/')[this.props.data.path.split('/').length - 1];
-	      var connectedUsers = this.props.users ? this.props.users.map(function (user, i) {
-	        var userStyle = { backgroundColor: user.color };
-	        return _react2.default.createElement(
-	          'div',
-	          { key: 'Connected-User-' + i, className: 'TreeFile-User', style: userStyle },
-	          user.username.charAt(0).toUpperCase()
-	        );
-	      }) : _react2.default.createElement('span', null);
-	      return _react2.default.createElement(
-	        'li',
-	        { onClick: this._onFileClick },
-	        _react2.default.createElement(
-	          'div',
-	          { className: className },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'TreeFile-Name' },
-	            name
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'TreeFile-Users' },
-	            connectedUsers
-	          )
-	        )
-	      );
-	    }
-	  }, {
-	    key: '_onFileClick',
-	    value: function _onFileClick(event) {
-	      if (event.button !== 0) {
-	        return;
-	      }
-	      // If modified event
-	      if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) {
-	        return;
-	      }
-	      var el = event.currentTarget;
-	      event.preventDefault();
-	      if (this.props) {
-	        if (this.props.onClick) {
-	          console.log('running on click in tree file:', this.props.data);
-	          this.props.onClick(this.props.data);
-	        }
-	      }
-	    }
-	  }]);
-	
-	  return TreeFile;
-	}(_react.Component);
-	
-	TreeFile.propTypes = {
-	  name: _react.PropTypes.string,
-	  index: _react.PropTypes.number.isRequired,
-	  data: _react.PropTypes.object.isRequired,
-	  active: _react.PropTypes.bool,
-	  onClick: _react.PropTypes.func
-	};
-	exports.default = TreeFile;
-	module.exports = exports['default'];
-
-/***/ },
-/* 469 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 470 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 471 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 472 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _DropDownMenu = __webpack_require__(473);
-	
-	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = _DropDownMenu2.default;
-
-/***/ },
-/* 473 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -103462,13 +105660,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _transitions = __webpack_require__(322);
+	var _reactDom = __webpack_require__(302);
 	
-	var _transitions2 = _interopRequireDefault(_transitions);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _arrowDropDown = __webpack_require__(409);
+	var _stylePropable = __webpack_require__(304);
 	
-	var _arrowDropDown2 = _interopRequireDefault(_arrowDropDown);
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _keyCode = __webpack_require__(334);
+	
+	var _keyCode2 = _interopRequireDefault(_keyCode);
+	
+	var _textField = __webpack_require__(370);
+	
+	var _textField2 = _interopRequireDefault(_textField);
 	
 	var _menu = __webpack_require__(393);
 	
@@ -103478,33 +105684,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _menuItem2 = _interopRequireDefault(_menuItem);
 	
-	var _lightRawTheme = __webpack_require__(341);
+	var _divider = __webpack_require__(488);
 	
-	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
-	
-	var _clearfix = __webpack_require__(427);
-	
-	var _clearfix2 = _interopRequireDefault(_clearfix);
-	
-	var _themeManager = __webpack_require__(344);
-	
-	var _themeManager2 = _interopRequireDefault(_themeManager);
+	var _divider2 = _interopRequireDefault(_divider);
 	
 	var _popover = __webpack_require__(397);
 	
 	var _popover2 = _interopRequireDefault(_popover);
 	
-	var _popoverAnimationFromTop = __webpack_require__(474);
+	var _propTypes = __webpack_require__(369);
 	
-	var _popoverAnimationFromTop2 = _interopRequireDefault(_popoverAnimationFromTop);
-	
-	var _styles = __webpack_require__(308);
-	
-	var _styles2 = _interopRequireDefault(_styles);
-	
-	var _warning = __webpack_require__(380);
-	
-	var _warning2 = _interopRequireDefault(_warning);
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _deprecatedPropType = __webpack_require__(434);
 	
@@ -103514,1277 +105704,522 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
-	var DropDownMenu = _react2.default.createClass({
-	  displayName: 'DropDownMenu',
+	var AutoComplete = _react2.default.createClass({
+	  displayName: 'AutoComplete',
 	
-	  // The nested styles for drop-down-menu are modified by toolbar and possibly
-	  // other user components, so it will give full access to its js styles rather
-	  // than just the parent.
 	  propTypes: {
-	    /**
-	     * The width will automatically be set according to the items inside the menu.
-	     * To control this width in css instead, set this prop to false.
-	     */
-	    autoWidth: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * The `MenuItem`s to populate the `Menu` with. If the `MenuItems` have the
-	     * prop `label` that value will be used to render the representation of that
-	     * item within the field.
-	     */
-	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * The css class name of the root element.
-	     */
-	    className: _react2.default.PropTypes.string,
-	
-	    /**
-	     * Disables the menu.
-	     */
-	    disabled: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * `DropDownMenu` will use this member to display
-	     * the name of the item.
-	     */
-	    displayMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'Instead, use composability.'),
-	
-	    /**
-	     * Overrides the styles of icon element.
-	     */
-	    iconStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * `DropDownMenu` will use this member to display
-	     * the name of the item on the label.
-	     */
-	    labelMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'Instead, use composability.'),
-	
-	    /**
-	     * Overrides the styles of label when the `DropDownMenu` is inactive.
-	     */
-	    labelStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The maximum height of the `Menu` when it is displayed.
-	     */
-	    maxHeight: _react2.default.PropTypes.number,
-	
-	    /**
-	     * JSON data representing all menu items in the dropdown.
-	     */
-	    menuItems: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.array, 'Instead, use composability.'),
-	
-	    /**
-	     * Overrides the styles of `Menu` when the `DropDownMenu` is displayed.
-	     */
+	    anchorOrigin: _propTypes2.default.origin,
+	    animated: _react2.default.PropTypes.bool,
+	    dataSource: _react2.default.PropTypes.array,
+	    disableFocusRipple: _react2.default.PropTypes.bool,
+	    errorStyle: _react2.default.PropTypes.object,
+	    errorText: _react2.default.PropTypes.string,
+	    filter: _react2.default.PropTypes.func,
+	    floatingLabelText: _react2.default.PropTypes.string,
+	    fullWidth: _react2.default.PropTypes.bool,
+	    hintText: _react2.default.PropTypes.string,
+	    listStyle: _react2.default.PropTypes.object,
+	    menuCloseDelay: _react2.default.PropTypes.number,
+	    menuProps: _react2.default.PropTypes.object,
 	    menuStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Fired when a menu item is clicked that is not the one currently selected.
-	     */
-	    onChange: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Set to true to have the `DropDownMenu` automatically open on mount.
-	     */
-	    openImmediately: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Index of the item selected.
-	     */
-	    selectedIndex: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.number, 'Use value instead to control the component.'),
-	
-	    /**
-	     * Override the inline-styles of the root element.
-	     */
+	    onNewRequest: _react2.default.PropTypes.func,
+	    onUpdateInput: _react2.default.PropTypes.func,
+	    open: _react2.default.PropTypes.bool,
+	    searchText: _react2.default.PropTypes.string,
+	    showAllItems: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.bool, 'showAllItems is deprecated, use noFilter instead'),
 	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Overrides the inline-styles of the underline.
-	     */
-	    underlineStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The value that is currently selected.
-	     */
-	    value: _react2.default.PropTypes.any,
-	
-	    /**
-	     * Two-way binding link.
-	     */
-	    valueLink: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.object, 'It\'s deprecated by React too.'),
-	
-	    /**
-	     * `DropDownMenu` will use this member as the value representing an item.
-	     */
-	    valueMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'Instead, use composability.')
+	    targetOrigin: _propTypes2.default.origin,
+	    touchTapCloseDelay: _react2.default.PropTypes.number,
+	    triggerUpdateOnFocus: _react2.default.PropTypes.bool,
+	    updateWhenFocused: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.bool, 'updateWhenFocused has been renamed to triggerUpdateOnFocus')
 	  },
 	
 	  contextTypes: {
 	    muiTheme: _react2.default.PropTypes.object
 	  },
 	
-	  //for passing default theme context to children
-	  childContextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
+	  mixins: [_stylePropable2.default],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      autoWidth: true,
-	      disabled: false,
-	      openImmediately: false,
-	      maxHeight: 500
+	      anchorOrigin: {
+	        vertical: 'bottom',
+	        horizontal: 'left'
+	      },
+	      targetOrigin: {
+	        vertical: 'top',
+	        horizontal: 'left'
+	      },
+	      animated: true,
+	      fullWidth: false,
+	      open: false,
+	      searchText: '',
+	      menuCloseDelay: 100,
+	      disableFocusRipple: true,
+	      onUpdateInput: function onUpdateInput() {},
+	      onNewRequest: function onNewRequest() {},
+	      filter: function filter(searchText, key) {
+	        return searchText !== '' && key.includes(searchText);
+	      },
+	      triggerUpdateOnFocus: false
 	    };
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      open: this.props.openImmediately,
-	      selectedIndex: this._isControlled() ? null : this.props.selectedIndex || 0,
-	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
+	      searchText: this.props.searchText,
+	      open: this.props.open,
+	      anchorEl: null
 	    };
 	  },
-	  getChildContext: function getChildContext() {
-	    return {
-	      muiTheme: this.state.muiTheme
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    if (this.props.autoWidth) this._setWidth();
-	    if (this.props.hasOwnProperty('selectedIndex')) this._setSelectedIndex(this.props.selectedIndex);
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
-	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
-	    this.setState({ muiTheme: newMuiTheme });
-	
-	    if (this.props.autoWidth) this._setWidth();
-	    if (nextProps.hasOwnProperty('value') || nextProps.hasOwnProperty('valueLink')) {
-	      return;
-	    } else if (nextProps.hasOwnProperty('selectedIndex')) {
-	      this._setSelectedIndex(nextProps.selectedIndex);
-	    }
-	  },
-	  getStyles: function getStyles() {
-	    var disabled = this.props.disabled;
-	
-	    var spacing = this.state.muiTheme.rawTheme.spacing;
-	    var palette = this.state.muiTheme.rawTheme.palette;
-	    var accentColor = this.state.muiTheme.dropDownMenu.accentColor;
-	    return {
-	      control: {
-	        cursor: disabled ? 'not-allowed' : 'pointer',
-	        height: '100%',
-	        position: 'relative',
-	        width: '100%'
-	      },
-	      icon: {
-	        fill: accentColor,
-	        position: 'absolute',
-	        right: spacing.desktopGutterLess,
-	        top: (spacing.desktopToolbarHeight - 24) / 2
-	      },
-	      label: {
-	        color: disabled ? palette.disabledColor : palette.textColor,
-	        lineHeight: spacing.desktopToolbarHeight + 'px',
-	        opacity: 1,
-	        position: 'relative',
-	        paddingLeft: spacing.desktopGutter,
-	        paddingRight: spacing.iconSize + spacing.desktopGutterLess + spacing.desktopGutterMini,
-	        top: 0
-	      },
-	      labelWhenOpen: {
-	        opacity: 0,
-	        top: spacing.desktopToolbarHeight / 8
-	      },
-	      rootWhenOpen: {
-	        opacity: 1
-	      },
-	      root: {
-	        display: 'inline-block',
-	        fontSize: spacing.desktopDropDownMenuFontSize,
-	        height: spacing.desktopSubheaderHeight,
-	        fontFamily: this.state.muiTheme.rawTheme.fontFamily,
-	        outline: 'none',
-	        position: 'relative',
-	        transition: _transitions2.default.easeOut()
-	      },
-	      underline: {
-	        borderTop: 'solid 1px ' + accentColor,
-	        bottom: 1,
-	        left: 0,
-	        margin: '-1px ' + spacing.desktopGutter + 'px',
-	        right: 0,
-	        position: 'absolute'
-	      }
-	    };
+	  componentWillMount: function componentWillMount() {
+	    this.focusOnInput = false;
+	    this.requestsList = [];
 	  },
 	
-	  /**
-	   * This method is deprecated but still here because the TextField
-	   * need it in order to work. That will be addressed later.
-	   */
-	  getInputNode: function getInputNode() {
-	    var _this = this;
-	
-	    var root = this.refs.root;
-	    var item = this.props.menuItems && this.props.menuItems[this.state.selectedIndex];
-	    if (item) {
-	      root.value = item[this.props.displayMember || 'text'];
-	    }
-	
-	    root.focus = function () {
-	      if (!_this.props.disabled) {
-	        _this.setState({
-	          open: !_this.state.open,
-	          anchorEl: _this.refs.root
-	        });
-	      }
-	    };
-	
-	    return root;
-	  },
-	  _setWidth: function _setWidth() {
-	    var el = this.refs.root;
-	    if (!this.props.style || !this.props.style.hasOwnProperty('width')) {
-	      el.style.width = 'auto';
-	    }
-	  },
-	  _setSelectedIndex: function _setSelectedIndex(index) {
-	     false ? (0, _warning2.default)(index >= 0, 'Cannot set selectedIndex to a negative index.') : undefined;
-	    this.setState({ selectedIndex: index >= 0 ? index : 0 });
-	  },
-	  _onControlTouchTap: function _onControlTouchTap(event) {
-	    event.preventDefault();
-	    if (!this.props.disabled) {
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if (this.props.searchText !== nextProps.searchText) {
 	      this.setState({
-	        open: !this.state.open,
-	        anchorEl: this.refs.root
+	        searchText: nextProps.searchText
 	      });
 	    }
 	  },
-	  _onMenuItemTouchTap: function _onMenuItemTouchTap(key, payload, e) {
-	    var _props = this.props;
-	    var onChange = _props.onChange;
-	    var menuItems = _props.menuItems;
-	    var value = _props.value;
-	    var valueLink = _props.valueLink;
-	    var valueMember = _props.valueMember;
 	
-	    if (menuItems && (this.state.selectedIndex !== key || e.target.value !== value)) {
-	      var selectedItem = menuItems[key];
-	      if (selectedItem) {
-	        e.target.value = selectedItem[valueMember || 'payload'];
-	      }
-	      this._onMenuRequestClose();
-	    }
-	
-	    if (valueLink) {
-	      valueLink.requestChange(e.target.value);
-	    } else if (onChange) {
-	      onChange(e, key, payload);
-	    }
-	
+	  componentClickAway: function componentClickAway() {
+	    this._close();
+	    this.focusOnInput = false;
+	  },
+	  _open: function _open() {
 	    this.setState({
-	      selectedIndex: key,
-	      open: false
+	      open: true,
+	      anchorEl: _reactDom2.default.findDOMNode(this.refs.searchTextField)
 	    });
 	  },
-	  _onMenuRequestClose: function _onMenuRequestClose() {
+	  _close: function _close() {
 	    this.setState({
 	      open: false,
 	      anchorEl: null
 	    });
 	  },
-	  _isControlled: function _isControlled() {
-	    return this.props.hasOwnProperty('value') || this.props.hasOwnProperty('valueLink');
+	  setValue: function setValue(textValue) {
+	    this.setState({
+	      searchText: textValue
+	    });
+	  },
+	  getValue: function getValue() {
+	    return this.state.searchText;
+	  },
+	  _updateRequests: function _updateRequests(searchText) {
+	
+	    this.setState({
+	      searchText: searchText,
+	      open: true,
+	      anchorEl: _reactDom2.default.findDOMNode(this.refs.searchTextField)
+	    });
+	
+	    this.focusOnInput = true;
+	
+	    this.props.onUpdateInput(searchText, this.props.dataSource);
+	  },
+	  _handleItemTouchTap: function _handleItemTouchTap(e, child) {
+	    var _this = this;
+	
+	    setTimeout(function () {
+	      _this._close();
+	    }, this.props.touchTapCloseDelay);
+	
+	    var dataSource = this.props.dataSource;
+	
+	    var chosenRequest = undefined,
+	        index = undefined,
+	        searchText = undefined;
+	    if (typeof dataSource[0] === 'string') {
+	      chosenRequest = this.requestsList[parseInt(child.key, 10)];
+	      index = dataSource.indexOf(chosenRequest);
+	      searchText = dataSource[index];
+	    } else {
+	      chosenRequest = child.key;
+	      index = dataSource.indexOf(dataSource.filter(function (item) {
+	        return chosenRequest === item.text;
+	      })[0]);
+	      searchText = chosenRequest;
+	    }
+	
+	    this.setState({ searchText: searchText });
+	
+	    this.props.onNewRequest(chosenRequest, index, dataSource);
+	  },
+	  _handleKeyDown: function _handleKeyDown(e) {
+	    switch (e.keyCode) {
+	      case _keyCode2.default.ESC:
+	        this._close();
+	        break;
+	      case _keyCode2.default.DOWN:
+	        if (this.focusOnInput && this.state.open) {
+	          e.preventDefault();
+	          this.focusOnInput = false;
+	          this._open();
+	        }
+	        break;
+	      default:
+	        break;
+	    }
 	  },
 	  render: function render() {
 	    var _this2 = this;
 	
-	    var _props2 = this.props;
-	    var autoWidth = _props2.autoWidth;
-	    var children = _props2.children;
-	    var className = _props2.className;
-	    var displayMember = _props2.displayMember;
-	    var iconStyle = _props2.iconStyle;
-	    var labelMember = _props2.labelMember;
-	    var labelStyle = _props2.labelStyle;
-	    var maxHeight = _props2.maxHeight;
-	    var menuItems = _props2.menuItems;
-	    var menuStyle = _props2.menuStyle;
-	    var style = _props2.style;
-	    var underlineStyle = _props2.underlineStyle;
-	    var valueLink = _props2.valueLink;
-	    var _props2$valueMember = _props2.valueMember;
-	    var valueMember = _props2$valueMember === undefined ? 'payload' : _props2$valueMember;
+	    var _props = this.props;
+	    var anchorOrigin = _props.anchorOrigin;
+	    var animated = _props.animated;
+	    var style = _props.style;
+	    var errorStyle = _props.errorStyle;
+	    var floatingLabelText = _props.floatingLabelText;
+	    var hintText = _props.hintText;
+	    var fullWidth = _props.fullWidth;
+	    var menuStyle = _props.menuStyle;
+	    var menuProps = _props.menuProps;
+	    var listStyle = _props.listStyle;
+	    var targetOrigin = _props.targetOrigin;
 	
-	    var other = _objectWithoutProperties(_props2, ['autoWidth', 'children', 'className', 'displayMember', 'iconStyle', 'labelMember', 'labelStyle', 'maxHeight', 'menuItems', 'menuStyle', 'style', 'underlineStyle', 'valueLink', 'valueMember']);
+	    var other = _objectWithoutProperties(_props, ['anchorOrigin', 'animated', 'style', 'errorStyle', 'floatingLabelText', 'hintText', 'fullWidth', 'menuStyle', 'menuProps', 'listStyle', 'targetOrigin']);
 	
 	    var _state = this.state;
-	    var anchorEl = _state.anchorEl;
 	    var open = _state.open;
-	    var muiTheme = _state.muiTheme;
+	    var anchorEl = _state.anchorEl;
 	
-	    var styles = this.getStyles();
+	    var styles = {
+	      root: {
+	        display: 'inline-block',
+	        position: 'relative',
+	        width: this.props.fullWidth ? '100%' : 256
+	      },
+	      input: {},
+	      error: {},
+	      menu: {
+	        width: '100%'
+	      },
+	      list: {
+	        display: 'block',
+	        width: this.props.fullWidth ? '100%' : 256
+	      }
+	    };
 	
-	    var value = undefined;
-	    var selectedIndex = this._isControlled() ? null : this.state.selectedIndex;
+	    var textFieldProps = {
+	      style: this.mergeAndPrefix(styles.input, style),
+	      floatingLabelText: floatingLabelText,
+	      hintText: !hintText && !floatingLabelText ? '' : hintText,
+	      fullWidth: true,
+	      multiLine: false,
+	      errorStyle: this.mergeAndPrefix(styles.error, errorStyle)
+	    };
 	
-	    if (menuItems && typeof selectedIndex === 'number') {
-	       false ? (0, _warning2.default)(menuItems[selectedIndex], 'SelectedIndex of ' + selectedIndex + ' does not exist in menuItems.') : undefined;
-	    }
+	    var mergedRootStyles = this.mergeAndPrefix(styles.root, style);
+	    var mergedMenuStyles = this.mergeStyles(styles.menu, menuStyle);
 	
-	    if (valueMember && this._isControlled()) {
-	      value = this.props.hasOwnProperty('value') ? this.props.value : valueLink.value;
-	      if (menuItems && value !== null && value !== undefined) {
-	        for (var i = 0; i < menuItems.length; i++) {
-	          if (menuItems[i][valueMember] === value) {
-	            selectedIndex = i;
+	    var requestsList = [];
+	
+	    this.props.dataSource.map(function (item) {
+	      //showAllItems is deprecated, will be removed in the future
+	      if (_this2.props.showAllItems) {
+	        requestsList.push(item);
+	        return;
+	      }
+	
+	      switch (typeof item === 'undefined' ? 'undefined' : _typeof(item)) {
+	        case 'string':
+	          if (_this2.props.filter(_this2.state.searchText, item, item)) {
+	            requestsList.push(item);
 	          }
-	        }
+	          break;
+	        case 'object':
+	          if (typeof item.text === 'string') {
+	            if (_this2.props.filter(_this2.state.searchText, item.text, item)) {
+	              requestsList.push(item);
+	            }
+	          }
+	          break;
 	      }
-	    }
-	
-	    var displayValue = '';
-	    if (menuItems) {
-	      var selectedItem = menuItems[selectedIndex];
-	      if (selectedItem) {
-	        displayValue = selectedItem[labelMember || 'text'] || selectedItem[displayMember || 'text'];
-	      }
-	    } else {
-	      _react2.default.Children.forEach(children, function (child) {
-	        if (value === child.props.value) {
-	          // This will need to be improved (in case primaryText is a node)
-	          displayValue = child.props.label || child.props.primaryText;
-	        }
-	      });
-	    }
-	
-	    var index = 0;
-	    var menuItemElements = menuItems ? menuItems.map(function (item, idx) {
-	      return _react2.default.createElement(_menuItem2.default, {
-	        key: idx,
-	        primaryText: item[displayMember || 'text'],
-	        value: item[valueMember],
-	        onTouchTap: _this2._onMenuItemTouchTap.bind(_this2, idx, item) });
-	    }) : _react2.default.Children.map(children, function (child) {
-	      var clone = _react2.default.cloneElement(child, {
-	        onTouchTap: _this2._onMenuItemTouchTap.bind(_this2, index, child.props.value)
-	      }, child.props.children);
-	      index += 1;
-	      return clone;
 	    });
 	
+	    this.requestsList = requestsList;
+	
+	    var menu = open && requestsList.length > 0 ? _react2.default.createElement(
+	      _menu2.default,
+	      _extends({}, menuProps, {
+	        ref: 'menu',
+	        key: 'dropDownMenu',
+	        autoWidth: false,
+	        onEscKeyDown: this._close,
+	        initiallyKeyboardFocused: false,
+	        onItemTouchTap: this._handleItemTouchTap,
+	        listStyle: this.mergeAndPrefix(styles.list, listStyle),
+	        style: mergedMenuStyles }),
+	      requestsList.map(function (request, index) {
+	        switch (typeof request === 'undefined' ? 'undefined' : _typeof(request)) {
+	          case 'string':
+	            return _react2.default.createElement(_menuItem2.default, {
+	              disableFocusRipple: _this2.props.disableFocusRipple,
+	              innerDivStyle: { overflow: 'hidden' },
+	              key: index,
+	              value: request,
+	              primaryText: request
+	            });
+	          case 'object':
+	            if (typeof request.text === 'string') {
+	              return _react2.default.cloneElement(request.value, {
+	                key: request.text,
+	                disableFocusRipple: _this2.props.disableFocusRipple
+	              });
+	            }
+	            return _react2.default.cloneElement(request, {
+	              key: index,
+	              disableFocusRipple: _this2.props.disableFocusRipple
+	            });
+	          default:
+	            return null;
+	        }
+	      })
+	    ) : null;
+	
 	    var popoverStyle = undefined;
-	    if (anchorEl && !autoWidth) {
+	    if (anchorEl && fullWidth) {
 	      popoverStyle = { width: anchorEl.clientWidth };
 	    }
 	
 	    return _react2.default.createElement(
 	      'div',
-	      _extends({}, other, {
-	        ref: 'root',
-	        className: className,
-	        style: _styles2.default.prepareStyles(muiTheme, styles.root, open && styles.rootWhenOpen, style)
-	      }),
+	      { style: mergedRootStyles,
+	        onKeyDown: this._handleKeyDown },
 	      _react2.default.createElement(
-	        _clearfix2.default,
-	        { style: _styles2.default.merge(styles.control), onTouchTap: this._onControlTouchTap },
-	        _react2.default.createElement(
-	          'div',
-	          { style: _styles2.default.prepareStyles(muiTheme, styles.label, open && styles.labelWhenOpen, labelStyle) },
-	          displayValue
-	        ),
-	        _react2.default.createElement(_arrowDropDown2.default, { style: _styles2.default.merge(styles.icon, iconStyle) }),
-	        _react2.default.createElement('div', { style: _styles2.default.prepareStyles(muiTheme, styles.underline, underlineStyle) })
+	        'div',
+	        {
+	          style: {
+	            width: '100%'
+	          } },
+	        _react2.default.createElement(_textField2.default, _extends({}, other, {
+	          ref: 'searchTextField',
+	          value: this.state.searchText,
+	          onEnterKeyDown: function onEnterKeyDown() {
+	            setTimeout(function () {
+	              _this2._close();
+	            }, _this2.props.touchTapCloseDelay);
+	            _this2.props.onNewRequest(_this2.state.searchText);
+	          },
+	          onChange: function onChange(e) {
+	            var searchText = e.target.value;
+	            _this2._updateRequests(searchText);
+	          },
+	          onBlur: function onBlur() {
+	            if (_this2.focusOnInput && open) _this2.refs.searchTextField.focus();
+	          },
+	          onFocus: function onFocus() {
+	            if (!open && (_this2.props.triggerUpdateOnFocus || _this2.props.updateWhenFocused //this line will be removed in the future
+	             || _this2.requestsList > 0)) {
+	              _this2._updateRequests(_this2.state.searchText);
+	            }
+	            _this2.focusOnInput = true;
+	          }
+	
+	        }, textFieldProps))
 	      ),
 	      _react2.default.createElement(
 	        _popover2.default,
 	        {
-	          anchorOrigin: { horizontal: 'left', vertical: 'top' },
-	          anchorEl: anchorEl,
 	          style: popoverStyle,
-	          animation: _popoverAnimationFromTop2.default,
+	          anchorOrigin: anchorOrigin,
+	          targetOrigin: targetOrigin,
 	          open: open,
-	          onRequestClose: this._onMenuRequestClose },
-	        _react2.default.createElement(
-	          _menu2.default,
-	          {
-	            maxHeight: maxHeight,
-	            desktop: true,
-	            value: value,
-	            style: menuStyle
-	          },
-	          menuItemElements
-	        )
+	          anchorEl: anchorEl,
+	          useLayerForClickAway: false,
+	          onRequestClose: this._close },
+	        menu
 	      )
 	    );
 	  }
 	});
 	
-	exports.default = DropDownMenu;
-
-/***/ },
-/* 474 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _transitions = __webpack_require__(322);
-	
-	var _transitions2 = _interopRequireDefault(_transitions);
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _propTypes = __webpack_require__(369);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _stylePropable = __webpack_require__(304);
-	
-	var _stylePropable2 = _interopRequireDefault(_stylePropable);
-	
-	var _lightRawTheme = __webpack_require__(341);
-	
-	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
-	
-	var _themeManager = __webpack_require__(344);
-	
-	var _themeManager2 = _interopRequireDefault(_themeManager);
-	
-	var _paper = __webpack_require__(368);
-	
-	var _paper2 = _interopRequireDefault(_paper);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PopoverAnimationFromTop = _react2.default.createClass({
-	  displayName: 'PopoverAnimationFromTop',
-	
-	  propTypes: {
-	    children: _react2.default.PropTypes.node,
-	    className: _react2.default.PropTypes.string,
-	    open: _react2.default.PropTypes.bool.isRequired,
-	
-	    /**
-	     * Override the inline-styles of the root element.
-	     */
-	    style: _react2.default.PropTypes.object,
-	    targetOrigin: _propTypes2.default.origin,
-	    zDepth: _propTypes2.default.zDepth
-	  },
-	
-	  contextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  //for passing default theme context to children
-	  childContextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  mixins: [_stylePropable2.default],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      style: {},
-	      zDepth: 1
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default),
-	      open: false
-	    };
-	  },
-	  getChildContext: function getChildContext() {
-	    return {
-	      muiTheme: this.state.muiTheme
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.setState({ open: true }); //eslint-disable-line react/no-did-mount-set-state
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
-	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
-	
-	    this.setState({
-	      open: nextProps.open,
-	      muiTheme: newMuiTheme
-	    });
-	  },
-	  getStyles: function getStyles() {
-	    var targetOrigin = this.props.targetOrigin;
-	
-	    var horizontal = targetOrigin.horizontal.replace('middle', 'vertical');
-	
-	    return {
-	      base: {
-	        opacity: 0,
-	        transform: 'scaleY(0)',
-	        transformOrigin: horizontal + ' ' + targetOrigin.vertical,
-	        position: 'fixed',
-	        zIndex: this.state.muiTheme.zIndex.popover,
-	        transition: _transitions2.default.easeOut('450ms', ['transform', 'opacity']),
-	        maxHeight: '100%'
+	AutoComplete.levenshteinDistance = function (searchText, key) {
+	  var current = [],
+	      prev = undefined,
+	      value = undefined;
+	  for (var i = 0; i <= key.length; i++) {
+	    for (var j = 0; j <= searchText.length; j++) {
+	      if (i && j) {
+	        if (searchText.charAt(j - 1) === key.charAt(i - 1)) value = prev;else value = Math.min(current[j], current[j - 1], prev) + 1;
+	      } else {
+	        value = i + j;
 	      }
-	
-	    };
-	  },
-	  getOpenStyles: function getOpenStyles() {
-	    return {
-	      base: {
-	        opacity: 1,
-	        transform: 'scaleY(1)'
-	      }
-	    };
-	  },
-	  render: function render() {
-	    var _props = this.props;
-	    var className = _props.className;
-	    var style = _props.style;
-	    var zDepth = _props.zDepth;
-	
-	    var styles = this.getStyles();
-	    var openStyles = {};
-	    if (this.state.open) openStyles = this.getOpenStyles();
-	
-	    return _react2.default.createElement(
-	      _paper2.default,
-	      {
-	        style: this.mergeStyles(styles.base, style, openStyles.base),
-	        zDepth: zDepth,
-	        className: className },
-	      this.props.children
-	    );
-	  }
-	});
-	
-	exports.default = PopoverAnimationFromTop;
-
-/***/ },
-/* 475 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _stylePropable = __webpack_require__(304);
-	
-	var _stylePropable2 = _interopRequireDefault(_stylePropable);
-	
-	var _lightRawTheme = __webpack_require__(341);
-	
-	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
-	
-	var _themeManager = __webpack_require__(344);
-	
-	var _themeManager2 = _interopRequireDefault(_themeManager);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
-	var Toolbar = _react2.default.createClass({
-	  displayName: 'Toolbar',
-	
-	  propTypes: {
-	    /**
-	     * Can be a `ToolbarGroup` to render a group of related items.
-	     */
-	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * The css class name of the root element.
-	     */
-	    className: _react2.default.PropTypes.string,
-	
-	    /**
-	     * Do not apply `desktopGutter` to the `Toolbar`.
-	     */
-	    noGutter: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Override the inline-styles of the root element.
-	     */
-	    style: _react2.default.PropTypes.object
-	  },
-	
-	  contextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	  //for passing default theme context to children
-	  childContextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  mixins: [_stylePropable2.default],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      noGutter: false
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
-	    };
-	  },
-	  getChildContext: function getChildContext() {
-	    return {
-	      muiTheme: this.state.muiTheme
-	    };
-	  },
-	
-	  //to update theme inside state whenever a new theme is passed down
-	  //from the parent / owner using context
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
-	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
-	    this.setState({ muiTheme: newMuiTheme });
-	  },
-	  getTheme: function getTheme() {
-	    return this.state.muiTheme.toolbar;
-	  },
-	  getSpacing: function getSpacing() {
-	    return this.state.muiTheme.rawTheme.spacing;
-	  },
-	  getStyles: function getStyles() {
-	    return {
-	      root: {
-	        boxSizing: 'border-box',
-	        WebkitTapHighlightColor: 'rgba(0,0,0,0)',
-	        backgroundColor: this.getTheme().backgroundColor,
-	        height: this.getTheme().height,
-	        width: '100%',
-	        padding: this.props.noGutter ? 0 : '0px ' + this.getSpacing().desktopGutter + 'px'
-	      }
-	    };
-	  },
-	  render: function render() {
-	    var _props = this.props;
-	    var children = _props.children;
-	    var className = _props.className;
-	    var style = _props.style;
-	
-	    var other = _objectWithoutProperties(_props, ['children', 'className', 'style']);
-	
-	    var styles = this.getStyles();
-	
-	    return _react2.default.createElement(
-	      'div',
-	      _extends({}, other, { className: className, style: this.prepareStyles(styles.root, style) }),
-	      children
-	    );
-	  }
-	});
-	
-	exports.default = Toolbar;
-
-/***/ },
-/* 476 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _colors = __webpack_require__(328);
-	
-	var _colors2 = _interopRequireDefault(_colors);
-	
-	var _stylePropable = __webpack_require__(304);
-	
-	var _stylePropable2 = _interopRequireDefault(_stylePropable);
-	
-	var _lightRawTheme = __webpack_require__(341);
-	
-	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
-	
-	var _themeManager = __webpack_require__(344);
-	
-	var _themeManager2 = _interopRequireDefault(_themeManager);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
-	var ToolbarGroup = _react2.default.createClass({
-	  displayName: 'ToolbarGroup',
-	
-	  propTypes: {
-	    /**
-	     * Can be any node or number of nodes.
-	     */
-	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * The css class name of the root element.
-	     */
-	    className: _react2.default.PropTypes.string,
-	
-	    /**
-	     * Set this to true for if the `ToolbarGroup` is the first child of `Toolbar`
-	     * to prevent setting the right gap.
-	     */
-	    firstChild: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Determines the side the `ToolbarGroup` will snap to. Either 'left' or 'right'.
-	     */
-	    float: _react2.default.PropTypes.oneOf(['left', 'right']),
-	
-	    /**
-	     * Set this to true for if the `ToolbarGroup` is the last child of `Toolbar`
-	     * to prevent setting the right gap.
-	     */
-	    lastChild: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * Override the inline-styles of the root element.
-	     */
-	    style: _react2.default.PropTypes.object
-	  },
-	
-	  contextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  //for passing default theme context to children
-	  childContextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  mixins: [_stylePropable2.default],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      firstChild: false,
-	      float: 'left',
-	      lastChild: false
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
-	    };
-	  },
-	  getChildContext: function getChildContext() {
-	    return {
-	      muiTheme: this.state.muiTheme
-	    };
-	  },
-	
-	  //to update theme inside state whenever a new theme is passed down
-	  //from the parent / owner using context
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
-	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
-	    this.setState({ muiTheme: newMuiTheme });
-	  },
-	  getTheme: function getTheme() {
-	    return this.state.muiTheme.toolbar;
-	  },
-	  getSpacing: function getSpacing() {
-	    return this.state.muiTheme.rawTheme.spacing;
-	  },
-	  getStyles: function getStyles() {
-	    var _props = this.props;
-	    var firstChild = _props.firstChild;
-	    var float = _props.float;
-	    var lastChild = _props.lastChild;
-	
-	    var marginHorizontal = this.getSpacing().desktopGutter;
-	    var marginVertical = (this.getTheme().height - this.state.muiTheme.button.height) / 2;
-	    var styles = {
-	      root: {
-	        float: float,
-	        position: 'relative',
-	        marginLeft: firstChild ? -marginHorizontal : undefined,
-	        marginRight: lastChild ? -marginHorizontal : undefined
-	      },
-	      dropDownMenu: {
-	        root: {
-	          float: 'left',
-	          color: _colors2.default.lightBlack, // removes hover color change, we want to keep it
-	          display: 'inline-block',
-	          marginRight: this.getSpacing().desktopGutter
-	        },
-	        controlBg: {
-	          backgroundColor: this.getTheme().menuHoverColor,
-	          borderRadius: 0
-	        },
-	        underline: {
-	          display: 'none'
-	        }
-	      },
-	      button: {
-	        float: 'left',
-	        margin: marginVertical + 'px ' + marginHorizontal + 'px',
-	        position: 'relative'
-	      },
-	      icon: {
-	        root: {
-	          float: 'left',
-	          cursor: 'pointer',
-	          color: this.getTheme().iconColor,
-	          lineHeight: this.getTheme().height + 'px',
-	          paddingLeft: this.getSpacing().desktopGutter
-	        },
-	        hover: {
-	          color: _colors2.default.darkBlack
-	        }
-	      },
-	      span: {
-	        float: 'left',
-	        color: this.getTheme().iconColor,
-	        lineHeight: this.getTheme().height + 'px'
-	      }
-	    };
-	
-	    return styles;
-	  },
-	  _handleMouseEnterDropDownMenu: function _handleMouseEnterDropDownMenu(e) {
-	    e.target.style.zIndex = this.getStyles().icon.hover.zIndex;
-	    e.target.style.color = this.getStyles().icon.hover.color;
-	  },
-	  _handleMouseLeaveDropDownMenu: function _handleMouseLeaveDropDownMenu(e) {
-	    e.target.style.zIndex = 'auto';
-	    e.target.style.color = this.getStyles().icon.root.color;
-	  },
-	  _handleMouseEnterFontIcon: function _handleMouseEnterFontIcon(e) {
-	    e.target.style.zIndex = this.getStyles().icon.hover.zIndex;
-	    e.target.style.color = this.getStyles().icon.hover.color;
-	  },
-	  _handleMouseLeaveFontIcon: function _handleMouseLeaveFontIcon(e) {
-	    e.target.style.zIndex = 'auto';
-	    e.target.style.color = this.getStyles().icon.root.color;
-	  },
-	  render: function render() {
-	    var _this = this;
-	
-	    var _props2 = this.props;
-	    var children = _props2.children;
-	    var className = _props2.className;
-	    var style = _props2.style;
-	
-	    var other = _objectWithoutProperties(_props2, ['children', 'className', 'style']);
-	
-	    var styles = this.getStyles();
-	    var newChildren = _react2.default.Children.map(children, function (currentChild) {
-	      if (!currentChild) {
-	        return null;
-	      }
-	      if (!currentChild.type) {
-	        return currentChild;
-	      }
-	      switch (currentChild.type.displayName) {
-	        case 'DropDownMenu':
-	          return _react2.default.cloneElement(currentChild, {
-	            style: _this.mergeStyles(styles.dropDownMenu.root, currentChild.props.style),
-	            styleControlBg: styles.dropDownMenu.controlBg,
-	            styleUnderline: styles.dropDownMenu.underline
-	          });
-	        case 'DropDownIcon':
-	          return _react2.default.cloneElement(currentChild, {
-	            style: _this.mergeStyles({ float: 'left' }, currentChild.props.style),
-	            iconStyle: styles.icon.root,
-	            onMouseEnter: _this._handleMouseEnterDropDownMenu,
-	            onMouseLeave: _this._handleMouseLeaveDropDownMenu
-	          });
-	        case 'RaisedButton':
-	        case 'FlatButton':
-	          return _react2.default.cloneElement(currentChild, {
-	            style: _this.mergeStyles(styles.button, currentChild.props.style)
-	          });
-	        case 'FontIcon':
-	          return _react2.default.cloneElement(currentChild, {
-	            style: _this.mergeStyles(styles.icon.root, currentChild.props.style),
-	            onMouseEnter: _this._handleMouseEnterFontIcon,
-	            onMouseLeave: _this._handleMouseLeaveFontIcon
-	          });
-	        case 'ToolbarSeparator':
-	        case 'ToolbarTitle':
-	          return _react2.default.cloneElement(currentChild, {
-	            style: _this.mergeStyles(styles.span, currentChild.props.style)
-	          });
-	        default:
-	          return currentChild;
-	      }
-	    }, this);
-	
-	    return _react2.default.createElement(
-	      'div',
-	      _extends({}, other, { className: className, style: this.prepareStyles(styles.root, style) }),
-	      newChildren
-	    );
-	  }
-	});
-	
-	exports.default = ToolbarGroup;
-
-/***/ },
-/* 477 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _SelectField = __webpack_require__(478);
-	
-	var _SelectField2 = _interopRequireDefault(_SelectField);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = _SelectField2.default;
-
-/***/ },
-/* 478 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _SelectField = __webpack_require__(479);
-	
-	var _SelectField2 = _interopRequireDefault(_SelectField);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = _SelectField2.default;
-
-/***/ },
-/* 479 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _stylePropable = __webpack_require__(304);
-	
-	var _stylePropable2 = _interopRequireDefault(_stylePropable);
-	
-	var _textField = __webpack_require__(370);
-	
-	var _textField2 = _interopRequireDefault(_textField);
-	
-	var _DropDownMenu = __webpack_require__(472);
-	
-	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
-	
-	var _lightRawTheme = __webpack_require__(341);
-	
-	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
-	
-	var _themeManager = __webpack_require__(344);
-	
-	var _themeManager2 = _interopRequireDefault(_themeManager);
-	
-	var _contextPure = __webpack_require__(375);
-	
-	var _contextPure2 = _interopRequireDefault(_contextPure);
-	
-	var _deprecatedPropType = __webpack_require__(434);
-	
-	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
-	var SelectField = _react2.default.createClass({
-	  displayName: 'SelectField',
-	
-	  propTypes: {
-	    /**
-	     * The width will automatically be set according to the
-	     * items inside the menu. To control this width in css
-	     * instead, set this prop to `false`.
-	     */
-	    autoWidth: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * The `MenuItem` elements to populate the `Menu` with.
-	     * If the MenuItems have the prop `label` that value will
-	     * be used to render the representation of that
-	     * item within the field.
-	     */
-	    children: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Disables the select field if set to true.
-	     */
-	    disabled: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * The style object to use to override error styles.
-	     */
-	    errorStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The error content to display.
-	     */
-	    errorText: _react2.default.PropTypes.node,
-	
-	    /**
-	     * The style object to use to override floating label styles.
-	     */
-	    floatingLabelStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The content to use for the floating label element.
-	     */
-	    floatingLabelText: _react2.default.PropTypes.node,
-	
-	    /**
-	     * If true, the field receives the property width 100%.
-	     */
-	    fullWidth: _react2.default.PropTypes.bool,
-	
-	    /**
-	     * The style object to use to override hint styles.
-	     */
-	    hintStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The hint content to display.
-	     */
-	    hintText: _react2.default.PropTypes.node,
-	
-	    /**
-	     * Overrides the styles of the icon element.
-	     */
-	    iconStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * `SelectField` will use text as default value,
-	     * with this property you can choose another name.
-	     */
-	    labelMember: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.string, 'to promote composability.'),
-	
-	    /**
-	     * Overrides the styles of label when the `SelectField` is inactive.
-	     */
-	    labelStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * JSON data representing all menu items in the dropdown.
-	     */
-	    menuItems: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.array, 'to promote composability.'),
-	
-	    /**
-	     * Callback function that is fired when the `SelectField` loses focus.
-	     */
-	    onBlur: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Callback function that is fired when the value changes.
-	     */
-	    onChange: _react2.default.PropTypes.func,
-	
-	    /**
-	     * Callback function that is fired when the `SelectField` gains focus.
-	     */
-	    onFocus: _react2.default.PropTypes.func,
-	
-	    /**
-	     * The style object to use to override the `DropDownMenu`.
-	     */
-	    selectFieldRoot: _react2.default.PropTypes.object, // Must be changed!
-	
-	    /**
-	     * Index of the item selected.
-	     */
-	    selectedIndex: (0, _deprecatedPropType2.default)(_react2.default.PropTypes.number, 'with menuItems.'),
-	
-	    /**
-	     * Override the inline-styles of the root element.
-	     */
-	    style: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Override the inline-styles of the underline element when disabled.
-	     */
-	    underlineDisabledStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Override the inline-styles of the underline element when focused.
-	     */
-	    underlineFocusStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * Overrides the styles of the underline element.
-	     */
-	    underlineStyle: _react2.default.PropTypes.object,
-	
-	    /**
-	     * The value that is currently selected.
-	     */
-	    value: _react2.default.PropTypes.any
-	  },
-	
-	  contextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  //for passing default theme context to children
-	  childContextTypes: {
-	    muiTheme: _react2.default.PropTypes.object
-	  },
-	
-	  mixins: [_stylePropable2.default, _contextPure2.default],
-	
-	  statics: {
-	    getChildrenClasses: function getChildrenClasses() {
-	      return [_textField2.default, _DropDownMenu2.default];
+	      prev = current[j];
+	      current[j] = value;
 	    }
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      autoWidth: false,
-	      disabled: false,
-	      fullWidth: false
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      muiTheme: this.context.muiTheme ? this.context.muiTheme : _themeManager2.default.getMuiTheme(_lightRawTheme2.default)
-	    };
-	  },
-	  getChildContext: function getChildContext() {
-	    return {
-	      muiTheme: this.state.muiTheme
-	    };
-	  },
-	
-	  //to update theme inside state whenever a new theme is passed down
-	  //from the parent / owner using context
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
-	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
-	    this.setState({ muiTheme: newMuiTheme });
-	  },
-	  getStyles: function getStyles() {
-	    var floatingLabelText = this.props.floatingLabelText;
-	
-	    return {
-	      label: {
-	        paddingLeft: 0,
-	        top: floatingLabelText ? 6 : -4
-	      },
-	      icon: {
-	        right: 0,
-	        top: floatingLabelText ? 22 : 14
-	      },
-	      hideDropDownUnderline: {
-	        borderTop: 'none'
-	      }
-	    };
-	  },
-	  render: function render() {
-	    var styles = this.getStyles();
-	    var _props = this.props;
-	    var autoWidth = _props.autoWidth;
-	    var children = _props.children;
-	    var style = _props.style;
-	    var labelStyle = _props.labelStyle;
-	    var iconStyle = _props.iconStyle;
-	    var underlineDisabledStyle = _props.underlineDisabledStyle;
-	    var underlineFocusStyle = _props.underlineFocusStyle;
-	    var underlineStyle = _props.underlineStyle;
-	    var errorStyle = _props.errorStyle;
-	    var selectFieldRoot = _props.selectFieldRoot;
-	    var disabled = _props.disabled;
-	    var floatingLabelText = _props.floatingLabelText;
-	    var floatingLabelStyle = _props.floatingLabelStyle;
-	    var hintStyle = _props.hintStyle;
-	    var hintText = _props.hintText;
-	    var fullWidth = _props.fullWidth;
-	    var errorText = _props.errorText;
-	    var onFocus = _props.onFocus;
-	    var onBlur = _props.onBlur;
-	    var onChange = _props.onChange;
-	    var value = _props.value;
-	
-	    var other = _objectWithoutProperties(_props, ['autoWidth', 'children', 'style', 'labelStyle', 'iconStyle', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineStyle', 'errorStyle', 'selectFieldRoot', 'disabled', 'floatingLabelText', 'floatingLabelStyle', 'hintStyle', 'hintText', 'fullWidth', 'errorText', 'onFocus', 'onBlur', 'onChange', 'value']);
-	
-	    return _react2.default.createElement(
-	      _textField2.default,
-	      {
-	        style: style,
-	        floatingLabelText: floatingLabelText,
-	        floatingLabelStyle: floatingLabelStyle,
-	        hintStyle: hintStyle,
-	        hintText: !hintText && !floatingLabelText ? ' ' : hintText,
-	        fullWidth: fullWidth,
-	        errorText: errorText,
-	        underlineStyle: underlineStyle,
-	        errorStyle: errorStyle,
-	        onFocus: onFocus,
-	        onBlur: onBlur,
-	        underlineDisabledStyle: underlineDisabledStyle,
-	        underlineFocusStyle: underlineFocusStyle
-	      },
-	      _react2.default.createElement(
-	        _DropDownMenu2.default,
-	        _extends({
-	          disabled: disabled,
-	          style: selectFieldRoot,
-	          labelStyle: this.mergeStyles(styles.label, labelStyle),
-	          iconStyle: this.mergeStyles(styles.icon, iconStyle),
-	          underlineStyle: styles.hideDropDownUnderline,
-	          autoWidth: autoWidth,
-	          value: value,
-	          onChange: onChange
-	        }, other),
-	        children
-	      )
-	    );
 	  }
-	});
+	  return current.pop();
+	};
 	
-	exports.default = SelectField;
+	AutoComplete.noFilter = function () {
+	  return true;
+	};
+	
+	AutoComplete.defaultFilter = AutoComplete.caseSensitiveFilter = function (searchText, key) {
+	  return searchText !== '' && key.includes(searchText);
+	};
+	
+	AutoComplete.caseInsensitiveFilter = function (searchText, key) {
+	  return key.toLowerCase().includes(searchText.toLowerCase());
+	};
+	
+	AutoComplete.levenshteinDistanceFilter = function (distanceLessThan) {
+	  if (distanceLessThan === undefined) return AutoComplete.levenshteinDistance;else if (typeof distanceLessThan !== 'number') {
+	    throw 'Error: AutoComplete.levenshteinDistanceFilter is a filter generator, not a filter!';
+	  }
+	  return function (s, k) {
+	    return AutoComplete.levenshteinDistance(s, k) < distanceLessThan;
+	  };
+	};
+	
+	AutoComplete.fuzzyFilter = function (searchText, key) {
+	  if (searchText.length === 0) return false;
+	  var subMatchKey = key.substring(0, searchText.length);
+	  var distance = AutoComplete.levenshteinDistance(searchText.toLowerCase(), subMatchKey.toLowerCase());
+	  return searchText.length > 3 ? distance < 2 : distance === 0;
+	};
+	
+	AutoComplete.Item = _menuItem2.default;
+	AutoComplete.Divider = _divider2.default;
+	
+	exports.default = AutoComplete;
+	module.exports = exports['default'];
 
 /***/ },
-/* 480 */
+/* 488 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _muiThemeable = __webpack_require__(489);
+	
+	var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+	
+	var _styles = __webpack_require__(308);
+	
+	var _styles2 = _interopRequireDefault(_styles);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var propTypes = {
+	  /**
+	   * CSS class that will be added to the divider's root element
+	   */
+	  className: _react2.default.PropTypes.string,
+	
+	  /**
+	   * If true, the divider will be indented 72px
+	   */
+	  inset: _react2.default.PropTypes.bool,
+	
+	  /**
+	   * Override the inline-styles of the list divider's root element
+	   */
+	  style: _react2.default.PropTypes.object
+	};
+	
+	var defaultProps = {
+	  inset: false
+	};
+	
+	var Divider = function Divider(_ref) {
+	  var inset = _ref.inset;
+	  var muiTheme = _ref.muiTheme;
+	  var style = _ref.style;
+	
+	  var other = _objectWithoutProperties(_ref, ['inset', 'muiTheme', 'style']);
+	
+	  var styles = {
+	    root: {
+	      margin: 0,
+	      marginTop: -1,
+	      marginLeft: inset ? 72 : 0,
+	      height: 1,
+	      border: 'none',
+	      backgroundColor: muiTheme.rawTheme.palette.borderColor
+	    }
+	  };
+	
+	  return _react2.default.createElement('hr', _extends({}, other, { style: _styles2.default.prepareStyles(muiTheme, styles.root, style) }));
+	};
+	
+	Divider.displayName = 'Divider';
+	Divider.propTypes = propTypes;
+	Divider.defaultProps = defaultProps;
+	Divider = (0, _muiThemeable2.default)(Divider);
+	
+	exports.default = Divider;
+	module.exports = exports['default'];
+
+/***/ },
+/* 489 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = muiThemeable;
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lightRawTheme = __webpack_require__(341);
+	
+	var _lightRawTheme2 = _interopRequireDefault(_lightRawTheme);
+	
+	var _themeManager = __webpack_require__(344);
+	
+	var _themeManager2 = _interopRequireDefault(_themeManager);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function getDisplayName(WrappedComponent) {
+	  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+	}
+	
+	function muiThemeable(WrappedComponent) {
+	  var MuiComponent = function MuiComponent(props, _ref) {
+	    var _ref$muiTheme = _ref.muiTheme;
+	    var muiTheme = _ref$muiTheme === undefined ? _themeManager2.default.getMuiTheme(_lightRawTheme2.default) : _ref$muiTheme;
+	
+	    return _react2.default.createElement(WrappedComponent, _extends({}, props, { muiTheme: muiTheme }));
+	  };
+	
+	  MuiComponent.displayName = getDisplayName(WrappedComponent);
+	  MuiComponent.contextTypes = {
+	    muiTheme: _react2.default.PropTypes.object
+	  };
+	  MuiComponent.childContextTypes = {
+	    muiTheme: _react2.default.PropTypes.object
+	  };
+	
+	  return MuiComponent;
+	}
+	module.exports = exports['default'];
+
+/***/ },
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104807,8 +106242,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ContentAddCircle = _react2.default.createClass({
-	  displayName: 'ContentAddCircle',
+	var ActionInfo = _react2.default.createClass({
+	  displayName: 'ActionInfo',
 	
 	  mixins: [_reactAddonsPureRenderMixin2.default],
 	
@@ -104816,15 +106251,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2.default.createElement(
 	      _svgIcon2.default,
 	      this.props,
-	      _react2.default.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z' })
+	      _react2.default.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z' })
 	    );
 	  }
 	});
 	
-	exports.default = ContentAddCircle;
+	exports.default = ActionInfo;
+	module.exports = exports['default'];
 
 /***/ },
-/* 481 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104847,8 +106283,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ActionSettings = _react2.default.createClass({
-	  displayName: 'ActionSettings',
+	var FileFolder = _react2.default.createClass({
+	  displayName: 'FileFolder',
 	
 	  mixins: [_reactAddonsPureRenderMixin2.default],
 	
@@ -104856,21 +106292,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2.default.createElement(
 	      _svgIcon2.default,
 	      this.props,
-	      _react2.default.createElement('path', { d: 'M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z' })
+	      _react2.default.createElement('path', { d: 'M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z' })
 	    );
 	  }
 	});
 	
-	exports.default = ActionSettings;
+	exports.default = FileFolder;
+	module.exports = exports['default'];
 
 /***/ },
-/* 482 */
+/* 492 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 483 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104885,13 +106322,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	__webpack_require__(484);
+	__webpack_require__(494);
 	
-	var _Tabs = __webpack_require__(485);
+	var _Tabs = __webpack_require__(495);
 	
 	var _Tabs2 = _interopRequireDefault(_Tabs);
 	
-	var _Views = __webpack_require__(489);
+	var _Views = __webpack_require__(499);
 	
 	var _Views2 = _interopRequireDefault(_Views);
 	
@@ -104962,13 +106399,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 484 */
+/* 494 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 485 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104983,11 +106420,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Tab = __webpack_require__(486);
+	var _Tab = __webpack_require__(496);
 	
 	var _Tab2 = _interopRequireDefault(_Tab);
 	
-	__webpack_require__(488);
+	__webpack_require__(498);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105063,7 +106500,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 486 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105086,7 +106523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _fontIcon2 = _interopRequireDefault(_fontIcon);
 	
-	__webpack_require__(487);
+	__webpack_require__(497);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105188,19 +106625,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 487 */
+/* 497 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 488 */
+/* 498 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 489 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105215,11 +106652,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _View = __webpack_require__(490);
+	var _View = __webpack_require__(500);
 	
 	var _View2 = _interopRequireDefault(_View);
 	
-	__webpack_require__(494);
+	__webpack_require__(504);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105303,7 +106740,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 490 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105318,11 +106755,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Editor = __webpack_require__(491);
+	var _Editor = __webpack_require__(501);
 	
 	var _Editor2 = _interopRequireDefault(_Editor);
 	
-	__webpack_require__(493);
+	__webpack_require__(503);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105389,7 +106826,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 491 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105404,7 +106841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	__webpack_require__(492);
+	__webpack_require__(502);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105497,37 +106934,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 492 */
+/* 502 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 493 */
+/* 503 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 494 */
+/* 504 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 495 */
+/* 505 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 496 */
+/* 506 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 497 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105550,19 +106987,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _reactRouter = __webpack_require__(179);
 	
-	var _dialog = __webpack_require__(463);
+	var _dialog = __webpack_require__(483);
 	
 	var _dialog2 = _interopRequireDefault(_dialog);
 	
-	var _ProjectTile = __webpack_require__(498);
+	var _ProjectTile = __webpack_require__(508);
 	
 	var _ProjectTile2 = _interopRequireDefault(_ProjectTile);
 	
-	var _NewProjectTile = __webpack_require__(500);
+	var _NewProjectTile = __webpack_require__(510);
 	
 	var _NewProjectTile2 = _interopRequireDefault(_NewProjectTile);
 	
-	var _NewProjectDialog = __webpack_require__(502);
+	var _NewProjectDialog = __webpack_require__(512);
 	
 	var _NewProjectDialog2 = _interopRequireDefault(_NewProjectDialog);
 	
@@ -105572,7 +107009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _reduxGrout = __webpack_require__(237);
 	
-	__webpack_require__(504);
+	__webpack_require__(514);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105697,7 +107134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 498 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105722,7 +107159,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _avatar2 = _interopRequireDefault(_avatar);
 	
-	__webpack_require__(499);
+	__webpack_require__(509);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105804,13 +107241,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 499 */
+/* 509 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 500 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105829,11 +107266,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _paper2 = _interopRequireDefault(_paper);
 	
-	var _addCircle = __webpack_require__(480);
+	var _addCircle = __webpack_require__(478);
 	
 	var _addCircle2 = _interopRequireDefault(_addCircle);
 	
-	__webpack_require__(501);
+	__webpack_require__(511);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105881,13 +107318,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 501 */
+/* 511 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 502 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105902,7 +107339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _dialog = __webpack_require__(463);
+	var _dialog = __webpack_require__(483);
 	
 	var _dialog2 = _interopRequireDefault(_dialog);
 	
@@ -105914,7 +107351,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _flatButton2 = _interopRequireDefault(_flatButton);
 	
-	__webpack_require__(503);
+	__webpack_require__(513);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -105999,19 +107436,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 503 */
+/* 513 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 504 */
+/* 514 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 505 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106034,7 +107471,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _reduxGrout = __webpack_require__(237);
 	
-	__webpack_require__(506);
+	__webpack_require__(516);
 	
 	var _paper = __webpack_require__(368);
 	
@@ -106200,13 +107637,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 506 */
+/* 516 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 507 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106243,7 +107680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _circularProgress2 = _interopRequireDefault(_circularProgress);
 	
-	var _SignupForm = __webpack_require__(508);
+	var _SignupForm = __webpack_require__(518);
 	
 	var _SignupForm2 = _interopRequireDefault(_SignupForm);
 	
@@ -106251,7 +107688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _snackbar2 = _interopRequireDefault(_snackbar);
 	
-	__webpack_require__(510);
+	__webpack_require__(520);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -106388,7 +107825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 508 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106419,7 +107856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _paper2 = _interopRequireDefault(_paper);
 	
-	__webpack_require__(509);
+	__webpack_require__(519);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -106583,19 +108020,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 509 */
+/* 519 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 510 */
+/* 520 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 511 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106626,7 +108063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var TabActions = _interopRequireWildcard(_tabs);
 	
-	var _Pane = __webpack_require__(483);
+	var _Pane = __webpack_require__(493);
 	
 	var _Pane2 = _interopRequireDefault(_Pane);
 	
@@ -106634,7 +108071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _Workspace2 = _interopRequireDefault(_Workspace);
 	
-	__webpack_require__(512);
+	__webpack_require__(522);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -106692,24 +108129,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 512 */
+/* 522 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 513 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function injectTapEventPlugin () {
 	  __webpack_require__(31).injection.injectEventPluginsByName({
-	    "TapEventPlugin":       __webpack_require__(514)
+	    "TapEventPlugin":       __webpack_require__(524)
 	  });
 	};
 
 
 /***/ },
-/* 514 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -106737,10 +108174,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var EventPluginUtils = __webpack_require__(33);
 	var EventPropagators = __webpack_require__(73);
 	var SyntheticUIEvent = __webpack_require__(87);
-	var TouchEventUtils = __webpack_require__(515);
+	var TouchEventUtils = __webpack_require__(525);
 	var ViewportMetrics = __webpack_require__(38);
 	
-	var keyOf = __webpack_require__(516);
+	var keyOf = __webpack_require__(526);
 	var topLevelTypes = EventConstants.topLevelTypes;
 	
 	var isStartish = EventPluginUtils.isStartish;
@@ -106884,7 +108321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 515 */
+/* 525 */
 /***/ function(module, exports) {
 
 	/**
@@ -106932,7 +108369,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 516 */
+/* 526 */
 /***/ function(module, exports) {
 
 	/**
@@ -106972,7 +108409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = keyOf;
 
 /***/ },
-/* 517 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106983,13 +108420,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _invariant = __webpack_require__(518);
+	var _invariant = __webpack_require__(528);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _Actions = __webpack_require__(519);
+	var _Actions = __webpack_require__(529);
 	
-	var _createHistory = __webpack_require__(520);
+	var _createHistory = __webpack_require__(530);
 	
 	var _createHistory2 = _interopRequireDefault(_createHistory);
 	
@@ -107119,7 +108556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 518 */
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -107178,7 +108615,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 519 */
+/* 529 */
 /***/ function(module, exports) {
 
 	/**
@@ -107214,7 +108651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 520 */
+/* 530 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107225,23 +108662,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _deepEqual = __webpack_require__(521);
+	var _deepEqual = __webpack_require__(531);
 	
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 	
-	var _AsyncUtils = __webpack_require__(524);
+	var _AsyncUtils = __webpack_require__(534);
 	
-	var _Actions = __webpack_require__(519);
+	var _Actions = __webpack_require__(529);
 	
-	var _createLocation2 = __webpack_require__(525);
+	var _createLocation2 = __webpack_require__(535);
 	
 	var _createLocation3 = _interopRequireDefault(_createLocation2);
 	
-	var _runTransitionHook = __webpack_require__(528);
+	var _runTransitionHook = __webpack_require__(538);
 	
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 	
-	var _deprecate = __webpack_require__(529);
+	var _deprecate = __webpack_require__(539);
 	
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 	
@@ -107466,12 +108903,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 521 */
+/* 531 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var pSlice = Array.prototype.slice;
-	var objectKeys = __webpack_require__(522);
-	var isArguments = __webpack_require__(523);
+	var objectKeys = __webpack_require__(532);
+	var isArguments = __webpack_require__(533);
 	
 	var deepEqual = module.exports = function (actual, expected, opts) {
 	  if (!opts) opts = {};
@@ -107566,7 +109003,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 522 */
+/* 532 */
 /***/ function(module, exports) {
 
 	exports = module.exports = typeof Object.keys === 'function'
@@ -107581,7 +109018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 523 */
+/* 533 */
 /***/ function(module, exports) {
 
 	var supportsArgumentsClass = (function(){
@@ -107607,7 +109044,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 524 */
+/* 534 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -107638,7 +109075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 525 */
+/* 535 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107647,9 +109084,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _Actions = __webpack_require__(519);
+	var _Actions = __webpack_require__(529);
 	
-	var _parsePath = __webpack_require__(526);
+	var _parsePath = __webpack_require__(536);
 	
 	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
@@ -107679,7 +109116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 526 */
+/* 536 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107688,7 +109125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _warning = __webpack_require__(527);
+	var _warning = __webpack_require__(537);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -107732,7 +109169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 527 */
+/* 537 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -107800,7 +109237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 528 */
+/* 538 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107809,7 +109246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _warning = __webpack_require__(527);
+	var _warning = __webpack_require__(537);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -107829,7 +109266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 529 */
+/* 539 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107838,7 +109275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _warning = __webpack_require__(527);
+	var _warning = __webpack_require__(537);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -107853,7 +109290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 530 */
+/* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file is copied to the root of the project to allow
@@ -107861,13 +109298,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports.__esModule = true;
 	
-	var _libServer = __webpack_require__(531);
+	var _libServer = __webpack_require__(541);
 	
 	exports.reduxReactRouter = _libServer.reduxReactRouter;
 	exports.match = _libServer.match;
 
 /***/ },
-/* 531 */
+/* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107882,7 +109319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _redux = __webpack_require__(164);
 	
-	var _historyLibCreateMemoryHistory = __webpack_require__(532);
+	var _historyLibCreateMemoryHistory = __webpack_require__(542);
 	
 	var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
 	
@@ -107898,7 +109335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _routeReplacement2 = _interopRequireDefault(_routeReplacement);
 	
-	var _matchMiddleware = __webpack_require__(539);
+	var _matchMiddleware = __webpack_require__(549);
 	
 	var _matchMiddleware2 = _interopRequireDefault(_matchMiddleware);
 	
@@ -107947,7 +109384,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.reduxReactRouter = reduxReactRouter;
 
 /***/ },
-/* 532 */
+/* 542 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107958,17 +109395,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _invariant = __webpack_require__(533);
+	var _invariant = __webpack_require__(543);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _Actions = __webpack_require__(534);
+	var _Actions = __webpack_require__(544);
 	
-	var _createLocation = __webpack_require__(535);
+	var _createLocation = __webpack_require__(545);
 	
 	var _createLocation2 = _interopRequireDefault(_createLocation);
 	
-	var _createHistory = __webpack_require__(537);
+	var _createHistory = __webpack_require__(547);
 	
 	var _createHistory2 = _interopRequireDefault(_createHistory);
 	
@@ -108099,7 +109536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 533 */
+/* 543 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -108160,7 +109597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 534 */
+/* 544 */
 /***/ function(module, exports) {
 
 	/**
@@ -108196,7 +109633,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 535 */
+/* 545 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -108205,11 +109642,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _warning = __webpack_require__(536);
+	var _warning = __webpack_require__(546);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Actions = __webpack_require__(534);
+	var _Actions = __webpack_require__(544);
 	
 	function extractPath(string) {
 	  var match = string.match(/https?:\/\/[^\/]*/);
@@ -108261,7 +109698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 536 */
+/* 546 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -108329,7 +109766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 537 */
+/* 547 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -108340,11 +109777,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _warning = __webpack_require__(536);
+	var _warning = __webpack_require__(546);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _invariant = __webpack_require__(533);
+	var _invariant = __webpack_require__(543);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -108352,11 +109789,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 	
-	var _AsyncUtils = __webpack_require__(538);
+	var _AsyncUtils = __webpack_require__(548);
 	
-	var _Actions = __webpack_require__(534);
+	var _Actions = __webpack_require__(544);
 	
-	var _createLocation = __webpack_require__(535);
+	var _createLocation = __webpack_require__(545);
 	
 	var _createLocation2 = _interopRequireDefault(_createLocation);
 	
@@ -108570,7 +110007,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 538 */
+/* 548 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -108601,7 +110038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 539 */
+/* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -108611,7 +110048,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _historyLibCreateLocation = __webpack_require__(535);
+	var _historyLibCreateLocation = __webpack_require__(545);
 	
 	var _historyLibCreateLocation2 = _interopRequireDefault(_historyLibCreateLocation);
 	
@@ -108648,7 +110085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 540 */
+/* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -108662,11 +110099,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _redux = __webpack_require__(164);
 	
-	var _reducers = __webpack_require__(541);
+	var _reducers = __webpack_require__(551);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxThunk = __webpack_require__(543);
+	var _reduxThunk = __webpack_require__(553);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
@@ -108704,7 +110141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 541 */
+/* 551 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -108717,7 +110154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _reduxRouter = __webpack_require__(175);
 	
-	var _tabs = __webpack_require__(542);
+	var _tabs = __webpack_require__(552);
 	
 	var _tabs2 = _interopRequireDefault(_tabs);
 	
@@ -108739,7 +110176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 542 */
+/* 552 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -108806,7 +110243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 543 */
+/* 553 */
 /***/ function(module, exports) {
 
 	'use strict';

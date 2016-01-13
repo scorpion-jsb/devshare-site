@@ -4,10 +4,13 @@ import Dialog from 'material-ui/lib/dialog';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import AutoComplete from 'material-ui/lib/auto-complete';
-import ActionInfo from 'material-ui/lib/svg-icons/action/info';
 import Avatar from 'material-ui/lib/avatar';
-import FileFolder from 'material-ui/lib/svg-icons/file/folder';
+import PersonIcon from 'material-ui/lib/svg-icons/social/person';
+import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle';
+import Colors from 'material-ui/lib/styles/colors';
 import './SharingDialog.scss';
+
+const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
 
 class SharingDialog extends Component {
   constructor(props){
@@ -15,7 +18,7 @@ class SharingDialog extends Component {
   }
 
   state = {
-    autocompleteField: ''
+    autocompleteField: []
   };
 
   static propTypes = {
@@ -24,6 +27,11 @@ class SharingDialog extends Component {
   };
 
   render(){
+    const user = {
+      image: {
+        url: null
+      }
+    };
     const actions = [
       <FlatButton
         label="Cancel"
@@ -39,39 +47,52 @@ class SharingDialog extends Component {
     ];
     return (
       <Dialog
-        title="Settings"
+        title="Sharing"
         className="SharingDialog"
         actions={ actions }
         modal={false}
         open={ this.props.modalOpen }
         onRequestClose={ this.props.toggleModal }
-        bodyClassName="SharingDialog-Settings"
-        titleClassName="SharingDialog-Settings-Title"
+        bodyClassName="SharingDialog-Content"
+        titleClassName="SharingDialog-Content-Title"
         contentStyle={{'width': '30%'}}
         >
-          <List subheader="Folders" insetSubheader={true}>
+          <List>
             <ListItem
-              leftAvatar={<Avatar icon={<FileFolder />} />}
-              rightIcon={<ActionInfo />}
+              leftAvatar={<Avatar
+                icon={ <PersonIcon /> }
+                src={ user.image.url || '' }
+              />}
+              rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
               primaryText="Scott Prue"
               secondaryText="Read, Write" />
             <ListItem
-              leftAvatar={<Avatar icon={<FileFolder />} />}
-              rightIcon={<ActionInfo />}
+              leftAvatar={<Avatar
+                icon={ <PersonIcon /> }
+                src={ user.image.url || '' }
+              />}
+              rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
               primaryText="Mel van Londen"
               secondaryText="Read, Write" />
             <ListItem
-              leftAvatar={<Avatar icon={<FileFolder />} />}
-              rightIcon={<ActionInfo />}
+              leftAvatar={<Avatar
+                icon={ <PersonIcon /> }
+                src={ user.image.url || '' }
+              />}
+              rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
               primaryText="John Cusak"
               secondaryText="Read" />
           </List>
-          <AutoComplete
-            hintText="Add collaborator"
-            dataSource={ this.state.autocompleteField }
-            onUpdateInput={ this.handleAutoCompleteChange }
-            onNewRequest={ this.handleAutoCompleteSubmit }
-          />
+          <div className="SharingDialog-AutoComplete-Container">
+            <AutoComplete
+              className="SharingDialog-Autocomplete"
+              hintText="Add collaborator"
+              fullWidth={true}
+              dataSource={ this.state.autocompleteField }
+              onUpdateInput={ this.handleAutoCompleteChange }
+              onNewRequest={ this.handleAutoCompleteSubmit }
+            />
+        </div>
       </Dialog>
     );
   }

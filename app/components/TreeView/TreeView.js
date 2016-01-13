@@ -8,24 +8,18 @@ const hideCurrentUser = true; //Display current user in file's connected users
 class TreeView extends Component {
   constructor() {
     super();
-    this.state = {
-      contextMenu: {
-        display: 'none',
-        top: '0px',
-        left: '0px'
-      },
-      newFile: false
-    };
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.renderInputDialog = this.renderInputDialog.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleNewSubmit = this.handleNewSubmit.bind(this);
-    this.addInputBox = this.addInputBox.bind(this);
-    this.handleNewClick = this.handleNewClick.bind(this);
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this.hideNewFileInput = this.hideNewFileInput.bind(this);
     this.inputKey = null;
   }
+
+  state = {
+    contextMenu: {
+      display: 'none',
+      top: '0px',
+      left: '0px'
+    },
+    newFile: false
+  };
+
   static propTypes = {
     fileStructure: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
@@ -38,14 +32,16 @@ class TreeView extends Component {
     onFilesDrop: PropTypes.func,
     onFileDelete: PropTypes.func
   };
-  handleNewClick(type) {
+
+  handleNewClick = (type) => {
     let newState = type === 'file' ? {'newFile': true} : {'newFolder': true};
     this.setState(newState, () => {
       this.refs.inputDialog.focus();
       window.addEventListener('keydown', this.hideNewFileInput);
     });
-  }
-  hideNewFileInput(e) {
+  };
+
+  hideNewFileInput = (e) => {
     if (e.keyCode == 27) {
       this.setState({
         showNewFile: false
@@ -56,8 +52,9 @@ class TreeView extends Component {
         showNewFile: false
       });
     }
-  }
-  handleRightClick(e) {
+  };
+
+  handleRightClick = (e) => {
     e.preventDefault();
     console.log(e.screenX, e.screenY);
     this.addInputBox(e.target);
@@ -70,8 +67,9 @@ class TreeView extends Component {
     });
     window.addEventListener('click', this.handleWindowClick);
     return false;
-  }
-  addInputBox(el) {
+  };
+
+  addInputBox = (el) => {
     let i = 0;
     while(el.tagName !== 'LI' && i < 5) {
       el = el.parentNode;
@@ -80,21 +78,24 @@ class TreeView extends Component {
     let reactId = el.getAttribute('data-reactid');
     let key = reactId.split('-')[2];
     this.inputKey = key;
-  }
-  handleWindowClick() {
+  };
+
+  handleWindowClick = () => {
     this.setState({
       contextMenu: {
         display: 'none'
       }
     });
     window.removeEventListener('click', this.handleWindowClick);
-  }
-  handleInputChange(e) {
+  };
+
+  handleInputChange = (e) => {
     this.setState({
       inputValue: e.target.value
     });
-  }
-  handleNewSubmit(e) {
+  };
+
+  handleNewSubmit = (e) => {
     e.preventDefault();
     if(this.state.newFile){
       this.setState({
@@ -108,15 +109,17 @@ class TreeView extends Component {
       this.props.addFolder({path: this.state.inputValue});
     }
     return false;
-  }
-  handleDeleteClick(e) {
+  };
+
+  handleDeleteClick = (e) => {
     e.preventDefault();
     let fileData = this.props.fileStructure[this.inputKey].meta;
     console.log('handle delete click:', fileData);
     if(this.inputKey){
       this.props.onFileDelete({projectName: this.props.projectName, path: fileData.path || fileData.name });
     }
-  }
+  };
+
   renderInputDialog(key) {
     if(this.state){
       return (

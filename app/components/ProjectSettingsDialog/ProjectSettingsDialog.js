@@ -47,10 +47,26 @@ export default class ProjectSettingsDialog extends Component {
         titleClassName="ProjectSettingsDialog-Settings-Title"
         contentStyle={{'width': '30%'}}
         >
-        <TextField hintText="Project name" floatingLabelText="Project name" />
-        <TextField hintText="Owner" floatingLabelText="Owner" disabled={true} />
-        <TextField hintText="Deployment url" floatingLabelText="Deployment Url"/>
-        <TextField hintText="Git url" floatingLabelText="Git url"/>
+        <TextField
+          hintText="Project name"
+          floatingLabelText="Project name"
+          defaultValue={ this.props.project.name }
+        />
+        <TextField
+          hintText="Owner"
+          floatingLabelText="Owner"
+          defaultValue={ this.props.project.owner.username || this.props.project.owner }
+          disabled={ true }
+        />
+        <TextField
+          hintText="Site url"
+          floatingLabelText="Site url"
+          disabled={ true }
+        />
+        <TextField
+          hintText="Git url"
+          floatingLabelText="Git url"
+        />
       </Dialog>
     );
   }

@@ -36,6 +36,7 @@ export default class ProjectSettingsDialog extends Component {
         onTouchTap={ this.saveSettings }
       />
     ];
+    const owner = (this.props.project && this.props.project.owner && this.props.project.owner.username) ? this.props.project.owner.username : this.props.project.owner;
     return (
       <Dialog
         title="Settings"
@@ -55,7 +56,7 @@ export default class ProjectSettingsDialog extends Component {
         <TextField
           hintText="Owner"
           floatingLabelText="Owner"
-          defaultValue={ this.props.project.owner.username || this.props.project.owner }
+          defaultValue={ owner }
           disabled={ true }
         />
         <TextField

@@ -29,7 +29,7 @@ export default class ProjectTile extends Component {
             <Avatar
               className="ProjectTile-Collaborator-Avatar"
               src={ (user.image && user.image.url) ? user.image.url : null }
-              icon={ <PersonIcon /> }
+              icon={ <PersonIcon style={{width: '50%', height: '75%'}}/> }
               size={60}
             />
           </div>

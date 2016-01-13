@@ -17,9 +17,7 @@ class Projects extends Component {
   }
   state = {addCollabModal: false, newProjectModal: false};
   componentDidMount() {
-    if(!this.props.projects){
-      this.props.getProjects();
-    }
+    this.props.getProjects();
   }
   handleCollabClick = (user) => {
     //TODO: Navigate to user's page

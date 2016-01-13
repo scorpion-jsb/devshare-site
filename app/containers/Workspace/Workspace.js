@@ -201,7 +201,7 @@ function mapStateToProps(state) {
   });
   //Populate owner param
   //TODO: Change namespacing to key instead of name
-  const collaboratorsList = (state.entities.projects[name] && state.entities.projects[name].collaborators) ? state.entities.projects[name].collaborators : [];
+  const collaboratorsList = (state.entities.projects  && state.entities.projects[name] && state.entities.projects[name].collaborators) ? state.entities.projects[name].collaborators : [];
   let collaborators = [];
   if(collaboratorsList.length > 0){
     collaborators = collaboratorsList.map((collabId) => {

@@ -14,26 +14,25 @@ import './Projects.scss';
 class Projects extends Component {
   constructor(props){
     super(props);
-    this.handleCollabClick = this.handleCollabClick.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.state = {addCollabModal: false, newProjectModal: false};
   }
+  state = {addCollabModal: false, newProjectModal: false};
   componentDidMount() {
-    this.props.getProjects();
+    if(!this.props.projects){
+      this.props.getProjects();
+    }
   }
-  handleCollabClick(user) {
+  handleCollabClick = (user) => {
     //TODO: Navigate to user's page
-  }
-  toggleModal(name) {
+  };
+  toggleModal = (name) => {
     let newState = {};
     newState[`${name}Modal`] = !this.state[`${name}Modal`] || false
     this.setState(newState);
-  }
-  newSubmit(projectData) {
+  };
+  newSubmit = (projectData) => {
     this.props.addProject(projectData);
-  }
+  };
   openProject = (project) => {
-    console.log('opening project:', project);
     this.props.history.pushState(null, `/${project.owner.username}/${project.name}`);
   };
   render(){

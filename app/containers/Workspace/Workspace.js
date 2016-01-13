@@ -49,7 +49,7 @@ class Workspace extends Component {
       if(isFunction(this.fb.removeBinding)){
         this.fb.removeBinding(this.ref);
       }
-      this.ref = this.fb.syncState(this.props.project.name, {
+      this.ref = this.fb.syncState(nextProps.project.name, {
         context: this,
         state: 'files',
         asArray: true

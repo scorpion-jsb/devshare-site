@@ -157,7 +157,6 @@ class Workspace extends Component {
   };
 
   showPopover = (type, path) => {
-    console.log('show pop', type, path);
     this.setState({
       addPath: path,
       addType: type,

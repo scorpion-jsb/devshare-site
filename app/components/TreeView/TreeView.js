@@ -35,7 +35,6 @@ class TreeView extends Component {
   };
 
   handleNewClick = (type) => {
-    console.log('selected path', this.state.selectedPath);
     if (type === 'file') {
       this.props.onAddFileClick(this.state.selectedPath);
     }
@@ -47,7 +46,6 @@ class TreeView extends Component {
   handleRightClick = (e) => {
     e.preventDefault();
     let path = this.getPathOfTarget(e.target);
-    console.log('this is our path', path);
     this.setState({
       contextMenu: {
         display: 'block',

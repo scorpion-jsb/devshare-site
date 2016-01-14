@@ -22,7 +22,7 @@ class TreeFile extends Component {
       return <div key={`Connected-User-${i}`} className="TreeFile-User" style={userStyle}>{user.username.charAt(0).toUpperCase()}</div>;
     }) : <span></span>;
     return (
-      <li onClick={ this._onFileClick }>
+      <li onClick={ this._onFileClick } data-path={ this.props.data.path }>
         <div className={ className }>
           <span className="TreeFile-Name">{ name }</span>
           <div className="TreeFile-Users">{ connectedUsers }</div>

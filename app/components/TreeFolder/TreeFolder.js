@@ -53,7 +53,7 @@ class TreeFolder extends Component {
     const name = this.props.data.name || this.props.data.path;
     if(this.state.isCollapsed) {
       return (
-        <li className={ className }>
+        <li className={ className } data-path={ this.props.data.path }>
           <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
             <FontIcon className="material-icons"
               style={{ 'fontSize': iconSize}}>
@@ -65,7 +65,7 @@ class TreeFolder extends Component {
       );
     } else {
       return (
-        <li className={ className }>
+        <li className={ className } data-path={ this.props.data.path }>
           <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
             <FontIcon className="material-icons"
               style={{ 'fontSize': iconSize}}>

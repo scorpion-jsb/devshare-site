@@ -9,10 +9,12 @@
 	margin: .5rem 0;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 	&-Structure {
 		list-style-type: none;
 		font-size: 1.4rem;
 		min-width: 200px;
+		min-height: 100%;
 		flex-grow: 2;
 		-webkit-padding-start: 0;
 		margin: .5rem 0;
@@ -23,6 +25,15 @@
 		li {
 			padding-left: 10px;
 		}
+	}
+	&-Dropzone {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	&-Container {
+		width: 100%;
+		height: 100%;
 	}
 	&-NewInput {
 		width: 150px;

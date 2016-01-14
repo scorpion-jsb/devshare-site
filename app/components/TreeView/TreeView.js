@@ -36,7 +36,7 @@ class TreeView extends Component {
   handleNewClick = (type) => {
     let newState = type === 'file' ? {'newFile': true} : {'newFolder': true};
     this.setState(newState, () => {
-      this.refs.inputDialog.focus();
+      // this.refs.inputDialog.focus();
       window.addEventListener('keydown', this.hideNewFileInput);
     });
   };
@@ -56,7 +56,6 @@ class TreeView extends Component {
 
   handleRightClick = (e) => {
     e.preventDefault();
-    console.log(e.screenX, e.screenY);
     this.addInputBox(e.target);
     this.setState({
       contextMenu: {
@@ -173,6 +172,7 @@ class TreeView extends Component {
         />
       );
     });
+
     if (this.inputKey && this.state.showNewFile) {
       let inputDialog = this.renderInputDialog(this.inputKey);
       structure.splice(this.inputKey + 1, 0, inputDialog);
@@ -180,6 +180,7 @@ class TreeView extends Component {
       let inputDialog = this.renderInputDialog(this.inputKey);
       structure.push(inputDialog);
     }
+
     var noFiles;
     if (structure.length < 1) {
       noFiles = (
@@ -195,25 +196,30 @@ class TreeView extends Component {
     } else {
       noFiles = null;
     }
+
     var contextMenuStyle = {
       display: this.state.contextMenu.display,
       top: this.state.contextMenu.top,
       left: this.state.contextMenu.left
     }
+
     return (
-      <Dropzone className="TreeView" onDrop={ this.props.onFilesDrop } multiple={ true } style={{ border: 'none' }} disableClick={ true } >
-        <div>
-          <ol className="TreeView-Structure" onContextMenu={ this.handleRightClick.bind(this) }>
-            { noFiles }
-            { structure }
-          </ol>
-          <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
-            <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
-            <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
-            <li onClick={ this.handleDeleteClick }>Delete File</li>
-          </ul>
-        </div>
-      </Dropzone>
+      <div className="TreeView" onContextMenu={ this.handleRightClick }>
+        <Dropzone className="TreeView-Dropzone" onDrop={ this.props.onFilesDrop } multiple={ true } style={{ border: 'none' }} disableClick={ true } >
+          <div className="TreeView-Container">
+            { inputDialog }
+            <ol className="TreeView-Structure">
+              { noFiles }
+              { structure }
+            </ol>
+            <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
+              <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
+              <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
+              <li onClick={ this.handleDeleteClick }>Delete File</li>
+            </ul>
+          </div>
+        </Dropzone>
+      </div>
     );
   }
 }

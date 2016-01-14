@@ -133,7 +133,6 @@ class Workspace extends Component {
   };
 
   closeTab = (index) => {
-    // console.log('closing tab:', this.props.tabs.list[index]);
     let file = this.props.tabs.list[index].file;
     if(activeFirepads[file.path]){
       activeFirepads[file.path].dispose();
@@ -143,8 +142,19 @@ class Workspace extends Component {
   };
 
   onFilesDrop = (files) => {
-    console.log('files dropped:', files);
     this.props.addFiles({project: this.props.project, files});
+  };
+
+  searchAccounts = (q, cb) => {
+    grout.Accounts.search(q).then(accountsList => {
+      cb(null, accountsList);
+    }, err => {
+      cb(err);
+    });
+  };
+
+  addCollaborator = (collaborator) => {
+    console.log('add collaborator called with:', collaborator);
   };
 
   render() {
@@ -159,6 +169,8 @@ class Workspace extends Component {
           project={ this.props.project }
           modalOpen={ this.state.sharingOpen }
           toggleModal={ this.toggleSharingModal }
+          onAccountSearch={ this.searchAccounts }
+          onAddCollab={ this.addCollaborator }
         />
         <SideBar
           projects={ this.props.projects }
@@ -188,12 +200,12 @@ class Workspace extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  let owner = state.router.params ? state.router.params.owner : null;
-  let name = state.router.params ? state.router.params.projectName : null;
-  let key = owner ? `${owner}/${name}` : name;
-  let tabs = (state.tabs[key] && state.tabs[key]) ? state.tabs[key] : {};//Tab data
+  const owner = state.router.params ? state.router.params.owner : null;
+  const name = state.router.params ? state.router.params.projectName : null;
+  const key = owner ? `${owner}/${name}` : name;
+  const tabs = (state.tabs[key] && state.tabs[key]) ? state.tabs[key] : {};//Tab data
   //Populate owner param
-  let projects = toArray(state.entities.projects).map((project) => {
+  const projects = toArray(state.entities.projects).map((project) => {
     if(project.owner && isString(project.owner) && state.entities.accounts[project.owner]){
       project.owner = state.entities.accounts[project.owner];
     }
@@ -202,15 +214,12 @@ function mapStateToProps(state) {
   //Populate owner param
   //TODO: Change namespacing to key instead of name
   const collaboratorsList = (state.entities.projects  && state.entities.projects[name] && state.entities.projects[name].collaborators) ? state.entities.projects[name].collaborators : [];
-  let collaborators = [];
-  if(collaboratorsList.length > 0){
-    collaborators = collaboratorsList.map((collabId) => {
-      if(state.entities.accounts && state.entities.accounts[collabId]){
-        return state.entities.accounts[collabId];
-      }
-      return collabId;
-    });
-  }
+  const collaborators = collaboratorsList.length > 0 ? collaboratorsList.map((collabId) => {
+    if(state.entities.accounts && state.entities.accounts[collabId]){
+      return state.entities.accounts[collabId];
+    }
+    return collabId;
+  }) : [];
   return {
     project: { name, owner, collaborators },
     projects,

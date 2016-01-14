@@ -26,7 +26,7 @@ class Home extends Component {
           <RaisedButton
             style={ buttonStyle }
             label="Start Sharing"
-            containerElement={ <Link to={ `/try/${randomProjectId()}` } /> }
+            containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
           />
           <RaisedButton
             style={ buttonStyle }

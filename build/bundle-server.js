@@ -66369,7 +66369,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _react2.default.createElement(_reactRouter.Route, { path: 'recover', component: _containers.Recover }),
 	  _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _containers.Signup }),
 	  _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _containers.About }),
-	  _react2.default.createElement(_reactRouter.Route, { path: 'try/:projectName', component: _containers.Try }),
+	  _react2.default.createElement(_reactRouter.Route, { path: 'anon/:projectName', component: _containers.Anon }),
 	  _react2.default.createElement(_reactRouter.Route, { path: ':owner/:projectName', component: _containers.Project }),
 	  _react2.default.createElement(_reactRouter.Route, { path: ':owner', component: _containers.Projects }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '*', component: _containers.NotFound })
@@ -66385,7 +66385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Workspace = exports.Try = exports.Signup = exports.Recover = exports.Projects = exports.Project = exports.NotFound = exports.Login = exports.Home = exports.App = exports.Account = exports.About = undefined;
+	exports.Workspace = exports.Anon = exports.Signup = exports.Recover = exports.Projects = exports.Project = exports.NotFound = exports.Login = exports.Home = exports.App = exports.Account = exports.About = undefined;
 	
 	var _About2 = __webpack_require__(235);
 	
@@ -66427,9 +66427,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _Signup3 = _interopRequireDefault(_Signup2);
 	
-	var _Try2 = __webpack_require__(521);
+	var _Anon2 = __webpack_require__(521);
 	
-	var _Try3 = _interopRequireDefault(_Try2);
+	var _Anon3 = _interopRequireDefault(_Anon2);
 	
 	var _Workspace2 = __webpack_require__(438);
 	
@@ -66447,7 +66447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Projects = _Projects3.default;
 	exports.Recover = _Recover3.default;
 	exports.Signup = _Signup3.default;
-	exports.Try = _Try3.default;
+	exports.Anon = _Anon3.default;
 	exports.Workspace = _Workspace3.default;
 
 /***/ },
@@ -96321,7 +96321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _react2.default.createElement(_raisedButton2.default, {
 	            style: buttonStyle,
 	            label: 'Start Sharing',
-	            containerElement: _react2.default.createElement(_reactRouter.Link, { to: '/try/' + (0, _helpers.randomProjectId)() })
+	            containerElement: _react2.default.createElement(_reactRouter.Link, { to: '/anon/' + (0, _helpers.randomProjectId)() })
 	          }),
 	          _react2.default.createElement(_raisedButton2.default, {
 	            style: buttonStyle,
@@ -104185,6 +104185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        keyboardFocused: true,
 	        onTouchTap: this.saveSettings
 	      })];
+	      var owner = this.props.project && this.props.project.owner && this.props.project.owner.username ? this.props.project.owner.username : this.props.project.owner;
 	      return _react2.default.createElement(
 	        _dialog2.default,
 	        {
@@ -104205,7 +104206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2.default.createElement(_textField2.default, {
 	          hintText: 'Owner',
 	          floatingLabelText: 'Owner',
-	          defaultValue: this.props.project.owner.username || this.props.project.owner,
+	          defaultValue: owner,
 	          disabled: true
 	        }),
 	        _react2.default.createElement(_textField2.default, {
@@ -107581,23 +107582,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var CombinedActions = (0, _lodash.merge)(_reduxGrout.Actions.projects, TabActions);
 	
-	var Try = function (_Component) {
-	  _inherits(Try, _Component);
+	var Anon = function (_Component) {
+	  _inherits(Anon, _Component);
 	
-	  function Try() {
-	    _classCallCheck(this, Try);
+	  function Anon() {
+	    _classCallCheck(this, Anon);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Try).call(this));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Anon).call(this));
 	  }
 	
-	  _createClass(Try, [{
+	  _createClass(Anon, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'Try' },
+	        { className: 'Anon' },
 	        _react2.default.createElement(_Workspace2.default, {
-	          projectName: this.props.projectName,
+	          project: this.props.project,
 	          showProjects: false,
 	          showButtons: true,
 	          hideName: false
@@ -107606,13 +107607,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }]);
 	
-	  return Try;
+	  return Anon;
 	}(_react.Component);
 	//Place state of redux store into props of component
 	
 	function mapStateToProps(state) {
+	  var name = state.router.params.projectName ? state.router.params.projectName : (0, _helpers.randomProjectId)();
+	  var owner = 'anon';
 	  return {
-	    projectName: state.router.params.projectName || (0, _helpers.randomProjectId)(),
+	    project: { name: name, owner: owner },
 	    router: state.router
 	  };
 	}
@@ -107621,7 +107624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return (0, _redux.bindActionCreators)(CombinedActions, dispatch);
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Try);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Anon);
 	module.exports = exports['default'];
 
 /***/ },

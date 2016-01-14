@@ -76,10 +76,10 @@ class TreeView extends Component {
       i++;
     }
     let path = el.getAttribute('data-path');
-    const type = el.getAttribute('data-reactid').split('$child-')[1].split('-')[0].toLowerCase();
-    if (path.split('/').length < 1) {
+    if (!path || path.split('/').length < 1) {
       return '/'
     }
+    const type = el.getAttribute('data-reactid').split('$child-')[1].split('-')[0].toLowerCase();
     const lastIndex = path.lastIndexOf("/");
     if (lastIndex < 0 && type === 'folder') {
       return `${path}/`;

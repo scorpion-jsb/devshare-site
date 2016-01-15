@@ -9,6 +9,7 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-direction: column;
+  background-color: rgba(50,50,50,0.05);
 }
 a {
   text-decoration: none;
@@ -22,6 +23,6 @@ html, body, #root {
   height: 100%;
 }
 
-input,textarea,select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
-}
+// input,textarea,select:-webkit-autofill {
+//   -webkit-box-shadow: 0 0 0px 1000px white inset;
+// }

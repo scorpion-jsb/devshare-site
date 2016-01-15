@@ -12,30 +12,36 @@ import IconButton from 'material-ui/lib/icon-button';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import Theme from '../../theme';
 import GroupIcon from 'material-ui/lib/svg-icons/social/group';
+import EditIcon from 'material-ui/lib/svg-icons/action/view-quilt';
+import StartIcon from 'material-ui/lib/svg-icons/content/create';
 
 class Home extends Component {
   render() {
+    const iconStyle = {
+      width: '130px',
+      height: '130px'
+    };
     const meInThree = [
       {
         title: 'Work with others in real-time',
-        icon: <GroupIcon />,
-        desc: 'Share a public link, share with editing access or share read-only'
+        icon: <GroupIcon style={iconStyle} />,
+        desc: 'Share a public link, share with editing access or share read-only becuase you hold the keys to your creations.'
       },
       {
-        title: 'Work with others in real-time',
-        icon: <GroupIcon />,
-        desc: 'Share a public link, share with editing access or share read-only'
+        title: 'Customize build environments',
+        icon: <EditIcon style={iconStyle} />,
+        desc: 'Use a combination of community-built components, templates and tabs to cater your flow to your needs.'
       },
       {
-        title: 'Work with others in real-time',
-        icon: <GroupIcon />,
-        desc: 'Share a public link, share with editing access or share read-only'
+        title: 'Start from anywhere',
+        icon: <StartIcon style={iconStyle} />,
+      desc: 'Upload or clone an existing project, start from scratch or use a templates to get you started.'
       }
     ];
 
-    const meInThreeElements = map(meInThree, (content) => {
+    const meInThreeElements = map(meInThree, (content, key) => {
       return (
-        <div className="Home-MeInThree-Item">
+        <div className="Home-MeInThree-Item" key={ key } >
           <div className="Home-MeInThree-Title">
             { content.title }
           </div>

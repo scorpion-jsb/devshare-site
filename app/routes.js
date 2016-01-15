@@ -11,7 +11,8 @@ import {
     Projects,
     Recover,
     Signup,
-    Anon
+    Anon,
+    OAuth
   } from './containers';
 export default (
   <Route path="/" component={ App }>
@@ -21,6 +22,7 @@ export default (
     <Route path="recover" component={ Recover } />
     <Route path="signup" component={ Signup }/>
     <Route path="about" component={ About } />
+    <Route path="oauth2callback" component={ OAuth } />
     <Route path="anon/:projectName" component={ Anon } />
     <Route path=":owner/:projectName" component={ Project } />
     <Route path=":owner" component={ Projects } />

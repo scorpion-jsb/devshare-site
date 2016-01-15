@@ -51,34 +51,22 @@ class TreeFolder extends Component {
       });
     }
     const name = this.props.data.name || this.props.data.path;
-    if(this.state.isCollapsed) {
-      return (
-        <li className={ className } data-path={ this.props.data.path }>
-          <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
-            <FontIcon className="material-icons"
-              style={{ 'fontSize': iconSize}}>
-              keyboard_arrow_down
-            </FontIcon>
-            <span className="TreeFolder-Name">{ name }</span>
-          </div>
-        </li>
-      );
-    } else {
-      return (
-        <li className={ className } data-path={ this.props.data.path }>
-          <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
-            <FontIcon className="material-icons"
-              style={{ 'fontSize': iconSize}}>
-              keyboard_arrow_right
-            </FontIcon>
-            <span className="TreeFolder-Name">{ name }</span>
-          </div>
+    return (
+      <li className={ className } data-path={ this.props.data.path }>
+        <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
+          <FontIcon className="material-icons"
+            style={{ 'fontSize': iconSize}}>
+            { this.state.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }
+          </FontIcon>
+          <span className="TreeFolder-Name">{ name }</span>
+        </div>
+        { this.state.isCollapsed &&
           <ol className="TreeFolder-Children">
             { children }
           </ol>
-        </li>
-      );
-    }
+        }
+      </li>
+    );
   }
   _onFolderClick(event) {
     if (event.button !== 0) {

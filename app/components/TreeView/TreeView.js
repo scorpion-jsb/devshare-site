@@ -102,7 +102,6 @@ class TreeView extends Component {
 
   render() {
     let structure = this.props.fileStructure.map((entry, i) => {
-      //TODO: find error when folder is introduced
       if(entry.meta.type == "folder" || entry.children){
         return (
           <TreeFolder
@@ -133,7 +132,6 @@ class TreeView extends Component {
           active={ entry.active }
           users={ mappedUsers }
           onClick={ this.props.onFileClick }
-          data-somedata="asdf"
         />
       );
     });

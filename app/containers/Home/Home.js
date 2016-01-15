@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import map from 'lodash/collection/map';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
@@ -10,32 +11,61 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import IconButton from 'material-ui/lib/icon-button';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import Theme from '../../theme';
+import GroupIcon from 'material-ui/lib/svg-icons/social/group';
 
 class Home extends Component {
   render() {
+    const meInThree = [
+      {
+        title: 'Work with others in real-time',
+        icon: <GroupIcon />,
+        desc: 'Share a public link, share with editing access or share read-only'
+      },
+      {
+        title: 'Work with others in real-time',
+        icon: <GroupIcon />,
+        desc: 'Share a public link, share with editing access or share read-only'
+      },
+      {
+        title: 'Work with others in real-time',
+        icon: <GroupIcon />,
+        desc: 'Share a public link, share with editing access or share read-only'
+      }
+    ];
+
+    const meInThreeElements = map(meInThree, (content) => {
+      return (
+        <div className="Home-MeInThree-Item">
+          <div className="Home-MeInThree-Title">
+            { content.title }
+          </div>
+          { content.icon }
+          <div className="Home-MeInThree-Desc">
+            { content.desc }
+          </div>
+        </div>
+      );
+    });
+
     const buttonStyle = {margin: '1rem'};
     return (
       <div className="Home">
         <div className="Home-Hero">
-          <span className="Home-Name">Devshare</span>
+          <span className="Home-Name">Build together</span>
           <span className="Home-Description">
-            Shared development from the comfort of your browser
+            real-time, full-project code editing in browser
           </span>
-        </div>
-        <div className="Home-Buttons">
           <RaisedButton
             style={ buttonStyle }
-            label="Start Sharing"
+            label="Share Code"
             containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
-          />
-          <RaisedButton
-            style={ buttonStyle }
-            label="Sign Up"
-            containerElement={ <Link to="/signup" /> }
-          />
+            />
         </div>
-        <div className="Home-Preview">
-          <img className="Home-Preview-Img" src="assets/Hypercube-Editor-Example.png" alt="Editor Preview"/>
+        <div className="Home-MeInThree">
+          { meInThreeElements }
+        </div>
+        <div className="Home-Footer">
+          Made by <a target="_blank" href="http://kyper.io">Kyper</a>
         </div>
       </div>
     )

@@ -1,3 +1,4 @@
+import { find } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
@@ -18,15 +19,27 @@ class SharingDialog extends Component {
   }
 
   state = {
-    autocompleteField: []
+    matchingAccounts: []
   };
 
   static propTypes = {
     project: PropTypes.object,
     modalOpen: PropTypes.bool,
-    toggleModal: PropTypes.func
+    toggleModal: PropTypes.func,
+    onAccountSearch: PropTypes.func.isRequired
   };
-
+  searchAccounts = (q) => {
+    this.props.onAccountSearch(q, (err, matchingAccounts) => {
+      if(!err){
+        this.setState({ matchingAccounts });
+      }
+    });
+  };
+  selectNewCollab = (username) => {
+    if(this.props.onAddCollab){
+      this.props.onAddCollab(find(this.state.matchingAccounts, {username}));
+    }
+  };
   render(){
     const user = {
       image: {
@@ -60,6 +73,9 @@ class SharingDialog extends Component {
         onTouchTap={ this.saveSettings }
       />
     ];
+    let matchingUsernames = this.state.matchingAccounts ? this.state.matchingAccounts.map(account => {
+      return account.username ? account.username : account;
+    }) : [];
     return (
       <Dialog
         title="Sharing"
@@ -88,9 +104,9 @@ class SharingDialog extends Component {
             hintText="Search users to add"
             floatingLabelText="Search users to add"
             fullWidth={true}
-            dataSource={ this.state.autocompleteField }
-            onUpdateInput={ this.handleAutoCompleteChange }
-            onNewRequest={ this.handleAutoCompleteSubmit }
+            dataSource={ matchingUsernames }
+            onUpdateInput={ this.searchAccounts }
+            onNewRequest={ this.selectNewCollab }
           />
         </div>
       </Dialog>

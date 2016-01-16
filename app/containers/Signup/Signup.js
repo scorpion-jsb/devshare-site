@@ -53,7 +53,7 @@ class Signup extends Component {
       } else {
         this.goAfterLoggedIn();
       }
-    }, 500);
+    }, 300);
   }
   render() {
     if(!this.props.account.isFetching){

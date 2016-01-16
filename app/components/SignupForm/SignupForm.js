@@ -126,7 +126,10 @@ export default class SignupForm extends Component {
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}
           />
+        <div className="SignupForm-Google" >
+          
         </div>
+      </div>
       </form>
     );
   }

@@ -64,10 +64,6 @@ export default class ProjectSettingsDialog extends Component {
           floatingLabelText="Site url"
           disabled={ true }
         />
-        <TextField
-          hintText="Git url"
-          floatingLabelText="Git url"
-        />
       </Dialog>
     );
   }

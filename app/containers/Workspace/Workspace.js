@@ -1,7 +1,11 @@
-import { merge, toArray, find, findIndex, isFunction, isUndefined, isString } from 'lodash';
-import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import {
+  merge, toArray, find,
+  findIndex, isFunction,
+  isUndefined, isString
+} from 'lodash';
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Rebase from 're-base';
 import { Actions } from 'redux-grout';
@@ -11,6 +15,7 @@ import SideBar from '../../components/SideBar/SideBar';
 import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
 import SharingDialog from '../../components/SharingDialog/SharingDialog';
 import Pane from '../../components/Pane/Pane';
+import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover';
 import Grout from 'kyper-grout';
 import './Workspace.scss';
 
@@ -23,7 +28,15 @@ class Workspace extends Component {
     super();
   }
 
-  state = {inputVisible: false, settingsOpen: false, sharingOpen: false, files: []};
+  state = {
+    inputVisible: false,
+    settingsOpen: false,
+    sharingOpen: false,
+    files: [],
+    addPath: '',
+    addType: 'file',
+    popoverOpen: false
+  };
 
   static propTypes = {
     project: PropTypes.object,
@@ -83,11 +96,11 @@ class Workspace extends Component {
   };
 
   addFile = (file) => {
-    this.props.addFile({project: this.props.project, file});
+    this.props.addFile({project: this.props.project, path: file});
   };
 
-  addFolder = (file) => {
-    this.props.addFolder({project: this.props.project, file});
+  addFolder = (folder) => {
+    this.props.addFolder({project: this.props.project, path: folder});
   };
 
   deleteFile = (file) => {
@@ -155,11 +168,46 @@ class Workspace extends Component {
 
   addCollaborator = (collaborator) => {
     console.log('add collaborator called with:', collaborator);
+    let project = this.props.project;
+    project.collaborators = project.collaborators ? project.collaborators.push(collaborator.id): [collaborator.id];
+    console.log('project update calling with:', project);
+    this.props.updateProject(project);
+  };
+
+  showPopover = (type, path) => {
+    this.setState({
+      addPath: path,
+      addType: type,
+      popoverOpen: true
+    });
+  };
+
+  addEntity = (type, path) => {
+    if (type === 'folder') {
+      this.addFolder(path);
+    }
+    if (type === 'file') {
+      this.addFile(path);
+    }
+  };
+
+  handlePopoverClose = () => {
+    this.setState({
+      popoverOpen: false
+    });
   };
 
   render() {
     return (
-      <div className="Workspace">
+      <div className="Workspace" ref="workspace">
+        <WorkspacePopover
+          workspaceElement={ this.refs.workspace }
+          initialPath={ this.state.addPath }
+          type={ this.state.addType }
+          onSubmit={ this.addEntity }
+          open={ this.state.popoverOpen }
+          onClose={ this.handlePopoverClose }
+        />
         <ProjectSettingsDialog
           project={ this.props.project }
           modalOpen={ this.state.settingsOpen }
@@ -183,8 +231,8 @@ class Workspace extends Component {
           onFileClick={ this.openFile }
           onSettingsClick={ this.toggleSettingsModal  }
           onSharingClick={ this.toggleSharingModal  }
-          addFile={ this.addFile }
-          addFile={ this.addFolder }
+          onAddFileClick={ this.showPopover.bind(this, 'file') }
+          onAddFolderClick={ this.showPopover.bind(this, 'folder') }
           onFilesDrop={ this.onFilesDrop }
           onFileDelete={ this.deleteFile }
         />

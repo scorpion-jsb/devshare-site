@@ -25,10 +25,10 @@ export default class SideBar extends Component {
     files: PropTypes.array,
     onFileClick: PropTypes.func,
     onPublishClick: PropTypes.func,
-    onNewFileClick: PropTypes.func,
     showButtons: PropTypes.bool,
     onLogoutClick: PropTypes.func,
-    addFile: PropTypes.func,
+    onAddFileClick: PropTypes.func,
+    onAddFolderClick: PropTypes.func,
     loadFiles: PropTypes.func,
     onFilesDrop: PropTypes.func,
     onSharingClick: PropTypes.func,
@@ -64,8 +64,8 @@ export default class SideBar extends Component {
           account={ this.props.account }
           fileStructure={ this.props.files }
           onFileClick={ this.props.onFileClick }
-          onNewFileClick={ this.props.onNewFileClick }
-          addFile={ this.props.addFile }
+          onAddFileClick={ this.props.onAddFileClick }
+          onAddFolderClick={ this.props.onAddFolderClick }
           projectName={ this.props.project.name }
           onFilesDrop={ this.props.onFilesDrop }
           onFileDelete={ this.props.onFileDelete }
@@ -73,8 +73,8 @@ export default class SideBar extends Component {
 
         <div className="SideBar-Buttons">
           <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
-            <MenuItem primaryText="Add file" />
-            <MenuItem primaryText="Add folder" />
+            <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
+            <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
             <MenuItem primaryText="Add files from Github" />
             <MenuItem primaryText="Upload files" />
           </IconMenu>

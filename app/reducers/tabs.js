@@ -29,7 +29,6 @@ export default function tabs(state = {
     return merge({}, state, newState); //push would not work
     break;
   case TAB_CLOSE:
-    // console.log('tab close called with', action);
     newState = clone(state);
     projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
     newState[projectKey].list.splice(action.index, 1);
@@ -44,7 +43,6 @@ export default function tabs(state = {
       newState[projectKey] = {};
     }
     newState[projectKey].currentIndex = action.index;
-    console.log('changed state in set active tab', newState);
     return merge({}, state, newState);
     break;
   default:

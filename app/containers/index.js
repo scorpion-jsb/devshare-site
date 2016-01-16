@@ -9,5 +9,4 @@ export Projects from './Projects/Projects';
 export Recover from './Recover/Recover';
 export Signup from './Signup/Signup';
 export Anon from './Anon/Anon';
-export OAuth from './OAuth/OAuth';
 export Workspace from './Workspace/Workspace';

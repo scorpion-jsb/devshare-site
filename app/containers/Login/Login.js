@@ -12,32 +12,30 @@ import Snackbar from 'material-ui/lib/snackbar';
  class Login extends Component {
    constructor(props) {
     super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
-    this.state = {errors:{username:null, password:null}, snackCanOpen: false};
    }
+   state = {errors:{username:null, password:null}, snackCanOpen: false};
    handleRequestClose = () => {
     this.setState({
       snackCanOpen: false,
     });
    };
    //TODO: Replace this with redux-rx
-  goAfterLoggedIn() {
+  goAfterLoggedIn = () => {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
         this.props.history.pushState(null, `/${this.props.account.username}`);
       } else {
         this.goAfterLoggedIn();
       }
-    }, 500);
-  }
-  handleLogin(loginData) {
+    }, 300);
+  };
+  handleLogin = (loginData) => {
     this.setState({
       snackCanOpen: true
-    })
+    });
     this.props.login(loginData);
     this.goAfterLoggedIn();
-  }
+  };
   render() {
     if(!this.props.account.isFetching){
       return (

@@ -3,29 +3,27 @@ import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import Paper from 'material-ui/lib/paper';
+import GoogleButton from '../GoogleButton/GoogleButton';
 import './SignupForm.scss';
 
 export default class SignupForm extends Component {
   constructor(props) {
     super(props);
-    this.handleSignup = this.handleSignup.bind(this);
-    this.requireInputs = this.requireInputs.bind(this);
-    this.reset = this.reset.bind(this);
-    this.state = {errors:{}};
   }
-  reset() {
+  state = {errors:{}};
+  reset = () => {
     return this.setState({
       errors:{},
       username: null,
       email: null,
       name: null
     });
-  }
+  };
   /**
    * @function handleSignup
    * @description Fire onLoginClick function provided to component when login is clicked
    */
-  handleSignup(e) {
+  handleSignup = (e) => {
     e.preventDefault();
     let newAccountData = this.state;
     if(this.requireInputs()){
@@ -33,13 +31,13 @@ export default class SignupForm extends Component {
       newAccountData.confirm = this.confirm;
       this.props.onSignup(newAccountData);
     }
-  }
+  };
   /**
    * @function requireInputs
    * @description Confirm that all required inputs have values
    * @return {Boolean}
    */
-  requireInputs() {
+  requireInputs = () => {
     const requiredInputs = [
       {name: 'username', val: this.state.username},
       {name: 'email', val: this.state.email},
@@ -59,27 +57,30 @@ export default class SignupForm extends Component {
       return false;
     }
     return true;
-  }
+  };
   /**
    * @function handleInputChange
    * @description Update the state with the values from the form inputs.
    * @fires context#setState
    */
-  handleInputChange(name, e) {
+  handleInputChange = (name, e) => {
     e.preventDefault();
     this.setState({
       [name]: e.target.value
     });
-  }
+  };
   /**
    * @function handlePrivateChange
    * @description Store private values.
    * @fires context#setState
    */
-  handlePrivateChange(name, e) {
+  handlePrivateChange = (name, e) => {
     e.preventDefault();
     this[name] = e.target.value;
-  }
+  };
+  googleSignup = () => {
+    this.props.signup('google');
+  };
   render(){
     const fieldStyle = {width: '80%'};
     return (
@@ -126,9 +127,9 @@ export default class SignupForm extends Component {
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}
           />
+        <GoogleButton onClick={ this.googleSignup }/>
         </div>
       </form>
     );
   }
 }
-// <RaisedButton label="Cancel" type="reset" onClick={ this.reset }/>

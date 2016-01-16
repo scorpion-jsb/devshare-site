@@ -4,16 +4,14 @@ import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import Checkbox from 'material-ui/lib/checkbox';
+import GoogleButton from '../GoogleButton/GoogleButton';
 import './LoginForm.scss';
 
 export default class LoginForm extends Component {
   constructor(props){
     super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handlePrivateChange = this.handlePrivateChange.bind(this);
-    this.state = {errors:{username:null, password:null}};
   }
+  state = {errors:{username:null, password:null}};
   static propTypes = {
     onLogin: PropTypes.func
   };
@@ -22,39 +20,42 @@ export default class LoginForm extends Component {
    * @description Update the state with the values from the form inputs.
    * @fires context#setState
    */
-   handleInputChange(name, e) {
+   handleInputChange = (name, e) => {
      e.preventDefault();
      this.setState({
        [name]: e.target.value
      });
-   }
+   };
   /**
   * @function handlePrivateChange
   * @description Store data in object instead of state
   */
-  handlePrivateChange(name, e) {
-   e.preventDefault();
-   this[name] = e.target.value;
-  }
-  handleLogin(e) {
-   if(e && typeof e.preventDefault === 'function'){
-     e.preventDefault();
-   }
-   if(!this.state.username || this.state.username == ''){
-     return this.setState({
-       errors: {username: 'Username required'}
-     });
-   }
-   if(!this.password || this.password == ''){
-     return this.setState({
-       errors: {password: 'Password required'}
-     });
-   }
-   let loginData = {username:this.state.username, password: this.password};
-   if(this.props.onLogin){
-     this.props.onLogin(loginData);
-   }
-  }
+  handlePrivateChange = (name, e) => {
+    e.preventDefault();
+    this[name] = e.target.value;
+  };
+  handleLogin = (e) => {
+    if(e && typeof e.preventDefault === 'function'){
+      e.preventDefault();
+    }
+    if(!this.state.username || this.state.username == ''){
+      return this.setState({
+        errors: {username: 'Username required'}
+      });
+    }
+    if(!this.password || this.password == ''){
+      return this.setState({
+        errors: {password: 'Password required'}
+      });
+    }
+    let loginData = {username:this.state.username, password: this.password};
+    if(this.props.onLogin){
+      this.props.onLogin(loginData);
+    }
+ };
+  googleLogin = () => {
+    this.props.onLogin('google');
+  };
   render(){
     const fieldStyle = {width: '80%'};
     const buttonStyle = {width: '80%'};
@@ -99,6 +100,7 @@ export default class LoginForm extends Component {
             style={ buttonStyle }
           />
         </div>
+        <GoogleButton onClick={ this.googleLogin }/>
       </form>
     );
   }

@@ -102,7 +102,7 @@ class TreeView extends Component {
 
   render() {
     let structure = this.props.fileStructure.map((entry, i) => {
-      if(entry.meta.type == "folder" || entry.children){
+      if((entry.meta && entry.meta.type == "folder") || entry.children){
         return (
           <TreeFolder
             key={ `child-Folder-${i}-${entry.meta.name}` }

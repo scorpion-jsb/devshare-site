@@ -9,13 +9,6 @@
   align-items: center;
   padding-top: 1rem;
   overflow-y: scroll;
-  &-Preview {
-    width: 80%;
-    &-Img {
-      width: 100%;
-      height: auto;
-    }
-  }
   &-Hero {
     display: -webkit-box;
     display: -moz-box;
@@ -25,34 +18,38 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3rem;
-    min-height: 300px;
+    min-height: 400px;
+    width: 100%;
+    position: relative;
+  }
+  &-PreviewVideo {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: -1;
   }
   &-Name {
     font-size: 5rem;
-    font-weight: 100;
+    font-weight: 800;
     text-decoration: bold;
     text-transform: uppercase;
   }
   &-Description {
     margin-top: 1rem;
     font-size: 1.5rem;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
-  }
-  &-Buttons {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
   }
   &-MeInThree {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 
     &-Item{
       flex-basis: 300px;

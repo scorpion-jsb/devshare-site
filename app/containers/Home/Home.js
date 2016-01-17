@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import map from 'lodash/collection/map';
+import map from 'lodash/map';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';

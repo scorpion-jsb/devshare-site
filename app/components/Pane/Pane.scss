@@ -1,6 +1,8 @@
 .Pane {
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   background-color: #272822;
   overflow:hidden;

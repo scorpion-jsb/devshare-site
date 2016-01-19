@@ -39,7 +39,7 @@ class TreeView extends Component {
       this.props.onAddFileClick(this.state.selectedPath);
     }
     if (type === 'folder') {
-      this.props.onAddFileClick(this.state.selectedPath);
+      this.props.onAddFolderClick(this.state.selectedPath);
     }
   };
 

@@ -14,7 +14,7 @@ class TreeFolder extends Component {
     this.state = {isCollapsed: true};
   }
   static propTypes = {
-    data: PropTypes.object,
+    name: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     onOpenClick: PropTypes.func,
     onClosedClick: PropTypes.func,

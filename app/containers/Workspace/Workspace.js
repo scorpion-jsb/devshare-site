@@ -49,7 +49,7 @@ class Workspace extends Component {
     const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
     this.fb = Rebase.createClass(userUrl);
     //Bind to files list on firebase
-    this.ref = this.fb.syncState(this.props.project.name, {
+    this.ref = this.fb.bindToState(this.props.project.name, {
       context: this,
       state: 'files',
       asArray: true

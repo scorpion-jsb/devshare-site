@@ -1,4 +1,4 @@
-import { map, filter } from 'lodash';
+import { map, filter, merge } from 'lodash';
 import React, { PropTypes, Component } from 'react';
 import TreeFolder from '../TreeFolder';
 import TreeFile from '../TreeFile';
@@ -103,14 +103,16 @@ class TreeView extends Component {
   render() {
     console.log('file structure', this.props.fileStructure);
     let structure = this.props.fileStructure.map((entry, i) => {
-      if(!entry.meta || entry.children){
+      if (entry.meta && (entry.meta.entityType === 'folder')){
+        let children = merge({}, entry);
+        delete children.key; delete children.meta;
         return (
           <TreeFolder
             key={ `child-Folder-${i}-${entry.meta.name}` }
             index={ i }
             data={ entry.meta }
             isCollapsed={ entry.isCollapsed }
-            children={ entry.children }
+            children={ children }
             onFileClick={ this.props.onFileClick }
           />
         );

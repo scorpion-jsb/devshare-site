@@ -135,6 +135,7 @@ class Workspace extends Component {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
       const { file } = list[currentIndex || 0];
+      console.log('loading this file', file);
       let fileObj = grout.Project(this.props.project).File(file);
       // console.log('calling load code sharing', editor, fileData);
       loadFirepadCodeshare(fileObj, editor);

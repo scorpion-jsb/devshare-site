@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import { map } from 'lodash';
 import FontIcon from 'material-ui/lib/font-icon';
 //Components
 import TreeFile from '../TreeFile';
@@ -14,8 +15,8 @@ class TreeFolder extends Component {
     this.state = {isCollapsed: true};
   }
   static propTypes = {
-    name: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
+    data: PropTypes.object.isRequired,
     onOpenClick: PropTypes.func,
     onClosedClick: PropTypes.func,
     onFileClick: PropTypes.func
@@ -25,9 +26,9 @@ class TreeFolder extends Component {
     const iconSize = "1.7rem";
     // let iconClass = (this.state.isCollapsed) ? 'octicon octicon-chevron-right ' : 'octicon octicon-chevron-down TreeFolder-Icon';
     let children;
-    if(this.props.children){
-      children = this.props.children.map((entry, i) => {
-        if(entry.type == "folder" || entry.children){
+    if(this.props.children) {
+      children = map(this.props.children, (entry, i) => {
+        if(entry.meta && (entry.meta.entityType === 'folder')){
           return (
             <TreeFolder
               key={ `${this.props.name}-Folder-${i}` }
@@ -43,7 +44,7 @@ class TreeFolder extends Component {
           <TreeFile
             key={ `${this.props.name}-File-${i}` }
             index={ i }
-            data={ entry }
+            data={ entry.meta }
             active={ entry.active }
             onClick={ this.props.onFileClick }
           />

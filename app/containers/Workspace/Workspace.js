@@ -49,7 +49,7 @@ class Workspace extends Component {
     const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
     this.fb = Rebase.createClass(userUrl);
     //Bind to files list on firebase
-    this.ref = this.fb.syncState(this.props.project.name, {
+    this.ref = this.fb.bindToState(this.props.project.name, {
       context: this,
       state: 'files',
       asArray: true
@@ -135,6 +135,7 @@ class Workspace extends Component {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
       const { file } = list[currentIndex || 0];
+      console.log('loading this file', file);
       let fileObj = grout.Project(this.props.project).File(file);
       // console.log('calling load code sharing', editor, fileData);
       loadFirepadCodeshare(fileObj, editor);

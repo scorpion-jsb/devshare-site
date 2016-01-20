@@ -3,8 +3,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding-top: 30px;
   flex-grow:2;
   box-sizing: border-box;
+  overflow-y: scroll;
   &-Tiles {
     display: -webkit-box;
     display: -moz-box;

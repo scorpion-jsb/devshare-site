@@ -3,9 +3,8 @@ import rootReducer from '../reducers';
 import thunk from 'redux-thunk';
 import routes from '../routes';
 import { createMiddleware } from 'redux-grout';
-const devSettings = {logLevel: 'trace', envName: 'dev'};
+const devSettings = {logLevel: 'trace', envName: 'prod'};
 let groutMiddleware = createMiddleware('tessellate', devSettings);
-import DevTools from '../helpers/DevTools';
 
 export default function configureStore(initialState, reduxReactRouter, createHistory) {
   const createStoreWithMiddleware = compose(
@@ -14,7 +13,7 @@ export default function configureStore(initialState, reduxReactRouter, createHis
       routes,
       createHistory
     }),
-    DevTools.instrument()
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )(createStore);
   const store = createStoreWithMiddleware(rootReducer, initialState);
 

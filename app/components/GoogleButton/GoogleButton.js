@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import './GoogleButton.scss';
 
-class GoogleButton extends Component {
+export default class GoogleButton extends Component {
   constructor(props){
     super(props);
   }
@@ -9,12 +9,11 @@ class GoogleButton extends Component {
     onClick: PropTypes.func
   };
   render(){
+    let { onClick, ...other } = this.props;
     return (
-      <div className="GoogleButton" onClick={ this.props.onClick }>
+      <div className="GoogleButton" { ...other } onClick={ this.props.onClick }>
 
       </div>
     );
   }
 }
-
-export default GoogleButton

@@ -83,6 +83,7 @@ export default class SignupForm extends Component {
   };
   render(){
     const fieldStyle = {width: '80%'};
+    const buttonStyle = {width: '96%', marginBottom: '.5rem'};
     return (
       <form className="SignupForm" onSubmit={ this.handleSignup }>
         <TextField
@@ -126,8 +127,8 @@ export default class SignupForm extends Component {
             primary={true}
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}
+            style={ buttonStyle }
           />
-        <GoogleButton onClick={ this.googleSignup }/>
         </div>
       </form>
     );

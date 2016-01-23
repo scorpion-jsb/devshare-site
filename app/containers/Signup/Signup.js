@@ -8,6 +8,7 @@ import Paper from 'material-ui/lib/paper';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import SignupForm from '../../components/SignupForm/SignupForm';
+import GoogleButton from '../../components/GoogleButton/GoogleButton';
 import Snackbar from 'material-ui/lib/snackbar';
 
 import './Signup.scss';
@@ -22,7 +23,7 @@ class Signup extends Component {
   }
   handleRequestClose = () => {
     this.setState({
-     snackOpen: false,
+     snackCanOpen: false,
     });
   };
   reset() {
@@ -31,12 +32,12 @@ class Signup extends Component {
       username: null,
       email: null,
       name: null,
-      snackOpen: false
+      snackCanOpen: true
     });
   }
   /**
    * @function handleSignup
-   * @description Fire onLoginClick function provided to component when login is clicked
+   * @description Call signup through redux-grout action
    */
   handleSignup(signupData) {
     this.setState({
@@ -45,6 +46,14 @@ class Signup extends Component {
     this.props.signup(signupData);
     this.goAfterLoggedIn();
   }
+  /**
+   * @function handleSignup
+   * @description Initiate Google signup through redux-grout action (popup)
+   */
+  googleSignup = () => {
+    this.props.login('google');
+    this.goAfterLoggedIn();
+  };
   //TODO: Replace this with redux-rx
   goAfterLoggedIn() {
     setTimeout(() => {
@@ -62,6 +71,10 @@ class Signup extends Component {
           <Paper className="Signup-Panel">
             <SignupForm onSignup={ this.handleSignup } />
           </Paper>
+          <div className="Signup-Or">
+            or
+          </div>
+          <GoogleButton onClick={ this.googleSignup } />
           <div className="Signup-Login">
             <span className="Signup-Login-Label">
               Already have an account?

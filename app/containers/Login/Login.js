@@ -7,9 +7,10 @@ import './Login.scss';
 import Paper from 'material-ui/lib/paper';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import GoogleButton from '../../components/GoogleButton/GoogleButton';
 import Snackbar from 'material-ui/lib/snackbar';
 
- class Login extends Component {
+class Login extends Component {
    constructor(props) {
     super(props);
    }
@@ -36,6 +37,9 @@ import Snackbar from 'material-ui/lib/snackbar';
     this.props.login(loginData);
     this.goAfterLoggedIn();
   };
+  googleLogin = () => {
+    this.props.login('google');
+  };
   render() {
     if(!this.props.account.isFetching){
       return (
@@ -43,6 +47,10 @@ import Snackbar from 'material-ui/lib/snackbar';
           <Paper className="Login-Panel">
             <LoginForm onLogin={ this.handleLogin } />
           </Paper>
+          <div className="Login-Or">
+            or
+          </div>
+          <GoogleButton onClick={ this.googleLogin }/>
           <div className="Login-Signup">
             <span className="Login-Signup-Label">
               Need an account?

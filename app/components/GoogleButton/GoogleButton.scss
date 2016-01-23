@@ -1,8 +1,9 @@
 // TODO: Replace cdn links with local links
-$googleHeight: 45px;
-$googleWidth: $googleHeight * 4.15;
+$googleHeight: 48px;
+$googleWidth: $googleHeight * 4;
 .GoogleButton {
-  margin-top: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
   background: url('https://s3.amazonaws.com/kyper-cdn/img/btn_google_signin_dark.png') no-repeat top left;
   background-size: $googleWidth $googleHeight;
   width:  $googleWidth;

@@ -58,7 +58,7 @@ export default class LoginForm extends Component {
   };
   render(){
     const fieldStyle = {width: '80%'};
-    const buttonStyle = {width: '80%'};
+    const buttonStyle = {width: '100%'};
     return (
       <form className="LoginForm" onSubmit={ this.handleLogin }>
         <TextField
@@ -76,7 +76,7 @@ export default class LoginForm extends Component {
           errorText={ this.state.errors.password }
           style={ fieldStyle }
         />
-        <div className="LoginForm-Buttons">
+        <div className="LoginForm-Options">
           <div className="LoginForm-Remember">
             <Checkbox
               name="remember"
@@ -84,11 +84,10 @@ export default class LoginForm extends Component {
               label="Remember"
               style={{}}
               labelStyle={{fontSize: '.8rem'}}
-              // onCheck={ }
             />
           </div>
           <Link className="LoginForm-Recover-Link" to="/recover">
-            Forgot Password?
+          Forgot Password?
           </Link>
         </div>
         <div className="LoginForm-Submit">
@@ -100,7 +99,6 @@ export default class LoginForm extends Component {
             style={ buttonStyle }
           />
         </div>
-        <GoogleButton onClick={ this.googleLogin }/>
       </form>
     );
   }

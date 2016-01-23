@@ -17,7 +17,7 @@ class Projects extends Component {
   }
   state = {addCollabModal: false, newProjectModal: false};
   componentDidMount() {
-    this.props.getProjects();
+    this.props.getProjects(this.props.owner);
   }
   handleCollabClick = (user) => {
     //TODO: Navigate to user's page
@@ -27,8 +27,8 @@ class Projects extends Component {
     newState[`${name}Modal`] = !this.state[`${name}Modal`] || false
     this.setState(newState);
   };
-  newSubmit = (projectData) => {
-    this.props.addProject(projectData);
+  newSubmit = (name) => {
+    this.props.addProject(name, this.props.owner);
   };
   openProject = (project) => {
     this.props.history.pushState(null, `/${project.owner.username}/${project.name}`);
@@ -80,10 +80,12 @@ function mapStateToProps(state) {
       return project;
     });
   }
+  let owner = state.router.params.owner;
   return {
     account: state.account,
     projects: projectsArray,
-    router: state.router
+    router: state.router,
+    owner
   };
 }
 //Place action methods into props

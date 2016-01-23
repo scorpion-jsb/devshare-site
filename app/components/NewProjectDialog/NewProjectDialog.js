@@ -24,7 +24,7 @@ class NewProjectDialog extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.props && this.props.onCreateClick){
-      this.props.onCreateClick(this.state);
+      this.props.onCreateClick(this.state.name);
       this.props.onRequestClose();
     }
   }
@@ -41,11 +41,6 @@ class NewProjectDialog extends Component {
             hintText="exampleProject"
             floatingLabelText="Project Name"
             onChange={  this.handleInputChange.bind(this, 'name')}
-          />
-          <TextField
-            hintText="https://github.com/prescottprue/hypercube"
-            floatingLabelText="Git Url"
-            onChange={  this.handleInputChange.bind(this, 'gitUrl')}
           />
         </div>
         <div className="NewProjectDialog-Buttons">

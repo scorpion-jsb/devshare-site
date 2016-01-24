@@ -134,8 +134,8 @@ class Workspace extends Component {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
       const { file } = list[currentIndex || 0];
-      console.log('loading this file', file);
-      let fileObj = grout.Project(this.props.project).File(file);
+      console.log('with the projj', this.props.project);
+      let fileObj = grout.Project(this.props.project.name, this.props.project.owner).File(file.path);
       // console.log('calling load code sharing', editor, fileData);
       loadFirepadCodeshare(fileObj, editor);
     }
@@ -158,9 +158,9 @@ class Workspace extends Component {
     this.props.addFiles(this.props.project, files);
   };
 
-  searchAccounts = (q, cb) => {
-    grout.Accounts.search(q).then(accountsList => {
-      cb(null, accountsList);
+  searchUsers = (q, cb) => {
+    grout.Users.search(q).then(usersList=> {
+      cb(null, usersList);
     }, err => {
       cb(err);
     });
@@ -169,9 +169,7 @@ class Workspace extends Component {
   addCollaborator = (collaborator) => {
     console.log('add collaborator called with:', collaborator);
     let project = this.props.project;
-    project.collaborators = project.collaborators ? project.collaborators.push(collaborator.id): [collaborator.id];
-    console.log('project update calling with:', project);
-    this.props.updateProject(project);
+    this.props.addCollaborator(collaborator, project);
   };
 
   showPopover = (type, path) => {
@@ -217,7 +215,7 @@ class Workspace extends Component {
           project={ this.props.project }
           modalOpen={ this.state.sharingOpen }
           toggleModal={ this.toggleSharingModal }
-          onAccountSearch={ this.searchAccounts }
+          onAccountSearch={ this.searchUsers }
           onAddCollab={ this.addCollaborator }
         />
         <SideBar
@@ -246,6 +244,7 @@ class Workspace extends Component {
     );
   }
 }
+
 function loadFirepadCodeshare(file, editor) {
   if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
     // console.warn('firepad is not already existant. creating it');
@@ -269,6 +268,7 @@ function loadFirepadCodeshare(file, editor) {
     }
   }
 }
+
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   const owner = state.router.params ? state.router.params.owner : null;
@@ -285,9 +285,12 @@ function mapStateToProps(state) {
     router: state.router
   };
 }
-const CombinedActions = merge(TabActions, Actions.files, Actions.account);
+
+let CombinedActions = merge(TabActions, Actions.files, Actions.account, Actions.projects);
+
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(CombinedActions, dispatch);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace);

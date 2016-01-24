@@ -113,6 +113,7 @@ export default class SignupForm extends Component {
           onChange={this.handlePrivateChange.bind(this, 'password')}
           errorText={ this.state.errors.password }
           style={ fieldStyle }
+          type="password"
         />
         <TextField
           hintText="confirm"
@@ -120,6 +121,7 @@ export default class SignupForm extends Component {
           onChange={this.handlePrivateChange.bind(this, 'confirm')}
           errorText={ this.state.errors.confirm }
           style={ fieldStyle }
+          type="password"
         />
         <div className="SignupForm-Submit">
           <RaisedButton

@@ -66,20 +66,20 @@ function mapStateToProps(state) {
     entities: { projects, accounts }
   } = state;
   let projectsArray = toArray(projects);
-  //Populate project owners and collaborators
-  if(accounts){
-    projectsArray.map((project) => {
-      if(project.owner){
-        project.owner = accounts[project.owner] || project.owner;
-      }
-      if(project.collaborators){
-        project.collaborators = project.collaborators.map((userId) => {
-          return accounts[userId] || userId;
-        });
-      }
-      return project;
-    });
-  }
+  // //Populate project owners and collaborators
+  // if(accounts){
+  //   projectsArray.map((project) => {
+  //     if(project.owner){
+  //       project.owner = accounts[project.owner] || project.owner;
+  //     }
+  //     if(project.collaborators){
+  //       project.collaborators = project.collaborators.map((userId) => {
+  //         return accounts[userId] || userId;
+  //       });
+  //     }
+  //     return project;
+  //   });
+  // }
   let owner = state.router.params.owner;
   return {
     account: state.account,

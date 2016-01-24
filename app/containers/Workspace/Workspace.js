@@ -46,7 +46,6 @@ class Workspace extends Component {
 
   componentDidMount() {
     this.project = this.props.project ? grout.Project(this.props.project.owner, this.props.project.name) : null;
-    console.log('sync url:', this.project.fbUrl);
     this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
     //Bind to files list on firebase
     this.ref = this.fb.bindToState(this.props.project.name, {
@@ -247,43 +246,6 @@ class Workspace extends Component {
     );
   }
 }
-//Place state of redux store into props of component
-function mapStateToProps(state) {
-  const owner = state.router.params ? state.router.params.owner : null;
-  const name = state.router.params ? state.router.params.projectName : null;
-  const key = owner ? `${owner}/${name}` : name;
-  const tabs = (state.tabs[key] && state.tabs[key]) ? state.tabs[key] : {};//Tab data
-  //Populate owner param
-  const projects = toArray(state.entities.projects).map((project) => {
-    if(project.owner && isString(project.owner) && state.entities.accounts[project.owner]){
-      project.owner = state.entities.accounts[project.owner];
-    }
-    return project;
-  });
-  //Populate owner param
-  //TODO: Change namespacing to key instead of name
-  const collaboratorsList = (state.entities.projects  && state.entities.projects[name] && state.entities.projects[name].collaborators) ? state.entities.projects[name].collaborators : [];
-  const collaborators = collaboratorsList.length > 0 ? collaboratorsList.map((collabId) => {
-    if(state.entities.accounts && state.entities.accounts[collabId]){
-      return state.entities.accounts[collabId];
-    }
-    return collabId;
-  }) : [];
-  return {
-    project: { name, owner, collaborators },
-    projects,
-    tabs,
-    account: state.account,
-    router: state.router
-  };
-}
-let CombinedActions = merge(TabActions, Actions.files, Actions.account);
-//Place action methods into props
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CombinedActions, dispatch);
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
-
 function loadFirepadCodeshare(file, editor) {
   if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
     // console.warn('firepad is not already existant. creating it');
@@ -293,16 +255,39 @@ function loadFirepadCodeshare(file, editor) {
       let firepad = createFirepad(file.fbRef, editor, editorSettings);
       firepad.on('ready', () => {
         activeFirepads[file.path] = firepad;
-        if(firepad.isHistoryEmpty()){
-          file.get().then(fileRes => {
-            if(fileRes.content){
-              firepad.setText(fileRes.content);
-            }
-          });
-        }
+        //TODO: Load original content of file
+        // if(firepad.isHistoryEmpty()){
+        //   file.get().then(fileRes => {
+        //     if(fileRes.content){
+        //       firepad.setText(fileRes.content);
+        //     }
+        //   });
+        // }
       });
     } catch(err) {
       console.warn('Load firepad error:', err);
     }
   }
 }
+//Place state of redux store into props of component
+function mapStateToProps(state) {
+  const owner = state.router.params ? state.router.params.owner : null;
+  const name = state.router.params ? state.router.params.projectName : null;
+  const key = owner ? `${owner}/${name}` : name;
+  const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {};
+  const project = (state.entities && state.entities.projects && state.entities.projects[name]) ? state.entities.projects[name] : { name, owner };
+  const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : []
+  return {
+    project,
+    projects,
+    tabs,
+    account: state.account,
+    router: state.router
+  };
+}
+const CombinedActions = merge(TabActions, Actions.files, Actions.account);
+//Place action methods into props
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(CombinedActions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Workspace);

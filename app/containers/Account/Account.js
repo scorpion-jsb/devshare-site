@@ -19,7 +19,8 @@ class Account extends Component {
     this.props.history.pushState(null, '/');
   };
   handleSave = () => {
-    // this.props.saveAccount();
+    //TODO: Handle saving image correctly
+    this.props.saveAccount(this.state);
   };
   onFileDrop = (files) => {
     console.warn('file dropped', files);
@@ -28,6 +29,7 @@ class Account extends Component {
     });
   };
   render(){
+    console.log('account in account page:', this.props.account);
     return (
       <div className="Account">
       { this.state.imageFile ?

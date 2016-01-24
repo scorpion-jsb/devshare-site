@@ -12,50 +12,61 @@ import './Account.scss';
 class Account extends Component {
   constructor(props){
     super(props);
-    this.handleLogout = this.handleLogout.bind(this);
-    this.handleSave = this.handleSave.bind(this);
-    this.onFileDrop = this.onFileDrop.bind(this);
-    this.state = {};
   }
-  static propTypes = {
-
-  };
-  handleLogout() {
+  state = {};
+  handleLogout = () => {
     this.props.logout();
     this.props.history.pushState(null, '/');
-  }
-  handleSave() {
+  };
+  handleSave = () => {
     // this.props.saveAccount();
-  }
-  onFileDrop(files) {
+  };
+  onFileDrop = (files) => {
     console.warn('file dropped', files);
     this.setState({
       imageFile: files[0]
     });
-  }
+  };
   render(){
     return (
       <div className="Account">
-        { this.state.imageFile ?
-          <AvatarEditor
+      { this.state.imageFile ?
+        <AvatarEditor
           image={ this.state.imageFile.preview }
           width={350}
           height={350}
           border={10}
-          scale={1} /> :
-          <Dropzone  onDrop={ this.onFileDrop } multiple={ false }>
-            <div className="Account-DropText">
-              Drag to Upload <br/> Profile Image
-            </div>
-          </Dropzone>
+        scale={1} /> :
+        <Dropzone  onDrop={ this.onFileDrop } multiple={ false }>
+          <div className="Account-DropText">
+            Drag to Upload <br/> Profile Image
+          </div>
+        </Dropzone>
         }
         <div className="Account-Data">
-            <TextField hintText="Username" floatingLabelText="Username" defaultValue={ this.props.account.username } />
-            <TextField hintText="Email" floatingLabelText="Email" defaultValue={ this.props.account.email || 'No Email' } />
+          <TextField
+            hintText="Username"
+            floatingLabelText="Username"
+            defaultValue={ this.props.account.username }
+          />
+          <TextField
+            hintText="Email"
+            floatingLabelText="Email"
+            defaultValue={ this.props.account.email || 'No Email' }
+          />
         </div>
         <div className="Account-Buttons">
-          <RaisedButton primary={true} label="Save" disabled={ this.state.imageFile } onClick={ this.handleSave } />
-          <RaisedButton style={{'marginTop': '1rem'}} label="Logout" onClick={this.props.logout}/>
+          <RaisedButton
+            primary={true}
+            label="Save"
+            disabled={ this.state.imageFile }
+            onClick={ this.handleSave }
+          />
+          <RaisedButton
+            style={{'marginTop': '1rem'}}
+            label="Logout"
+            onClick={ this.handleLogout }
+          />
         </div>
       </div>
     );

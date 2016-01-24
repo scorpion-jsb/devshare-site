@@ -13,14 +13,14 @@ class Project extends Component {
 
   componentDidMount() {
     if(!this.props.projects){
-      this.props.getProjects();
+      this.props.getProjects(this.props.account.username);
     }
   }
 
   selectProject = (proj) => {
     this.props.history.pushState(null, `/${proj.owner.username}/${proj.name}`);
   };
-  
+
   render(){
     return (
       <div className="Project">

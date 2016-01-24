@@ -45,9 +45,9 @@ class Workspace extends Component {
   };
 
   componentDidMount() {
-    this.project = this.props.project ? grout.Project(this.props.project) : null;
-    const userUrl = this.project.fbUrl.replace(`/${this.project.name}`, '');
-    this.fb = Rebase.createClass(userUrl);
+    this.project = this.props.project ? grout.Project(this.props.project.owner, this.props.project.name) : null;
+    console.log('sync url:', this.project.fbUrl);
+    this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
     //Bind to files list on firebase
     this.ref = this.fb.bindToState(this.props.project.name, {
       context: this,
@@ -80,13 +80,13 @@ class Workspace extends Component {
   toggleSettingsModal = () => {
     this.setState({
       settingsOpen: !this.state.settingsOpen
-    })
+    });
   };
 
   toggleSharingModal = () => {
     this.setState({
       sharingOpen: !this.state.sharingOpen
-    })
+    });
   };
 
   saveSettings = (data) => {
@@ -95,16 +95,16 @@ class Workspace extends Component {
     this.toggleSettingsModal();
   };
 
-  addFile = (file) => {
-    this.props.addFile({project: this.props.project, path: file});
+  addFile = (path) => {
+    this.props.addFile(this.props.project, path);
   };
 
-  addFolder = (folder) => {
-    this.props.addFolder({project: this.props.project, path: folder});
+  addFolder = (path) => {
+    this.props.addFolder(this.props.project, path);
   };
 
-  deleteFile = (file) => {
-    this.props.deleteFile({project: this.props.project, file});
+  deleteFile = (path) => {
+    this.props.deleteFile(this.props.project, path);
   };
 
   openFile = (file) => {
@@ -156,7 +156,7 @@ class Workspace extends Component {
   };
 
   onFilesDrop = (files) => {
-    this.props.addFiles({project: this.props.project, files});
+    this.props.addFiles(this.props.project, files);
   };
 
   searchAccounts = (q, cb) => {

@@ -20,7 +20,8 @@ class Login extends Component {
       snackCanOpen: false,
     });
    };
-   //TODO: Replace this with redux-rx
+
+  //TODO: Replace this with redux-rx
   goAfterLoggedIn = () => {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
@@ -28,7 +29,7 @@ class Login extends Component {
       } else {
         this.goAfterLoggedIn();
       }
-    }, 300);
+    }, 100);
   };
   handleLogin = (loginData) => {
     this.setState({
@@ -50,7 +51,7 @@ class Login extends Component {
           <div className="Login-Or">
             or
           </div>
-          <GoogleButton onClick={ this.googleLogin }/>
+          <GoogleButton onClick={ this.googleLogin } />
           <div className="Login-Signup">
             <span className="Login-Signup-Label">
               Need an account?

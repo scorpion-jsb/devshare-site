@@ -9,13 +9,12 @@ export default function tabs(state = {
   let newState, projectKey;
   switch (action.type) {
   case TAB_OPEN:
-    //TODO: Use another method that doesn't directly modifiy state
     if(!action.project || !action.project.name){
       console.error('Project name needed to open tab');
       return;
     }
     newState = clone(state);
-    projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
+    projectKey = action.project.owner.username ? `${action.project.owner.username}/${action.project.name}` : action.project.name;
     if(!newState[projectKey]){
       newState[projectKey] = {list: [], currentIndex: 0};
     }
@@ -30,7 +29,7 @@ export default function tabs(state = {
     break;
   case TAB_CLOSE:
     newState = clone(state);
-    projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
+    projectKey = action.project.owner.username ? `${action.project.owner.username}/${action.project.name}` : action.project.name;
     newState[projectKey].list.splice(action.index, 1);
     const newInd = (action.index > 0) ? action.index - 1 : 0;
     newState[projectKey].currentIndex = newInd;
@@ -38,7 +37,7 @@ export default function tabs(state = {
     break;
   case SET_ACTIVE_TAB:
     newState = clone(state);
-    projectKey = action.project.owner ? `${action.project.owner}/${action.project.name}` : action.project.name;
+    projectKey = action.project.owner.username ? `${action.project.owner.username}/${action.project.name}` : action.project.name;
     if(!state[projectKey]){
       newState[projectKey] = {};
     }

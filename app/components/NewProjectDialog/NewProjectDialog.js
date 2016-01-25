@@ -7,27 +7,31 @@ import './NewProjectDialog.scss';
 class NewProjectDialog extends Component {
   constructor(props){
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
-  /**
-  * @function handleInputChange
-  * @description Update the state with the values from the form inputs.
-  * @fires context#setState
-  */
- handleInputChange(name, e) {
-   e.preventDefault();
-   this.setState({
-     [name]: e.target.value
-   });
- }
-  handleSubmit(e) {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.open) {
+      setTimeout(() => {
+        this.refs.modalTextField.focus();
+      }, 500);
+    }
+  };
+
+  handleInputChange = (name, e) => {
+    e.preventDefault();
+    this.setState({
+      [name]: e.target.value
+    });
+  };
+
+  handleSubmit = (e) => {
     e.preventDefault();
     if(this.props && this.props.onCreateClick){
       this.props.onCreateClick(this.state.name);
       this.props.onRequestClose();
     }
-  }
+  };
+
   render(){
     return (
       <Dialog
@@ -40,6 +44,7 @@ class NewProjectDialog extends Component {
           <TextField
             hintText="exampleProject"
             floatingLabelText="Project Name"
+            ref="modalTextField"
             onChange={  this.handleInputChange.bind(this, 'name')}
           />
         </div>

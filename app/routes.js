@@ -22,8 +22,8 @@ export default (
     <Route path="signup" component={ Signup }/>
     <Route path="about" component={ About } />
     <Route path="anon/:projectName" component={ Anon } />
-    <Route path=":owner/:projectName" component={ Project } />
-    <Route path=":owner" component={ Projects } />
+    <Route path=":username/:projectName" component={ Project } />
+    <Route path=":username" component={ Projects } />
     <Route path="*" component={ NotFound } />
   </Route>
 );

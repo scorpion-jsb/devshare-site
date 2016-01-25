@@ -32,7 +32,9 @@ class WorkspacePopover extends Component {
     this.setState({
       activePopover:key
     }, () => {
-      this.refs.popoverTextField.focus();
+      setTimeout(() => {
+        this.refs.popoverTextField.focus();
+      }, 500);
     });
   };
 
@@ -41,6 +43,8 @@ class WorkspacePopover extends Component {
       return
     this.setState({
       activePopover:'none',
+    }, () => {
+      this.refs.popoverTextField.blur();
     });
     this.props.onClose();
   };

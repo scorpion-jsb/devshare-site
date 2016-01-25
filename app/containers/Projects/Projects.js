@@ -17,7 +17,7 @@ class Projects extends Component {
   }
   state = {addCollabModal: false, newProjectModal: false};
   componentDidMount() {
-    this.props.getProjects(this.props.owner);
+    this.props.getProjects(this.props.username);
   }
   handleCollabClick = (user) => {
     //TODO: Navigate to user's page
@@ -28,7 +28,7 @@ class Projects extends Component {
     this.setState(newState);
   };
   newSubmit = (name) => {
-    this.props.addProject(name, this.props.owner);
+    this.props.addProject(name, this.props.username);
   };
   openProject = (project) => {
     this.props.history.pushState(null, `/${project.owner.username}/${project.name}`);
@@ -66,26 +66,12 @@ function mapStateToProps(state) {
     entities: { projects, accounts }
   } = state;
   let projectsArray = toArray(projects);
-  // //Populate project owners and collaborators
-  // if(accounts){
-  //   projectsArray.map((project) => {
-  //     if(project.owner){
-  //       project.owner = accounts[project.owner] || project.owner;
-  //     }
-  //     if(project.collaborators){
-  //       project.collaborators = project.collaborators.map((userId) => {
-  //         return accounts[userId] || userId;
-  //       });
-  //     }
-  //     return project;
-  //   });
-  // }
-  let owner = state.router.params.owner;
+  let username = state.router.params.username;
   return {
     account: state.account,
     projects: projectsArray,
     router: state.router,
-    owner
+    username
   };
 }
 //Place action methods into props

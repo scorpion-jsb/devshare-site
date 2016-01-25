@@ -45,7 +45,8 @@ class Workspace extends Component {
   };
 
   componentDidMount() {
-    this.project = this.props.project ? grout.Project(this.props.project.owner, this.props.project.name) : null;
+    this.project = this.props.project ? grout.Project(this.props.project.name, this.props.project.owner.username) : null;
+    console.log(this.project);
     this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
     //Bind to files list on firebase
     this.ref = this.fb.bindToState(this.props.project.name, {
@@ -271,12 +272,12 @@ function loadFirepadCodeshare(file, editor) {
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  const owner = state.router.params ? state.router.params.owner : null;
+  const username = state.router.params ? state.router.params.username : null;
   const name = state.router.params ? state.router.params.projectName : null;
-  const key = owner ? `${owner}/${name}` : name;
+  const key = username ? `${username}/${name}` : name;
   const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {};
-  const project = (state.entities && state.entities.projects && state.entities.projects[name]) ? state.entities.projects[name] : { name, owner };
   const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : []
+  const project = (state.entities && state.entities.projects && state.entities.projects[name]) ? state.entities.projects[name] : { name, owner: { username } };
   return {
     project,
     projects,

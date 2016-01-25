@@ -42,10 +42,10 @@ class Home extends Component {
     const meInThreeElements = map(meInThree, (content, key) => {
       return (
         <div className="Home-MeInThree-Item" key={ key } >
+          { content.icon }
           <div className="Home-MeInThree-Title">
             { content.title }
           </div>
-          { content.icon }
           <div className="Home-MeInThree-Desc">
             { content.desc }
           </div>

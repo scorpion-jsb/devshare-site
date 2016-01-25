@@ -50,15 +50,15 @@ export default class SideBar extends Component {
     }
     return (
       <div className="SideBar">
-        { (projectsMenu && showProjects) ?
-          <SelectField
-            style={{width: '80%', marginLeft: '10%'}}
-            labelStyle={{fontSize: '1.5rem', fontWeight: '300'}}
-            autoWidth={ true }
-            value={ this.props.project.name }
-            children={ projectsMenu }
-            onChange={ this.selectProject }
-          /> : null
+      { (projectsMenu && showProjects) ?
+        <SelectField
+          style={{width: '80%', marginLeft: '10%'}}
+          labelStyle={{fontSize: '1.5rem', fontWeight: '300'}}
+          autoWidth={ true }
+          value={ this.props.project.name }
+          children={ projectsMenu }
+          onChange={ this.selectProject }
+        /> : null
         }
         <TreeView
           account={ this.props.account }
@@ -75,8 +75,8 @@ export default class SideBar extends Component {
           <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
             <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
             <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
-            {/*<MenuItem primaryText="Add files from Github" />
-            <MenuItem primaryText="Upload files" />*/}
+            <MenuItem primaryText="Upload files" />
+            {/*<MenuItem primaryText="Add files from Github" />*/}
           </IconMenu>
           <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSharingClick }>
             <GroupIcon />

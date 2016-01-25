@@ -33,7 +33,7 @@ export default class View extends Component {
     } else {
       return (
         <div className="View-Default">
-          <span className="View-Default-Label">Click on a file name to open</span>
+          <span className="View-Default-Label">Click on a file to open</span>
         </div>
       );
     }

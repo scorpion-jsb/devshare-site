@@ -5,10 +5,9 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-direction: column;
-  // background-color: white;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 1rem;
+  padding-top: 2rem;
   overflow-y: scroll;
   &-Hero {
     display: -webkit-box;
@@ -19,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 400px;
+    min-height: 500px;
     width: 100%;
     position: relative;
 

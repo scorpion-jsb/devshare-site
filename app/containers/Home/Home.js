@@ -53,7 +53,7 @@ class Home extends Component {
       );
     });
 
-    const buttonStyle = {margin: '1rem'};
+    const buttonStyle = {margin: '3rem'};
     return (
       <div className="Home">
         <div className="Home-Hero" style={{ color: Theme.palette.accent3Color }}>
@@ -64,11 +64,12 @@ class Home extends Component {
           </video>
           <span className="Home-Name">Build together</span>
           <span className="Home-Description">
-            real-time, full-project code editing in browser
+          real-time, full-project code editing in browser
           </span>
           <RaisedButton
-            style={ buttonStyle }
+            primary={ true }
             label="Share Code"
+            style={buttonStyle}
             containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
             />
         </div>

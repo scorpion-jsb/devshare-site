@@ -5,6 +5,7 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-direction: column;
+  // background-color: white;
   justify-content: flex-start;
   align-items: center;
   padding-top: 1rem;
@@ -21,6 +22,10 @@
     min-height: 400px;
     width: 100%;
     position: relative;
+
+    a {
+      -webkit-appearance: none !important;
+    }
   }
   &-PreviewVideo {
     height: 100%;
@@ -30,19 +35,19 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    z-index: -1;
   }
   &-Name {
     font-size: 5rem;
     font-weight: 800;
     text-decoration: bold;
     text-transform: uppercase;
+    z-index: 1;
   }
   &-Description {
-    margin-top: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     font-weight: 400;
     text-align: center;
+    z-index: 1;
   }
   &-MeInThree {
     display: flex;
@@ -63,6 +68,7 @@
     &-Title {
       font-size: 1.2rem;
       font-weight: 500;
+      margin-bottom: 12px;
     }
 
     &-Desc {
@@ -70,10 +76,7 @@
     }
   }
   &-Footer {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
+    margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;

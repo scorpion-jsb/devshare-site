@@ -87,16 +87,16 @@ class SharingDialog extends Component {
         bodyClassName="SharingDialog-Content"
         titleClassName="SharingDialog-Content-Title"
         contentStyle={{'width': '30%'}}
-        >
-        {
-          (this.props.project && this.props.project.collaborators) ?
-          <List>
-            { collabsList }
-          </List>
-          :
-          <div className="SharingDialog-No-Collabs">
-            <span>No current collaborators</span>
-          </div>
+      >
+      {
+      (this.props.project && this.props.project.collaborators) ?
+        <List>
+        { collabsList }
+        </List>
+        :
+        <div className="SharingDialog-No-Collabs">
+          <span>No current collaborators</span>
+        </div>
         }
         <div className="SharingDialog-AutoComplete-Container">
           <AutoComplete

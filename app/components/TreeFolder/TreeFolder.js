@@ -23,11 +23,12 @@ class TreeFolder extends Component {
   };
   render() {
     let className = (this.state.isCollapsed) ? 'TreeFolder collapsed noselect' : 'TreeFolder noselect';
-    const iconSize = "1.7rem";
+    const iconSize = "1.2rem";
     // let iconClass = (this.state.isCollapsed) ? 'octicon octicon-chevron-right ' : 'octicon octicon-chevron-down TreeFolder-Icon';
     let children;
     if(this.props.children) {
-      children = map(this.props.children, (entry, i) => {
+      let i = 0;
+      children = map(this.props.children, (entry) => {
         if(entry.meta && (entry.meta.entityType === 'folder')){
           return (
             <TreeFolder
@@ -57,11 +58,11 @@ class TreeFolder extends Component {
         <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
           <FontIcon className="material-icons"
             style={{ 'fontSize': iconSize}}>
-            { this.state.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }
+            { !this.state.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }
           </FontIcon>
           <span className="TreeFolder-Name">{ name }</span>
         </div>
-        { this.state.isCollapsed &&
+        { !this.state.isCollapsed &&
           <ol className="TreeFolder-Children">
             { children }
           </ol>

@@ -46,7 +46,6 @@ class Workspace extends Component {
 
   componentDidMount() {
     this.project = this.props.project ? grout.Project(this.props.project.name, this.props.project.owner.username) : null;
-    console.log(this.project);
     this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
     //Bind to files list on firebase
     this.ref = this.fb.bindToState(this.props.project.name, {
@@ -135,9 +134,7 @@ class Workspace extends Component {
     let { list, currentIndex } = this.props.tabs;
     if(list && list[currentIndex || 0].file){
       const { file } = list[currentIndex || 0];
-      console.log('with the projj', this.props.project);
-      let fileObj = grout.Project(this.props.project.name, this.props.project.owner).File(file.path);
-      // console.log('calling load code sharing', editor, fileData);
+      let fileObj = grout.Project(this.props.project.name, this.props.project.owner.username).File(file.path);
       loadFirepadCodeshare(fileObj, editor);
     }
   };
@@ -168,7 +165,6 @@ class Workspace extends Component {
   };
 
   addCollaborator = (collaborator) => {
-    console.log('add collaborator called with:', collaborator);
     let project = this.props.project;
     this.props.addCollaborator(collaborator, project);
   };

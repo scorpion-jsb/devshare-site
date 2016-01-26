@@ -3,7 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'redux-grout';
 import Workspace from '../Workspace/Workspace';
-
+import {
+  toArray
+} from 'lodash';
 import './Project.scss';
 
 class Project extends Component {
@@ -13,7 +15,7 @@ class Project extends Component {
 
   componentDidMount() {
     if(!this.props.projects){
-      this.props.getProjects(this.props.account.username);
+      this.props.getProjects(this.props.project.owner.username);
     }
   }
 
@@ -35,10 +37,11 @@ class Project extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  let name = state.router.params.projectName;
-  let owner = state.router.params.owner;
+  const username = state.router.params ? state.router.params.username : null;
+  const name = state.router.params ? state.router.params.projectName : null;
+  const project = (state.entities && state.entities.projects && state.entities.projects[name]) ? state.entities.projects[name] : { name, owner: { username } };
   return {
-    project: { name, owner },
+    project,
     account: state.account,
     router: state.router
   };

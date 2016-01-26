@@ -39,12 +39,13 @@ class Workspace extends Component {
   };
 
   static propTypes = {
-    project: PropTypes.object,
+    project: PropTypes.object.isRequired,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool
   };
 
   componentDidMount() {
+    console.log('this.props.project:', this.props.project);
     this.project = this.props.project ? grout.Project(this.props.project.name, this.props.project.owner.username) : null;
     this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
     //Bind to files list on firebase
@@ -273,9 +274,7 @@ function mapStateToProps(state) {
   const key = username ? `${username}/${name}` : name;
   const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {};
   const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : []
-  const project = (state.entities && state.entities.projects && state.entities.projects[name]) ? state.entities.projects[name] : { name, owner: { username } };
   return {
-    project,
     projects,
     tabs,
     account: state.account,

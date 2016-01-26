@@ -15,6 +15,7 @@ class Login extends Component {
     super(props);
    }
    state = {errors:{username:null, password:null}, snackCanOpen: false};
+
    handleRequestClose = () => {
     this.setState({
       snackCanOpen: false,

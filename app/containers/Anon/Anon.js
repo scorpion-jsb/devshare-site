@@ -32,7 +32,7 @@ class Anon extends Component {
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   let name = state.router.params.projectName ? state.router.params.projectName : randomProjectId();
-  let owner = 'anon';
+  let owner = {username: 'anon'};
   return {
     project: { name, owner },
     router: state.router,

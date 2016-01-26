@@ -42,7 +42,7 @@ export default class ProjectTile extends Component {
           { this.props.project.name }
         </span>
         <span className="ProjectTile-Owner">
-          { this.props.project.owner.username || 'No Owner' }
+          { (this.props.project.owner && this.props.project.owner.username) ?  this.props.project.owner.username : 'No Owner' }
         </span>
         <div className="ProjectTile-Collaborators">
           { collaborators }

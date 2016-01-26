@@ -57,7 +57,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <div className="Home-Hero" style={{ color: Theme.palette.accent3Color }}>
-          <video className="Home-PreviewVideo" autoPlay loop> //EDIT: loop="true" and  autoplay="autoplay" are deprecated
+          <video className="Home-PreviewVideo" autoPlay loop>
             <source src="assets/devShareEdit.mp4" type="video/mp4" />
             <source src="assets/devShareEdit.ogv" type="video/ogg" />
             Your browser does not support the video tag.

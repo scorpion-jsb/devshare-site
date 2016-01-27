@@ -18,6 +18,7 @@ export default class View extends Component {
     // TODO: Switch view type based on provided type instead of availability of editor data
     if(this.props.viewData && this.props.viewData.file){
       const { file } = this.props.viewData;
+      console.log('file for view', file);
       // console.warn('file in view:', file);
       return (
         <div className="View" style={ style }>

@@ -45,7 +45,10 @@ class Projects extends Component {
         />
       );
     }) : <span>Click the plus to start a project</span>;
-    projects.unshift(<NewProjectTile key="Project-New" onClick={ this.toggleModal.bind(this, 'newProject')}/>);
+    // If username doesn't match route then hide add project tile 
+    if (this.props.account.username === this.props.router.params.username) {
+      projects.unshift(<NewProjectTile key="Project-New" onClick={ this.toggleModal.bind(this, 'newProject')}/>);
+    }
     return (
       <div className="Projects">
         <NewProjectDialog

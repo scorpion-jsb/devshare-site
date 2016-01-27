@@ -32,7 +32,7 @@ class TreeFolder extends Component {
         if(entry.meta && (entry.meta.entityType === 'folder')){
           return (
             <TreeFolder
-              key={ `${this.props.name}-Folder-${i}` }
+              key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }
               index={ i }
               data={ entry.meta }
               isCollapsed={ entry.isCollapsed }
@@ -43,7 +43,7 @@ class TreeFolder extends Component {
         }
         return (
           <TreeFile
-            key={ `${this.props.name}-File-${i}` }
+            key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }
             index={ i }
             data={ entry.meta }
             active={ entry.active }

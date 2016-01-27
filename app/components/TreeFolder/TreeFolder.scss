@@ -2,11 +2,14 @@
   cursor: pointer;
   vertical-align: center;
   font-weight: 300;
+
   &-Info {
+    margin-left: .4rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+
   }
   &-Children {
     list-style-type:none;

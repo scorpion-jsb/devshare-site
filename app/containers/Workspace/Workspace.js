@@ -151,6 +151,9 @@ class Workspace extends Component {
       delete activeFirepads[file.path];
     }
     this.props.closeTab({project: this.props.project, index});
+    // let nextTab = (index - 1 < 0) ? 0 : index - 1;
+    // console.log('next tab', nextTab);
+    // this.props.navigateToTab({project: this.props.project, index: nextTab});
   };
 
   onFilesDrop = (files) => {
@@ -194,6 +197,7 @@ class Workspace extends Component {
   };
 
   render() {
+    console.log('tabs right meow', this.props.tabs);
     return (
       <div className="Workspace" ref="workspace">
         <WorkspacePopover
@@ -244,6 +248,7 @@ class Workspace extends Component {
 }
 
 function loadFirepadCodeshare(file, editor) {
+  console.log('load firepad codeshare', file, editor);
   if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
     // console.warn('firepad is not already existant. creating it');
     let editorSettings = grout.currentUser ? {userId: grout.currentUser.username} : {};

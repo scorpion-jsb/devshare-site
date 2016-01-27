@@ -19,7 +19,6 @@ import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover
 import Grout from 'kyper-grout';
 import './Workspace.scss';
 
-let activeFirepads = {};
 let grout = new Grout();
 
 class Workspace extends Component {
@@ -45,7 +44,6 @@ class Workspace extends Component {
   };
 
   componentDidMount() {
-    console.log('this.props.project:', this.props.project);
     this.project = this.props.project ? grout.Project(this.props.project.name, this.props.project.owner.username) : null;
     this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
     //Bind to files list on firebase
@@ -131,25 +129,12 @@ class Workspace extends Component {
     }
   };
 
-  // loadCodeSharing = (editor) => {
-  //   let { list, currentIndex } = this.props.tabs;
-  //   if(list && list[currentIndex || 0].file){
-  //     const { file } = list[currentIndex || 0];
-  //     let fileObj = grout.Project(this.props.project.name, this.props.project.owner.username).File(file.path);
-  //     loadFirepadCodeshare(fileObj, editor);
-  //   }
-  // };
-
   selectTab = (index) => {
     this.props.navigateToTab({project: this.props.project, index});
   };
 
   closeTab = (index) => {
     let file = this.props.tabs.list[index].file;
-    if(activeFirepads[file.path]){
-      activeFirepads[file.path].dispose();
-      delete activeFirepads[file.path];
-    }
     this.props.closeTab({project: this.props.project, index});
     // let nextTab = (index - 1 < 0) ? 0 : index - 1;
     // console.log('next tab', nextTab);
@@ -197,7 +182,6 @@ class Workspace extends Component {
   };
 
   render() {
-    console.log('tabs right meow', this.props.tabs);
     return (
       <div className="Workspace" ref="workspace">
         <WorkspacePopover
@@ -246,31 +230,6 @@ class Workspace extends Component {
     );
   }
 }
-
-// function loadFirepadCodeshare(file, editor) {
-//   console.log('load firepad codeshare', file, editor);
-//   if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
-//     // console.warn('firepad is not already existant. creating it');
-//     let editorSettings = grout.currentUser ? {userId: grout.currentUser.username} : {};
-//     //Load file content
-//     try {
-//       let firepad = createFirepad(file.fbRef, editor, editorSettings);
-//       firepad.on('ready', () => {
-//         activeFirepads[file.path] = firepad;
-//         //TODO: Load original content of file
-//         // if(firepad.isHistoryEmpty()){
-//         //   file.get().then(fileRes => {
-//         //     if(fileRes.content){
-//         //       firepad.setText(fileRes.content);
-//         //     }
-//         //   });
-//         // }
-//       });
-//     } catch(err) {
-//       console.warn('Load firepad error:', err);
-//     }
-//   }
-// }
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {

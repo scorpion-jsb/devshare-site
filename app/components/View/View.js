@@ -13,7 +13,7 @@ export default class View extends Component {
     project: PropTypes.object.isRequired
   };
   render(){
-    console.log('project in view', this.props.project);
+    // console.log('project in view', this.props.project);
     let style = this.props.visible ? { display: 'block' } : { display: 'none' };
     const name = `ace-editor-${this.props.index}`;
     // TODO: Switch view type based on provided type instead of availability of editor data

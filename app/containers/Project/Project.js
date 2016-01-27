@@ -41,7 +41,8 @@ class Project extends Component {
 function mapStateToProps(state) {
   const username = state.router.params ? state.router.params.username : null;
   const name = state.router.params ? state.router.params.projectName : null;
-  const project = (state.entities && state.entities.projects && state.entities.projects[name]) ? state.entities.projects[name] : { name, owner: { username } };
+  const key = username ? `${username}/${name}` : name;
+  const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : { name, owner: { username } };
   return {
     project,
     account: state.account,

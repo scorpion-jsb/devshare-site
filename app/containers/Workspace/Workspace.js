@@ -269,11 +269,12 @@ function loadFirepadCodeshare(file, editor) {
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  const username = state.router.params ? state.router.params.username : null;
-  const name = state.router.params ? state.router.params.projectName : null;
-  const key = username ? `${username}/${name}` : name;
+  const { username, projectName } = state.router.params;
+  const owner = username || 'anon';
+  const name = projectName || null;
+  const key = owner ? `${owner}/${name}` : name;
   const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {};
-  const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : []
+  const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : [];
   return {
     projects,
     tabs,

@@ -20,7 +20,9 @@ class Project extends Component {
   }
 
   selectProject = (proj) => {
-    this.props.history.pushState(null, `/${proj.owner.username}/${proj.name}`);
+    if (proj.owner) {
+      this.props.history.pushState(null, `/${proj.owner.username}/${proj.name}`);
+    }
   };
 
   render(){

@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 2rem;
+  padding-top: 3rem;
   overflow-y: scroll;
   &-Hero {
     display: -webkit-box;
@@ -18,7 +18,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 500px;
     width: 100%;
     position: relative;
 
@@ -26,12 +25,22 @@
       -webkit-appearance: none !important;
     }
   }
+  &-Logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 30px;
+      img {
+        height: auto;
+        width: 100px;
+        margin-right: 20px;
+      }
+  }
+  &-Brand {
+    font-size: 4rem;
+  }
   &-PreviewVideo {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    height: 500px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -47,6 +56,10 @@
     font-weight: 400;
     text-align: center;
     z-index: 1;
+  }
+  &-Muted {
+    margin-bottom: 3rem;
+    opacity: .3;
   }
   &-MeInThree {
     display: flex;
@@ -66,8 +79,8 @@
 
     &-Title {
       font-size: 1.2rem;
-      font-weight: 500;
-      margin-bottom: 12px;
+      font-weight: 900;
+      margin-bottom: 5px;
     }
 
     &-Desc {

@@ -14,6 +14,7 @@ import Theme from '../../theme';
 import GroupIcon from 'material-ui/lib/svg-icons/social/group';
 import EditIcon from 'material-ui/lib/svg-icons/action/view-quilt';
 import StartIcon from 'material-ui/lib/svg-icons/content/create';
+import Paper from 'material-ui/lib/paper';
 
 class Home extends Component {
   render() {
@@ -53,15 +54,15 @@ class Home extends Component {
       );
     });
 
-    const buttonStyle = {margin: '3rem'};
+    const buttonStyle = {margin: '3rem', height: '3rem', marginBottom: 5};
+    const buttonLabelStyle ={fontSize: '1.5rem'};
     return (
       <div className="Home">
-        <div className="Home-Hero" style={{ color: Theme.palette.accent3Color }}>
-          <video className="Home-PreviewVideo" autoPlay loop>
-            <source src="assets/devShareEdit.mp4" type="video/mp4" />
-            <source src="assets/devShareEdit.ogv" type="video/ogg" />
-            Your browser does not support the video tag.
-          </video>
+        <div className="Home-Hero" style={{ color: Theme.palette.primary2Color }}>
+          <div className="Home-Logo">
+            <img src="assets/devShareLogo.gif" />
+            <span className="Home-Brand">devShare</span>
+          </div>
           <span className="Home-Name">Build together</span>
           <span className="Home-Description">
           real-time, full-project code editing in browser
@@ -70,8 +71,17 @@ class Home extends Component {
             primary={ true }
             label="Share Code"
             style={buttonStyle}
+            labelStyle={buttonLabelStyle}
             containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
-            />
+          />
+          <span className="Home-Muted">No sign up required</span>
+          <Paper style={{height: 500}} zDepth={1}>
+            <video className="Home-PreviewVideo" autoPlay loop>
+              <source src="assets/devShareEdit.mp4" type="video/mp4" />
+              <source src="assets/devShareEdit.ogv" type="video/ogg" />
+              Your browser does not support the video tag.
+            </video>
+          </Paper>
         </div>
         <div className="Home-MeInThree">
           { meInThreeElements }

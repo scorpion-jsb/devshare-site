@@ -3,7 +3,16 @@
   box-sizing: border-box;
   &-Brand {
     color: $navbarText;
-    font-weight: 300;
+    font-weight: 200;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &-Logo{
+      height: 25px;
+      width: 25px;
+      margin-right: 10px;
+    }
   }
   &-Avatar {
     margin-right: 1rem;

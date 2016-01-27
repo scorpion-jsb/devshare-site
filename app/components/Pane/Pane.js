@@ -15,7 +15,7 @@ class Pane extends Component {
     tabs: PropTypes.object,
     onTabSelect: PropTypes.func.isRequired,
     onTabClose: PropTypes.func.isRequired,
-    onActiveLoad: PropTypes.func
+    project: PropTypes.object.isRequired,
   };
   closeTab(ind){
     this.props.onTabClose(ind);
@@ -24,6 +24,7 @@ class Pane extends Component {
     this.props.onTabSelect(ind);
   }
   render() {
+    console.log('project in pane, no game', this.props.project);
     return (
       <div className="Pane">
         <Tabs
@@ -37,7 +38,6 @@ class Pane extends Component {
           currentIndex={ this.props.tabs.currentIndex }
           project={ this.props.project }
           workspace={ this.workspace }
-          onActiveLoad={ this.props.onActiveLoad }
         />
       </div>
     );

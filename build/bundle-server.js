@@ -69327,7 +69327,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Fetches an API response and normalizes the result JSON according to schema.
 	// This makes every API response have the same shape, regardless of how nested it was.
 	function callGrout(callInfoObj) {
-	  console.log('callInfoObj:', callInfoObj);
 	  var model = callInfoObj.model;
 	  var subModel = callInfoObj.subModel;
 	  var subModelData = callInfoObj.subModelData;
@@ -69375,8 +69374,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var accountSchema = new _normalizr.Schema('accounts', {
 	  idAttribute: 'id'
 	});
+	
+	function generateSlug(entity) {
+	  return entity.owner.username + '/' + entity.name;
+	}
 	var projectSchema = new _normalizr.Schema('projects', {
-	  idAttribute: 'name'
+	  idAttribute: generateSlug
 	});
 	var templateSchema = new _normalizr.Schema('templates', {
 	  idAttribute: 'id'
@@ -69384,6 +69387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var groupSchema = new _normalizr.Schema('groups', {
 	  idAttribute: 'id'
 	});
+	//Populated by server
 	// projectSchema.define({
 	//   owner: accountSchema,
 	//   collaborators: arrayOf(accountSchema)
@@ -73016,12 +73020,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	var _merge = __webpack_require__(336);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.files = exports.account = undefined;
 	
-	var _account = __webpack_require__(336);
+	var _account = __webpack_require__(374);
 	
 	Object.defineProperty(exports, 'account', {
 	  enumerable: true,
@@ -73040,10 +73048,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.entities = entities;
 	
-	var _merge = __webpack_require__(337);
-	
-	var _merge2 = _interopRequireDefault(_merge);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// Updates an entity cache in response to any action with response.entities.
@@ -73061,65 +73065,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.account = account;
-	
-	var _merge = __webpack_require__(337);
-	
-	var _merge2 = _interopRequireDefault(_merge);
-	
-	var _account = __webpack_require__(375);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function account() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {
-	    isFetching: false,
-	    error: null
-	  } : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case _account.LOGIN_REQUEST:
-	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
-	    case _account.LOGIN_SUCCESS:
-	      return (0, _merge2.default)({}, state, { isFetching: false, error: null }, action.response);
-	    case _account.LOGIN_FAILURE:
-	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
-	    case _account.SIGNUP_REQUEST:
-	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
-	    case _account.SIGNUP_SUCCESS:
-	      return (0, _merge2.default)({}, state, { isFetching: false, error: null }, action.response);
-	    case _account.SIGNUP_FAILURE:
-	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
-	    case _account.LOGOUT_REQUEST:
-	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
-	    case _account.LOGOUT_SUCCESS:
-	      return (0, _merge2.default)({}, { isFetching: false, error: null });
-	    case _account.LOGOUT_FAILURE:
-	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
-	    case _account.RECOVER_REQUEST:
-	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
-	    case _account.RECOVER_SUCCESS:
-	      return (0, _merge2.default)({}, { isFetching: false, error: null });
-	    case _account.RECOVER_FAILURE:
-	      console.warn('recover failure', action);
-	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
-	    default:
-	      return state;
-	  }
-	}
-
-/***/ },
-/* 337 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseMerge = __webpack_require__(338),
-	    createAssigner = __webpack_require__(369);
+	var baseMerge = __webpack_require__(337),
+	    createAssigner = __webpack_require__(368);
 	
 	/**
 	 * Recursively merges own and inherited enumerable properties of source
@@ -73158,17 +73105,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 338 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(250),
-	    arrayEach = __webpack_require__(339),
-	    assignMergeValue = __webpack_require__(340),
-	    baseMergeDeep = __webpack_require__(341),
+	    arrayEach = __webpack_require__(338),
+	    assignMergeValue = __webpack_require__(339),
+	    baseMergeDeep = __webpack_require__(340),
 	    isArray = __webpack_require__(240),
 	    isObject = __webpack_require__(242),
 	    isTypedArray = __webpack_require__(303),
-	    keysIn = __webpack_require__(365);
+	    keysIn = __webpack_require__(364);
 	
 	/**
 	 * The base implementation of `_.merge` without support for multiple sources.
@@ -73207,7 +73154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 339 */
+/* 338 */
 /***/ function(module, exports) {
 
 	/**
@@ -73235,7 +73182,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 340 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(255);
@@ -73259,20 +73206,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 341 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignMergeValue = __webpack_require__(340),
-	    baseClone = __webpack_require__(342),
-	    copyArray = __webpack_require__(347),
+	var assignMergeValue = __webpack_require__(339),
+	    baseClone = __webpack_require__(341),
+	    copyArray = __webpack_require__(346),
 	    isArguments = __webpack_require__(293),
 	    isArray = __webpack_require__(240),
 	    isArrayLikeObject = __webpack_require__(294),
 	    isFunction = __webpack_require__(267),
 	    isObject = __webpack_require__(242),
-	    isPlainObject = __webpack_require__(363),
+	    isPlainObject = __webpack_require__(362),
 	    isTypedArray = __webpack_require__(303),
-	    toPlainObject = __webpack_require__(364);
+	    toPlainObject = __webpack_require__(363);
 	
 	/**
 	 * A specialized version of `baseMerge` for arrays and objects which performs
@@ -73328,20 +73275,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 342 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(250),
-	    arrayEach = __webpack_require__(339),
-	    assignValue = __webpack_require__(343),
-	    baseAssign = __webpack_require__(344),
+	    arrayEach = __webpack_require__(338),
+	    assignValue = __webpack_require__(342),
+	    baseAssign = __webpack_require__(343),
 	    baseForOwn = __webpack_require__(305),
-	    copyArray = __webpack_require__(347),
-	    copySymbols = __webpack_require__(348),
+	    copyArray = __webpack_require__(346),
+	    copySymbols = __webpack_require__(347),
 	    getTag = __webpack_require__(301),
-	    initCloneArray = __webpack_require__(350),
-	    initCloneByTag = __webpack_require__(351),
-	    initCloneObject = __webpack_require__(361),
+	    initCloneArray = __webpack_require__(349),
+	    initCloneByTag = __webpack_require__(350),
+	    initCloneObject = __webpack_require__(360),
 	    isArray = __webpack_require__(240),
 	    isHostObject = __webpack_require__(268),
 	    isObject = __webpack_require__(242);
@@ -73457,7 +73404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 343 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(255);
@@ -73491,10 +73438,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 344 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyObject = __webpack_require__(345),
+	var copyObject = __webpack_require__(344),
 	    keys = __webpack_require__(289);
 	
 	/**
@@ -73514,10 +73461,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 345 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyObjectWith = __webpack_require__(346);
+	var copyObjectWith = __webpack_require__(345);
 	
 	/**
 	 * Copies properties of `source` to `object`.
@@ -73536,10 +73483,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 346 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignValue = __webpack_require__(343);
+	var assignValue = __webpack_require__(342);
 	
 	/**
 	 * This function is like `copyObject` except that it accepts a function to
@@ -73571,7 +73518,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 347 */
+/* 346 */
 /***/ function(module, exports) {
 
 	/**
@@ -73597,11 +73544,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 348 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyObject = __webpack_require__(345),
-	    getSymbols = __webpack_require__(349);
+	var copyObject = __webpack_require__(344),
+	    getSymbols = __webpack_require__(348);
 	
 	/**
 	 * Copies own symbol properties of `source` to `object`.
@@ -73619,7 +73566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 349 */
+/* 348 */
 /***/ function(module, exports) {
 
 	/** Built-in value references. */
@@ -73640,7 +73587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 350 */
+/* 349 */
 /***/ function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -73672,15 +73619,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 351 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneBuffer = __webpack_require__(352),
-	    cloneMap = __webpack_require__(353),
-	    cloneRegExp = __webpack_require__(356),
-	    cloneSet = __webpack_require__(357),
-	    cloneSymbol = __webpack_require__(359),
-	    cloneTypedArray = __webpack_require__(360);
+	var cloneBuffer = __webpack_require__(351),
+	    cloneMap = __webpack_require__(352),
+	    cloneRegExp = __webpack_require__(355),
+	    cloneSet = __webpack_require__(356),
+	    cloneSymbol = __webpack_require__(358),
+	    cloneTypedArray = __webpack_require__(359);
 	
 	/** `Object#toString` result references. */
 	var boolTag = '[object Boolean]',
@@ -73752,7 +73699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 352 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Uint8Array = __webpack_require__(283);
@@ -73777,11 +73724,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 353 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addMapEntry = __webpack_require__(354),
-	    arrayReduce = __webpack_require__(355),
+	var addMapEntry = __webpack_require__(353),
+	    arrayReduce = __webpack_require__(354),
 	    mapToArray = __webpack_require__(285);
 	
 	/**
@@ -73800,7 +73747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 354 */
+/* 353 */
 /***/ function(module, exports) {
 
 	/**
@@ -73820,7 +73767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 355 */
+/* 354 */
 /***/ function(module, exports) {
 
 	/**
@@ -73851,7 +73798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 356 */
+/* 355 */
 /***/ function(module, exports) {
 
 	/** Used to match `RegExp` flags from their coerced string values. */
@@ -73876,11 +73823,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 357 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addSetEntry = __webpack_require__(358),
-	    arrayReduce = __webpack_require__(355),
+	var addSetEntry = __webpack_require__(357),
+	    arrayReduce = __webpack_require__(354),
 	    setToArray = __webpack_require__(286);
 	
 	/**
@@ -73899,7 +73846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 358 */
+/* 357 */
 /***/ function(module, exports) {
 
 	/**
@@ -73919,7 +73866,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 359 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _Symbol = __webpack_require__(284);
@@ -73943,10 +73890,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 360 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneBuffer = __webpack_require__(352);
+	var cloneBuffer = __webpack_require__(351);
 	
 	/**
 	 * Creates a clone of `typedArray`.
@@ -73967,10 +73914,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 361 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(362),
+	var baseCreate = __webpack_require__(361),
 	    isFunction = __webpack_require__(267);
 	
 	/**
@@ -73989,7 +73936,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 362 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isObject = __webpack_require__(242);
@@ -74018,7 +73965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 363 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isHostObject = __webpack_require__(268),
@@ -74092,11 +74039,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 364 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyObject = __webpack_require__(345),
-	    keysIn = __webpack_require__(365);
+	var copyObject = __webpack_require__(344),
+	    keysIn = __webpack_require__(364);
 	
 	/**
 	 * Converts `value` to a plain object flattening inherited enumerable
@@ -74129,10 +74076,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 365 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseKeysIn = __webpack_require__(366),
+	var baseKeysIn = __webpack_require__(365),
 	    indexKeys = __webpack_require__(291),
 	    isIndex = __webpack_require__(299),
 	    isPrototype = __webpack_require__(300);
@@ -74189,11 +74136,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 366 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Reflect = __webpack_require__(367),
-	    iteratorToArray = __webpack_require__(368);
+	var Reflect = __webpack_require__(366),
+	    iteratorToArray = __webpack_require__(367);
 	
 	/** Used for built-in method references. */
 	var objectProto = global.Object.prototype;
@@ -74231,7 +74178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 367 */
+/* 366 */
 /***/ function(module, exports) {
 
 	/** Built-in value references. */
@@ -74241,7 +74188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 368 */
+/* 367 */
 /***/ function(module, exports) {
 
 	/**
@@ -74265,11 +74212,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 369 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isIterateeCall = __webpack_require__(370),
-	    rest = __webpack_require__(371);
+	var isIterateeCall = __webpack_require__(369),
+	    rest = __webpack_require__(370);
 	
 	/**
 	 * Creates a function like `_.assign`.
@@ -74305,7 +74252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 370 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(255),
@@ -74339,11 +74286,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 371 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var apply = __webpack_require__(372),
-	    toInteger = __webpack_require__(373);
+	var apply = __webpack_require__(371),
+	    toInteger = __webpack_require__(372);
 	
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -74406,7 +74353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 372 */
+/* 371 */
 /***/ function(module, exports) {
 
 	/**
@@ -74434,10 +74381,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 373 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toNumber = __webpack_require__(374);
+	var toNumber = __webpack_require__(373);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0,
@@ -74484,7 +74431,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 374 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isFunction = __webpack_require__(267),
@@ -74547,6 +74494,63 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = toNumber;
 
+
+/***/ },
+/* 374 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _merge = __webpack_require__(336);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.account = account;
+	
+	var _account = __webpack_require__(375);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function account() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {
+	    isFetching: false,
+	    error: null
+	  } : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _account.LOGIN_REQUEST:
+	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
+	    case _account.LOGIN_SUCCESS:
+	      return (0, _merge2.default)({}, state, { isFetching: false, error: null }, action.response);
+	    case _account.LOGIN_FAILURE:
+	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
+	    case _account.SIGNUP_REQUEST:
+	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
+	    case _account.SIGNUP_SUCCESS:
+	      return (0, _merge2.default)({}, state, { isFetching: false, error: null }, action.response);
+	    case _account.SIGNUP_FAILURE:
+	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
+	    case _account.LOGOUT_REQUEST:
+	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
+	    case _account.LOGOUT_SUCCESS:
+	      return (0, _merge2.default)({}, { isFetching: false, error: null });
+	    case _account.LOGOUT_FAILURE:
+	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
+	    case _account.RECOVER_REQUEST:
+	      return (0, _merge2.default)({}, state, { isFetching: true, error: null });
+	    case _account.RECOVER_SUCCESS:
+	      return (0, _merge2.default)({}, { isFetching: false, error: null });
+	    case _account.RECOVER_FAILURE:
+	      console.warn('recover failure', action);
+	      return (0, _merge2.default)({}, state, { isFetching: false, error: action.error });
+	    default:
+	      return state;
+	  }
+	}
 
 /***/ },
 /* 375 */
@@ -74620,12 +74624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.files = files;
-	
-	var _merge = __webpack_require__(337);
+	var _merge = __webpack_require__(336);
 	
 	var _merge2 = _interopRequireDefault(_merge);
 	
@@ -74636,6 +74635,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _clone = __webpack_require__(390);
 	
 	var _clone2 = _interopRequireDefault(_clone);
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.files = files;
 	
 	var _files = __webpack_require__(391);
 	
@@ -74676,7 +74680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var baseFlatten = __webpack_require__(378),
 	    baseUniq = __webpack_require__(380),
-	    rest = __webpack_require__(371);
+	    rest = __webpack_require__(370);
 	
 	/**
 	 * Creates an array of unique values, in order, from all of the provided arrays
@@ -75105,7 +75109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseClone = __webpack_require__(342);
+	var baseClone = __webpack_require__(341);
 	
 	/**
 	 * Creates a shallow clone of `value`.
@@ -110813,19 +110817,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	
-	    _this.loadCodeSharing = function (editor) {
-	      var _this$props$tabs = _this.props.tabs;
-	      var list = _this$props$tabs.list;
-	      var currentIndex = _this$props$tabs.currentIndex;
-	
-	      if (list && list[currentIndex || 0].file) {
-	        var file = list[currentIndex || 0].file;
-	
-	        var fileObj = grout.Project(_this.props.project.name, _this.props.project.owner.username).File(file.path);
-	        loadFirepadCodeshare(fileObj, editor);
-	      }
-	    };
-	
 	    _this.selectTab = function (index) {
 	      _this.props.navigateToTab({ project: _this.props.project, index: index });
 	    };
@@ -110837,6 +110828,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        delete activeFirepads[file.path];
 	      }
 	      _this.props.closeTab({ project: _this.props.project, index: index });
+	      // let nextTab = (index - 1 < 0) ? 0 : index - 1;
+	      // console.log('next tab', nextTab);
+	      // this.props.navigateToTab({project: this.props.project, index: nextTab});
 	    };
 	
 	    _this.onFilesDrop = function (files) {
@@ -110918,9 +110912,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.fb.removeBinding(this.ref);
 	      }
 	    }
+	
+	    // loadCodeSharing = (editor) => {
+	    //   let { list, currentIndex } = this.props.tabs;
+	    //   if(list && list[currentIndex || 0].file){
+	    //     const { file } = list[currentIndex || 0];
+	    //     let fileObj = grout.Project(this.props.project.name, this.props.project.owner.username).File(file.path);
+	    //     loadFirepadCodeshare(fileObj, editor);
+	    //   }
+	    // };
+	
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log('tabs right meow', this.props.tabs);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'Workspace', ref: 'workspace' },
@@ -110964,7 +110969,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          tabs: this.props.tabs,
 	          onTabSelect: this.selectTab,
 	          onTabClose: this.closeTab,
-	          onActiveLoad: this.loadCodeSharing
+	          project: this.props.project
 	        })
 	      );
 	    }
@@ -110973,39 +110978,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return Workspace;
 	}(_react.Component);
 	
+	// function loadFirepadCodeshare(file, editor) {
+	//   console.log('load firepad codeshare', file, editor);
+	//   if(typeof editor.firepad === 'undefined' && !activeFirepads[file.path]){
+	//     // console.warn('firepad is not already existant. creating it');
+	//     let editorSettings = grout.currentUser ? {userId: grout.currentUser.username} : {};
+	//     //Load file content
+	//     try {
+	//       let firepad = createFirepad(file.fbRef, editor, editorSettings);
+	//       firepad.on('ready', () => {
+	//         activeFirepads[file.path] = firepad;
+	//         //TODO: Load original content of file
+	//         // if(firepad.isHistoryEmpty()){
+	//         //   file.get().then(fileRes => {
+	//         //     if(fileRes.content){
+	//         //       firepad.setText(fileRes.content);
+	//         //     }
+	//         //   });
+	//         // }
+	//       });
+	//     } catch(err) {
+	//       console.warn('Load firepad error:', err);
+	//     }
+	//   }
+	// }
+	
+	//Place state of redux store into props of component
+	
 	Workspace.propTypes = {
 	  project: _react.PropTypes.object.isRequired,
 	  tabs: _react.PropTypes.object,
 	  showButtons: _react.PropTypes.bool
 	};
-	
-	function loadFirepadCodeshare(file, editor) {
-	  if (typeof editor.firepad === 'undefined' && !activeFirepads[file.path]) {
-	    // console.warn('firepad is not already existant. creating it');
-	    var editorSettings = grout.currentUser ? { userId: grout.currentUser.username } : {};
-	    //Load file content
-	    try {
-	      (function () {
-	        var firepad = createFirepad(file.fbRef, editor, editorSettings);
-	        firepad.on('ready', function () {
-	          activeFirepads[file.path] = firepad;
-	          //TODO: Load original content of file
-	          // if(firepad.isHistoryEmpty()){
-	          //   file.get().then(fileRes => {
-	          //     if(fileRes.content){
-	          //       firepad.setText(fileRes.content);
-	          //     }
-	          //   });
-	          // }
-	        });
-	      })();
-	    } catch (err) {
-	      console.warn('Load firepad error:', err);
-	    }
-	  }
-	}
-	
-	//Place state of redux store into props of component
 	function mapStateToProps(state) {
 	  var _state$router$params = state.router.params;
 	  var username = _state$router$params.username;
@@ -114380,7 +114384,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          children = (0, _lodash.map)(_this2.props.children, function (entry) {
 	            if (entry.meta && entry.meta.entityType === 'folder') {
 	              return _react2.default.createElement(TreeFolder, {
-	                key: _this2.props.name + '-Folder-' + i,
+	                key: 'child-File-' + i + '-' + (entry.meta.name || entry.meta.path.split('/')[0]),
 	                index: i,
 	                data: entry.meta,
 	                isCollapsed: entry.isCollapsed,
@@ -114389,7 +114393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              });
 	            }
 	            return _react2.default.createElement(_TreeFile2.default, {
-	              key: _this2.props.name + '-File-' + i,
+	              key: 'child-File-' + i + '-' + (entry.meta.name || entry.meta.path.split('/')[0]),
 	              index: i,
 	              data: entry.meta,
 	              active: entry.active,
@@ -117862,6 +117866,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log('project in pane, no game', this.props.project);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'Pane' },
@@ -117875,8 +117880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          views: this.props.tabs.list,
 	          currentIndex: this.props.tabs.currentIndex,
 	          project: this.props.project,
-	          workspace: this.workspace,
-	          onActiveLoad: this.props.onActiveLoad
+	          workspace: this.workspace
 	        })
 	      );
 	    }
@@ -117889,7 +117893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  tabs: _react.PropTypes.object,
 	  onTabSelect: _react.PropTypes.func.isRequired,
 	  onTabClose: _react.PropTypes.func.isRequired,
-	  onActiveLoad: _react.PropTypes.func
+	  project: _react.PropTypes.object.isRequired
 	};
 	exports.default = Pane;
 	module.exports = exports['default'];
@@ -118168,30 +118172,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Views() {
 	    _classCallCheck(this, Views);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Views).call(this));
-	
-	    _this.handleLoad = _this.handleLoad.bind(_this);
-	    _this.handleUnload = _this.handleUnload.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Views).call(this));
 	  }
 	
 	  _createClass(Views, [{
-	    key: 'handleLoad',
-	    value: function handleLoad(loadedViewData) {
-	      if (this.props && this.props.onActiveLoad) {
-	        this.props.onActiveLoad(loadedViewData);
-	      }
-	    }
-	  }, {
-	    key: 'handleUnload',
-	    value: function handleUnload(unloadData) {
-	      console.warn('handle unload called ', unloadData);
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      console.log('next props for views', nextProps);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
+	      console.log('project in views, so much game', this.props.project);
 	      var defaultView = {
 	        title: 'view1',
 	        type: 'default'
@@ -118204,16 +118198,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	            key: i,
 	            index: i,
 	            viewData: view,
-	            visible: true,
-	            onLoad: _this2.handleLoad
+	            project: _this2.props.project,
+	            visible: true
 	          });
 	        }
 	        return _react2.default.createElement(_View2.default, {
 	          index: i,
 	          key: i,
 	          viewData: view,
-	          visible: false,
-	          onLoad: _this2.handleUnload
+	          project: _this2.props.project,
+	          visible: false
 	        });
 	      });
 	      return _react2.default.createElement(
@@ -118230,7 +118224,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Views.propTypes = {
 	  views: _react.PropTypes.array,
 	  currentIndex: _react.PropTypes.number,
-	  onActiveLoad: _react.PropTypes.func
+	  project: _react.PropTypes.object.isRequred
 	};
 	exports.default = Views;
 	module.exports = exports['default'];
@@ -118277,12 +118271,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(View, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log('project in view', this.props.project);
 	      var style = this.props.visible ? { display: 'block' } : { display: 'none' };
 	      var name = 'ace-editor-' + this.props.index;
 	      // TODO: Switch view type based on provided type instead of availability of editor data
 	      if (this.props.viewData && this.props.viewData.file) {
 	        var file = this.props.viewData.file;
-	        // console.warn('file in view:', file);
 	
 	        return _react2.default.createElement(
 	          'div',
@@ -118291,8 +118285,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            name: name,
 	            value: file.content,
 	            mode: file.fileType || 'javascript',
-	            onLoad: this.props.onLoad,
-	            fbRef: file.fbRef
+	            filePath: file.path,
+	            project: this.props.project
 	          })
 	        );
 	      } else {
@@ -118316,7 +118310,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  viewData: _react.PropTypes.object,
 	  visible: _react.PropTypes.bool.isRequired,
 	  index: _react.PropTypes.number.isRequired,
-	  onLoad: _react.PropTypes.func
+	  project: _react.PropTypes.object.isRequired
 	};
 	exports.default = View;
 	module.exports = exports['default'];
@@ -118339,6 +118333,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	__webpack_require__(696);
 	
+	var _reactRedux = __webpack_require__(156);
+	
+	var _kyperGrout = __webpack_require__(154);
+	
+	var _kyperGrout2 = _interopRequireDefault(_kyperGrout);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -118347,16 +118347,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var grout = new _kyperGrout2.default();
+	
 	var Editor = function (_Component) {
 	  _inherits(Editor, _Component);
 	
 	  function Editor() {
 	    _classCallCheck(this, Editor);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Editor).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Editor).call(this));
+	
+	    _this.firepad = {};
+	
+	    _this.handleLoad = function (editor) {
+	      //Load file content
+	
+	      if (typeof editor.firepad === 'undefined') {
+	        console.log('load for editor', editor);
+	        var fbRef = grout.Project(_this.props.project.name, _this.props.project.owner.username).File(_this.props.filePath).fbRef;
+	        console.log('for real lemme check your ref', fbRef);
+	        try {
+	          _this.firepad = createFirepad(fbRef, editor, { userId: _this.props.account.username || '&' });
+	          _this.firepad.on('ready', function () {
+	            console.log('scott wants to know this is loaded');
+	            //TODO: Load original content of file
+	            // if(firepad.isHistoryEmpty()){
+	            //   file.get().then(fileRes => {
+	            //     if(fileRes.content){
+	            //       firepad.setText(fileRes.content);
+	            //     }
+	            //   });
+	            // }
+	          });
+	        } catch (err) {
+	          console.warn('Load firepad error:', err);
+	        }
+	      }
+	    };
+	
+	    _this.handleDispose = function () {
+	      _this.firepad.dispose();
+	    };
+	
+	    return _this;
 	  }
 	
 	  _createClass(Editor, [{
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.handleDispose();
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      // require('brace/mode/javascript');
@@ -118371,9 +118412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.editor.setOption('readOnly', this.props.readOnly);
 	      this.editor.setOption('highlightActiveLine', this.props.highlightActiveLine);
 	      this.editor.setShowPrintMargin(this.props.setShowPrintMargin);
-	      if (this.props.onLoad) {
-	        this.props.onLoad(this.editor);
-	      }
+	      this.handleLoad(this.editor);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
@@ -118385,9 +118424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.editor.setOption('maxLines', nextProps.maxLines);
 	        this.editor.setOption('readOnly', nextProps.readOnly);
 	        this.editor.setOption('highlightActiveLine', nextProps.highlightActiveLine);
-	        if (nextProps.onLoad) {
-	          nextProps.onLoad(this.editor);
-	        }
+	        this.handleLoad(this.editor);
 	      }
 	    }
 	  }, {
@@ -118399,6 +118436,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return Editor;
 	}(_react.Component);
+	
+	//Place state of redux store into props of component
 	
 	Editor.propTypes = {
 	  mode: _react.PropTypes.string,
@@ -118412,7 +118451,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  maxLines: _react.PropTypes.number,
 	  readOnly: _react.PropTypes.bool,
 	  highlightActiveLine: _react.PropTypes.bool,
-	  showPrintMargin: _react.PropTypes.bool
+	  showPrintMargin: _react.PropTypes.bool,
+	  filePath: _react.PropTypes.string.isRequired,
+	  project: _react.PropTypes.object.isRequired
 	};
 	Editor.defaultProps = {
 	  name: 'brace-editor',
@@ -118426,7 +118467,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  highlightActiveLine: true,
 	  showPrintMargin: true
 	};
-	exports.default = Editor;
+	function mapStateToProps(state) {
+	  return {
+	    account: state.account
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(Editor);
 	module.exports = exports['default'];
 
 /***/ },
@@ -118710,7 +118757,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        null,
 	        'Click the plus to start a project'
 	      );
-	      projects.unshift(_react2.default.createElement(_NewProjectTile2.default, { key: 'Project-New', onClick: this.toggleModal.bind(this, 'newProject') }));
+	      // If username doesn't match route then hide add project tile
+	      if (this.props.account.username === this.props.router.params.username) {
+	        projects.unshift(_react2.default.createElement(_NewProjectTile2.default, { key: 'Project-New', onClick: this.toggleModal.bind(this, 'newProject') }));
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'Projects' },

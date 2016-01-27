@@ -1,7 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import './Editor.scss';
+import { connect } from 'react-redux';
+import Grout from 'kyper-grout';
 
-export default class Editor extends Component {
+let grout = new Grout();
+
+class Editor extends Component {
   constructor() {
     super();
   }
@@ -17,7 +21,9 @@ export default class Editor extends Component {
     maxLines: PropTypes.number,
     readOnly: PropTypes.bool,
     highlightActiveLine: PropTypes.bool,
-    showPrintMargin: PropTypes.bool
+    showPrintMargin: PropTypes.bool,
+    filePath: PropTypes.string.isRequired,
+    project: PropTypes.object.isRequired
   };
   static defaultProps = {
     name: 'brace-editor',
@@ -31,6 +37,43 @@ export default class Editor extends Component {
     highlightActiveLine: true,
     showPrintMargin: true
   };
+
+  firepad = {};
+
+  handleLoad = (editor) => {
+    //Load file content
+
+    if(typeof editor.firepad === 'undefined'){
+      console.log('load for editor', editor);
+      let fbRef = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath).fbRef;
+      console.log('for real lemme check your ref', fbRef);
+      try {
+        this.firepad = createFirepad(fbRef, editor, {userId: this.props.account.username || '&'});
+        this.firepad.on('ready', () => {
+          console.log('scott wants to know this is loaded');
+          //TODO: Load original content of file
+          // if(firepad.isHistoryEmpty()){
+          //   file.get().then(fileRes => {
+          //     if(fileRes.content){
+          //       firepad.setText(fileRes.content);
+          //     }
+          //   });
+          // }
+        });
+      } catch(err) {
+        console.warn('Load firepad error:', err);
+      }
+    }
+  };
+
+  handleDispose = () => {
+    this.firepad.dispose();
+  };
+
+  componentWillUnmount() {
+    this.handleDispose();
+  }
+
   componentDidMount() {
     // require('brace/mode/javascript');
     // require('brace/theme/monokai');
@@ -44,9 +87,7 @@ export default class Editor extends Component {
     this.editor.setOption('readOnly', this.props.readOnly);
     this.editor.setOption('highlightActiveLine', this.props.highlightActiveLine);
     this.editor.setShowPrintMargin(this.props.setShowPrintMargin);
-    if (this.props.onLoad) {
-      this.props.onLoad(this.editor);
-    }
+    this.handleLoad(this.editor);
   }
   componentWillReceiveProps(nextProps) {
     if(this.editor){
@@ -56,9 +97,7 @@ export default class Editor extends Component {
       this.editor.setOption('maxLines', nextProps.maxLines);
       this.editor.setOption('readOnly', nextProps.readOnly);
       this.editor.setOption('highlightActiveLine', nextProps.highlightActiveLine);
-      if (nextProps.onLoad) {
-        nextProps.onLoad(this.editor);
-      }
+      this.handleLoad(this.editor);
     }
   }
   render() {
@@ -67,3 +106,12 @@ export default class Editor extends Component {
     );
   }
 }
+
+//Place state of redux store into props of component
+function mapStateToProps(state) {
+  return {
+    account: state.account
+  };
+}
+
+export default connect(mapStateToProps, {})(Editor);

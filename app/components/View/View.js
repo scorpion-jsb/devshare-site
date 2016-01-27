@@ -10,24 +10,23 @@ export default class View extends Component {
     viewData: PropTypes.object,
     visible: PropTypes.bool.isRequired,
     index: PropTypes.number.isRequired,
-    onLoad: PropTypes.func
+    project: PropTypes.object.isRequired
   };
   render(){
+    console.log('project in view', this.props.project);
     let style = this.props.visible ? { display: 'block' } : { display: 'none' };
     const name = `ace-editor-${this.props.index}`;
     // TODO: Switch view type based on provided type instead of availability of editor data
     if(this.props.viewData && this.props.viewData.file){
       const { file } = this.props.viewData;
-      console.log('file for view', file);
-      // console.warn('file in view:', file);
       return (
         <div className="View" style={ style }>
           <Editor
             name={ name }
             value={ file.content }
             mode={ file.fileType || 'javascript' }
-            onLoad={ this.props.onLoad }
-            fbRef={ file.fbRef }
+            filePath={ file.path }
+            project={ this.props.project }
           />
         </div>
       );

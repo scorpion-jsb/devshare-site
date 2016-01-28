@@ -30,13 +30,13 @@ export default class View extends Component {
           />
         </div>
       );
-    } else {
-      return (
-        <div className="View-Default">
-          <span className="View-Default-Label">Click on a file to open</span>
-        </div>
-      );
     }
+
+    return (
+      <div className="View-Default">
+        <span className="View-Default-Label">Click on a file to open</span>
+      </div>
+    );
 
   }
 }

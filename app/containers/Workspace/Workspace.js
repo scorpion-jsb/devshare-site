@@ -136,9 +136,6 @@ class Workspace extends Component {
   closeTab = (index) => {
     let file = this.props.tabs.list[index].file;
     this.props.closeTab({project: this.props.project, index});
-    // let nextTab = (index - 1 < 0) ? 0 : index - 1;
-    // console.log('next tab', nextTab);
-    // this.props.navigateToTab({project: this.props.project, index: nextTab});
   };
 
   onFilesDrop = (files) => {

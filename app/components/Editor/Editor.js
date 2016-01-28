@@ -65,7 +65,10 @@ class Editor extends Component {
   };
 
   handleDispose = () => {
+    console.log('disposing of firepad', this.firepad);
+    console.log('disposing of editor', this.editor);
     this.firepad.dispose();
+    this.editor.destroy();
   };
 
   componentWillUnmount() {
@@ -99,7 +102,7 @@ class Editor extends Component {
       this.handleLoad(this.editor);
     }
   }
-  
+
   render() {
     return (
       <div className="Editor" id={ this.props.name }></div>

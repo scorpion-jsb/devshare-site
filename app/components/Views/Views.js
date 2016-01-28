@@ -9,13 +9,12 @@ class Views extends Component {
   static propTypes = {
     views: PropTypes.array,
     currentIndex: PropTypes.number,
-    project: PropTypes.object.isRequred
+    project: PropTypes.object.isRequired
   };
   componentWillReceiveProps(nextProps) {
-    console.log('next props for views', nextProps);
+    // console.log('next props for views', nextProps);
   }
   render() {
-    console.log('project in views, so much game', this.props.project);
     const defaultView = {
       title: 'view1',
       type: 'default'

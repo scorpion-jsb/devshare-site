@@ -18,7 +18,7 @@
       return editor;
     }
     function createFirepad(fbRef, editor, settings) {
-      console.warn('Open firepad called', fbRef, editor);
+      // console.warn('Open firepad called', fbRef, editor);
       var settingsObj = settings ? settings : {};
       try {
         return Firepad.fromACE(fbRef, editor, settingsObj);

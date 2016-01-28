@@ -8,23 +8,20 @@ import Views from '../Views';
 class Pane extends Component {
   constructor() {
     super();
-    this.closeTab = this.closeTab.bind(this);
-    this.selectTab = this.selectTab.bind(this);
   }
   static propTypes = {
     tabs: PropTypes.object,
-    onTabSelect: PropTypes.func.isRequired,
-    onTabClose: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,
+    onTabSelect: PropTypes.func.isRequired,
+    onTabClose: PropTypes.func.isRequired
   };
-  closeTab(ind){
+  closeTab = (ind) => {
     this.props.onTabClose(ind);
-  }
-  selectTab(ind){
+  };
+  selectTab = (ind) => {
     this.props.onTabSelect(ind);
-  }
+  };
   render() {
-    console.log('project in pane, no game', this.props.project);
     return (
       <div className="Pane">
         <Tabs

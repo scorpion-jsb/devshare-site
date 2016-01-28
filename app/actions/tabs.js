@@ -6,7 +6,6 @@ export const RECEIVE_FILE = 'RECEIVE_FILE';
 export const TAB_ERR = 'TAB_ERR';
 
 export function navigateToTab(tabData) {
-  // console.log('navigate to tab called with', tabData);
   const { index, project } = tabData;
   if(!project || !project.name){
     console.error('Project name is requried to navigate to tab')
@@ -20,7 +19,6 @@ export function navigateToTab(tabData) {
   };
 }
 export function closeTab(tabData) {
-  // console.log('close tab called with', tabData);
   const { index, project } = tabData;
   if(!project || !project.name){
     console.error('Project name is requried to navigate to tab')
@@ -34,7 +32,6 @@ export function closeTab(tabData) {
  };
 }
 export function openTab(tabData) {
-  console.log('open tab called with', tabData);
   const { index, project, title, type, file, data } = tabData;
   if(!project || !project.name){
     console.error('Project name is requried to open a tab')

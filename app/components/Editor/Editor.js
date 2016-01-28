@@ -9,6 +9,7 @@ class Editor extends Component {
   constructor() {
     super();
   }
+
   static propTypes = {
     mode: PropTypes.string,
     theme: PropTypes.string,
@@ -25,6 +26,7 @@ class Editor extends Component {
     filePath: PropTypes.string.isRequired,
     project: PropTypes.object.isRequired
   };
+
   static defaultProps = {
     name: 'brace-editor',
     mode: 'javascript',
@@ -42,15 +44,11 @@ class Editor extends Component {
 
   handleLoad = (editor) => {
     //Load file content
-
     if(typeof editor.firepad === 'undefined'){
-      console.log('load for editor', editor);
       let fbRef = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath).fbRef;
-      console.log('for real lemme check your ref', fbRef);
       try {
         this.firepad = createFirepad(fbRef, editor, {userId: this.props.account.username || '&'});
         this.firepad.on('ready', () => {
-          console.log('scott wants to know this is loaded');
           //TODO: Load original content of file
           // if(firepad.isHistoryEmpty()){
           //   file.get().then(fileRes => {
@@ -89,6 +87,7 @@ class Editor extends Component {
     this.editor.setShowPrintMargin(this.props.setShowPrintMargin);
     this.handleLoad(this.editor);
   }
+
   componentWillReceiveProps(nextProps) {
     if(this.editor){
       this.editor.getSession().setMode(`ace/mode/${nextProps.mode}`);
@@ -100,6 +99,7 @@ class Editor extends Component {
       this.handleLoad(this.editor);
     }
   }
+  
   render() {
     return (
       <div className="Editor" id={ this.props.name }></div>

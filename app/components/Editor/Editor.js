@@ -3,7 +3,7 @@ import './Editor.scss';
 import { connect } from 'react-redux';
 import Grout from 'kyper-grout';
 
-let grout = new Grout();
+let grout = new Grout('tessellate', {logLevel: 'trace'});
 
 class Editor extends Component {
   constructor() {
@@ -99,7 +99,7 @@ class Editor extends Component {
       this.handleLoad(this.editor);
     }
   }
-  
+
   render() {
     return (
       <div className="Editor" id={ this.props.name }></div>

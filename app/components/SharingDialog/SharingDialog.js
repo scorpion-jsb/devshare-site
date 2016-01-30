@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import { find, map } from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
@@ -11,50 +11,82 @@ import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle';
 import Colors from 'material-ui/lib/styles/colors';
 import './SharingDialog.scss';
 
-const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
-
-class SharingDialog extends Component {
+export default class SharingDialog extends Component {
   constructor(props){
     super(props);
   }
 
   state = {
-    matchingAccounts: []
+    matchingUsers: [],
+    collaborators: this.props.project.collaborators || []
   };
 
   static propTypes = {
-    project: PropTypes.object,
+    project: PropTypes.object.isRequired,
     modalOpen: PropTypes.bool,
     toggleModal: PropTypes.func,
-    onAccountSearch: PropTypes.func.isRequired
+    onAccountSearch: PropTypes.func.isRequired,
+    onSave: PropTypes.func
   };
+
   searchAccounts = (q) => {
-    this.props.onAccountSearch(q, (err, matchingAccounts) => {
+    this.props.onAccountSearch(q, (err, matchingUsers) => {
       if(!err){
-        this.setState({ matchingAccounts });
+        this.setState({ matchingUsers });
       }
     });
   };
+
   selectNewCollab = (username) => {
-    if(this.props.onAddCollab){
-      this.props.onAddCollab(find(this.state.matchingAccounts, {username}));
+    const { collaborators, matchingUsers } = this.state;
+    collaborators.push(find(matchingUsers, { username }));
+    this.setState({ collaborators, searchText: null });
+  };
+
+  removeNewCollab = (ind) => {
+    const { collaborators, matchingUsers } = this.state;
+    collaborators.splice(ind, 1);
+    this.setState({ collaborators });
+  };
+
+  cancelClick = () => {
+    this.setState({
+      collaborators: this.props.project.collaborators || []
+    });
+    this.props.toggleModal();
+  };
+
+  saveSettings = () => {
+    const collaborators =  map(this.state.collaborators, '_id');
+    if(this.props.onSave){
+      this.props.onSave({ collaborators });
+      this.props.toggleModal();
     }
   };
+
   render(){
     const user = {
       image: {
         url: null
       }
     };
-    let collabsList = (this.props.project && this.props.project.collaborators) ? this.props.project.collaborators.map((collaborator, i) => {
+    let collabsList = (this.state && this.state.collaborators) ? this.state.collaborators.map((collaborator, i) => {
       return (
         <ListItem
           key={`${this.props.project.name}-Collab-${i}`}
-          leftAvatar={<Avatar
-            icon={ <PersonIcon /> }
-            src={ (user.image && user.image.url) ? user.image.url : null }
-          />}
-          rightIcon={<RemoveIcon color={Colors.red500} hoverColor={Colors.red800} />}
+          leftAvatar={
+            <Avatar
+              icon={ <PersonIcon /> }
+              src={ (user.image && user.image.url) ? user.image.url : null }
+            />
+          }
+          rightIcon={
+            <RemoveIcon
+              color={Colors.red500}
+              hoverColor={Colors.red800}
+              onClick={ this.removeNewCollab.bind(this, i) }
+            />
+          }
           primaryText={ collaborator.username }
           secondaryText="Read, Write"
         />
@@ -63,8 +95,8 @@ class SharingDialog extends Component {
     const actions = [
       <FlatButton
         label="Cancel"
-        secondary={true}
-        onTouchTap={ this.props.toggleModal }
+        secondary={ true }
+        onTouchTap={ this.cancelClick }
       />,
       <FlatButton
         label="Save"
@@ -73,7 +105,7 @@ class SharingDialog extends Component {
         onTouchTap={ this.saveSettings }
       />
     ];
-    let matchingUsernames = this.state.matchingAccounts ? this.state.matchingAccounts.map(account => {
+    let matchingUsernames = this.state.matchingUsers ? this.state.matchingUsers.map(account => {
       return account.username ? account.username : account;
     }) : [];
     return (
@@ -89,7 +121,7 @@ class SharingDialog extends Component {
         contentStyle={{'width': '30%'}}
       >
       {
-      (this.props.project && this.props.project.collaborators) ?
+      this.state.collaborators ?
         <List>
         { collabsList }
         </List>
@@ -97,13 +129,14 @@ class SharingDialog extends Component {
         <div className="SharingDialog-No-Collabs">
           <span>No current collaborators</span>
         </div>
-        }
+      }
         <div className="SharingDialog-AutoComplete-Container">
           <AutoComplete
             className="SharingDialog-Autocomplete"
             hintText="Search users to add"
             floatingLabelText="Search users to add"
-            fullWidth={true}
+            fullWidth={ true }
+            searchText={ this.state.searchText }
             dataSource={ matchingUsernames }
             onUpdateInput={ this.searchAccounts }
             onNewRequest={ this.selectNewCollab }
@@ -113,5 +146,3 @@ class SharingDialog extends Component {
     );
   }
 }
-
-export default SharingDialog

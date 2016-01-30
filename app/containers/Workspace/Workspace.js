@@ -9,20 +9,20 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Rebase from 're-base';
 import { Actions } from 'redux-grout';
+import Grout from 'kyper-grout';
 import * as TabActions from '../../actions/tabs';
-import RaisedButton from 'material-ui/lib/raised-button';
 import SideBar from '../../components/SideBar/SideBar';
 import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
 import SharingDialog from '../../components/SharingDialog/SharingDialog';
 import Pane from '../../components/Pane/Pane';
 import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover';
-import Grout from 'kyper-grout';
+import RaisedButton from 'material-ui/lib/raised-button';
+
 import './Workspace.scss';
 
 let grout = new Grout();
 
 class Workspace extends Component {
-
   constructor() {
     super();
   }
@@ -44,10 +44,11 @@ class Workspace extends Component {
   };
 
   componentDidMount() {
-    this.project = this.props.project ? grout.Project(this.props.project.name, this.props.project.owner.username) : null;
-    this.fb = Rebase.createClass(this.project.fbUrl.replace(this.props.project.name, ''));
+    const { name, owner } = this.props.project;
+    this.project = this.props.project ? grout.Project(name, owner.username) : null;
+    this.fb = Rebase.createClass(this.project.fbUrl.replace(name, ''));
     //Bind to files list on firebase
-    this.ref = this.fb.bindToState(this.props.project.name, {
+    this.ref = this.fb.bindToState(name, {
       context: this,
       state: 'files',
       asArray: true
@@ -88,7 +89,8 @@ class Workspace extends Component {
   };
 
   saveSettings = (data) => {
-    this.props.updateProject({project: this.props.project, data});
+    // console.log('save settings called:', data);
+    this.props.updateProject(this.props.project, data);
     //TODO: Show popup of save success/failure
     this.toggleSettingsModal();
   };
@@ -106,27 +108,27 @@ class Workspace extends Component {
   };
 
   openFile = (file) => {
-    let tabData = {
-      project: this.props.project,
+    const { project, tabs } = this.props;
+    const tabData = {
+      project,
       title: file.name || file.path.split('/')[file.path.split('/').length - 1],
       type: 'file',
       file,
     };
-    //Search for already matching title
     //TODO: Search by matching path instead of tab title
-    const matchingInd = findIndex(this.props.tabs.list, {title: tabData.title});
+    //Search for already matching title
+    const matchingInd = findIndex(tabs.list, {title: tabData.title});
     //Only open tab if file is not already open
     if(matchingInd === -1){
       this.props.openTab(tabData);
       //Select last tab
-      let newInd =  this.props.tabs.list ? this.props.tabs.list.length - 1 : 0;
-      this.props.navigateToTab({project: this.props.project, index: newInd});
-    } else {
-      this.props.navigateToTab({
-        project: this.props.project,
-        index: matchingInd
-      })
+      const newInd =  tabs.list ? tabs.list.length - 1 : 0;
+      return this.props.navigateToTab({project, index: newInd});
     }
+    this.props.navigateToTab({
+      project,
+      index: matchingInd
+    });
   };
 
   selectTab = (index) => {
@@ -134,8 +136,7 @@ class Workspace extends Component {
   };
 
   closeTab = (index) => {
-    let file = this.props.tabs.list[index].file;
-    this.props.closeTab({project: this.props.project, index});
+    this.props.closeTab({ project: this.props.project, index });
   };
 
   onFilesDrop = (files) => {
@@ -143,33 +144,24 @@ class Workspace extends Component {
   };
 
   searchUsers = (q, cb) => {
-    grout.Users.search(q).then(usersList=> {
+    grout.Users.search(q).then(usersList => {
       cb(null, usersList);
     }, err => {
       cb(err);
     });
   };
 
-  addCollaborator = (collaborator) => {
-    let project = this.props.project;
-    this.props.addCollaborator(collaborator, project);
-  };
-
-  showPopover = (type, path) => {
+  showPopover = (addType, addPath) => {
     this.setState({
-      addPath: path,
-      addType: type,
+      addPath,
+      addType,
       popoverOpen: true
     });
   };
 
   addEntity = (type, path) => {
-    if (type === 'folder') {
-      this.addFolder(path);
-    }
-    if (type === 'file') {
-      this.addFile(path);
-    }
+    if (type === 'folder') return this.addFolder(path);
+    this.addFile(path);
   };
 
   handlePopoverClose = () => {
@@ -193,13 +185,14 @@ class Workspace extends Component {
           project={ this.props.project }
           modalOpen={ this.state.settingsOpen }
           toggleModal={ this.toggleSettingsModal }
+          onSave={ this.saveSettings }
         />
         <SharingDialog
           project={ this.props.project }
           modalOpen={ this.state.sharingOpen }
           toggleModal={ this.toggleSharingModal }
           onAccountSearch={ this.searchUsers }
-          onAddCollab={ this.addCollaborator }
+          onSave={ this.saveSettings }
         />
         <SideBar
           projects={ this.props.projects }

@@ -65,8 +65,6 @@ class Editor extends Component {
   };
 
   handleDispose = () => {
-    console.log('disposing of firepad', this.firepad);
-    console.log('disposing of editor', this.editor);
     this.firepad.dispose();
     this.editor.destroy();
   };

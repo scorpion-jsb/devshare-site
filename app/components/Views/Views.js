@@ -11,11 +11,8 @@ class Views extends Component {
     currentIndex: PropTypes.number,
     project: PropTypes.object.isRequired
   };
-  componentWillReceiveProps(nextProps) {
-    console.log('next props for views', nextProps);
-  }
+  
   render() {
-    console.log('this is the views arrray', this.props.views);
     let currentIndex = this.props.currentIndex || 0;
     if (!this.props.views) {
       return (
@@ -25,7 +22,6 @@ class Views extends Component {
       );
     }
     let views = this.props.views.map((view, i) => {
-      console.log('view', view);
       if (i === currentIndex) {
         return (
           <View

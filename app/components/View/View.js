@@ -22,6 +22,7 @@ export default class View extends Component {
       return (
         <div className="View" style={ style }>
           <Editor
+            key={ file.path }
             name={ name }
             value={ file.content }
             mode={ file.fileType || 'javascript' }

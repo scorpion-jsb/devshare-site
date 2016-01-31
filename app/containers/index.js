@@ -8,5 +8,4 @@ export Project from './Project/Project';
 export Projects from './Projects/Projects';
 export Recover from './Recover/Recover';
 export Signup from './Signup/Signup';
-export Anon from './Anon/Anon';
 export Workspace from './Workspace/Workspace';

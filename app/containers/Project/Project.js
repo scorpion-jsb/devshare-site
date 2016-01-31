@@ -14,7 +14,7 @@ class Project extends Component {
   }
 
   componentDidMount() {
-    if(!this.props.projects){
+    if(!this.props.projects && this.props.username !== 'anon'){
       this.props.getProjects(this.props.project.owner.username);
     }
   }
@@ -44,6 +44,7 @@ function mapStateToProps(state) {
   const key = username ? `${username}/${name}` : name;
   const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : { name, owner: { username } };
   return {
+    username,
     project,
     account: state.account,
     router: state.router

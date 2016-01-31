@@ -82,6 +82,7 @@ class Editor extends Component {
     this.editor.setTheme('ace/theme/'+this.props.theme);
     this.editor.setFontSize(this.props.fontSize);
     this.editor.renderer.setShowGutter(this.props.showGutter);
+    this.editor.setAutoScrollEditorIntoView(true);
     this.editor.setOption('maxLines', this.props.maxLines);
     this.editor.setOption('readOnly', this.props.readOnly);
     this.editor.setOption('highlightActiveLine', this.props.highlightActiveLine);

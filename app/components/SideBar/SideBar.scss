@@ -6,6 +6,7 @@
   flex-direction: column;
   min-width: 220px;
   padding-top: 2rem;
+  overflow: hidden;
   a {
     text-align: center;
   }
@@ -24,10 +25,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 0 10px 20px 10px;
-  }
-  &-Button {
-    // width: 40%;
+    flex-basis: 60px;
+    padding: 0 10px 20px 10px;
   }
   &-Name {
     width: 100%;

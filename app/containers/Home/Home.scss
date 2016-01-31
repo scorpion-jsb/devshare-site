@@ -1,3 +1,4 @@
+@import '../../device-sizes';
 .Home {
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
@@ -9,6 +10,7 @@
   align-items: center;
   padding-top: 3rem;
   overflow-y: scroll;
+
   &-Hero {
     display: -webkit-box;
     display: -moz-box;
@@ -18,8 +20,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 100%;
     position: relative;
+
     a {
       -webkit-appearance: none !important;
     }
@@ -38,13 +42,26 @@
   &-Brand {
     font-size: 4rem;
   }
-  &-PreviewVideo {
-    height: 500px;
+  &-VideoContainer {
     margin-left: auto;
     margin-right: auto;
+    @include desktop {
+      max-width: 60%;
+    }
+    @include tablet {
+      max-width: 60%;
+    }
+    @include mobile {
+      width: 95%;
+    }
+  }
+  &-PreviewVideo {
+    width: 100%;
+    margin-bottom: -6px;
   }
   &-Name {
     font-size: 5rem;
+    line-height: 5rem;
     font-weight: 800;
     text-decoration: bold;
     text-transform: uppercase;
@@ -55,6 +72,9 @@
     font-weight: 400;
     text-align: center;
     z-index: 1;
+    @include mobile {
+      max-width: 80%;
+    }
   }
   &-Muted {
     margin-bottom: 3rem;
@@ -66,6 +86,7 @@
     justify-content: space-around;
     flex-wrap: wrap;
     margin-bottom: 30px;
+    margin-top: 30px;
 
     &-Item{
       flex-basis: 300px;

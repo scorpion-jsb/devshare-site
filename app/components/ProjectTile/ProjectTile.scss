@@ -42,11 +42,8 @@
   }
   &-Collaborator {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 20%;
     margin: .4rem;
     overflow: hidden;
+    cursor: pointer;
   }
 }

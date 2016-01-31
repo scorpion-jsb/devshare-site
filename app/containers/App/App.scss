@@ -1,8 +1,8 @@
 @import '../../variables';
 @import '../../device-sizes';
-@import url(https://fonts.googleapis.com/css?family=Yantramanav:400,100,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,100,500,900);
 .App {
-  font-family: 'Yantramanav', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100%;
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -32,6 +32,19 @@ html, body, #root {
     font-size: 12px;
   }
 
+}
+
+body {
+  > .firepad {
+    display: none;
+  }
+}
+#headless {
+  height: 1px;
+  width: 1px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }
 
 // input,textarea,select:-webkit-autofill {

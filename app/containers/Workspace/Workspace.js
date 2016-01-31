@@ -1,7 +1,8 @@
 import {
   merge, toArray, find,
   findIndex, isFunction,
-  isUndefined, isString
+  isUndefined, isString,
+  each, isEqual, debounce
 } from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
@@ -25,6 +26,7 @@ let grout = new Grout();
 class Workspace extends Component {
   constructor() {
     super();
+    this.debounceStateChange = debounce(this.debounceStateChange, 1000);
   }
 
   state = {
@@ -34,7 +36,8 @@ class Workspace extends Component {
     files: [],
     addPath: '',
     addType: 'file',
-    popoverOpen: false
+    popoverOpen: false,
+    debouncedFiles: [],
   };
 
   static propTypes = {
@@ -53,6 +56,7 @@ class Workspace extends Component {
       state: 'files',
       asArray: true
     });
+    this.debounceStateChange();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -76,6 +80,18 @@ class Workspace extends Component {
     }
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (!isEqual(this.state.files, nextState.files)) {
+      this.debounceStateChange();
+    }
+  }
+
+  debounceStateChange = () => {
+    this.setState({
+      debouncedFiles: this.state.files
+    });
+  };
+
   toggleSettingsModal = () => {
     this.setState({
       settingsOpen: !this.state.settingsOpen
@@ -95,8 +111,8 @@ class Workspace extends Component {
     this.toggleSettingsModal();
   };
 
-  addFile = (path) => {
-    this.props.addFile(this.props.project, path);
+  addFile = (path, content) => {
+    this.props.addFile(this.props.project, path, content);
   };
 
   addFolder = (path) => {
@@ -139,8 +155,50 @@ class Workspace extends Component {
     this.props.closeTab({ project: this.props.project, index });
   };
 
-  onFilesDrop = (files) => {
-    this.props.addFiles(this.props.project, files);
+  readAndSaveFileEntry = (entry) => {
+    entry.file(file => {
+      let reader = new FileReader();
+      let scopedAddFile = this.addFile.bind(this);
+      reader.onloadend = function(e) {
+        scopedAddFile(entry.fullPath, this.result);
+      }
+      reader.readAsText(file);
+    })
+  };
+
+  readAndSaveFolderEntry = (entry) => {
+    this.addFolder(entry.fullPath);
+    let reader = entry.createReader();
+    reader.readEntries(folder => {
+      if (folder.length > 1) {
+        this.handleEntries(folder);
+      }
+    });
+  };
+
+  handleEntries = (entries) => {
+    if (entries.isFile) {
+      this.readAndSaveFileEntry(entries);
+    } else if (entries.isDirectory) {
+      this.readAndSaveFolderEntry(entries);
+    }
+
+    each(entries, entry => {
+      if (entry.isFile) {
+        this.readAndSaveFileEntry(entry);
+      } else if (entry.isDirectory) {
+        this.readAndSaveFolderEntry(entry);
+      }
+    })
+  };
+
+  onFilesDrop = (e) => {
+    e.preventDefault();
+    let items = e.dataTransfer.items;
+    each(items, item => {
+      var entry = item.webkitGetAsEntry();
+      this.handleEntries(entry);
+    });
   };
 
   searchUsers = (q, cb) => {
@@ -159,9 +217,9 @@ class Workspace extends Component {
     });
   };
 
-  addEntity = (type, path) => {
+  addEntity = (type, path, content) => {
     if (type === 'folder') return this.addFolder(path);
-    this.addFile(path);
+    this.addFile(path, content);
   };
 
   handlePopoverClose = () => {
@@ -187,7 +245,7 @@ class Workspace extends Component {
           project={ this.props.project }
           onProjectSelect={ this.props.onProjectSelect }
           showButtons={ this.props.showButtons }
-          files={ this.state.files }
+          files={ this.state.debouncedFiles }
           hideName={ this.props.hideName }
           onFileClick={ this.openFile }
           onSettingsClick={ this.toggleSettingsModal  }

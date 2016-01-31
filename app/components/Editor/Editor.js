@@ -16,7 +16,6 @@ class Editor extends Component {
     name: PropTypes.string,
     height: PropTypes.string,
     width: PropTypes.string,
-    fontSize: PropTypes.number,
     showGutter: PropTypes.bool,
     value: PropTypes.string,
     maxLines: PropTypes.number,
@@ -80,10 +79,14 @@ class Editor extends Component {
     this.editor.setTheme('ace/theme/monokai');
     this.editor.getSession().setMode(`ace/mode/${this.props.mode}`);
     this.editor.setTheme('ace/theme/'+this.props.theme);
-    this.editor.setFontSize(this.props.fontSize);
     this.editor.renderer.setShowGutter(this.props.showGutter);
     this.editor.setAutoScrollEditorIntoView(true);
+    this.editor.setOptions({
+      fontFamily: 'Roboto Mono',
+      fontSize: '16px',
+    });
     this.editor.setOption('maxLines', this.props.maxLines);
+    //TODO: add read only for collabs
     this.editor.setOption('readOnly', this.props.readOnly);
     this.editor.setOption('highlightActiveLine', this.props.highlightActiveLine);
     this.editor.setShowPrintMargin(this.props.setShowPrintMargin);
@@ -94,7 +97,6 @@ class Editor extends Component {
     if(this.editor){
       this.editor.getSession().setMode(`ace/mode/${nextProps.mode}`);
       this.editor.setTheme('ace/theme/'+nextProps.theme);
-      this.editor.setFontSize(nextProps.fontSize);
       this.editor.setOption('maxLines', nextProps.maxLines);
       this.editor.setOption('readOnly', nextProps.readOnly);
       this.editor.setOption('highlightActiveLine', nextProps.highlightActiveLine);

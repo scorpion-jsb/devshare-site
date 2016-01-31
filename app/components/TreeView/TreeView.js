@@ -94,6 +94,10 @@ class TreeView extends Component {
     }
   };
 
+  preventDefault = (e) => {
+    e.preventDefault();
+  };
+
   handleEntryClick = (path) => {
     this.setState({
       selectedPath: path
@@ -162,7 +166,7 @@ class TreeView extends Component {
 
     return (
       <div className="TreeView" onContextMenu={ this.handleRightClick }>
-        <Dropzone className="TreeView-Dropzone" onDrop={ this.props.onFilesDrop } multiple={ true } style={{ border: 'none' }} disableClick={ true } >
+        <div className="TreeView-Dropzone" onDragOver={ this.preventDefault } onDrop={ this.props.onFilesDrop }>
           <div className="TreeView-Container">
             <ol className="TreeView-Structure">
               { noFiles }
@@ -174,7 +178,7 @@ class TreeView extends Component {
               <li onClick={ this.handleDeleteClick }>Delete File</li>
             </ul>
           </div>
-        </Dropzone>
+        </div>
       </div>
     );
   }

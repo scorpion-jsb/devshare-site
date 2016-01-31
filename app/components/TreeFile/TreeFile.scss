@@ -23,8 +23,9 @@
     align-self: flex-end;
   }
   &-User {
-    width: 1.2rem;
+    padding: 0 3px;
     text-align: center;
+    font-weight: 500;
   }
   &.active{
     background-color: $editorBackground;

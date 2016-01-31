@@ -22,6 +22,7 @@ export default class View extends Component {
       return (
         <div className="View" style={ style }>
           <Editor
+            key={ file.path }
             name={ name }
             value={ file.content }
             mode={ file.fileType || 'javascript' }
@@ -30,13 +31,13 @@ export default class View extends Component {
           />
         </div>
       );
-    } else {
-      return (
-        <div className="View-Default">
-          <span className="View-Default-Label">Click on a file to open</span>
-        </div>
-      );
     }
+
+    return (
+      <div className="View-Default">
+        <span className="View-Default-Label">Click on a file to open</span>
+      </div>
+    );
 
   }
 }

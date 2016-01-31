@@ -11,21 +11,21 @@ class Views extends Component {
     currentIndex: PropTypes.number,
     project: PropTypes.object.isRequired
   };
-  componentWillReceiveProps(nextProps) {
-    // console.log('next props for views', nextProps);
-  }
+  
   render() {
-    const defaultView = {
-      title: 'view1',
-      type: 'default'
-    };
-    let viewsArray = (this.props.views && this.props.views.length) ?  this.props.views : [defaultView];
     let currentIndex = this.props.currentIndex || 0;
-    let views = viewsArray.map((view, i) => {
+    if (!this.props.views) {
+      return (
+        <div className="View-Default">
+          <span className="View-Default-Label">Click on a file to open</span>
+        </div>
+      );
+    }
+    let views = this.props.views.map((view, i) => {
       if (i === currentIndex) {
         return (
           <View
-            key={ i }
+            key={ `{i}-${view.file.path}` }
             index={ i }
             viewData={ view }
             project={ this.props.project }

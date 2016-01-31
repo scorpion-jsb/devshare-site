@@ -11,7 +11,6 @@ import {
     Projects,
     Recover,
     Signup,
-    Anon
   } from './containers';
 export default (
   <Route path="/" component={ App }>
@@ -21,7 +20,6 @@ export default (
     <Route path="recover" component={ Recover } />
     <Route path="signup" component={ Signup }/>
     <Route path="about" component={ About } />
-    <Route path="anon/:projectName" component={ Anon } />
     <Route path=":username/:projectName" component={ Project } />
     <Route path=":username" component={ Projects } />
     <Route path="*" component={ NotFound } />

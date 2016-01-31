@@ -57,40 +57,44 @@ class Home extends Component {
     const buttonStyle = {margin: '3rem', height: '3rem', marginBottom: 5};
     const buttonLabelStyle ={fontSize: '1.5rem'};
     return (
-      <div className="Home">
-        <div className="Home-Hero" style={{ color: Theme.palette.primary2Color }}>
-          <div className="Home-Logo">
-            <img src="assets/devShareLogo.gif" />
-            <span className="Home-Brand">devShare</span>
+      <div className="Home" style={{ color: Theme.palette.primary2Color }}>
+        <div>
+          <div className="Home-Hero">
+            <div className="Home-Logo">
+              <img src="assets/devShareLogo.gif" />
+              <span className="Home-Brand">devShare</span>
+            </div>
+            <span className="Home-Name">Build together</span>
+            <span className="Home-Description">
+            real-time, full-project code editing in browser
+            </span>
+            <RaisedButton
+              primary={ true }
+              label="Share Code"
+              style={buttonStyle}
+              labelStyle={buttonLabelStyle}
+              containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
+            />
+            <span className="Home-Muted">No sign up required</span>
+            <div className="Home-VideoContainer">
+              <Paper style={{marginBottom: -10}} zDepth={1}>
+                <video className="Home-PreviewVideo" autoPlay loop>
+                  <source src="assets/devShareEdit.mp4" type="video/mp4" />
+                  <source src="assets/devShareEdit.ogv" type="video/ogg" />
+                  Your browser does not support the video tag.
+                </video>
+              </Paper>
+            </div>
           </div>
-          <span className="Home-Name">Build together</span>
-          <span className="Home-Description">
-          real-time, full-project code editing in browser
-          </span>
-          <RaisedButton
-            primary={ true }
-            label="Share Code"
-            style={buttonStyle}
-            labelStyle={buttonLabelStyle}
-            containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
-          />
-          <span className="Home-Muted">No sign up required</span>
-          <Paper style={{height: 500}} zDepth={1}>
-            <video className="Home-PreviewVideo" autoPlay loop>
-              <source src="assets/devShareEdit.mp4" type="video/mp4" />
-              <source src="assets/devShareEdit.ogv" type="video/ogg" />
-              Your browser does not support the video tag.
-            </video>
-          </Paper>
-        </div>
-        <div className="Home-MeInThree">
+          <div className="Home-MeInThree">
           { meInThreeElements }
+          </div>
+          <div className="Home-Footer">
+            Made by <a target="_blank" href="http://kyper.io">Kyper</a>
+          </div>
         </div>
-        <div className="Home-Footer">
-          Made by <a target="_blank" href="http://kyper.io">Kyper</a>
         </div>
-      </div>
-    )
+        )
   }
 }
 

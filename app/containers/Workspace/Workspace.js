@@ -181,19 +181,6 @@ class Workspace extends Component {
           open={ this.state.popoverOpen }
           onClose={ this.handlePopoverClose }
         />
-        <ProjectSettingsDialog
-          project={ this.props.project }
-          modalOpen={ this.state.settingsOpen }
-          toggleModal={ this.toggleSettingsModal }
-          onSave={ this.saveSettings }
-        />
-        <SharingDialog
-          project={ this.props.project }
-          modalOpen={ this.state.sharingOpen }
-          toggleModal={ this.toggleSharingModal }
-          onAccountSearch={ this.searchUsers }
-          onSave={ this.saveSettings }
-        />
         <SideBar
           projects={ this.props.projects }
           showProjects={ this.props.showProjects }
@@ -216,6 +203,25 @@ class Workspace extends Component {
           onTabClose={ this.closeTab }
           project={ this.props.project }
         />
+        {
+          this.state.settingsOpen ?
+          <ProjectSettingsDialog
+            project={ this.props.project }
+            modalOpen={ this.state.settingsOpen }
+            toggleModal={ this.toggleSettingsModal }
+            onSave={ this.saveSettings }
+          /> : null
+        }
+        {
+          this.state.sharingOpen ?
+          <SharingDialog
+            project={ this.props.project }
+            modalOpen={ this.state.sharingOpen }
+            toggleModal={ this.toggleSharingModal }
+            onAccountSearch={ this.searchUsers }
+            onSave={ this.saveSettings }
+          /> : null
+        }
       </div>
     );
   }

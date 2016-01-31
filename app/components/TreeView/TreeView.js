@@ -101,7 +101,6 @@ class TreeView extends Component {
   };
 
   render() {
-    console.log('file structure', this.props.fileStructure);
     let structure = this.props.fileStructure.map((entry, i) => {
       if (entry.meta && (entry.meta.entityType === 'folder')){
         let children = merge({}, entry);

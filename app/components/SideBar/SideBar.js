@@ -73,9 +73,10 @@ export default class SideBar extends Component {
 
         <div className="SideBar-Buttons">
           <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
+            <MenuItem primaryText="Upload files" />
+            <MenuItem primaryText="Download files" />
             <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
             <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
-            <MenuItem primaryText="Upload files" />
             {/*<MenuItem primaryText="Add files from Github" />*/}
           </IconMenu>
           <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSharingClick }>

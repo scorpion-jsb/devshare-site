@@ -78,11 +78,12 @@ class Home extends Component {
             <span className="Home-Muted">No sign up required</span>
             <div className="Home-VideoContainer">
               <Paper style={{marginBottom: -10}} zDepth={1}>
-                <video className="Home-PreviewVideo" autoPlay loop>
+                <img className="Home-PreviewVideo" src="assets/devShareEdit.gif" />
+                {/*<video className="Home-PreviewVideo" autoPlay loop>
                   <source src="assets/devShareEdit.mp4" type="video/mp4" />
                   <source src="assets/devShareEdit.ogv" type="video/ogg" />
                   Your browser does not support the video tag.
-                </video>
+                </video>*/}
               </Paper>
             </div>
           </div>

@@ -60,7 +60,7 @@ export default class Navbar extends Component {
     ) : mainMenu;
     return (
       <AppBar
-        title={<Link className="Navbar-Brand" to={ brandLinkLoc }><img className="Navbar-Brand-Logo" src="/assets/devShareLogoSingle.png" />devShare</Link>}
+        title={<Link className="Navbar-Brand" to={ brandLinkLoc }>devShare</Link>}
         className="Navbar"
         showMenuIconButton={ false }
         iconElementRight={rightMenu}

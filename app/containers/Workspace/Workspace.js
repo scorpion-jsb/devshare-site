@@ -250,6 +250,14 @@ class Workspace extends Component {
     });
   };
 
+  addCollaborator = (username) => {
+    this.props.addCollaborator(this.props.project, username);
+  };
+
+  removeCollaborator = (username) => {
+    this.props.removeCollaborator(this.props.project, username);
+  };
+
   render() {
     return (
       <div className="Workspace" ref="workspace">
@@ -301,6 +309,8 @@ class Workspace extends Component {
             toggleModal={ this.toggleSharingModal }
             onAccountSearch={ this.searchUsers }
             onSave={ this.saveSettings }
+            onAddCollab={ this.addCollaborator }
+            onRemoveCollab={ this.removeCollaborator }
           /> : null
         }
       </div>

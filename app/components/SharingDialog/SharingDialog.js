@@ -26,8 +26,14 @@ export default class SharingDialog extends Component {
     modalOpen: PropTypes.bool,
     toggleModal: PropTypes.func,
     onAccountSearch: PropTypes.func.isRequired,
-    onSave: PropTypes.func
+    onSave: PropTypes.func,
+    onRemoveCollab: PropTypes.func,
+    onAddCollab: PropTypes.func
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.state.collaborators = nextProps.project.collaborators || [];
+  }
 
   searchAccounts = (q) => {
     this.props.onAccountSearch(q, (err, matchingUsers) => {
@@ -38,26 +44,32 @@ export default class SharingDialog extends Component {
   };
 
   selectNewCollab = (username) => {
-    const { collaborators, matchingUsers } = this.state;
-    collaborators.push(find(matchingUsers, { username }));
-    this.setState({ collaborators, searchText: null });
+    const { collaborators } = this.props.project;
+    if(this.props.onAddCollab){
+      this.props.onAddCollab(username);
+    }
+    this.setState({ searchText: null });
   };
 
-  removeNewCollab = (ind) => {
-    const { collaborators, matchingUsers } = this.state;
-    collaborators.splice(ind, 1);
-    this.setState({ collaborators });
+  removeCollab = (ind) => {
+    console.log('collaborators before remove:', this.state.collaborators);
+    const user = this.state.collaborators[ind];
+    if(this.props.onRemoveCollab){
+      this.props.onRemoveCollab(user.username);
+      this.setState({
+        collaborators: this.state.collaborators.splice(ind, 1)
+      });
+    }
   };
 
   cancelClick = () => {
     this.setState({
-      collaborators: this.props.project.collaborators || []
+      searchText: null
     });
     this.props.toggleModal();
   };
 
   saveSettings = () => {
-    const collaborators =  map(this.state.collaborators, '_id');
     if(this.props.onSave){
       this.props.onSave({ collaborators });
       this.props.toggleModal();
@@ -70,7 +82,7 @@ export default class SharingDialog extends Component {
         url: null
       }
     };
-    let collabsList = (this.state && this.state.collaborators) ? this.state.collaborators.map((collaborator, i) => {
+    let collabsList = (this.state.collaborators && this.state.collaborators) ? this.state.collaborators.map((collaborator, i) => {
       return (
         <ListItem
           key={`${this.props.project.name}-Collab-${i}`}
@@ -84,7 +96,7 @@ export default class SharingDialog extends Component {
             <RemoveIcon
               color={Colors.red500}
               hoverColor={Colors.red800}
-              onClick={ this.removeNewCollab.bind(this, i) }
+              onClick={ this.removeCollab.bind(this, i) }
             />
           }
           primaryText={ collaborator.username }
@@ -121,7 +133,7 @@ export default class SharingDialog extends Component {
         contentStyle={{'width': '30%'}}
       >
       {
-      this.state.collaborators ?
+      this.props.project.collaborators ?
         <List>
         { collabsList }
         </List>

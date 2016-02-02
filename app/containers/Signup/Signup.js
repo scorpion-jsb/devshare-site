@@ -51,7 +51,7 @@ class Signup extends Component {
    * @description Initiate Google signup through redux-grout action (popup)
    */
   googleSignup = () => {
-    this.props.login('google');
+    this.props.signup('google');
     this.goAfterLoggedIn();
   };
   //TODO: Replace this with redux-rx

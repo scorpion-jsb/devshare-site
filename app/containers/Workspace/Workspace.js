@@ -2,7 +2,8 @@ import {
   merge, toArray, find,
   findIndex, isFunction,
   isUndefined, isString,
-  each, isEqual, debounce
+  each, isEqual, debounce,
+  last
 } from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
@@ -22,6 +23,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import './Workspace.scss';
 
 let grout = new Grout();
+let fileEntityBlackList = ['.DS_Store', 'node_modules'];
 
 class Workspace extends Component {
   constructor() {
@@ -158,9 +160,9 @@ class Workspace extends Component {
   readAndSaveFileEntry = (entry) => {
     entry.file(file => {
       let reader = new FileReader();
-      let scopedAddFile = this.addFile.bind(this);
+      let parent = this;
       reader.onloadend = function(e) {
-        scopedAddFile(entry.fullPath, this.result);
+        parent.addFile(entry.fullPath, this.result);
       }
       reader.readAsText(file);
     })
@@ -184,6 +186,9 @@ class Workspace extends Component {
     }
 
     each(entries, entry => {
+      if (fileEntityBlackList.indexOf(last(entry.fullPath.split('/'))) !== -1) {
+        return void 0;
+      }
       if (entry.isFile) {
         this.readAndSaveFileEntry(entry);
       } else if (entry.isDirectory) {

@@ -44,18 +44,19 @@ class Editor extends Component {
   handleLoad = (editor) => {
     //Load file content
     if(typeof editor.firepad === 'undefined'){
-      let fbRef = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath).fbRef;
+      let file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath);
+      let fbRef = file.fbRef;
       try {
         this.firepad = createFirepad(fbRef, editor, {userId: this.props.account.username || '&'});
         this.firepad.on('ready', () => {
           //TODO: Load original content of file
-          // if(firepad.isHistoryEmpty()){
-          //   file.get().then(fileRes => {
-          //     if(fileRes.content){
-          //       firepad.setText(fileRes.content);
-          //     }
-          //   });
-          // }
+          if(this.firepad.isHistoryEmpty()){
+            file.getOriginalContent().then(content => {
+              if(content){
+                this.firepad.setText(content);
+              }
+            });
+          }
         });
       } catch(err) {
         console.warn('Load firepad error:', err);

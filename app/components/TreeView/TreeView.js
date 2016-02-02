@@ -94,8 +94,24 @@ class TreeView extends Component {
     }
   };
 
-  preventDefault = (e) => {
+  handleFileDrag = (e) => {
     e.preventDefault();
+    this.setState({
+      filesOver: true
+    });
+  };
+
+  handleFileDrop = (e) => {
+    this.props.onFilesDrop(e);
+    this.setState({
+      filesOver: false
+    });
+  };
+
+  handleFileDragLeave = (e) => {
+    this.setState({
+      filesOver: false
+    });
   };
 
   handleEntryClick = (path) => {
@@ -106,6 +122,12 @@ class TreeView extends Component {
 
   render() {
     let structure = this.props.fileStructure.map((entry, i) => {
+      if (!entry.meta) {
+        entry.meta = {
+          entityType: 'folder',
+          name: entry.key
+        }
+      }
       if (entry.meta && (entry.meta.entityType === 'folder')){
         let children = merge({}, entry);
         delete children.key; delete children.meta;
@@ -165,8 +187,8 @@ class TreeView extends Component {
     }
 
     return (
-      <div className="TreeView" onContextMenu={ this.handleRightClick }>
-        <div className="TreeView-Dropzone" onDragOver={ this.preventDefault } onDrop={ this.props.onFilesDrop }>
+      <div className={ this.state.filesOver ? "TreeView TreeView--FileHover" : "TreeView"} onContextMenu={ this.handleRightClick }>
+        <div className="TreeView-Dropzone" onDragOver={ this.handleFileDrag } onDragLeave={ this.handleFileDragLeave } onDrop={ this.handleFileDrop }>
           <div className="TreeView-Container">
             <ol className="TreeView-Structure">
               { noFiles }

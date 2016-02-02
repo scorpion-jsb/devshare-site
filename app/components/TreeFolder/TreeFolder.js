@@ -28,7 +28,13 @@ class TreeFolder extends Component {
     let children;
     if(this.props.children) {
       let i = 0;
-      children = map(this.props.children, (entry) => {
+      children = map(this.props.children, (entry, key) => {
+        if (!entry.meta) {
+          entry.meta = {
+            entityType: 'folder',
+            name: key
+          }
+        }
         if(entry.meta && (entry.meta.entityType === 'folder')){
           let children = merge({}, entry);
           delete children.key; delete children.meta;

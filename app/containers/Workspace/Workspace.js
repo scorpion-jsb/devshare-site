@@ -158,14 +158,20 @@ class Workspace extends Component {
   };
 
   readAndSaveFileEntry = (entry) => {
-    entry.file(file => {
+    let parent = this;
+    function readAndSaveFile(file, path) {
       let reader = new FileReader();
-      let parent = this;
       reader.onloadend = function(e) {
-        parent.addFile(entry.fullPath, this.result);
+        parent.addFile(path, this.result);
       }
       reader.readAsText(file);
-    })
+    }
+    if (entry.webkitRelativePath) {
+      return readAndSaveFile(entry, entry.webkitRelativePath)  ;
+    }
+    entry.file(file => {
+      readAndSaveFile(file, entry.fullPath);
+    });
   };
 
   readAndSaveFolderEntry = (entry) => {
@@ -203,6 +209,17 @@ class Workspace extends Component {
     each(items, item => {
       var entry = item.webkitGetAsEntry();
       this.handleEntries(entry);
+    });
+  };
+
+  onFilesAdd = (e) => {
+    e.preventDefault();
+    let items = e.target.files;
+    each(items, item => {
+      if (fileEntityBlackList.indexOf(last(item.webkitRelativePath.split('/'))) !== -1) {
+        return void 0;
+      }
+      this.readAndSaveFileEntry(item);
     });
   };
 
@@ -258,6 +275,7 @@ class Workspace extends Component {
           onAddFileClick={ this.showPopover.bind(this, 'file') }
           onAddFolderClick={ this.showPopover.bind(this, 'folder') }
           onFilesDrop={ this.onFilesDrop }
+          onFilesAdd={ this.onFilesAdd }
           onFileDelete={ this.deleteFile }
         />
         <Pane

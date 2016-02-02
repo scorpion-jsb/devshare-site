@@ -43259,12 +43259,12 @@ return /******/ (function(modules) { // webpackBootstrap
 		  */
 	
 			_createClass(File, [{
-				key: 'getContent',
+				key: 'getOriginalContent',
 	
 				/**
 		   * @description Get a file's content from default location (Firebase)
 		   */
-				value: function getContent() {
+				value: function getOriginalContent() {
 					var _this2 = this;
 	
 					return new Promise(function (resolve, reject) {
@@ -43284,36 +43284,13 @@ return /******/ (function(modules) { // webpackBootstrap
 									description: 'File content loaded.',
 									content: _this2.content, func: 'get', obj: 'File'
 								});
-								return _this2.headless.setText(_this2.content, function (error) {
-									_this2.headless.dispose();
-									if (!error) {
-										logger.log({
-											description: 'File content set to Headless Firepad.',
-											func: 'get', obj: 'File'
-										});
-										return resolve(_this2.content);
-									}
-									logger.error({
-										description: 'Error setting file text.',
-										error: error, func: 'get', obj: 'File'
-									});
-									reject(error);
-								});
+								return resolve(_this2.content);
 							}
-	
-							//Get firepad text from history
-							_this2.headless.getText(function (text) {
-								logger.log({
-									description: 'Text loaded from headless',
-									text: text, func: 'get', obj: 'File'
-								});
-								_this2.content = text;
-								// this.fbRef.once('value', (fileSnap) => {
-								// 	let meta = fileSnap.child('meta').val();
-								// });
-								_this2.headless.dispose();
-								resolve(_this2.content);
+							logger.warn({
+								description: 'Cannot get content of file with existing firepad content.',
+								func: 'get', obj: 'File'
 							});
+							reject({ message: 'no orignal content or has existing history' });
 						});
 					});
 				}
@@ -43487,25 +43464,6 @@ return /******/ (function(modules) { // webpackBootstrap
 				get: function get() {
 					var re = /(?:\.([^.]+))?$/;
 					return re.exec(this.name)[1];
-				}
-	
-				/**
-		   * @description Headless Firepad at file location
-		   */
-	
-			}, {
-				key: 'headless',
-				get: function get() {
-					var firepad = _firebase2.default.getFirepadLib();
-					if (typeof firepad === 'undefined' || typeof firepad.Headless !== 'function') {
-						logger.error({
-							description: 'Firepad is required to get file content.',
-							func: 'get', obj: 'File'
-						});
-						throw Error('Firepad is required to get file content');
-					} else {
-						return firepad.Headless(this.fbRef);
-					}
 				}
 			}]);
 	
@@ -44078,16 +44036,6 @@ return /******/ (function(modules) { // webpackBootstrap
 						fbData.original = content;
 					}
 					return new Promise(function (resolve, reject) {
-						if (entityType === 'file' && fbData.original) {
-							(function () {
-								var editor = createAce('headless');
-								var firepad = window.Firepad.fromACE(fbRef, editor);
-								firepad.on('ready', function () {
-									firepad.setText(content);
-									editor.destroy();
-								});
-							})();
-						}
 						fbRef.update(fbData, function (error) {
 							if (!error) {
 								logger.info({
@@ -92212,6 +92160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var grout = new _kyperGrout2.default();
+	var fileEntityBlackList = ['.DS_Store', 'node_modules'];
 	
 	var Workspace = function (_Component) {
 	  _inherits(Workspace, _Component);
@@ -92305,13 +92254,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.readAndSaveFileEntry = function (entry) {
-	      entry.file(function (file) {
+	      var parent = _this;
+	      function readAndSaveFile(file, path) {
 	        var reader = new FileReader();
-	        var scopedAddFile = _this.addFile.bind(_this);
 	        reader.onloadend = function (e) {
-	          scopedAddFile(entry.fullPath, this.result);
+	          parent.addFile(path, this.result);
 	        };
 	        reader.readAsText(file);
+	      }
+	      if (entry.webkitRelativePath) {
+	        return readAndSaveFile(entry, entry.webkitRelativePath);
+	      }
+	      entry.file(function (file) {
+	        readAndSaveFile(file, entry.fullPath);
 	      });
 	    };
 	
@@ -92333,6 +92288,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      (0, _lodash.each)(entries, function (entry) {
+	        if (fileEntityBlackList.indexOf((0, _lodash.last)(entry.fullPath.split('/'))) !== -1) {
+	          return void 0;
+	        }
 	        if (entry.isFile) {
 	          _this.readAndSaveFileEntry(entry);
 	        } else if (entry.isDirectory) {
@@ -92347,6 +92305,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      (0, _lodash.each)(items, function (item) {
 	        var entry = item.webkitGetAsEntry();
 	        _this.handleEntries(entry);
+	      });
+	    };
+	
+	    _this.onFilesAdd = function (e) {
+	      e.preventDefault();
+	      var items = e.target.files;
+	      (0, _lodash.each)(items, function (item) {
+	        if (fileEntityBlackList.indexOf((0, _lodash.last)(item.webkitRelativePath.split('/'))) !== -1) {
+	          return void 0;
+	        }
+	        _this.readAndSaveFileEntry(item);
 	      });
 	    };
 	
@@ -92456,6 +92425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onAddFileClick: this.showPopover.bind(this, 'file'),
 	          onAddFolderClick: this.showPopover.bind(this, 'folder'),
 	          onFilesDrop: this.onFilesDrop,
+	          onFilesAdd: this.onFilesAdd,
 	          onFileDelete: this.deleteFile
 	        }),
 	        _react2.default.createElement(_Pane2.default, {
@@ -95438,11 +95408,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SideBar).call(this, props));
 	
+	    _this.handleFileUploadClick = function (e) {
+	      _this.refs.fileInput.click();
+	    };
+	
+	    _this.handleFileUpload = function (e) {
+	      _this.props.onFilesAdd(e);
+	    };
+	
 	    _this.selectProject = _this.selectProject.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(SideBar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.refs.fileInput.setAttribute('webkitdirectory', '');
+	    }
+	  }, {
 	    key: 'selectProject',
 	    value: function selectProject(e, i, name) {
 	      if (this.props && this.props.onProjectSelect) {
@@ -95482,6 +95465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onFilesDrop: this.props.onFilesDrop,
 	          onFileDelete: this.props.onFileDelete
 	        }),
+	        _react2.default.createElement('input', { type: 'file', ref: 'fileInput', style: { visibility: 'hidden' }, onChange: this.handleFileUpload, multiple: true }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'SideBar-Buttons' },
@@ -95492,7 +95476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { style: iconButtonStyle, iconStyle: { width: '100%', height: '100%' } },
 	                _react2.default.createElement(_addCircle2.default, null)
 	              ) },
-	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Upload files' }),
+	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Upload files', onClick: this.handleFileUploadClick }),
 	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Download files' }),
 	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add file', onClick: this.props.onAddFileClick.bind(this, '/') }),
 	            _react2.default.createElement(_menuItem2.default, { primaryText: 'Add folder', onClick: this.props.onAddFolderClick.bind(this, '/') })
@@ -95527,7 +95511,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onAddFolderClick: _react.PropTypes.func,
 	  loadFiles: _react.PropTypes.func,
 	  onFilesDrop: _react.PropTypes.func,
-	  onSharingClick: _react.PropTypes.func
+	  onSharingClick: _react.PropTypes.func,
+	  onFilesAdd: _react.PropTypes.func
 	};
 	exports.default = SideBar;
 	module.exports = exports['default'];
@@ -95651,8 +95636,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	
-	    _this.preventDefault = function (e) {
+	    _this.handleFileDrag = function (e) {
 	      e.preventDefault();
+	      _this.setState({
+	        filesOver: true
+	      });
+	    };
+	
+	    _this.handleFileDrop = function (e) {
+	      _this.props.onFilesDrop(e);
+	      _this.setState({
+	        filesOver: false
+	      });
+	    };
+	
+	    _this.handleFileDragLeave = function (e) {
+	      _this.setState({
+	        filesOver: false
+	      });
 	    };
 	
 	    _this.handleEntryClick = function (path) {
@@ -95671,6 +95672,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this2 = this;
 	
 	      var structure = this.props.fileStructure.map(function (entry, i) {
+	        if (!entry.meta) {
+	          entry.meta = {
+	            entityType: 'folder',
+	            name: entry.key
+	          };
+	        }
 	        if (entry.meta && entry.meta.entityType === 'folder') {
 	          var children = (0, _lodash.merge)({}, entry);
 	          delete children.key;delete children.meta;
@@ -95741,10 +95748,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'TreeView', onContextMenu: this.handleRightClick },
+	        { className: this.state.filesOver ? "TreeView TreeView--FileHover" : "TreeView", onContextMenu: this.handleRightClick },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'TreeView-Dropzone', onDragOver: this.preventDefault, onDrop: this.props.onFilesDrop },
+	          { className: 'TreeView-Dropzone', onDragOver: this.handleFileDrag, onDragLeave: this.handleFileDragLeave, onDrop: this.handleFileDrop },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'TreeView-Container' },
@@ -95863,7 +95870,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (this.props.children) {
 	        (function () {
 	          var i = 0;
-	          children = (0, _lodash.map)(_this2.props.children, function (entry) {
+	          children = (0, _lodash.map)(_this2.props.children, function (entry, key) {
+	            if (!entry.meta) {
+	              entry.meta = {
+	                entityType: 'folder',
+	                name: key
+	              };
+	            }
 	            if (entry.meta && entry.meta.entityType === 'folder') {
 	              var _children = (0, _lodash.merge)({}, entry);
 	              delete _children.key;delete _children.meta;
@@ -99869,22 +99882,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.handleLoad = function (editor) {
 	      //Load file content
 	      if (typeof editor.firepad === 'undefined') {
-	        var fbRef = grout.Project(_this.props.project.name, _this.props.project.owner.username).File(_this.props.filePath).fbRef;
-	        try {
-	          _this.firepad = createFirepad(fbRef, editor, { userId: _this.props.account.username || '&' });
-	          _this.firepad.on('ready', function () {
-	            //TODO: Load original content of file
-	            // if(firepad.isHistoryEmpty()){
-	            //   file.get().then(fileRes => {
-	            //     if(fileRes.content){
-	            //       firepad.setText(fileRes.content);
-	            //     }
-	            //   });
-	            // }
-	          });
-	        } catch (err) {
-	          console.warn('Load firepad error:', err);
-	        }
+	        (function () {
+	          var file = grout.Project(_this.props.project.name, _this.props.project.owner.username).File(_this.props.filePath);
+	          var fbRef = file.fbRef;
+	          try {
+	            _this.firepad = createFirepad(fbRef, editor, { userId: _this.props.account.username || '&' });
+	            _this.firepad.on('ready', function () {
+	              //TODO: Load original content of file
+	              if (_this.firepad.isHistoryEmpty()) {
+	                file.getOriginalContent().then(function (content) {
+	                  if (content) {
+	                    _this.firepad.setText(content);
+	                  }
+	                });
+	              }
+	            });
+	          } catch (err) {
+	            console.warn('Load firepad error:', err);
+	          }
+	        })();
 	      }
 	    };
 	

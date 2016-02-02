@@ -32,13 +32,28 @@ export default class SideBar extends Component {
     loadFiles: PropTypes.func,
     onFilesDrop: PropTypes.func,
     onSharingClick: PropTypes.func,
+    onFilesAdd: PropTypes.func,
   };
+
+  componentDidMount() {
+    this.refs.fileInput.setAttribute('webkitdirectory', '');
+  }
+
   selectProject(e, i, name) {
     if(this.props && this.props.onProjectSelect){
       let proj = find(this.props.projects, { name });
       this.props.onProjectSelect(proj, i);
     }
   }
+
+  handleFileUploadClick = (e) => {
+    this.refs.fileInput.click();
+  };
+
+  handleFileUpload = (e) => {
+    this.props.onFilesAdd(e);
+  };
+
   render() {
     const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true;
     const iconButtonStyle = { width: '60px', height: '60px' };
@@ -70,10 +85,11 @@ export default class SideBar extends Component {
           onFilesDrop={ this.props.onFilesDrop }
           onFileDelete={ this.props.onFileDelete }
         />
+        <input type="file" ref="fileInput" style={{visibility: 'hidden'}} onChange={ this.handleFileUpload } multiple />
 
         <div className="SideBar-Buttons">
           <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
-            <MenuItem primaryText="Upload files" />
+            <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
             <MenuItem primaryText="Download files" />
             <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
             <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />

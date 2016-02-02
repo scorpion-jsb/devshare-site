@@ -90,7 +90,7 @@ export default class SideBar extends Component {
         <div className="SideBar-Buttons">
           <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
             <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
-            <MenuItem primaryText="Download files" />
+            <MenuItem primaryText="Download files" onClick={ this.props.onDownloadFileClick } />
             <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
             <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
             {/*<MenuItem primaryText="Add files from Github" />*/}

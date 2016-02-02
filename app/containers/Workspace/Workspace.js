@@ -250,6 +250,10 @@ class Workspace extends Component {
     });
   };
 
+  handleDowloadFileClick = (e) => {
+    this.props.downloadFiles(this.props.project);
+  };
+
   render() {
     return (
       <div className="Workspace" ref="workspace">
@@ -277,6 +281,7 @@ class Workspace extends Component {
           onFilesDrop={ this.onFilesDrop }
           onFilesAdd={ this.onFilesAdd }
           onFileDelete={ this.deleteFile }
+          onDownloadFileClick={ this.handleDowloadFileClick }
         />
         <Pane
           tabs={ this.props.tabs }

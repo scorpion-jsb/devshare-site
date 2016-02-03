@@ -3,7 +3,7 @@ import rootReducer from '../reducers';
 import thunk from 'redux-thunk';
 import routes from '../routes';
 import { createMiddleware } from 'redux-grout';
-const devSettings = {logLevel: 'trace', envName: 'local'};
+const devSettings = {logLevel: 'warn', envName: 'prod'};
 let groutMiddleware = createMiddleware('tessellate', devSettings);
 
 export default function configureStore(initialState, reduxReactRouter, createHistory) {

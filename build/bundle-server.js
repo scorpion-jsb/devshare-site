@@ -19029,7 +19029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*! grout.js v0.2.1 | (c) Kyper Digital Inc. */
+	/*! grout.js v0.2.2 | (c) Kyper Digital Inc. */
 	(function webpackUniversalModuleDefinition(root, factory) {
 		if(true)
 			module.exports = factory();
@@ -28321,6 +28321,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		var _File2 = _interopRequireDefault(_File);
 	
+		var _FileSystemEntity2 = __webpack_require__(179);
+	
+		var _FileSystemEntity3 = _interopRequireDefault(_FileSystemEntity2);
+	
 		var _firebase = __webpack_require__(177);
 	
 		var _firebase2 = _interopRequireDefault(_firebase);
@@ -28482,6 +28486,22 @@ return /******/ (function(modules) { // webpackBootstrap
 						func: 'File', obj: 'Project'
 					});
 					return file;
+				}
+	
+				/**
+		   * @description FileSystemEntity within project
+		   */
+	
+			}, {
+				key: 'FileSystemEntity',
+				value: function FileSystemEntity(path) {
+					var fileSystemEntity = new _FileSystemEntity3.default(this, path);
+					logger.debug({
+						description: 'Projects fileSystemEntity action called.',
+						path: path, project: this, fileSystemEntity: fileSystemEntity,
+						func: 'FileSystemEntity', obj: 'Project'
+					});
+					return fileSystemEntity;
 				}
 	
 				/**
@@ -28862,9 +28882,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		var _jszip2 = _interopRequireDefault(_jszip);
 	
-		var _filesaver = __webpack_require__(228);
+		var _nodeSafeFilesaver = __webpack_require__(228);
 	
-		var _filesaver2 = _interopRequireDefault(_filesaver);
+		var _nodeSafeFilesaver2 = _interopRequireDefault(_nodeSafeFilesaver);
 	
 		function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28965,7 +28985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						handleZip(directory);
 						return Promise.all(promiseArray).then(function () {
 							var content = zip.generate({ type: "blob" });
-							return _filesaver2.default.saveAs(content, _this2.project.name + '-devShare-export.zip');
+							return _nodeSafeFilesaver2.default.saveAs(content, _this2.project.name + '-devShare-export.zip');
 						});
 					});
 				}
@@ -41470,7 +41490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
 		 * A saveAs() FileSaver implementation.
-		 * 1.1.20150716
+		 * 2015-05-07.2
 		 *
 		 * By Eli Grey, http://eligrey.com
 		 * License: X11/MIT
@@ -41484,6 +41504,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		var saveAs = saveAs || (function(view) {
 			"use strict";
+			
+			// If no view just quit, probably we are in node.js
+			if(typeof view === "undefined") {
+			  	return;
+			}
+			
 			// IE <10 is explicitly unsupported
 			if (typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
 				return;
@@ -41497,7 +41523,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
 				, can_use_save_link = "download" in save_link
 				, click = function(node) {
-					var event = new MouseEvent("click");
+					var event = doc.createEvent("MouseEvents");
+					event.initMouseEvent(
+						"click", true, false, view, 0, 0, 0, 0, 0
+						, false, false, false, false, 0, null
+					);
 					node.dispatchEvent(event);
 				}
 				, webkit_req_fs = view.webkitRequestFileSystem
@@ -41548,10 +41578,8 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 					return blob;
 				}
-				, FileSaver = function(blob, name, no_auto_bom) {
-					if (!no_auto_bom) {
-						blob = auto_bom(blob);
-					}
+				, FileSaver = function(blob, name) {
+					blob = auto_bom(blob);
 					// First try a.download, then web filesystem, then object URLs
 					var
 						  filesaver = this
@@ -41599,12 +41627,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						object_url = get_URL().createObjectURL(blob);
 						save_link.href = object_url;
 						save_link.download = name;
-						setTimeout(function() {
-							click(save_link);
-							dispatch_all();
-							revoke(object_url);
-							filesaver.readyState = filesaver.DONE;
-						});
+						click(save_link);
+						filesaver.readyState = filesaver.DONE;
+						dispatch_all();
+						revoke(object_url);
 						return;
 					}
 					// Object and web filesystem URLs have a problem saving in Google Chrome when
@@ -41675,17 +41701,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					}), fs_error);
 				}
 				, FS_proto = FileSaver.prototype
-				, saveAs = function(blob, name, no_auto_bom) {
-					return new FileSaver(blob, name, no_auto_bom);
+				, saveAs = function(blob, name) {
+					return new FileSaver(blob, name);
 				}
 			;
 			// IE 10+ (native saveAs)
 			if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
-				return function(blob, name, no_auto_bom) {
-					if (!no_auto_bom) {
-						blob = auto_bom(blob);
-					}
-					return navigator.msSaveOrOpenBlob(blob, name || "download");
+				return function(blob, name) {
+					return navigator.msSaveOrOpenBlob(auto_bom(blob), name);
 				};
 			}
 	
@@ -93202,10 +93225,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    _this.handleNewClick = function (type) {
 	      if (type === 'file') {
-	        _this.props.onAddFileClick(_this.state.selectedPath);
+	        _this.props.onAddFileClick(_this.getParentOfPath(_this.state.selectedPath));
 	      }
 	      if (type === 'folder') {
-	        _this.props.onAddFolderClick(_this.state.selectedPath);
+	        _this.props.onAddFolderClick(_this.getParentOfPath(_this.state.selectedPath));
 	      }
 	    };
 	
@@ -93244,20 +93267,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return '/';
 	      }
 	      var type = el.getAttribute('data-reactid').split('$child-')[1].split('-')[0].toLowerCase();
-	      var lastIndex = path.lastIndexOf("/");
+	      var lastIndex = path.lastIndexOf('/');
 	      if (lastIndex < 0 && type === 'folder') {
 	        return path + '/';
 	      }
-	      return path.substring(0, lastIndex + 1) || '/';
+	      return path;
+	    };
+	
+	    _this.getParentOfPath = function (path) {
+	      return path.substring(0, path.lastIndexOf('/') + 1) || '/';
 	    };
 	
 	    _this.handleDeleteClick = function (e) {
 	      e.preventDefault();
-	      var fileData = _this.props.fileStructure[_this.inputKey].meta;
-	      console.log('handle delete click:', fileData);
-	      if (_this.inputKey) {
-	        _this.props.onFileDelete({ projectName: _this.props.projectName, path: fileData.path || fileData.name });
-	      }
+	      console.log('this state selected', _this.state.selectedPath);
+	      _this.props.onFileDelete(_this.state.selectedPath);
 	    };
 	
 	    _this.handleFileDrag = function (e) {
@@ -93297,9 +93321,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      var structure = this.props.fileStructure.map(function (entry, i) {
 	        if (!entry.meta) {
+	          var firstChildPath = entry[Object.keys(entry)[0]].meta.path;
+	          var childPathSplit = firstChildPath.split('/');
 	          entry.meta = {
 	            entityType: 'folder',
-	            name: entry.key
+	            name: entry.key,
+	            path: childPathSplit.slice(0, -1).join('/')
 	          };
 	        }
 	        if (entry.meta && entry.meta.entityType === 'folder') {
@@ -93401,7 +93428,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              _react2.default.createElement(
 	                'li',
 	                { onClick: this.handleDeleteClick },
-	                'Delete File'
+	                'Delete'
 	              )
 	            )
 	          )
@@ -93496,9 +93523,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var i = 0;
 	          children = (0, _lodash.map)(_this2.props.children, function (entry, key) {
 	            if (!entry.meta) {
+	              var firstChildPath = entry[Object.keys(entry)[0]].meta.path;
+	              var childPathSplit = firstChildPath.split('/');
 	              entry.meta = {
 	                entityType: 'folder',
-	                name: key
+	                name: key,
+	                path: childPathSplit.slice(0, -1).join('/')
 	              };
 	            }
 	            if (entry.meta && entry.meta.entityType === 'folder') {

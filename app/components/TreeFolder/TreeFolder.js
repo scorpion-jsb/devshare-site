@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { map, merge } from 'lodash';
+import { map, merge  } from 'lodash';
 import FontIcon from 'material-ui/lib/font-icon';
 //Components
 import TreeFile from '../TreeFile';
@@ -30,9 +30,12 @@ class TreeFolder extends Component {
       let i = 0;
       children = map(this.props.children, (entry, key) => {
         if (!entry.meta) {
+          let firstChildPath = entry[Object.keys(entry)[0]].meta.path;
+          let childPathSplit = firstChildPath.split('/');
           entry.meta = {
             entityType: 'folder',
-            name: key
+            name: key,
+            path: childPathSplit.slice(0, -1).join('/')
           }
         }
         if(entry.meta && (entry.meta.entityType === 'folder')){

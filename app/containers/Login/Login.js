@@ -41,6 +41,7 @@ class Login extends Component {
   };
   googleLogin = () => {
     this.props.login('google');
+    this.goAfterLoggedIn();
   };
   render() {
     if(!this.props.account.isFetching){

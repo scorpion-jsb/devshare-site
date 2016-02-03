@@ -253,6 +253,14 @@ class Workspace extends Component {
   handleDowloadFileClick = (e) => {
     this.props.downloadFiles(this.props.project);
   };
+  
+  addCollaborator = (username) => {
+    this.props.addCollaborator(this.props.project, username);
+  };
+
+  removeCollaborator = (username) => {
+    this.props.removeCollaborator(this.props.project, username);
+  };
 
   render() {
     return (
@@ -306,6 +314,8 @@ class Workspace extends Component {
             toggleModal={ this.toggleSharingModal }
             onAccountSearch={ this.searchUsers }
             onSave={ this.saveSettings }
+            onAddCollab={ this.addCollaborator }
+            onRemoveCollab={ this.removeCollaborator }
           /> : null
         }
       </div>

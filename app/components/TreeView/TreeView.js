@@ -36,10 +36,10 @@ class TreeView extends Component {
 
   handleNewClick = (type) => {
     if (type === 'file') {
-      this.props.onAddFileClick(this.state.selectedPath);
+      this.props.onAddFileClick(this.getParentOfPath(this.state.selectedPath));
     }
     if (type === 'folder') {
-      this.props.onAddFolderClick(this.state.selectedPath);
+      this.props.onAddFolderClick(this.getParentOfPath(this.state.selectedPath));
     }
   };
 
@@ -78,20 +78,21 @@ class TreeView extends Component {
       return '/'
     }
     const type = el.getAttribute('data-reactid').split('$child-')[1].split('-')[0].toLowerCase();
-    const lastIndex = path.lastIndexOf("/");
+    const lastIndex = path.lastIndexOf('/');
     if (lastIndex < 0 && type === 'folder') {
       return `${path}/`;
     }
-    return path.substring(0, lastIndex + 1) || '/';
+    return path;
+  };
+
+  getParentOfPath = path => {
+    return path.substring(0, path.lastIndexOf('/') + 1) || '/';
   };
 
   handleDeleteClick = (e) => {
     e.preventDefault();
-    let fileData = this.props.fileStructure[this.inputKey].meta;
-    console.log('handle delete click:', fileData);
-    if(this.inputKey){
-      this.props.onFileDelete({projectName: this.props.projectName, path: fileData.path || fileData.name });
-    }
+    console.log('this state selected', this.state.selectedPath);
+    this.props.onFileDelete(this.state.selectedPath);
   };
 
   handleFileDrag = (e) => {
@@ -122,12 +123,15 @@ class TreeView extends Component {
 
   render() {
     let structure = this.props.fileStructure.map((entry, i) => {
-      if (!entry.meta) {
-        entry.meta = {
-          entityType: 'folder',
-          name: entry.key
+        if (!entry.meta) {
+          let firstChildPath = entry[Object.keys(entry)[0]].meta.path;
+          let childPathSplit = firstChildPath.split('/');
+          entry.meta = {
+            entityType: 'folder',
+            name: entry.key,
+            path: childPathSplit.slice(0, -1).join('/')
+          }
         }
-      }
       if (entry.meta && (entry.meta.entityType === 'folder')){
         let children = merge({}, entry);
         delete children.key; delete children.meta;
@@ -197,7 +201,7 @@ class TreeView extends Component {
             <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
               <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
               <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
-              <li onClick={ this.handleDeleteClick }>Delete File</li>
+              <li onClick={ this.handleDeleteClick }>Delete</li>
             </ul>
           </div>
         </div>

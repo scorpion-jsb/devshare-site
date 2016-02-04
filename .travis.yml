@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "4.2.2"
+branches:
+  only:
+    - master
+sudo: false
+script: "npm run build"
+addons:
+  code_climate:
+    repo_token: $CODE_CLIMATE_TOKEN
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $AWS_KEY
+  secret_access_key: $AWS_SECRET
+  region: us-east-1
+  app: devshare
+  env: devshare-stg
+  bucket_name: $BUCKET

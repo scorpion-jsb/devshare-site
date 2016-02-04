@@ -60,10 +60,15 @@ class Projects extends Component {
     });
   };
 
-  saveCurrentProject = () => {
-
+  addCollaborator = (username) => {
+    console.log('calling add collaborator with', username);
+    this.props.addCollaborator(this.state.currentProject, username);
   };
 
+  removeCollaborator = (username) => {
+    console.log('calling remove collaborator with', username);
+    this.props.removeCollaborator(this.state.currentProject, username);
+  };
   render(){
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (
@@ -106,8 +111,9 @@ class Projects extends Component {
             project={ this.state.currentProject }
             modalOpen={ this.state.addCollabModal }
             toggleModal={ this.toggleModal.bind(this, 'addCollab') }
-            onAccountSearch={ this.searchUsers }
-            onSave={ this.saveCurrentProject }
+            onUserSearch={ this.searchUsers }
+            onAddCollab={ this.addCollaborator }
+            onRemoveCollab={ this.removeCollaborator }
           /> : null
         }
       </div>

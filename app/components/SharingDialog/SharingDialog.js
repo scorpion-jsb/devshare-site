@@ -25,7 +25,7 @@ export default class SharingDialog extends Component {
     project: PropTypes.object.isRequired,
     modalOpen: PropTypes.bool,
     toggleModal: PropTypes.func,
-    onAccountSearch: PropTypes.func.isRequired,
+    onUserSearch: PropTypes.func.isRequired,
     onSave: PropTypes.func,
     onRemoveCollab: PropTypes.func,
     onAddCollab: PropTypes.func
@@ -36,7 +36,7 @@ export default class SharingDialog extends Component {
   }
 
   searchAccounts = (q) => {
-    this.props.onAccountSearch(q, (err, matchingUsers) => {
+    this.props.onUserSearch(q, (err, matchingUsers) => {
       if(!err){
         this.setState({ matchingUsers });
       }

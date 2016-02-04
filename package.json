@@ -4,8 +4,8 @@
   "main": "bin/server.js",
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
-    "build-bundle": "webpack --stats --progress --config webpack-production.config",
-    "build-server": "webpack --stats --progress --config webpack-server-production.config",
+    "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
+    "build-server": "webpack -p --stats --progress --config webpack-server-production.config",
     "copy-assets": "cp -a assets build",
     "copy-stats": "node ./lib/copy-stats",
     "copy": "npm run copy-assets && npm run copy-stats",
@@ -52,6 +52,7 @@
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-lodash": "^2.0.1",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.1.18",

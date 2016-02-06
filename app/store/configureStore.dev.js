@@ -3,16 +3,14 @@ import rootReducer from '../reducers';
 import thunk from 'redux-thunk';
 import routes from '../routes';
 import { createMiddleware } from 'redux-grout';
+import { syncHistory } from 'react-router-redux';
 const devSettings = {logLevel: 'warn', envName: 'prod'};
 let groutMiddleware = createMiddleware('tessellate', devSettings);
 
-export default function configureStore(initialState, reduxReactRouter, createHistory) {
+export default function configureStore(initialState, history) {
+  const reduxRouterMiddleware = syncHistory(history);
   const createStoreWithMiddleware = compose(
-    applyMiddleware(thunk, groutMiddleware),
-    reduxReactRouter({
-      routes,
-      createHistory
-    }),
+    applyMiddleware(thunk, groutMiddleware, reduxRouterMiddleware),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )(createStore);
   const store = createStoreWithMiddleware(rootReducer, initialState);

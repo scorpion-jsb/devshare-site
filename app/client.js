@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router';
 import Grout from 'kyper-grout';
 
 let grout = new Grout();
-let initialData = {entities: {accounts:{}}, account: {}};
+let initialData = {entities: {projects: {}, accounts: {}}};
 
 if(grout.currentUser){
   initialData.account = grout.currentUser;

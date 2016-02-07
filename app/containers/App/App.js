@@ -28,11 +28,11 @@ class Main extends Component {
   };
 
   handleClick(loc) {
-    this.props.history.pushState(null, `/${loc}`);
+    this.props.history.push(null, `/${loc}`);
   }
   handleLogout() {
     this.props.logout();
-    this.props.history.pushState(null, `/`);
+    this.props.history.push(null, `/`);
   }
   render() {
     return (

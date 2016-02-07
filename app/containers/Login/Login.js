@@ -9,6 +9,8 @@ import CircularProgress from 'material-ui/lib/circular-progress';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import GoogleButton from '../../components/GoogleButton/GoogleButton';
 import Snackbar from 'material-ui/lib/snackbar';
+import RaisedButton from 'material-ui/lib/raised-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
 class Login extends Component {
    constructor(props) {
@@ -32,6 +34,7 @@ class Login extends Component {
       }
     }, 100);
   };
+
   handleLogin = (loginData) => {
     this.setState({
       snackCanOpen: true
@@ -39,10 +42,12 @@ class Login extends Component {
     this.props.login(loginData);
     this.goAfterLoggedIn();
   };
-  googleLogin = () => {
-    this.props.login('google');
+
+  providerLogin = (provider) => {
+    this.props.login(provider);
     this.goAfterLoggedIn();
   };
+
   render() {
     if(!this.props.account.isFetching){
       return (
@@ -53,7 +58,12 @@ class Login extends Component {
           <div className="Login-Or">
             or
           </div>
-          <GoogleButton onClick={ this.googleLogin } />
+          <GoogleButton onClick={ this.providerLogin.bind(this, 'google') } />
+          <RaisedButton
+            label="Sign in With GitHub"
+            secondary={ true }
+            onTouchTap={ this.providerLogin.bind(this, 'github') }
+          />
           <div className="Login-Signup">
             <span className="Login-Signup-Label">
               Need an account?

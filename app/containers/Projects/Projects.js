@@ -46,9 +46,9 @@ class Projects extends Component {
     this.props.history.pushState(null, `/${project.owner.username}/${project.name}`);
   };
 
-  addCollabClick = (currentProject) => {
-    this.setState({ currentProject });
-    this.toggleModal('addCollab');
+  collaboratorClick = (collaborator) => {
+    console.log('collaborator clicked:', collaborator);
+    this.props.history.pushState(null, `/${collaborator.username}`);
   };
 
   searchUsers = (q, cb) => {
@@ -60,6 +60,11 @@ class Projects extends Component {
     });
   };
 
+  addCollabClick = (currentProject) => {
+    this.setState({ currentProject });
+    this.toggleModal('addCollab');
+  };
+
   addCollaborator = (username) => {
     console.log('calling add collaborator with', username);
     this.props.addCollaborator(this.state.currentProject, username);
@@ -69,6 +74,7 @@ class Projects extends Component {
     console.log('calling remove collaborator with', username);
     this.props.removeCollaborator(this.state.currentProject, username);
   };
+
   render(){
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (

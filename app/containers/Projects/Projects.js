@@ -123,7 +123,6 @@ class Projects extends Component {
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  console.log('state', state);
   const {
     entities: { projects }
   } = state;

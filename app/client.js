@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
-import Root from './root';
+import createRoutes from './router';
+import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { reduxReactRouter } from 'redux-router';
 import { browserHistory } from 'react-router';
-import { syncHistory } from 'react-router-redux';
 import Grout from 'kyper-grout';
 
 let grout = new Grout();
@@ -21,5 +20,7 @@ const store = configureStore(initialState, browserHistory);
 let rootElement = document.getElementById('root');
 
 ReactDOM.render(
-  <Root store={ store } />, rootElement
+  <Provider store={ store }>
+    { createRoutes(browserHistory) }
+  </Provider>, rootElement
 );

@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 import thunk from 'redux-thunk';
-import routes from '../routes';
 import { createMiddleware } from 'redux-grout';
 import { syncHistory } from 'react-router-redux';
 const devSettings = {logLevel: 'warn', envName: 'prod'};

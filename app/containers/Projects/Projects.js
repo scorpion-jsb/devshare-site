@@ -80,10 +80,10 @@ class Projects extends Component {
           onSelect={ this.openProject }
         />
       );
-    }) : <span>Click the plus to start a project</span>;
+    }) : <span>No projects yet</span>;
 
     // If username doesn't match route then hide add project tile
-    if (this.props.account.username === this.props.router.params.username) {
+    if (this.props.account.username === this.props.username) {
       projects.unshift((
         <NewProjectTile
           key="Project-New"
@@ -123,11 +123,12 @@ class Projects extends Component {
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {
+  console.log('state', state);
   const {
     entities: { projects }
   } = state;
   const projectsArray = toArray(projects);
-  const username = state.router.params.username;
+  const username = state.router.location.pathname.split('/')[1];
   return {
     account: state.account,
     projects: projectsArray,

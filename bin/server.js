@@ -37,7 +37,7 @@ app.use(handleRender);
 
 function handleRender(req, res) {
   if (typeof renderApp === 'function') {
-    renderApp(function (result) {
+    renderApp(req.url, function (result) {
       res.send(renderIndex({
         hash: stats.hash,
         appData: result.appData,

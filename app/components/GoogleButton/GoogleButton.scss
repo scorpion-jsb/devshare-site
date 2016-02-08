@@ -10,6 +10,7 @@ $googleWidth: $googleHeight * 4;
   height: $googleHeight;
   cursor: pointer;
   text-align: center;
+  min-height: $googleHeight;
   &:focus {
     background: url('https://s3.amazonaws.com/kyper-cdn/img/btn_google_signin_dark_focus.png') no-repeat top left;
     background-size: $googleWidth $googleHeight;

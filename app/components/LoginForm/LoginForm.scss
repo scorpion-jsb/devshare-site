@@ -53,7 +53,18 @@
   &-Progress {
     margin-top: 5rem;
   }
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 958px){
+    &-Recover-Link {
+      font-size: 1rem;
+    }
+    &-Options {
+      flex-direction: column;
+    }
+    &-Remember {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 1000px){
     &-Options {
       flex-direction: column;
     }

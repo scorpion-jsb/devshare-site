@@ -16,9 +16,6 @@ import './Signup.scss';
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.handleSignup = this.handleSignup.bind(this);
-    this.goAfterLoggedIn = this.goAfterLoggedIn.bind(this);
-    this.reset = this.reset.bind(this);
     this.state = {errors:{}, snackCanOpen: true};
   }
 
@@ -31,7 +28,8 @@ class Signup extends Component {
      snackCanOpen: false,
     });
   };
-  reset() {
+
+  reset = () => {
     return this.setState({
       errors:{},
       username: null,
@@ -39,26 +37,29 @@ class Signup extends Component {
       name: null,
       snackCanOpen: true
     });
-  }
+  };
+
   /**
    * @function handleSignup
    * @description Call signup through redux-grout action
    */
-  handleSignup(signupData) {
+  handleSignup = (signupData) => {
     this.setState({
       snackCanOpen: true
     });
     this.props.signup(signupData);
     this.goAfterLoggedIn();
-  }
+  };
+
   /**
-   * @function handleSignup
-   * @description Initiate Google signup through redux-grout action (popup)
+   * @function providerSignup
+   * @description Initiate external providerSignup through redux-grout action (popup)
    */
-  googleSignup = () => {
-    this.props.signup('google');
+  providerSignup = (provider) => {
+    this.props.signup(provider);
     this.goAfterLoggedIn();
   };
+
   //TODO: Replace this with redux-rx
   goAfterLoggedIn() {
     setTimeout(() => {
@@ -69,6 +70,7 @@ class Signup extends Component {
       }
     }, 300);
   }
+
   render() {
     if(!this.props.account.isFetching){
       return (
@@ -79,7 +81,12 @@ class Signup extends Component {
           <div className="Signup-Or">
             or
           </div>
-          <GoogleButton onClick={ this.googleSignup } />
+          <GoogleButton onClick={ this.providerSignup.bind('google') } />
+          <RaisedButton
+            label="Sign up With GitHub"
+            secondary={ true }
+            onTouchTap={ this.providerSignup.bind(this, 'github') }
+          />
           <div className="Signup-Login">
             <span className="Signup-Login-Label">
               Already have an account?

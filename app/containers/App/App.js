@@ -24,15 +24,19 @@ class Main extends Component {
   }
 
   static childContextTypes = {
-    muiTheme: React.PropTypes.object,
+    muiTheme: React.PropTypes.object
+  };
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
   };
 
   handleClick(loc) {
-    this.props.history.push(null, `/${loc}`);
+    this.context.router.push(`/${loc}`);
   }
   handleLogout() {
     this.props.logout();
-    this.props.history.push(null, `/`);
+    this.context.router.push(`/`);
   }
   render() {
     return (

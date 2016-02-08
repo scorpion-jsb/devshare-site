@@ -24,12 +24,16 @@ class Projects extends Component {
     newProjectModal: false
   };
 
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   componentDidMount() {
     this.props.getProjects(this.props.username);
   }
 
   collabClick = (user) => {
-    this.props.history.pushState(null, `/${user.username}`);
+    this.context.router.push(`/${user.username}`);
   };
 
   toggleModal = (name) => {
@@ -43,7 +47,7 @@ class Projects extends Component {
   };
 
   openProject = (project) => {
-    this.props.history.pushState(null, `/${project.owner.username}/${project.name}`);
+    this.context.router.push(`/${project.owner.username}/${project.name}`);
   };
 
   collaboratorClick = (collaborator) => {
@@ -66,12 +70,10 @@ class Projects extends Component {
   };
 
   addCollaborator = (username) => {
-    console.log('calling add collaborator with', username);
     this.props.addCollaborator(this.state.currentProject, username);
   };
 
   removeCollaborator = (username) => {
-    console.log('calling remove collaborator with', username);
     this.props.removeCollaborator(this.state.currentProject, username);
   };
 

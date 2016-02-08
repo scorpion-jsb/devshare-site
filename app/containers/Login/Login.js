@@ -16,7 +16,12 @@ class Login extends Component {
    constructor(props) {
     super(props);
    }
+
    state = {errors:{username:null, password:null}, snackCanOpen: false};
+
+   static contextTypes = {
+     router: React.PropTypes.object.isRequired
+   };
 
    handleRequestClose = () => {
     this.setState({
@@ -28,7 +33,7 @@ class Login extends Component {
   goAfterLoggedIn = () => {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.props.history.pushState(null, `/${this.props.account.username}`);
+        this.context.router.push(`/${this.props.account.username}`);
       } else {
         this.goAfterLoggedIn();
       }

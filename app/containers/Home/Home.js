@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line
 import map from 'lodash/map';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,11 +8,9 @@ import { Actions } from 'redux-grout';
 import './Home.scss';
 //React Components
 import RaisedButton from 'material-ui/lib/raised-button';
-import IconButton from 'material-ui/lib/icon-button';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import Theme from '../../theme';
 import GroupIcon from 'material-ui/lib/svg-icons/social/group';
-import EditIcon from 'material-ui/lib/svg-icons/action/view-quilt';
+import CloudDownload from 'material-ui/lib/svg-icons/file/cloud-download';
 import StartIcon from 'material-ui/lib/svg-icons/content/create';
 import Paper from 'material-ui/lib/paper';
 
@@ -29,14 +27,14 @@ class Home extends Component {
         desc: 'Share a public link, share with editing access or share read-only becuase you hold the keys to your creations.'
       },
       {
-        title: 'Customize build environments',
-        icon: <EditIcon style={iconStyle} />,
-        desc: 'Use a combination of community-built components, templates and tabs to cater your flow to your needs.'
-      },
-      {
         title: 'Start from anywhere',
         icon: <StartIcon style={iconStyle} />,
-      desc: 'Upload or clone an existing project, start from scratch or use a templates to get you started.'
+        desc: 'Upload an existing project or start from scratch.'
+      },
+      {
+        title: 'Download your project',
+        icon: <CloudDownload style={iconStyle} />,
+        desc: 'Export all the files and folder into a zip file to continue development or deploy.'
       }
     ];
 
@@ -79,11 +77,6 @@ class Home extends Component {
             <div className="Home-VideoContainer">
               <Paper style={{marginBottom: -10}} zDepth={1}>
                 <img className="Home-PreviewVideo" src="assets/devShareEdit.gif" />
-                {/*<video className="Home-PreviewVideo" autoPlay loop>
-                  <source src="assets/devShareEdit.mp4" type="video/mp4" />
-                  <source src="assets/devShareEdit.ogv" type="video/ogg" />
-                  Your browser does not support the video tag.
-                </video>*/}
               </Paper>
             </div>
           </div>
@@ -95,7 +88,7 @@ class Home extends Component {
           </div>
         </div>
         </div>
-        )
+      );
   }
 }
 
@@ -103,7 +96,7 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
-    router: state.router,
+    router: state.router
   };
 }
 //Place action methods into props

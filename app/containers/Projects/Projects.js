@@ -9,7 +9,7 @@ import NewProjectTile from '../../components/NewProjectTile/NewProjectTile';
 import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog';
 import SharingDialog from '../../components/SharingDialog/SharingDialog';
 import TextField from 'material-ui/lib/text-field';
-import Grout from 'kyper-grout';
+const Grout = typeof window !== 'undefined' ? require('kyper-grout') : undefined;
 import { Actions } from 'redux-grout';
 
 import './Projects.scss';
@@ -86,10 +86,10 @@ class Projects extends Component {
           onSelect={ this.openProject }
         />
       );
-    }) : <span>Click the plus to start a project</span>;
+    }) : <span>No projects yet</span>;
 
     // If username doesn't match route then hide add project tile
-    if (this.props.account.username === this.props.router.params.username) {
+    if (this.props.account.username === this.props.username) {
       projects.unshift((
         <NewProjectTile
           key="Project-New"
@@ -133,7 +133,7 @@ function mapStateToProps(state) {
     entities: { projects }
   } = state;
   const projectsArray = toArray(projects);
-  const username = state.router.params.username;
+  const username = state.router.location.pathname.split('/')[1];
   return {
     account: state.account,
     projects: projectsArray,

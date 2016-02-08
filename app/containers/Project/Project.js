@@ -39,8 +39,8 @@ class Project extends Component {
 }
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  const username = state.router.params ? state.router.params.username : null;
-  const name = state.router.params ? state.router.params.projectName : null;
+  const username = state.router.location.pathname.split('/')[1];
+  const projectName = state.router.location.pathname.split('/')[2];
   const key = username ? `${username}/${name}` : name;
   const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : { name, owner: { username } };
   return {

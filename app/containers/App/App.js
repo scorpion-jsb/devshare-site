@@ -8,6 +8,9 @@ import './App.scss';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import Theme from '../../theme';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +28,11 @@ class Main extends Component {
   };
 
   handleClick(loc) {
-    this.props.history.pushState(null, `/${loc}`);
+    this.props.history.push(null, `/${loc}`);
   }
   handleLogout() {
     this.props.logout();
-    this.props.history.pushState(null, `/`);
+    this.props.history.push(null, `/`);
   }
   render() {
     return (

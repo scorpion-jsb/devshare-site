@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
-import Root from './root';
+import createRoutes from './router';
+import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { reduxReactRouter } from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
+import { browserHistory } from 'react-router';
 import Grout from 'kyper-grout';
 
 let grout = new Grout();
-let initialData = {entities: {accounts:{}}, account: {}};
+let initialData = {entities: {projects: {}, accounts: {}}};
 
 if(grout.currentUser){
   initialData.account = grout.currentUser;
@@ -15,10 +15,12 @@ if(grout.currentUser){
 }
 const initialState = window.__INITIAL_STATE__ || initialData;
 
-const store = configureStore(initialState, reduxReactRouter, createHistory);
+const store = configureStore(initialState, browserHistory);
 
 let rootElement = document.getElementById('root');
 
 ReactDOM.render(
-  <Root store={ store } />, rootElement
+  <Provider store={ store }>
+    { createRoutes(browserHistory) }
+  </Provider>, rootElement
 );

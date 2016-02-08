@@ -325,7 +325,8 @@ class Workspace extends Component {
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  const { username, projectName } = state.router.params;
+  const username = state.router.location.pathname.split('/')[1];
+  const projectName = state.router.location.pathname.split('/')[2];
   const owner = username || 'anon';
   const name = projectName || null;
   const key = owner ? `${owner}/${name}` : name;

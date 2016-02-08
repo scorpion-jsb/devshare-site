@@ -13,10 +13,16 @@ class Account extends Component {
   constructor(props){
     super(props);
   }
+
   state = {};
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   handleLogout = () => {
     this.props.logout();
-    this.props.history.pushState(null, '/');
+    this.context.router.push('/');
   };
   handleSave = () => {
     //TODO: Handle saving image correctly

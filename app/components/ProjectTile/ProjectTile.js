@@ -13,7 +13,8 @@ export default class ProjectTile extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
     onSelect: PropTypes.func.isRequired,
-    onAddCollabClick: PropTypes.func
+    onAddCollabClick: PropTypes.func,
+    onCollaboratorClick: PropTypes.func
   };
 
   handleSelect = (e) => {
@@ -28,6 +29,12 @@ export default class ProjectTile extends Component {
     }
   };
 
+  collaboratorClick = (collaborator) => {
+    if(this.props.onCollaboratorClick){
+      this.props.onCollaboratorClick(collaborator);
+    }
+  };
+
   render(){
     const { collaborators, name, owner } = this.props.project;
     const personIconStyle = { width: '50%', height: '75%' };
@@ -35,7 +42,7 @@ export default class ProjectTile extends Component {
     if(collaborators){
       collaboratorsList = collaborators.map((user, i) => {
         return(
-          <div key={`${name}-Collab-${i}`} className="ProjectTile-Collaborator">
+          <div key={`${name}-Collab-${i}`} className="ProjectTile-Collaborator" onClick={ this.collaboratorClick.bind(this, user) }>
             <Avatar
               className="ProjectTile-Collaborator-Avatar"
               src={ (user.image && user.image.url) ? user.image.url : null }

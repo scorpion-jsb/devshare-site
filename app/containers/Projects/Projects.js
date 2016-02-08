@@ -9,7 +9,7 @@ import NewProjectTile from '../../components/NewProjectTile/NewProjectTile';
 import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog';
 import SharingDialog from '../../components/SharingDialog/SharingDialog';
 import TextField from 'material-ui/lib/text-field';
-import Grout from 'kyper-grout';
+const Grout = typeof window !== 'undefined' ? require('kyper-grout') : undefined;
 import { Actions } from 'redux-grout';
 
 import './Projects.scss';
@@ -50,9 +50,9 @@ class Projects extends Component {
     this.context.router.push(`/${project.owner.username}/${project.name}`);
   };
 
-  addCollabClick = (currentProject) => {
-    this.setState({ currentProject });
-    this.toggleModal('addCollab');
+  collaboratorClick = (collaborator) => {
+    console.log('collaborator clicked:', collaborator);
+    this.props.history.pushState(null, `/${collaborator.username}`);
   };
 
   searchUsers = (q, cb) => {
@@ -64,6 +64,11 @@ class Projects extends Component {
     });
   };
 
+  addCollabClick = (currentProject) => {
+    this.setState({ currentProject });
+    this.toggleModal('addCollab');
+  };
+
   addCollaborator = (username) => {
     this.props.addCollaborator(this.state.currentProject, username);
   };
@@ -71,6 +76,7 @@ class Projects extends Component {
   removeCollaborator = (username) => {
     this.props.removeCollaborator(this.state.currentProject, username);
   };
+
   render(){
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (

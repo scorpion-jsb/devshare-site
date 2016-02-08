@@ -24317,7 +24317,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    _this.handleLogout = function () {
 	      _this.props.logout();
-	      _this.props.history.pushState(null, '/');
+	      _this.context.router.push('/');
 	    };
 	
 	    _this.handleSave = function () {
@@ -24395,6 +24395,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react.Component);
 	//Place state of redux store into props of component
 	
+	Account.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 	function mapStateToProps(state) {
 	  return {
 	    account: state.account,
@@ -41622,13 +41625,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(Main, [{
 	    key: 'handleClick',
 	    value: function handleClick(loc) {
-	      this.props.history.push(null, '/' + loc);
+	      this.context.router.push('/' + loc);
 	    }
 	  }, {
 	    key: 'handleLogout',
 	    value: function handleLogout() {
 	      this.props.logout();
-	      this.props.history.push(null, '/');
+	      this.context.router.push('/');
 	    }
 	  }, {
 	    key: 'render',
@@ -41652,6 +41655,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	Main.childContextTypes = {
 	  muiTheme: _react2.default.PropTypes.object
+	};
+	Main.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
 	};
 	function mapStateToProps(state) {
 	  return {
@@ -48007,14 +48013,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _raisedButton2 = _interopRequireDefault(_raisedButton);
 	
-	var _iconButton = __webpack_require__(486);
-	
-	var _iconButton2 = _interopRequireDefault(_iconButton);
-	
-	var _themeManager = __webpack_require__(514);
-	
-	var _themeManager2 = _interopRequireDefault(_themeManager);
-	
 	var _theme = __webpack_require__(515);
 	
 	var _theme2 = _interopRequireDefault(_theme);
@@ -48023,9 +48021,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _group2 = _interopRequireDefault(_group);
 	
-	var _viewQuilt = __webpack_require__(539);
+	var _cloudDownload = __webpack_require__(539);
 	
-	var _viewQuilt2 = _interopRequireDefault(_viewQuilt);
+	var _cloudDownload2 = _interopRequireDefault(_cloudDownload);
 	
 	var _create = __webpack_require__(540);
 	
@@ -48041,7 +48039,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line
+	
 	//React Components
 	
 	var Home = function (_Component) {
@@ -48065,13 +48064,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        icon: _react2.default.createElement(_group2.default, { style: iconStyle }),
 	        desc: 'Share a public link, share with editing access or share read-only becuase you hold the keys to your creations.'
 	      }, {
-	        title: 'Customize build environments',
-	        icon: _react2.default.createElement(_viewQuilt2.default, { style: iconStyle }),
-	        desc: 'Use a combination of community-built components, templates and tabs to cater your flow to your needs.'
-	      }, {
 	        title: 'Start from anywhere',
 	        icon: _react2.default.createElement(_create2.default, { style: iconStyle }),
-	        desc: 'Upload or clone an existing project, start from scratch or use a templates to get you started.'
+	        desc: 'Upload an existing project or start from scratch.'
+	      }, {
+	        title: 'Download your project',
+	        icon: _react2.default.createElement(_cloudDownload2.default, { style: iconStyle }),
+	        desc: 'Export all the files and folder into a zip file to continue development or deploy.'
 	      }];
 	
 	      var meInThreeElements = (0, _map2.default)(meInThree, function (content, key) {
@@ -48931,8 +48930,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ActionViewQuilt = _react2.default.createClass({
-	  displayName: 'ActionViewQuilt',
+	var FileCloudDownload = _react2.default.createClass({
+	  displayName: 'FileCloudDownload',
 	
 	  mixins: [_reactAddonsPureRenderMixin2.default],
 	
@@ -48940,12 +48939,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2.default.createElement(
 	      _svgIcon2.default,
 	      this.props,
-	      _react2.default.createElement('path', { d: 'M10 18h5v-6h-5v6zm-6 0h5V5H4v13zm12 0h5v-6h-5v6zM10 5v6h11V5H10z' })
+	      _react2.default.createElement('path', { d: 'M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z' })
 	    );
 	  }
 	});
 	
-	exports.default = ActionViewQuilt;
+	exports.default = FileCloudDownload;
 	module.exports = exports['default'];
 
 /***/ },
@@ -49062,7 +49061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.goAfterLoggedIn = function () {
 	      setTimeout(function () {
 	        if (_this.props.account && _this.props.account.username) {
-	          _this.props.history.pushState(null, '/' + _this.props.account.username);
+	          _this.context.router.push('/' + _this.props.account.username);
 	        } else {
 	          _this.goAfterLoggedIn();
 	        }
@@ -49145,6 +49144,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react.Component);
 	//Place state of redux store into props of component
 	
+	Login.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 	function mapStateToProps(state) {
 	  return {
 	    account: state.account,
@@ -51357,7 +51359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    _this.selectProject = function (proj) {
 	      if (proj.owner) {
-	        _this.props.history.pushState(null, '/' + proj.owner.username + '/' + proj.name);
+	        _this.context.router.push('/' + proj.owner.username + '/' + proj.name);
 	      }
 	    };
 	
@@ -51365,8 +51367,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  _createClass(Project, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      if (!this.props.projects && this.props.username !== 'anon') {
 	        this.props.getProjects(this.props.project.owner.username);
 	      }
@@ -51390,9 +51392,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react.Component);
 	//Place state of redux store into props of component
 	
+	Project.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 	function mapStateToProps(state) {
 	  var username = state.router.location.pathname.split('/')[1];
-	  var projectName = state.router.location.pathname.split('/')[2];
+	  var name = state.router.location.pathname.split('/')[2];
 	  var key = username ? username + '/' + name : name;
 	  var project = state.entities && state.entities.projects && state.entities.projects[key] ? state.entities.projects[key] : { name: name, owner: { username: username } };
 	  return {
@@ -51556,7 +51561,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.saveSettings = function (data) {
-	      // console.log('save settings called:', data);
 	      _this.props.updateProject(_this.props.project, data);
 	      //TODO: Show popup of save success/failure
 	      _this.toggleSettingsModal();
@@ -60435,7 +60439,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.collabClick = function (user) {
-	      _this.props.history.pushState(null, '/' + user.username);
+	      _this.context.router.push('/' + user.username);
 	    };
 	
 	    _this.toggleModal = function (name) {
@@ -60449,7 +60453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.openProject = function (project) {
-	      _this.props.history.pushState(null, '/' + project.owner.username + '/' + project.name);
+	      _this.context.router.push('/' + project.owner.username + '/' + project.name);
 	    };
 	
 	    _this.addCollabClick = function (currentProject) {
@@ -60467,12 +60471,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.addCollaborator = function (username) {
-	      console.log('calling add collaborator with', username);
 	      _this.props.addCollaborator(_this.state.currentProject, username);
 	    };
 	
 	    _this.removeCollaborator = function (username) {
-	      console.log('calling remove collaborator with', username);
 	      _this.props.removeCollaborator(_this.state.currentProject, username);
 	    };
 	
@@ -60541,6 +60543,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	//Place state of redux store into props of component
 	
+	Projects.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 	function mapStateToProps(state) {
 	  var projects = state.entities.projects;
 	
@@ -61262,7 +61267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      setTimeout(function () {
 	        if (_this2.props.account && _this2.props.account.username) {
-	          _this2.props.history.pushState(null, '/' + _this2.props.account.username);
+	          _this2.context.router.push('/' + _this2.props.account.username);
 	        } else {
 	          _this2.goAfterLoggedIn();
 	        }
@@ -61326,6 +61331,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react.Component);
 	//Place state of redux store into props of component
 	
+	Signup.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 	function mapStateToProps(state) {
 	  return {
 	    account: state.account,

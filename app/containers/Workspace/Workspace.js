@@ -107,7 +107,6 @@ class Workspace extends Component {
   };
 
   saveSettings = (data) => {
-    // console.log('save settings called:', data);
     this.props.updateProject(this.props.project, data);
     //TODO: Show popup of save success/failure
     this.toggleSettingsModal();

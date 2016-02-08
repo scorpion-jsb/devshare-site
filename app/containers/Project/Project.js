@@ -13,7 +13,11 @@ class Project extends Component {
     super(props);
   }
 
-  componentDidMount() {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
+  componentWillMount() {
     if(!this.props.projects && this.props.username !== 'anon'){
       this.props.getProjects(this.props.project.owner.username);
     }
@@ -21,7 +25,7 @@ class Project extends Component {
 
   selectProject = (proj) => {
     if (proj.owner) {
-      this.props.history.pushState(null, `/${proj.owner.username}/${proj.name}`);
+      this.context.router.push(`/${proj.owner.username}/${proj.name}`);
     }
   };
 
@@ -40,7 +44,7 @@ class Project extends Component {
 //Place state of redux store into props of component
 function mapStateToProps(state) {
   const username = state.router.location.pathname.split('/')[1];
-  const projectName = state.router.location.pathname.split('/')[2];
+  const name = state.router.location.pathname.split('/')[2];
   const key = username ? `${username}/${name}` : name;
   const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : { name, owner: { username } };
   return {

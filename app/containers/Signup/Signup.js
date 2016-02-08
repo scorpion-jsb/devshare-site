@@ -21,6 +21,11 @@ class Signup extends Component {
     this.reset = this.reset.bind(this);
     this.state = {errors:{}, snackCanOpen: true};
   }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   handleRequestClose = () => {
     this.setState({
      snackCanOpen: false,
@@ -58,7 +63,7 @@ class Signup extends Component {
   goAfterLoggedIn() {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.props.history.pushState(null, `/${this.props.account.username}`);
+        this.context.router.push(`/${this.props.account.username}`);
       } else {
         this.goAfterLoggedIn();
       }

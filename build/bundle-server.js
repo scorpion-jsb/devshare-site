@@ -51367,8 +51367,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  _createClass(Project, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      if (!this.props.projects && this.props.username !== 'anon') {
 	        this.props.getProjects(this.props.project.owner.username);
 	      }
@@ -51397,7 +51397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	function mapStateToProps(state) {
 	  var username = state.router.location.pathname.split('/')[1];
-	  var projectName = state.router.location.pathname.split('/')[2];
+	  var name = state.router.location.pathname.split('/')[2];
 	  var key = username ? username + '/' + name : name;
 	  var project = state.entities && state.entities.projects && state.entities.projects[key] ? state.entities.projects[key] : { name: name, owner: { username: username } };
 	  return {
@@ -51561,7 +51561,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.saveSettings = function (data) {
-	      // console.log('save settings called:', data);
 	      _this.props.updateProject(_this.props.project, data);
 	      //TODO: Show popup of save success/failure
 	      _this.toggleSettingsModal();
@@ -51730,10 +51729,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var name = _props$project.name;
 	      var owner = _props$project.owner;
 	
-	      console.log('name', name, 'owner', owner);
-	      console.log('project', this.props.project);
 	      this.project = this.props.project ? grout.Project(name, owner.username) : null;
-	      console.log('stop stop');
 	      this.fb = _reBase2.default.createClass(this.project.fbUrl.replace(name, ''));
 	      //Bind to files list on firebase
 	      this.ref = this.fb.bindToState(name, {
@@ -51841,7 +51837,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  showButtons: _react.PropTypes.bool
 	};
 	function mapStateToProps(state) {
-	  console.log('log', state.router.location.pathname.split('/'));
 	  var username = state.router.location.pathname.split('/')[1];
 	  var projectName = state.router.location.pathname.split('/')[2];
 	  var owner = username || 'anon';
@@ -60476,12 +60471,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _this.addCollaborator = function (username) {
-	      console.log('calling add collaborator with', username);
 	      _this.props.addCollaborator(_this.state.currentProject, username);
 	    };
 	
 	    _this.removeCollaborator = function (username) {
-	      console.log('calling remove collaborator with', username);
 	      _this.props.removeCollaborator(_this.state.currentProject, username);
 	    };
 	

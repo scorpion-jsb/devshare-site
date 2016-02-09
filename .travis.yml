@@ -6,9 +6,6 @@ branches:
     - master
 sudo: false
 script: "npm run build"
-before_deploy:
-  - git add .
-  - git commit --amend
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_KEY

@@ -25824,10 +25824,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    subModelData = [subModelData];
 	  }
 	  if (model) {
-	    grout = modelData ? grout[model].apply(grout, modelData) : grout[model];
+	    grout = modelData[0] ? grout[model].apply(grout, modelData) : grout[model];
 	  }
 	  if (subModel) {
-	    grout = subModelData ? grout[subModel].apply(grout, subModelData) : grout[subModel];
+	    grout = subModelData[0] ? grout[subModel].apply(grout, subModelData) : grout[subModel];
 	  }
 	  if (!(0, _isArray2.default)(methodData)) {
 	    methodData = [methodData];
@@ -89536,49 +89536,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    };
 	
-	    _this.googleSignup = function () {
-	      _this.props.signup('google');
-	      _this.goAfterLoggedIn();
-	    };
-	
-	    _this.handleSignup = _this.handleSignup.bind(_this);
-	    _this.goAfterLoggedIn = _this.goAfterLoggedIn.bind(_this);
-	    _this.reset = _this.reset.bind(_this);
-	    _this.state = { errors: {}, snackCanOpen: true };
-	    return _this;
-	  }
-	
-	  _createClass(Signup, [{
-	    key: 'reset',
-	    value: function reset() {
-	      return this.setState({
+	    _this.reset = function () {
+	      return _this.setState({
 	        errors: {},
 	        username: null,
 	        email: null,
 	        name: null,
 	        snackCanOpen: true
 	      });
-	    }
-	    /**
-	     * @function handleSignup
-	     * @description Call signup through redux-grout action
-	     */
+	    };
 	
-	  }, {
-	    key: 'handleSignup',
-	    value: function handleSignup(signupData) {
-	      this.setState({
+	    _this.handleSignup = function (signupData) {
+	      _this.setState({
 	        snackCanOpen: true
 	      });
-	      this.props.signup(signupData);
-	      this.goAfterLoggedIn();
-	    }
-	    /**
-	     * @function handleSignup
-	     * @description Initiate Google signup through redux-grout action (popup)
-	     */
+	      _this.props.signup(signupData);
+	      _this.goAfterLoggedIn();
+	    };
 	
-	  }, {
+	    _this.providerSignup = function (provider) {
+	      _this.props.signup(provider);
+	      _this.goAfterLoggedIn();
+	    };
+	
+	    _this.state = { errors: {}, snackCanOpen: true };
+	    return _this;
+	  }
+	
+	  /**
+	   * @function handleSignup
+	   * @description Call signup through redux-grout action
+	   */
+	
+	  /**
+	   * @function providerSignup
+	   * @description Initiate external providerSignup through redux-grout action (popup)
+	   */
+	
+	  _createClass(Signup, [{
 	    key: 'goAfterLoggedIn',
 	
 	    //TODO: Replace this with redux-rx
@@ -89610,7 +89605,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { className: 'Signup-Or' },
 	            'or'
 	          ),
-	          _react2.default.createElement(_GoogleButton2.default, { onClick: this.googleSignup }),
+	          _react2.default.createElement(_GoogleButton2.default, { onClick: this.providerSignup.bind('google') }),
+	          _react2.default.createElement(_raisedButton2.default, {
+	            label: 'Sign up With GitHub',
+	            secondary: true,
+	            onTouchTap: this.providerSignup.bind(this, 'github')
+	          }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'Signup-Login' },

@@ -24,7 +24,7 @@ class Home extends Component {
       {
         title: 'Work with others in real-time',
         icon: <GroupIcon style={iconStyle} />,
-        desc: 'Share a public link, share with editing access or share read-only becuase you hold the keys to your creations.'
+        desc: 'Share a link or add someone with an account directly to your project.'
       },
       {
         title: 'Start from anywhere',

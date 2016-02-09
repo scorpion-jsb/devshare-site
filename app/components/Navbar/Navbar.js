@@ -18,11 +18,13 @@ export default class Navbar extends Component {
     super(props);
     this.selectItem = this.selectItem.bind(this);
   }
+
   static propTypes = {
     account: PropTypes.object,
     onMenuClick: PropTypes.func,
     onLogoutClick: PropTypes.func
   };
+
   selectItem(e, item) {
     if(item === 'logout' && this.props.onLogoutClick){
       return this.props.onLogoutClick();
@@ -31,13 +33,14 @@ export default class Navbar extends Component {
       this.props.onMenuClick(item);
     }
   }
+  
   render() {
-    let brandLinkLoc = (this.props.account && this.props.account.username) ? `/${this.props.account.username}` : '/';
-    let iconButton = (
+    const brandLinkLoc = (this.props.account && this.props.account.username) ? `/${this.props.account.username}` : '/';
+    const iconButton = (
         <Avatar
           className="Navbar-Avatar"
-          src={ this.props.account.image ? this.props.account.image.url : stockPhotoUrl }
-          size={50}
+          src={ this.props.account.avatar_url ? this.props.account.avatar_url : stockPhotoUrl }
+          size={ 50 }
         />
       );
     let mainMenu = (

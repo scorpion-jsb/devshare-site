@@ -7,14 +7,16 @@ import Dropzone from 'react-dropzone';
 import AvatarEditor from 'react-avatar-editor';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
+import AccountDialog from '../../components/AccountDialog/AccountDialog';
 import './Account.scss';
+const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
 
 class Account extends Component {
   constructor(props){
     super(props);
   }
 
-  state = {};
+  state = { modalOpen: false };
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -24,56 +26,75 @@ class Account extends Component {
     this.props.logout();
     this.context.router.push('/');
   };
+
   handleSave = () => {
-    //TODO: Handle saving image correctly
+    //TODO: Handle saving image and account data at the same time
     this.props.saveAccount(this.state);
   };
-  onFileDrop = (files) => {
-    console.warn('file dropped', files);
+
+  handleAvatarUpload = (imageFile) => {
+    console.log('calling upload avatar with:', imageFile);
+    this.props.uploadAvatar({image: imageFile});
+  };
+
+  toggleModal = () => {
     this.setState({
-      imageFile: files[0]
+      modalOpen: !this.state.modalOpen
     });
   };
+
   render(){
-    console.log('account in account page:', this.props.account);
+    const buttonStyle = {'marginTop': '2rem', width: '20%'};
+    const textFieldStyle = {width: '60%'};
     return (
       <div className="Account">
-      { this.state.imageFile ?
-        <AvatarEditor
-          image={ this.state.imageFile.preview }
-          width={350}
-          height={350}
-          border={10}
-        scale={1} /> :
-        <Dropzone  onDrop={ this.onFileDrop } multiple={ false }>
-          <div className="Account-DropText">
-            Drag to Upload <br/> Profile Image
+        <AccountDialog
+          modalOpen={ this.state.modalOpen }
+          toggleModal={ this.toggleModal }
+          onSave={ this.handleAvatarUpload }
+        />
+        <div className="Account-Settings">
+          <div className="Account-Avatar">
+            <img
+              className="Account-Avatar-Current"
+              src={ this.props.account.avatar_url || defaultUserImageUrl }
+              onClick={ this.toggleModal }
+            />
           </div>
-        </Dropzone>
-        }
-        <div className="Account-Data">
-          <TextField
-            hintText="Username"
-            floatingLabelText="Username"
-            defaultValue={ this.props.account.username }
-          />
-          <TextField
-            hintText="Email"
-            floatingLabelText="Email"
-            defaultValue={ this.props.account.email || 'No Email' }
-          />
+          <div className="Account-Meta">
+            <TextField
+              hintText="Username"
+              floatingLabelText="Username"
+              defaultValue={ this.props.account.username }
+              style={ textFieldStyle }
+            />
+            <TextField
+              hintText="Email"
+              floatingLabelText="Email"
+              defaultValue={ this.props.account.email || 'No Email' }
+              style={ textFieldStyle }
+            />
+            <TextField
+              hintText="Name"
+              floatingLabelText="Name"
+              defaultValue={ this.props.account.name || 'No Name' }
+              style={ textFieldStyle }
+            />
+            <RaisedButton
+              primary={true}
+              label="Save"
+              disabled={ true }
+              onClick={ this.handleSave }
+              style={ buttonStyle }
+            />
+          </div>
         </div>
-        <div className="Account-Buttons">
-          <RaisedButton
-            primary={true}
-            label="Save"
-            disabled={ this.state.imageFile }
-            onClick={ this.handleSave }
-          />
+        <div className="Account-Logout">
           <RaisedButton
             style={{'marginTop': '1rem'}}
             label="Logout"
             onClick={ this.handleLogout }
+            style={ buttonStyle }
           />
         </div>
       </div>

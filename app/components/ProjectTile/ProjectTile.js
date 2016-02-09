@@ -45,7 +45,7 @@ export default class ProjectTile extends Component {
           <div key={`${name}-Collab-${i}`} className="ProjectTile-Collaborator" onClick={ this.collaboratorClick.bind(this, user) }>
             <Avatar
               className="ProjectTile-Collaborator-Avatar"
-              src={ (user.image && user.image.url) ? user.image.url : null }
+              src={ user.avatar_url ? user.avatar_url : null }
               icon={ <PersonIcon style={ personIconStyle }/> }
               size={ 60 }
             />

@@ -13,8 +13,7 @@
     "clean": "rimraf build",
     "test": "mocha -R spec --compilers js:babel-core/register ./test/setup.js ./test/**/*.js",
     "start": "node bin/dev-server",
-    "production": "node bin/server",
-    "postinstall": "npm run build"
+    "production": "node bin/server"
   },
   "keywords": [
     "webpack",
@@ -30,7 +29,6 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
     "history": "1.13.0",
-    "kyper-grout": "0.2.4",
     "lodash": "^4.1.0",
     "material-ui": "^0.14.4",
     "proxy-middleware": "^0.13.1",
@@ -44,8 +42,9 @@
     "react-router": "2.0.0-rc6",
     "react-router-redux": "^3.0.0",
     "react-tap-event-plugin": "^0.2.1",
+    "kyper-grout": "0.2.5",
     "redux": "^3.3.0",
-    "redux-grout": "0.1.8",
+    "redux-grout": "0.1.9",
     "redux-router": "1.0.0-beta3",
     "redux-thunk": "^1.0.0",
     "serve-static": "^1.10.0",

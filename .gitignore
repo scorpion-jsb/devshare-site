@@ -3,8 +3,6 @@ npm-debug.log
 .DS_Store
 **/.DS_Store
 stats.json
-build-stats.json
-build/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

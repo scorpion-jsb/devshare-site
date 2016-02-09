@@ -5,7 +5,7 @@ branches:
   only:
     - master
 sudo: false
-script: "npm run build"
+script: "npm run test"
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_KEY

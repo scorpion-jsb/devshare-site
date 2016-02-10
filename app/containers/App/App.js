@@ -36,9 +36,7 @@ class Main extends Component {
   componentDidMount() {
     let grout = new Grout();
 
-    console.log('grout', grout);
     if(grout.currentUser){
-      console.log('grout user', grout.currentUser);
       this.props.hydrateUser(grout.currentUser);
     }
 
@@ -73,9 +71,8 @@ function mapStateToProps(state) {
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  let boundActionCreators = bindActionCreators(Actions.account, dispatch);
-  boundActionCreators.hydrateUser = hydrateUser;
-  return boundActionCreators;
+  Actions.account.hydrateUser = hydrateUser;
+  return bindActionCreators(Actions.account, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

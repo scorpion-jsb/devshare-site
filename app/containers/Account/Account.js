@@ -38,7 +38,7 @@ class Account extends Component {
 
   handleAvatarUpload = (imageFile) => {
     console.log('calling upload avatar with:', imageFile);
-    this.props.uploadAvatar({image: imageFile});
+    this.props.uploadAvatar(imageFile);
   };
 
   toggleModal = () => {

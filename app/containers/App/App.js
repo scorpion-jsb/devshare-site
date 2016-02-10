@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'redux-grout';
+import { hydrateUser } from '../../actions/account';
 import Navbar from '../../components/Navbar/Navbar';
+import Grout from 'kyper-grout';
 import './App.scss';
 
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -30,6 +32,17 @@ class Main extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
+
+  componentDidMount() {
+    let grout = new Grout();
+
+    console.log('grout', grout);
+    if(grout.currentUser){
+      console.log('grout user', grout.currentUser);
+      this.props.hydrateUser(grout.currentUser);
+    }
+
+  }
 
   handleClick(loc) {
     this.context.router.push(`/${loc}`);
@@ -60,7 +73,9 @@ function mapStateToProps(state) {
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions.account, dispatch);
+  let boundActionCreators = bindActionCreators(Actions.account, dispatch);
+  boundActionCreators.hydrateUser = hydrateUser;
+  return boundActionCreators;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

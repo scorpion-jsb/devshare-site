@@ -30,8 +30,7 @@ class Account extends Component {
   handleSave = () => {
     //TODO: Handle saving image and account data at the same time
     let account = {
-      username: this.refs.username.getValue(),
-      password: this.refs.password.getValue(),
+      name: this.refs.name.getValue(),
       email: this.refs.email.getValue()
     }
     this.props.updateAccount(account);
@@ -68,13 +67,6 @@ class Account extends Component {
           </div>
           <div className="Account-Meta">
             <TextField
-              hintText="Username"
-              floatingLabelText="Username"
-              ref="username"
-              defaultValue={ this.props.account.username }
-              style={ textFieldStyle }
-            />
-            <TextField
               hintText="Email"
               floatingLabelText="Email"
               ref="email"
@@ -91,7 +83,6 @@ class Account extends Component {
             <RaisedButton
               primary={true}
               label="Save"
-              disabled={ true }
               onClick={ this.handleSave }
               style={ buttonStyle }
             />

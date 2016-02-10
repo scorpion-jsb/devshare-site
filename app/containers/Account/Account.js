@@ -29,7 +29,11 @@ class Account extends Component {
 
   handleSave = () => {
     //TODO: Handle saving image and account data at the same time
-    this.props.saveAccount(this.state);
+    let account = {
+      name: this.refs.name.getValue(),
+      email: this.refs.email.getValue()
+    }
+    this.props.updateAccount(account);
   };
 
   handleAvatarUpload = (imageFile) => {
@@ -63,27 +67,22 @@ class Account extends Component {
           </div>
           <div className="Account-Meta">
             <TextField
-              hintText="Username"
-              floatingLabelText="Username"
-              defaultValue={ this.props.account.username }
-              style={ textFieldStyle }
-            />
-            <TextField
               hintText="Email"
               floatingLabelText="Email"
+              ref="email"
               defaultValue={ this.props.account.email || 'No Email' }
               style={ textFieldStyle }
             />
             <TextField
               hintText="Name"
               floatingLabelText="Name"
+              ref="name"
               defaultValue={ this.props.account.name || 'No Name' }
               style={ textFieldStyle }
             />
             <RaisedButton
               primary={true}
               label="Save"
-              disabled={ true }
               onClick={ this.handleSave }
               style={ buttonStyle }
             />

@@ -85,7 +85,7 @@ export default class SideBar extends Component {
           onFilesDrop={ this.props.onFilesDrop }
           onFileDelete={ this.props.onFileDelete }
         />
-        <input type="file" ref="fileInput" style={{visibility: 'hidden'}} onChange={ this.handleFileUpload } multiple />
+        <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
 
         <div className="SideBar-Buttons">
           <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>

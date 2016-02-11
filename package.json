@@ -1,6 +1,6 @@
 {
   "name": "devshare",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "bin/server.js",
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",

@@ -83,7 +83,7 @@ class Signup extends Component {
           </div>
           <GoogleButton onClick={ this.providerSignup.bind('google') } />
           <RaisedButton
-            label="Sign up With GitHub"
+            label="Sign in with GitHub"
             secondary={ true }
             onTouchTap={ this.providerSignup.bind(this, 'github') }
           />

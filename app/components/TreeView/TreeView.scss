@@ -10,12 +10,6 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	&--FileHover {
-		border: 3px dashed #b2dfdb;
-		.TreeView-Dropzone {
-			margin: -3px;
-		}
-	}
 	&-Structure {
 		list-style-type: none;
 		font-size: 1.4rem;

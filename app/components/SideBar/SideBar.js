@@ -35,6 +35,10 @@ export default class SideBar extends Component {
     onFilesAdd: PropTypes.func,
   };
 
+  state = {
+    filesOver: false
+  };
+
   componentDidMount() {
     this.refs.fileInput.setAttribute('webkitdirectory', '');
   }
@@ -54,6 +58,27 @@ export default class SideBar extends Component {
     this.props.onFilesAdd(e);
   };
 
+  handleFileDrag = (e) => {
+    e.preventDefault();
+    this.setState({
+      filesOver: true
+    });
+  };
+
+  handleFileDrop = (e) => {
+    this.props.onFilesDrop(e);
+    this.setState({
+      filesOver: false
+    });
+  };
+
+  handleFileDragLeave = (e) => {
+    this.setState({
+      filesOver: false
+    });
+  };
+
+
   render() {
     const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true;
     const iconButtonStyle = { width: '60px', height: '60px' };
@@ -64,43 +89,45 @@ export default class SideBar extends Component {
       });
     }
     return (
-      <div className="SideBar">
-      { (projectsMenu && showProjects) ?
-        <SelectField
-          style={{width: '80%', marginLeft: '10%'}}
-          labelStyle={{fontSize: '1.5rem', fontWeight: '300'}}
-          autoWidth={ true }
-          value={ this.props.project.name }
-          children={ projectsMenu }
-          onChange={ this.selectProject }
-        /> : null
-        }
-        <TreeView
-          account={ this.props.account }
-          fileStructure={ this.props.files }
-          onFileClick={ this.props.onFileClick }
-          onAddFileClick={ this.props.onAddFileClick }
-          onAddFolderClick={ this.props.onAddFolderClick }
-          projectName={ this.props.project.name }
-          onFilesDrop={ this.props.onFilesDrop }
-          onFileDelete={ this.props.onFileDelete }
-        />
-        <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
+      <div className={ this.state.filesOver ? "SideBar SideBar--FileHover" : "SideBar"} onDragOver={ this.handleFileDrag } onDragLeave={ this.handleFileDragLeave } onDrop={ this.handleFileDrop }>
+        <div className="SideBar-Dropzone">
+        { (projectsMenu && showProjects) ?
+          <SelectField
+            style={{width: '80%', marginLeft: '10%'}}
+            labelStyle={{fontSize: '1.5rem', fontWeight: '300'}}
+            autoWidth={ true }
+            value={ this.props.project.name }
+            children={ projectsMenu }
+            onChange={ this.selectProject }
+          /> : null
+          }
+          <TreeView
+            account={ this.props.account }
+            fileStructure={ this.props.files }
+            onFileClick={ this.props.onFileClick }
+            onAddFileClick={ this.props.onAddFileClick }
+            onAddFolderClick={ this.props.onAddFolderClick }
+            projectName={ this.props.project.name }
+            onFilesDrop={ this.props.onFilesDrop }
+            onFileDelete={ this.props.onFileDelete }
+          />
+          <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
 
-        <div className="SideBar-Buttons">
-          <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
-            <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
-            <MenuItem primaryText="Download files" onClick={ this.props.onDownloadFileClick } />
-            <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
-            <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
-            {/*<MenuItem primaryText="Add files from Github" />*/}
-          </IconMenu>
-          <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSharingClick }>
-            <GroupIcon />
-          </IconButton>
-          <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
-            <SettingsIcon />
-          </IconButton>
+          <div className="SideBar-Buttons">
+            <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
+              <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
+              <MenuItem primaryText="Download files" onClick={ this.props.onDownloadFileClick } />
+              <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
+              <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
+              {/*<MenuItem primaryText="Add files from Github" />*/}
+            </IconMenu>
+            <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSharingClick }>
+              <GroupIcon />
+            </IconButton>
+            <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
+              <SettingsIcon />
+            </IconButton>
+          </div>
         </div>
       </div>
     );

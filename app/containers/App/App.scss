@@ -23,6 +23,7 @@ a {
 
 html, body, #root {
   height: 100%;
+  background-color: #F2F2F2;
 
   @include desktop {
     font-size: 16px;

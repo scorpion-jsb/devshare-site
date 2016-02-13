@@ -2,11 +2,23 @@
 
 .SideBar {
   flex-grow:2;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   min-width: 220px;
-  padding-top: 2rem;
+  max-width: 220px;
   overflow: hidden;
+	&--FileHover {
+		border: 3px dashed #b2dfdb;
+    .SideBar-Dropzone {
+      margin: -3px;
+    }
+	}
+  &-Dropzone {
+    padding-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
   a {
     text-align: center;
   }

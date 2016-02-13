@@ -95,26 +95,6 @@ class TreeView extends Component {
     this.props.onFileDelete(this.state.selectedPath);
   };
 
-  handleFileDrag = (e) => {
-    e.preventDefault();
-    this.setState({
-      filesOver: true
-    });
-  };
-
-  handleFileDrop = (e) => {
-    this.props.onFilesDrop(e);
-    this.setState({
-      filesOver: false
-    });
-  };
-
-  handleFileDragLeave = (e) => {
-    this.setState({
-      filesOver: false
-    });
-  };
-
   handleEntryClick = (path) => {
     this.setState({
       selectedPath: path

@@ -101,13 +101,6 @@ export default class SignupForm extends Component {
           style={ fieldStyle }
         />
         <TextField
-          hintText="name"
-          floatingLabelText="Name"
-          onChange={this.handleInputChange.bind(this, 'name')}
-          errorText={ this.state.errors.name }
-          style={ fieldStyle }
-        />
-        <TextField
           hintText="password"
           floatingLabelText="Password"
           onChange={this.handlePrivateChange.bind(this, 'password')}

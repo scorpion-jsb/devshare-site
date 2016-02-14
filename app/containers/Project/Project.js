@@ -19,7 +19,7 @@ class Project extends Component {
 
   componentWillMount() {
     if(!this.props.projects && this.props.username !== 'anon'){
-      this.props.getProjects(this.props.project.owner.username);
+      this.props.getProjects(this.props.account.username);
     }
   }
 

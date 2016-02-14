@@ -45,7 +45,8 @@ class Workspace extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
     tabs: PropTypes.object,
-    showButtons: PropTypes.bool
+    showButtons: PropTypes.bool,
+    projects: PropTypes.array
   };
 
   componentDidMount() {

@@ -190,9 +190,6 @@ class Workspace extends Component {
   };
 
   handleEntries = (entries) => {
-    this.setState({
-      uploading: true
-    });
     if (entries.isFile) {
       this.readAndSaveFileEntry(entries);
     } else if (entries.isDirectory) {
@@ -209,17 +206,20 @@ class Workspace extends Component {
         this.readAndSaveFolderEntry(entry);
       }
     })
-    this.setState({
-      uploading: false
-    });
   };
 
   onFilesDrop = (e) => {
     e.preventDefault();
+    this.setState({
+      uploading: true
+    });
     let items = e.dataTransfer.items;
     each(items, item => {
       var entry = item.webkitGetAsEntry();
       this.handleEntries(entry);
+    });
+    this.setState({
+      uploading: false
     });
   };
 

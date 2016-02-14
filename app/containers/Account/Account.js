@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Link } from 'react-router';
 import { Actions } from 'redux-grout';
-import Dropzone from 'react-dropzone';
 import AvatarEditor from 'react-avatar-editor';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';

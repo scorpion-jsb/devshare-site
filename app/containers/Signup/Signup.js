@@ -81,7 +81,7 @@ class Signup extends Component {
           <div className="Signup-Or">
             or
           </div>
-          <GoogleButton onClick={ this.providerSignup.bind('google') } />
+          <GoogleButton onClick={ this.providerSignup.bind(this, 'google') } />
           <RaisedButton
             label="Sign up With GitHub"
             secondary={ true }

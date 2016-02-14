@@ -21,7 +21,7 @@ export default class SideBar extends Component {
   }
   static propTypes = {
     projects: PropTypes.array,
-    project: PropTypes.object,
+    project: PropTypes.object.isRequired,
     files: PropTypes.array,
     onFileClick: PropTypes.func,
     onPublishClick: PropTypes.func,
@@ -94,8 +94,8 @@ export default class SideBar extends Component {
         { (projectsMenu && showProjects) ?
           <SelectField
             style={{width: '80%', marginLeft: '10%'}}
-            labelStyle={{fontSize: '1.5rem', fontWeight: '300'}}
-            autoWidth={ true }
+            labelStyle={{fontSize: '1.5rem', fontWeight: '300', textOverflow: 'ellipsis'}}
+            autoWidth={ false }
             value={ this.props.project.name }
             children={ projectsMenu }
             onChange={ this.selectProject }

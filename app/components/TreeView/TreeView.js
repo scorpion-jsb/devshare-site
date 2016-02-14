@@ -91,7 +91,6 @@ class TreeView extends Component {
 
   handleDeleteClick = (e) => {
     e.preventDefault();
-    console.log('this state selected', this.state.selectedPath);
     this.props.onFileDelete(this.state.selectedPath);
   };
 

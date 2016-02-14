@@ -18,8 +18,14 @@ class Project extends Component {
   };
 
   componentWillMount() {
-    if(!this.props.projects && this.props.username !== 'anon'){
+    if(this.props.account.username && !this.props.projects && this.props.username !== 'anon'){
       this.props.getProjects(this.props.account.username);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.account.username && this.props.account.username !== nextProps.account.username) {
+      this.props.getProjects(nextProps.account.username);
     }
   }
 

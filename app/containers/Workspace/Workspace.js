@@ -39,7 +39,8 @@ class Workspace extends Component {
     addPath: '',
     addType: 'file',
     popoverOpen: false,
-    debouncedFiles: [],
+    debouncedFiles: null,
+    uploading: false
   };
 
   static propTypes = {
@@ -209,10 +210,16 @@ class Workspace extends Component {
 
   onFilesDrop = (e) => {
     e.preventDefault();
+    this.setState({
+      uploading: true
+    });
     let items = e.dataTransfer.items;
     each(items, item => {
       var entry = item.webkitGetAsEntry();
       this.handleEntries(entry);
+    });
+    this.setState({
+      uploading: false
     });
   };
 
@@ -294,6 +301,7 @@ class Workspace extends Component {
           onFilesAdd={ this.onFilesAdd }
           onFileDelete={ this.deleteFile }
           onDownloadFileClick={ this.handleDowloadFileClick }
+          filesLoading={ this.state.uploading }
         />
         <Pane
           tabs={ this.props.tabs }

@@ -33,6 +33,7 @@ export default class SideBar extends Component {
     onFilesDrop: PropTypes.func,
     onSharingClick: PropTypes.func,
     onFilesAdd: PropTypes.func,
+    filesLoading: PropTypes.bool
   };
 
   state = {
@@ -110,6 +111,7 @@ export default class SideBar extends Component {
             projectName={ this.props.project.name }
             onFilesDrop={ this.props.onFilesDrop }
             onFileDelete={ this.props.onFileDelete }
+            loading={ this.props.filesLoading }
           />
           <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
 

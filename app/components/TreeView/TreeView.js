@@ -17,8 +17,7 @@ class TreeView extends Component {
       top: '0px',
       left: '0px'
     },
-    selectedPath: '',
-    loading: true
+    selectedPath: ''
   };
 
   static propTypes = {
@@ -32,7 +31,8 @@ class TreeView extends Component {
     onAddFolderClick: PropTypes.func,
     projectName: PropTypes.string,
     onFilesDrop: PropTypes.func,
-    onFileDelete: PropTypes.func
+    onFileDelete: PropTypes.func,
+    loading: PropTypes.bool
   };
 
   handleNewClick = (type) => {
@@ -102,9 +102,8 @@ class TreeView extends Component {
   };
 
   render() {
-    console.log('file structure', this.props.fileStructure);
     let loading = false;
-    if (this.props.fileStructure === null) {
+    if (this.props.fileStructure === null || this.props.loading) {
       loading = true;
     }
 

@@ -40,6 +40,7 @@ class Workspace extends Component {
     addType: 'file',
     popoverOpen: false,
     debouncedFiles: null,
+    uploading: false
   };
 
   static propTypes = {
@@ -189,6 +190,9 @@ class Workspace extends Component {
   };
 
   handleEntries = (entries) => {
+    this.setState({
+      uploading: true
+    });
     if (entries.isFile) {
       this.readAndSaveFileEntry(entries);
     } else if (entries.isDirectory) {
@@ -205,6 +209,9 @@ class Workspace extends Component {
         this.readAndSaveFolderEntry(entry);
       }
     })
+    this.setState({
+      uploading: false
+    });
   };
 
   onFilesDrop = (e) => {
@@ -294,6 +301,7 @@ class Workspace extends Component {
           onFilesAdd={ this.onFilesAdd }
           onFileDelete={ this.deleteFile }
           onDownloadFileClick={ this.handleDowloadFileClick }
+          filesLoading={ this.state.uploading }
         />
         <Pane
           tabs={ this.props.tabs }

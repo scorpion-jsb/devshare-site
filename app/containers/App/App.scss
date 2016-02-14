@@ -11,7 +11,7 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-direction: column;
-  background-color: rgba(50,50,50,0.05);
+  background-color: #F2F2F2;
 }
 a {
   text-decoration: none;
@@ -23,6 +23,7 @@ a {
 
 html, body, #root {
   height: 100%;
+  background-color: #F2F2F2;
 
   @include desktop {
     font-size: 16px;

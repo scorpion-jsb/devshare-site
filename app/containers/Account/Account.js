@@ -73,28 +73,19 @@ class Account extends Component {
               defaultValue={ this.props.account.email || 'No Email' }
               style={ textFieldStyle }
             />
-            <TextField
-              hintText="Name"
-              floatingLabelText="Name"
-              ref="name"
-              defaultValue={ this.props.account.name || 'No Name' }
-              style={ textFieldStyle }
-            />
             <RaisedButton
               primary={true}
               label="Save"
               onClick={ this.handleSave }
               style={ buttonStyle }
             />
-          </div>
-        </div>
-        <div className="Account-Logout">
-          <RaisedButton
+            <RaisedButton
             style={{'marginTop': '1rem'}}
             label="Logout"
             onClick={ this.handleLogout }
             style={ buttonStyle }
-          />
+            />
+          </div>
         </div>
       </div>
     );

@@ -4,7 +4,7 @@ $googleWidth: $googleHeight * 4;
 .GoogleButton {
   margin-top: .5rem;
   margin-bottom: .5rem;
-  background: url('https://s3.amazonaws.com/kyper-cdn/img/btn_google_signin_dark.png') no-repeat top left;
+  background: url('/assets/btn_google_signin_dark.png') no-repeat top left;
   background-size: $googleWidth $googleHeight;
   width:  $googleWidth;
   height: $googleHeight;
@@ -12,11 +12,11 @@ $googleWidth: $googleHeight * 4;
   text-align: center;
   min-height: $googleHeight;
   &:focus {
-    background: url('https://s3.amazonaws.com/kyper-cdn/img/btn_google_signin_dark_focus.png') no-repeat top left;
+    background: url('/assets/btn_google_signin_dark_focus.png') no-repeat top left;
     background-size: $googleWidth $googleHeight;
   }
   &:active {
-    background: url('https://s3.amazonaws.com/kyper-cdn/img/btn_google_signin_dark_pressed.png') no-repeat top left;
+    background: url('/assets/btn_google_signin_dark_pressed.png') no-repeat top left;
     background-size: $googleWidth $googleHeight;
   }
 }

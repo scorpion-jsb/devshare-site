@@ -101,13 +101,6 @@ export default class SignupForm extends Component {
           style={ fieldStyle }
         />
         <TextField
-          hintText="name"
-          floatingLabelText="Name"
-          onChange={this.handleInputChange.bind(this, 'name')}
-          errorText={ this.state.errors.name }
-          style={ fieldStyle }
-        />
-        <TextField
           hintText="password"
           floatingLabelText="Password"
           onChange={this.handlePrivateChange.bind(this, 'password')}
@@ -115,17 +108,9 @@ export default class SignupForm extends Component {
           style={ fieldStyle }
           type="password"
         />
-        <TextField
-          hintText="confirm"
-          floatingLabelText="Confirm Password"
-          onChange={this.handlePrivateChange.bind(this, 'confirm')}
-          errorText={ this.state.errors.confirm }
-          style={ fieldStyle }
-          type="password"
-        />
         <div className="SignupForm-Submit">
           <RaisedButton
-            label="Sign Up"
+            label="Sign in"
             primary={true}
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}

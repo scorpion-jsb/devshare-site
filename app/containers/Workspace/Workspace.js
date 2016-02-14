@@ -49,9 +49,29 @@ class Workspace extends Component {
   };
 
   componentDidMount() {
-    const { name, owner } = this.props.project;
-    this.project = this.props.project ? grout.Project(name, owner.username) : null;
-    this.fb = Rebase.createClass(this.project.fbUrl.replace(name, ''));
+    this.fetchProjectFiles(this.props.project);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //Rebind files if props change (new project selected)
+    this.fetchProjectFiles(nextProps.project);
+  }
+
+  fetchProjectFiles = (project) => {
+    const { name, owner } = project;
+    if (!name) {
+      return new Error('project name required to fetch projects');
+    }
+    if (this.ref && this.ref.endpoint === name) {
+      return
+    }
+    if (this.ref && this.ref.endpoint !== name) {
+      this.fb.reset();
+    }
+    const groutProject = project ? grout.Project(name, owner.username) : null;
+    // Move to parent ref
+    this.fb = Rebase.createClass(groutProject.fbUrl.replace(name, ''));
+
     //Bind to files list on firebase
     this.ref = this.fb.bindToState(name, {
       context: this,
@@ -59,21 +79,7 @@ class Workspace extends Component {
       asArray: true
     });
     this.debounceStateChange();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    //Rebind files if props change (new project selected)
-    if(this.fb){
-      if(isFunction(this.fb.removeBinding)){
-        this.fb.removeBinding(this.ref);
-      }
-      this.ref = this.fb.syncState(nextProps.project.name, {
-        context: this,
-        state: 'files',
-        asArray: true
-      });
-    }
-  }
+  };
 
   componentWillUnmount() {
     //Unbind files list from Firebase

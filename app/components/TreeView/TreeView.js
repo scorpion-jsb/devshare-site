@@ -1,8 +1,8 @@
-import { map, filter, merge } from 'lodash';
+import { map, filter, merge, isArray } from 'lodash';
 import React, { PropTypes, Component } from 'react';
 import TreeFolder from '../TreeFolder';
 import TreeFile from '../TreeFile';
-import Dropzone from 'react-dropzone';
+import CircularProgress from 'material-ui/lib/circular-progress';
 import './TreeView.scss';
 const hideCurrentUser = true; //Display current user in file's connected users
 class TreeView extends Component {
@@ -17,7 +17,8 @@ class TreeView extends Component {
       top: '0px',
       left: '0px'
     },
-    selectedPath: ''
+    selectedPath: '',
+    loading: true
   };
 
   static propTypes = {
@@ -101,7 +102,13 @@ class TreeView extends Component {
   };
 
   render() {
-    let structure = this.props.fileStructure.map((entry, i) => {
+    console.log('file structure', this.props.fileStructure);
+    let loading = false;
+    if (this.props.fileStructure === null) {
+      loading = true;
+    }
+
+    let structure = this.props.fileStructure ? this.props.fileStructure.map((entry, i) => {
         if (!entry.meta) {
           let firstChildPath = entry[Object.keys(entry)[0]].meta.path;
           let childPathSplit = firstChildPath.split('/');
@@ -145,19 +152,19 @@ class TreeView extends Component {
           onClick={ this.props.onFileClick }
         />
       );
-    });
+    }) : [];
 
     var noFiles;
-    if (structure.length < 1) {
+    if (structure.length < 1 && !loading) {
       noFiles = (
-        <li className="TreeView-None" key="NotFound-1">
+        <div className="TreeView-None" key="NotFound-1">
           <div>
             <strong>Right click</strong><br/>
               OR <br/>
             <strong>Drop files</strong><br/>
               to get started <br/>
           </div>
-        </li>
+        </div>
       )
     } else {
       noFiles = null;
@@ -171,18 +178,19 @@ class TreeView extends Component {
 
     return (
       <div className={ this.state.filesOver ? "TreeView TreeView--FileHover" : "TreeView"} onContextMenu={ this.handleRightClick }>
-        <div className="TreeView-Dropzone" onDragOver={ this.handleFileDrag } onDragLeave={ this.handleFileDragLeave } onDrop={ this.handleFileDrop }>
-          <div className="TreeView-Container">
-            <ol className="TreeView-Structure">
-              { noFiles }
-              { structure }
-            </ol>
-            <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
-              <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
-              <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
-              <li onClick={ this.handleDeleteClick }>Delete</li>
-            </ul>
+        <div className="TreeView-Container">
+          <ol className="TreeView-Structure">
+            { structure }
+          </ol>
+          { noFiles }
+          <div className="TreeView-Loader" style={ loading ? {display: 'block'} : {display: 'none'}}>
+            <CircularProgress size={.75} />
           </div>
+          <ul style={ contextMenuStyle } className="TreeView-ContextMenu">
+            <li onClick={ this.handleNewClick.bind(this, 'file') }>Add new file</li>
+            <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
+            <li onClick={ this.handleDeleteClick }>Delete</li>
+          </ul>
         </div>
       </div>
     );

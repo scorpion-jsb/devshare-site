@@ -39,7 +39,7 @@ class Workspace extends Component {
     addPath: '',
     addType: 'file',
     popoverOpen: false,
-    debouncedFiles: [],
+    debouncedFiles: null,
   };
 
   static propTypes = {

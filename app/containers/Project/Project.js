@@ -30,7 +30,6 @@ class Project extends Component {
   };
 
   render(){
-    console.log('here comes new project', this.props.project.name);
     return (
       <div className="Project">
         <Workspace

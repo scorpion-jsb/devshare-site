@@ -33,6 +33,7 @@ class Projects extends Component {
   }
 
   collabClick = (user) => {
+    console.log('collab click:', user);
     this.context.router.push(`/${user.username}`);
   };
 

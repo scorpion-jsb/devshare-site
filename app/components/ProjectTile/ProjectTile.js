@@ -14,7 +14,7 @@ export default class ProjectTile extends Component {
     project: PropTypes.object.isRequired,
     onSelect: PropTypes.func.isRequired,
     onAddCollabClick: PropTypes.func,
-    onCollaboratorClick: PropTypes.func
+    onCollabClick: PropTypes.func
   };
 
   handleSelect = (e) => {
@@ -30,8 +30,8 @@ export default class ProjectTile extends Component {
   };
 
   collaboratorClick = (collaborator) => {
-    if(this.props.onCollaboratorClick){
-      this.props.onCollaboratorClick(collaborator);
+    if(this.props.onCollabClick){
+      this.props.onCollabClick(collaborator);
     }
   };
 
@@ -45,8 +45,8 @@ export default class ProjectTile extends Component {
           <div key={`${name}-Collab-${i}`} className="ProjectTile-Collaborator" onClick={ this.collaboratorClick.bind(this, user) }>
             <Avatar
               className="ProjectTile-Collaborator-Avatar"
-              src={ user.avatar_url ? user.avatar_url : null }
-              icon={ <PersonIcon style={ personIconStyle }/> }
+              src={ user.avatarUrl ? user.avatarUrl : null }
+              icon={ user.avatarUrl ?  null : <Avatar style={{'fontWeight': '200'}}>{ user.username.charAt(0).toUpperCase() }</Avatar> }
               size={ 60 }
             />
           </div>

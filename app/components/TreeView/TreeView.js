@@ -131,25 +131,27 @@ class TreeView extends Component {
           />
         );
       }
-      let mappedUsers = entry.users ? map(entry.users, (user, key) => {
+      let userBlocks = entry.users ? map(entry.users, (user, key) => {
         user.username = key;
-        return user;
-      }) : null;
+        const userStyle = { backgroundColor: user.color };
+        return <div key={`Connected-User-${i}`} className="TreeView-User" style={ userStyle }>{ user.username.charAt(0).toUpperCase() }</div>;
+      }) : <span></span>;
       // //Remove current user from file's users array
-      if(hideCurrentUser && this.props.account && this.props.account.username){
-        mappedUsers = mappedUsers ? filter(mappedUsers, (user) => {
-          return (user.username !== this.props.account.username);
-        }) : null;
-      }
+      // if(hideCurrentUser && this.props.account && this.props.account.username){
+      //   mappedUsers = mappedUsers ? filter(mappedUsers, (user) => {
+      //     return (user.username !== this.props.account.username);
+      //   }) : null;
+      // }
       return (
-        <TreeFile
-          key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }
-          index={ i }
-          data={ entry.meta }
-          active={ entry.active }
-          users={ mappedUsers }
-          onClick={ this.props.onFileClick }
-        />
+        <li key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }>
+          <TreeFile
+            index={ i }
+            data={ entry.meta }
+            active={ entry.active }
+            onClick={ this.props.onFileClick }
+          />
+          <div className="TreeView-Users">{ userBlocks }</div>
+        </li>
       );
     }) : [];
 

@@ -30,17 +30,10 @@ export default class TreeFile extends Component {
   render() {
     const className = (this.props.active) ? 'TreeFile active noselect' : 'TreeFile noselect';
     const name = this.props.data.name || this.props.data.path.split('/')[this.props.data.path.split('/').length - 1];
-    let connectedUsers = this.props.users ? this.props.users.map((user, i) => {
-      const userStyle = { backgroundColor: user.color };
-      return <div key={`Connected-User-${i}`} className="TreeFile-User" style={ userStyle }>{ user.username.charAt(0).toUpperCase() }</div>;
-    }) : <span></span>;
     return (
-      <li onClick={ this.onFileClick } data-path={ this.props.data.path }>
-        <div className={ className }>
-          <span className="TreeFile-Name">{ name }</span>
-          <div className="TreeFile-Users">{ connectedUsers }</div>
-        </div>
-      </li>
+      <div className="TreeFile" onClick={ this.onFileClick } data-path={ this.props.data.path }>
+        <span className="TreeFile-Name">{ name }</span>
+      </div>
     );
   }
 }

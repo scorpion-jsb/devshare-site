@@ -21,6 +21,9 @@ class Project extends Component {
     if(this.props.account.username && !this.props.projects && this.props.username !== 'anon'){
       this.props.getProjects(this.props.account.username);
     }
+    console.log('this.props:', this.props);
+    this.props.getProject(this.props.username, this.props.projectname);
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,11 +54,12 @@ class Project extends Component {
 function mapStateToProps(state) {
   const pathname = decodeURIComponent(state.router.location.pathname);
   const username = pathname.split('/')[1];
-  const name = pathname.split('/')[2];
-  const key = username ? `${username}/${name}` : name;
-  const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : { name, owner: { username } };
+  const projectname = pathname.split('/')[2];
+  const key = username ? `${username}/${projectname}` : projectname;
+  const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : null;
   return {
     username,
+    projectname,
     project,
     account: state.account,
     router: state.router

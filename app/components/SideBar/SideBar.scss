@@ -3,9 +3,9 @@
 .SideBar {
   flex-grow:2;
   box-sizing: border-box;
-  display: flex;
   min-width: 220px;
   max-width: 220px;
+  transform: rotate(0deg);
   overflow: hidden;
 	&--FileHover {
 		border: 3px dashed #b2dfdb;
@@ -35,6 +35,8 @@
   }
   &-Buttons {
     display: flex;
+    position: absolute;
+    bottom: 0;
     flex-direction: row;
     justify-content: space-around;
     flex-basis: 60px;

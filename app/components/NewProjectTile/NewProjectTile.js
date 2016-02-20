@@ -16,7 +16,7 @@ export default class NewProjectTile extends Component {
     const color = '#979797';
     const hoverColor = '#616161';
     return (
-      <Paper className="NewProjectTile" onClick={ this.props.onClick }>
+      <Paper className="ProjectTile NewProjectTile" onClick={ this.props.onClick }>
         <ContentAddCircle
           color={ color }
           hoverColor={ hoverColor }

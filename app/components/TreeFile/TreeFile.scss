@@ -4,9 +4,7 @@
   background-color: transparent;
   cursor: pointer;
   margin-left: 1.7rem;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
+  float: left;
   &-Name {
     display: flex;
     align-self: flex-start;
@@ -17,15 +15,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  &-Users {
-    display: flex;
-    align-self: flex-end;
-  }
-  &-User {
-    padding: 0 3px;
-    text-align: center;
-    font-weight: 500;
   }
   &.active{
     background-color: $editorBackground;

@@ -1,8 +1,8 @@
 {
   "name": "devshare-site",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "bin/server.js",
-  "engines": { "node" : ">=4.0.0 <5.0.0"},
+  "engines": { "node" : ">=4.0.0 <5.0.0" },
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",

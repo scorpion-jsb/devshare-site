@@ -2,6 +2,7 @@
   "name": "devshare-site",
   "version": "0.1.0",
   "main": "bin/server.js",
+  "engines": { "node" : ">=4.0.0 <5.0.0"},
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
@@ -44,7 +45,7 @@
     "react-tap-event-plugin": "^0.2.1",
     "kyper-grout": "0.2.8",
     "redux": "^3.3.0",
-    "redux-grout": "0.2.2",
+    "redux-grout": "0.2.3",
     "redux-router": "1.0.0-beta3",
     "redux-thunk": "^1.0.0",
     "serve-static": "^1.10.0",

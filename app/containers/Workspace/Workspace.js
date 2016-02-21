@@ -44,7 +44,7 @@ class Workspace extends Component {
   };
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    project: PropTypes.object,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool,
     projects: PropTypes.array
@@ -164,6 +164,7 @@ class Workspace extends Component {
 
   readAndSaveFileEntry = (entry) => {
     let parent = this;
+    //TODO: Use bind instead of parent var
     function readAndSaveFile(file, path) {
       let reader = new FileReader();
       reader.onloadend = function(e) {
@@ -172,7 +173,7 @@ class Workspace extends Component {
       reader.readAsText(file);
     }
     if (entry.webkitRelativePath) {
-      return readAndSaveFile(entry, entry.webkitRelativePath)  ;
+      return readAndSaveFile(entry, entry.webkitRelativePath);
     }
     entry.file(file => {
       readAndSaveFile(file, entry.fullPath);
@@ -337,11 +338,11 @@ class Workspace extends Component {
 
 //Place state of redux store into props of component
 function mapStateToProps(state) {
-  const username = state.router.location.pathname.split('/')[1];
-  const projectName = state.router.location.pathname.split('/')[2];
+  const pathname = decodeURIComponent(state.router.location.pathname);
+  const username = pathname.split('/')[1];
+  const projectname = pathname.split('/')[2];
   const owner = username || 'anon';
-  const name = projectName || null;
-  const key = owner ? `${owner}/${name}` : name;
+  const key = `${owner}/${projectname}`;
   const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {};
   const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : [];
   return {

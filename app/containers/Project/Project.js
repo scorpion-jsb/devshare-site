@@ -19,11 +19,12 @@ class Project extends Component {
 
   componentWillMount() {
     if(this.props.account.username && !this.props.projects && this.props.username !== 'anon'){
+      //Load all projects if user is logged in
       this.props.getProjects(this.props.account.username);
+    } else {
+      //Load only single project if user is not logged in
+      this.props.getProject(this.props.username, this.props.projectname);
     }
-    console.log('this.props:', this.props);
-    this.props.getProject(this.props.username, this.props.projectname);
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,7 +57,7 @@ function mapStateToProps(state) {
   const username = pathname.split('/')[1];
   const projectname = pathname.split('/')[2];
   const key = username ? `${username}/${projectname}` : projectname;
-  const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : null;
+  const project = (state.entities && state.entities.projects && state.entities.projects[key]) ? state.entities.projects[key] : { owner: { username }, name: projectname};
   return {
     username,
     projectname,

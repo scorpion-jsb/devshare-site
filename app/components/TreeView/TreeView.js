@@ -134,7 +134,7 @@ class TreeView extends Component {
       let userBlocks = entry.users ? map(entry.users, (user, key) => {
         user.username = key;
         const userStyle = { backgroundColor: user.color };
-        return <div key={`Connected-User-${i}`} className="TreeView-User" style={ userStyle }>{ user.username.charAt(0).toUpperCase() }</div>;
+        return <div key={`Connected-User-${key}`} className="TreeView-User" style={ userStyle }>{ user.username.charAt(0).toUpperCase() }</div>;
       }) : <span></span>;
       // //Remove current user from file's users array
       // if(hideCurrentUser && this.props.account && this.props.account.username){

@@ -11,19 +11,22 @@
   <!-- style -->
   <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
   <title>devShare</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/theme-monokai.js"></script>
-  <script src="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.js"></script>
+  <!-- CodeMirror -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.js"></script> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css" /> -->
+  <!-- <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.js"></script> -->
+
   <script>
     function createAce(divId) {
       var editor = ace.edit(divId);
       return editor;
     }
+
     function createFirepad(fbRef, editor, settings) {
       // console.warn('Open firepad called', fbRef, editor);
       var settingsObj = settings ? settings : {};
       try {
-        return Firepad.fromACE(fbRef, editor, settingsObj);
+        return Firepad.fromCodeMirror(fbRef, editor);
       } catch(err) {
         console.warn('Error creating firepad', err);
       }

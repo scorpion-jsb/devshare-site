@@ -3,6 +3,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 import TextField from 'material-ui/lib/text-field';
 import './ProjectSettingsDialog.scss';
+import Toggle from 'material-ui/lib/toggle';
 
 export default class ProjectSettingsDialog extends Component {
   constructor(props){
@@ -11,8 +12,13 @@ export default class ProjectSettingsDialog extends Component {
 
   static propTypes = {
     modalOpen: PropTypes.bool,
-    toggleModal: PropTypes.func
+    toggleModal: PropTypes.func,
+    project: PropTypes.object,
+    vimEnabled: PropTypes.bool,
+    onVimToggle: PropTypes.func
   };
+
+  state = { vimEnabled: this.props.vimEnabled || false };
 
   handleAutoCompleteSubmit = () => {
     //TODO: Add collaborator
@@ -20,6 +26,13 @@ export default class ProjectSettingsDialog extends Component {
 
   handleAutoCompleteChange = () => {
     //TODO: handle change
+  };
+
+  handleVimToggle = () => {
+    if(this.props.onVimToggle) this.props.onVimToggle(this.state.vimEnabled);
+    this.setState({
+      vimEnabled: !this.state.vimEnabled
+    });
   };
 
   render(){
@@ -63,6 +76,17 @@ export default class ProjectSettingsDialog extends Component {
           hintText="Site url"
           floatingLabelText="Site url"
           disabled={ true }
+        />
+        <Toggle
+          label="Vim Mode"
+          labelPotition="right"
+          style={{
+              maxWidth: 150,
+              marginBottom: 16,
+              marginTop: 20
+          }}
+          toggled={ this.state.vimEnabled }
+          onToggle={ this.handleVimToggle }
         />
       </Dialog>
     );

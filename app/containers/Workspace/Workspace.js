@@ -274,6 +274,11 @@ class Workspace extends Component {
     this.props.removeCollaborator(this.props.project, username);
   };
 
+  toggleVim = (vimState) => {
+    console.log('toggle vim called');
+    this.props.toggleVim()
+  }
+
   render() {
     return (
       <div className="Workspace" ref="workspace">
@@ -317,6 +322,7 @@ class Workspace extends Component {
             modalOpen={ this.state.settingsOpen }
             toggleModal={ this.toggleSettingsModal }
             onSave={ this.saveSettings }
+            onVimToggle={ this.toggleVim }
           /> : null
         }
         {

@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import Popover from 'material-ui/lib/popover/popover';
 import TextField from 'material-ui/lib/text-field';
 import './WorkspacePopover.scss';
-
 class WorkspacePopover extends Component {
 
   constructor(props){

@@ -7,7 +7,9 @@ import 'expose?CodeMirror!codemirror'; //Needed for Firepad to load CodeMirror
 import Firepad from 'firepad';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/monokai.css';
-// import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/keymap/vim';
 let grout = new Grout('tessellate', {logLevel: 'trace'});
 
 class Editor extends Component {
@@ -49,12 +51,10 @@ class Editor extends Component {
   handleLoad = (editor) => {
     //Load file content
     if(typeof editor.firepad === 'undefined'){
-      let file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath);
-      let fbRef = file.fbRef;
+      const file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath);
       try {
-        // this.firepad = createFirepad(fbRef.push(), editor, {userId: this.props.account.username || '&'});
         try {
-          this.firepad = Firepad.fromCodeMirror(fbRef, editor,  {userId: this.props.account.username || '&'});
+          this.firepad = Firepad.fromCodeMirror(file.fbRef, editor,  {userId: this.props.account.username || '&'});
         } catch(err) {
           console.warn('Error creating firepad', err);
         }
@@ -87,34 +87,24 @@ class Editor extends Component {
 
   componentDidMount() {
     const editorDiv = document.getElementById(this.props.name);
-    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: 'javascript', lineWrapping: true });
+    let mode = this.props.mode;
+    //TODO: Handle different types
+    if(mode === 'html') mode = 'htmlmixed';
+    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true});
     this.editor.setOption('theme', 'monokai');
-    // this.editor = createAce(this.props.name);
-    // this.editor.setTheme('ace/theme/monokai');
-    // this.editor.getSession().setMode(`ace/mode/${this.props.mode}`);
-    // this.editor.setTheme('ace/theme/'+this.props.theme);
-    // this.editor.renderer.setShowGutter(this.props.showGutter);
-    // this.editor.setAutoScrollEditorIntoView(true);
-    // this.editor.setOptions({
-    //   fontFamily: 'Roboto Mono',
-    //   fontSize: '16px',
-    // });
-    // this.editor.setOption('maxLines', this.props.maxLines);
     // //TODO: add read only for collabs
     // this.editor.setOption('readOnly', this.props.readOnly);
-    // this.editor.setOption('highlightActiveLine', this.props.highlightActiveLine);
-    // this.editor.setShowPrintMargin(this.props.setShowPrintMargin);
     this.handleLoad(this.editor);
   }
 
+  enableVim = () => {
+    // this.editor.setOption('keyMap', 'vim');
+  };
+
   componentWillReceiveProps(nextProps) {
     if(this.editor){
-      // this.editor.getSession().setMode(`ace/mode/${nextProps.mode}`);
-      // this.editor.setTheme('ace/theme/'+nextProps.theme);
-      // this.editor.setOption('maxLines', nextProps.maxLines);
-      // this.editor.setOption('readOnly', nextProps.readOnly);
-      // this.editor.setOption('highlightActiveLine', nextProps.highlightActiveLine);
-      // this.handleLoad(this.editor);
+      //TODO: Check to see if this is nessesary
+      this.handleLoad(this.editor);
     }
   }
 

@@ -17,6 +17,17 @@
     -ms-user-select: none;
     user-select: none;
   }
+  &-Users {
+    display: flex;
+    align-self: flex-end;
+		position: fixed;
+		right: 0;
+  }
+  &-User {
+		width: 30px;
+    text-align: center;
+    font-weight: 500;
+  }
   &.active{
     background-color: $editorBackground;
     color:blue;

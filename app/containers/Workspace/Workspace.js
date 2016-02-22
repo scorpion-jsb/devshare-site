@@ -16,6 +16,7 @@ import * as TabActions from '../../actions/tabs';
 import SideBar from '../../components/SideBar/SideBar';
 import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
 import SharingDialog from '../../components/SharingDialog/SharingDialog';
+import ContextMenu from '../../components/ContextMenu/ContextMenu';
 import Pane from '../../components/Pane/Pane';
 import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -40,7 +41,15 @@ class Workspace extends Component {
     addType: 'file',
     popoverOpen: false,
     debouncedFiles: null,
-    uploading: false
+    uploading: false,
+    contextMenu: {
+      path: '',
+      open: false,
+      position: {
+        x: 0,
+        y: 0
+      }
+    },
   };
 
   static propTypes = {
@@ -274,6 +283,26 @@ class Workspace extends Component {
     this.props.removeCollaborator(this.props.project, username);
   };
 
+  showContextMenu = (path, position) => {
+    this.setState({
+      contextMenu : {
+        open: true,
+        path: path,
+        position
+      }
+    });
+  };
+
+  dismissContextMenu = (path, position) => {
+    this.setState({
+      contextMenu : {
+        open: false,
+        path: '',
+        position
+      }
+    });
+  };
+
   render() {
     return (
       <div className="Workspace" ref="workspace">
@@ -300,8 +329,8 @@ class Workspace extends Component {
           onAddFolderClick={ this.showPopover.bind(this, 'folder') }
           onFilesDrop={ this.onFilesDrop }
           onFilesAdd={ this.onFilesAdd }
-          onFileDelete={ this.deleteFile }
           onDownloadFileClick={ this.handleDowloadFileClick }
+          onRightClick={ this.showContextMenu }
           filesLoading={ this.state.uploading }
         />
         <Pane
@@ -330,6 +359,17 @@ class Workspace extends Component {
             onAddCollab={ this.addCollaborator }
             onRemoveCollab={ this.removeCollaborator }
           /> : null
+        }
+        {
+          this.state.contextMenu.open ?
+          <ContextMenu
+            path={ this.state.contextMenu.path }
+            onAddFileClick={ this.showPopover.bind(this, 'file') }
+            onAddFolderClick={ this.showPopover.bind(this, 'folder') }
+            onFileDelete={ this.deleteFile }
+            position={ this.state.contextMenu.position }
+            dismiss={ this.dismissContextMenu }
+          />: null
         }
       </div>
     );

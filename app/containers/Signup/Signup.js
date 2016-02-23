@@ -16,8 +16,9 @@ import './Signup.scss';
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = {errors:{}, snackCanOpen: true};
   }
+
+  state = { errors:{username:null, password:null}, snackCanOpen: false };
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -94,8 +95,8 @@ class Signup extends Component {
             <Link className="Signup-Login-Link" to="/login">Login</Link>
           </div>
           <Snackbar
-            open={ typeof this.props.account.error !== 'undefined' && this.props.account.error !== null && this.state.snackCanOpen }
-            message={ this.props.account.error || '' }
+            open={ typeof this.props.account.error !== 'undefined' && this.state.snackCanOpen }
+            message={ this.props.account.error || 'Signup error' }
             action="close"
             autoHideDuration={ 3000 }
             onRequestClose={ this.handleRequestClose }

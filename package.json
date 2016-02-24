@@ -2,7 +2,9 @@
   "name": "devshare-site",
   "version": "0.1.1",
   "main": "bin/server.js",
-  "engines": { "node" : ">=4.0.0 <5.0.0" },
+  "engines": {
+    "node": ">=4.0.0 <5.0.0"
+  },
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
@@ -29,8 +31,10 @@
   "dependencies": {
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
+    "firebase": "^2.4.1",
     "history": "1.13.0",
-    "lodash": "^4.3.0",
+    "kyper-grout": "0.2.10",
+    "lodash": "^4.5.1",
     "material-ui": "^0.14.4",
     "proxy-middleware": "^0.13.1",
     "re-base": "^1.5.1",
@@ -43,9 +47,8 @@
     "react-router": "2.0.0-rc6",
     "react-router-redux": "^3.0.0",
     "react-tap-event-plugin": "^0.2.1",
-    "kyper-grout": "0.2.8",
     "redux": "^3.3.0",
-    "redux-grout": "0.2.3",
+    "redux-grout": "0.2.5",
     "redux-router": "1.0.0-beta3",
     "redux-thunk": "^1.0.0",
     "serve-static": "^1.10.0",
@@ -62,9 +65,6 @@
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "css-loader": "^0.16.0",
-    "eslint": "^1.4.1",
-    "eslint-config-airbnb": "0.0.8",
-    "eslint-plugin-react": "^3.2.3",
     "mocha": "^2.4.5",
     "node-sass": "^3.3.2",
     "react-hot-loader": "^1.2.8",

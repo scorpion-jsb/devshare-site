@@ -69,13 +69,6 @@ export default class SharingDialog extends Component {
     this.props.toggleModal();
   };
 
-  saveSettings = () => {
-    if(this.props.onSave){
-      this.props.onSave({ collaborators });
-      this.props.toggleModal();
-    }
-  };
-
   render(){
     const user = {
       image: {
@@ -106,15 +99,9 @@ export default class SharingDialog extends Component {
     }) : null;
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Close"
         secondary={ true }
         onTouchTap={ this.cancelClick }
-      />,
-      <FlatButton
-        label="Save"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={ this.saveSettings }
       />
     ];
     let matchingUsernames = this.state.matchingUsers ? this.state.matchingUsers.map(account => {

@@ -17,7 +17,7 @@ class Signup extends Component {
     super(props)
   }
 
-  state = { errors:{ username:null, password:null }, snackCanOpen: true }
+  state = { errors:{ username:null, password:null }, snackCanOpen: false }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -35,7 +35,7 @@ class Signup extends Component {
       username: null,
       email: null,
       name: null,
-      snackCanOpen: true
+      snackCanOpen: false
     })
   }
 
@@ -56,6 +56,9 @@ class Signup extends Component {
    * @description Initiate external providerSignup through redux-grout action (popup)
    */
   providerSignup = (provider) => {
+    this.setState({
+      snackCanOpen: true
+    })
     this.props.signup(provider)
     this.goAfterLoggedIn()
   }
@@ -94,7 +97,7 @@ class Signup extends Component {
             <Link className="Signup-Login-Link" to="/login">Login</Link>
           </div>
           <Snackbar
-            open={ typeof this.props.account.error !== 'undefined' && this.state.snackCanOpen }
+            open={ typeof this.props.account.error !== 'undefined' && this.props.account.error !== null && this.state.snackCanOpen }
             message={ this.props.account.error || 'Signup error' }
             action="close"
             autoHideDuration={ 3000 }

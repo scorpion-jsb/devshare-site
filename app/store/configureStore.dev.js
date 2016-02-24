@@ -3,7 +3,7 @@ import rootReducer from '../reducers'
 import thunk from 'redux-thunk'
 import { createMiddleware } from 'redux-grout'
 import { syncHistory } from 'react-router-redux'
-const devSettings = {logLevel: 'trace', envName: 'prod'}
+const devSettings = { logLevel: 'trace', envName: 'prod' }
 
 export default function configureStore (initialState, history) {
   const groutMiddleware = createMiddleware('tessellate', devSettings)

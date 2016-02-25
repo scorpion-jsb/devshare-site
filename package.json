@@ -7,9 +7,9 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
+    "pre-deploy": "node ./lib/pre-deploy",
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
     "build-server": "webpack -p --stats --progress --config webpack-server-production.config",
-    "postinstall": "npm run build",
     "copy-assets": "cp -a assets build",
     "copy-stats": "node ./lib/copy-stats",
     "copy": "npm run copy-assets && npm run copy-stats",

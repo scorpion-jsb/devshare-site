@@ -5,6 +5,7 @@
   cursor: pointer;
   margin-left: 1.7rem;
   float: left;
+  width: 100%;
   &-Name {
     display: flex;
     align-self: flex-start;
@@ -15,6 +16,17 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+  &-Users {
+    display: flex;
+    align-self: flex-end;
+		position: fixed;
+		right: 0;
+  }
+  &-User {
+		width: 30px;
+    text-align: center;
+    font-weight: 500;
   }
   &.active{
     background-color: $editorBackground;

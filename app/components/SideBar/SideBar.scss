@@ -15,8 +15,9 @@
 	}
   &-Dropzone {
     padding-top: 2rem;
-    width: 100%;
     display: flex;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     flex-direction: column;
   }
   a {
@@ -35,11 +36,9 @@
   }
   &-Buttons {
     display: flex;
-    position: absolute;
-    bottom: 0;
     flex-direction: row;
     justify-content: space-around;
-    flex-basis: 60px;
+    flex-basis: 70px;
     padding: 0 10px 20px 10px;
   }
   &-Name {

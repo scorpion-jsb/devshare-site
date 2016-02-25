@@ -19,8 +19,16 @@ class TreeFolder extends Component {
     data: PropTypes.object.isRequired,
     onOpenClick: PropTypes.func,
     onClosedClick: PropTypes.func,
-    onFileClick: PropTypes.func
+    onFileClick: PropTypes.func,
+    onRightClick: PropTypes.func
   };
+
+  handleRightClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.onRightClick(this.props.data.path, {x: e.clientX, y: e.clientY});
+  };
+
   render() {
     let className = (this.state.isCollapsed) ? 'TreeFolder collapsed noselect' : 'TreeFolder noselect';
     const iconSize = "1.2rem";
@@ -49,6 +57,7 @@ class TreeFolder extends Component {
               isCollapsed={ entry.isCollapsed }
               children={ children }
               onFileClick={ this.props.onFileClick }
+              onRightClick={ this.props.onRightClick }
             />
           );
         }
@@ -59,14 +68,16 @@ class TreeFolder extends Component {
             data={ entry.meta }
             active={ entry.active }
             onClick={ this.props.onFileClick }
+            onRightClick={ this.props.onRightClick }
+            users={ entry.users }
           />
         );
       });
     }
     const name = this.props.data.name || this.props.data.path;
     return (
-      <li className={ className } data-path={ this.props.data.path }>
-        <div className="TreeFolder-Info" onClick={ this._onFolderClick }>
+      <li data-path={ this.props.data.path } onContextMenu={ this.handleRightClick }>
+        <div className={ className }  className="TreeFolder-Info" onClick={ this._onFolderClick }>
           <FontIcon className="material-icons"
             style={{ 'fontSize': iconSize}}>
             { !this.state.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }

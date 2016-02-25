@@ -10,17 +10,7 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-  &-Users {
-    display: flex;
-    align-self: flex-end;
-		position: fixed;
-		right: 0;
-  }
-  &-User {
-		width: 30px;
-    text-align: center;
-    font-weight: 500;
-  }
+	overflow: scroll;
 	&-Structure {
 		list-style-type: none;
 		font-size: 1.4rem;
@@ -35,6 +25,9 @@
 		  line-height: 2.3rem;
 		  font-weight: 300;
 			position: relative;
+			cursor: pointer;
+			float: left;
+			width: 100%;
 		}
 	}
 	&-Container {
@@ -51,10 +44,6 @@
 	}
 	&-NewInput {
 		width: 150px;
-	}
-	&-ContextMenu {
-		display: none;
-		position: fixed;
 	}
 	&-None {
 		max-width: 200px;
@@ -82,28 +71,5 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-	}
-	&-ContextMenu {
-		margin: 0;
-		padding: 0;
-		z-index: 90;
-		list-style: none;
-		background-color: $lightGray;
-		cursor: pointer;
-		li {
-			 padding: 10px;
-			 font-size: .8rem;
-			 font-weight: 400;
-				user-select: none;
-				-webkit-touch-callout: none;
-		    -webkit-user-select: none;
-		    -khtml-user-select: none;
-		    -moz-user-select: none;
-		    -ms-user-select: none;
-			 &:hover {
-				 background-color: $darkGray;
-				 color: white;
-			 }
-	 	}
 	}
 }

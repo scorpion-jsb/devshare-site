@@ -1,33 +1,33 @@
-import { capitalize, find } from 'lodash';
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { Actions } from 'redux-grout';
-import Paper from 'material-ui/lib/paper';
-import RaisedButton from 'material-ui/lib/raised-button';
-import CircularProgress from 'material-ui/lib/circular-progress';
-import SignupForm from '../../components/SignupForm/SignupForm';
-import GoogleButton from '../../components/GoogleButton/GoogleButton';
-import Snackbar from 'material-ui/lib/snackbar';
-
-import './Signup.scss';
+import { capitalize, find } from 'lodash'
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { Actions } from 'redux-grout'
+import Paper from 'material-ui/lib/paper'
+import RaisedButton from 'material-ui/lib/raised-button'
+import CircularProgress from 'material-ui/lib/circular-progress'
+import SignupForm from '../../components/SignupForm/SignupForm'
+import GoogleButton from '../../components/GoogleButton/GoogleButton'
+import Snackbar from 'material-ui/lib/snackbar'
+import './Signup.scss'
 
 class Signup extends Component {
   constructor(props) {
-    super(props);
-    this.state = {errors:{}, snackCanOpen: true};
+    super(props)
   }
+
+  state = { errors:{ username:null, password:null }, snackCanOpen: false }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
-  };
+  }
 
   handleRequestClose = () => {
     this.setState({
      snackCanOpen: false,
-    });
-  };
+    })
+  }
 
   reset = () => {
     return this.setState({
@@ -35,9 +35,9 @@ class Signup extends Component {
       username: null,
       email: null,
       name: null,
-      snackCanOpen: true
-    });
-  };
+      snackCanOpen: false
+    })
+  }
 
   /**
    * @function handleSignup
@@ -46,29 +46,32 @@ class Signup extends Component {
   handleSignup = (signupData) => {
     this.setState({
       snackCanOpen: true
-    });
-    this.props.signup(signupData);
-    this.goAfterLoggedIn();
-  };
+    })
+    this.props.signup(signupData)
+    this.goAfterLoggedIn()
+  }
 
   /**
    * @function providerSignup
    * @description Initiate external providerSignup through redux-grout action (popup)
    */
   providerSignup = (provider) => {
-    this.props.signup(provider);
-    this.goAfterLoggedIn();
-  };
+    this.setState({
+      snackCanOpen: true
+    })
+    this.props.signup(provider)
+    this.goAfterLoggedIn()
+  }
 
   //TODO: Replace this with redux-rx
   goAfterLoggedIn() {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.context.router.push(`/${this.props.account.username}`);
+        this.context.router.push(`/${this.props.account.username}`)
       } else {
-        this.goAfterLoggedIn();
+        this.goAfterLoggedIn()
       }
-    }, 300);
+    }, 300)
   }
 
   render() {
@@ -95,13 +98,13 @@ class Signup extends Component {
           </div>
           <Snackbar
             open={ typeof this.props.account.error !== 'undefined' && this.props.account.error !== null && this.state.snackCanOpen }
-            message={ this.props.account.error || '' }
+            message={ this.props.account.error || 'Signup error' }
             action="close"
             autoHideDuration={ 3000 }
             onRequestClose={ this.handleRequestClose }
           />
         </div>
-      );
+      )
     } else {
       return (
         <div className="Signup">
@@ -109,7 +112,7 @@ class Signup extends Component {
             <CircularProgress  mode="indeterminate" />
           </div>
         </div>
-      );
+      )
     }
   }
 }
@@ -118,10 +121,10 @@ function mapStateToProps(state) {
   return {
     account: state.account,
     router: state.router
-  };
+  }
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions.account, dispatch);
+  return bindActionCreators(Actions.account, dispatch)
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

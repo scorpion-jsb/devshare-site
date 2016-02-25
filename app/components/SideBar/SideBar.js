@@ -33,6 +33,7 @@ export default class SideBar extends Component {
     onFilesDrop: PropTypes.func,
     onSharingClick: PropTypes.func,
     onFilesAdd: PropTypes.func,
+    onRightClick: PropTypes.func,
     filesLoading: PropTypes.bool
   };
 
@@ -79,6 +80,11 @@ export default class SideBar extends Component {
     });
   };
 
+  handleRightClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.onRightClick(null, {x: e.clientX, y: e.clientY});
+  };
 
   render() {
     const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true;
@@ -90,7 +96,12 @@ export default class SideBar extends Component {
       });
     }
     return (
-      <div className={ this.state.filesOver ? "SideBar SideBar--FileHover" : "SideBar"} onDragOver={ this.handleFileDrag } onDragLeave={ this.handleFileDragLeave } onDrop={ this.handleFileDrop }>
+      <div className={ this.state.filesOver ? "SideBar SideBar--FileHover" : "SideBar"}
+        onDragOver={ this.handleFileDrag }
+        onDragLeave={ this.handleFileDragLeave }
+        onDrop={ this.handleFileDrop }
+        onContextMenu={ this.handleRightClick }
+      >
         <div className="SideBar-Dropzone">
         { (projectsMenu && showProjects) ?
           <SelectField
@@ -106,11 +117,8 @@ export default class SideBar extends Component {
             account={ this.props.account }
             fileStructure={ this.props.files }
             onFileClick={ this.props.onFileClick }
-            onAddFileClick={ this.props.onAddFileClick }
-            onAddFolderClick={ this.props.onAddFolderClick }
+            onRightClick={ this.props.onRightClick }
             projectName={ this.props.project.name }
-            onFilesDrop={ this.props.onFilesDrop }
-            onFileDelete={ this.props.onFileDelete }
             loading={ this.props.filesLoading }
           />
           <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />

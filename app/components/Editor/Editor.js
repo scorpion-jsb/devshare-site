@@ -30,7 +30,8 @@ class Editor extends Component {
     highlightActiveLine: PropTypes.bool,
     showPrintMargin: PropTypes.bool,
     filePath: PropTypes.string.isRequired,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    vimEnabled: PropTypes.bool
   };
 
   static defaultProps = {
@@ -90,6 +91,7 @@ class Editor extends Component {
     let mode = this.props.mode;
     //TODO: Handle different types
     if(mode === 'html') mode = 'htmlmixed';
+    CodeMirror.Vim.map('jj', '<Esc>', 'insert')
     this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true});
     this.editor.setOption('theme', 'monokai');
     // //TODO: add read only for collabs
@@ -98,13 +100,18 @@ class Editor extends Component {
   }
 
   enableVim = () => {
-    // this.editor.setOption('keyMap', 'vim');
+    this.editor.setOption('keyMap', 'vim')
+  };
+
+  disableVim = () => {
+    this.editor.setOption('keyMap', 'default')
   };
 
   componentWillReceiveProps(nextProps) {
     if(this.editor){
       //TODO: Check to see if this is nessesary
       this.handleLoad(this.editor);
+      nextProps.vimEnabled ? this.enableVim() : this.disableVim()
     }
   }
 

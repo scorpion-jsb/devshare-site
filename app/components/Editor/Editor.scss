@@ -3,16 +3,9 @@
   font-family: 'Roboto Mono';
   font-size: 16px;
   height: auto;
-  &.ace_editor {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-  }
 }
 .CodeMirror {
-  height: 100% !important;
+  height: auto;
 }
 .firepad {
   height: auto;

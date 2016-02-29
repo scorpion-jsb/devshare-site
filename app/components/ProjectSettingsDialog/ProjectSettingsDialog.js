@@ -38,15 +38,9 @@ export default class ProjectSettingsDialog extends Component {
   render(){
     const actions = [
       <FlatButton
-        label="Cancel"
-        secondary={true}
+        label="Close"
+        secondary={ true }
         onTouchTap={ this.props.toggleModal }
-      />,
-      <FlatButton
-        label="Save"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={ this.saveSettings }
       />
     ];
     const owner = (this.props.project && this.props.project.owner && this.props.project.owner.username) ? this.props.project.owner.username : this.props.project.owner;

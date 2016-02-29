@@ -42,6 +42,7 @@ class Workspace extends Component {
     popoverOpen: false,
     debouncedFiles: null,
     uploading: false,
+    vimEnabled: false,
     contextMenu: {
       path: '',
       open: false,
@@ -284,8 +285,9 @@ class Workspace extends Component {
   };
 
   toggleVim = (vimState) => {
-    console.log('toggle vim called');
-    this.props.toggleVim()
+    this.setState({
+      vimEnabled: !this.state.vimEnabled
+    })
   }
 
   showContextMenu = (path, position) => {
@@ -343,6 +345,7 @@ class Workspace extends Component {
           onTabSelect={ this.selectTab }
           onTabClose={ this.closeTab }
           project={ this.props.project }
+          vimEnabled={ this.state.vimEnabled }
         />
         {
           this.state.settingsOpen ?
@@ -352,6 +355,7 @@ class Workspace extends Component {
             toggleModal={ this.toggleSettingsModal }
             onSave={ this.saveSettings }
             onVimToggle={ this.toggleVim }
+            vimEnabled={ this.state.vimEnabled }
           /> : null
         }
         {

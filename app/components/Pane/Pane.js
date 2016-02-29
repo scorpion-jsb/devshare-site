@@ -13,7 +13,8 @@ class Pane extends Component {
     tabs: PropTypes.object,
     project: PropTypes.object.isRequired,
     onTabSelect: PropTypes.func.isRequired,
-    onTabClose: PropTypes.func.isRequired
+    onTabClose: PropTypes.func.isRequired,
+    vimEnabled: PropTypes.bool
   };
   closeTab = (ind) => {
     this.props.onTabClose(ind);
@@ -35,6 +36,7 @@ class Pane extends Component {
           currentIndex={ this.props.tabs.currentIndex }
           project={ this.props.project }
           workspace={ this.workspace }
+          vimEnabled={ this.props.vimEnabled }
         />
       </div>
     );

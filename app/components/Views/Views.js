@@ -9,9 +9,10 @@ class Views extends Component {
   static propTypes = {
     views: PropTypes.array,
     currentIndex: PropTypes.number,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    vimEnabled: PropTypes.bool
   };
-  
+
   render() {
     let currentIndex = this.props.currentIndex || 0;
     if (!this.props.views) {
@@ -30,6 +31,7 @@ class Views extends Component {
             viewData={ view }
             project={ this.props.project }
             visible={ true }
+            vimEnabled={ this.props.vimEnabled }
           />
         );
       }
@@ -40,6 +42,7 @@ class Views extends Component {
           viewData={ view }
           project={ this.props.project }
           visible={ false }
+          vimEnabled={ this.props.vimEnabled }
         />
       );
     });

@@ -11,7 +11,7 @@ var renderIndex = require('../lib/render-index');
 var renderApp = require('../build/bundle-server');
 
 try {
-  var stats = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'build-stats.json')));
+  var stats = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'stats.json')));
 } catch(err) {
   console.log('Error parsing stats file:', err);
 }

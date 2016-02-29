@@ -3,6 +3,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 import TextField from 'material-ui/lib/text-field';
 import './ProjectSettingsDialog.scss';
+import Toggle from 'material-ui/lib/toggle';
 
 export default class ProjectSettingsDialog extends Component {
   constructor(props){
@@ -11,8 +12,13 @@ export default class ProjectSettingsDialog extends Component {
 
   static propTypes = {
     modalOpen: PropTypes.bool,
-    toggleModal: PropTypes.func
+    toggleModal: PropTypes.func,
+    project: PropTypes.object,
+    vimEnabled: PropTypes.bool,
+    onVimToggle: PropTypes.func
   };
+
+  state = { vimEnabled: this.props.vimEnabled || false };
 
   handleAutoCompleteSubmit = () => {
     //TODO: Add collaborator
@@ -22,18 +28,19 @@ export default class ProjectSettingsDialog extends Component {
     //TODO: handle change
   };
 
+  handleVimToggle = () => {
+    if(this.props.onVimToggle) this.props.onVimToggle(this.state.vimEnabled);
+    this.setState({
+      vimEnabled: !this.state.vimEnabled
+    });
+  };
+
   render(){
     const actions = [
       <FlatButton
-        label="Cancel"
-        secondary={true}
+        label="Close"
+        secondary={ true }
         onTouchTap={ this.props.toggleModal }
-      />,
-      <FlatButton
-        label="Save"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={ this.saveSettings }
       />
     ];
     const owner = (this.props.project && this.props.project.owner && this.props.project.owner.username) ? this.props.project.owner.username : this.props.project.owner;
@@ -63,6 +70,17 @@ export default class ProjectSettingsDialog extends Component {
           hintText="Site url"
           floatingLabelText="Site url"
           disabled={ true }
+        />
+        <Toggle
+          label="Vim Mode"
+          labelPotition="right"
+          style={{
+              maxWidth: 150,
+              marginBottom: 16,
+              marginTop: 20
+          }}
+          toggled={ this.state.vimEnabled }
+          onToggle={ this.handleVimToggle }
         />
       </Dialog>
     );

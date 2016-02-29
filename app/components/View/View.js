@@ -10,7 +10,8 @@ export default class View extends Component {
     viewData: PropTypes.object,
     visible: PropTypes.bool.isRequired,
     index: PropTypes.number.isRequired,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    vimEnabled: PropTypes.bool
   };
   render(){
     // console.log('project in view', this.props.project);
@@ -28,6 +29,7 @@ export default class View extends Component {
             mode={ file.fileType || 'javascript' }
             filePath={ file.path }
             project={ this.props.project }
+            vimEnabled={ this.props.vimEnabled }
           />
         </div>
       );

@@ -42,6 +42,7 @@ class Workspace extends Component {
     popoverOpen: false,
     debouncedFiles: null,
     uploading: false,
+    vimEnabled: false,
     contextMenu: {
       path: '',
       open: false,
@@ -283,6 +284,12 @@ class Workspace extends Component {
     this.props.removeCollaborator(this.props.project, username);
   };
 
+  toggleVim = (vimState) => {
+    this.setState({
+      vimEnabled: !this.state.vimEnabled
+    })
+  }
+
   showContextMenu = (path, position) => {
     this.setState({
       contextMenu : {
@@ -338,6 +345,7 @@ class Workspace extends Component {
           onTabSelect={ this.selectTab }
           onTabClose={ this.closeTab }
           project={ this.props.project }
+          vimEnabled={ this.state.vimEnabled }
         />
         {
           this.state.settingsOpen ?
@@ -346,6 +354,8 @@ class Workspace extends Component {
             modalOpen={ this.state.settingsOpen }
             toggleModal={ this.toggleSettingsModal }
             onSave={ this.saveSettings }
+            onVimToggle={ this.toggleVim }
+            vimEnabled={ this.state.vimEnabled }
           /> : null
         }
         {

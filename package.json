@@ -6,13 +6,12 @@
     "node": ">=4.0.0 <5.0.0"
   },
   "scripts": {
-    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
+    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy-assets",
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
     "build-server": "webpack -p --stats --progress --config webpack-server-production.config",
     "postinstall": "npm run build",
     "copy-assets": "cp -a assets build",
-    "copy-stats": "node ./lib/copy-stats",
-    "copy": "npm run copy-assets && npm run copy-stats",
+    "pre-deploy": "node ./bin/pre-deploy",
     "clean": "rimraf build",
     "test": "mocha -R spec --compilers js:babel-core/register ./test/setup.js ./test/**/*.js",
     "start": "node bin/dev-server",

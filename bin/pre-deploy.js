@@ -3,7 +3,7 @@
   var fs = require('fs')
   var path = require('path')
 
-  var removePaths = ['dist']
+  var removePaths = ['build']
 
   module.exports = removeFromIgnore
 

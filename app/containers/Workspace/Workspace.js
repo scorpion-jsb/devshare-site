@@ -20,6 +20,7 @@ import ContextMenu from '../../components/ContextMenu/ContextMenu';
 import Pane from '../../components/Pane/Pane';
 import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover';
 import RaisedButton from 'material-ui/lib/raised-button';
+import ga from '../../helpers/ga'
 
 import './Workspace.scss';
 
@@ -61,12 +62,12 @@ class Workspace extends Component {
   };
 
   componentDidMount() {
-    this.fetchProjectFiles(this.props.project);
+    this.fetchProjectFiles(this.props.project)
   }
 
   componentWillReceiveProps(nextProps) {
     //Rebind files if props change (new project selected)
-    this.fetchProjectFiles(nextProps.project);
+    this.fetchProjectFiles(nextProps.project)
   }
 
   fetchProjectFiles = (project) => {
@@ -129,34 +130,37 @@ class Workspace extends Component {
   };
 
   addFile = (path, content) => {
-    this.props.addFile(this.props.project, path, content);
+    ga.event({ category: 'Files', action: 'File added' })
+    this.props.addFile(this.props.project, path, content)
   };
 
-  addFolder = (path) => {
-    this.props.addFolder(this.props.project, path);
+  addFolder = path => {
+    ga.event({ category: 'Files', action: 'Folder added' })
+    this.props.addFolder(this.props.project, path)
   };
 
-  deleteFile = (path) => {
-    this.props.deleteFile(this.props.project, path);
+  deleteFile = path => {
+    ga.event({ category: 'Files', action: 'Folder added' })
+    this.props.deleteFile(this.props.project, path)
   };
 
   openFile = (file) => {
-    const { project, tabs } = this.props;
+    const { project, tabs } = this.props
     const tabData = {
       project,
       title: file.name || file.path.split('/')[file.path.split('/').length - 1],
       type: 'file',
       file,
-    };
+    }
     //TODO: Search by matching path instead of tab title
     //Search for already matching title
-    const matchingInd = findIndex(tabs.list, {title: tabData.title});
+    const matchingInd = findIndex(tabs.list, {title: tabData.title})
     //Only open tab if file is not already open
     if(matchingInd === -1){
-      this.props.openTab(tabData);
+      this.props.openTab(tabData)
       //Select last tab
       const newInd =  tabs.list ? tabs.list.length - 1 : 0;
-      return this.props.navigateToTab({project, index: newInd});
+      return this.props.navigateToTab({ project, index: newInd })
     }
     this.props.navigateToTab({
       project,
@@ -165,37 +169,37 @@ class Workspace extends Component {
   };
 
   selectTab = (index) => {
-    this.props.navigateToTab({project: this.props.project, index});
+    this.props.navigateToTab({ project: this.props.project, index })
   };
 
   closeTab = (index) => {
-    this.props.closeTab({ project: this.props.project, index });
+    this.props.closeTab({ project: this.props.project, index })
   };
 
   readAndSaveFileEntry = (entry) => {
-    let parent = this;
+    let parent = this
     //TODO: Use bind instead of parent var
     function readAndSaveFile(file, path) {
-      let reader = new FileReader();
+      let reader = new FileReader()
       reader.onloadend = function(e) {
-        parent.addFile(path, this.result);
+        parent.addFile(path, this.result)
       }
-      reader.readAsText(file);
+      reader.readAsText(file)
     }
     if (entry.webkitRelativePath) {
-      return readAndSaveFile(entry, entry.webkitRelativePath);
+      return readAndSaveFile(entry, entry.webkitRelativePath)
     }
     entry.file(file => {
-      readAndSaveFile(file, entry.fullPath);
+      readAndSaveFile(file, entry.fullPath)
     });
   };
 
   readAndSaveFolderEntry = (entry) => {
-    this.addFolder(entry.fullPath);
-    let reader = entry.createReader();
+    this.addFolder(entry.fullPath)
+    let reader = entry.createReader()
     reader.readEntries(folder => {
       if (folder.length > 1) {
-        this.handleEntries(folder);
+        this.handleEntries(folder)
       }
     });
   };
@@ -209,48 +213,48 @@ class Workspace extends Component {
 
     each(entries, entry => {
       if (fileEntityBlackList.indexOf(last(entry.fullPath.split('/'))) !== -1) {
-        return void 0;
+        return void 0
       }
       if (entry.isFile) {
-        this.readAndSaveFileEntry(entry);
+        this.readAndSaveFileEntry(entry)
       } else if (entry.isDirectory) {
-        this.readAndSaveFolderEntry(entry);
+        this.readAndSaveFolderEntry(entry)
       }
     })
   };
 
   onFilesDrop = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
       uploading: true
-    });
-    let items = e.dataTransfer.items;
+    })
+    let items = e.dataTransfer.items
     each(items, item => {
-      var entry = item.webkitGetAsEntry();
-      this.handleEntries(entry);
-    });
+      var entry = item.webkitGetAsEntry()
+      this.handleEntries(entry)
+    })
     this.setState({
       uploading: false
-    });
+    })
   };
 
   onFilesAdd = (e) => {
-    e.preventDefault();
-    let items = e.target.files;
+    e.preventDefault()
+    let items = e.target.files
     each(items, item => {
       if (fileEntityBlackList.indexOf(last(item.webkitRelativePath.split('/'))) !== -1) {
-        return void 0;
+        return void 0
       }
-      this.readAndSaveFileEntry(item);
-    });
+      this.readAndSaveFileEntry(item)
+    })
   };
 
   searchUsers = (q, cb) => {
     grout.Users.search(q).then(usersList => {
-      cb(null, usersList);
+      cb(null, usersList)
     }, err => {
-      cb(err);
-    });
+      cb(err)
+    })
   };
 
   showPopover = (addType, addPath) => {
@@ -258,30 +262,30 @@ class Workspace extends Component {
       addPath,
       addType,
       popoverOpen: true
-    });
+    })
   };
 
   addEntity = (type, path, content) => {
-    if (type === 'folder') return this.addFolder(path);
-    this.addFile(path, content);
+    if (type === 'folder') return this.addFolder(path)
+    this.addFile(path, content)
   };
 
   handlePopoverClose = () => {
     this.setState({
       popoverOpen: false
-    });
+    })
   };
 
   handleDowloadFileClick = (e) => {
-    this.props.downloadFiles(this.props.project);
+    this.props.downloadFiles(this.props.project)
   };
 
   addCollaborator = (username) => {
-    this.props.addCollaborator(this.props.project, username);
+    this.props.addCollaborator(this.props.project, username)
   };
 
   removeCollaborator = (username) => {
-    this.props.removeCollaborator(this.props.project, username);
+    this.props.removeCollaborator(this.props.project, username)
   };
 
   toggleVim = (vimState) => {
@@ -297,7 +301,7 @@ class Workspace extends Component {
         path: path,
         position
       }
-    });
+    })
   };
 
   dismissContextMenu = (path, position) => {
@@ -307,7 +311,7 @@ class Workspace extends Component {
         path: '',
         position
       }
-    });
+    })
   };
 
   render() {

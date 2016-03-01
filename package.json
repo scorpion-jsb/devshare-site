@@ -6,7 +6,7 @@
     "node": ">=4.0.0 <5.0.0"
   },
   "scripts": {
-    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy",
+    "build": "npm run clean && npm run build-bundle && npm run build-server && npm run copy-assets",
     "pre-deploy": "node ./bin/pre-deploy",
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
     "build-server": "webpack -p --stats --progress --config webpack-server-production.config",

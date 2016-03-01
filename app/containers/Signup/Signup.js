@@ -10,6 +10,7 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import SignupForm from '../../components/SignupForm/SignupForm'
 import GoogleButton from '../../components/GoogleButton/GoogleButton'
 import Snackbar from 'material-ui/lib/snackbar'
+import ga from '../../helpers/ga'
 import './Signup.scss'
 
 class Signup extends Component {
@@ -27,7 +28,7 @@ class Signup extends Component {
     this.setState({
      snackCanOpen: false,
     })
-  }
+  };
 
   reset = () => {
     return this.setState({
@@ -37,7 +38,7 @@ class Signup extends Component {
       name: null,
       snackCanOpen: false
     })
-  }
+  };
 
   /**
    * @function handleSignup
@@ -48,8 +49,9 @@ class Signup extends Component {
       snackCanOpen: true
     })
     this.props.signup(signupData)
+    ga.event({category: 'User', action: 'Email Signup' })
     this.goAfterLoggedIn()
-  }
+  };
 
   /**
    * @function providerSignup
@@ -60,8 +62,9 @@ class Signup extends Component {
       snackCanOpen: true
     })
     this.props.signup(provider)
+    ga.event({category: 'User', action: 'Provider Signup', value: provider })
     this.goAfterLoggedIn()
-  }
+  };
 
   //TODO: Replace this with redux-rx
   goAfterLoggedIn() {
@@ -72,7 +75,7 @@ class Signup extends Component {
         this.goAfterLoggedIn()
       }
     }, 300)
-  }
+  };
 
   render() {
     if(!this.props.account.isFetching){

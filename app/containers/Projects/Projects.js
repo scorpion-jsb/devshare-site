@@ -51,7 +51,6 @@ class Projects extends Component {
   };
 
   collaboratorClick = (collaborator) => {
-    console.log('collaborator clicked:', collaborator);
     this.props.history.pushState(null, `/${collaborator.username}`);
   };
 

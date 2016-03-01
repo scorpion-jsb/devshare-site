@@ -1,18 +1,18 @@
-import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import { Link } from 'react-router';
-import { Actions } from 'redux-grout';
-import AvatarEditor from 'react-avatar-editor';
-import RaisedButton from 'material-ui/lib/raised-button';
-import TextField from 'material-ui/lib/text-field';
-import AccountDialog from '../../components/AccountDialog/AccountDialog';
-import './Account.scss';
-const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png';
+import React, {Component, PropTypes} from 'react'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import { Link } from 'react-router'
+import { Actions } from 'redux-grout'
+import AvatarEditor from 'react-avatar-editor'
+import RaisedButton from 'material-ui/lib/raised-button'
+import TextField from 'material-ui/lib/text-field'
+import AccountDialog from '../../components/AccountDialog/AccountDialog'
+import './Account.scss'
+const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
 
 class Account extends Component {
   constructor(props){
-    super(props);
+    super(props)
   }
 
   state = { modalOpen: false };
@@ -22,8 +22,8 @@ class Account extends Component {
   };
 
   handleLogout = () => {
-    this.props.logout();
-    this.context.router.push('/');
+    this.props.logout()
+    this.context.router.push('/')
   };
 
   handleSave = () => {
@@ -35,9 +35,8 @@ class Account extends Component {
     this.props.updateAccount(account);
   };
 
-  handleAvatarUpload = (imageFile) => {
-    console.log('calling upload avatar with:', imageFile);
-    this.props.uploadAvatar(imageFile);
+  handleAvatarUpload = imageFile => {
+    this.props.uploadAvatar(imageFile)
   };
 
   toggleModal = () => {
@@ -46,9 +45,9 @@ class Account extends Component {
     });
   };
 
-  render(){
-    const buttonStyle = {'marginTop': '2rem', width: '20%'};
-    const textFieldStyle = {width: '60%'};
+  render (){
+    const buttonStyle = { 'marginTop': '2rem', width: '20%' }
+    const textFieldStyle = { width: '60%' }
     return (
       <div className="Account">
         <AccountDialog
@@ -87,18 +86,21 @@ class Account extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
-//Place state of redux store into props of component
+
+// Place state of redux store into props of component
 function mapStateToProps(state) {
   return {
     account: state.account,
     router: state.router
-  };
+  }
 }
-//Place action methods into props
+
+// Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions.account, dispatch);
+  return bindActionCreators(Actions.account, dispatch)
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account)

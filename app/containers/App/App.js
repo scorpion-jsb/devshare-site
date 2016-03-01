@@ -1,28 +1,25 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Actions } from 'redux-grout';
-import { hydrateUser } from '../../actions/account';
-import Navbar from '../../components/Navbar/Navbar';
-import Grout from 'kyper-grout';
-import './App.scss';
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Actions } from 'redux-grout'
+import { hydrateUser } from '../../actions/account'
+import Navbar from '../../components/Navbar/Navbar'
+import Grout from 'kyper-grout'
+import ThemeManager from 'material-ui/lib/styles/theme-manager'
+import Theme from '../../theme'
+import './App.scss'
 
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import Theme from '../../theme';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
     this.getChildContext = () => {
       return {
         muiTheme: ThemeManager.getMuiTheme(Theme),
-      };
-    };
+      }
+    }
   }
 
   static childContextTypes = {
@@ -34,23 +31,21 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    let grout = new Grout();
-
+    let grout = new Grout()
     if(grout.currentUser){
-      this.props.hydrateUser(grout.currentUser);
+      this.props.hydrateUser(grout.currentUser)
     }
-
   }
 
-  handleClick(loc) {
+  handleClick = (loc) => {
     this.context.router.push(`/${loc}`);
-  }
+  };
 
-  handleLogout() {
+  handleLogout = () => {
     this.props.logout();
     this.context.router.push(`/`);
-  }
-  
+  };
+
   render() {
     return (
       <div className="App">
@@ -69,12 +64,12 @@ function mapStateToProps(state) {
   return {
     account: state.account,
     router: state.router
-  };
+  }
 }
 //Place action methods into props
 function mapDispatchToProps(dispatch) {
-  Actions.account.hydrateUser = hydrateUser;
-  return bindActionCreators(Actions.account, dispatch);
+  Actions.account.hydrateUser = hydrateUser
+  return bindActionCreators(Actions.account, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

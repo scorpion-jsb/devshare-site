@@ -11,6 +11,7 @@
     "build-bundle": "webpack -p --stats --progress --config webpack-production.config",
     "build-server": "webpack -p --stats --progress --config webpack-server-production.config",
     "copy-assets": "cp -a assets build",
+    "postinstall": "npm run build",
     "clean": "rimraf build",
     "test": "mocha -R spec --compilers js:babel-core/register ./test/setup.js ./test/**/*.js",
     "start": "node bin/dev-server",

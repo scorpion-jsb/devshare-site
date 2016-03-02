@@ -1,18 +1,13 @@
 language: node_js
 node_js:
-  - "4.2.2"
-branches:
-  only:
-    - master
+- "5.7.0"
 sudo: false
-script: "npm run pre-deploy && npm run build"
+cache:
+  directories:
+  - node_modules
 deploy:
-  skip_cleanup: true
-  provider: elasticbeanstalk
-  access_key_id: $AWS_KEY
-  secret_access_key: $AWS_SECRET
-  region: us-east-1
-  app: devshare
-  env: devshare-stg
-  bucket_name: $BUCKET
-  bucket_path: $PREFIX
+  provider: heroku
+  api_key:
+    secure: ed11d72d-8ffb-43a4-9495-366025ab4e2f
+  app:
+    master: kyper-devshare

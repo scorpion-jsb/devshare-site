@@ -2,14 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import './Editor.scss';
 import { connect } from 'react-redux';
 import Grout from 'kyper-grout';
-import CodeMirror from 'codemirror';
-import 'expose?CodeMirror!codemirror'; //Needed for Firepad to load CodeMirror
-import Firepad from 'firepad';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/monokai.css';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/mode/htmlmixed/htmlmixed';
-import 'codemirror/keymap/vim';
+
 let grout = new Grout('tessellate', {logLevel: 'trace'});
 
 class Editor extends Component {
@@ -51,6 +44,7 @@ class Editor extends Component {
 
   handleLoad = (editor) => {
     //Load file content
+    var Firepad = require('firepad');
     if(typeof editor.firepad === 'undefined'){
       const file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath);
       try {
@@ -87,11 +81,18 @@ class Editor extends Component {
   }
 
   componentDidMount() {
+    var CodeMirror = require('codemirror')
+    require('expose?CodeMirror!codemirror'); //Needed for Firepad to load CodeMirror
+    require('codemirror/lib/codemirror.css');
+    require('codemirror/theme/monokai.css');
+    require('codemirror/mode/javascript/javascript');
+    require('codemirror/mode/htmlmixed/htmlmixed');
+    require('codemirror/keymap/vim');
     const editorDiv = document.getElementById(this.props.name);
     let mode = this.props.mode;
     //TODO: Handle different types
     if(mode === 'html') mode = 'htmlmixed';
-    CodeMirror.Vim.map('jj', '<Esc>', 'insert')
+    // CodeMirror.Vim.map('jj', '<Esc>', 'insert')
     this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true});
     this.editor.setOption('theme', 'monokai');
     // //TODO: add read only for collabs

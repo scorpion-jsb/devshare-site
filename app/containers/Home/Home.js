@@ -13,10 +13,11 @@ import GroupIcon from 'material-ui/lib/svg-icons/social/group'
 import CloudDownload from 'material-ui/lib/svg-icons/file/cloud-download'
 import StartIcon from 'material-ui/lib/svg-icons/content/create'
 import Paper from 'material-ui/lib/paper'
+import { event } from '../../helpers/ga'
 
 class Home extends Component {
   trackEvent = () => {
-    window.ga.event({category: 'Projects', action: 'Create Anonymous' })
+    event({ category: 'Projects', action: 'Create Anonymous' })
   };
 
   render () {

@@ -4,24 +4,24 @@ import {
   isUndefined, isString,
   each, isEqual, debounce,
   last
-} from 'lodash';
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Modal from 'react-modal';
-import Rebase from 're-base';
-import { Actions } from 'redux-grout';
-import Grout from 'kyper-grout';
-import * as TabActions from '../../actions/tabs';
-import SideBar from '../../components/SideBar/SideBar';
-import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog';
-import SharingDialog from '../../components/SharingDialog/SharingDialog';
-import ContextMenu from '../../components/ContextMenu/ContextMenu';
-import Pane from '../../components/Pane/Pane';
-import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover';
-import RaisedButton from 'material-ui/lib/raised-button';
-
-import './Workspace.scss';
+} from 'lodash'
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Modal from 'react-modal'
+import Rebase from 're-base'
+import { Actions } from 'redux-grout'
+import Grout from 'kyper-grout'
+import * as TabActions from '../../actions/tabs'
+import SideBar from '../../components/SideBar/SideBar'
+import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog'
+import SharingDialog from '../../components/SharingDialog/SharingDialog'
+import ContextMenu from '../../components/ContextMenu/ContextMenu'
+import Pane from '../../components/Pane/Pane'
+import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover'
+import RaisedButton from 'material-ui/lib/raised-button'
+import { event } from '../../helpers/ga'
+import './Workspace.scss'
 
 let grout = new Grout();
 let fileEntityBlackList = ['.DS_Store', 'node_modules'];
@@ -129,17 +129,17 @@ class Workspace extends Component {
   };
 
   addFile = (path, content) => {
-    window.ga.event({ category: 'Files', action: 'File added' })
+    event({ category: 'Files', action: 'File added' })
     this.props.addFile(this.props.project, path, content)
   };
 
   addFolder = path => {
-    window.ga.event({ category: 'Files', action: 'Folder added' })
+    event({ category: 'Files', action: 'Folder added' })
     this.props.addFolder(this.props.project, path)
   };
 
   deleteFile = path => {
-    window.ga.event({ category: 'Files', action: 'Folder added' })
+    event({ category: 'Files', action: 'Folder added' })
     this.props.deleteFile(this.props.project, path)
   };
 

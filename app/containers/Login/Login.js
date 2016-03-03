@@ -11,6 +11,7 @@ import GoogleButton from '../../components/GoogleButton/GoogleButton';
 import Snackbar from 'material-ui/lib/snackbar';
 import RaisedButton from 'material-ui/lib/raised-button';
 import FontIcon from 'material-ui/lib/font-icon';
+import { event } from '../../helpers/ga'
 
 class Login extends Component {
    constructor(props) {
@@ -45,13 +46,13 @@ class Login extends Component {
       snackCanOpen: true
     });
     this.props.login(loginData);
-    window.ga.event({category: 'User', action: 'Email Login'})
+    event({category: 'User', action: 'Email Login'})
     this.goAfterLoggedIn();
   };
 
   providerLogin = (provider) => {
     this.props.login(provider);
-    window.ga.event({category: 'User', action: 'Provider Login', value: provider })
+    event({category: 'User', action: 'Provider Login', value: provider })
     this.goAfterLoggedIn();
   };
 

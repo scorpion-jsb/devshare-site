@@ -20,7 +20,6 @@ import ContextMenu from '../../components/ContextMenu/ContextMenu';
 import Pane from '../../components/Pane/Pane';
 import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover';
 import RaisedButton from 'material-ui/lib/raised-button';
-import ga from '../../helpers/ga'
 
 import './Workspace.scss';
 
@@ -130,17 +129,17 @@ class Workspace extends Component {
   };
 
   addFile = (path, content) => {
-    ga.event({ category: 'Files', action: 'File added' })
+    window.ga.event({ category: 'Files', action: 'File added' })
     this.props.addFile(this.props.project, path, content)
   };
 
   addFolder = path => {
-    ga.event({ category: 'Files', action: 'Folder added' })
+    window.ga.event({ category: 'Files', action: 'Folder added' })
     this.props.addFolder(this.props.project, path)
   };
 
   deleteFile = path => {
-    ga.event({ category: 'Files', action: 'Folder added' })
+    window.ga.event({ category: 'Files', action: 'Folder added' })
     this.props.deleteFile(this.props.project, path)
   };
 

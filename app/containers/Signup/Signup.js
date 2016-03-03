@@ -10,7 +10,6 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import SignupForm from '../../components/SignupForm/SignupForm'
 import GoogleButton from '../../components/GoogleButton/GoogleButton'
 import Snackbar from 'material-ui/lib/snackbar'
-import ga from '../../helpers/ga'
 import './Signup.scss'
 
 class Signup extends Component {
@@ -49,7 +48,7 @@ class Signup extends Component {
       snackCanOpen: true
     })
     this.props.signup(signupData)
-    ga.event({category: 'User', action: 'Email Signup' })
+    window.ga.event({category: 'User', action: 'Email Signup' })
     this.goAfterLoggedIn()
   };
 
@@ -62,7 +61,7 @@ class Signup extends Component {
       snackCanOpen: true
     })
     this.props.signup(provider)
-    ga.event({category: 'User', action: 'Provider Signup', value: provider })
+    window.ga.event({category: 'User', action: 'Provider Signup', value: provider })
     this.goAfterLoggedIn()
   };
 

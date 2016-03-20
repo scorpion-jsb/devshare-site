@@ -23,13 +23,13 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import { event } from '../../helpers/ga'
 import './Workspace.scss'
 
-let grout = new Grout();
-let fileEntityBlackList = ['.DS_Store', 'node_modules'];
+let grout = new Grout()
+let fileEntityBlackList = ['.DS_Store', 'node_modules']
 
 class Workspace extends Component {
-  constructor() {
-    super();
-    this.debounceStateChange = debounce(this.debounceStateChange, 1000);
+  constructor () {
+    super()
+    this.debounceStateChange = debounce(this.debounceStateChange, 1000)
   }
 
   state = {
@@ -60,72 +60,63 @@ class Workspace extends Component {
     projects: PropTypes.array
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this.fetchProjectFiles(this.props.project)
   }
 
-  componentWillReceiveProps(nextProps) {
-    //Rebind files if props change (new project selected)
+  componentWillReceiveProps (nextProps) {
+    // Rebind files if props change (new project selected)
     this.fetchProjectFiles(nextProps.project)
   }
 
   fetchProjectFiles = (project) => {
-    const { name, owner } = project;
-    if (!name) {
-      return new Error('project name required to fetch projects');
-    }
-    if (this.ref && this.ref.endpoint === name) {
-      return
-    }
-    if (this.ref && this.ref.endpoint !== name) {
-      this.fb.reset();
-    }
-    const groutProject = project ? grout.Project(name, owner.username) : null;
+    const { name, owner } = project
+    if (!name) return new Error('project name required to fetch projects')
+    if (this.ref && this.ref.endpoint === name) return
+    if (this.ref && this.ref.endpoint !== name) this.fb.reset()
+    const groutProject = project ? grout.Project(name, owner.username) : null
     // Move to parent ref
-    this.fb = Rebase.createClass(groutProject.fbUrl.replace(name, ''));
-
+    this.fb = Rebase.createClass(groutProject.fbUrl.replace(name, ''))
     //Bind to files list on firebase
     this.ref = this.fb.bindToState(name, {
       context: this,
       state: 'files',
       asArray: true
-    });
-    this.debounceStateChange();
+    })
+    this.debounceStateChange()
   };
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     //Unbind files list from Firebase
-    if(this.fb && isFunction(this.fb.removeBinding)){
-      this.fb.removeBinding(this.ref);
+    if (this.fb && isFunction(this.fb.removeBinding)) {
+      this.fb.removeBinding(this.ref)
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (!isEqual(this.state.files, nextState.files)) {
-      this.debounceStateChange();
-    }
+  componentWillUpdate (nextProps, nextState) {
+    if (!isEqual(this.state.files, nextState.files)) this.debounceStateChange()
   }
 
   debounceStateChange = () => {
     this.setState({
       debouncedFiles: this.state.files
-    });
+    })
   };
 
   toggleSettingsModal = () => {
     this.setState({
       settingsOpen: !this.state.settingsOpen
-    });
+    })
   };
 
   toggleSharingModal = () => {
     this.setState({
       sharingOpen: !this.state.sharingOpen
-    });
+    })
   };
 
   saveSettings = (data) => {
-    this.toggleSettingsModal();
+    this.toggleSettingsModal()
   };
 
   addFile = (path, content) => {
@@ -190,17 +181,15 @@ class Workspace extends Component {
     }
     entry.file(file => {
       readAndSaveFile(file, entry.fullPath)
-    });
+    })
   };
 
   readAndSaveFolderEntry = (entry) => {
     this.addFolder(entry.fullPath)
     let reader = entry.createReader()
     reader.readEntries(folder => {
-      if (folder.length > 1) {
-        this.handleEntries(folder)
-      }
-    });
+      if (folder.length > 1) this.handleEntries(folder)
+    })
   };
 
   handleEntries = (entries) => {
@@ -313,7 +302,7 @@ class Workspace extends Component {
     })
   };
 
-  render() {
+  render () {
     return (
       <div className="Workspace" ref="workspace">
         <WorkspacePopover
@@ -389,8 +378,8 @@ class Workspace extends Component {
   }
 }
 
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   const pathname = decodeURIComponent(state.router.location.pathname);
   const username = pathname.split('/')[1];
   const projectname = pathname.split('/')[2];
@@ -406,11 +395,11 @@ function mapStateToProps(state) {
   };
 }
 
-let CombinedActions = merge(TabActions, Actions.files, Actions.account, Actions.projects);
+const CombinedActions = merge(TabActions, Actions.files, Actions.account, Actions.projects)
 
-//Place action methods into props
+// Place action methods into props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CombinedActions, dispatch);
+  return bindActionCreators(CombinedActions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Workspace);
+export default connect(mapStateToProps, mapDispatchToProps)(Workspace)

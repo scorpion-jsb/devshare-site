@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Actions } from 'redux-grout'
 import AvatarEditor from 'react-avatar-editor'
@@ -11,7 +11,7 @@ import './Account.scss'
 const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
 
 class Account extends Component {
-  constructor(props){
+  constructor (props){
     super(props)
   }
 
@@ -45,7 +45,7 @@ class Account extends Component {
     });
   };
 
-  render (){
+  render () {
     const buttonStyle = { 'marginTop': '2rem', width: '20%' }
     const textFieldStyle = { width: '60%' }
     return (

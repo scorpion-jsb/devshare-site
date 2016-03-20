@@ -11,9 +11,9 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import Snackbar from 'material-ui/lib/snackbar'
 
 class Recover extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state = {errors: {username: null}, open: false}
+    this.state = { errors: { username: null }, open: false }
   }
   /**
    * @function handleInputChange
@@ -36,7 +36,7 @@ class Recover extends Component {
 
   handleRecover = (e) => {
     e.preventDefault()
-    if(!this.state.username){
+    if (!this.state.username) {
       return this.setState({
         errors: {username: 'Email or Username required'}
       })
@@ -48,9 +48,9 @@ class Recover extends Component {
   };
 
   render () {
-    const fieldStyle = {width: '80%'}
-    const buttonStyle = {width: '80%'}
-    if(!this.props.account.isFetching){
+    const fieldStyle = { width: '80%' }
+    const buttonStyle = { width: '80%' }
+    if (!this.props.account.isFetching) {
       return (
         <div className="Recover">
           <Paper className="Recover-Panel">
@@ -89,26 +89,25 @@ class Recover extends Component {
           />
         </div>
       )
-    } else {
-      return (
-        <div className="Recover">
-          <div className="Recover-Progress">
-            <CircularProgress  mode="indeterminate" />
-          </div>
-        </div>
-      )
     }
+    return (
+      <div className="Recover">
+        <div className="Recover-Progress">
+          <CircularProgress  mode="indeterminate" />
+        </div>
+      </div>
+    )
   }
 }
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   return {
     account: state.account,
     router: state.router
   }
 }
-//Place action methods into props
-function mapDispatchToProps(dispatch) {
+// Place action methods into props
+function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch)
 }
 

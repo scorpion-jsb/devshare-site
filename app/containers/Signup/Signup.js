@@ -50,7 +50,7 @@ class Signup extends Component {
       snackCanOpen: true
     })
     this.props.signup(signupData)
-    event({category: 'User', action: 'Email Signup' })
+    event({ category: 'User', action: 'Email Signup' })
     this.goAfterLoggedIn()
   };
 
@@ -63,7 +63,7 @@ class Signup extends Component {
       snackCanOpen: true
     })
     this.props.signup(provider)
-    event({category: 'User', action: 'Provider Signup', value: provider })
+    event({ category: 'User', action: 'Provider Signup', value: provider })
     this.goAfterLoggedIn()
   };
 
@@ -78,7 +78,7 @@ class Signup extends Component {
     }, 300)
   };
 
-  render() {
+  render () {
     if(!this.props.account.isFetching){
       return (
         <div className="Signup">
@@ -109,26 +109,25 @@ class Signup extends Component {
           />
         </div>
       )
-    } else {
-      return (
-        <div className="Signup">
-          <div className="Signup-Progress">
-            <CircularProgress  mode="indeterminate" />
-          </div>
-        </div>
-      )
     }
+    return (
+      <div className="Signup">
+        <div className="Signup-Progress">
+          <CircularProgress  mode="indeterminate" />
+        </div>
+      </div>
+    )
   }
 }
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   return {
     account: state.account,
     router: state.router
   }
 }
-//Place action methods into props
-function mapDispatchToProps(dispatch) {
+// Place action methods into props
+function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

@@ -8,6 +8,6 @@ cache:
 deploy:
   provider: heroku
   api_key:
-    secure: ed11d72d-8ffb-43a4-9495-366025ab4e2f
+    secure: $HEROKU_KEY
   app:
     master: kyper-devshare

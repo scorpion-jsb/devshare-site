@@ -1,16 +1,16 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Actions } from 'redux-grout';
-import Workspace from '../Workspace/Workspace';
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Actions } from 'redux-grout'
+import Workspace from '../Workspace/Workspace'
 import {
   toArray
-} from 'lodash';
-import './Project.scss';
+} from 'lodash'
+import './Project.scss'
 
 class Project extends Component {
-  constructor(props){
-    super(props);
+  constructor (props){
+    super(props)
   }
 
   static contextTypes = {
@@ -18,7 +18,7 @@ class Project extends Component {
   };
 
   componentWillMount() {
-    if(this.props.account.username && !this.props.projects && this.props.username !== 'anon'){
+    if (this.props.account.username && !this.props.projects && this.props.username !== 'anon') {
       //Load all projects if user is logged in
       this.props.getProjects(this.props.account.username);
     } else {
@@ -27,7 +27,7 @@ class Project extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if(nextProps.account.username && this.props.account.username !== nextProps.account.username) {
       this.props.getProjects(nextProps.account.username);
     }
@@ -39,7 +39,7 @@ class Project extends Component {
     }
   };
 
-  render(){
+  render () {
     return (
       <div className="Project">
         <Workspace
@@ -48,11 +48,11 @@ class Project extends Component {
           onProjectSelect={ this.selectProject }
         />
       </div>
-    );
+    )
   }
 }
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   const pathname = decodeURIComponent(state.router.location.pathname);
   const username = pathname.split('/')[1];
   const projectname = pathname.split('/')[2];
@@ -66,8 +66,8 @@ function mapStateToProps(state) {
     router: state.router
   };
 }
-//Place action methods into props
-function mapDispatchToProps(dispatch) {
+// Place action methods into props
+function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.projects, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Project);

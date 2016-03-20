@@ -1,13 +1,13 @@
-import React, { PropTypes, Component } from 'react';
-import './Editor.scss';
-import { connect } from 'react-redux';
-import Grout from 'kyper-grout';
+import React, { PropTypes, Component } from 'react'
+import './Editor.scss'
+import { connect } from 'react-redux'
+import Grout from 'kyper-grout'
 
-let grout = new Grout('tessellate', {logLevel: 'trace'});
+let grout = new Grout('tessellate', { logLevel: 'trace' })
 
 class Editor extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
 
   static propTypes = {
@@ -42,63 +42,75 @@ class Editor extends Component {
 
   firepad = {};
 
+  componentWillUnmount () {
+    this.handleDispose()
+  }
+
+  componentDidMount () {
+    let CodeMirror = require('codemirror')
+    require('expose?CodeMirror!codemirror') // Needed for Firepad to load CodeMirror
+    require('codemirror/lib/codemirror.css')
+    require('codemirror/theme/monokai.css')
+    require('codemirror/keymap/vim')
+    require('codemirror/mode/javascript/javascript')
+    require('codemirror/mode/css/css')
+    require('codemirror/mode/jsx/jsx')
+    require('codemirror/mode/htmlmixed/htmlmixed')
+    require('codemirror/mode/go/go')
+    require('codemirror/mode/yaml/yaml')
+    require('codemirror/mode/jade/jade')
+    require('codemirror/mode/markdown/markdown')
+    const editorDiv = document.getElementById(this.props.name)
+    const mode = getMode(this.props.mode)
+    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true })
+    this.editor.setOption('theme', 'monokai')
+    // CodeMirror.Vim.map('jj', '<Esc>', 'insert')
+    // //TODO: add read only for collabs
+    // this.editor.setOption('readOnly', this.props.readOnly);
+    this.handleLoad(this.editor)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.editor) {
+      //TODO: Check to see if this is nessesary
+      this.handleLoad(this.editor)
+      nextProps.vimEnabled ? this.enableVim() : this.disableVim()
+    }
+  }
+
   handleLoad = (editor) => {
-    //Load file content
-    var Firepad = require('firepad');
-    if(typeof editor.firepad === 'undefined'){
-      const file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath);
+    // Load file content
+    const Firepad = require('firepad')
+    if (typeof editor.firepad === 'undefined') {
+      const file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath)
       try {
         try {
-          this.firepad = Firepad.fromCodeMirror(file.fbRef, editor,  {userId: this.props.account.username || '&'});
-        } catch(err) {
-          console.warn('Error creating firepad', err);
+          this.firepad = Firepad.fromCodeMirror(file.fbRef, editor,  { userId: this.props.account.username || '&' })
+        } catch (err) {
+          console.warn('Error creating firepad', err)
         }
-        if(this.firepad){
+        if (this.firepad) {
           this.firepad.on('ready', () => {
-            //TODO: Load original content of file
-            if(this.firepad.isHistoryEmpty()){
+            // TODO: Load original content of file
+            if (this.firepad.isHistoryEmpty()) {
               file.getOriginalContent().then(content => {
-                if(content){
+                if (content) {
                   this.firepad.setText(content);
                 }
-              });
+              })
             }
-          });
+          })
         }
-      } catch(err) {
-        console.warn('Load firepad error:', err);
+      } catch (err) {
+        console.warn('Load firepad error:', err)
       }
     }
   };
 
   handleDispose = () => {
-    this.firepad.dispose();
-    // this.editor.destroy();
+    if (this.firepad && typeof this.firepad.dispose === 'function') this.firepad.dispose()
+    // this.editor.destroy()
   };
-
-  componentWillUnmount() {
-    this.handleDispose();
-  }
-
-  componentDidMount() {
-    var CodeMirror = require('codemirror')
-    require('expose?CodeMirror!codemirror'); //Needed for Firepad to load CodeMirror
-    require('codemirror/lib/codemirror.css');
-    require('codemirror/theme/monokai.css');
-    require('codemirror/mode/javascript/javascript');
-    require('codemirror/mode/htmlmixed/htmlmixed');
-    require('codemirror/keymap/vim');
-    const editorDiv = document.getElementById(this.props.name);
-    let mode = this.props.mode;
-    //TODO: Handle different types
-    if(mode === 'html') mode = 'htmlmixed';
-    // CodeMirror.Vim.map('jj', '<Esc>', 'insert')
-    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true});
-    this.editor.setOption('theme', 'monokai');
-    // //TODO: add read only for collabs
-    // this.editor.setOption('readOnly', this.props.readOnly);
-    this.handleLoad(this.editor);
-  }
 
   enableVim = () => {
     this.editor.setOption('keyMap', 'vim')
@@ -108,26 +120,35 @@ class Editor extends Component {
     this.editor.setOption('keyMap', 'default')
   };
 
-  componentWillReceiveProps(nextProps) {
-    if(this.editor){
-      //TODO: Check to see if this is nessesary
-      this.handleLoad(this.editor);
-      nextProps.vimEnabled ? this.enableVim() : this.disableVim()
-    }
-  }
-
-  render() {
+  render () {
     return (
       <div className="Editor" id={ this.props.name }></div>
-    );
+    )
   }
 }
 
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   return {
     account: state.account
-  };
+  }
 }
 
-export default connect(mapStateToProps, {})(Editor);
+export default connect(mapStateToProps, {})(Editor)
+
+function getMode (mode) {
+  switch (mode) {
+    case 'html':
+      return 'htmlmixed'
+    case 'md':
+      return 'markdown'
+    case 'yml':
+      return 'yaml'
+    case 'json':
+      return 'javascript'
+    case 'ts':
+      return 'javascript'
+    default:
+      return mode
+   }
+}

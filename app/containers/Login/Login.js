@@ -1,24 +1,24 @@
-import React, {Component, PropTypes} from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { Actions } from 'redux-grout';
-import './Login.scss';
-import Paper from 'material-ui/lib/paper';
-import CircularProgress from 'material-ui/lib/circular-progress';
-import LoginForm from '../../components/LoginForm/LoginForm';
-import GoogleButton from '../../components/GoogleButton/GoogleButton';
-import Snackbar from 'material-ui/lib/snackbar';
-import RaisedButton from 'material-ui/lib/raised-button';
-import FontIcon from 'material-ui/lib/font-icon';
+import React, {Component, PropTypes} from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { Actions } from 'redux-grout'
+import Paper from 'material-ui/lib/paper'
+import CircularProgress from 'material-ui/lib/circular-progress'
+import LoginForm from '../../components/LoginForm/LoginForm'
+import GoogleButton from '../../components/GoogleButton/GoogleButton'
+import Snackbar from 'material-ui/lib/snackbar'
+import RaisedButton from 'material-ui/lib/raised-button'
+import FontIcon from 'material-ui/lib/font-icon'
 import { event } from '../../helpers/ga'
+import './Login.scss'
 
 class Login extends Component {
-   constructor(props) {
-    super(props);
+   constructor (props) {
+    super(props)
    }
 
-   state = { errors:{username:null, password:null}, snackCanOpen: false };
+   state = { errors:{ username:null, password:null}, snackCanOpen: false };
 
    static contextTypes = {
      router: React.PropTypes.object.isRequired
@@ -56,8 +56,8 @@ class Login extends Component {
     this.goAfterLoggedIn();
   };
 
-  render() {
-    if(!this.props.account.isFetching){
+  render () {
+    if (!this.props.account.isFetching) {
       return (
         <div className="Login">
           <Paper className="Login-Panel">
@@ -89,26 +89,25 @@ class Login extends Component {
           />
         </div>
       );
-    } else {
-      return (
-        <div className="Login">
-          <div className="Login-Progress">
-            <CircularProgress  mode="indeterminate" />
-          </div>
-        </div>
-      );
     }
+    return (
+      <div className="Login">
+        <div className="Login-Progress">
+          <CircularProgress  mode="indeterminate" />
+        </div>
+      </div>
+    )
   }
 }
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   return {
     account: state.account,
     router: state.router
-  };
+  }
 }
-//Place action methods into props
-function mapDispatchToProps(dispatch) {
+// Place action methods into props
+function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch);
 }
 

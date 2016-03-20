@@ -23,8 +23,8 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import { event } from '../../helpers/ga'
 import './Workspace.scss'
 
-let grout = new Grout();
-let fileEntityBlackList = ['.DS_Store', 'node_modules'];
+let grout = new Grout()
+let fileEntityBlackList = ['.DS_Store', 'node_modules']
 
 class Workspace extends Component {
   constructor () {
@@ -100,7 +100,7 @@ class Workspace extends Component {
   debounceStateChange = () => {
     this.setState({
       debouncedFiles: this.state.files
-    });
+    })
   };
 
   toggleSettingsModal = () => {
@@ -181,17 +181,15 @@ class Workspace extends Component {
     }
     entry.file(file => {
       readAndSaveFile(file, entry.fullPath)
-    });
+    })
   };
 
   readAndSaveFolderEntry = (entry) => {
     this.addFolder(entry.fullPath)
     let reader = entry.createReader()
     reader.readEntries(folder => {
-      if (folder.length > 1) {
-        this.handleEntries(folder)
-      }
-    });
+      if (folder.length > 1) this.handleEntries(folder)
+    })
   };
 
   handleEntries = (entries) => {

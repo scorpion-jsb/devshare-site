@@ -10,11 +10,11 @@ import Theme from '../../theme'
 import './App.scss'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin();
+injectTapEventPlugin()
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.getChildContext = () => {
       return {
         muiTheme: ThemeManager.getMuiTheme(Theme),
@@ -30,7 +30,7 @@ class Main extends Component {
     router: React.PropTypes.object.isRequired
   };
 
-  componentDidMount() {
+  componentDidMount () {
     let grout = new Grout()
     if(grout.currentUser){
       this.props.hydrateUser(grout.currentUser)
@@ -46,7 +46,7 @@ class Main extends Component {
     this.context.router.push(`/`);
   };
 
-  render() {
+  render () {
     return (
       <div className="App">
         <Navbar
@@ -59,15 +59,16 @@ class Main extends Component {
     )
   }
 }
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   return {
     account: state.account,
     router: state.router
   }
 }
-//Place action methods into props
-function mapDispatchToProps(dispatch) {
+
+// Place action methods into props
+function mapDispatchToProps (dispatch) {
   Actions.account.hydrateUser = hydrateUser
   return bindActionCreators(Actions.account, dispatch)
 }

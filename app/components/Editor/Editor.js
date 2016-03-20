@@ -41,7 +41,42 @@ class Editor extends Component {
   };
 
   firepad = {};
-  loadedSyntaxes = [];
+
+  componentWillUnmount () {
+    this.handleDispose()
+  }
+
+  componentDidMount () {
+    let CodeMirror = require('codemirror')
+    require('expose?CodeMirror!codemirror') // Needed for Firepad to load CodeMirror
+    require('codemirror/lib/codemirror.css')
+    require('codemirror/theme/monokai.css')
+    require('codemirror/keymap/vim')
+    require('codemirror/mode/javascript/javascript')
+    require('codemirror/mode/css/css')
+    require('codemirror/mode/jsx/jsx')
+    require('codemirror/mode/htmlmixed/htmlmixed')
+    require('codemirror/mode/go/go')
+    require('codemirror/mode/yaml/yaml')
+    require('codemirror/mode/jade/jade')
+    require('codemirror/mode/markdown/markdown')
+    const editorDiv = document.getElementById(this.props.name)
+    const mode = getMode(this.props.mode)
+    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true })
+    this.editor.setOption('theme', 'monokai')
+    // CodeMirror.Vim.map('jj', '<Esc>', 'insert')
+    // //TODO: add read only for collabs
+    // this.editor.setOption('readOnly', this.props.readOnly);
+    this.handleLoad(this.editor)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.editor) {
+      //TODO: Check to see if this is nessesary
+      this.handleLoad(this.editor)
+      nextProps.vimEnabled ? this.enableVim() : this.disableVim()
+    }
+  }
 
   handleLoad = (editor) => {
     // Load file content
@@ -77,46 +112,6 @@ class Editor extends Component {
     // this.editor.destroy()
   };
 
-  componentWillUnmount () {
-    this.handleDispose()
-  }
-
-  componentDidMount () {
-    let CodeMirror = require('codemirror')
-    require('expose?CodeMirror!codemirror') // Needed for Firepad to load CodeMirror
-    require('codemirror/lib/codemirror.css')
-    require('codemirror/theme/monokai.css')
-    require('codemirror/keymap/vim')
-    require('codemirror/mode/javascript/javascript')
-    require('codemirror/mode/jsx/jsx')
-    require('codemirror/mode/htmlmixed/htmlmixed')
-    require('codemirror/mode/go/go')
-    require('codemirror/mode/yaml/yaml')
-    require('codemirror/mode/jade/jade')
-    require('codemirror/mode/markdown/markdown')
-    const editorDiv = document.getElementById(this.props.name)
-    const mode = this.getMode(this.props.mode)
-    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true })
-    this.editor.setOption('theme', 'monokai')
-    // CodeMirror.Vim.map('jj', '<Esc>', 'insert')
-    // //TODO: add read only for collabs
-    // this.editor.setOption('readOnly', this.props.readOnly);
-    this.handleLoad(this.editor)
-  }
-
-  getMode = (mode) => {
-    switch (mode) {
-      case 'html':
-        return 'htmlmixed'
-      case 'md':
-        return 'markdown'
-      case 'yml':
-        return 'yaml'
-      default:
-        return mode
-     }
-  };
-
   enableVim = () => {
     this.editor.setOption('keyMap', 'vim')
   };
@@ -125,26 +120,35 @@ class Editor extends Component {
     this.editor.setOption('keyMap', 'default')
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.editor) {
-      //TODO: Check to see if this is nessesary
-      this.handleLoad(this.editor)
-      nextProps.vimEnabled ? this.enableVim() : this.disableVim()
-    }
-  }
-
-  render() {
+  render () {
     return (
       <div className="Editor" id={ this.props.name }></div>
     )
   }
 }
 
-//Place state of redux store into props of component
-function mapStateToProps(state) {
+// Place state of redux store into props of component
+function mapStateToProps (state) {
   return {
     account: state.account
   }
 }
 
 export default connect(mapStateToProps, {})(Editor)
+
+function getMode (mode) {
+  switch (mode) {
+    case 'html':
+      return 'htmlmixed'
+    case 'md':
+      return 'markdown'
+    case 'yml':
+      return 'yaml'
+    case 'json':
+      return 'javascript'
+    case 'ts':
+      return 'javascript'
+    default:
+      return mode
+   }
+}

@@ -4,10 +4,10 @@
 	list-style-type: none;
 	font-size: 1.4rem;
 	min-width: 200px;
-	flex-grow: 2;
 	-webkit-padding-start: 0;
 	margin: .5rem 0;
 	display: flex;
+	flex-grow: 1;
 	flex-direction: column;
 	position: relative;
 	overflow: scroll;
@@ -32,8 +32,6 @@
 	}
 	&-Container {
 		position: absolute;
-		width: 100%;
-		min-height: 100%;
 		overflow: scroll;
 	}
 	&-Loader {

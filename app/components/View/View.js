@@ -1,11 +1,12 @@
-import React, { PropTypes, Component } from 'react';
-import Editor from '../Editor';
-import './View.scss';
+import React, { PropTypes, Component } from 'react'
+import Editor from '../Editor'
+import './View.scss'
 
 export default class View extends Component {
   constructor(props){
-    super(props);
+    super(props)
   }
+  
   static propTypes = {
     viewData: PropTypes.object,
     visible: PropTypes.bool.isRequired,
@@ -13,13 +14,14 @@ export default class View extends Component {
     project: PropTypes.object.isRequired,
     vimEnabled: PropTypes.bool
   };
-  render(){
-    // console.log('project in view', this.props.project);
-    let style = this.props.visible ? { display: 'block' } : { display: 'none' };
-    const name = `ace-editor-${this.props.index}`;
-    // TODO: Switch view type based on provided type instead of availability of editor data
-    if(this.props.viewData && this.props.viewData.file){
-      const { file } = this.props.viewData;
+
+  render () {
+    const style = this.props.visible ? { display: 'block' } : { display: 'none' }
+    const name = `editor-${this.props.index}`
+    // File loaded in View
+    if (this.props.viewData && this.props.viewData.file) {
+      // TODO: Switch view type based on provided type instead of availability of editor data
+      const { file } = this.props.viewData
       return (
         <div className="View" style={ style }>
           <Editor
@@ -32,14 +34,13 @@ export default class View extends Component {
             vimEnabled={ this.props.vimEnabled }
           />
         </div>
-      );
+      )
     }
-
+    // Empty View
     return (
       <div className="View-Default">
         <span className="View-Default-Label">Click on a file to open</span>
       </div>
-    );
-
+    )
   }
 }

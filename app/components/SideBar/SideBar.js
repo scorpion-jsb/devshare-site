@@ -17,7 +17,6 @@ import './SideBar.scss';
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-    this.selectProject = this.selectProject.bind(this);
   }
   static propTypes = {
     projects: PropTypes.array,
@@ -42,58 +41,55 @@ export default class SideBar extends Component {
   };
 
   componentDidMount() {
-    this.refs.fileInput.setAttribute('webkitdirectory', '');
+    this.refs.fileInput.setAttribute('webkitdirectory', '')
   }
 
-  selectProject(e, i, name) {
-    if(this.props && this.props.onProjectSelect){
-      let proj = find(this.props.projects, { name });
-      this.props.onProjectSelect(proj, i);
+  selectProject = (e, i, name) => {
+    if (this.props && this.props.onProjectSelect) {
+      let proj = find(this.props.projects, { name })
+      this.props.onProjectSelect(proj, i)
     }
-  }
+  };
 
   handleFileUploadClick = (e) => {
-    this.refs.fileInput.click();
+    this.refs.fileInput.click()
   };
 
   handleFileUpload = (e) => {
-    this.props.onFilesAdd(e);
+    this.props.onFilesAdd(e)
   };
 
   handleFileDrag = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
       filesOver: true
-    });
+    })
   };
 
   handleFileDrop = (e) => {
-    this.props.onFilesDrop(e);
-    this.setState({
-      filesOver: false
-    });
+    this.props.onFilesDrop(e)
+    this.setState({ filesOver: false })
   };
 
   handleFileDragLeave = (e) => {
-    this.setState({
-      filesOver: false
-    });
+    this.setState({ filesOver: false })
   };
 
   handleRightClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    this.props.onRightClick(null, {x: e.clientX, y: e.clientY});
+    e.preventDefault()
+    e.stopPropagation()
+    this.props.onRightClick(null, { x: e.clientX, y: e.clientY })
   };
 
-  render() {
+  render () {
     const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true;
-    const iconButtonStyle = { width: '60px', height: '60px' };
-    let projectsMenu;
-    if(isArray(this.props.projects) && this.props.projects.length > 0) {
+    const iconButtonStyle = { width: '60px', height: '60px' }
+    const iconStyle = { width: '100%', height: '100%' }
+    let projectsMenu
+    if (isArray(this.props.projects) && this.props.projects.length > 0) {
       projectsMenu = this.props.projects.map((project, i) => {
         return <MenuItem key={`Project-${i}`} label={ project.name } value={ project.name } primaryText={ project.name }/>
-      });
+      })
     }
     return (
       <div className={ this.state.filesOver ? "SideBar SideBar--FileHover" : "SideBar"}
@@ -122,24 +118,39 @@ export default class SideBar extends Component {
             loading={ this.props.filesLoading }
           />
           <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
-
           <div className="SideBar-Buttons">
-            <IconMenu className="SideBar-Button" iconButtonElement={ <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} ><AddIcon /></IconButton> }>
+            <IconMenu
+              className="SideBar-Button"
+              iconButtonElement={
+                <IconButton
+                  style={ iconButtonStyle }
+                  iconStyle={ iconStyle } >
+                  <AddIcon />
+                </IconButton>
+            }>
               <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
               <MenuItem primaryText="Download files" onClick={ this.props.onDownloadFileClick } />
               <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
               <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
               {/*<MenuItem primaryText="Add files from Github" />*/}
             </IconMenu>
-            <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSharingClick }>
+            <IconButton
+              style={ iconButtonStyle }
+              iconStyle={ iconStyle }
+              className="SideBar-Button"
+              onClick={ this.props.onSharingClick } >
               <GroupIcon />
             </IconButton>
-            <IconButton style={ iconButtonStyle } iconStyle={{ width: '100%', height: '100%' }} className="SideBar-Button" onClick={ this.props.onSettingsClick }>
+            <IconButton
+              style={ iconButtonStyle }
+              iconStyle={ iconStyle }
+              className="SideBar-Button"
+              onClick={ this.props.onSettingsClick } >
               <SettingsIcon />
             </IconButton>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

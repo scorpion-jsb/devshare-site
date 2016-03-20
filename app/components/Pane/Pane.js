@@ -1,14 +1,13 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, Component } from 'react'
+import Tabs from '../Tabs'
+import Views from '../Views'
+import './Pane.scss'
 
-import './Pane.scss';
-
-import Tabs from '../Tabs';
-import Views from '../Views';
-
-class Pane extends Component {
-  constructor() {
-    super();
+export default class Pane extends Component {
+  constructor () {
+    super()
   }
+  
   static propTypes = {
     tabs: PropTypes.object,
     project: PropTypes.object.isRequired,
@@ -16,13 +15,16 @@ class Pane extends Component {
     onTabClose: PropTypes.func.isRequired,
     vimEnabled: PropTypes.bool
   };
+
   closeTab = (ind) => {
     this.props.onTabClose(ind);
   };
+
   selectTab = (ind) => {
     this.props.onTabSelect(ind);
   };
-  render() {
+
+  render () {
     return (
       <div className="Pane">
         <Tabs
@@ -43,4 +45,3 @@ class Pane extends Component {
   }
 
 }
-export default Pane;

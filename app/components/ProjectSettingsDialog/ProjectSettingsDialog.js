@@ -36,6 +36,10 @@ export default class ProjectSettingsDialog extends Component {
     });
   };
 
+  showDelete = () => {
+    this.setState({ showDelete: true })
+  };
+
   render () {
     const actions = [
       <FlatButton
@@ -72,21 +76,22 @@ export default class ProjectSettingsDialog extends Component {
           floatingLabelText="Site url"
           disabled={ true }
         />
-        <Toggle
-          label="Vim Mode"
-          labelPotition="right"
-          style={{
-              maxWidth: 150,
-              marginBottom: 16,
-              marginTop: 20
-          }}
-          toggled={ this.state.vimEnabled }
-          onToggle={ this.handleVimToggle }
-        />
-        <RaisedButton
-          label="Delete"
-          primary={true}
-        />
+        <div>
+          {
+            this.state.showDelete
+            ? <TextField
+                hintText="myProject"
+                floatingLabelText="project name"
+                style={{ color: 'grey'}}
+              />
+              : null
+          }
+          <RaisedButton
+            label="Delete"
+            primary={true}
+            onClick={ this.showDelete }
+          />
+        </div>
       </Dialog>
     );
   }

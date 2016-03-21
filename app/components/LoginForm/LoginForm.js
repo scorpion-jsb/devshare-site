@@ -1,20 +1,23 @@
-import React, {Component, PropTypes} from 'react';
-import { Link } from 'react-router';
-import TextField from 'material-ui/lib/text-field';
-import RaisedButton from 'material-ui/lib/raised-button';
-import CircularProgress from 'material-ui/lib/circular-progress';
-import Checkbox from 'material-ui/lib/checkbox';
-import GoogleButton from '../GoogleButton/GoogleButton';
-import './LoginForm.scss';
+import React, {Component, PropTypes} from 'react'
+import { Link } from 'react-router'
+import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/lib/raised-button'
+import CircularProgress from 'material-ui/lib/circular-progress'
+import Checkbox from 'material-ui/lib/checkbox'
+import GoogleButton from '../GoogleButton/GoogleButton'
+import './LoginForm.scss'
 
 export default class LoginForm extends Component {
-  constructor(props){
-    super(props);
+  constructor (props){
+    super(props)
   }
-  state = {errors:{username:null, password:null}};
+
+  state = { errors:{ username:null, password:null } };
+
   static propTypes = {
     onLogin: PropTypes.func
   };
+
   /**
    * @function handleInputChange
    * @description Update the state with the values from the form inputs.
@@ -34,6 +37,7 @@ export default class LoginForm extends Component {
     e.preventDefault();
     this[name] = e.target.value;
   };
+
   handleLogin = (e) => {
     if(e && typeof e.preventDefault === 'function'){
       e.preventDefault();
@@ -53,10 +57,12 @@ export default class LoginForm extends Component {
       this.props.onLogin(loginData);
     }
  };
+
   googleLogin = () => {
     this.props.onLogin('google');
   };
-  render(){
+
+  render () {
     const fieldStyle = {width: '80%'};
     const buttonStyle = {width: '100%'};
     return (

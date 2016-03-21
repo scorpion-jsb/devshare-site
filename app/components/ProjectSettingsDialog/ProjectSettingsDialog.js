@@ -1,13 +1,14 @@
-import React, {Component, PropTypes} from 'react';
-import FlatButton from 'material-ui/lib/flat-button';
-import Dialog from 'material-ui/lib/dialog';
-import TextField from 'material-ui/lib/text-field';
-import './ProjectSettingsDialog.scss';
-import Toggle from 'material-ui/lib/toggle';
+import React, {Component, PropTypes} from 'react'
+import FlatButton from 'material-ui/lib/flat-button'
+import Dialog from 'material-ui/lib/dialog'
+import TextField from 'material-ui/lib/text-field'
+import './ProjectSettingsDialog.scss'
+import Toggle from 'material-ui/lib/toggle'
+import RaisedButton from 'material-ui/lib/raised-button';
 
 export default class ProjectSettingsDialog extends Component {
   constructor(props){
-    super(props);
+    super(props)
   }
 
   static propTypes = {
@@ -35,7 +36,7 @@ export default class ProjectSettingsDialog extends Component {
     });
   };
 
-  render(){
+  render () {
     const actions = [
       <FlatButton
         label="Close"
@@ -81,6 +82,10 @@ export default class ProjectSettingsDialog extends Component {
           }}
           toggled={ this.state.vimEnabled }
           onToggle={ this.handleVimToggle }
+        />
+        <RaisedButton
+          label="Delete"
+          primary={true}
         />
       </Dialog>
     );

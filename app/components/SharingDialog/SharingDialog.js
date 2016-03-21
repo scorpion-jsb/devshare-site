@@ -1,18 +1,18 @@
-import { find, map } from 'lodash';
-import React, {Component, PropTypes} from 'react';
-import FlatButton from 'material-ui/lib/flat-button';
-import Dialog from 'material-ui/lib/dialog';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import AutoComplete from 'material-ui/lib/auto-complete';
-import Avatar from 'material-ui/lib/avatar';
-import PersonIcon from 'material-ui/lib/svg-icons/social/person';
-import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle';
-import Colors from 'material-ui/lib/styles/colors';
-import './SharingDialog.scss';
+import { find, map } from 'lodash'
+import React, {Component, PropTypes} from 'react'
+import FlatButton from 'material-ui/lib/flat-button'
+import Dialog from 'material-ui/lib/dialog'
+import List from 'material-ui/lib/lists/list'
+import ListItem from 'material-ui/lib/lists/list-item'
+import AutoComplete from 'material-ui/lib/auto-complete'
+import Avatar from 'material-ui/lib/avatar'
+import PersonIcon from 'material-ui/lib/svg-icons/social/person'
+import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle'
+import Colors from 'material-ui/lib/styles/colors'
+import './SharingDialog.scss'
 
 export default class SharingDialog extends Component {
-  constructor(props){
+  constructor (props){
     super(props);
   }
 
@@ -31,34 +31,30 @@ export default class SharingDialog extends Component {
     onAddCollab: PropTypes.func
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     this.state.collaborators = nextProps.project.collaborators || [];
   }
 
-  searchAccounts = (q) => {
+  searchAccounts = q => {
     this.props.onUserSearch(q, (err, matchingUsers) => {
-      if(!err){
-        this.setState({ matchingUsers });
-      }
-    });
+      if (!err) this.setState({ matchingUsers })
+    })
   };
 
   selectNewCollab = (username) => {
-    const { collaborators } = this.props.project;
-    if(this.props.onAddCollab){
-      this.props.onAddCollab(username);
-    }
-    this.setState({ searchText: null });
+    const { collaborators } = this.props.project
+    if (this.props.onAddCollab) this.props.onAddCollab(username)
+    this.setState({ searchText: null })
   };
 
-  removeCollab = (ind) => {
-    console.log('collaborators before remove:', this.state.collaborators);
-    const user = this.state.collaborators[ind];
+  removeCollab = ind => {
+    console.log('collaborators before remove:', this.state.collaborators)
+    const user = this.state.collaborators[ind]
     if(this.props.onRemoveCollab){
       this.props.onRemoveCollab(user.username);
       this.setState({
         collaborators: this.state.collaborators.splice(ind, 1)
-      });
+      })
     }
   };
 

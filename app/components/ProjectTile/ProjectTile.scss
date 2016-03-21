@@ -6,11 +6,12 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: 200px;
-  flex-basis: 250px;
+  flex-basis: 300;
   flex-grow: 1;
   margin: .5rem;
   padding: 1.3rem;
   overflow: hidden;
+  min-width: 300px;
   @media screen and (max-width: 600px){
     flex-basis: 80%;
   }
@@ -18,7 +19,7 @@
     flex-basis: 40%;
   }
   &-Name {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     text-decoration: none;
     color: $darkGray;
@@ -45,5 +46,17 @@
     margin: .4rem;
     overflow: hidden;
     cursor: pointer;
+  }
+  &-Settings {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  &-Header {
+    display: flex;
+    flex-direction: row;
   }
 }

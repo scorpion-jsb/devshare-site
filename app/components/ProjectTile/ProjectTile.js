@@ -4,6 +4,8 @@ import Paper from 'material-ui/lib/paper'
 import Avatar from 'material-ui/lib/avatar'
 import PersonIcon from 'material-ui/lib/svg-icons/social/person'
 import PersonAddIcon from 'material-ui/lib/svg-icons/social/person-add'
+import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
+import ProjectSettingsDialog from '../ProjectSettingsDialog/ProjectSettingsDialog'
 import './ProjectTile.scss'
 
 export default class ProjectTile extends Component {
@@ -18,9 +20,17 @@ export default class ProjectTile extends Component {
     onCollabClick: PropTypes.func
   };
 
+  state = { vimEnabled: false, settingsOpen: false }
+
   handleSelect = e => {
     e.preventDefault()
     this.props.onSelect(this.props.project)
+  };
+
+  toggleSettings = () => {
+    this.setState({
+      settingsOpen: !this.state.settingsOpen
+    })
   };
 
   addClick = e => {
@@ -62,17 +72,28 @@ export default class ProjectTile extends Component {
       ))
     }
     return (
-      <Paper key={`Project-${name}`} className='ProjectTile'>
-        <span className='ProjectTile-Name' onClick={ this.handleSelect }>
-          { this.props.project.name }
-        </span>
-        <span className='ProjectTile-Owner'>
-          { (owner && owner.username) ? owner.username : 'No Owner' }
-        </span>
-        <div className='ProjectTile-Collaborators'>
-          { collaboratorsList }
-        </div>
-      </Paper>
+      <div>
+        <ProjectSettingsDialog
+          project={ this.props.project }
+          modalOpen={ this.state.settingsOpen }
+          toggleModal={ this.toggleSettings }
+          onSave={ this.saveSettings }
+          onVimToggle={ this.toggleVim }
+          vimEnabled={ this.state.vimEnabled }
+        />
+        <Paper key={`Project-${name}`} className='ProjectTile'>
+          <SettingsIcon className='ProjectTile-Settings' onClick={ this.toggleSettings }/>
+          <span className='ProjectTile-Name' onClick={ this.handleSelect }>
+            { this.props.project.name }
+          </span>
+          <span className='ProjectTile-Owner'>
+            { (owner && owner.username) ? owner.username : 'No Owner' }
+          </span>
+          <div className='ProjectTile-Collaborators'>
+            { collaboratorsList }
+          </div>
+        </Paper>
+      </div>
     )
   }
 }

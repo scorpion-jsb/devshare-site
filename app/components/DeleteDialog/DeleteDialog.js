@@ -37,18 +37,18 @@ export default class DeleteDialog extends Component {
     })
   }
 
-  /**
-   * @function handleInputChange
-   * @description Update the state with the values from the form inputs.
-   * @fires context#setState
-   */
-   handleInputChange = (name, e) => {
-     e.preventDefault()
-     console.log('setting project name:', name, this.state)
-     this.setState({
-       [name]: e.target.value
-     })
-   }
+  handleSubmit = e => {
+    e.preventDefault()
+    if (this.props.onSubmit) this.props.onSubmit(name)
+    this.close()
+  }
+
+  handleInputChange = (name, e) => {
+    e.preventDefault()
+    this.setState({
+      [name]: e.target.value
+    })
+  }
 
 
   render () {
@@ -63,7 +63,7 @@ export default class DeleteDialog extends Component {
         label="Delete"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={ this.props.onSubmit.bind(this, name) }
+        onTouchTap={ this.handleSubmit }
         disabled={ !this.state.projectname || this.state.projectname !== this.props.name }
       />
    ]

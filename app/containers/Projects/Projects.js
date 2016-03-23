@@ -22,11 +22,11 @@ class Projects extends Component {
   state = {
     addCollabModal: false,
     newProjectModal: false
-  };
+  }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
-  };
+  }
 
   componentDidMount () {
     this.props.getProjects(this.props.username)
@@ -72,7 +72,11 @@ class Projects extends Component {
     this.props.removeCollaborator(this.state.currentProject, username)
   }
 
-  render(){
+  removeProject = project => {
+    this.props.deleteProject(project)
+  }
+
+  render () {
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (
         <ProjectTile
@@ -81,6 +85,7 @@ class Projects extends Component {
           onCollabClick={ this.collabClick }
           onAddCollabClick={ this.addCollabClick.bind(this, project) }
           onSelect={ this.openProject }
+          onDelete={ this.props.deleteProject }
         />
       )
     }) : <span>No projects yet</span>
@@ -136,12 +141,12 @@ function mapStateToProps (state) {
     projects: projectsArray,
     router: state.router,
     username
-  };
+  }
 }
 
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.projects, dispatch);
+  return bindActionCreators(Actions.projects, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

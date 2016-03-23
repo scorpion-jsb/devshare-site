@@ -39,12 +39,12 @@ class Main extends Component {
 
   handleClick = (loc) => {
     this.context.router.push(`/${loc}`);
-  };
+  }
 
   handleLogout = () => {
     this.props.logout();
     this.context.router.push(`/`);
-  };
+  }
 
   render () {
     return (

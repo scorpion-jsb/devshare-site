@@ -12,7 +12,7 @@ import SharingDialog from '../../components/SharingDialog/SharingDialog'
 const Grout = typeof window !== 'undefined' ? require('kyper-grout') : undefined
 import { Actions } from 'redux-grout'
 
-import './Projects.scss';
+import './Projects.scss'
 
 class Projects extends Component {
   constructor (props) {
@@ -22,61 +22,60 @@ class Projects extends Component {
   state = {
     addCollabModal: false,
     newProjectModal: false
-  };
+  }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
-  };
+  }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.getProjects(this.props.username)
   }
 
-  collabClick = (user) => {
+  collabClick = user => {
     this.context.router.push(`/${user.username}`)
-  };
+  }
 
-  toggleModal = (name) => {
+  toggleModal = name => {
     let newState = {}
     newState[`${name}Modal`] = !this.state[`${name}Modal`] || false
     this.setState(newState)
-  };
+  }
 
-  newSubmit = (name) => {
+  newSubmit = name => {
     this.props.addProject(name, this.props.username)
-  };
+    this.setState({
+      newProjectModal: false
+    })
+  }
 
-  openProject = (project) => {
+  openProject = project => {
     this.context.router.push(`/${project.owner.username}/${project.name}`)
-  };
+  }
 
-  collaboratorClick = (collaborator) => {
+  collaboratorClick = collaborator => {
     this.props.history.pushState(null, `/${collaborator.username}`)
-  };
+  }
 
   searchUsers = (q, cb) => {
     const grout = new Grout()
-    grout.Users.search(q).then(usersList => {
-      cb(null, usersList)
-    }, err => {
-      cb(err)
-    })
-  };
+    grout.Users.search(q).then(usersList => cb(null, usersList), err => cb(err))
+  }
 
-  addCollabClick = (currentProject) => {
+  addCollabClick = currentProject => {
     this.setState({ currentProject })
     this.toggleModal('addCollab')
-  };
+  }
 
-  addCollaborator = (username) => {
+  addCollaborator = username => {
     this.props.addCollaborator(this.state.currentProject, username)
-  };
+  }
 
-  removeCollaborator = (username) => {
+  removeCollaborator = username => {
     this.props.removeCollaborator(this.state.currentProject, username)
-  };
+  }
 
-  render(){
+  render () {
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (
         <ProjectTile
@@ -85,8 +84,9 @@ class Projects extends Component {
           onCollabClick={ this.collabClick }
           onAddCollabClick={ this.addCollabClick.bind(this, project) }
           onSelect={ this.openProject }
+          onDelete={ this.props.deleteProject }
         />
-      );
+      )
     }) : <span>No projects yet</span>
 
     // If username doesn't match route then hide add project tile
@@ -140,12 +140,12 @@ function mapStateToProps (state) {
     projects: projectsArray,
     router: state.router,
     username
-  };
+  }
 }
 
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.projects, dispatch);
+  return bindActionCreators(Actions.projects, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

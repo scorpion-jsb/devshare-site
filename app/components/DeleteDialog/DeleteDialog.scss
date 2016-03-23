@@ -1,0 +1,34 @@
+@import '../../variables';
+.DeleteDialog {
+  &-Content {
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+  }
+  &-Warning {
+    display: inline;
+    color: red;
+  }
+  &-Question {
+    margin-top: 1rem;
+  }
+  &-Restatement {
+    margin-top: 1rem;
+    &-Name {
+      color: $primary;
+    }
+  }
+
+  &-InputGroup {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+}

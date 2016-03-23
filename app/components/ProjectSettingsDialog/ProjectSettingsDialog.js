@@ -1,13 +1,14 @@
-import React, {Component, PropTypes} from 'react';
-import FlatButton from 'material-ui/lib/flat-button';
-import Dialog from 'material-ui/lib/dialog';
-import TextField from 'material-ui/lib/text-field';
-import './ProjectSettingsDialog.scss';
-import Toggle from 'material-ui/lib/toggle';
+import React, {Component, PropTypes} from 'react'
+import FlatButton from 'material-ui/lib/flat-button'
+import Dialog from 'material-ui/lib/dialog'
+import TextField from 'material-ui/lib/text-field'
+import './ProjectSettingsDialog.scss'
+import Toggle from 'material-ui/lib/toggle'
+import RaisedButton from 'material-ui/lib/raised-button';
 
 export default class ProjectSettingsDialog extends Component {
   constructor(props){
-    super(props);
+    super(props)
   }
 
   static propTypes = {
@@ -35,7 +36,11 @@ export default class ProjectSettingsDialog extends Component {
     });
   };
 
-  render(){
+  showDelete = () => {
+    this.setState({ showDelete: true })
+  };
+
+  render () {
     const actions = [
       <FlatButton
         label="Close"
@@ -71,17 +76,22 @@ export default class ProjectSettingsDialog extends Component {
           floatingLabelText="Site url"
           disabled={ true }
         />
-        <Toggle
-          label="Vim Mode"
-          labelPotition="right"
-          style={{
-              maxWidth: 150,
-              marginBottom: 16,
-              marginTop: 20
-          }}
-          toggled={ this.state.vimEnabled }
-          onToggle={ this.handleVimToggle }
-        />
+        <div>
+          {
+            this.state.showDelete
+            ? <TextField
+                hintText="myProject"
+                floatingLabelText="project name"
+                style={{ color: 'grey'}}
+              />
+              : null
+          }
+          <RaisedButton
+            label="Delete"
+            primary={true}
+            onClick={ this.showDelete }
+          />
+        </div>
       </Dialog>
     );
   }

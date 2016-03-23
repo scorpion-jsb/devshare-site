@@ -12,11 +12,11 @@ export default class LoginForm extends Component {
     super(props)
   }
 
-  state = { errors:{ username:null, password:null } };
+  state = { errors:{ username:null, password:null } }
 
   static propTypes = {
     onLogin: PropTypes.func
-  };
+  }
 
   /**
    * @function handleInputChange
@@ -27,50 +27,51 @@ export default class LoginForm extends Component {
      e.preventDefault();
      this.setState({
        [name]: e.target.value
-     });
-   };
+     })
+   }
+
   /**
   * @function handlePrivateChange
   * @description Store data in object instead of state
   */
   handlePrivateChange = (name, e) => {
-    e.preventDefault();
-    this[name] = e.target.value;
-  };
+    e.preventDefault()
+    this[name] = e.target.value
+  }
 
   handleLogin = (e) => {
     if(e && typeof e.preventDefault === 'function'){
-      e.preventDefault();
+      e.preventDefault()
     }
     if(!this.state.username || this.state.username == ''){
       return this.setState({
         errors: {username: 'Username required'}
-      });
+      })
     }
     if(!this.password || this.password == ''){
       return this.setState({
         errors: {password: 'Password required'}
-      });
+      })
     }
     let loginData = {username:this.state.username, password: this.password};
     if(this.props.onLogin){
-      this.props.onLogin(loginData);
+      this.props.onLogin(loginData)
     }
- };
+ }
 
   googleLogin = () => {
-    this.props.onLogin('google');
-  };
+    this.props.onLogin('google')
+  }
 
   render () {
-    const fieldStyle = {width: '80%'};
-    const buttonStyle = {width: '100%'};
+    const fieldStyle = { width: '80%' }
+    const buttonStyle = { width: '100%' }
     return (
       <form className="LoginForm" onSubmit={ this.handleLogin }>
         <TextField
           hintText="some@email.com"
           floatingLabelText="Username/Email"
-          onChange={this.handleInputChange.bind(this, 'username')}
+          onChange={ this.handleInputChange.bind(this, 'username') }
           errorText={ this.state.errors.username }
           style={ fieldStyle }
         />
@@ -78,7 +79,7 @@ export default class LoginForm extends Component {
           hintText="password"
           floatingLabelText="Password"
           type="password"
-          onChange={this.handlePrivateChange.bind(this, 'password')}
+          onChange={ this.handlePrivateChange.bind(this, 'password') }
           errorText={ this.state.errors.password }
           style={ fieldStyle }
         />
@@ -88,8 +89,7 @@ export default class LoginForm extends Component {
               name="remember"
               value="remember"
               label="Remember"
-              style={{}}
-              labelStyle={{fontSize: '.8rem'}}
+              labelStyle={{ fontSize: '.8rem' }}
             />
           </div>
           <Link className="LoginForm-Recover-Link" to="/recover">
@@ -99,7 +99,7 @@ export default class LoginForm extends Component {
         <div className="LoginForm-Submit">
           <RaisedButton
             label="Login"
-            primary={true}
+            primary={ true }
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}
             style={ buttonStyle }

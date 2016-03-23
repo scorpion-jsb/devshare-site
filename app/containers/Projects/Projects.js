@@ -32,25 +32,28 @@ class Projects extends Component {
     this.props.getProjects(this.props.username)
   }
 
-  collabClick = (user) => {
+  collabClick = user => {
     this.context.router.push(`/${user.username}`)
   }
 
-  toggleModal = (name) => {
+  toggleModal = name => {
     let newState = {}
     newState[`${name}Modal`] = !this.state[`${name}Modal`] || false
     this.setState(newState)
   }
 
-  newSubmit = (name) => {
+  newSubmit = name => {
     this.props.addProject(name, this.props.username)
+    this.setState({
+      newProjectModal: false
+    })
   }
 
-  openProject = (project) => {
+  openProject = project => {
     this.context.router.push(`/${project.owner.username}/${project.name}`)
   }
 
-  collaboratorClick = (collaborator) => {
+  collaboratorClick = collaborator => {
     this.props.history.pushState(null, `/${collaborator.username}`)
   }
 
@@ -70,10 +73,6 @@ class Projects extends Component {
 
   removeCollaborator = username => {
     this.props.removeCollaborator(this.state.currentProject, username)
-  }
-
-  removeProject = project => {
-    this.props.deleteProject(project)
   }
 
   render () {

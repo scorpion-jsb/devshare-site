@@ -62,7 +62,6 @@ export default class ProjectTile extends Component {
     if (this.props.onCollabClick) this.props.onCollabClick(collaborator)
   }
 
-
   closeDialog = (name, name2) => {
     console.log('close dialog called', name)
     let newState = {}
@@ -80,6 +79,7 @@ export default class ProjectTile extends Component {
   }
 
   deleteProject = () => {
+    this.closeDialog('delete')
     if(this.props.onDelete) this.props.onDelete(this.props.project)
   }
 

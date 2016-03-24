@@ -7,6 +7,9 @@ import Checkbox from 'material-ui/lib/checkbox'
 import GoogleButton from '../GoogleButton/GoogleButton'
 import './LoginForm.scss'
 
+const fieldStyle = { width: '80%' }
+const buttonStyle = { width: '100%' }
+
 export default class LoginForm extends Component {
   constructor (props){
     super(props)
@@ -39,10 +42,8 @@ export default class LoginForm extends Component {
     this[name] = e.target.value
   }
 
-  handleLogin = (e) => {
-    if(e && typeof e.preventDefault === 'function'){
-      e.preventDefault()
-    }
+  handleLogin = e => {
+    if(e && typeof e.preventDefault === 'function') e.preventDefault()
     if(!this.state.username || this.state.username == ''){
       return this.setState({
         errors: {username: 'Username required'}
@@ -50,13 +51,11 @@ export default class LoginForm extends Component {
     }
     if(!this.password || this.password == ''){
       return this.setState({
-        errors: {password: 'Password required'}
+        errors: { password: 'Password required' }
       })
     }
-    let loginData = {username:this.state.username, password: this.password};
-    if(this.props.onLogin){
-      this.props.onLogin(loginData)
-    }
+    let loginData = { username:this.state.username, password: this.password }
+    if (this.props.onLogin) this.props.onLogin(loginData)
  }
 
   googleLogin = () => {
@@ -64,8 +63,6 @@ export default class LoginForm extends Component {
   }
 
   render () {
-    const fieldStyle = { width: '80%' }
-    const buttonStyle = { width: '100%' }
     return (
       <form className="LoginForm" onSubmit={ this.handleLogin }>
         <TextField

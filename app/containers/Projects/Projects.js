@@ -10,7 +10,7 @@ import NewProjectTile from '../../components/NewProjectTile/NewProjectTile'
 import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog'
 import SharingDialog from '../../components/SharingDialog/SharingDialog'
 const Grout = typeof window !== 'undefined' ? require('kyper-grout') : undefined
-import { Actions } from 'redux-grout'
+import { Actions } from 'redux-devshare'
 
 import './Projects.scss'
 

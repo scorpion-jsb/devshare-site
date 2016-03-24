@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Actions } from 'redux-grout'
+import { Actions } from 'redux-devshare'
 import { hydrateUser } from '../../actions/account'
 import Navbar from '../../components/Navbar/Navbar'
-import Grout from 'kyper-grout'
+import Devshare from 'devshare'
 import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import Theme from '../../theme'
 import './App.scss'
@@ -24,20 +24,19 @@ class Main extends Component {
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object
-  };
+  }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
-  };
+  }
 
   componentDidMount () {
-    let grout = new Grout()
-    if(grout.currentUser){
+    if(Devshare.currentUser){
       this.props.hydrateUser(grout.currentUser)
     }
   }
 
-  handleClick = (loc) => {
+  handleClick = loc => {
     this.context.router.push(`/${loc}`);
   }
 
@@ -59,6 +58,7 @@ class Main extends Component {
     )
   }
 }
+
 // Place state of redux store into props of component
 function mapStateToProps (state) {
   return {

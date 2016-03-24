@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import { randomProjectId } from '../../helpers'
-import { Actions } from 'redux-grout'
+import { Actions } from 'redux-devshare'
 import './Home.scss'
 // React Components
 import RaisedButton from 'material-ui/lib/raised-button'
@@ -15,16 +15,23 @@ import StartIcon from 'material-ui/lib/svg-icons/content/create'
 import Paper from 'material-ui/lib/paper'
 import { event } from '../../helpers/ga'
 
+const iconStyle = {
+  width: '130px',
+  height: '130px'
+}
+const buttonStyle = {
+  margin: '3rem',
+  height: '3rem',
+  marginBottom: 5
+}
+const buttonLabelStyle = { fontSize: '1.5rem' }
+
 class Home extends Component {
   trackEvent = () => {
     event({ category: 'Projects', action: 'Create Anonymous' })
-  };
+  }
 
   render () {
-    const iconStyle = {
-      width: '130px',
-      height: '130px'
-    }
     const meInThree = [
       {
         title: 'Work with others in real-time',
@@ -57,8 +64,6 @@ class Home extends Component {
       )
     })
 
-    const buttonStyle = { margin: '3rem', height: '3rem', marginBottom: 5 }
-    const buttonLabelStyle = { fontSize: '1.5rem' }
     return (
       <div className='Home' style={{ color: Theme.palette.primary2Color }}>
         <div>
@@ -105,8 +110,10 @@ function mapStateToProps (state) {
     router: state.router
   }
 }
+
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.projects, dispatch)
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

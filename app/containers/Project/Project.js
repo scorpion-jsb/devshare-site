@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Actions } from 'redux-grout'
+import { Actions } from 'redux-devshare'
 import Workspace from '../Workspace/Workspace'
 import {
   toArray

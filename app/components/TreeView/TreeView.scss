@@ -31,9 +31,13 @@
 		}
 	}
 	&-Container {
-		position: absolute;
+		// position: absolute;
+		flex-grow: 1;
 		overflow: scroll;
-		min-height: 50px;
+	}
+	&-NoFiles {
+		margin-top: 2rem;
+		min-height: 130px;
 	}
 	&-Loader {
 		margin-right: auto;
@@ -61,6 +65,8 @@
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+		min-height: 200px;
+		height: 100px;
 		strong {
 			font-weight: 500;
 		}

@@ -13,64 +13,64 @@ import './SharingDialog.scss'
 
 export default class SharingDialog extends Component {
   constructor (props){
-    super(props);
+    super(props)
   }
 
   state = {
+    open: this.props.open || false,
     matchingUsers: [],
     collaborators: this.props.project.collaborators || []
-  };
+  }
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    modalOpen: PropTypes.bool,
-    toggleModal: PropTypes.func,
+    open: PropTypes.bool,
     onUserSearch: PropTypes.func.isRequired,
     onSave: PropTypes.func,
     onRemoveCollab: PropTypes.func,
     onAddCollab: PropTypes.func
-  };
+  }
 
   componentWillReceiveProps (nextProps) {
-    this.state.collaborators = nextProps.project.collaborators || [];
+    this.state.collaborators = nextProps.project.collaborators || []
   }
 
   searchAccounts = q => {
     this.props.onUserSearch(q, (err, matchingUsers) => {
       if (!err) this.setState({ matchingUsers })
     })
-  };
+  }
 
   selectNewCollab = (username) => {
     const { collaborators } = this.props.project
     if (this.props.onAddCollab) this.props.onAddCollab(username)
     this.setState({ searchText: null })
-  };
+  }
 
   removeCollab = ind => {
-    console.log('collaborators before remove:', this.state.collaborators)
     const user = this.state.collaborators[ind]
     if(this.props.onRemoveCollab){
-      this.props.onRemoveCollab(user.username);
+      this.props.onRemoveCollab(user.username)
       this.setState({
         collaborators: this.state.collaborators.splice(ind, 1)
       })
     }
-  };
+  }
 
-  cancelClick = () => {
+  close = () => {
     this.setState({
-      searchText: null
-    });
-    this.props.toggleModal();
-  };
+      searchText: null,
+      open: false
+    })
+
+  }
 
   render(){
     const user = {
       image: {
         url: null
       }
-    };
+    }
     let collabsList = (this.state.collaborators && this.state.collaborators) ? this.state.collaborators.map((collaborator, i) => {
       return (
         <ListItem
@@ -92,28 +92,27 @@ export default class SharingDialog extends Component {
           secondaryText="Read, Write"
         />
       )
-    }) : null;
+    }) : null
     const actions = [
       <FlatButton
         label="Close"
         secondary={ true }
-        onTouchTap={ this.cancelClick }
+        onTouchTap={ this.close }
       />
-    ];
-    let matchingUsernames = this.state.matchingUsers ? this.state.matchingUsers.map(account => {
-      return account.username ? account.username : account;
-    }) : [];
+    ]
+    const matchingUsernames = this.state.matchingUsers ? this.state.matchingUsers.map(account => {
+      return account.username ? account.username : account
+    }) : []
     return (
       <Dialog
         title="Sharing"
-        className="SharingDialog"
         actions={ actions }
-        modal={false}
-        open={ this.props.modalOpen }
-        onRequestClose={ this.props.toggleModal }
-        bodyClassName="SharingDialog-Content"
-        titleClassName="SharingDialog-Content-Title"
-        contentStyle={{'width': '30%'}}
+        modal={ false }
+        open={ this.state.open }
+        onRequestClose={ this.close }
+        bodyClassName='SharingDialog-Content'
+        titleClassName='SharingDialog-Content-Title'
+        contentClassName='SharingDialog'
       >
       {
       this.props.project.collaborators ?
@@ -138,6 +137,6 @@ export default class SharingDialog extends Component {
           />
         </div>
       </Dialog>
-    );
+    )
   }
 }

@@ -4,6 +4,7 @@
 	list-style-type: none;
 	font-size: 1.4rem;
 	min-width: 200px;
+	-webkit-flex-flow: row wrap;
 	-webkit-padding-start: 0;
 	margin: .5rem 0;
 	display: flex;
@@ -15,7 +16,6 @@
 		list-style-type: none;
 		font-size: 1.4rem;
 		min-width: 200px;
-		min-height: 100%;
 		-webkit-padding-start: 0;
 		margin: .5rem 0;
 		display: flex;
@@ -33,6 +33,7 @@
 	&-Container {
 		position: absolute;
 		overflow: scroll;
+		min-height: 50px;
 	}
 	&-Loader {
 		margin-right: auto;

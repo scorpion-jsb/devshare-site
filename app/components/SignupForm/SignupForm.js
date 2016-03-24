@@ -1,37 +1,41 @@
-import React, {Component, PropTypes} from 'react';
-import TextField from 'material-ui/lib/text-field';
-import RaisedButton from 'material-ui/lib/raised-button';
-import CircularProgress from 'material-ui/lib/circular-progress';
-import Paper from 'material-ui/lib/paper';
-import GoogleButton from '../GoogleButton/GoogleButton';
-import './SignupForm.scss';
+import React, {Component, PropTypes} from 'react'
+import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/lib/raised-button'
+import CircularProgress from 'material-ui/lib/circular-progress'
+import Paper from 'material-ui/lib/paper'
+import GoogleButton from '../GoogleButton/GoogleButton'
+import './SignupForm.scss'
+const fieldStyle = { width: '80%' }
+const buttonStyle = { width: '96%', marginBottom: '.5rem' }
 
 export default class SignupForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
   }
-  state = {errors:{}};
-  reset = () => {
-    return this.setState({
+
+  state = { errors:{} }
+
+  reset = () =>
+    this.setState({
       errors:{},
       username: null,
       email: null,
       name: null
-    });
-  };
+    })
+
   /**
    * @function handleSignup
    * @description Fire onLoginClick function provided to component when login is clicked
    */
-  handleSignup = (e) => {
-    e.preventDefault();
-    let newAccountData = this.state;
+  handleSignup = e => {
+    e.preventDefault()
+    let newAccountData = this.state
     if(this.requireInputs()){
-      newAccountData.password = this.password;
-      newAccountData.confirm = this.confirm;
-      this.props.onSignup(newAccountData);
+      newAccountData.password = this.password
+      newAccountData.confirm = this.confirm
+      this.props.onSignup(newAccountData)
     }
-  };
+  }
   /**
    * @function requireInputs
    * @description Confirm that all required inputs have values
@@ -44,46 +48,47 @@ export default class SignupForm extends Component {
       {name: 'name', val: this.state.name},
       {name: 'password', val: this.password},
       {name: 'confirm', val: this.confirm},
-    ];
+    ]
     const firstError = find(requiredInputs, (input) => {
       if(!input.val || input.val == ''){
-        return true;
+        return true
       }
-    });
-    if(firstError){
-      let errors = {};
-      errors[firstError.name] = `${capitalize(firstError.name)} is required`;
-      this.setState({errors});
-      return false;
+    })
+    if (firstError) {
+      let errors = {}
+      errors[firstError.name] = `${capitalize(firstError.name)} is required`
+      this.setState({ errors })
+      return false
     }
-    return true;
-  };
+    return true
+  }
   /**
    * @function handleInputChange
    * @description Update the state with the values from the form inputs.
    * @fires context#setState
    */
   handleInputChange = (name, e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
       [name]: e.target.value
-    });
-  };
+    })
+  }
+
   /**
    * @function handlePrivateChange
    * @description Store private values.
    * @fires context#setState
    */
   handlePrivateChange = (name, e) => {
-    e.preventDefault();
-    this[name] = e.target.value;
-  };
+    e.preventDefault()
+    this[name] = e.target.value
+  }
+
   googleSignup = () => {
-    this.props.signup('google');
-  };
-  render(){
-    const fieldStyle = {width: '80%'};
-    const buttonStyle = {width: '96%', marginBottom: '.5rem'};
+    this.props.signup('google')
+  }
+
+  render () {
     return (
       <form className="SignupForm" onSubmit={ this.handleSignup }>
         <TextField
@@ -103,14 +108,14 @@ export default class SignupForm extends Component {
         <TextField
           hintText="password"
           floatingLabelText="Password"
-          onChange={this.handlePrivateChange.bind(this, 'password')}
+          onChange={ this.handlePrivateChange.bind(this, 'password') }
           errorText={ this.state.errors.password }
           style={ fieldStyle }
           type="password"
         />
         <div className="SignupForm-Submit">
           <RaisedButton
-            label="Sign in"
+            label="Sign Up"
             primary={true}
             type="submit"
             disabled={ this.props.account && this.props.account.isFetching}
@@ -118,6 +123,6 @@ export default class SignupForm extends Component {
           />
         </div>
       </form>
-    );
+    )
   }
 }

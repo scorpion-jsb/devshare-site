@@ -5,9 +5,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 1.3rem;
   cursor: pointer;
-  flex-basis: 10%;
+  min-width: 300px;
   @media screen and (max-width: 600px){
     flex-basis: 80%;
   }

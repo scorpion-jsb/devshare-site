@@ -18,6 +18,9 @@
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     flex-direction: column;
+    @media screen and (max-width: 700px){
+      padding-top: .5rem;
+    }
   }
   a {
     text-align: center;
@@ -37,8 +40,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    flex-basis: 70px;
     padding: 0 10px 20px 10px;
+    @media screen and (max-width: 700px){
+      padding: 0 10px 5px 10px;
+    }
   }
   &-Name {
     width: 100%;

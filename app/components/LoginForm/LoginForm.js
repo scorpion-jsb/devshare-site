@@ -7,12 +7,15 @@ import Checkbox from 'material-ui/lib/checkbox'
 import GoogleButton from '../GoogleButton/GoogleButton'
 import './LoginForm.scss'
 
+const fieldStyle = { width: '80%' }
+const buttonStyle = { width: '100%' }
+
 export default class LoginForm extends Component {
-  constructor (props){
+  constructor (props) {
     super(props)
   }
 
-  state = { errors:{ username:null, password:null } }
+  state = { errors:{ username: null, password: null } }
 
   static propTypes = {
     onLogin: PropTypes.func
@@ -39,24 +42,21 @@ export default class LoginForm extends Component {
     this[name] = e.target.value
   }
 
-  handleLogin = (e) => {
-    if(e && typeof e.preventDefault === 'function'){
-      e.preventDefault()
-    }
-    if(!this.state.username || this.state.username == ''){
+  handleLogin = e => {
+    if (e && typeof e.preventDefault === 'function') e.preventDefault()
+    const { username } = this.state
+    if (!username || username == '') {
       return this.setState({
-        errors: {username: 'Username required'}
+        errors: { username: 'Username required' }
       })
     }
-    if(!this.password || this.password == ''){
+    if (!this.password || this.password == '') {
       return this.setState({
-        errors: {password: 'Password required'}
+        errors: { password: 'Password required' }
       })
     }
-    let loginData = {username:this.state.username, password: this.password};
-    if(this.props.onLogin){
-      this.props.onLogin(loginData)
-    }
+    const loginData = { username, password: this.password }
+    if (this.props.onLogin) this.props.onLogin(loginData)
  }
 
   googleLogin = () => {
@@ -64,8 +64,6 @@ export default class LoginForm extends Component {
   }
 
   render () {
-    const fieldStyle = { width: '80%' }
-    const buttonStyle = { width: '100%' }
     return (
       <form className="LoginForm" onSubmit={ this.handleLogin }>
         <TextField
@@ -83,6 +81,15 @@ export default class LoginForm extends Component {
           errorText={ this.state.errors.password }
           style={ fieldStyle }
         />
+        <div className="LoginForm-Submit">
+          <RaisedButton
+            label="Login"
+            primary={ true }
+            type="submit"
+            disabled={ this.props.account && this.props.account.isFetching}
+            style={ buttonStyle }
+          />
+        </div>
         <div className="LoginForm-Options">
           <div className="LoginForm-Remember">
             <Checkbox
@@ -96,16 +103,7 @@ export default class LoginForm extends Component {
           Forgot Password?
           </Link>
         </div>
-        <div className="LoginForm-Submit">
-          <RaisedButton
-            label="Login"
-            primary={ true }
-            type="submit"
-            disabled={ this.props.account && this.props.account.isFetching}
-            style={ buttonStyle }
-          />
-        </div>
       </form>
-    );
+    )
   }
 }

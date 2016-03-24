@@ -41,7 +41,7 @@ class Workspace extends Component {
     addType: 'file',
     popoverOpen: false,
     debouncedFiles: null,
-    uploading: false,
+    filesLoading: false,
     vimEnabled: false,
     contextMenu: {
       path: '',
@@ -51,14 +51,14 @@ class Workspace extends Component {
         y: 0
       }
     },
-  };
+  }
 
   static propTypes = {
     project: PropTypes.object,
     tabs: PropTypes.object,
     showButtons: PropTypes.bool,
     projects: PropTypes.array
-  };
+  }
 
   componentDidMount () {
     this.fetchProjectFiles(this.props.project)
@@ -69,7 +69,18 @@ class Workspace extends Component {
     this.fetchProjectFiles(nextProps.project)
   }
 
-  fetchProjectFiles = (project) => {
+  componentWillUnmount () {
+    //Unbind files list from Firebase
+    if (this.fb && isFunction(this.fb.removeBinding)) {
+      this.fb.removeBinding(this.ref)
+    }
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    if (!isEqual(this.state.files, nextState.files)) this.debounceStateChange()
+  }
+
+  fetchProjectFiles = project => {
     const { name, owner } = project
     if (!name) return new Error('project name required to fetch projects')
     if (this.ref && this.ref.endpoint === name) return
@@ -84,57 +95,47 @@ class Workspace extends Component {
       asArray: true
     })
     this.debounceStateChange()
-  };
-
-  componentWillUnmount () {
-    //Unbind files list from Firebase
-    if (this.fb && isFunction(this.fb.removeBinding)) {
-      this.fb.removeBinding(this.ref)
-    }
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (!isEqual(this.state.files, nextState.files)) this.debounceStateChange()
-  }
 
   debounceStateChange = () => {
     this.setState({
       debouncedFiles: this.state.files
     })
-  };
+  }
 
   toggleSettingsModal = () => {
     this.setState({
       settingsOpen: !this.state.settingsOpen
     })
-  };
+  }
 
   toggleSharingModal = () => {
     this.setState({
       sharingOpen: !this.state.sharingOpen
     })
-  };
+  }
 
   saveSettings = (data) => {
     this.toggleSettingsModal()
-  };
+  }
 
   addFile = (path, content) => {
     event({ category: 'Files', action: 'File added' })
     this.props.addFile(this.props.project, path, content)
-  };
+  }
 
   addFolder = path => {
     event({ category: 'Files', action: 'Folder added' })
     this.props.addFolder(this.props.project, path)
-  };
+  }
 
   deleteFile = path => {
     event({ category: 'Files', action: 'Folder added' })
     this.props.deleteFile(this.props.project, path)
-  };
+  }
 
-  openFile = (file) => {
+  openFile = file => {
     const { project, tabs } = this.props
     const tabData = {
       project,
@@ -146,27 +147,27 @@ class Workspace extends Component {
     //Search for already matching title
     const matchingInd = findIndex(tabs.list, {title: tabData.title})
     //Only open tab if file is not already open
-    if(matchingInd === -1){
+    if (matchingInd === -1) {
       this.props.openTab(tabData)
       //Select last tab
-      const newInd =  tabs.list ? tabs.list.length - 1 : 0;
+      const newInd =  tabs.list ? tabs.list.length - 1 : 0
       return this.props.navigateToTab({ project, index: newInd })
     }
     this.props.navigateToTab({
       project,
       index: matchingInd
-    });
-  };
+    })
+  }
 
-  selectTab = (index) => {
+  selectTab = index => {
     this.props.navigateToTab({ project: this.props.project, index })
-  };
+  }
 
-  closeTab = (index) => {
+  closeTab = index => {
     this.props.closeTab({ project: this.props.project, index })
-  };
+  }
 
-  readAndSaveFileEntry = (entry) => {
+  readAndSaveFileEntry = entry => {
     let parent = this
     //TODO: Use bind instead of parent var
     function readAndSaveFile(file, path) {
@@ -176,27 +177,23 @@ class Workspace extends Component {
       }
       reader.readAsText(file)
     }
-    if (entry.webkitRelativePath) {
-      return readAndSaveFile(entry, entry.webkitRelativePath)
-    }
-    entry.file(file => {
-      readAndSaveFile(file, entry.fullPath)
-    })
-  };
+    if (entry.webkitRelativePath) return readAndSaveFile(entry, entry.webkitRelativePath)
+    entry.file(file => readAndSaveFile(file, entry.fullPath))
+  }
 
-  readAndSaveFolderEntry = (entry) => {
+  readAndSaveFolderEntry = entry => {
     this.addFolder(entry.fullPath)
     let reader = entry.createReader()
     reader.readEntries(folder => {
       if (folder.length > 1) this.handleEntries(folder)
     })
-  };
+  }
 
   handleEntries = (entries) => {
     if (entries.isFile) {
-      this.readAndSaveFileEntry(entries);
+      this.readAndSaveFileEntry(entries)
     } else if (entries.isDirectory) {
-      this.readAndSaveFolderEntry(entries);
+      this.readAndSaveFolderEntry(entries)
     }
 
     each(entries, entry => {
@@ -209,12 +206,12 @@ class Workspace extends Component {
         this.readAndSaveFolderEntry(entry)
       }
     })
-  };
+  }
 
   onFilesDrop = (e) => {
     e.preventDefault()
     this.setState({
-      uploading: true
+      filesLoading: true
     })
     let items = e.dataTransfer.items
     each(items, item => {
@@ -222,9 +219,9 @@ class Workspace extends Component {
       this.handleEntries(entry)
     })
     this.setState({
-      uploading: false
+      filesLoading: false
     })
-  };
+  }
 
   onFilesAdd = (e) => {
     e.preventDefault()
@@ -235,7 +232,7 @@ class Workspace extends Component {
       }
       this.readAndSaveFileEntry(item)
     })
-  };
+  }
 
   searchUsers = (q, cb) => {
     grout.Users.search(q).then(usersList => {
@@ -243,7 +240,7 @@ class Workspace extends Component {
     }, err => {
       cb(err)
     })
-  };
+  }
 
   showPopover = (addType, addPath) => {
     this.setState({
@@ -251,32 +248,32 @@ class Workspace extends Component {
       addType,
       popoverOpen: true
     })
-  };
+  }
 
   addEntity = (type, path, content) => {
     if (type === 'folder') return this.addFolder(path)
     this.addFile(path, content)
-  };
+  }
 
   handlePopoverClose = () => {
     this.setState({
       popoverOpen: false
     })
-  };
+  }
 
-  handleDowloadFileClick = (e) => {
+  handleDowloadFileClick = e => {
     this.props.downloadFiles(this.props.project)
-  };
+  }
 
-  addCollaborator = (username) => {
+  addCollaborator = username => {
     this.props.addCollaborator(this.props.project, username)
-  };
+  }
 
-  removeCollaborator = (username) => {
+  removeCollaborator = username => {
     this.props.removeCollaborator(this.props.project, username)
-  };
+  }
 
-  toggleVim = (vimState) => {
+  toggleVim = vimState => {
     this.setState({
       vimEnabled: !this.state.vimEnabled
     })
@@ -290,7 +287,7 @@ class Workspace extends Component {
         position
       }
     })
-  };
+  }
 
   dismissContextMenu = (path, position) => {
     this.setState({
@@ -300,7 +297,7 @@ class Workspace extends Component {
         position
       }
     })
-  };
+  }
 
   render () {
     return (
@@ -330,7 +327,7 @@ class Workspace extends Component {
           onFilesAdd={ this.onFilesAdd }
           onDownloadFileClick={ this.handleDowloadFileClick }
           onRightClick={ this.showContextMenu }
-          filesLoading={ this.state.uploading }
+          filesLoading={ this.state.filesLoading }
         />
         <Pane
           tabs={ this.props.tabs }
@@ -374,25 +371,25 @@ class Workspace extends Component {
           />: null
         }
       </div>
-    );
+    )
   }
 }
 
 // Place state of redux store into props of component
 function mapStateToProps (state) {
-  const pathname = decodeURIComponent(state.router.location.pathname);
-  const username = pathname.split('/')[1];
-  const projectname = pathname.split('/')[2];
-  const owner = username || 'anon';
-  const key = `${owner}/${projectname}`;
-  const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {};
-  const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : [];
+  const pathname = decodeURIComponent(state.router.location.pathname)
+  const username = pathname.split('/')[1]
+  const projectname = pathname.split('/')[2]
+  const owner = username || 'anon'
+  const key = `${owner}/${projectname}`
+  const tabs = (state.tabs && state.tabs[key]) ? state.tabs[key] : {}
+  const projects =  (state.entities && state.entities.projects) ? toArray(state.entities.projects) : []
   return {
     projects,
     tabs,
     account: state.account,
     router: state.router
-  };
+  }
 }
 
 const CombinedActions = merge(TabActions, Actions.files, Actions.account, Actions.projects)

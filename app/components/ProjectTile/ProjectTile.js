@@ -42,6 +42,7 @@ export default class ProjectTile extends Component {
     this.setState({
       anchorEl: e.currentTarget,
       dropdownOpen: !this.state.dropdownOpen,
+      settingsOpen: false,
       deleteOpen: false
     })
   }
@@ -66,15 +67,25 @@ export default class ProjectTile extends Component {
     console.log('close dialog called', name)
     let newState = {}
     newState[`${name}Open`] = false
-    if (name2) newState[`${name2}Open`] = true
+    if (name2){
+      if (name2) newState[`${name2}Open`] = true
+      e.preventDefault()
+    } else {
+      name2.preventDefault()
+    }
     this.setState(newState)
   }
 
-  openDialog = (name, name2) => {
-    console.log('open dialog called', name)
+  openDialog = (name, name2, e) => {
+    console.log('open dialog called', name, name2, e)
     let newState = {}
     newState[`${name}Open`] = true
-    if (name2) newState[`${name2}Open`] = false
+    if (name2){
+      newState[`${name2}Open`] = false
+      e.preventDefault()
+    } else {
+      name2.preventDefault()
+    }
     this.setState(newState)
   }
 
@@ -118,8 +129,7 @@ export default class ProjectTile extends Component {
       <div>
         <ProjectSettingsDialog
           project={ this.props.project }
-          modalOpen={ this.state.settingsOpen }
-          toggleModal={ this.toggleDropdown }
+          open={ this.state.settingsOpen }
           onSave={ this.saveSettings }
           onVimToggle={ this.toggleVim }
           vimEnabled={ this.state.vimEnabled }

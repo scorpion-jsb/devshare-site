@@ -25,7 +25,7 @@ class Editor extends Component {
     filePath: PropTypes.string.isRequired,
     project: PropTypes.object.isRequired,
     vimEnabled: PropTypes.bool
-  };
+  }
 
   static defaultProps = {
     name: 'editor',
@@ -38,7 +38,7 @@ class Editor extends Component {
     readOnly: false,
     highlightActiveLine: true,
     showPrintMargin: true
-  };
+  }
 
   firepad = {};
 
@@ -60,6 +60,10 @@ class Editor extends Component {
     require('codemirror/mode/yaml/yaml')
     require('codemirror/mode/jade/jade')
     require('codemirror/mode/markdown/markdown')
+    require('codemirror/mode/sass/sass')
+    require('codemirror/mode/shell/shell')
+    require('codemirror/mode/clike/clike')
+    require('codemirror/mode/xml/xml')
     const editorDiv = document.getElementById(this.props.name)
     const mode = getMode(this.props.mode)
     this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${mode || 'javascript'}`, lineWrapping: true })
@@ -140,6 +144,12 @@ function getMode (mode) {
   switch (mode) {
     case 'html':
       return 'htmlmixed'
+    case 'scss':
+      return 'text/x-scss'
+    case 'less':
+      return 'text/x-less'
+    case 'ejs':
+      return 'application/x-ejs'
     case 'md':
       return 'markdown'
     case 'yml':
@@ -148,6 +158,22 @@ function getMode (mode) {
       return 'javascript'
     case 'ts':
       return 'javascript'
+    case 'java':
+      return 'text/x-java'
+    case 'scala':
+      return 'text/x-scala'
+    case 'c':
+      return 'text/x-csrc'
+    case 'h':
+      return 'text/x-csrc'
+    case 'cc':
+      return 'text/x-c++src'
+    case 'm':
+      return 'text/x-objectivec'
+    case 'py':
+      return { name: 'python', version: 3, singleLineStringErrors: false }
+    case 'sh':
+      return 'shell'
     default:
       return mode
    }

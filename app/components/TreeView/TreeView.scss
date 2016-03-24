@@ -34,10 +34,10 @@
 		// position: absolute;
 		flex-grow: 1;
 		overflow: scroll;
-	}
-	&-NoFiles {
-		margin-top: 2rem;
-		min-height: 130px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
 	}
 	&-Loader {
 		margin-right: auto;
@@ -49,15 +49,10 @@
 		width: 150px;
 	}
 	&-None {
-		max-width: 200px;
-		position: absolute;
-		top: 0; left: 0; bottom: 0; right: 0;
-		margin: auto;
-		text-align: center;
-		line-height: 2.4rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 		cursor: default;
 		user-select: none;
 		-webkit-touch-callout: none;
@@ -65,10 +60,26 @@
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-		min-height: 200px;
-		height: 100px;
+		flex-grow: 1;
+		align-self: center;
 		strong {
 			font-weight: 500;
+		}
+		&-Desktop {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		@media screen and (max-width: 768px){
+			&-Desktop {
+				display: none;
+			}
+		}
+		@media screen and (min-width: 768px){
+			&-Mobile {
+				display: none;
+			}
 		}
 	}
 	&-Upload {

@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
@@ -14,47 +14,48 @@ import { event } from '../../helpers/ga'
 import './Login.scss'
 
 class Login extends Component {
-   constructor (props) {
+  constructor (props) {
     super(props)
-   }
+  }
 
-   state = { errors:{ username:null, password:null}, snackCanOpen: false };
+  state = { errors: { username: null, password: null}, snackCanOpen: false }
 
-   static contextTypes = {
-     router: React.PropTypes.object.isRequired
-   };
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
 
-   handleRequestClose = () => {
+  handleRequestClose = () => {
     this.setState({
       snackCanOpen: false,
-    });
-   };
+    })
+  }
 
   //TODO: Replace this with redux-rx
   goAfterLoggedIn = () => {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.context.router.push(`/${this.props.account.username}`);
+        this.context.router.push(`/${this.props.account.username}`)
       } else {
-        this.goAfterLoggedIn();
+        this.goAfterLoggedIn()
       }
-    }, 100);
-  };
+    }, 100)
+  }
 
-  handleLogin = (loginData) => {
+  handleLogin = loginData => {
     this.setState({
       snackCanOpen: true
-    });
-    this.props.login(loginData);
-    event({category: 'User', action: 'Email Login'})
-    this.goAfterLoggedIn();
-  };
+    })
+    console.log('login data:', loginData)
+    this.props.login(loginData)
+    event({ category: 'User', action: 'Email Login' })
+    this.goAfterLoggedIn()
+  }
 
-  providerLogin = (provider) => {
-    this.props.login(provider);
-    event({category: 'User', action: 'Provider Login', value: provider })
-    this.goAfterLoggedIn();
-  };
+  providerLogin = provider => {
+    this.props.login(provider)
+    event({ category: 'User', action: 'Provider Login', value: provider })
+    this.goAfterLoggedIn()
+  }
 
   render () {
     if (!this.props.account.isFetching) {
@@ -88,7 +89,7 @@ class Login extends Component {
             onRequestClose={ this.handleRequestClose }
           />
         </div>
-      );
+      )
     }
     return (
       <div className="Login">
@@ -108,7 +109,7 @@ function mapStateToProps (state) {
 }
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.account, dispatch);
+  return bindActionCreators(Actions.account, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

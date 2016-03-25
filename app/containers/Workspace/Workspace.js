@@ -23,6 +23,9 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import { event } from '../../helpers/ga'
 import './Workspace.scss'
 
+import Devshare from 'devshare'
+console.log('devshare', Devshare)
+
 let grout = new Grout()
 let fileEntityBlackList = ['.DS_Store', 'node_modules']
 
@@ -235,6 +238,7 @@ class Workspace extends Component {
   }
 
   searchUsers = (q, cb) => {
+    console.log('Devshare.users.search:', Devshare.users)
     grout.Users.search(q).then(usersList => {
       cb(null, usersList)
     }, err => {

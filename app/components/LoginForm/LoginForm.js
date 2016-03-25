@@ -11,11 +11,11 @@ const fieldStyle = { width: '80%' }
 const buttonStyle = { width: '100%' }
 
 export default class LoginForm extends Component {
-  constructor (props){
+  constructor (props) {
     super(props)
   }
 
-  state = { errors:{ username:null, password:null } }
+  state = { errors:{ username: null, password: null } }
 
   static propTypes = {
     onLogin: PropTypes.func
@@ -43,18 +43,19 @@ export default class LoginForm extends Component {
   }
 
   handleLogin = e => {
-    if(e && typeof e.preventDefault === 'function') e.preventDefault()
-    if(!this.state.username || this.state.username == ''){
+    if (e && typeof e.preventDefault === 'function') e.preventDefault()
+    const { username } = this.state
+    if (!username || username == '') {
       return this.setState({
-        errors: {username: 'Username required'}
+        errors: { username: 'Username required' }
       })
     }
-    if(!this.password || this.password == ''){
+    if (!this.password || this.password == '') {
       return this.setState({
         errors: { password: 'Password required' }
       })
     }
-    let loginData = { username:this.state.username, password: this.password }
+    const loginData = { username, password: this.password }
     if (this.props.onLogin) this.props.onLogin(loginData)
  }
 
@@ -80,6 +81,15 @@ export default class LoginForm extends Component {
           errorText={ this.state.errors.password }
           style={ fieldStyle }
         />
+        <div className="LoginForm-Submit">
+          <RaisedButton
+            label="Login"
+            primary={ true }
+            type="submit"
+            disabled={ this.props.account && this.props.account.isFetching}
+            style={ buttonStyle }
+          />
+        </div>
         <div className="LoginForm-Options">
           <div className="LoginForm-Remember">
             <Checkbox
@@ -93,16 +103,7 @@ export default class LoginForm extends Component {
           Forgot Password?
           </Link>
         </div>
-        <div className="LoginForm-Submit">
-          <RaisedButton
-            label="Login"
-            primary={ true }
-            type="submit"
-            disabled={ this.props.account && this.props.account.isFetching}
-            style={ buttonStyle }
-          />
-        </div>
       </form>
-    );
+    )
   }
 }

@@ -3,17 +3,17 @@ import Editor from '../Editor'
 import './View.scss'
 
 export default class View extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
   }
-  
+
   static propTypes = {
     viewData: PropTypes.object,
     visible: PropTypes.bool.isRequired,
     index: PropTypes.number.isRequired,
     project: PropTypes.object.isRequired,
     vimEnabled: PropTypes.bool
-  };
+  }
 
   render () {
     const style = this.props.visible ? { display: 'block' } : { display: 'none' }

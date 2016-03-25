@@ -108,7 +108,6 @@ class Projects extends Component {
           this.state.newProjectModal ?
           <NewProjectDialog
             open={ this.state.newProjectModal }
-            onRequestClose={ this.toggleModal.bind(this, 'newProject') }
             onCreateClick={ this.newSubmit }
           /> : null
         }
@@ -116,8 +115,7 @@ class Projects extends Component {
           (this.state.currentProject && this.state.addCollabModal) ?
           <SharingDialog
             project={ this.state.currentProject }
-            modalOpen={ this.state.addCollabModal }
-            toggleModal={ this.toggleModal.bind(this, 'addCollab') }
+            open={ this.state.addCollabModal }
             onUserSearch={ this.searchUsers }
             onAddCollab={ this.addCollaborator }
             onRemoveCollab={ this.removeCollaborator }

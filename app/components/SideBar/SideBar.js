@@ -1,23 +1,24 @@
-import { isArray, isUndefined, find, isString } from 'lodash';
-import React, { PropTypes, Component } from 'react';
-import { Link } from 'react-router';
-import TreeView from '../TreeView';
-import DropDownMenu from 'material-ui/lib/DropDownMenu';
-import Toolbar from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import SelectField from 'material-ui/lib/select-field';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import IconButton from 'material-ui/lib/icon-button';
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import AddIcon from 'material-ui/lib/svg-icons/content/add-circle';
-import SettingsIcon from 'material-ui/lib/svg-icons/action/settings';
-import GroupIcon from 'material-ui/lib/svg-icons/social/group';
-import './SideBar.scss';
+import { isArray, isUndefined, find, isString } from 'lodash'
+import React, { PropTypes, Component } from 'react'
+import { Link } from 'react-router'
+import TreeView from '../TreeView'
+import DropDownMenu from 'material-ui/lib/DropDownMenu'
+import Toolbar from 'material-ui/lib/toolbar/toolbar'
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
+import SelectField from 'material-ui/lib/select-field'
+import MenuItem from 'material-ui/lib/menus/menu-item'
+import IconButton from 'material-ui/lib/icon-button'
+import IconMenu from 'material-ui/lib/menus/icon-menu'
+import AddIcon from 'material-ui/lib/svg-icons/content/add-circle'
+import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
+import GroupIcon from 'material-ui/lib/svg-icons/social/group'
+import './SideBar.scss'
 
 export default class SideBar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
+
   static propTypes = {
     projects: PropTypes.array,
     project: PropTypes.object.isRequired,
@@ -34,11 +35,11 @@ export default class SideBar extends Component {
     onFilesAdd: PropTypes.func,
     onRightClick: PropTypes.func,
     filesLoading: PropTypes.bool
-  };
+  }
 
   state = {
     filesOver: false
-  };
+  }
 
   componentDidMount() {
     this.refs.fileInput.setAttribute('webkitdirectory', '')
@@ -49,40 +50,40 @@ export default class SideBar extends Component {
       let proj = find(this.props.projects, { name })
       this.props.onProjectSelect(proj, i)
     }
-  };
+  }
 
   handleFileUploadClick = (e) => {
     this.refs.fileInput.click()
-  };
+  }
 
   handleFileUpload = (e) => {
     this.props.onFilesAdd(e)
-  };
+  }
 
   handleFileDrag = (e) => {
     e.preventDefault()
     this.setState({
       filesOver: true
     })
-  };
+  }
 
   handleFileDrop = (e) => {
     this.props.onFilesDrop(e)
     this.setState({ filesOver: false })
-  };
+  }
 
   handleFileDragLeave = (e) => {
     this.setState({ filesOver: false })
-  };
+  }
 
   handleRightClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
     this.props.onRightClick(null, { x: e.clientX, y: e.clientY })
-  };
+  }
 
   render () {
-    const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true;
+    const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true
     const iconButtonStyle = { width: '60px', height: '60px' }
     const iconStyle = { width: '100%', height: '100%' }
     let projectsMenu

@@ -15,16 +15,19 @@ import StartIcon from 'material-ui/lib/svg-icons/content/create'
 import Paper from 'material-ui/lib/paper'
 import { event } from '../../helpers/ga'
 
+const iconStyle = {
+  width: '130px',
+  height: '130px'
+}
+const buttonStyle = { margin: '3rem', height: '3rem', marginBottom: 5 }
+const buttonLabelStyle = { fontSize: '1.5rem' }
+
 class Home extends Component {
   trackEvent = () => {
     event({ category: 'Projects', action: 'Create Anonymous' })
-  };
+  }
 
   render () {
-    const iconStyle = {
-      width: '130px',
-      height: '130px'
-    }
     const meInThree = [
       {
         title: 'Work with others in real-time',
@@ -42,7 +45,6 @@ class Home extends Component {
         desc: 'Export all the files and folder into a zip file to continue development or deploy.'
       }
     ]
-
     const meInThreeElements = map(meInThree, (content, key) => {
       return (
         <div className='Home-MeInThree-Item' key={ key } >
@@ -56,9 +58,6 @@ class Home extends Component {
         </div>
       )
     })
-
-    const buttonStyle = { margin: '3rem', height: '3rem', marginBottom: 5 }
-    const buttonLabelStyle = { fontSize: '1.5rem' }
     return (
       <div className='Home' style={{ color: Theme.palette.primary2Color }}>
         <div>

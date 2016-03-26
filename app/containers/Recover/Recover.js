@@ -24,17 +24,17 @@ class Recover extends Component {
     e.preventDefault()
     this.setState({
       [name]: e.target.value,
-      errors: {username: null}
+      errors: { username: null }
     })
-  };
+  }
 
   handleRequestClose = () => {
     this.setState({
       open: false,
     })
-  };
+  }
 
-  handleRecover = (e) => {
+  handleRecover = e => {
     e.preventDefault()
     if (!this.state.username) {
       return this.setState({
@@ -45,7 +45,7 @@ class Recover extends Component {
     this.setState({
       open: true
     })
-  };
+  }
 
   render () {
     const fieldStyle = { width: '80%' }

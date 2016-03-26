@@ -18,43 +18,43 @@ class Login extends Component {
     super(props)
    }
 
-   state = { errors:{ username:null, password:null}, snackCanOpen: false };
+   state = { errors: { username: null, password: null }, snackCanOpen: false }
 
    static contextTypes = {
      router: React.PropTypes.object.isRequired
-   };
+   }
 
    handleRequestClose = () => {
     this.setState({
       snackCanOpen: false,
-    });
-   };
+    })
+   }
 
   //TODO: Replace this with redux-rx
   goAfterLoggedIn = () => {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
-        this.context.router.push(`/${this.props.account.username}`);
+        this.context.router.push(`/${this.props.account.username}`)
       } else {
-        this.goAfterLoggedIn();
+        this.goAfterLoggedIn()
       }
-    }, 100);
-  };
+    }, 100)
+  }
 
-  handleLogin = (loginData) => {
+  handleLogin = loginData => {
     this.setState({
       snackCanOpen: true
     });
-    this.props.login(loginData);
+    this.props.login(loginData)
     event({category: 'User', action: 'Email Login'})
-    this.goAfterLoggedIn();
-  };
+    this.goAfterLoggedIn()
+  }
 
-  providerLogin = (provider) => {
-    this.props.login(provider);
+  providerLogin = provider => {
+    this.props.login(provider)
     event({category: 'User', action: 'Provider Login', value: provider })
-    this.goAfterLoggedIn();
-  };
+    this.goAfterLoggedIn()
+  }
 
   render () {
     if (!this.props.account.isFetching) {
@@ -99,6 +99,7 @@ class Login extends Component {
     )
   }
 }
+
 // Place state of redux store into props of component
 function mapStateToProps (state) {
   return {
@@ -106,9 +107,10 @@ function mapStateToProps (state) {
     router: state.router
   }
 }
+
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

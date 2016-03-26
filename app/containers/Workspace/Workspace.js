@@ -116,7 +116,7 @@ class Workspace extends Component {
     })
   }
 
-  saveSettings = (data) => {
+  saveSettings = data => {
     this.toggleSettingsModal()
   }
 
@@ -189,7 +189,7 @@ class Workspace extends Component {
     })
   }
 
-  handleEntries = (entries) => {
+  handleEntries = entries => {
     if (entries.isFile) {
       this.readAndSaveFileEntry(entries)
     } else if (entries.isDirectory) {
@@ -208,7 +208,7 @@ class Workspace extends Component {
     })
   }
 
-  onFilesDrop = (e) => {
+  onFilesDrop = e => {
     e.preventDefault()
     this.setState({
       filesLoading: true
@@ -223,7 +223,7 @@ class Workspace extends Component {
     })
   }
 
-  onFilesAdd = (e) => {
+  onFilesAdd = e => {
     e.preventDefault()
     let items = e.target.files
     each(items, item => {
@@ -340,8 +340,7 @@ class Workspace extends Component {
           this.state.settingsOpen ?
           <ProjectSettingsDialog
             project={ this.props.project }
-            modalOpen={ this.state.settingsOpen }
-            toggleModal={ this.toggleSettingsModal }
+            open={ this.state.settingsOpen }
             onSave={ this.saveSettings }
             onVimToggle={ this.toggleVim }
             vimEnabled={ this.state.vimEnabled }
@@ -351,8 +350,7 @@ class Workspace extends Component {
           this.state.sharingOpen ?
           <SharingDialog
             project={ this.props.project }
-            modalOpen={ this.state.sharingOpen }
-            toggleModal={ this.toggleSharingModal }
+            open={ this.state.sharingOpen }
             onUserSearch={ this.searchUsers }
             onSave={ this.saveSettings }
             onAddCollab={ this.addCollaborator }

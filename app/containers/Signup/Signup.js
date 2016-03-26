@@ -15,11 +15,11 @@ import { event } from '../../helpers/ga'
 import './Signup.scss'
 
 class Signup extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
 
-  state = { errors:{ username:null, password:null }, snackCanOpen: false }
+  state = { errors: { username: null, password: null }, snackCanOpen: false }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -27,48 +27,48 @@ class Signup extends Component {
 
   handleRequestClose = () => {
     this.setState({
-     snackCanOpen: false,
+     snackCanOpen: false
     })
-  };
+  }
 
   reset = () => {
     return this.setState({
-      errors:{},
+      errors: {},
       username: null,
       email: null,
       name: null,
       snackCanOpen: false
     })
-  };
+  }
 
   /**
    * @function handleSignup
    * @description Call signup through redux-grout action
    */
-  handleSignup = (signupData) => {
+  handleSignup = signupData => {
     this.setState({
       snackCanOpen: true
     })
     this.props.signup(signupData)
     event({ category: 'User', action: 'Email Signup' })
     this.goAfterLoggedIn()
-  };
+  }
 
   /**
    * @function providerSignup
    * @description Initiate external providerSignup through redux-grout action (popup)
    */
-  providerSignup = (provider) => {
+  providerSignup = provider => {
     this.setState({
       snackCanOpen: true
     })
     this.props.signup(provider)
     event({ category: 'User', action: 'Provider Signup', value: provider })
     this.goAfterLoggedIn()
-  };
+  }
 
   //TODO: Replace this with redux-rx
-  goAfterLoggedIn() {
+  goAfterLoggedIn = () => {
     setTimeout(() => {
       if(this.props.account && this.props.account.username){
         this.context.router.push(`/${this.props.account.username}`)
@@ -76,10 +76,10 @@ class Signup extends Component {
         this.goAfterLoggedIn()
       }
     }, 300)
-  };
+  }
 
   render () {
-    if(!this.props.account.isFetching){
+    if (!this.props.account.isFetching) {
       return (
         <div className="Signup">
           <Paper className="Signup-Panel">
@@ -119,6 +119,7 @@ class Signup extends Component {
     )
   }
 }
+
 // Place state of redux store into props of component
 function mapStateToProps (state) {
   return {
@@ -126,8 +127,10 @@ function mapStateToProps (state) {
     router: state.router
   }
 }
+
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch)
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

@@ -15,6 +15,7 @@ import StartIcon from 'material-ui/lib/svg-icons/content/create'
 import Paper from 'material-ui/lib/paper'
 import { event } from '../../helpers/ga'
 
+// Styling vars
 const iconStyle = {
   width: '130px',
   height: '130px'
@@ -24,7 +25,9 @@ const buttonStyle = {
   height: '3rem',
   marginBottom: 5
 }
-const buttonLabelStyle = { fontSize: '1.5rem' }
+const buttonLabelStyle = {
+  fontSize: '1.5rem'
+}
 
 class Home extends Component {
   trackEvent = () => {
@@ -35,21 +38,20 @@ class Home extends Component {
     const meInThree = [
       {
         title: 'Work with others in real-time',
-        icon: <GroupIcon style={iconStyle} />,
+        icon: <GroupIcon style={ iconStyle } />,
         desc: 'Share a link or add someone with an account directly to your project.'
       },
       {
         title: 'Start from anywhere',
-        icon: <StartIcon style={iconStyle} />,
+        icon: <StartIcon style={ iconStyle } />,
         desc: 'Upload an existing project or start from scratch.'
       },
       {
         title: 'Download your project',
-        icon: <CloudDownload style={iconStyle} />,
+        icon: <CloudDownload style={ iconStyle } />,
         desc: 'Export all the files and folder into a zip file to continue development or deploy.'
       }
     ]
-
     const meInThreeElements = map(meInThree, (content, key) => {
       return (
         <div className='Home-MeInThree-Item' key={ key } >
@@ -98,8 +100,8 @@ class Home extends Component {
             Made by <a target='_blank' href='http://kyper.io'>Kyper</a>
           </div>
         </div>
-        </div>
-      )
+      </div>
+    )
   }
 }
 

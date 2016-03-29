@@ -18,7 +18,7 @@ class Login extends Component {
     super(props)
   }
 
-  state = { errors: { username: null, password: null}, snackCanOpen: false }
+  state = { errors: { username: null, password: null }, snackCanOpen: false }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -100,6 +100,7 @@ class Login extends Component {
     )
   }
 }
+
 // Place state of redux store into props of component
 function mapStateToProps (state) {
   return {
@@ -107,6 +108,7 @@ function mapStateToProps (state) {
     router: state.router
   }
 }
+
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch)

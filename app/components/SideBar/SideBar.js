@@ -2,6 +2,7 @@ import { isArray, isUndefined, find, isString } from 'lodash'
 import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import TreeView from '../TreeView'
+
 import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import Toolbar from 'material-ui/lib/toolbar/toolbar'
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
@@ -12,6 +13,7 @@ import IconMenu from 'material-ui/lib/menus/icon-menu'
 import AddIcon from 'material-ui/lib/svg-icons/content/add-circle'
 import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import GroupIcon from 'material-ui/lib/svg-icons/social/group'
+
 import './SideBar.scss'
 
 export default class SideBar extends Component {

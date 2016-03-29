@@ -3,14 +3,17 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Actions } from 'redux-devshare'
-import Paper from 'material-ui/lib/paper'
-import CircularProgress from 'material-ui/lib/circular-progress'
+import { event } from '../../helpers/ga'
+
+// Components
 import LoginForm from '../../components/LoginForm/LoginForm'
 import GoogleButton from '../../components/GoogleButton/GoogleButton'
+import Paper from 'material-ui/lib/paper'
+import CircularProgress from 'material-ui/lib/circular-progress'
 import Snackbar from 'material-ui/lib/snackbar'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FontIcon from 'material-ui/lib/font-icon'
-import { event } from '../../helpers/ga'
+
 import './Login.scss'
 
 class Login extends Component {
@@ -18,7 +21,10 @@ class Login extends Component {
     super(props)
   }
 
-  state = { errors: { username: null, password: null }, snackCanOpen: false }
+  state = {
+    snackCanOpen: false,
+    errors: { username: null, password: null }
+  }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -45,7 +51,6 @@ class Login extends Component {
     this.setState({
       snackCanOpen: true
     })
-    console.log('login data:', loginData)
     this.props.login(loginData)
     event({ category: 'User', action: 'Email Login' })
     this.goAfterLoggedIn()
@@ -58,46 +63,48 @@ class Login extends Component {
   }
 
   render () {
-    if (!this.props.account.isFetching) {
+    const { isFetching, error } = this.props.account
+    if (isFetching) {
       return (
         <div className="Login">
-          <Paper className="Login-Panel">
-            <LoginForm onLogin={ this.handleLogin } />
-          </Paper>
-          <div className="Login-Or">
-            or
+          <div className="Login-Progress">
+            <CircularProgress  mode="indeterminate" />
           </div>
-          <GoogleButton onClick={ this.providerLogin.bind(this, 'google') } />
-          <RaisedButton
-            label="Sign in With GitHub"
-            secondary={ true }
-            onTouchTap={ this.providerLogin.bind(this, 'github') }
-          />
-          <div className="Login-Signup">
-            <span className="Login-Signup-Label">
-              Need an account?
-            </span>
-            <Link className="Login-Signup-Link" to="/signup">
-              Sign Up
-            </Link>
-          </div>
-          <Snackbar
-            open={ typeof this.props.account.error !== 'undefined' && this.props.account.account !== null && this.state.snackCanOpen }
-            message={ this.props.account.error || '' }
-            action="close"
-            autoHideDuration={ 3000 }
-            onRequestClose={ this.handleRequestClose }
-          />
         </div>
       )
     }
     return (
       <div className="Login">
-        <div className="Login-Progress">
-          <CircularProgress  mode="indeterminate" />
+        <Paper className="Login-Panel">
+          <LoginForm onLogin={ this.handleLogin } />
+        </Paper>
+        <div className="Login-Or">
+          or
         </div>
+        <GoogleButton onClick={ this.providerLogin.bind(this, 'google') } />
+        <RaisedButton
+          label="Sign in With GitHub"
+          secondary={ true }
+          onTouchTap={ this.providerLogin.bind(this, 'github') }
+        />
+        <div className="Login-Signup">
+          <span className="Login-Signup-Label">
+            Need an account?
+          </span>
+          <Link className="Login-Signup-Link" to="/signup">
+            Sign Up
+          </Link>
+        </div>
+        <Snackbar
+          open={ typeof error !== 'undefined' && this.state.snackCanOpen }
+          message={ error || 'Error' }
+          action="close"
+          autoHideDuration={ 3000 }
+          onRequestClose={ this.handleRequestClose }
+        />
       </div>
     )
+
   }
 }
 

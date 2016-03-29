@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import './Editor.scss'
 import { connect } from 'react-redux'
-import Grout from 'kyper-grout'
-
-let grout = new Grout('tessellate', { logLevel: 'trace' })
+import { project } from 'devshare'
 
 class Editor extends Component {
   constructor () {
@@ -40,7 +38,7 @@ class Editor extends Component {
     showPrintMargin: true
   }
 
-  firepad = {};
+  firepad = {}
 
   componentWillUnmount () {
     this.handleDispose()
@@ -85,11 +83,13 @@ class Editor extends Component {
   handleLoad = (editor) => {
     // Load file content
     const Firepad = require('firepad')
+    const { name, owner } = this.props.project
     if (typeof editor.firepad === 'undefined') {
-      const file = grout.Project(this.props.project.name, this.props.project.owner.username).File(this.props.filePath)
+      const { fileSystem } = project(name, owner.username)
+      const file = fileSystem.file(this.props.filePath)
       try {
         try {
-          this.firepad = Firepad.fromCodeMirror(file.fbRef, editor,  { userId: this.props.account.username || '&' })
+          this.firepad = Firepad.fromCodeMirror(fileSystem.createFirebaseRef(), editor,  { userId: this.props.account.username || '&' })
         } catch (err) {
           console.warn('Error creating firepad', err)
         }

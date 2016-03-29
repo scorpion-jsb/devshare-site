@@ -3,14 +3,15 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import TextField from 'material-ui/lib/text-field'
-import Dialog from 'material-ui/lib/dialog'
+import { Actions } from 'redux-devshare'
+
+// Components
 import ProjectTile from '../../components/ProjectTile/ProjectTile'
 import NewProjectTile from '../../components/NewProjectTile/NewProjectTile'
 import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog'
 import SharingDialog from '../../components/SharingDialog/SharingDialog'
-const Grout = typeof window !== 'undefined' ? require('kyper-grout') : undefined
-import { Actions } from 'redux-devshare'
+import TextField from 'material-ui/lib/text-field'
+import Dialog from 'material-ui/lib/dialog'
 
 import './Projects.scss'
 
@@ -44,9 +45,7 @@ class Projects extends Component {
 
   newSubmit = name => {
     this.props.addProject(name, this.props.username)
-    this.setState({
-      newProjectModal: false
-    })
+    this.setState({ newProjectModal: false })
   }
 
   openProject = project => {
@@ -58,8 +57,7 @@ class Projects extends Component {
   }
 
   searchUsers = (q, cb) => {
-    const grout = new Grout()
-    grout.Users.search(q).then(usersList => cb(null, usersList), err => cb(err))
+    Devshare.users().search(q).then(usersList => cb(null, usersList), err => cb(err))
   }
 
   addCollabClick = currentProject => {

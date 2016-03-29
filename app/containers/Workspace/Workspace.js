@@ -8,11 +8,13 @@ import {
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Modal from 'react-modal'
-import Rebase from 're-base'
-import { Actions } from 'redux-devshare'
-import Grout from 'kyper-grout'
 import * as TabActions from '../../actions/tabs'
+import Rebase from 're-base'
+import Devshare from 'devshare'
+import { Actions } from 'redux-devshare'
+
+// Components
+import Modal from 'react-modal'
 import SideBar from '../../components/SideBar/SideBar'
 import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog'
 import SharingDialog from '../../components/SharingDialog/SharingDialog'
@@ -23,11 +25,7 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import { event } from '../../helpers/ga'
 import './Workspace.scss'
 
-import Devshare from 'devshare'
-console.log('devshare', Devshare)
-
-let grout = new Grout()
-let fileEntityBlackList = ['.DS_Store', 'node_modules']
+const fileEntityBlackList = ['.DS_Store', 'node_modules']
 
 class Workspace extends Component {
   constructor () {
@@ -88,10 +86,11 @@ class Workspace extends Component {
     if (!name) return new Error('project name required to fetch projects')
     if (this.ref && this.ref.endpoint === name) return
     if (this.ref && this.ref.endpoint !== name) this.fb.reset()
-    const groutProject = project ? grout.Project(name, owner.username) : null
+    console.log('Devshare.project:', Devshare.project(owner.username, name))
+    const fbUrl = project ? Devshare.project(owner.username, name).fileSystem.createFirebaseUrl() : null
     // Move to parent ref
-    this.fb = Rebase.createClass(groutProject.fbUrl.replace(name, ''))
-    //Bind to files list on firebase
+    this.fb = Rebase.createClass(fbUrl.replace(`/${name}`, ''))
+    // Bind to files list on firebase
     this.ref = this.fb.bindToState(name, {
       context: this,
       state: 'files',
@@ -238,12 +237,12 @@ class Workspace extends Component {
   }
 
   searchUsers = (q, cb) => {
-    console.log('Devshare.users.search:', Devshare.users)
-    grout.Users.search(q).then(usersList => {
-      cb(null, usersList)
-    }, err => {
-      cb(err)
-    })
+    Devshare.users()
+      .search(q)
+      .then(usersList =>
+        cb(null, usersList),
+        error => cb(error)
+      )
   }
 
   showPopover = (addType, addPath) => {

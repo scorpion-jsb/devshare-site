@@ -1,19 +1,21 @@
 import React, { Component } from 'react' // eslint-disable-line
-import map from 'lodash/map'
+import { map } from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
-import { randomProjectId } from '../../helpers'
 import { Actions } from 'redux-devshare'
-import './Home.scss'
-// React Components
+import { event } from '../../helpers/ga'
+import { randomProjectId } from '../../helpers'
+
+// Components
 import RaisedButton from 'material-ui/lib/raised-button'
 import Theme from '../../theme'
 import GroupIcon from 'material-ui/lib/svg-icons/social/group'
 import CloudDownload from 'material-ui/lib/svg-icons/file/cloud-download'
 import StartIcon from 'material-ui/lib/svg-icons/content/create'
 import Paper from 'material-ui/lib/paper'
-import { event } from '../../helpers/ga'
+
+import './Home.scss'
 
 // Styling vars
 const iconStyle = {
@@ -52,6 +54,7 @@ class Home extends Component {
         desc: 'Export all the files and folder into a zip file to continue development or deploy.'
       }
     ]
+
     const meInThreeElements = map(meInThree, (content, key) => {
       return (
         <div className='Home-MeInThree-Item' key={ key } >

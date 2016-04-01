@@ -30,6 +30,12 @@ class Signup extends Component {
     router: React.PropTypes.object.isRequired
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.account.username) {
+      this.context.router.push(`/${nextProps.account.username}`)
+    }
+  }
+
   handleSnackClose = () => {
     this.setState({
      snackCanOpen: false
@@ -55,12 +61,9 @@ class Signup extends Component {
    * @description Call signup through redux-devshare action
    */
   handleSignup = signupData => {
-    this.setState({
-      snackCanOpen: true
-    })
+    this.setState({ snackCanOpen: true })
     this.props.signup(signupData)
     event({ category: 'User', action: 'Email Signup' })
-    this.redirectAfterAuth()
   }
 
   /**
@@ -68,27 +71,9 @@ class Signup extends Component {
    * @description Initiate external providerSignup through redux-devshare action (popup)
    */
   providerSignup = provider => {
-    this.setState({
-      snackCanOpen: true
-    })
+    this.setState({ snackCanOpen: true })
     this.props.signup(provider)
     event({ category: 'User', action: 'Provider Signup', value: provider })
-    this.redirectAfterAuth()
-  }
-
-  /**
-   * @function redirectAfterAuth
-   * @description Navigate to new page once user is logged in (debouced checking)
-   */
-  redirectAfterAuth = () => {
-    //TODO: Replace this with redux-rx
-    setTimeout(() => {
-      if(this.props.account && this.props.account.username){
-        this.context.router.push(`/${this.props.account.username}`)
-      } else {
-        this.redirectAfterAuth()
-      }
-    }, 300)
   }
 
   render () {

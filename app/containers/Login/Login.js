@@ -30,21 +30,16 @@ class Login extends Component {
     router: React.PropTypes.object.isRequired
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.account.username) {
+      this.context.router.push(`/${nextProps.account.username}`)
+    }
+  }
+
   handleRequestClose = () => {
     this.setState({
       snackCanOpen: false,
     })
-  }
-
-  //TODO: Replace this with redux-rx
-  goAfterLoggedIn = () => {
-    setTimeout(() => {
-      if(this.props.account && this.props.account.username){
-        this.context.router.push(`/${this.props.account.username}`)
-      } else {
-        this.goAfterLoggedIn()
-      }
-    }, 100)
   }
 
   handleLogin = loginData => {
@@ -53,13 +48,11 @@ class Login extends Component {
     })
     this.props.login(loginData)
     event({ category: 'User', action: 'Email Login' })
-    this.goAfterLoggedIn()
   }
 
   providerLogin = provider => {
-    this.props.login(provider)
+    this.props.authWithProvider(provider)
     event({ category: 'User', action: 'Provider Login', value: provider })
-    this.goAfterLoggedIn()
   }
 
   render () {

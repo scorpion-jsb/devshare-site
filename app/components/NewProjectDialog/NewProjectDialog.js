@@ -12,7 +12,6 @@ class NewProjectDialog extends Component {
   state = { open: this.props.open || false }
 
   componentWillReceiveProps (nextProps) {
-    console.log('nextprops:', nextProps)
     if (nextProps.open) {
       this.setState({
         open: true

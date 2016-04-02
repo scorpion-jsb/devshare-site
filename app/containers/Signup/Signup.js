@@ -3,14 +3,16 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Actions } from 'redux-grout'
+import { Actions } from 'redux-devshare'
+import { event } from '../../helpers/ga'
+
+// Components
+import SignupForm from '../../components/SignupForm/SignupForm'
+import GoogleButton from '../../components/GoogleButton/GoogleButton'
 import Paper from 'material-ui/lib/paper'
 import RaisedButton from 'material-ui/lib/raised-button'
 import CircularProgress from 'material-ui/lib/circular-progress'
-import SignupForm from '../../components/SignupForm/SignupForm'
-import GoogleButton from '../../components/GoogleButton/GoogleButton'
 import Snackbar from 'material-ui/lib/snackbar'
-import { event } from '../../helpers/ga'
 
 import './Signup.scss'
 
@@ -19,18 +21,31 @@ class Signup extends Component {
     super(props)
   }
 
-  state = { errors: { username: null, password: null }, snackCanOpen: false }
+  state = {
+    errors: { username: null, password: null },
+    snackCanOpen: false
+  }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   }
 
-  handleRequestClose = () => {
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.account.username) {
+      this.context.router.push(`/${nextProps.account.username}`)
+    }
+  }
+
+  handleSnackClose = () => {
     this.setState({
      snackCanOpen: false
     })
   }
 
+  /**
+   * @function reset
+   * @description Reset whole state (inputs, errors, snackbar open/close)
+   */
   reset = () => {
     return this.setState({
       errors: {},
@@ -43,39 +58,22 @@ class Signup extends Component {
 
   /**
    * @function handleSignup
-   * @description Call signup through redux-grout action
+   * @description Call signup through redux-devshare action
    */
   handleSignup = signupData => {
-    this.setState({
-      snackCanOpen: true
-    })
+    this.setState({ snackCanOpen: true })
     this.props.signup(signupData)
     event({ category: 'User', action: 'Email Signup' })
-    this.goAfterLoggedIn()
   }
 
   /**
    * @function providerSignup
-   * @description Initiate external providerSignup through redux-grout action (popup)
+   * @description Initiate external providerSignup through redux-devshare action (popup)
    */
   providerSignup = provider => {
-    this.setState({
-      snackCanOpen: true
-    })
+    this.setState({ snackCanOpen: true })
     this.props.signup(provider)
     event({ category: 'User', action: 'Provider Signup', value: provider })
-    this.goAfterLoggedIn()
-  }
-
-  //TODO: Replace this with redux-rx
-  goAfterLoggedIn = () => {
-    setTimeout(() => {
-      if(this.props.account && this.props.account.username){
-        this.context.router.push(`/${this.props.account.username}`)
-      } else {
-        this.goAfterLoggedIn()
-      }
-    }, 300)
   }
 
   render () {
@@ -105,7 +103,7 @@ class Signup extends Component {
             message={ this.props.account.error || 'Signup error' }
             action="close"
             autoHideDuration={ 3000 }
-            onRequestClose={ this.handleRequestClose }
+            onRequestClose={ this.handleSnackClose }
           />
         </div>
       )

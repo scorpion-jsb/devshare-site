@@ -4,15 +4,15 @@ import createRoutes from './router'
 import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 import { browserHistory } from 'react-router'
-import Grout from 'kyper-grout'
+import Devshare from 'devshare'
 
-let grout = new Grout()
 let initialData = {entities: {projects: {}, users: {}}}
 
-if (grout.currentUser) {
-  initialData.account = grout.currentUser
-  initialData.entities.users[grout.currentUser.username] = grout.currentUser
+if (Devshare.currentUser) {
+  initialData.account = Devshare.currentUser
+  initialData.entities.users[Devshare.currentUser.username] = Devshare.currentUser
 }
+
 const initialState = window.__INITIAL_STATE__ || initialData
 
 const store = configureStore(initialState, browserHistory)

@@ -1,15 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from '../reducers'
 import thunk from 'redux-thunk'
-import { createMiddleware } from 'redux-grout'
+import { Middleware } from 'redux-devshare'
 import { syncHistory } from 'react-router-redux'
-const devSettings = { logLevel: 'trace', envName: 'prod' }
 
 export default function configureStore (initialState, history) {
-  const groutMiddleware = createMiddleware('tessellate', devSettings)
   const reduxRouterMiddleware = syncHistory(history)
   const createStoreWithMiddleware = compose(
-    applyMiddleware(thunk, groutMiddleware, reduxRouterMiddleware),
+    applyMiddleware(thunk, Middleware, reduxRouterMiddleware),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )(createStore)
   const store = createStoreWithMiddleware(rootReducer, initialState)

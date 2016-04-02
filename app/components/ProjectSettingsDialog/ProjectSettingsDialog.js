@@ -20,11 +20,8 @@ export default class ProjectSettingsDialog extends Component {
   state = { open: this.props.open || false, vimEnabled: this.props.vimEnabled || false }
 
   componentWillReceiveProps (nextProps) {
-    console.log('nextprops:', nextProps, this.state)
     if (typeof nextProps.open !== 'undefined' && nextProps.open !== this.state.open) {
-      this.setState({
-        open: nextProps.open
-      })
+      this.setState({ open: nextProps.open })
     }
   }
 
@@ -37,7 +34,7 @@ export default class ProjectSettingsDialog extends Component {
   }
 
   handleVimToggle = () => {
-    if(this.props.onVimToggle) this.props.onVimToggle(this.state.vimEnabled)
+    if (this.props.onVimToggle) this.props.onVimToggle(this.state.vimEnabled)
     this.setState({
       vimEnabled: !this.state.vimEnabled
     })

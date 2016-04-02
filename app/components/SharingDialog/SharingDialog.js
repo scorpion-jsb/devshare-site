@@ -11,6 +11,12 @@ import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle'
 import Colors from 'material-ui/lib/styles/colors'
 import './SharingDialog.scss'
 
+const user = {
+  image: {
+    url: null
+  }
+}
+
 export default class SharingDialog extends Component {
   constructor (props){
     super(props)
@@ -19,7 +25,8 @@ export default class SharingDialog extends Component {
   state = {
     open: this.props.open || false,
     matchingUsers: [],
-    collaborators: this.props.project.collaborators || []
+    collaborators: this.props.project.collaborators || [],
+    error: null
   }
 
   static propTypes = {
@@ -36,15 +43,20 @@ export default class SharingDialog extends Component {
   }
 
   searchAccounts = q => {
-    this.props.onUserSearch(q, (err, matchingUsers) => {
-      if (!err) this.setState({ matchingUsers })
+    this.props.onUserSearch(q, (error, matchingUsers) => {
+      if (error) return this.setState({ error  })
+      if (!matchingUsers || !matchingUsers.length) return this.setState({ matchingUsers: [] })
+      this.setState({ matchingUsers })
     })
   }
 
-  selectNewCollab = (username) => {
+  selectNewCollab = username => {
     const { collaborators } = this.props.project
     if (this.props.onAddCollab) this.props.onAddCollab(username)
-    this.setState({ searchText: null })
+    this.setState({
+      searchText: null,
+      collaborators
+    })
   }
 
   removeCollab = ind => {
@@ -62,37 +74,35 @@ export default class SharingDialog extends Component {
       searchText: null,
       open: false
     })
-
   }
 
-  render(){
-    const user = {
-      image: {
-        url: null
-      }
-    }
-    let collabsList = (this.state.collaborators && this.state.collaborators) ? this.state.collaborators.map((collaborator, i) => {
+  render () {
+    console.log('this.state.collaborators:', this.state.collaborators)
+    let collabsList = this.state.collaborators ? this.state.collaborators.map((collaborator, i) => {
+      const { image, username } = collaborator
       return (
-        <ListItem
-          key={`${this.props.project.name}-Collab-${i}`}
-          leftAvatar={
-            <Avatar
-              icon={ <PersonIcon /> }
-              src={ (user.image && user.image.url) ? user.image.url : null }
-            />
-          }
-          rightIcon={
-            <RemoveIcon
-              color={Colors.red500}
-              hoverColor={Colors.red800}
-              onClick={ this.removeCollab.bind(this, i) }
-            />
-          }
-          primaryText={ collaborator.username }
-          secondaryText="Read, Write"
-        />
+        <div key={`${this.props.project.name}-Collab-${i}`}>
+          <ListItem
+            leftAvatar={
+              <Avatar
+                icon={ <PersonIcon /> }
+                src={ (image && image.url) ? image.url : null }
+              />
+            }
+            rightIcon={
+              <RemoveIcon
+                color={ Colors.red500 }
+                hoverColor={ Colors.red800 }
+                onClick={ this.removeCollab.bind(this, i) }
+              />
+            }
+            primaryText={ username }
+            secondaryText="Read, Write"
+          />
+        </div>
       )
     }) : null
+
     const actions = [
       <FlatButton
         label="Close"
@@ -100,12 +110,16 @@ export default class SharingDialog extends Component {
         onTouchTap={ this.close }
       />
     ]
-    const matchingUsernames = this.state.matchingUsers ? this.state.matchingUsers.map(account => {
-      return account.username ? account.username : account
-    }) : []
+
+    const matchingUsernames = this.state.matchingUsers
+      ? this.state.matchingUsers.map(account =>
+          account.username ? account.username : account
+        )
+      : []
+
     return (
       <Dialog
-        title="Sharing"
+        title='Sharing'
         actions={ actions }
         modal={ false }
         open={ this.state.open }
@@ -114,16 +128,15 @@ export default class SharingDialog extends Component {
         titleClassName='SharingDialog-Content-Title'
         contentClassName='SharingDialog'
       >
-      {
-      this.props.project.collaborators ?
-        <List>
-        { collabsList }
-        </List>
-        :
-        <div className="SharingDialog-No-Collabs">
-          <span>No current collaborators</span>
-        </div>
-      }
+        {
+          this.state.collaborators
+            ? <List>
+                { collabsList }
+              </List>
+            : <div className="SharingDialog-No-Collabs">
+                <span>No current collaborators</span>
+              </div>
+        }
         <div className="SharingDialog-AutoComplete-Container">
           <AutoComplete
             className="SharingDialog-Autocomplete"

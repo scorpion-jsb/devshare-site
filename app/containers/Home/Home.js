@@ -1,26 +1,35 @@
 import React, { Component } from 'react' // eslint-disable-line
-import map from 'lodash/map'
+import { map } from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
+import { Actions } from 'redux-devshare'
+import { event } from '../../helpers/ga'
 import { randomProjectId } from '../../helpers'
-import { Actions } from 'redux-grout'
-import './Home.scss'
-// React Components
+
+// Components
 import RaisedButton from 'material-ui/lib/raised-button'
 import Theme from '../../theme'
 import GroupIcon from 'material-ui/lib/svg-icons/social/group'
 import CloudDownload from 'material-ui/lib/svg-icons/file/cloud-download'
 import StartIcon from 'material-ui/lib/svg-icons/content/create'
 import Paper from 'material-ui/lib/paper'
-import { event } from '../../helpers/ga'
 
+import './Home.scss'
+
+// Styling vars
 const iconStyle = {
   width: '130px',
   height: '130px'
 }
-const buttonStyle = { margin: '3rem', height: '3rem', marginBottom: 5 }
-const buttonLabelStyle = { fontSize: '1.5rem' }
+const buttonStyle = {
+  margin: '3rem',
+  height: '3rem',
+  marginBottom: 5
+}
+const buttonLabelStyle = {
+  fontSize: '1.5rem'
+}
 
 class Home extends Component {
   trackEvent = () => {
@@ -31,20 +40,21 @@ class Home extends Component {
     const meInThree = [
       {
         title: 'Work with others in real-time',
-        icon: <GroupIcon style={iconStyle} />,
+        icon: <GroupIcon style={ iconStyle } />,
         desc: 'Share a link or add someone with an account directly to your project.'
       },
       {
         title: 'Start from anywhere',
-        icon: <StartIcon style={iconStyle} />,
+        icon: <StartIcon style={ iconStyle } />,
         desc: 'Upload an existing project or start from scratch.'
       },
       {
         title: 'Download your project',
-        icon: <CloudDownload style={iconStyle} />,
+        icon: <CloudDownload style={ iconStyle } />,
         desc: 'Export all the files and folder into a zip file to continue development or deploy.'
       }
     ]
+
     const meInThreeElements = map(meInThree, (content, key) => {
       return (
         <div className='Home-MeInThree-Item' key={ key } >
@@ -58,6 +68,7 @@ class Home extends Component {
         </div>
       )
     })
+
     return (
       <div className='Home' style={{ color: Theme.palette.primary2Color }}>
         <div>
@@ -92,8 +103,8 @@ class Home extends Component {
             Made by <a target='_blank' href='http://kyper.io'>Kyper</a>
           </div>
         </div>
-        </div>
-      )
+      </div>
+    )
   }
 }
 
@@ -104,8 +115,10 @@ function mapStateToProps (state) {
     router: state.router
   }
 }
+
 // Place action methods into props
 function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.projects, dispatch)
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -3,14 +3,16 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import TextField from 'material-ui/lib/text-field'
-import Dialog from 'material-ui/lib/dialog'
+import Devshare from 'devshare'
+import { Actions } from 'redux-devshare'
+
+// Components
 import ProjectTile from '../../components/ProjectTile/ProjectTile'
 import NewProjectTile from '../../components/NewProjectTile/NewProjectTile'
 import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog'
 import SharingDialog from '../../components/SharingDialog/SharingDialog'
-const Grout = typeof window !== 'undefined' ? require('kyper-grout') : undefined
-import { Actions } from 'redux-grout'
+import TextField from 'material-ui/lib/text-field'
+import Dialog from 'material-ui/lib/dialog'
 
 import './Projects.scss'
 
@@ -43,10 +45,8 @@ class Projects extends Component {
   }
 
   newSubmit = name => {
-    this.props.addProject(name, this.props.username)
-    this.setState({
-      newProjectModal: false
-    })
+    this.props.addProject(this.props.username, name)
+    this.setState({ newProjectModal: false })
   }
 
   openProject = project => {
@@ -58,8 +58,11 @@ class Projects extends Component {
   }
 
   searchUsers = (q, cb) => {
-    const grout = new Grout()
-    grout.Users.search(q).then(usersList => cb(null, usersList), err => cb(err))
+    Devshare.users()
+      .search(q)
+      .then(usersList =>
+        cb(null, usersList), err => cb(err)
+      )
   }
 
   addCollabClick = currentProject => {
@@ -75,6 +78,10 @@ class Projects extends Component {
     this.props.removeCollaborator(this.state.currentProject, username)
   }
 
+  deleteProject = project => {
+    this.props.deleteProject(project.owner.username, project.name)
+  }
+
   render () {
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (
@@ -84,7 +91,7 @@ class Projects extends Component {
           onCollabClick={ this.collabClick }
           onAddCollabClick={ this.addCollabClick.bind(this, project) }
           onSelect={ this.openProject }
-          onDelete={ this.props.deleteProject }
+          onDelete={ this.deleteProject }
         />
       )
     }) : <span>No projects yet</span>

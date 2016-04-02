@@ -1,49 +1,52 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Actions } from 'redux-grout'
+import Devshare from 'devshare'
+import { Actions } from 'redux-devshare'
 import { hydrateUser } from '../../actions/account'
+
+// Components
 import Navbar from '../../components/Navbar/Navbar'
-import Grout from 'kyper-grout'
-import ThemeManager from 'material-ui/lib/styles/theme-manager'
+
+// Styling
 import Theme from '../../theme'
+import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import './App.scss'
 
+// Tap Plugin
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
 class Main extends Component {
   constructor (props) {
     super(props)
-    this.getChildContext = () => {
-      return {
-        muiTheme: ThemeManager.getMuiTheme(Theme),
-      }
-    }
   }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object
-  };
+  }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
-  };
+  }
 
   componentDidMount () {
-    let grout = new Grout()
-    if(grout.currentUser){
-      this.props.hydrateUser(grout.currentUser)
+    if (Devshare.currentUser) this.props.hydrateUser(Devshare.currentUser)
+  }
+
+  getChildContext = () => {
+    return {
+      muiTheme: ThemeManager.getMuiTheme(Theme)
     }
   }
 
-  handleClick = (loc) => {
-    this.context.router.push(`/${loc}`);
+  handleClick = loc => {
+    this.context.router.push(`/${loc}`)
   }
 
   handleLogout = () => {
-    this.props.logout();
-    this.context.router.push(`/`);
+    this.props.logout()
+    this.context.router.push(`/`)
   }
 
   render () {
@@ -59,6 +62,7 @@ class Main extends Component {
     )
   }
 }
+
 // Place state of redux store into props of component
 function mapStateToProps (state) {
   return {

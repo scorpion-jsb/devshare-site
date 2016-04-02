@@ -2,52 +2,56 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Actions } from 'redux-grout'
+import { Actions } from 'redux-devshare'
+
+// Components
+import AccountDialog from '../../components/AccountDialog/AccountDialog'
 import AvatarEditor from 'react-avatar-editor'
 import RaisedButton from 'material-ui/lib/raised-button'
 import TextField from 'material-ui/lib/text-field'
-import AccountDialog from '../../components/AccountDialog/AccountDialog'
+
 import './Account.scss'
+
+const textFieldStyle = { width: '60%' }
+const buttonStyle = { 'marginTop': '2rem', width: '20%' }
 const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
 
 class Account extends Component {
-  constructor (props){
+  constructor (props) {
     super(props)
   }
 
-  state = { modalOpen: false };
+  state = { modalOpen: false }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
-  };
+  }
 
   handleLogout = () => {
     this.props.logout()
     this.context.router.push('/')
-  };
+  }
 
   handleSave = () => {
     //TODO: Handle saving image and account data at the same time
-    let account = {
+    const account = {
       name: this.refs.name.getValue(),
       email: this.refs.email.getValue()
     }
-    this.props.updateAccount(account);
-  };
+    this.props.updateAccount(account)
+  }
 
   handleAvatarUpload = imageFile => {
     this.props.uploadAvatar(imageFile)
-  };
+  }
 
   toggleModal = () => {
     this.setState({
       modalOpen: !this.state.modalOpen
-    });
-  };
+    })
+  }
 
   render () {
-    const buttonStyle = { 'marginTop': '2rem', width: '20%' }
-    const textFieldStyle = { width: '60%' }
     return (
       <div className="Account">
         <AccountDialog
@@ -78,10 +82,9 @@ class Account extends Component {
               style={ buttonStyle }
             />
             <RaisedButton
-            style={{'marginTop': '1rem'}}
-            label="Logout"
-            onClick={ this.handleLogout }
-            style={ buttonStyle }
+              label="Logout"
+              onClick={ this.handleLogout }
+              style={ buttonStyle }
             />
           </div>
         </div>

@@ -67,17 +67,11 @@ export default class ProjectTile extends Component {
     console.log('close dialog called', name)
     let newState = {}
     newState[`${name}Open`] = false
-    if (name2){
-      if (name2) newState[`${name2}Open`] = true
-      e.preventDefault()
-    } else {
-      name2.preventDefault()
-    }
+    if (name2) newState[`${name2}Open`] = true
     this.setState(newState)
   }
 
   openDialog = (name, name2, e) => {
-    console.log('open dialog called', name, name2, e)
     let newState = {}
     newState[`${name}Open`] = true
     if (name2){
@@ -91,7 +85,7 @@ export default class ProjectTile extends Component {
 
   deleteProject = () => {
     this.closeDialog('delete')
-    if(this.props.onDelete) this.props.onDelete(this.props.project)
+    if (this.props.onDelete) this.props.onDelete(this.props.project)
   }
 
   render () {

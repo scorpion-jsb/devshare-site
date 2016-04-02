@@ -11,6 +11,12 @@ import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle'
 import Colors from 'material-ui/lib/styles/colors'
 import './SharingDialog.scss'
 
+const user = {
+  image: {
+    url: null
+  }
+}
+
 export default class SharingDialog extends Component {
   constructor (props){
     super(props)
@@ -47,7 +53,10 @@ export default class SharingDialog extends Component {
   selectNewCollab = username => {
     const { collaborators } = this.props.project
     if (this.props.onAddCollab) this.props.onAddCollab(username)
-    this.setState({ searchText: null })
+    this.setState({
+      searchText: null,
+      collaborators
+    })
   }
 
   removeCollab = ind => {
@@ -68,33 +77,29 @@ export default class SharingDialog extends Component {
   }
 
   render () {
-    const user = {
-      image: {
-        url: null
-      }
-    }
-
-    const collabsList = this.state.collaborators ? this.state.collaborators.map((collaborator, i) => {
+    console.log('this.state.collaborators:', this.state.collaborators)
+    let collabsList = this.state.collaborators ? this.state.collaborators.map((collaborator, i) => {
       const { image, username } = collaborator
       return (
-        <ListItem
-          key={`${this.props.project.name}-Collab-${i}`}
-          leftAvatar={
-            <Avatar
-              icon={ <PersonIcon /> }
-              src={ (image && image.url) ? image.url : null }
-            />
-          }
-          rightIcon={
-            <RemoveIcon
-              color={ Colors.red500 }
-              hoverColor={ Colors.red800 }
-              onClick={ this.removeCollab.bind(this, i) }
-            />
-          }
-          primaryText={ username }
-          secondaryText="Read, Write"
-        />
+        <div key={`${this.props.project.name}-Collab-${i}`}>
+          <ListItem
+            leftAvatar={
+              <Avatar
+                icon={ <PersonIcon /> }
+                src={ (image && image.url) ? image.url : null }
+              />
+            }
+            rightIcon={
+              <RemoveIcon
+                color={ Colors.red500 }
+                hoverColor={ Colors.red800 }
+                onClick={ this.removeCollab.bind(this, i) }
+              />
+            }
+            primaryText={ username }
+            secondaryText="Read, Write"
+          />
+        </div>
       )
     }) : null
 
@@ -114,7 +119,7 @@ export default class SharingDialog extends Component {
 
     return (
       <Dialog
-        title="Sharing"
+        title='Sharing'
         actions={ actions }
         modal={ false }
         open={ this.state.open }
@@ -124,7 +129,7 @@ export default class SharingDialog extends Component {
         contentClassName='SharingDialog'
       >
         {
-          this.props.project.collaborators
+          this.state.collaborators
             ? <List>
                 { collabsList }
               </List>

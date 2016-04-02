@@ -86,7 +86,6 @@ class Workspace extends Component {
     if (!name) return new Error('project name required to fetch projects')
     if (this.ref && this.ref.endpoint === name) return
     if (this.ref && this.ref.endpoint !== name) this.fb.reset()
-    console.log('Devshare.project:', Devshare.project(owner.username, name))
     const fbUrl = project ? Devshare.project(owner.username, name).fileSystem.createFirebaseUrl() : null
     // Move to parent ref
     this.fb = Rebase.createClass(fbUrl.replace(`/${name}`, ''))
@@ -98,7 +97,6 @@ class Workspace extends Component {
     })
     this.debounceStateChange()
   }
-
 
   debounceStateChange = () => {
     this.setState({

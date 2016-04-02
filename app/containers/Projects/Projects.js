@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Devshare from 'devshare'
 import { Actions } from 'redux-devshare'
 
 // Components
@@ -44,7 +45,7 @@ class Projects extends Component {
   }
 
   newSubmit = name => {
-    this.props.addProject(name, this.props.username)
+    this.props.addProject(this.props.username, name)
     this.setState({ newProjectModal: false })
   }
 
@@ -57,7 +58,11 @@ class Projects extends Component {
   }
 
   searchUsers = (q, cb) => {
-    Devshare.users().search(q).then(usersList => cb(null, usersList), err => cb(err))
+    Devshare.users()
+      .search(q)
+      .then(usersList =>
+        cb(null, usersList), err => cb(err)
+      )
   }
 
   addCollabClick = currentProject => {
@@ -73,6 +78,10 @@ class Projects extends Component {
     this.props.removeCollaborator(this.state.currentProject, username)
   }
 
+  deleteProject = project => {
+    this.props.deleteProject(project.owner.username, project.name)
+  }
+
   render () {
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
       return (
@@ -82,7 +91,7 @@ class Projects extends Component {
           onCollabClick={ this.collabClick }
           onAddCollabClick={ this.addCollabClick.bind(this, project) }
           onSelect={ this.openProject }
-          onDelete={ this.props.deleteProject }
+          onDelete={ this.deleteProject }
         />
       )
     }) : <span>No projects yet</span>

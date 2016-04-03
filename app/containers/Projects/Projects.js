@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import Devshare from 'devshare'
+import { users } from 'devshare'
 import { Actions } from 'redux-devshare'
 
 // Components
@@ -58,7 +58,7 @@ class Projects extends Component {
   }
 
   searchUsers = (q, cb) => {
-    Devshare.users()
+    users()
       .search(q)
       .then(usersList =>
         cb(null, usersList), err => cb(err)

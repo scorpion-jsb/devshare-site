@@ -86,7 +86,7 @@ class Workspace extends Component {
     if (!name) return new Error('project name required to fetch projects')
     if (this.ref && this.ref.endpoint === name) return
     if (this.ref && this.ref.endpoint !== name) this.fb.reset()
-    const fbUrl = project ? Devshare.project(owner.username, name).fileSystem.createFirebaseUrl() : null
+    const fbUrl = project ? Devshare.project(owner.username, name).fileSystem.firebaseUrl() : null
     // Move to parent ref
     this.fb = Rebase.createClass(fbUrl.replace(`/${name}`, ''))
     // Bind to files list on firebase

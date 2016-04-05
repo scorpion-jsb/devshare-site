@@ -12,12 +12,12 @@ import * as TabActions from '../../actions/tabs'
 import Rebase from 're-base'
 import Devshare from 'devshare'
 import { Actions } from 'redux-devshare'
+import Modal from 'react-modal'
 
 // Components
-import Modal from 'react-modal'
 import SideBar from '../../components/SideBar/SideBar'
 import ProjectSettingsDialog from '../../components/ProjectSettingsDialog/ProjectSettingsDialog'
-import SharingDialog from '../../components/SharingDialog/SharingDialog'
+import SharingDialog from '../SharingDialog/SharingDialog'
 import ContextMenu from '../../components/ContextMenu/ContextMenu'
 import Pane from '../../components/Pane/Pane'
 import WorkspacePopover from '../../components/WorkspacePopover/WorkspacePopover'
@@ -301,6 +301,7 @@ class Workspace extends Component {
   }
 
   render () {
+    const { name, owner } = this.props.projext
     return (
       <div className="Workspace" ref="workspace">
         <WorkspacePopover
@@ -350,7 +351,7 @@ class Workspace extends Component {
         {
           this.state.sharingOpen ?
           <SharingDialog
-            project={ this.props.project }
+            projectKey={ `${owner.username}/${name}` }
             open={ this.state.sharingOpen }
             onUserSearch={ this.searchUsers }
             onSave={ this.saveSettings }

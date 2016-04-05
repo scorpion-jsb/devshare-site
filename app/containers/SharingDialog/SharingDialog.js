@@ -1,5 +1,11 @@
-import { find, map } from 'lodash'
+import { find, map, toArray } from 'lodash'
 import React, {Component, PropTypes} from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { Actions } from 'redux-devshare'
+import { users } from 'devshare'
+
 import FlatButton from 'material-ui/lib/flat-button'
 import Dialog from 'material-ui/lib/dialog'
 import List from 'material-ui/lib/lists/list'
@@ -24,63 +30,67 @@ export default class SharingDialog extends Component {
 
   state = {
     open: this.props.open || false,
-    matchingUsers: [],
-    collaborators: this.props.project.collaborators || [],
+    project: this.props.projects[this.props.projectKey] || {},
+    collaborators: this.props.projects[this.props.projectKey] ? this.props.projects[this.props.projectKey].collaborators : [],
     error: null
   }
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
-    open: PropTypes.bool,
-    onUserSearch: PropTypes.func.isRequired,
-    onSave: PropTypes.func,
-    onRemoveCollab: PropTypes.func,
-    onAddCollab: PropTypes.func
+    projectKey: PropTypes.string.isRequired,
+    open: PropTypes.bool
+  }
+
+  componentDidMount () {
+    console.log('mounted:', this.props, this.state)
+    const project = this.props.projects[this.props.projectKey]
+    console.log('project:', project)
+    this.setState({
+      collaborators: project ? project.collaborators : []
+    })
   }
 
   componentWillReceiveProps (nextProps) {
-    this.state.collaborators = nextProps.project.collaborators || []
-  }
-
-  searchAccounts = q => {
-    this.props.onUserSearch(q, (error, matchingUsers) => {
-      if (error) return this.setState({ error  })
-      if (!matchingUsers || !matchingUsers.length) return this.setState({ matchingUsers: [] })
-      this.setState({ matchingUsers })
-    })
-  }
-
-  selectNewCollab = username => {
-    const { collaborators } = this.props.project
-    if (this.props.onAddCollab) this.props.onAddCollab(username)
-    this.setState({
-      searchText: null,
-      collaborators
-    })
-  }
-
-  removeCollab = ind => {
-    const user = this.state.collaborators[ind]
-    if(this.props.onRemoveCollab){
-      this.props.onRemoveCollab(user.username)
+    if (nextProps.projectKey) {
+      const project = nextProps.projects[nextProps.projectKey]
       this.setState({
-        collaborators: this.state.collaborators.splice(ind, 1)
+        project,
+        collaborators: project ? project.collaborators : []
+      })
+    }
+    if (nextProps.open) {
+      this.setState({
+        open: nextProps.open
       })
     }
   }
 
-  close = () => {
+  searchAccounts = q =>
+    users()
+      .search(q)
+      .then(matchingUsers => this.setState({ matchingUsers }))
+      .catch(error => this.setState({ error }))
+
+  selectNewCollab = username => {
+    this.props.addCollaborator(this.state.project, username)
+    this.setState({ searchText: null })
+  }
+
+  removeCollab = ind => {
+    console.log('remove collab called:', this.state.project, ind, this.state.collaborators[ind])
+    this.props.removeCollaborator(this.state.project, this.state.collaborators[ind].username)
+  }
+
+  close = () =>
     this.setState({
       searchText: null,
       open: false
     })
-  }
 
   render () {
     const collabsList = this.state.collaborators ? this.state.collaborators.map((collaborator, i) => {
       const { image, username } = collaborator
       return (
-        <div key={`${this.props.project.name}-Collab-${i}`}>
+        <div key={`${this.props.projectKey}-Collab-${i}`}>
           <ListItem
             leftAvatar={
               <Avatar
@@ -127,8 +137,15 @@ export default class SharingDialog extends Component {
         titleClassName='SharingDialog-Content-Title'
         contentClassName='SharingDialog'
       >
+      {
+        this.props.error
+        ? <div className="SharingDialog-Error">
+            <span>{ this.props.error }</span>
+          </div>
+        : null
+      }
         {
-          this.state.collaborators
+          collabsList
             ? <List>
                 { collabsList }
               </List>
@@ -152,3 +169,20 @@ export default class SharingDialog extends Component {
     )
   }
 }
+// Place state of redux store into props of component
+function mapStateToProps (state) {
+  const projects =  (state.entities && state.entities.projects) ? state.entities.projects : {}
+  return {
+    projects,
+    error: state.projects.error || null,
+    account: state.account,
+    router: state.router
+  }
+}
+
+// Place action methods into props
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators(Actions.projects, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SharingDialog)

@@ -10,7 +10,7 @@ import { Actions } from 'redux-devshare'
 import ProjectTile from '../../components/ProjectTile/ProjectTile'
 import NewProjectTile from '../../components/NewProjectTile/NewProjectTile'
 import NewProjectDialog from '../../components/NewProjectDialog/NewProjectDialog'
-import SharingDialog from '../../components/SharingDialog/SharingDialog'
+import SharingDialog from '../SharingDialog/SharingDialog'
 import TextField from 'material-ui/lib/text-field'
 import Dialog from 'material-ui/lib/dialog'
 
@@ -34,10 +34,6 @@ class Projects extends Component {
     this.props.getProjects(this.props.username)
   }
 
-  collabClick = user => {
-    this.context.router.push(`/${user.username}`)
-  }
-
   toggleModal = name => {
     let newState = {}
     newState[`${name}Modal`] = !this.state[`${name}Modal`] || false
@@ -46,41 +42,25 @@ class Projects extends Component {
 
   newSubmit = name => {
     this.props.addProject(this.props.username, name)
-    this.setState({ newProjectModal: false })
+    this.toggleModal('newProject')
   }
 
-  openProject = project => {
+  openProject = project =>
     this.context.router.push(`/${project.owner.username}/${project.name}`)
-  }
 
-  collaboratorClick = collaborator => {
+  collaboratorClick = collaborator =>
     this.props.history.pushState(null, `/${collaborator.username}`)
-  }
 
-  searchUsers = (q, cb) => {
-    users()
-      .search(q)
-      .then(usersList =>
-        cb(null, usersList), err => cb(err)
-      )
-  }
+  collabClick = user =>
+    this.context.router.push(`/${user.username}`)
 
   addCollabClick = currentProject => {
     this.setState({ currentProject })
     this.toggleModal('addCollab')
   }
 
-  addCollaborator = username => {
-    this.props.addCollaborator(this.state.currentProject, username)
-  }
-
-  removeCollaborator = username => {
-    this.props.removeCollaborator(this.state.currentProject, username)
-  }
-
-  deleteProject = project => {
+  deleteProject = project =>
     this.props.deleteProject(project.owner.username, project.name)
-  }
 
   render () {
     let projects = this.props.projects ? this.props.projects.map((project, i) => {
@@ -105,7 +85,6 @@ class Projects extends Component {
         />
       ))
     }
-
     return (
       <div className="Projects">
         <div className="Projects-Tiles">
@@ -121,11 +100,8 @@ class Projects extends Component {
         {
           (this.state.currentProject && this.state.addCollabModal) ?
           <SharingDialog
-            project={ this.state.currentProject }
+            projectKey={ `${this.state.currentProject.owner.username}/${this.state.currentProject.name}` }
             open={ this.state.addCollabModal }
-            onUserSearch={ this.searchUsers }
-            onAddCollab={ this.addCollaborator }
-            onRemoveCollab={ this.removeCollaborator }
           /> : null
         }
       </div>

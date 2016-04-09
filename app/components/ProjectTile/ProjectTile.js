@@ -94,7 +94,6 @@ export default class ProjectTile extends Component {
     // Collaborator Bubbles
     if (collaborators) {
       collaboratorsList = collaborators.map((user, i) => {
-        console.log('collab user:', user)
         const { username, avatarUrl } = user
         return(
           <div key={`${name}-Collab-${i}`} className='ProjectTile-Collaborator' onClick={ this.collaboratorClick.bind(this, user) }>

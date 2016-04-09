@@ -36,11 +36,10 @@ class Login extends Component {
     }
   }
 
-  handleRequestClose = () => {
+  handleRequestClose = () =>
     this.setState({
       snackCanOpen: false,
     })
-  }
 
   handleLogin = loginData => {
     this.setState({
@@ -57,6 +56,7 @@ class Login extends Component {
 
   render () {
     const { isFetching, error } = this.props.account
+
     if (isFetching) {
       return (
         <div className="Login">
@@ -66,6 +66,7 @@ class Login extends Component {
         </div>
       )
     }
+
     return (
       <div className="Login">
         <Paper className="Login-Panel">

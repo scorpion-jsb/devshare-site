@@ -301,7 +301,7 @@ class Workspace extends Component {
   }
 
   render () {
-    const { name, owner } = this.props.projext
+    const { name, owner } = this.props.project
     return (
       <div className="Workspace" ref="workspace">
         <WorkspacePopover

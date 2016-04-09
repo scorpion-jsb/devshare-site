@@ -41,25 +41,24 @@ export default class SharingDialog extends Component {
   }
 
   componentDidMount () {
-    console.log('mounted:', this.props, this.state)
     const project = this.props.projects[this.props.projectKey]
-    console.log('project:', project)
     this.setState({
       collaborators: project ? project.collaborators : []
     })
   }
 
   componentWillReceiveProps (nextProps) {
+    // if (nextProps.open) {
+    //   this.setState({
+    //     open: nextProps.open
+    //   })
+    // }
+
     if (nextProps.projectKey) {
       const project = nextProps.projects[nextProps.projectKey]
       this.setState({
         project,
         collaborators: project ? project.collaborators : []
-      })
-    }
-    if (nextProps.open) {
-      this.setState({
-        open: nextProps.open
       })
     }
   }
@@ -76,8 +75,10 @@ export default class SharingDialog extends Component {
   }
 
   removeCollab = ind => {
-    console.log('remove collab called:', this.state.project, ind, this.state.collaborators[ind])
     this.props.removeCollaborator(this.state.project, this.state.collaborators[ind].username)
+    this.setState({
+      collaborators: this.state.collaborators.splice(ind, 1)
+    })
   }
 
   close = () =>

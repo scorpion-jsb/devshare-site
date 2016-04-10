@@ -1,10 +1,10 @@
-import { map, filter, merge, isArray } from 'lodash';
-import React, { PropTypes, Component } from 'react';
-import './ContextMenu.scss';
+import { map, filter, merge, isArray } from 'lodash'
+import React, { PropTypes, Component } from 'react'
+import './ContextMenu.scss'
 
 class ContextMenu extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
 
   state = {
@@ -13,7 +13,7 @@ class ContextMenu extends Component {
       top: '0px',
       left: '0px'
     }
-  };
+  }
 
   static propTypes = {
     event: PropTypes.object,
@@ -26,21 +26,21 @@ class ContextMenu extends Component {
     }),
     path: PropTypes.string,
     dismiss: PropTypes.func
-  };
-
-  componentDidMount() {
-    this.handleRightClick();
   }
 
-  handleNewClick = (type) => {
+  componentDidMount() {
+    this.handleRightClick()
+  }
+
+  handleNewClick = type => {
     let parent = this.getParentOfPath(this.props.path)
     if (type === 'file') {
-      this.props.onAddFileClick(parent);
+      this.props.onAddFileClick(parent)
     }
     if (type === 'folder') {
-      this.props.onAddFolderClick(parent);
+      this.props.onAddFolderClick(parent)
     }
-  };
+  }
 
   handleRightClick = () => {
     this.setState({
@@ -48,24 +48,24 @@ class ContextMenu extends Component {
         top: this.props.position.y,
         left: this.props.position.x
       }
-    });
-    window.addEventListener('click', this.handleWindowClick);
-    return false;
-  };
+    })
+    window.addEventListener('click', this.handleWindowClick)
+    return false
+  }
 
   handleWindowClick = () => {
     this.props.dismiss()
-    window.removeEventListener('click', this.handleWindowClick);
-  };
+    window.removeEventListener('click', this.handleWindowClick)
+  }
 
   getParentOfPath = path => {
-    return path.substring(0, path.lastIndexOf('/') + 1) || '/';
-  };
+    return path ? path.substring(0, path.lastIndexOf('/') + 1) : '/'
+  }
 
   handleDeleteClick = (e) => {
-    e.preventDefault();
-    this.props.onFileDelete(this.props.path);
-  };
+    e.preventDefault()
+    this.props.onFileDelete(this.props.path)
+  }
 
   render() {
     var contextMenuStyle = {
@@ -79,8 +79,8 @@ class ContextMenu extends Component {
         <li onClick={ this.handleNewClick.bind(this, 'folder') }>Add new folder</li>
         { this.props.path && <li onClick={ this.handleDeleteClick }>Delete</li> }
       </ul>
-    );
+    )
   }
 }
 
-export default ContextMenu;
+export default ContextMenu

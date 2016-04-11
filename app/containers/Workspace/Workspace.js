@@ -98,42 +98,121 @@ class Workspace extends Component {
     this.debounceStateChange()
   }
 
-  debounceStateChange = () => {
+  debounceStateChange = () =>
     this.setState({
       debouncedFiles: this.state.files
     })
-  }
 
-  toggleSettingsModal = () => {
+  toggleSettingsModal = () =>
     this.setState({
       settingsOpen: !this.state.settingsOpen
     })
-  }
 
-  toggleSharingModal = () => {
+  toggleSharingModal = () =>
     this.setState({
       sharingOpen: !this.state.sharingOpen
     })
-  }
 
-  saveSettings = data => {
+  selectTab = index =>
+    this.props.navigateToTab({ project: this.props.project, index })
+
+  closeTab = index =>
+    this.props.closeTab({ project: this.props.project, index })
+
+  toggleVim = vimState =>
+    this.setState({
+      vimEnabled: !this.state.vimEnabled
+    })
+
+  showContextMenu = (path, position) =>
+    this.setState({
+      contextMenu : {
+        open: true,
+        path: path,
+        position
+      }
+    })
+
+  dismissContextMenu = (path, position) =>
+    this.setState({
+      contextMenu : {
+        open: false,
+        path: '',
+        position
+      }
+    })
+
+  showPopover = (addType, addPath) =>
+    this.setState({
+      addPath,
+      addType,
+      popoverOpen: true
+    })
+
+  handlePopoverClose = () =>
+    this.setState({
+      popoverOpen: false
+    })
+
+  saveSettings = data =>
     this.toggleSettingsModal()
+
+  addCollaborator = username =>
+    this.props.addCollaborator(this.props.project, username)
+
+  removeCollaborator = username =>
+    this.props.removeCollaborator(this.props.project, username)
+
+  searchUsers = (q, cb) =>
+    Devshare.users()
+      .search(q)
+      .then(usersList =>
+        cb(null, usersList),
+        error => cb(error)
+      )
+
+  handleDowloadFileClick = () => {
+    console.log('handle download click')
+    Devshare.project(this.props.project)
+      .fileSystem
+      .download()
+      .then(res => console.log('download successful:', res))
+      .catch(error => {
+        console.error('error downloading files', error)
+        this.error = error.toString()
+      })
   }
 
-  addFile = (path, content) => {
-    event({ category: 'Files', action: 'File added' })
-    this.props.addFile(this.props.project, path, content)
-  }
 
-  addFolder = path => {
-    event({ category: 'Files', action: 'Folder added' })
-    this.props.addFolder(this.props.project, path)
-  }
+  addFile = (path, content) =>
+    Devshare.project(this.props.project)
+      .fileSystem
+      .addFile(path.replace('/', ''), content)
+      .then(file => event({ category: 'Files', action: 'File added' }))
+      .catch(error => {
+        console.error('error adding file', error)
+        this.error = error.toString
+      })
 
-  deleteFile = path => {
-    event({ category: 'Files', action: 'Folder added' })
-    this.props.deleteFile(this.props.project, path)
-  }
+  addFolder = path =>
+    Devshare.project(this.props.project)
+      .fileSystem
+      .addFolder(path.replace('/', ''))
+      .then(file => event({ category: 'Files', action: 'Folder added' }))
+      .catch(error => this.error = error.toString)
+
+  addEntity = (type, path, content) =>
+    type === 'folder'
+      ? this.addFolder(path)
+      : this.addFile(path, content)
+
+  deleteFile = path =>
+    Devshare.project(this.props.project)
+      .fileSystem
+      .file(path)
+      .remove()
+      .then(file => event({ category: 'Files', action: 'File deleted' }))
+      .catch(error => this.error = error.toString)
 
   openFile = file => {
     const { project, tabs } = this.props
@@ -143,10 +222,10 @@ class Workspace extends Component {
       type: 'file',
       file,
     }
-    //TODO: Search by matching path instead of tab title
-    //Search for already matching title
+    // TODO: Search by matching path instead of tab title
+    // Search for already matching title
     const matchingInd = findIndex(tabs.list, {title: tabData.title})
-    //Only open tab if file is not already open
+    // Only open tab if file is not already open
     if (matchingInd === -1) {
       this.props.openTab(tabData)
       //Select last tab
@@ -157,14 +236,6 @@ class Workspace extends Component {
       project,
       index: matchingInd
     })
-  }
-
-  selectTab = index => {
-    this.props.navigateToTab({ project: this.props.project, index })
-  }
-
-  closeTab = index => {
-    this.props.closeTab({ project: this.props.project, index })
   }
 
   readAndSaveFileEntry = entry => {
@@ -195,7 +266,6 @@ class Workspace extends Component {
     } else if (entries.isDirectory) {
       this.readAndSaveFolderEntry(entries)
     }
-
     each(entries, entry => {
       if (fileEntityBlackList.indexOf(last(entry.fullPath.split('/'))) !== -1) {
         return void 0
@@ -234,71 +304,19 @@ class Workspace extends Component {
     })
   }
 
-  searchUsers = (q, cb) => {
-    Devshare.users()
-      .search(q)
-      .then(usersList =>
-        cb(null, usersList),
-        error => cb(error)
-      )
+  toggleMenu = name => {
+    let newState = {}
+    newState[`show${name}`] = !newState[`show${name}`] || true
+    this.setState(newState)
   }
-
-  showPopover = (addType, addPath) => {
-    this.setState({
-      addPath,
-      addType,
-      popoverOpen: true
-    })
-  }
-
-  addEntity = (type, path, content) => {
-    if (type === 'folder') return this.addFolder(path)
-    this.addFile(path, content)
-  }
-
-  handlePopoverClose = () => {
-    this.setState({
-      popoverOpen: false
-    })
-  }
-
-  handleDowloadFileClick = e => {
-    this.props.downloadFiles(this.props.project)
-  }
-
-  addCollaborator = username => {
-    this.props.addCollaborator(this.props.project, username)
-  }
-
-  removeCollaborator = username => {
-    this.props.removeCollaborator(this.props.project, username)
-  }
-
-  toggleVim = vimState => {
-    this.setState({
-      vimEnabled: !this.state.vimEnabled
-    })
-  }
-
-  showContextMenu = (path, position) => {
-    this.setState({
-      contextMenu : {
-        open: true,
-        path: path,
-        position
-      }
-    })
-  }
-
-  dismissContextMenu = (path, position) => {
-    this.setState({
-      contextMenu : {
-        open: false,
-        path: '',
-        position
-      }
-    })
-  }
+  // TODO: Finish a popup for clone settings
+  //
+  // cloneProject = p => {
+  //   Devshare.project(this.props.project)
+  //     .clone()
+  //     .then()
+  //     .catch()
+  // }
 
   render () {
     const { name, owner } = this.props.project
@@ -330,6 +348,7 @@ class Workspace extends Component {
           onDownloadFileClick={ this.handleDowloadFileClick }
           onRightClick={ this.showContextMenu }
           filesLoading={ this.state.filesLoading }
+          onCloneClick={ this.toggleMenu.bind(this, 'clone') }
         />
         <Pane
           tabs={ this.props.tabs }
@@ -395,8 +414,7 @@ function mapStateToProps (state) {
 const CombinedActions = merge(TabActions, Actions.files, Actions.account, Actions.projects)
 
 // Place action methods into props
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CombinedActions, dispatch)
-}
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CombinedActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace)

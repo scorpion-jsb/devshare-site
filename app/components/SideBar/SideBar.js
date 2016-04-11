@@ -44,7 +44,8 @@ export default class SideBar extends Component {
     onSharingClick: PropTypes.func,
     onFilesAdd: PropTypes.func,
     onRightClick: PropTypes.func,
-    filesLoading: PropTypes.bool
+    filesLoading: PropTypes.bool,
+    onCloneClick: PropTypes.func
   }
 
   state = {
@@ -133,7 +134,7 @@ export default class SideBar extends Component {
               style={ iconButtonStyle }
               iconStyle={ iconStyle }
               className="SideBar-Button"
-              onClick={ this.props.onSharingClick }
+              onClick={ this.props.onCloneClick }
               tooltip="Clone"
               tooltipStyle={ tooltipStyle }
               tooltipPosition={ tooltipPosition }
@@ -148,7 +149,8 @@ export default class SideBar extends Component {
               tooltip="Download"
               tooltipStyle={ tooltipStyle }
               tooltipPosition={ tooltipPosition }
-              touch={true} >
+              touch={true}
+              disabled={ true } >
               <ArchiveIcon />
             </IconButton>
           </div>

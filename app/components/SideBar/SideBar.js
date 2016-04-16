@@ -13,8 +13,16 @@ import IconMenu from 'material-ui/lib/menus/icon-menu'
 import AddIcon from 'material-ui/lib/svg-icons/content/add-circle'
 import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import GroupIcon from 'material-ui/lib/svg-icons/social/group'
+import CopyIcon from 'material-ui/lib/svg-icons/content/content-copy'
+import ArchiveIcon from 'material-ui/lib/svg-icons/content/archive'
 
 import './SideBar.scss'
+
+// Icon styles
+const iconButtonStyle = { width: '50px', height: '50px', padding: '0px' }
+const iconStyle = { width: '100%', height: '100%' }
+const tooltipStyle = { margin: '0px' }
+const tooltipPosition = 'top-center'
 
 export default class SideBar extends Component {
   constructor(props) {
@@ -36,7 +44,8 @@ export default class SideBar extends Component {
     onSharingClick: PropTypes.func,
     onFilesAdd: PropTypes.func,
     onRightClick: PropTypes.func,
-    filesLoading: PropTypes.bool
+    filesLoading: PropTypes.bool,
+    onCloneClick: PropTypes.func
   }
 
   state = {
@@ -86,8 +95,7 @@ export default class SideBar extends Component {
 
   render () {
     const showProjects = !isUndefined(this.props.showProjects) ? this.props.showProjects : true
-    const iconButtonStyle = { width: '60px', height: '60px' }
-    const iconStyle = { width: '100%', height: '100%' }
+
     let projectsMenu
     if (isArray(this.props.projects) && this.props.projects.length > 0) {
       projectsMenu = this.props.projects.map((project, i) => {
@@ -122,17 +130,45 @@ export default class SideBar extends Component {
           />
           <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
           <div className="SideBar-Buttons">
+            <IconButton
+              style={ iconButtonStyle }
+              iconStyle={ iconStyle }
+              className="SideBar-Button"
+              onClick={ this.props.onCloneClick }
+              tooltip="Clone"
+              tooltipStyle={ tooltipStyle }
+              tooltipPosition={ tooltipPosition }
+              touch={true} >
+              <CopyIcon />
+            </IconButton>
+            <IconButton
+              style={ iconButtonStyle }
+              iconStyle={ iconStyle }
+              className="SideBar-Button"
+              onClick={ this.props.onDownloadFileClick }
+              tooltip="Download"
+              tooltipStyle={ tooltipStyle }
+              tooltipPosition={ tooltipPosition }
+              touch={true}
+              disabled={ true } >
+              <ArchiveIcon />
+            </IconButton>
+          </div>
+          <div className="SideBar-Buttons">
             <IconMenu
               className="SideBar-Button"
               iconButtonElement={
                 <IconButton
                   style={ iconButtonStyle }
-                  iconStyle={ iconStyle } >
+                  iconStyle={ iconStyle }
+                  tooltip="Add"
+                  tooltipStyle={ tooltipStyle }
+                  tooltipPosition={ tooltipPosition }
+                  touch={true} >
                   <AddIcon />
                 </IconButton>
             }>
               <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
-              <MenuItem primaryText="Download files" onClick={ this.props.onDownloadFileClick } />
               <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
               <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
               {/*<MenuItem primaryText="Add files from Github" />*/}
@@ -141,14 +177,22 @@ export default class SideBar extends Component {
               style={ iconButtonStyle }
               iconStyle={ iconStyle }
               className="SideBar-Button"
-              onClick={ this.props.onSharingClick } >
+              onClick={ this.props.onSharingClick }
+              tooltip="Sharing"
+              tooltipStyle={ tooltipStyle }
+              tooltipPosition={ tooltipPosition }
+              touch={true} >
               <GroupIcon />
             </IconButton>
             <IconButton
               style={ iconButtonStyle }
               iconStyle={ iconStyle }
               className="SideBar-Button"
-              onClick={ this.props.onSettingsClick } >
+              onClick={ this.props.onSettingsClick }
+              tooltip="Settings"
+              tooltipStyle={ tooltipStyle }
+              tooltipPosition={ tooltipPosition }
+              touch={true} >
               <SettingsIcon />
             </IconButton>
           </div>

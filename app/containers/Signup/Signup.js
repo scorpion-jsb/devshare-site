@@ -46,15 +46,14 @@ class Signup extends Component {
    * @function reset
    * @description Reset whole state (inputs, errors, snackbar open/close)
    */
-  reset = () => {
-    return this.setState({
+  reset = () =>
+    this.setState({
       errors: {},
       username: null,
       email: null,
       name: null,
       snackCanOpen: false
     })
-  }
 
   /**
    * @function handleSignup
@@ -99,7 +98,7 @@ class Signup extends Component {
             <Link className="Signup-Login-Link" to="/login">Login</Link>
           </div>
           <Snackbar
-            open={ typeof this.props.account.error !== 'undefined' && this.props.account.error !== null && this.state.snackCanOpen }
+            open={ this.props.account.error !== null && this.state.snackCanOpen }
             message={ this.props.account.error || 'Signup error' }
             action="close"
             autoHideDuration={ 3000 }

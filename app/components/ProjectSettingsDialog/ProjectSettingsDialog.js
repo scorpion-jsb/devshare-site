@@ -20,9 +20,9 @@ export default class ProjectSettingsDialog extends Component {
   state = { open: this.props.open || false, vimEnabled: this.props.vimEnabled || false }
 
   componentWillReceiveProps (nextProps) {
-    if (typeof nextProps.open !== 'undefined' && nextProps.open !== this.state.open) {
-      this.setState({ open: nextProps.open })
-    }
+    // if (typeof nextProps.open !== 'undefined' && nextProps.open !== this.state.open) {
+    //   this.setState({ open: nextProps.open })
+    // }
   }
 
   handleAutoCompleteSubmit = () => {

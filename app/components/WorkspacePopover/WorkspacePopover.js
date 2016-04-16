@@ -8,7 +8,7 @@ const originSettings = { horizontal: 'middle', vertical: 'top' }
 const pathInputStyling = { padding: 20 }
 
 export default class WorkspacePopover extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
   }
 
@@ -16,7 +16,7 @@ export default class WorkspacePopover extends Component {
     workspaceElement: PropTypes.object,
     initialPath: PropTypes.string,
     type: PropTypes.oneOf(['file', 'folder']),
-    onSubmit: PropTypes.func,
+    onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func
   }
 
@@ -26,12 +26,10 @@ export default class WorkspacePopover extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (props.type && props.open) {
-      this.show('pop')
-    }
+    if (props.type && props.open) this.show('pop')
   }
 
-  show = (key, e) => {
+  show = (key, e) =>
     this.setState({
       activePopover:key
     }, () => {
@@ -39,7 +37,6 @@ export default class WorkspacePopover extends Component {
         this.refs.popoverTextField.focus()
       }, 500)
     })
-  }
 
   closePopover = key => {
     if (this.state.activePopover !== key) return
@@ -56,15 +53,13 @@ export default class WorkspacePopover extends Component {
     this.closePopover('pop')
   }
 
-  handleChange = e => {
+  handleChange = e =>
     this.setState({ path: e.target.value })
-  }
 
-  handleFocus = e => {
+  handleFocus = e =>
     e.target.value = e.target.value
-  }
 
-  render(){
+  render () {
     return (
       <Popover className="WorkspacePopover" open={ this.state.activePopover === 'pop' }
         anchorEl={ this.props.workspaceElement }

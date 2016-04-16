@@ -94,12 +94,13 @@ export default class ProjectTile extends Component {
     // Collaborator Bubbles
     if (collaborators) {
       collaboratorsList = collaborators.map((user, i) => {
+        const { username, avatarUrl } = user
         return(
           <div key={`${name}-Collab-${i}`} className='ProjectTile-Collaborator' onClick={ this.collaboratorClick.bind(this, user) }>
             <Avatar
               className='ProjectTile-Collaborator-Avatar'
-              src={ user.avatarUrl ? user.avatarUrl : null }
-              icon={ user.avatarUrl ? null : <Avatar hoverColor={ hoverColor }> { user.username.charAt(0).toUpperCase() } </Avatar> }
+              src={ avatarUrl ? avatarUrl : null }
+              icon={ avatarUrl ? null : <Avatar hoverColor={ hoverColor }> { username.charAt(0).toUpperCase() } </Avatar> }
               size={ avatarSize }
             />
           </div>

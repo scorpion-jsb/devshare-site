@@ -283,9 +283,8 @@ class Workspace extends Component {
     this.setState({
       filesLoading: true
     })
-    let items = e.dataTransfer.items
-    each(items, item => {
-      var entry = item.webkitGetAsEntry()
+    each(e.dataTransfer.items, item => {
+      let entry = item.webkitGetAsEntry()
       this.handleEntries(entry)
     })
     this.setState({

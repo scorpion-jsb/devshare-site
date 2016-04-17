@@ -45,14 +45,15 @@ export default class SideBar extends Component {
     onFilesAdd: PropTypes.func,
     onRightClick: PropTypes.func,
     filesLoading: PropTypes.bool,
-    onCloneClick: PropTypes.func
+    onCloneClick: PropTypes.func,
+    onDownloadClick: PropTypes.func
   }
 
   state = {
     filesOver: false
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.refs.fileInput.setAttribute('webkitdirectory', '')
   }
 
@@ -145,12 +146,11 @@ export default class SideBar extends Component {
               style={ iconButtonStyle }
               iconStyle={ iconStyle }
               className="SideBar-Button"
-              onClick={ this.props.onDownloadFileClick }
+              onClick={ this.props.onDownloadClick }
               tooltip="Download"
               tooltipStyle={ tooltipStyle }
               tooltipPosition={ tooltipPosition }
-              touch={true}
-              disabled={ true } >
+              touch={true}>
               <ArchiveIcon />
             </IconButton>
           </div>

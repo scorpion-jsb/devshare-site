@@ -171,7 +171,7 @@ class Workspace extends Component {
         error => cb(error)
       )
 
-  handleDowloadFileClick = () => {
+  handleDownloadClick = () => {
     console.log('handle download click')
     Devshare.project(this.props.project)
       .fileSystem
@@ -206,7 +206,7 @@ class Workspace extends Component {
       ? this.addFolder(path)
       : this.addFile(path, content)
 
-  deleteFile = path =>
+  deleteFile = (path) =>
     Devshare.project(this.props.project)
       .fileSystem
       .file(path)
@@ -214,7 +214,7 @@ class Workspace extends Component {
       .then(file => event({ category: 'Files', action: 'File deleted' }))
       .catch(error => this.error = error.toString)
 
-  openFile = file => {
+  openFile = (file) => {
     const { project, tabs } = this.props
     const tabData = {
       project,
@@ -238,7 +238,7 @@ class Workspace extends Component {
     })
   }
 
-  readAndSaveFileEntry = entry => {
+  readAndSaveFileEntry = (entry) => {
     let parent = this
     //TODO: Use bind instead of parent var
     function readAndSaveFile(file, path) {
@@ -252,7 +252,7 @@ class Workspace extends Component {
     entry.file(file => readAndSaveFile(file, entry.fullPath))
   }
 
-  readAndSaveFolderEntry = entry => {
+  readAndSaveFolderEntry = (entry) => {
     this.addFolder(entry.fullPath)
     let reader = entry.createReader()
     reader.readEntries(folder => {
@@ -260,13 +260,13 @@ class Workspace extends Component {
     })
   }
 
-  handleEntries = entries => {
+  handleEntries = (entries) => {
     if (entries.isFile) {
       this.readAndSaveFileEntry(entries)
     } else if (entries.isDirectory) {
       this.readAndSaveFolderEntry(entries)
     }
-    each(entries, entry => {
+    each(entries, (entry) => {
       if (fileEntityBlackList.indexOf(last(entry.fullPath.split('/'))) !== -1) {
         return void 0
       }
@@ -278,7 +278,7 @@ class Workspace extends Component {
     })
   }
 
-  onFilesDrop = e => {
+  onFilesDrop = (e) => {
     e.preventDefault()
     this.setState({
       filesLoading: true
@@ -292,7 +292,7 @@ class Workspace extends Component {
     })
   }
 
-  onFilesAdd = e => {
+  onFilesAdd = (e) => {
     e.preventDefault()
     let items = e.target.files
     each(items, item => {
@@ -303,11 +303,12 @@ class Workspace extends Component {
     })
   }
 
-  toggleMenu = name => {
+  toggleMenu = (name) => {
     let newState = {}
     newState[`show${name}`] = !newState[`show${name}`] || true
     this.setState(newState)
   }
+
   // TODO: Finish a popup for clone settings
   //
   // cloneProject = p => {
@@ -344,7 +345,7 @@ class Workspace extends Component {
           onAddFolderClick={ this.showPopover.bind(this, 'folder') }
           onFilesDrop={ this.onFilesDrop }
           onFilesAdd={ this.onFilesAdd }
-          onDownloadFileClick={ this.handleDowloadFileClick }
+          onDownloadClick={ this.handleDownloadClick }
           onRightClick={ this.showContextMenu }
           filesLoading={ this.state.filesLoading }
           onCloneClick={ this.toggleMenu.bind(this, 'clone') }

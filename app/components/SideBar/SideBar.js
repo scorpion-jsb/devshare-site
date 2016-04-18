@@ -139,7 +139,8 @@ export default class SideBar extends Component {
               tooltip="Clone"
               tooltipStyle={ tooltipStyle }
               tooltipPosition={ tooltipPosition }
-              touch={true} >
+              touch={true}
+              disabled={true}>
               <CopyIcon />
             </IconButton>
             <IconButton
@@ -150,7 +151,8 @@ export default class SideBar extends Component {
               tooltip="Download"
               tooltipStyle={ tooltipStyle }
               tooltipPosition={ tooltipPosition }
-              touch={true}>
+              touch={true}
+              disabled={ !this.props.files || this.props.files.length < 1 }>
               <ArchiveIcon />
             </IconButton>
           </div>

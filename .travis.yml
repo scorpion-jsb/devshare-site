@@ -1,11 +1,20 @@
 language: node_js
+
 node_js:
 - 5.9.0
+
 sudo: false
+
 branches:
   only:
     - master
+
+cache:
+  directories:
+    - node_modules
+
 script: npm run build
+
 deploy:
   skip_cleanup: true
   provider: heroku

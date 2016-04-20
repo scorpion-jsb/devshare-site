@@ -120,6 +120,7 @@ export default class SharingDialog extends Component {
         label="Close"
         secondary={ true }
         onClick={ this.props.onRequestClose }
+        onTouchTap={ this.props.onRequestClose }
       />
     ]
 

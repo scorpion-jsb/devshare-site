@@ -43,23 +43,14 @@ export default class ProjectSettingsDialog extends Component {
     this.setState({ showDelete: true })
   }
 
-  close = () => {
-    console.log('settings close called')
-    this.props.onRequestClose()
-  }
-
   render () {
     const { project, onRequestClose } = this.props
     const actions = [
       <FlatButton
         label="Close"
         secondary={ true }
-        onTouchTap={ this.close }
-      />,
-      <FlatButton
-        label="Close2"
-        secondary={ true }
-        onTouchTap={ this.close }
+        onClick={ this.props.onRequestClose }
+        onTouchTap={ this.props.onRequestClose }
       />
     ]
     const owner = (project && project.owner && project.owner.username) ? project.owner.username : project.owner

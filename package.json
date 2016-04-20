@@ -50,7 +50,7 @@
     "react-redux": "2.1.2",
     "react-router": "2.0.0-rc6",
     "react-router-redux": "3.0.0",
-    "react-tap-event-plugin": "1.0.0",
+    "react-tap-event-plugin": "0.2.1",
     "redux": "3.4.0",
     "redux-router": "1.0.0-beta3",
     "redux-thunk": "2.0.1",

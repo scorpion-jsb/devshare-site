@@ -294,8 +294,7 @@ class Workspace extends Component {
 
   onFilesAdd = (e) => {
     e.preventDefault()
-    let items = e.target.files
-    each(items, item => {
+    each(e.target.files, item => {
       if (fileEntityBlackList.indexOf(last(item.webkitRelativePath.split('/'))) !== -1) {
         return void 0
       }
@@ -303,12 +302,18 @@ class Workspace extends Component {
     })
   }
 
-  toggleMenu = (name) => {
+  toggleDialog = (name) => {
     let newState = {}
-    newState[`show${name}`] = !newState[`show${name}`] || true
+    newState[`${name}Open`] = !newState[`${name}Open`] || true
     this.setState(newState)
   }
 
+  closeDialog = (name) => {
+    console.log('close menu called:', name)
+    let newState = {}
+    newState[`${name}Open`] = false
+    this.setState(newState)
+  }
   // TODO: Finish a popup for clone settings
   //
   // cloneProject = p => {
@@ -348,7 +353,7 @@ class Workspace extends Component {
           onDownloadClick={ this.handleDownloadClick }
           onRightClick={ this.showContextMenu }
           filesLoading={ this.state.filesLoading }
-          onCloneClick={ this.toggleMenu.bind(this, 'clone') }
+          onCloneClick={ this.showPopover.bind(this, 'clone') }
         />
         <Pane
           tabs={ this.props.tabs }
@@ -365,6 +370,7 @@ class Workspace extends Component {
             onSave={ this.saveSettings }
             onVimToggle={ this.toggleVim }
             vimEnabled={ this.state.vimEnabled }
+            onRequestClose={ this.closeDialog.bind(this, 'settings') }
           /> : null
         }
         {
@@ -376,6 +382,7 @@ class Workspace extends Component {
             onSave={ this.saveSettings }
             onAddCollab={ this.addCollaborator }
             onRemoveCollab={ this.removeCollaborator }
+            onRequestClose={ this.closeDialog.bind(this, 'sharing') }
           /> : null
         }
         {

@@ -29,7 +29,6 @@ export default class SharingDialog extends Component {
   }
 
   state = {
-    open: this.props.open || false,
     project: this.props.projects[this.props.projectKey] || {},
     collaborators: this.props.projects[this.props.projectKey] ? this.props.projects[this.props.projectKey].collaborators : [],
     error: null
@@ -48,11 +47,12 @@ export default class SharingDialog extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    // if (nextProps.open) {
-    //   this.setState({
-    //     open: nextProps.open
-    //   })
-    // }
+    console.log('component recieve props', nextProps)
+    if (nextProps.open) {
+      this.setState({
+        open: nextProps.open
+      })
+    }
 
     if (nextProps.projectKey) {
       const project = nextProps.projects[nextProps.projectKey]
@@ -81,11 +81,13 @@ export default class SharingDialog extends Component {
     })
   }
 
-  close = () =>
+  close = () => {
     this.setState({
-      searchText: null,
-      open: false
+      searchText: null
     })
+    this.props.onRequestClose()
+  }
+
 
   render () {
     const collabsList = this.state.collaborators ? this.state.collaborators.map((collaborator, i) => {
@@ -117,7 +119,7 @@ export default class SharingDialog extends Component {
       <FlatButton
         label="Close"
         secondary={ true }
-        onTouchTap={ this.close }
+        onClick={ this.props.onRequestClose }
       />
     ]
 
@@ -129,11 +131,10 @@ export default class SharingDialog extends Component {
 
     return (
       <Dialog
+        { ...this.props }
         title='Sharing'
         actions={ actions }
         modal={ false }
-        open={ this.state.open }
-        onRequestClose={ this.close }
         bodyClassName='SharingDialog-Content'
         titleClassName='SharingDialog-Content-Title'
         contentClassName='SharingDialog'

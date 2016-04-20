@@ -11,18 +11,17 @@ export default class ProjectSettingsDialog extends Component {
     super(props)
   }
   static propTypes = {
-    open: PropTypes.bool,
+    open: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.func.isRequired,
     project: PropTypes.object,
     vimEnabled: PropTypes.bool,
     onVimToggle: PropTypes.func
   }
 
-  state = { open: this.props.open || false, vimEnabled: this.props.vimEnabled || false }
+  state = { vimEnabled: this.props.vimEnabled || false }
 
   componentWillReceiveProps (nextProps) {
-    // if (typeof nextProps.open !== 'undefined' && nextProps.open !== this.state.open) {
-    //   this.setState({ open: nextProps.open })
-    // }
+    console.log('props:', nextProps)
   }
 
   handleAutoCompleteSubmit = () => {
@@ -45,34 +44,38 @@ export default class ProjectSettingsDialog extends Component {
   }
 
   close = () => {
-    this.setState({
-      open: false
-    })
+    console.log('settings close called')
+    this.props.onRequestClose()
   }
 
   render () {
+    const { project, onRequestClose } = this.props
     const actions = [
       <FlatButton
         label="Close"
         secondary={ true }
         onTouchTap={ this.close }
+      />,
+      <FlatButton
+        label="Close2"
+        secondary={ true }
+        onTouchTap={ this.close }
       />
     ]
-    const owner = (this.props.project && this.props.project.owner && this.props.project.owner.username) ? this.props.project.owner.username : this.props.project.owner
+    const owner = (project && project.owner && project.owner.username) ? project.owner.username : project.owner
     return (
       <Dialog
+        { ...this.props }
         title="Settings"
         actions={ actions }
         modal={ false }
-        open={ this.state.open }
-        onRequestClose={ this.close }
         bodyClassName="ProjectSettingsDialog-Settings"
         titleClassName="ProjectSettingsDialog-Settings-Title"
         contentClassName='ProjectSettingsDialog'>
         <TextField
           hintText="Project name"
           floatingLabelText="Project name"
-          defaultValue={ this.props.project.name }
+          defaultValue={ project.name }
         />
         <TextField
           hintText="Owner"
@@ -98,7 +101,7 @@ export default class ProjectSettingsDialog extends Component {
           <RaisedButton
             label="Delete"
             primary={true}
-            onClick={ this.showDelete }
+            onTouchTap={ this.showDelete }
           />
         </div>
       </Dialog>

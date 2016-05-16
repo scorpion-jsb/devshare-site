@@ -64,7 +64,6 @@ export default class ProjectTile extends Component {
   }
 
   closeDialog = (name, name2) => {
-    console.log('close dialog called', name)
     let newState = {}
     newState[`${name}Open`] = false
     if (name2) newState[`${name2}Open`] = true
@@ -74,7 +73,7 @@ export default class ProjectTile extends Component {
   openDialog = (name, name2, e) => {
     let newState = {}
     newState[`${name}Open`] = true
-    if (name2){
+    if (name2) {
       newState[`${name2}Open`] = false
       e.preventDefault()
     } else {
@@ -128,6 +127,7 @@ export default class ProjectTile extends Component {
           onSave={ this.saveSettings }
           onVimToggle={ this.toggleVim }
           vimEnabled={ this.state.vimEnabled }
+          onRequestClose={ this.closeDialog.bind(this, 'settings')}
         />
         <DeleteDialog
           name={ name }

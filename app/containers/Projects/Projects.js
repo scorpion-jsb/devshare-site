@@ -102,6 +102,7 @@ class Projects extends Component {
           <SharingDialog
             projectKey={ `${this.state.currentProject.owner.username}/${this.state.currentProject.name}` }
             open={ this.state.addCollabModal }
+            onRequestClose={ this.toggleModal.bind(this, 'addCollab')}
           /> : null
         }
       </div>

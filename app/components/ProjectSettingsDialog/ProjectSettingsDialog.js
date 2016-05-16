@@ -10,6 +10,7 @@ export default class ProjectSettingsDialog extends Component {
   constructor (props) {
     super(props)
   }
+
   static propTypes = {
     open: PropTypes.bool.isRequired,
     onRequestClose: PropTypes.func.isRequired,
@@ -21,7 +22,7 @@ export default class ProjectSettingsDialog extends Component {
   state = { vimEnabled: this.props.vimEnabled || false }
 
   componentWillReceiveProps (nextProps) {
-    console.log('props:', nextProps)
+    // console.log('props:', nextProps)
   }
 
   handleAutoCompleteSubmit = () => {

@@ -36,7 +36,8 @@ export default class SharingDialog extends Component {
 
   static propTypes = {
     projectKey: PropTypes.string.isRequired,
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    onRequestClose: PropTypes.func
   }
 
   componentDidMount () {
@@ -47,7 +48,7 @@ export default class SharingDialog extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('component recieve props', nextProps)
+    // console.log('component recieve props', nextProps)
     if (nextProps.open) {
       this.setState({
         open: nextProps.open

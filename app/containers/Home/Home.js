@@ -40,30 +40,30 @@ class Home extends Component {
     const meInThree = [
       {
         title: 'Work with others in real-time',
-        icon: <GroupIcon style={ iconStyle } />,
+        icon: <GroupIcon style={iconStyle} />,
         desc: 'Share a link or add someone with an account directly to your project.'
       },
       {
         title: 'Start from anywhere',
-        icon: <StartIcon style={ iconStyle } />,
+        icon: <StartIcon style={iconStyle} />,
         desc: 'Upload an existing project or start from scratch.'
       },
       {
         title: 'Download your project',
-        icon: <CloudDownload style={ iconStyle } />,
+        icon: <CloudDownload style={iconStyle} />,
         desc: 'Export all the files and folder into a zip file to continue development or deploy.'
       }
     ]
 
     const meInThreeElements = map(meInThree, (content, key) => {
       return (
-        <div className='Home-MeInThree-Item' key={ key } >
-          { content.icon }
+        <div className='Home-MeInThree-Item' key={key} >
+          {content.icon}
           <div className='Home-MeInThree-Title'>
-            { content.title }
+            {content.title}
           </div>
           <div className='Home-MeInThree-Desc'>
-            { content.desc }
+            {content.desc}
           </div>
         </div>
       )
@@ -82,12 +82,12 @@ class Home extends Component {
             real-time, full-project code editing in browser
             </span>
             <RaisedButton
-              primary={ true }
+              primary
               label='Share Code'
-              style={ buttonStyle }
-              labelStyle={ buttonLabelStyle }
-              containerElement={ <Link to={ `/anon/${randomProjectId()}` } /> }
-              onClick={ this.trackEvent }
+              style={buttonStyle}
+              labelStyle={buttonLabelStyle}
+              containerElement={<Link to={`/anon/${randomProjectId()}`} />}
+              onClick={this.trackEvent}
             />
             <span className='Home-Muted'>No sign up required</span>
             <div className='Home-VideoContainer'>
@@ -97,7 +97,7 @@ class Home extends Component {
             </div>
           </div>
           <div className='Home-MeInThree'>
-          { meInThreeElements }
+          {meInThreeElements}
           </div>
           <div className='Home-Footer'>
             Made by <a target='_blank' href='http://kyper.io'>Kyper</a>

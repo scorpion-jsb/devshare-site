@@ -18,9 +18,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
 class Main extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object
@@ -28,6 +25,13 @@ class Main extends Component {
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
+  }
+
+  static propTypes = {
+    account: PropTypes.object,
+    children: PropTypes.object,
+    hydrateUser: PropTypes.func,
+    logout: PropTypes.func
   }
 
   componentDidMount () {
@@ -46,18 +50,18 @@ class Main extends Component {
 
   handleLogout = () => {
     this.props.logout()
-    this.context.router.push(`/`)
+    this.context.router.push('/')
   }
 
   render () {
     return (
-      <div className="App">
+      <div className='App'>
         <Navbar
-          account={ this.props.account }
-          onMenuClick={ this.handleClick }
-          onLogoutClick={ this.handleLogout }
+          account={this.props.account}
+          onMenuClick={this.handleClick}
+          onLogoutClick={this.handleLogout}
         />
-        { this.props.children }
+        {this.props.children}
       </div>
     )
   }

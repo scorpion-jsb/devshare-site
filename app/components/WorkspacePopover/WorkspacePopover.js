@@ -8,9 +8,6 @@ const originSettings = { horizontal: 'middle', vertical: 'top' }
 const pathInputStyling = { padding: 20 }
 
 export default class WorkspacePopover extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   static propTypes = {
     workspaceElement: PropTypes.object,
@@ -31,7 +28,7 @@ export default class WorkspacePopover extends Component {
 
   show = (key, e) =>
     this.setState({
-      activePopover:key
+      activePopover: key
     }, () => {
       setTimeout(() => {
         this.refs.popoverTextField.focus()
@@ -41,7 +38,7 @@ export default class WorkspacePopover extends Component {
   closePopover = key => {
     if (this.state.activePopover !== key) return
     this.setState({
-      activePopover:'none',
+      activePopover: 'none'
     }, () => {
       this.refs.popoverTextField.blur()
     })
@@ -61,20 +58,20 @@ export default class WorkspacePopover extends Component {
 
   render () {
     return (
-      <Popover className="WorkspacePopover" open={ this.state.activePopover === 'pop' }
-        anchorEl={ this.props.workspaceElement }
-        anchorOrigin={ originSettings}
-        targetOrigin={ originSettings }
-        onRequestClose={ this.closePopover.bind(this, 'pop') } >
-        <div style={ pathInputStyling }>
-          <p>Enter path for new { this.props.type }</p>
+      <Popover className='WorkspacePopover' open={this.state.activePopover === 'pop'}
+        anchorEl={this.props.workspaceElement}
+        anchorOrigin={originSettings}
+        targetOrigin={originSettings}
+        onRequestClose={this.closePopover.bind(this, 'pop')} >
+        <div style={pathInputStyling}>
+          <p>Enter path for new {this.props.type}</p>
           <TextField
-            hintText={ this.props.initialPath }
-            defaultValue={ this.props.initialPath }
-            onChange={ this.handleChange }
-            ref="popoverTextField"
-            onFocus={ this.handleFocus }
-            onEnterKeyDown={ this.onSubmit }
+            hintText={this.props.initialPath}
+            defaultValue={this.props.initialPath}
+            onChange={this.handleChange}
+            ref='popoverTextField'
+            onFocus={this.handleFocus}
+            onEnterKeyDown={this.onSubmit}
           />
         </div>
       </Popover>

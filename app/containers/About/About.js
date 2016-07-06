@@ -8,7 +8,9 @@ export default class About extends Component {
         <ul>
           <li>React - View Rendering</li>
           <li>Redux - State management</li>
-        <li><a href='https://github.com/KyperTech/devshare'>Devshare</a> - Platform communication and authentication</li>
+          <li>
+            <a href='https://github.com/KyperTech/devshare'>Devshare</a> - Platform communication and authentication
+          </li>
         </ul>
       </div>
     )

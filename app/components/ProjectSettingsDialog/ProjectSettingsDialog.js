@@ -3,20 +3,16 @@ import FlatButton from 'material-ui/lib/flat-button'
 import Dialog from 'material-ui/lib/dialog'
 import TextField from 'material-ui/lib/text-field'
 import './ProjectSettingsDialog.scss'
-import Toggle from 'material-ui/lib/toggle'
 import RaisedButton from 'material-ui/lib/raised-button'
 
 export default class ProjectSettingsDialog extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   static propTypes = {
     open: PropTypes.bool.isRequired,
-    onRequestClose: PropTypes.func.isRequired,
     project: PropTypes.object,
     vimEnabled: PropTypes.bool,
-    onVimToggle: PropTypes.func
+    onVimToggle: PropTypes.func,
+    onRequestClose: PropTypes.func.isRequired
   }
 
   state = { vimEnabled: this.props.vimEnabled || false }
@@ -26,11 +22,11 @@ export default class ProjectSettingsDialog extends Component {
   }
 
   handleAutoCompleteSubmit = () => {
-    //TODO: Add collaborator
+    // TODO: Add collaborator
   }
 
   handleAutoCompleteChange = () => {
-    //TODO: handle change
+    // TODO: handle change
   }
 
   handleVimToggle = () => {
@@ -48,52 +44,54 @@ export default class ProjectSettingsDialog extends Component {
     const { project, onRequestClose } = this.props
     const actions = [
       <FlatButton
-        label="Close"
-        secondary={ true }
-        onClick={ this.props.onRequestClose }
-        onTouchTap={ this.props.onRequestClose }
+        label='Close'
+        secondary
+        onClick={onRequestClose}
+        onTouchTap={onRequestClose}
       />
     ]
     const owner = (project && project.owner && project.owner.username) ? project.owner.username : project.owner
     return (
       <Dialog
-        { ...this.props }
-        title="Settings"
-        actions={ actions }
-        modal={ false }
-        bodyClassName="ProjectSettingsDialog-Settings"
-        titleClassName="ProjectSettingsDialog-Settings-Title"
+        {...this.props}
+        title='Settings'
+        actions={actions}
+        modal={false}
+        bodyClassName='ProjectSettingsDialog-Settings'
+        titleClassName='ProjectSettingsDialog-Settings-Title'
         contentClassName='ProjectSettingsDialog'>
         <TextField
-          hintText="Project name"
-          floatingLabelText="Project name"
-          defaultValue={ project.name }
+          hintText='Project name'
+          floatingLabelText='Project name'
+          defaultValue={project.name}
         />
         <TextField
-          hintText="Owner"
-          floatingLabelText="Owner"
-          defaultValue={ owner }
-          disabled={ true }
+          hintText='Owner'
+          floatingLabelText='Owner'
+          defaultValue={owner}
+          disabled
         />
         <TextField
-          hintText="Site url"
-          floatingLabelText="Site url"
-          disabled={ true }
+          hintText='Site url'
+          floatingLabelText='Site url'
+          disabled
         />
         <div>
           {
             this.state.showDelete
-            ? <TextField
-                hintText="myProject"
-                floatingLabelText="project name"
-                style={{ color: 'grey'}}
+            ? (
+              <TextField
+                hintText='myProject'
+                floatingLabelText='project name'
+                style={{ color: 'grey' }}
               />
+            )
             : null
           }
           <RaisedButton
-            label="Delete"
-            primary={true}
-            onTouchTap={ this.showDelete }
+            label='Delete'
+            primary
+            onTouchTap={this.showDelete}
           />
         </div>
       </Dialog>

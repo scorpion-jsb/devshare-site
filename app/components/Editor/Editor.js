@@ -4,12 +4,10 @@ import { connect } from 'react-redux'
 import { project } from 'devshare'
 
 class Editor extends Component {
-  constructor () {
-    super()
-  }
 
   static propTypes = {
     mode: PropTypes.string,
+    account: PropTypes.object,
     theme: PropTypes.string,
     name: PropTypes.string.isRequired,
     height: PropTypes.string,
@@ -65,7 +63,11 @@ class Editor extends Component {
     const editorDiv = document.getElementById(this.props.name)
     const { name, owner } = this.props.project
     const file = project(owner.username, name).fileSystem.file(this.props.filePath)
-    this.editor = CodeMirror(editorDiv, { lineNumbers: true, mode: `${file.syntaxMode || 'javascript'}`, lineWrapping: true })
+    this.editor = CodeMirror(editorDiv, {
+      lineNumbers: true,
+      lineWrapping: true,
+      mode: `${file.syntaxMode || 'javascript'}`
+    })
     this.editor.setOption('theme', 'monokai')
     // CodeMirror.Vim.map('jj', '<Esc>', 'insert')
     // //TODO: add read only for collabs
@@ -75,7 +77,7 @@ class Editor extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (this.editor) {
-      //TODO: Check to see if this is nessesary
+      // TODO: Check to see if this is nessesary
       this.handleLoad(this.editor)
       nextProps.vimEnabled ? this.enableVim() : this.disableVim()
     }
@@ -90,7 +92,11 @@ class Editor extends Component {
       const file = fileSystem.file(this.props.filePath)
       try {
         try {
-          this.firepad = Firepad.fromCodeMirror(file.firebaseRef(), editor,  { userId: this.props.account.username || '&' })
+          this.firepad = Firepad.fromCodeMirror(
+            file.firebaseRef(),
+            editor,
+            { userId: this.props.account.username || '&' }
+          )
         } catch (err) {
           console.warn('Error creating firepad', err)
         }
@@ -124,7 +130,7 @@ class Editor extends Component {
 
   render () {
     return (
-      <div className="Editor" id={ this.props.name }></div>
+      <div className='Editor' id={this.props.name}></div>
     )
   }
 }

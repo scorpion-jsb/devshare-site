@@ -20,13 +20,13 @@ var app = new Express()
 
 app.use('/' + config.publicPath, serveStatic('assets', {
   index: false,
-  setHeaders: function(res) {
+  setHeaders: function (res) {
     res.setHeader('Cache-Control', 'max-age=2592000')
   }
 }))
 app.use('/' + config.publicPath, serveStatic(config.output.path, {
   index: false,
-  setHeaders: function(res) {
+  setHeaders: function (res) {
     res.setHeader('Cache-Control', 'max-age=2592000')
   }
 }))
@@ -34,8 +34,7 @@ app.use('/' + config.publicPath, serveStatic(config.output.path, {
 // This is fired every time the server side receives a request
 app.use(handleRender)
 
-
-function handleRender(req, res) {
+function handleRender (req, res) {
   if (typeof renderApp === 'function') {
     renderApp(req.url, function (result) {
       res.send(renderIndex({
@@ -49,7 +48,7 @@ function handleRender(req, res) {
   }
 }
 
-app.listen(config.port, function(error) {
+app.listen(config.port, function (error) {
   if (error) {
     console.error(error)
   } else {

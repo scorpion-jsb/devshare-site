@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { Actions } from 'redux-devshare'
 
 // Components
 import AccountDialog from '../../components/AccountDialog/AccountDialog'
-import AvatarEditor from 'react-avatar-editor'
 import RaisedButton from 'material-ui/lib/raised-button'
 import TextField from 'material-ui/lib/text-field'
 
@@ -17,15 +15,19 @@ const buttonStyle = { 'marginTop': '2rem', width: '20%' }
 const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
 
 class Account extends Component {
-  constructor (props) {
-    super(props)
-  }
-
-  state = { modalOpen: false }
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   }
+
+  static propTypes = {
+    account: PropTypes.object,
+    logout: PropTypes.func,
+    uploadAvatar: PropTypes.func,
+    updateAccount: PropTypes.func
+  }
+
+  state = { modalOpen: false }
 
   handleLogout = () => {
     this.props.logout()
@@ -33,7 +35,7 @@ class Account extends Component {
   }
 
   handleSave = () => {
-    //TODO: Handle saving image and account data at the same time
+    // TODO: Handle saving image and account data at the same time
     const account = {
       name: this.refs.name.getValue(),
       email: this.refs.email.getValue()
@@ -53,38 +55,38 @@ class Account extends Component {
 
   render () {
     return (
-      <div className="Account">
+      <div className='Account'>
         <AccountDialog
-          modalOpen={ this.state.modalOpen }
-          toggleModal={ this.toggleModal }
-          onSave={ this.handleAvatarUpload }
+          modalOpen={this.state.modalOpen}
+          toggleModal={this.toggleModal}
+          onSave={this.handleAvatarUpload}
         />
-        <div className="Account-Settings">
-          <div className="Account-Avatar">
+        <div className='Account-Settings'>
+          <div className='Account-Avatar'>
             <img
-              className="Account-Avatar-Current"
-              src={ this.props.account.avatar_url || defaultUserImageUrl }
-              onClick={ this.toggleModal }
+              className='Account-Avatar-Current'
+              src={this.props.account.avatar_url || defaultUserImageUrl}
+              onClick={this.toggleModal}
             />
           </div>
-          <div className="Account-Meta">
+          <div className='Account-Meta'>
             <TextField
-              hintText="Email"
-              floatingLabelText="Email"
-              ref="email"
-              defaultValue={ this.props.account.email || 'No Email' }
-              style={ textFieldStyle }
+              hintText='Email'
+              floatingLabelText='Email'
+              ref='email'
+              defaultValue={this.props.account.email || 'No Email'}
+              style={textFieldStyle}
             />
             <RaisedButton
-              primary={true}
-              label="Save"
-              onClick={ this.handleSave }
-              style={ buttonStyle }
+              primary
+              label='Save'
+              onClick={this.handleSave}
+              style={buttonStyle}
             />
             <RaisedButton
-              label="Logout"
-              onClick={ this.handleLogout }
-              style={ buttonStyle }
+              label='Logout'
+              onClick={this.handleLogout}
+              style={buttonStyle}
             />
           </div>
         </div>
@@ -94,7 +96,7 @@ class Account extends Component {
 }
 
 // Place state of redux store into props of component
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     account: state.account,
     router: state.router
@@ -102,7 +104,7 @@ function mapStateToProps(state) {
 }
 
 // Place action methods into props
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions.account, dispatch)
 }
 

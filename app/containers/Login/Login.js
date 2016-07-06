@@ -12,14 +12,10 @@ import Paper from 'material-ui/lib/paper'
 import CircularProgress from 'material-ui/lib/circular-progress'
 import Snackbar from 'material-ui/lib/snackbar'
 import RaisedButton from 'material-ui/lib/raised-button'
-import FontIcon from 'material-ui/lib/font-icon'
 
 import './Login.scss'
 
 class Login extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   state = {
     snackCanOpen: false,
@@ -30,6 +26,12 @@ class Login extends Component {
     router: React.PropTypes.object.isRequired
   }
 
+  static propTypes = {
+    account: PropTypes.object,
+    login: PropTypes.func.isRequired,
+    authWithProvider: PropTypes.func.isRequired
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.account.username) {
       this.context.router.push(`/${nextProps.account.username}`)
@@ -38,7 +40,7 @@ class Login extends Component {
 
   handleRequestClose = () =>
     this.setState({
-      snackCanOpen: false,
+      snackCanOpen: false
     })
 
   handleLogin = loginData => {
@@ -59,46 +61,45 @@ class Login extends Component {
 
     if (isFetching) {
       return (
-        <div className="Login">
-          <div className="Login-Progress">
-            <CircularProgress  mode="indeterminate" />
+        <div className='Login'>
+          <div className='Login-Progress'>
+            <CircularProgress mode='indeterminate' />
           </div>
         </div>
       )
     }
 
     return (
-      <div className="Login">
-        <Paper className="Login-Panel">
-          <LoginForm onLogin={ this.handleLogin } />
+      <div className='Login'>
+        <Paper className='Login-Panel'>
+          <LoginForm onLogin={this.handleLogin} />
         </Paper>
-        <div className="Login-Or">
+        <div className='Login-Or'>
           or
         </div>
-        <GoogleButton onClick={ this.providerLogin.bind(this, 'google') } />
+        <GoogleButton onClick={this.providerLogin.bind(this, 'google')} />
         <RaisedButton
-          label="Sign in With GitHub"
-          secondary={ true }
-          onTouchTap={ this.providerLogin.bind(this, 'github') }
+          label='Sign in With GitHub'
+          secondary
+          onTouchTap={this.providerLogin.bind(this, 'github')}
         />
-        <div className="Login-Signup">
-          <span className="Login-Signup-Label">
+        <div className='Login-Signup'>
+          <span className='Login-Signup-Label'>
             Need an account?
           </span>
-          <Link className="Login-Signup-Link" to="/signup">
+          <Link className='Login-Signup-Link' to='/signup'>
             Sign Up
           </Link>
         </div>
         <Snackbar
-          open={ typeof error !== 'undefined' && this.state.snackCanOpen }
-          message={ error || 'Error' }
-          action="close"
-          autoHideDuration={ 3000 }
-          onRequestClose={ this.handleRequestClose }
+          open={typeof error !== 'undefined' && this.state.snackCanOpen}
+          message={error || 'Error'}
+          action='close'
+          autoHideDuration={3000}
+          onRequestClose={this.handleRequestClose}
         />
       </div>
     )
-
   }
 }
 

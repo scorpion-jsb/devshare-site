@@ -1,15 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import { Link } from 'react-router'
 import Paper from 'material-ui/lib/paper'
 import Avatar from 'material-ui/lib/avatar'
 import Popover from 'material-ui/lib/popover/popover'
-import PersonIcon from 'material-ui/lib/svg-icons/social/person'
 import PersonAddIcon from 'material-ui/lib/svg-icons/social/person-add'
 import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import ProjectSettingsDialog from '../ProjectSettingsDialog/ProjectSettingsDialog'
 import List from 'material-ui/lib/lists/list'
 import ListItem from 'material-ui/lib/lists/list-item'
 import DeleteDialog from '../DeleteDialog/DeleteDialog'
+
 import './ProjectTile.scss'
 
 const personIconStyle = { width: '50%', height: '65%' }
@@ -17,11 +16,6 @@ const avatarSize = 50
 const hoverColor = '#03A9F4'
 
 export default class ProjectTile extends Component {
-  constructor (props){
-    super(props)
-  }
-
-  state = { dropdownOpen: false, deleteOpen: false }
 
   static propTypes = {
     project: PropTypes.object.isRequired,
@@ -31,7 +25,7 @@ export default class ProjectTile extends Component {
     onDelete: PropTypes.func
   }
 
-  state = { vimEnabled: false, settingsOpen: false }
+  state = { vimEnabled: false, settingsOpen: false, dropdownOpen: false, deleteOpen: false }
 
   handleSelect = e => {
     e.preventDefault()
@@ -94,13 +88,24 @@ export default class ProjectTile extends Component {
     if (collaborators) {
       collaboratorsList = collaborators.map((user, i) => {
         const { username, avatarUrl } = user
-        return(
-          <div key={`${name}-Collab-${i}`} className='ProjectTile-Collaborator' onClick={ this.collaboratorClick.bind(this, user) }>
+        return (
+          <div
+            key={`${name}-Collab-${i}`}
+            className='ProjectTile-Collaborator'
+            onClick={this.collaboratorClick.bind(this, user)}>
             <Avatar
               className='ProjectTile-Collaborator-Avatar'
-              src={ avatarUrl ? avatarUrl : null }
-              icon={ avatarUrl ? null : <Avatar hoverColor={ hoverColor }> { username.charAt(0).toUpperCase() } </Avatar> }
-              size={ avatarSize }
+              src={avatarUrl || null}
+              icon={
+                avatarUrl
+                  ? null
+                  : (
+                  <Avatar hoverColor={hoverColor}>
+                    {username.charAt(0).toUpperCase()}
+                  </Avatar>
+                  )
+              }
+              size={avatarSize}
             />
           </div>
         )
@@ -110,11 +115,11 @@ export default class ProjectTile extends Component {
     // New Collaborator Button
     if (this.props.onAddCollabClick) {
       collaboratorsList.push((
-        <div key={`${name}-Add-Collab`} className='ProjectTile-Collaborator ProjectTile-Add' onClick={ this.addClick }>
+        <div key={`${name}-Add-Collab`} className='ProjectTile-Collaborator ProjectTile-Add' onClick={this.addClick}>
           <Avatar
             className='ProjectTile-Collaborator-Avatar'
-            icon={ <PersonAddIcon style={ personIconStyle } hoverColor={ hoverColor } /> }
-            size={ avatarSize }
+            icon={<PersonAddIcon style={personIconStyle} hoverColor={hoverColor} />}
+            size={avatarSize}
           />
         </div>
       ))
@@ -122,42 +127,42 @@ export default class ProjectTile extends Component {
     return (
       <div>
         <ProjectSettingsDialog
-          project={ this.props.project }
-          open={ this.state.settingsOpen }
-          onSave={ this.saveSettings }
-          onVimToggle={ this.toggleVim }
-          vimEnabled={ this.state.vimEnabled }
-          onRequestClose={ this.closeDialog.bind(this, 'settings')}
+          project={this.props.project}
+          open={this.state.settingsOpen}
+          onSave={this.saveSettings}
+          onVimToggle={this.toggleVim}
+          vimEnabled={this.state.vimEnabled}
+          onRequestClose={this.closeDialog.bind(this, 'settings')}
         />
         <DeleteDialog
-          name={ name }
-          open={ this.state.deleteOpen || false }
-          onSubmit={ this.deleteProject }
+          name={name}
+          open={this.state.deleteOpen || false}
+          onSubmit={this.deleteProject}
         />
         <Paper key={`Project-${name}`} className='ProjectTile'>
           <div className='ProjectTile-Top'>
-            <span className='ProjectTile-Name' onClick={ this.handleSelect }>
-              { name }
+            <span className='ProjectTile-Name' onClick={this.handleSelect}>
+              {name}
             </span>
             <Popover
-              open={ this.state.dropdownOpen }
-              anchorEl={ this.state.anchorEl }
+              open={this.state.dropdownOpen}
+              anchorEl={this.state.anchorEl}
               anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
               targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-              onRequestClose={ this.handleDropdownClose }
+              onRequestClose={this.handleDropdownClose}
             >
               <List>
-                <ListItem primaryText="More Settings" onClick={ this.openDialog.bind(this, 'settings', 'dropdown') }/>
-                <ListItem primaryText="Delete" onClick={ this.openDialog.bind(this, 'delete', 'dropdown') }/>
+                <ListItem primaryText='More Settings' onClick={this.openDialog.bind(this, 'settings', 'dropdown')} />
+                <ListItem primaryText='Delete' onClick={this.openDialog.bind(this, 'delete', 'dropdown')} />
               </List>
             </Popover>
-            <SettingsIcon className='ProjectTile-Settings' onClick={ this.toggleDropdown } hoverColor={ hoverColor }/>
+            <SettingsIcon className='ProjectTile-Settings' onClick={this.toggleDropdown} hoverColor={hoverColor} />
           </div>
           <span className='ProjectTile-Owner'>
-            { (owner && owner.username) ? owner.username : 'No Owner' }
+            {(owner && owner.username) ? owner.username : 'No Owner'}
           </span>
           <div className='ProjectTile-Collaborators'>
-            { collaboratorsList }
+            {collaboratorsList}
           </div>
         </Paper>
       </div>

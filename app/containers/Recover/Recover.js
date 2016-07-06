@@ -17,18 +17,15 @@ const fieldStyle = { width: '80%' }
 const buttonStyle = { width: '80%' }
 
 class Recover extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   state = { errors: { username: null }, open: false }
 
-  /**
-   * @function handleInputChange
-   * @description Update the state with the values from the form inputs.
-   * @fires context#setState
-   */
-  handleInputChange = (name, e) =>{
+  static propTypes = {
+    account: PropTypes.object,
+    recover: PropTypes.func
+  }
+
+  handleInputChange = (name, e) => {
     e.preventDefault()
     this.setState({
       [name]: e.target.value,
@@ -37,9 +34,7 @@ class Recover extends Component {
   }
 
   handleRequestClose = () => {
-    this.setState({
-      open: false,
-    })
+    this.setState({ open: false })
   }
 
   handleRecover = e => {
@@ -59,48 +54,48 @@ class Recover extends Component {
     const { isFetching, error } = this.props.account
     if (isFetching) {
       return (
-        <div className="Recover">
-          <div className="Recover-Progress">
-            <CircularProgress  mode="indeterminate" />
+        <div className='Recover'>
+          <div className='Recover-Progress'>
+            <CircularProgress mode='indeterminate' />
           </div>
         </div>
       )
     }
     return (
-      <div className="Recover">
-        <Paper className="Recover-Panel">
+      <div className='Recover'>
+        <Paper className='Recover-Panel'>
           <TextField
-            hintText="some@email.com"
-            floatingLabelText="Email or Username"
-            errorText={ this.state.errors.username }
+            hintText='some@email.com'
+            floatingLabelText='Email or Username'
+            errorText={this.state.errors.username}
             onChange={this.handleInputChange.bind(this, 'username')}
-            style={ fieldStyle }
+            style={fieldStyle}
           />
-          <div className="Recover-Buttons">
+          <div className='Recover-Buttons'>
             <RaisedButton
-              label="Send"
-              primary={true}
-              type="submit"
-              disabled={ this.props.account && isFetching}
-              style={ buttonStyle }
-              onClick={ this.handleRecover }
+              label='Send'
+              primary
+              type='submit'
+              disabled={this.props.account && isFetching}
+              style={buttonStyle}
+              onClick={this.handleRecover}
             />
           </div>
         </Paper>
-        <div className="Recover-Signup">
-          <span className="Recover-Signup-Label">
+        <div className='Recover-Signup'>
+          <span className='Recover-Signup-Label'>
             Need an account?
           </span>
-          <Link className="Recover-Signup-Link" to="/signup">
+          <Link className='Recover-Signup-Link' to='/signup'>
             Sign Up
           </Link>
         </div>
         <Snackbar
-          open={ typeof error !== 'undefined' && this.state.open }
-          message={ this.props.account.error || 'Email sent' }
-          action="close"
-          autoHideDuration={ 3000 }
-          onRequestClose={ this.handleRequestClose }
+          open={typeof error !== 'undefined' && this.state.open}
+          message={this.props.account.error || 'Email sent'}
+          action='close'
+          autoHideDuration={3000}
+          onRequestClose={this.handleRequestClose}
         />
       </div>
     )

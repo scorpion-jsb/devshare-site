@@ -1,8 +1,6 @@
-import { find, map, toArray } from 'lodash'
 import React, {Component, PropTypes} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { Actions } from 'redux-devshare'
 import { users } from 'devshare'
 
@@ -17,27 +15,25 @@ import RemoveIcon from 'material-ui/lib/svg-icons/content/remove-circle'
 import Colors from 'material-ui/lib/styles/colors'
 import './SharingDialog.scss'
 
-const user = {
-  image: {
-    url: null
-  }
-}
-
 export default class SharingDialog extends Component {
-  constructor (props){
-    super(props)
-  }
-
-  state = {
-    project: this.props.projects[this.props.projectKey] || {},
-    collaborators: this.props.projects[this.props.projectKey] ? this.props.projects[this.props.projectKey].collaborators : [],
-    error: null
+  constructor () {
+    super()
+    const { projects, projectKey } = this.props
+    this.state = {
+      project: projects[projectKey] || {},
+      collaborators: projects[projectKey] ? projects[projectKey].collaborators : [],
+      error: null
+    }
   }
 
   static propTypes = {
+    projects: PropTypes.object,
     projectKey: PropTypes.string.isRequired,
     open: PropTypes.bool,
-    onRequestClose: PropTypes.func
+    error: PropTypes.object,
+    onRequestClose: PropTypes.func,
+    addCollaborator: PropTypes.func.isRequired,
+    removeCollaborator: PropTypes.func.isRequired
   }
 
   componentDidMount () {
@@ -89,7 +85,6 @@ export default class SharingDialog extends Component {
     this.props.onRequestClose()
   }
 
-
   render () {
     const collabsList = this.state.collaborators ? this.state.collaborators.map((collaborator, i) => {
       const { image, username } = collaborator
@@ -98,19 +93,19 @@ export default class SharingDialog extends Component {
           <ListItem
             leftAvatar={
               <Avatar
-                icon={ <PersonIcon /> }
-                src={ (image && image.url) ? image.url : null }
+                icon={<PersonIcon />}
+                src={(image && image.url) ? image.url : null}
               />
             }
             rightIcon={
               <RemoveIcon
-                color={ Colors.red500 }
-                hoverColor={ Colors.red800 }
-                onClick={ this.removeCollab.bind(this, i) }
+                color={Colors.red500}
+                hoverColor={Colors.red800}
+                onClick={this.removeCollab.bind(this, i)}
               />
             }
-            primaryText={ username }
-            secondaryText="Read, Write"
+            primaryText={username}
+            secondaryText='Read, Write'
           />
         </div>
       )
@@ -118,10 +113,10 @@ export default class SharingDialog extends Component {
 
     const actions = [
       <FlatButton
-        label="Close"
-        secondary={ true }
-        onClick={ this.props.onRequestClose }
-        onTouchTap={ this.props.onRequestClose }
+        label='Close'
+        secondary
+        onClick={this.props.onRequestClose}
+        onTouchTap={this.props.onRequestClose}
       />
     ]
 
@@ -133,40 +128,46 @@ export default class SharingDialog extends Component {
 
     return (
       <Dialog
-        { ...this.props }
+        {...this.props}
         title='Sharing'
-        actions={ actions }
-        modal={ false }
+        actions={actions}
+        modal={false}
         bodyClassName='SharingDialog-Content'
         titleClassName='SharingDialog-Content-Title'
         contentClassName='SharingDialog'
       >
-      {
-        this.props.error
-        ? <div className="SharingDialog-Error">
-            <span>{ this.props.error }</span>
-          </div>
-        : null
-      }
+        {
+          this.props.error
+          ? (
+            <div className='SharingDialog-Error'>
+              <span>{this.props.error}</span>
+            </div>
+          )
+          : null
+        }
         {
           collabsList
-            ? <List>
-                { collabsList }
-              </List>
-            : <div className="SharingDialog-No-Collabs">
-                <span>No current collaborators</span>
-              </div>
+            ? (
+            <List>
+              {collabsList}
+            </List>
+            )
+            : (
+            <div className='SharingDialog-No-Collabs'>
+              <span>No current collaborators</span>
+            </div>
+            )
         }
-        <div className="SharingDialog-AutoComplete-Container">
+        <div className='SharingDialog-AutoComplete-Container'>
           <AutoComplete
-            className="SharingDialog-Autocomplete"
-            hintText="Search users to add"
-            floatingLabelText="Search users to add"
-            fullWidth={ true }
-            searchText={ this.state.searchText }
-            dataSource={ matchingUsernames }
-            onUpdateInput={ this.searchAccounts }
-            onNewRequest={ this.selectNewCollab }
+            className='SharingDialog-Autocomplete'
+            hintText='Search users to add'
+            floatingLabelText='Search users to add'
+            fullWidth
+            searchText={this.state.searchText}
+            dataSource={matchingUsernames}
+            onUpdateInput={this.searchAccounts}
+            onNewRequest={this.selectNewCollab}
           />
         </div>
       </Dialog>
@@ -174,8 +175,10 @@ export default class SharingDialog extends Component {
   }
 }
 // Place state of redux store into props of component
-function mapStateToProps (state) {
-  const projects =  (state.entities && state.entities.projects) ? state.entities.projects : {}
+const mapStateToProps = (state) => {
+  const projects = (state.entities && state.entities.projects)
+    ? state.entities.projects
+    : {}
   return {
     projects,
     error: state.projects.error || null,
@@ -185,8 +188,7 @@ function mapStateToProps (state) {
 }
 
 // Place action methods into props
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.projects, dispatch)
-}
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Actions.projects, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(SharingDialog)

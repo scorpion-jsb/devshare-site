@@ -2,36 +2,32 @@ import React, {Component, PropTypes} from 'react'
 import { Link } from 'react-router'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
-import CircularProgress from 'material-ui/lib/circular-progress'
 import Checkbox from 'material-ui/lib/checkbox'
-import GoogleButton from '../GoogleButton/GoogleButton'
 import './LoginForm.scss'
 
 const fieldStyle = { width: '80%' }
 const buttonStyle = { width: '100%' }
 
 export default class LoginForm extends Component {
-  constructor (props) {
-    super(props)
-  }
-
-  state = { errors:{ username: null, password: null } }
 
   static propTypes = {
+    account: PropTypes.object,
     onLogin: PropTypes.func
   }
+
+  state = { errors: { username: null, password: null } }
 
   /**
    * @function handleInputChange
    * @description Update the state with the values from the form inputs.
    * @fires context#setState
    */
-   handleInputChange = (name, e) => {
-     e.preventDefault();
-     this.setState({
-       [name]: e.target.value
-     })
-   }
+  handleInputChange = (name, e) => {
+    e.preventDefault()
+    this.setState({
+      [name]: e.target.value
+    })
+  }
 
   /**
   * @function handlePrivateChange
@@ -45,19 +41,19 @@ export default class LoginForm extends Component {
   handleLogin = e => {
     if (e && typeof e.preventDefault === 'function') e.preventDefault()
     const { username } = this.state
-    if (!username || username == '') {
+    if (!username || username === '') {
       return this.setState({
         errors: { username: 'Username required' }
       })
     }
-    if (!this.password || this.password == '') {
+    if (!this.password || this.password === '') {
       return this.setState({
         errors: { password: 'Password required' }
       })
     }
     const loginData = { username, password: this.password }
     if (this.props.onLogin) this.props.onLogin(loginData)
- }
+  }
 
   googleLogin = () => {
     this.props.onLogin('google')
@@ -65,42 +61,42 @@ export default class LoginForm extends Component {
 
   render () {
     return (
-      <form className="LoginForm" onSubmit={ this.handleLogin }>
+      <form className='LoginForm' onSubmit={this.handleLogin}>
         <TextField
-          hintText="some@email.com"
-          floatingLabelText="Username/Email"
-          onChange={ this.handleInputChange.bind(this, 'username') }
-          errorText={ this.state.errors.username }
-          style={ fieldStyle }
+          hintText='some@email.com'
+          floatingLabelText='Username/Email'
+          onChange={this.handleInputChange.bind(this, 'username')}
+          errorText={this.state.errors.username}
+          style={fieldStyle}
         />
         <TextField
-          hintText="password"
-          floatingLabelText="Password"
-          type="password"
-          onChange={ this.handlePrivateChange.bind(this, 'password') }
-          errorText={ this.state.errors.password }
-          style={ fieldStyle }
+          hintText='password'
+          floatingLabelText='Password'
+          type='password'
+          onChange={this.handlePrivateChange.bind(this, 'password')}
+          errorText={this.state.errors.password}
+          style={fieldStyle}
         />
-        <div className="LoginForm-Submit">
+        <div className='LoginForm-Submit'>
           <RaisedButton
-            label="Login"
-            primary={ true }
-            type="submit"
-            disabled={ this.props.account && this.props.account.isFetching}
-            style={ buttonStyle }
+            label='Login'
+            primary
+            type='submit'
+            disabled={this.props.account && this.props.account.isFetching}
+            style={buttonStyle}
           />
         </div>
-        <div className="LoginForm-Options">
-          <div className="LoginForm-Remember">
+        <div className='LoginForm-Options'>
+          <div className='LoginForm-Remember'>
             <Checkbox
-              name="remember"
-              value="remember"
-              label="Remember"
+              name='remember'
+              value='remember'
+              label='Remember'
               labelStyle={{ fontSize: '.8rem' }}
             />
           </div>
-          <Link className="LoginForm-Recover-Link" to="/recover">
-          Forgot Password?
+          <Link className='LoginForm-Recover-Link' to='/recover'>
+            Forgot Password?
           </Link>
         </div>
       </form>

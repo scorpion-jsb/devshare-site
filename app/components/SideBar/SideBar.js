@@ -1,11 +1,7 @@
-import { isArray, isUndefined, find, isString } from 'lodash'
+import { isArray, isUndefined, find } from 'lodash'
 import React, { PropTypes, Component } from 'react'
-import { Link } from 'react-router'
 import TreeView from '../TreeView'
 
-import DropDownMenu from 'material-ui/lib/DropDownMenu'
-import Toolbar from 'material-ui/lib/toolbar/toolbar'
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
 import SelectField from 'material-ui/lib/select-field'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 import IconButton from 'material-ui/lib/icon-button'
@@ -25,17 +21,16 @@ const tooltipStyle = { margin: '0px' }
 const tooltipPosition = 'top-center'
 
 export default class SideBar extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   static propTypes = {
+    account: PropTypes.object,
     projects: PropTypes.array,
     project: PropTypes.object.isRequired,
     files: PropTypes.array,
     onFileClick: PropTypes.func,
     onPublishClick: PropTypes.func,
     showButtons: PropTypes.bool,
+    showProjects: PropTypes.bool,
     onLogoutClick: PropTypes.func,
     onAddFileClick: PropTypes.func,
     onAddFolderClick: PropTypes.func,
@@ -46,7 +41,9 @@ export default class SideBar extends Component {
     onRightClick: PropTypes.func,
     filesLoading: PropTypes.bool,
     onCloneClick: PropTypes.func,
-    onDownloadClick: PropTypes.func
+    onDownloadClick: PropTypes.func,
+    onProjectSelect: PropTypes.func,
+    onSettingsClick: PropTypes.func
   }
 
   state = {
@@ -100,100 +97,103 @@ export default class SideBar extends Component {
     let projectsMenu
     if (isArray(this.props.projects) && this.props.projects.length > 0) {
       projectsMenu = this.props.projects.map((project, i) => {
-        return <MenuItem key={`Project-${i}`} label={ project.name } value={ project.name } primaryText={ project.name }/>
+        return <MenuItem key={`Project-${i}`} label={project.name} value={project.name} primaryText={project.name} />
       })
     }
     return (
-      <div className={ this.state.filesOver ? "SideBar SideBar--FileHover" : "SideBar"}
-        onDragOver={ this.handleFileDrag }
-        onDragLeave={ this.handleFileDragLeave }
-        onDrop={ this.handleFileDrop }
-        onContextMenu={ this.handleRightClick }
+      <div className={this.state.filesOver ? 'SideBar SideBar--FileHover' : 'SideBar'}
+        onDragOver={this.handleFileDrag}
+        onDragLeave={this.handleFileDragLeave}
+        onDrop={this.handleFileDrop}
+        onContextMenu={this.handleRightClick}
       >
-        <div className="SideBar-Dropzone">
-        { (projectsMenu && showProjects) ?
-          <SelectField
-            style={{width: '80%', marginLeft: '10%'}}
-            labelStyle={{fontSize: '1.5rem', fontWeight: '300', textOverflow: 'ellipsis'}}
-            autoWidth={ false }
-            value={ this.props.project.name }
-            children={ projectsMenu }
-            onChange={ this.selectProject }
-          /> : null
-          }
+        <div className='SideBar-Dropzone'>
+        {
+          (projectsMenu && showProjects)
+            ? (
+            <SelectField
+              style={{width: '80%', marginLeft: '10%'}}
+              labelStyle={{fontSize: '1.5rem', fontWeight: '300', textOverflow: 'ellipsis'}}
+              autoWidth={false}
+              value={this.props.project.name}
+              children={projectsMenu}
+              onChange={this.selectProject}
+            />
+            ) : null
+        }
           <TreeView
-            account={ this.props.account }
-            fileStructure={ this.props.files }
-            onFileClick={ this.props.onFileClick }
-            onRightClick={ this.props.onRightClick }
-            projectName={ this.props.project.name }
-            loading={ this.props.filesLoading }
+            account={this.props.account}
+            fileStructure={this.props.files}
+            onFileClick={this.props.onFileClick}
+            onRightClick={this.props.onRightClick}
+            projectName={this.props.project.name}
+            loading={this.props.filesLoading}
           />
-          <input type="file" ref="fileInput" style={{display: 'none'}} onChange={ this.handleFileUpload } multiple />
-          <div className="SideBar-Buttons">
+          <input type='file' ref='fileInput' style={{display: 'none'}} onChange={this.handleFileUpload} multiple />
+          <div className='SideBar-Buttons'>
             <IconButton
-              style={ iconButtonStyle }
-              iconStyle={ iconStyle }
-              className="SideBar-Button"
-              onClick={ this.props.onCloneClick }
-              tooltip="Clone"
-              tooltipStyle={ tooltipStyle }
-              tooltipPosition={ tooltipPosition }
-              touch={true}
-              disabled={true}>
+              style={iconButtonStyle}
+              iconStyle={iconStyle}
+              className='SideBar-Button'
+              onClick={this.props.onCloneClick}
+              tooltip='Clone'
+              tooltipStyle={tooltipStyle}
+              tooltipPosition={tooltipPosition}
+              touch
+              disabled>
               <CopyIcon />
             </IconButton>
             <IconButton
-              style={ iconButtonStyle }
-              iconStyle={ iconStyle }
-              className="SideBar-Button"
-              onClick={ this.props.onDownloadClick }
-              tooltip="Download"
-              tooltipStyle={ tooltipStyle }
-              tooltipPosition={ tooltipPosition }
-              touch={true}
-              disabled={ !this.props.files || this.props.files.length < 1 }>
+              style={iconButtonStyle}
+              iconStyle={iconStyle}
+              className='SideBar-Button'
+              onClick={this.props.onDownloadClick}
+              tooltip='Download'
+              tooltipStyle={tooltipStyle}
+              tooltipPosition={tooltipPosition}
+              touch
+              disabled={!this.props.files || this.props.files.length < 1}>
               <ArchiveIcon />
             </IconButton>
           </div>
-          <div className="SideBar-Buttons">
+          <div className='SideBar-Buttons'>
             <IconMenu
-              className="SideBar-Button"
+              className='SideBar-Button'
               iconButtonElement={
                 <IconButton
-                  style={ iconButtonStyle }
-                  iconStyle={ iconStyle }
-                  tooltip="Add"
-                  tooltipStyle={ tooltipStyle }
-                  tooltipPosition={ tooltipPosition }
-                  touch={true} >
+                  style={iconButtonStyle}
+                  iconStyle={iconStyle}
+                  tooltip='Add'
+                  tooltipStyle={tooltipStyle}
+                  tooltipPosition={tooltipPosition}
+                  touch >
                   <AddIcon />
                 </IconButton>
             }>
-              <MenuItem primaryText="Upload files" onClick={ this.handleFileUploadClick } />
-              <MenuItem primaryText="Add file" onClick={ this.props.onAddFileClick.bind(this, '/') } />
-              <MenuItem primaryText="Add folder" onClick={ this.props.onAddFolderClick.bind(this, '/') } />
+              <MenuItem primaryText='Upload files' onClick={this.handleFileUploadClick} />
+              <MenuItem primaryText='Add file' onClick={this.props.onAddFileClick.bind(this, '/')} />
+              <MenuItem primaryText='Add folder' onClick={this.props.onAddFolderClick.bind(this, '/')} />
             </IconMenu>
             <IconButton
-              style={ iconButtonStyle }
-              iconStyle={ iconStyle }
-              className="SideBar-Button"
-              onClick={ this.props.onSharingClick }
-              tooltip="Sharing"
-              tooltipStyle={ tooltipStyle }
-              tooltipPosition={ tooltipPosition }
-              touch={true} >
+              style={iconButtonStyle}
+              iconStyle={iconStyle}
+              className='SideBar-Button'
+              onClick={this.props.onSharingClick}
+              tooltip='Sharing'
+              tooltipStyle={tooltipStyle}
+              tooltipPosition={tooltipPosition}
+              touch >
               <GroupIcon />
             </IconButton>
             <IconButton
-              style={ iconButtonStyle }
-              iconStyle={ iconStyle }
-              className="SideBar-Button"
-              onClick={ this.props.onSettingsClick }
-              tooltip="Settings"
-              tooltipStyle={ tooltipStyle }
-              tooltipPosition={ tooltipPosition }
-              touch={true} >
+              style={iconButtonStyle}
+              iconStyle={iconStyle}
+              className='SideBar-Button'
+              onClick={this.props.onSettingsClick}
+              tooltip='Settings'
+              tooltipStyle={tooltipStyle}
+              tooltipPosition={tooltipPosition}
+              touch >
               <SettingsIcon />
             </IconButton>
           </div>

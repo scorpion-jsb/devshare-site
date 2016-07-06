@@ -6,9 +6,6 @@ import TextField from 'material-ui/lib/text-field'
 import './DeleteDialog.scss'
 
 export default class DeleteDialog extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   state = { open: this.props.open || false }
 
@@ -17,7 +14,6 @@ export default class DeleteDialog extends Component {
     open: PropTypes.bool,
     onSubmit: PropTypes.func
   }
-
 
   componentWillReceiveProps (nextProps) {
     let nextState = {}
@@ -50,31 +46,30 @@ export default class DeleteDialog extends Component {
     })
   }
 
-
   render () {
     const { name } = this.props
     const deleteActions = [
       <FlatButton
-        label="Cancel"
-        secondary={true}
-        onTouchTap={ this.close }
+        label='Cancel'
+        secondary
+        onTouchTap={this.close}
       />,
       <FlatButton
-        label="Delete"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={ this.handleSubmit }
-        disabled={ !this.state.projectname || this.state.projectname !== this.props.name }
+        label='Delete'
+        primary
+        keyboardFocused
+        onTouchTap={this.handleSubmit}
+        disabled={!this.state.projectname || this.state.projectname !== this.props.name}
       />
-   ]
+    ]
     return (
       <div className='DeleteDialog'>
         <Dialog
-          title={ `Delete ${name}` }
-          onRequestClose={ this.close }
-          open={ this.state.open || false }
-          actions={ deleteActions }
-          modal={ false } >
+          title={`Delete ${name}`}
+          onRequestClose={this.close}
+          open={this.state.open || false}
+          actions={deleteActions}
+          modal={false} >
           <div className='DeleteDialog-Content'>
             <div className='DeleteDialog-Section'>
               <h3 className='DeleteDialog-Warning'>WARNING: </h3>
@@ -84,14 +79,19 @@ export default class DeleteDialog extends Component {
               <span>Are you sure this is what you want to be doing?</span>
             </div>
             <div className='DeleteDialog-Restatement'>
-              <span>You are about to delete your project named <span className='DeleteDialog-Restatement-Name'>{ name }</span></span>
+              <span>
+                You are about to delete your project named
+                <span className='DeleteDialog-Restatement-Name'>
+                  {name}
+                </span>
+              </span>
             </div>
             <div className='DeleteDialog-InputGroup'>
               <span>Please type in the name of the project to confirm:</span>
               <TextField
                 className='DeleteDialog-Input'
-                floatingLabelText="Project Name"
-                onChange={ this.handleInputChange.bind(this, 'projectname') }
+                floatingLabelText='Project Name'
+                onChange={this.handleInputChange.bind(this, 'projectname')}
               />
             </div>
           </div>

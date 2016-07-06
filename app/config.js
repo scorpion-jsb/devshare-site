@@ -26,7 +26,6 @@ class Config {
     if (!instance) {
       instance = this
     }
-    // console.log({description: 'Config object created.', config: merge(this, defaultConfig), func: 'constructor', obj: 'Config'})
     return merge(instance, defaultConfig)
   }
   get logLevel () {
@@ -34,8 +33,6 @@ class Config {
   }
   set envName (newEnv) {
     envName = newEnv
-    // this.envName = newEnv
-    // console.log('Environment name set:', envName)
   }
   get env () {
     return defaultConfig.envs[envName]

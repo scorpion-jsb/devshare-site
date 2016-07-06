@@ -6,14 +6,11 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import './TreeView.scss'
 
 export default class TreeView extends Component {
-  constructor () {
-    super()
-  }
 
   static propTypes = {
     fileStructure: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
-      path: PropTypes.string,
+      path: PropTypes.string
     })),
     onFileClick: PropTypes.func,
     onFolderClick: PropTypes.func,
@@ -40,26 +37,26 @@ export default class TreeView extends Component {
         const children = Object.assign({}, omit(entry, ['key', 'meta']))
         return (
           <TreeFolder
-            key={ `child-Folder-${i}-${entry.meta.name}` }
-            index={ i }
-            data={ entry.meta }
-            isCollapsed={ entry.isCollapsed }
-            children={ children }
-            onFileClick={ this.props.onFileClick }
-            onRightClick={ this.props.onRightClick }
+            key={`child-Folder-${i}-${entry.meta.name}`}
+            index={i}
+            data={entry.meta}
+            isCollapsed={entry.isCollapsed}
+            children={children}
+            onFileClick={this.props.onFileClick}
+            onRightClick={this.props.onRightClick}
           />
         )
       }
       // File
       return (
         <TreeFile
-          key={ `child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}` }
-          index={ i }
-          data={ entry.meta }
-          active={ entry.active }
-          onClick={ this.props.onFileClick }
-          onRightClick={ this.props.onRightClick }
-          users={ entry.users }
+          key={`child-File-${i}-${entry.meta.name || entry.meta.path.split('/')[0]}`}
+          index={i}
+          data={entry.meta}
+          active={entry.active}
+          onClick={this.props.onFileClick}
+          onRightClick={this.props.onRightClick}
+          users={entry.users}
         />
       )
     })
@@ -76,33 +73,39 @@ export default class TreeView extends Component {
         <div className='TreeView-Container'>
           {
             (structure && !this.props.loading)
-            ? <ol className='TreeView-Structure'>
-                { structure }
+            ? (
+              <ol className='TreeView-Structure'>
+                {structure}
               </ol>
+            )
             : null
           }
           {
             (!structure && !loading)
             ? (
-                <div className='TreeView-None' key='NotFound-1'>
-                  <div className='TreeView-None-Desktop'>
-                    <span><strong>Right click</strong></span>
-                    <span className=''>OR</span>
-                    <strong>Drop files</strong>
-                    <span>to get started</span>
-                  </div>
-                  <div className='TreeView-None-Mobile'>
-                    <span>Touch the Plus to get started</span>
-                  </div>
+              <div className='TreeView-None' key='NotFound-1'>
+                <div className='TreeView-None-Desktop'>
+                  <span><strong>Right click</strong></span>
+                  <span className=''>OR</span>
+                  <strong>Drop files</strong>
+                  <span>to get started</span>
                 </div>
-              )
+                <div className='TreeView-None-Mobile'>
+                  <span>Touch the Plus to get started</span>
+                </div>
+              </div>
+            )
             : null
           }
           {
             loading
-            ? <div className='TreeView-Loader' style={ loading ? {display: 'block'} : {display: 'none'}}>
-                <CircularProgress size={ 0.75 } />
+            ? (
+              <div
+                className='TreeView-Loader'
+                style={loading ? {display: 'block'} : {display: 'none'}}>
+                <CircularProgress size={0.75} />
               </div>
+            )
             : null
           }
         </div>

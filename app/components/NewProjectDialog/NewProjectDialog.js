@@ -5,8 +5,10 @@ import FlatButton from 'material-ui/lib/flat-button'
 import './NewProjectDialog.scss'
 
 class NewProjectDialog extends Component {
-  constructor(props){
-    super(props)
+
+  static propTypes = {
+    open: PropTypes.bool,
+    onCreateClick: PropTypes.func
   }
 
   state = { open: this.props.open || false }
@@ -37,7 +39,7 @@ class NewProjectDialog extends Component {
         error: 'Name is required'
       })
     }
-    if(this.props && this.props.onCreateClick){
+    if (this.props && this.props.onCreateClick) {
       this.props.onCreateClick(this.state.name)
       this.close()
     }
@@ -52,31 +54,31 @@ class NewProjectDialog extends Component {
   render () {
     const actions = [
       <FlatButton
-        label="Cancel"
-        secondary={true}
-        onClick={ this.close }
+        label='Cancel'
+        secondary
+        onClick={this.close}
       />,
       <FlatButton
-        label="Create"
-        primary={true}
-        onClick={ this.handleSubmit}
+        label='Create'
+        primary
+        onClick={this.handleSubmit}
       />
     ]
     return (
       <Dialog
-        title="New Project"
-        modal={ false }
-        actions={ actions }
-        open={ this.state.open }
-        onRequestClose={ this.close }
+        title='New Project'
+        modal={false}
+        actions={actions}
+        open={this.state.open}
+        onRequestClose={this.close}
         contentClassName='NewProjectDialog'>
-        <div className="NewProjectDialog-Inputs">
+        <div className='NewProjectDialog-Inputs'>
           <TextField
-            hintText="exampleProject"
-            floatingLabelText="Project Name"
-            ref="projectNameField"
-            onChange={ this.handleInputChange.bind(this, 'name') }
-            errorText={ this.state.error || null }
+            hintText='exampleProject'
+            floatingLabelText='Project Name'
+            ref='projectNameField'
+            onChange={this.handleInputChange.bind(this, 'name')}
+            errorText={this.state.error || null}
           />
         </div>
       </Dialog>

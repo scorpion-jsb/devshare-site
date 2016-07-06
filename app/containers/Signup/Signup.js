@@ -1,4 +1,3 @@
-import { capitalize, find } from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -17,17 +16,19 @@ import Snackbar from 'material-ui/lib/snackbar'
 import './Signup.scss'
 
 class Signup extends Component {
-  constructor (props) {
-    super(props)
+
+  static propTypes = {
+    account: PropTypes.object,
+    signup: PropTypes.func.isRequired
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
   }
 
   state = {
     errors: { username: null, password: null },
     snackCanOpen: false
-  }
-
-  static contextTypes = {
-    router: React.PropTypes.object.isRequired
   }
 
   componentWillReceiveProps (nextProps) {
@@ -38,7 +39,7 @@ class Signup extends Component {
 
   handleSnackClose = () => {
     this.setState({
-     snackCanOpen: false
+      snackCanOpen: false
     })
   }
 
@@ -78,39 +79,39 @@ class Signup extends Component {
   render () {
     if (!this.props.account.isFetching) {
       return (
-        <div className="Signup">
-          <Paper className="Signup-Panel">
-            <SignupForm onSignup={ this.handleSignup } />
+        <div className='Signup'>
+          <Paper className='Signup-Panel'>
+            <SignupForm onSignup={this.handleSignup} />
           </Paper>
-          <div className="Signup-Or">
+          <div className='Signup-Or'>
             or
           </div>
-          <GoogleButton onClick={ this.providerSignup.bind(this, 'google') } />
+          <GoogleButton onClick={this.providerSignup.bind(this, 'google')} />
           <RaisedButton
-            label="Sign in with GitHub"
-            secondary={ true }
-            onTouchTap={ this.providerSignup.bind(this, 'github') }
+            label='Sign in with GitHub'
+            secondary
+            onTouchTap={this.providerSignup.bind(this, 'github')}
           />
-          <div className="Signup-Login">
-            <span className="Signup-Login-Label">
+          <div className='Signup-Login'>
+            <span className='Signup-Login-Label'>
               Already have an account?
             </span>
-            <Link className="Signup-Login-Link" to="/login">Login</Link>
+            <Link className='Signup-Login-Link' to='/login'>Login</Link>
           </div>
           <Snackbar
-            open={ this.props.account.error !== null && this.state.snackCanOpen }
-            message={ this.props.account.error || 'Signup error' }
-            action="close"
-            autoHideDuration={ 3000 }
-            onRequestClose={ this.handleSnackClose }
+            open={this.props.account.error !== null && this.state.snackCanOpen}
+            message={this.props.account.error || 'Signup error'}
+            action='close'
+            autoHideDuration={3000}
+            onRequestClose={this.handleSnackClose}
           />
         </div>
       )
     }
     return (
-      <div className="Signup">
-        <div className="Signup-Progress">
-          <CircularProgress  mode="indeterminate" />
+      <div className='Signup'>
+        <div className='Signup-Progress'>
+          <CircularProgress mode='indeterminate' />
         </div>
       </div>
     )

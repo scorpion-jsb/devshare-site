@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import Dialog from 'material-ui/lib/dialog'
-import TextField from 'material-ui/lib/text-field'
-import FlatButton from 'material-ui/lib/flat-button'
+import Dialog from 'material-ui/Dialog'
+import TextField from 'material-ui/TextField'
+import FlatButton from 'material-ui/FlatButton'
 import './NewProjectDialog.scss'
 
 class NewProjectDialog extends Component {

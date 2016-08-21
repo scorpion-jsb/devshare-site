@@ -8,10 +8,10 @@ import { event } from '../../helpers/ga'
 // Components
 import SignupForm from '../../components/SignupForm/SignupForm'
 import GoogleButton from '../../components/GoogleButton/GoogleButton'
-import Paper from 'material-ui/lib/paper'
-import RaisedButton from 'material-ui/lib/raised-button'
-import CircularProgress from 'material-ui/lib/circular-progress'
-import Snackbar from 'material-ui/lib/snackbar'
+import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton'
+import CircularProgress from 'material-ui/CircularProgress'
+import Snackbar from 'material-ui/Snackbar'
 
 import './Signup.scss'
 
@@ -89,7 +89,7 @@ class Signup extends Component {
           <GoogleButton onClick={this.providerSignup.bind(this, 'google')} />
           <RaisedButton
             label='Sign in with GitHub'
-            secondary
+            primary
             onTouchTap={this.providerSignup.bind(this, 'github')}
           />
           <div className='Signup-Login'>
@@ -119,16 +119,15 @@ class Signup extends Component {
 }
 
 // Place state of redux store into props of component
-function mapStateToProps (state) {
-  return {
-    account: state.account,
-    router: state.router
+const mapStateToProps = ({ account, router }) => (
+  {
+    account,
+    router
   }
-}
+)
 
 // Place action methods into props
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.account, dispatch)
-}
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Actions.account, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

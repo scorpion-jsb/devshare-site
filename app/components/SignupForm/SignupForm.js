@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import TextField from 'material-ui/lib/text-field'
-import RaisedButton from 'material-ui/lib/raised-button'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 import { capitalize } from 'lodash'
 
 import './SignupForm.scss'
@@ -118,7 +118,7 @@ export default class SignupForm extends Component {
         <div className='SignupForm-Submit'>
           <RaisedButton
             label='Sign Up'
-            primary
+            secondary
             type='submit'
             disabled={this.props.account && this.props.account.isFetching}
             style={buttonStyle}

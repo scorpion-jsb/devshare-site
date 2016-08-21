@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import Paper from 'material-ui/lib/paper'
-import ContentAddCircle from 'material-ui/lib/svg-icons/content/add-circle'
+import Paper from 'material-ui/Paper'
+import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
 import './NewProjectTile.scss'
 

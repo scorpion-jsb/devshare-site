@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { map, merge } from 'lodash'
-import FontIcon from 'material-ui/lib/font-icon'
+import FontIcon from 'material-ui/FontIcon'
 // Components
 import TreeFile from '../TreeFile'
 

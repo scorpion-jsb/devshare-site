@@ -2,7 +2,7 @@ import { omit } from 'lodash'
 import React, { PropTypes, Component } from 'react'
 import TreeFolder from '../TreeFolder'
 import TreeFile from '../TreeFile'
-import CircularProgress from 'material-ui/lib/circular-progress'
+import CircularProgress from 'material-ui/CircularProgress'
 import './TreeView.scss'
 
 export default class TreeView extends Component {

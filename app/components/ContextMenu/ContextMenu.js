@@ -3,14 +3,6 @@ import './ContextMenu.scss'
 
 class ContextMenu extends Component {
 
-  state = {
-    contextMenu: {
-      display: 'none',
-      top: '0px',
-      left: '0px'
-    }
-  }
-
   static propTypes = {
     event: PropTypes.object,
     onAddFileClick: PropTypes.func,
@@ -22,6 +14,14 @@ class ContextMenu extends Component {
     }),
     path: PropTypes.string,
     dismiss: PropTypes.func
+  }
+
+  state = {
+    contextMenu: {
+      display: 'none',
+      top: '0px',
+      left: '0px'
+    }
   }
 
   componentDidMount () {

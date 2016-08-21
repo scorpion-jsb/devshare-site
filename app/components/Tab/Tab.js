@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import FontIcon from 'material-ui/lib/font-icon'
+import FontIcon from 'material-ui/FontIcon'
 
 import './Tab.scss'
 

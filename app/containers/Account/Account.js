@@ -5,8 +5,8 @@ import { Actions } from 'redux-devshare'
 
 // Components
 import AccountDialog from '../../components/AccountDialog/AccountDialog'
-import RaisedButton from 'material-ui/lib/raised-button'
-import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
 
 import './Account.scss'
 
@@ -96,16 +96,15 @@ class Account extends Component {
 }
 
 // Place state of redux store into props of component
-function mapStateToProps (state) {
-  return {
-    account: state.account,
-    router: state.router
+const mapStateToProps = ({ account, router }) => (
+  {
+    account,
+    router
   }
-}
+)
 
 // Place action methods into props
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.account, dispatch)
-}
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Actions.account, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account)

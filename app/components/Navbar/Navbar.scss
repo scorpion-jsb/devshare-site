@@ -1,6 +1,7 @@
 @import '../../variables';
 .Navbar {
   box-sizing: border-box;
+  min-height: 64px;
   &-Brand {
     color: $navbarText;
     font-weight: 200;

@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import Devshare from 'devshare'
 import { Actions } from 'redux-devshare'
 import { hydrateUser } from '../../actions/account'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 // Components
 import Navbar from '../../components/Navbar/Navbar'
 
 // Styling
 import Theme from '../../theme'
-import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import './App.scss'
 
 // Tap Plugin
@@ -40,7 +40,7 @@ class Main extends Component {
 
   getChildContext = () => {
     return {
-      muiTheme: ThemeManager.getMuiTheme(Theme)
+      muiTheme: getMuiTheme(Theme)
     }
   }
 
@@ -68,15 +68,15 @@ class Main extends Component {
 }
 
 // Place state of redux store into props of component
-function mapStateToProps (state) {
-  return {
-    account: state.account,
-    router: state.router
+const mapStateToProps = ({ account, router }) => (
+  {
+    account,
+    router
   }
-}
+)
 
 // Place action methods into props
-function mapDispatchToProps (dispatch) {
+const mapDispatchToProps = (dispatch) => {
   Actions.account.hydrateUser = hydrateUser
   return bindActionCreators(Actions.account, dispatch)
 }

@@ -8,12 +8,12 @@ import { event } from '../../helpers/ga'
 import { randomProjectId } from '../../helpers'
 
 // Components
-import RaisedButton from 'material-ui/lib/raised-button'
+import RaisedButton from 'material-ui/RaisedButton'
 import Theme from '../../theme'
-import GroupIcon from 'material-ui/lib/svg-icons/social/group'
-import CloudDownload from 'material-ui/lib/svg-icons/file/cloud-download'
-import StartIcon from 'material-ui/lib/svg-icons/content/create'
-import Paper from 'material-ui/lib/paper'
+import GroupIcon from 'material-ui/svg-icons/social/group'
+import CloudDownload from 'material-ui/svg-icons/file/cloud-download'
+import StartIcon from 'material-ui/svg-icons/content/create'
+import Paper from 'material-ui/Paper'
 
 import './Home.scss'
 
@@ -25,6 +25,7 @@ const iconStyle = {
 const buttonStyle = {
   margin: '3rem',
   height: '3rem',
+  lineHeight: '3rem',
   marginBottom: 5
 }
 const buttonLabelStyle = {
@@ -109,16 +110,15 @@ class Home extends Component {
 }
 
 // Place state of redux store into props of component
-function mapStateToProps (state) {
-  return {
+const mapStateToProps = (state) => (
+  {
     account: state.account,
     router: state.router
   }
-}
+)
 
 // Place action methods into props
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators(Actions.projects, dispatch)
-}
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Actions.projects, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

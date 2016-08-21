@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import FlatButton from 'material-ui/lib/flat-button'
-import Dialog from 'material-ui/lib/dialog'
+import FlatButton from 'material-ui/FlatButton'
+import Dialog from 'material-ui/Dialog'
 import Dropzone from 'react-dropzone'
 import AvatarEditor from 'react-avatar-editor'
 import './AccountDialog.scss'

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import Popover from 'material-ui/lib/popover/popover'
-import TextField from 'material-ui/lib/text-field'
+import Popover from 'material-ui/Popover/Popover'
+import TextField from 'material-ui/TextField'
 
 import './WorkspacePopover.scss'
 

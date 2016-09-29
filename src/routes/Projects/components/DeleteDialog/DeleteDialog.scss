@@ -1,0 +1,35 @@
+@import '../../../../styles/base';
+.container {
+
+}
+.content {
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+}
+.warning {
+  display: inline;
+  color: red;
+}
+.question {
+  margin-top: 1rem;
+}
+.restatement {
+  margin-top: 1rem;
+  &-name {
+    color: $primary;
+    margin-left: .5rem;
+  }
+}
+
+.input-group {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}

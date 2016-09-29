@@ -1,21 +1,27 @@
 language: node_js
 
 node_js:
-- 5.9.0
-
-sudo: false
-
-branches:
-  only:
-    - master
+  - "6"
 
 cache:
+  bundler: true
   directories:
-    - node_modules
+    - node_modules # NPM packages
+
+install:
+  - npm set progress=false
+  - npm install -g firebase-tools
+  - npm install
 
 script:
-  - npm run lint
-  - npm run build
+  - npm run config
+  - npm run lint:fix
+  - npm run test
+  - npm run build:prod
+  - npm run fb
+
+after_success:
+  - npm run codecov
 
 deploy:
   skip_cleanup: true
@@ -23,3 +29,8 @@ deploy:
   api_key:
     secure: $HEROKU
   app: devshare-stg
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change

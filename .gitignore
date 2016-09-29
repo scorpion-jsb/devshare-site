@@ -1,11 +1,12 @@
-node_modules/
-npm-debug.log
-.DS_Store
-**/.DS_Store
-stats.json
-build
+.DS_STORE
+**/*.DS_STORE
+*.log
+src/config.js
+node_modules
 
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+dist
+coverage
+
+.idea/
+
+src/config.js

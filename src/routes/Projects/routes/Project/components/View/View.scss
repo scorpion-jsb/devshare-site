@@ -1,0 +1,35 @@
+@import '../../../../../../styles/colors';
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #f8f8f2;
+  background-color: $editorBackground;
+  height: 100%;
+  overflow: scroll;
+}
+.default {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align:center;
+  vertical-align: middle;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  background-color: $editorBackground;
+  color: rgba(0, 0, 0, 0.2);
+  &-label {
+    font-size: 2rem;
+    margin-top: 50px;
+    font-weight: 500;
+    flex-grow: 1;
+    align-self: center;
+  }
+}

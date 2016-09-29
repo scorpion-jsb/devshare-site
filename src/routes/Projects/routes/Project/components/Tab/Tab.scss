@@ -1,0 +1,52 @@
+/*TODO: extract height into local variable and colors into global variable*/
+@import '../../../../../../styles/colors';
+.container {
+  display: inline-block;
+  position: relative;
+  flex-grow: 1;
+  line-height: 35px;
+  border: none;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  height: 100%;
+  font-weight: 400;
+  color: $lightGray;
+  background-color: $Tab;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    color: white;
+    // .Tab-Close {
+    //   display: block;
+    // }
+  }
+  &.active {
+    z-index: 1;
+    .indicator {
+      background-color: $accentColor;
+    }
+  }
+}
+.indicator {
+  background-color: $blackGray;
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  bottom: 0;
+}
+.title {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+.close {
+  position: absolute;
+  // display: none;
+  bottom: 0;
+  right: 10px;
+  z-index: 3;
+  text-align: right;
+  vertical-align: center;
+  cursor: pointer;
+}

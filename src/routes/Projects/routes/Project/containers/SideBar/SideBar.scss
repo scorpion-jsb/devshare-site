@@ -1,0 +1,48 @@
+@import '../../../../../../styles/colors';
+
+.container {
+  box-sizing: border-box;
+  min-width: 240px;
+  min-height: 200px;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.filehover {
+  border: 3px dashed #b2dfdb;
+  .dropzone {
+    margin: -3px;
+  }
+}
+.dropzone {
+  padding-top: 2rem;
+  display: flex;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  flex-direction: column;
+  @media screen and (max-width: 700px){
+    padding-top: .5rem;
+  }
+}
+a {
+  text-align: center;
+}
+.treeview {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex: auto;
+  flex-grow: 1;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 10px 40px 10px;
+  @media screen and (max-width: 700px){
+    padding: 0 10px 5px 10px;
+  }
+}
+// Hide default choose file button
+.file-input {
+  display: none !important;
+}

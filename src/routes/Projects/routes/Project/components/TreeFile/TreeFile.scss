@@ -1,0 +1,34 @@
+@import '../../../../../../styles/colors';
+
+.container {
+  background-color: transparent;
+  cursor: pointer;
+  float: left;
+  width: 100%;
+  &.active{
+    background-color: $editorBackground;
+    color:blue;
+  }
+}
+.name {
+  display: flex;
+  align-self: flex-start;
+  flex-grow: 1;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.users {
+  display: flex;
+  align-self: flex-end;
+  position: fixed;
+  right: 0;
+}
+.user {
+  width: 30px;
+  text-align: center;
+  font-weight: 500;
+}

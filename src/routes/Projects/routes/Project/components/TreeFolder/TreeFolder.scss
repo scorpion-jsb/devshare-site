@@ -1,0 +1,25 @@
+.container {
+  cursor: pointer;
+  vertical-align: center;
+  width: 100%;
+  float: left;
+}
+.info {
+  margin-left: .4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.children {
+  list-style-type:none;
+  padding-left:0;
+}
+.name {
+  height: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

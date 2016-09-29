@@ -2,7 +2,7 @@ import React from 'react'
 import { Home } from 'routes/Home/components/Home'
 import { shallow } from 'enzyme'
 
-describe('(Component) Home', () => {
+describe.skip('(Component) Home', () => {
   let _component
 
   beforeEach(() => {

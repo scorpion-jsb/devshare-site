@@ -14,21 +14,13 @@ install:
   - npm install
 
 script:
-  - npm run config
   - npm run lint:fix
   - npm run test
   - npm run build:prod
-  - npm run fb
+  - npm run deploy
 
 after_success:
   - npm run codecov
-
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  api_key:
-    secure: $HEROKU
-  app: devshare-stg
 
 notifications:
   email:

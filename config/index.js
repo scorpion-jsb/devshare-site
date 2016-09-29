@@ -70,16 +70,25 @@ Edit at Your Own Risk
 
 -------------------------------------------------
 ************************************************/
+const pkg = require('../package.json')
 
+// Switch env to production on prod branch
+let env = config.env
+if (process.env.TRAVIS_PULL_REQUEST === false) {
+  if (process.env.TRAVIS_BRANCH === 'prod') {
+    env = 'production'
+  }
+}
 // ------------------------------------
 // Environment
 // ------------------------------------
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
   'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.env)
+    'NODE_ENV' : JSON.stringify(env)
   },
-  'NODE_ENV'     : config.env,
+  '__NODE_ENV__' : JSON.stringify(env),
+  '__VERSION__'  : JSON.stringify(pkg.version),
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
@@ -91,7 +100,6 @@ config.globals = {
 // ------------------------------------
 // Validate Vendor Dependencies
 // ------------------------------------
-const pkg = require('../package.json')
 
 config.compiler_vendor = config.compiler_vendor
   .filter((dep) => {

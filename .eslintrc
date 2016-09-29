@@ -17,7 +17,9 @@
     "__PROD__"     : false,
     "__DEBUG__"    : false,
     "__COVERAGE__" : false,
-    "__BASENAME__" : false
+    "__BASENAME__" : false,
+    "__VERSION__"  : false,
+    "__NODE_ENV__" : false
   },
   "rules": {
     "semi" : [2, "never"],

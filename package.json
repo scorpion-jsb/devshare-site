@@ -17,12 +17,12 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
-    "config": "better-npm-run config",
     "build": "better-npm-run build",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "fb": "better-npm-run deploy"
+    "travis": "better-npm-run travis",
+    "deploy": "better-npm-run deploy"
   },
   "betterScripts": {
     "compile": {
@@ -71,10 +71,10 @@
         "DEBUG": "test:*"
       }
     },
-    "config": {
-      "command": "babel-node build/config",
+    "travis": {
+      "command": "babel-node build/travis",
       "env": {
-        "DEBUG": "config:*"
+        "DEBUG": "travis:*"
       }
     },
     "deploy": {

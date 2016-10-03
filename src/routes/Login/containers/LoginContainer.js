@@ -5,6 +5,9 @@ import Paper from 'material-ui/Paper'
 import CircularProgress from 'material-ui/CircularProgress'
 import Snackbar from 'material-ui/Snackbar'
 import LoginForm from '../components/LoginForm/LoginForm'
+import FontIcon from 'material-ui/FontIcon'
+import RaisedButton from 'material-ui/RaisedButton'
+import GithubIcon from 'react-icons/lib/go/mark-github'
 
 // styles
 import classes from './LoginContainer.scss'
@@ -45,8 +48,8 @@ export default class Login extends Component {
       .then(account => this.context.router.push(`/${account.username}`))
   }
 
-  googleLogin = () =>
-    this.handleLogin({ provider: 'google', type: 'popup' })
+  providerLogin = (provider) =>
+    this.handleLogin({ provider, type: 'popup' })
 
   render () {
     const { isLoading, snackCanOpen } = this.state
@@ -71,7 +74,19 @@ export default class Login extends Component {
           or
         </div>
         <div className={classes['providers']}>
-          <GoogleButton onClick={this.googleLogin} />
+          <GoogleButton onClick={() => this.providerLogin('google')} />
+        </div>
+        <div className={classes['providers']}>
+          <RaisedButton
+            className={classes['github']}
+            onClick={() => this.providerLogin('github')}
+            label='Sign in with Github'
+            icon={
+              <FontIcon className={classes['github-icon']}>
+                <GithubIcon />
+              </FontIcon>
+            }
+          />
         </div>
         <div className={classes['signup']}>
           <span className={classes['signup-label']}>

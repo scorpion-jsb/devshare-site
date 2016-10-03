@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../config'
 import _debug from 'debug'
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
@@ -266,6 +267,22 @@ if (!__DEV__) {
   webpackConfig.plugins.push(
     new ExtractTextPlugin('[name].[contenthash].css', {
       allChunks: true
+    }),
+    new FaviconsWebpackPlugin({
+      logo: 'static/devshare-icon.png',
+      inject: true,
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
     })
   )
 }

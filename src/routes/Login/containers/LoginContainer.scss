@@ -60,3 +60,12 @@
 .providers {
   margin-top: 1rem;
 }
+.github {
+  width: 240px;
+  display: flex;
+  padding-top: 6.66px;
+  padding-bottom: 7px;
+  &-icon {
+    padding-right: 25px;
+  }
+}

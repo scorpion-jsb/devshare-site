@@ -5,8 +5,11 @@ import GoogleButton from 'react-google-button'
 // Components
 import SignupForm from '../components/SignupForm/SignupForm'
 import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import Snackbar from 'material-ui/Snackbar'
+import GithubIcon from 'react-icons/lib/go/mark-github'
+import FontIcon from 'material-ui/FontIcon'
 
 import classes from './SignupContainer.scss'
 
@@ -55,13 +58,13 @@ export default class Signup extends Component {
       )
   }
 
-  googleLogin = () => {
+  providerLogin = (provider) => {
     this.setState({
       snackCanOpen: true,
       isLoading: true
     })
     this.props.devshare
-      .login({ provider: 'google', type: 'popup' })
+      .login({ provider, type: 'popup' })
       .then(account =>
         this.context.router.push(`${account.username}`)
       )
@@ -90,7 +93,19 @@ export default class Signup extends Component {
           or
         </div>
         <div className={classes['providers']}>
-          <GoogleButton onClick={this.googleLogin} />
+          <GoogleButton onClick={() => this.providerLogin('google')} />
+        </div>
+        <div className={classes['providers']}>
+          <RaisedButton
+            className={classes['github']}
+            onClick={() => this.providerLogin('github')}
+            label='Sign in with Github'
+            icon={
+              <FontIcon className={classes['github-icon']}>
+                <GithubIcon />
+              </FontIcon>
+            }
+          />
         </div>
         <div className={classes['login']}>
           <span className={classes['login-label']}>

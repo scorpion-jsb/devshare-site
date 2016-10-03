@@ -6,10 +6,21 @@ import { Field, reduxForm } from 'redux-form'
 import classes from './SignupForm.scss'
 const buttonStyle = { width: '100%' }
 
-export const validate = values => {
+export const validate = ({ email, password, username }) => {
   const errors = {}
-  if (!values.email) errors.email = 'Required'
-  if (!values.password) errors.password = 'Required'
+  if (!email) errors.email = 'Email Required'
+  if (!password) errors.password = 'Password Required'
+  if (username) {
+    if (username.match(/[/\s]/g)) {
+      errors.username = 'Username may not contain spaces'
+    }
+    if (username.match(/[.$#\[\]\/]/g)) {
+      errors.username = 'Username may not contain symbols'
+    }
+  }
+  if (email && email.indexOf('@') === -1) {
+    errors.email = 'Invalid Email'
+  }
   return errors
 }
 

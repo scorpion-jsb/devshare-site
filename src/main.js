@@ -4,14 +4,13 @@ import { initScripts } from 'utils'
 import createStore from './store/createStore'
 import AppContainer from './containers/App/App'
 import { version } from '../package.json'
-import { env, firebase as fbConfig } from './config'
+import { env } from './config'
 
 // ========================================================
 // Set Window Variables
 // ========================================================
 window.version = version
 window.env = env
-window.db = fbConfig.databaseURL
 initScripts()
 
 // ========================================================

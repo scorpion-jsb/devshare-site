@@ -1,38 +1,38 @@
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../modules/<%= pascalEntityName %>'
+import { reduxForm } from 'redux-form'
+import { devshare, helpers } from 'redux-devshare'
 
-/*  This is a container component. Notice it does not contain any JSX,
-    nor does it import React. This component is **only** responsible for
-    wiring in the actions and state necessary to render a presentational
-    component - in this case, the counter:   */
+import <%= pascalEntityName %> from '../components/<%= pascalEntityName %>/<%= pascalEntityName %>'
 
-import <%= pascalEntityName %> from '../components/<%= pascalEntityName %>'
+const { pathToJS, dataToJS } = helpers
 
-/*  Object of action creators (can also be function that returns object).
-    Keys will be passed as props to presentational components. Here we are
-    implementing our wrapper around increment; the component doesn't care   */
+const formName = <%= pascalEntityName %>
 
-const mapActionCreators = {
-  increment: () => increment(1),
-  doubleAsync
-}
-
-const mapStateToProps = (state) => ({
-  counter: state.counter
-})
-
-/*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
-
-    import { createSelector } from 'reselect'
-    const counter = (state) => state.counter
-    const tripleCount = createSelector(counter, (count) => count * 3)
-    const mapStateToProps = (state) => ({
-      counter: tripleCount(state)
+// Props decorators
+@devshare(
+  // List of Firbase refs to sync
+  ({ params }) => ([
+    '<%= pascalEntityName %>'
+  ])
+)
+@connect(
+  // Map state to props
+  ({ firebase }, { params }) => ({
+      account: pathToJS(firebase, 'profile'),
+      <%= pascalEntityName %>: dataToJS(firebase, '<%= pascalEntityName %>')
     })
+  })
+)
+export default class <%= pascalEntityName %>Container extends Component {
+  static propTypes = {
+    account: PropTypes.object,
+    <%= pascalEntityName %>: PropTypes.object
+  }
 
-    Selectors can compute derived data, allowing Redux to store the minimal possible state.
-    Selectors are efficient. A selector is not recomputed unless one of its arguments change.
-    Selectors are composable. They can be used as input to other selectors.
-    https://github.com/reactjs/reselect    */
-
-export default connect(mapStateToProps, mapActionCreators)(<%= pascalEntityName %>)
+  render() {
+    return (
+      <<%= pascalEntityName %> />
+    )
+  }
+}

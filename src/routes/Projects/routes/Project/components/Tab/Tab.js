@@ -31,15 +31,15 @@ export default class Tab extends Component {
     const iconStyle = { color: '#aaaaaa', fontSize: iconSize }
     const { active, title } = this.props
     return (
-      <li className={classnames(classes['container'], active && classes['active'])}>
-        <div className={classes['title']} onClick={this.handleTabClick}>
+      <li className={classnames(classes.container, active && classes.active)}>
+        <div className={classes.title} onClick={this.handleTabClick}>
           {title}
         </div>
-        <div className={classes['close']} onClick={this.handleCloseClick}>
+        <div className={classes.close} onClick={this.handleCloseClick}>
           <CloseIcon style={iconStyle} />
         </div>
         {/* TODO: Make tab indicator :after css class */}
-        <div className={classes['indicator']} />
+        <div className={classes.indicator} />
       </li>
     )
   }
@@ -53,10 +53,7 @@ export default class Tab extends Component {
     if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) {
       return
     }
-    // Event element
-    var el = event.currentTarget
     // Prevent default action
     event.preventDefault()
-    return el
   }
 }

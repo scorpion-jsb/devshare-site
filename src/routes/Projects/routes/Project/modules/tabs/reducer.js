@@ -11,26 +11,25 @@ const initialState = fromJS({})
 export default function tabs (state = initialState, { type, project, payload, title, index }) {
   switch (type) {
     case TAB_OPEN:
-      if (!project || !project.name) {
-        console.error('Project name needed to open tab')
-        return
-      }
-      const projectKey = project.owner
-        ? `${project.owner}/${project.name}`
-        : project.name
+      if (project && project.name) {
+        const projectKey = project.owner
+          ? `${project.owner}/${project.name}`
+          : project.name
 
-      const stateWithTab = state.getIn([projectKey, 'list'])
-        ? [
-          ...state.getIn([projectKey, 'list']).toJS(),
-            { title, file: payload }
-        ]
-        : [
-            { title, file: payload }
-        ]
-      return state.setIn(
-        [ projectKey, 'list' ],
-        fromJS(stateWithTab)
-      )
+        const stateWithTab = state.getIn([projectKey, 'list'])
+          ? [
+            ...state.getIn([projectKey, 'list']).toJS(),
+              { title, file: payload }
+          ]
+          : [
+              { title, file: payload }
+          ]
+        return state.setIn(
+          [ projectKey, 'list' ],
+          fromJS(stateWithTab)
+        )
+      }
+      return state
     case TAB_CLOSE:
       return state.deleteIn([`${project.owner}/${project.name}`, 'list', index])
     case SET_ACTIVE_TAB:

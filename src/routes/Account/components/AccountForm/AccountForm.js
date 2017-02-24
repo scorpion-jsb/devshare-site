@@ -1,28 +1,24 @@
 import React, { PropTypes } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field } from 'redux-form'
 import TextField from '../../../../components/TextField'
 import classes from './AccountForm.scss'
 import ProviderDataForm from '../ProviderDataForm/ProviderDataForm'
 
-import { connect } from 'react-redux'
-import { helpers } from 'redux-devshare'
-const { pathToJS } = helpers
-
 export const AccountForm = ({ account, handleSubmit, submitting }) => (
-  <div className={classes['Account']}>
+  <div className={classes.container}>
     <h4>Account</h4>
     <div>
       <Field
         name='username'
-        component={TextField}
         label='Username'
+        component={TextField}
       />
     </div>
     <div>
       <Field
         name='email'
-        component={TextField}
         label='Email'
+        component={TextField}
       />
     </div>
     <div>
@@ -45,13 +41,4 @@ AccountForm.propTypes = {
   submitting: PropTypes.bool
 }
 
-const AccountReduxForm = reduxForm({
-  form: 'Account'
-})(AccountForm)
-
-export default connect(({devshare}) => (
-  {
-    initialValues: pathToJS(devshare, 'profile'),
-    account: pathToJS(devshare, 'profile')
-  }
-))(AccountReduxForm)
+export default AccountForm

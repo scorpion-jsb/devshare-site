@@ -17,7 +17,7 @@ export default class DeleteDialog extends Component {
 
   componentWillReceiveProps (nextProps) {
     let nextState = {}
-    if (nextProps && typeof nextProps.open !== 'undefined') nextState.open = nextProps.open
+    if (nextProps && typeof nextProps.open !== 'undefined') { nextState.open = nextProps.open }
     this.setState(nextState)
   }
 
@@ -35,7 +35,7 @@ export default class DeleteDialog extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    if (this.props.onSubmit) this.props.onSubmit(name)
+    if (this.props.onSubmit) { this.props.onSubmit(name) }
     this.close()
   }
 
@@ -90,7 +90,7 @@ export default class DeleteDialog extends Component {
               <span>Please type in the name of the project to confirm:</span>
               <TextField
                 floatingLabelText='Project Name'
-                onChange={this.handleInputChange.bind(this, 'projectname')}
+                onChange={() => this.handleInputChange('projectname')}
               />
             </div>
           </div>

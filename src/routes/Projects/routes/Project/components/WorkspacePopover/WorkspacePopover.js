@@ -14,6 +14,7 @@ export default class WorkspacePopover extends Component {
     initialPath: PropTypes.string,
     type: PropTypes.oneOf(['file', 'folder']),
     onSubmit: PropTypes.func.isRequired,
+    open: PropTypes.bool,
     onClose: PropTypes.func
   }
 
@@ -23,7 +24,9 @@ export default class WorkspacePopover extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (props.type && props.open) this.show('pop')
+    if (props.type && props.open) {
+      this.show('pop')
+    }
   }
 
   show = (key, e) =>
@@ -38,7 +41,7 @@ export default class WorkspacePopover extends Component {
     })
 
   closePopover = key => {
-    if (this.state.activePopover !== key) return
+    if (this.state.activePopover !== key) { return }
     this.setState({
       activePopover: 'none'
     }, () => {
@@ -70,7 +73,7 @@ export default class WorkspacePopover extends Component {
         anchorEl={workspaceElement}
         anchorOrigin={originSettings}
         targetOrigin={originSettings}
-        onRequestClose={this.closePopover.bind(this, 'pop')} >
+        onRequestClose={() => this.closePopover('pop')} >
         <div style={pathInputStyling}>
           <p>Enter path for new {type}</p>
           <TextField

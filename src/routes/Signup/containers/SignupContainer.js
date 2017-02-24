@@ -17,7 +17,9 @@ import classes from './SignupContainer.scss'
 import { connect } from 'react-redux'
 import { devshare, helpers } from 'redux-devshare'
 const { isLoaded, isEmpty, pathToJS } = helpers
+// import { UserIsNotAuthenticated } from 'utils/router'
 
+// @UserIsNotAuthenticated // redirect to home if logged in
 @devshare()
 @connect(
   // Map state to props

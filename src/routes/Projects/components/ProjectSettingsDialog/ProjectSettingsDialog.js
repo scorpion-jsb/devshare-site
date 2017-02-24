@@ -26,7 +26,7 @@ export default class ProjectSettingsDialog extends Component {
   }
 
   handleVimToggle = () => {
-    if (this.props.onVimToggle) this.props.onVimToggle(this.state.vimEnabled)
+    if (this.props.onVimToggle) { this.props.onVimToggle(this.state.vimEnabled) }
     this.setState({
       vimEnabled: !this.state.vimEnabled
     })

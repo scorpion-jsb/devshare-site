@@ -140,14 +140,14 @@ export default class SharingDialog extends Component {
         {
           collabsList
             ? (
-            <List>
-              {collabsList}
-            </List>
+              <List>
+                {collabsList}
+              </List>
             )
             : (
-            <div className={classes['no-collabs']}>
-              <span>No current collaborators</span>
-            </div>
+              <div className={classes['no-collabs']}>
+                <span>No current collaborators</span>
+              </div>
             )
         }
         <div className={classes['search-container']}>

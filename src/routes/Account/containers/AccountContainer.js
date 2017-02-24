@@ -1,30 +1,28 @@
 import React, { Component, PropTypes } from 'react'
-
-// Components
-// import AccountDialog from '../components/AccountDialog/AccountDialog'
-import AccountForm from '../components/AccountForm/AccountForm'
+import { reduxForm } from 'redux-form'
 import CircularProgress from 'material-ui/CircularProgress'
 import Paper from 'material-ui/Paper'
-
-import classes from './AccountContainer.scss'
-
-const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
-
-// redux-devsharev3
+// import AccountDialog from '../components/AccountDialog/AccountDialog'
+import AccountForm from '../components/AccountForm/AccountForm'
 import { connect } from 'react-redux'
 import { devshare, helpers } from 'redux-devshare'
+import classes from './AccountContainer.scss'
+
 const { pathToJS, isLoaded } = helpers
+const defaultUserImageUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
 
 @devshare()
 @connect(
-  // Map state to props
   ({devshare}) => ({
     authError: pathToJS(devshare, 'authError'),
-    account: pathToJS(devshare, 'profile')
+    account: pathToJS(devshare, 'profile'),
+    initialValues: pathToJS(devshare, 'profile')
   })
 )
+@reduxForm({
+  form: 'Account'
+})
 export default class Account extends Component {
-
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   }
@@ -45,15 +43,6 @@ export default class Account extends Component {
       .logout()
       .then(() => this.context.router.push('/'))
 
-  handleSave = () => {
-    // TODO: Handle saving image and account data at the same time
-    const account = {
-      name: this.refs.name.getValue(),
-      email: this.refs.email.getValue()
-    }
-    this.props.devshare.updateAccount(account)
-  }
-
   toggleModal = () => {
     this.setState({
       modalOpen: !this.state.modalOpen
@@ -65,24 +54,24 @@ export default class Account extends Component {
 
     if (!isLoaded(account)) {
       return (
-        <div className={classes['container']}>
+        <div className={classes.container}>
           <CircularProgress size={1.5} />
         </div>
       )
     }
 
     return (
-      <div className={classes['container']}>
-        <Paper className={classes['pane']}>
-          <div className={classes['settings']}>
-            <div className={classes['avatar']}>
+      <div className={classes.container}>
+        <Paper className={classes.pane}>
+          <div className={classes.settings}>
+            <div className={classes.avatar}>
               <img
                 className={classes['avatar-current']}
                 src={account && account.avatarUrl || defaultUserImageUrl}
                 onClick={this.toggleModal}
               />
             </div>
-            <div className={classes['meta']}>
+            <div className={classes.meta}>
               <AccountForm
                 onSubmit={saveAccount}
                 account={account}

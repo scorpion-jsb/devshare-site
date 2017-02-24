@@ -101,10 +101,10 @@ export default class TreeFolder extends Component {
   }
 
   _onFolderClick = (e) => {
-    if (e.button !== 0) return
+    if (e.button !== 0) { return }
 
     // If modified event
-    if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) return
+    if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) { return }
 
     // var el = event.currentTarget
     e.preventDefault()

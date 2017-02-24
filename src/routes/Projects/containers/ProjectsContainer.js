@@ -92,7 +92,7 @@ export class Projects extends Component {
 
   render () {
     // TODO: Look into moving this into its own layer
-    if (this.props.children) return this.props.children
+    if (this.props.children) { return this.props.children }
 
     const { projects, account, params: { username }, devshare } = this.props
     const { newProjectModal, addCollabModal, currentProject } = this.state
@@ -116,13 +116,13 @@ export class Projects extends Component {
 
     const projectsList = projects.map((project, i) =>
       (
-      <ProjectTile
-        key={`${project.name}-Collab-${i}`}
-        project={project}
-        onCollabClick={this.collabClick}
-        onAddCollabClick={() => this.toggleModal('addCollab', project)}
-        onSelect={this.openProject}
-        onDelete={this.deleteProject}
+        <ProjectTile
+          key={`${project.name}-Collab-${i}`}
+          project={project}
+          onCollabClick={this.collabClick}
+          onAddCollabClick={() => this.toggleModal('addCollab', project)}
+          onSelect={this.openProject}
+          onDelete={this.deleteProject}
       />
       )
     )

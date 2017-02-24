@@ -65,25 +65,25 @@ export default class TreeView extends Component {
     // Only open tab if file is not already open
     if (matchingInd === -1) {
       this.props.openTab(project, tabData)
-      // Select last tab
-      return this.props.navigateToTab(project)
+      this.props.navigateToTab(project) // Select last tab
+    } else {
+      this.props.navigateToTab(project, matchingInd)
     }
-
-    this.props.navigateToTab(project, matchingInd)
   }
 
   onFilesAdd = (e) => {
     e.preventDefault()
     each(e.target.files, item => {
-      if (fileEntityBlackList.indexOf(last(item.webkitRelativePath.split('/'))) !== -1) {
-        return void 0
+      if (fileEntityBlackList.indexOf(last(item.webkitRelativePath.split('/'))) === -1) {
+        this.readAndSaveFileEntry(item)
       }
-      this.readAndSaveFileEntry(item)
     })
   }
 
   getStructure = () => {
-    if (!this.props.files || !this.props.files.length) return null
+    if (!this.props.files || !this.props.files.length) {
+      return null
+    }
     return this.props.files.map((entry, i) => {
       // no metadata
       if (!entry.meta) {
@@ -132,9 +132,9 @@ export default class TreeView extends Component {
     const structure = this.getStructure()
     if (!isLoaded(files)) {
       return (
-        <div className={classes['container']}>
-          <div className={classes['wrapper']}>
-            <div className={classes['loader']}>
+        <div className={classes.container}>
+          <div className={classes.wrapper}>
+            <div className={classes.loader}>
               <CircularProgress size={0.75} />
             </div>
           </div>
@@ -143,17 +143,17 @@ export default class TreeView extends Component {
     }
 
     return (
-      <div className={classes['container']}>
-        <div className={classes['wrapper']}>
+      <div className={classes.container}>
+        <div className={classes.wrapper}>
           {
             !isEmpty(files)
             ? (
-              <ol className={classes['structure']}>
+              <ol className={classes.structure}>
                 {structure}
               </ol>
               )
             : (
-              <div className={classes['none']} key='NotFound-1'>
+              <div className={classes.none} key='NotFound-1'>
                 <div className={classes['none-desktop']}>
                   <span><strong>Right click</strong></span>
                   <span className=''>OR</span>

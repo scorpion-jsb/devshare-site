@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "devshare-stg"
+    "prod": "devshare-1",
+    "stg": "devshare-stg",
+    "default": "devshare-int"
   }
 }

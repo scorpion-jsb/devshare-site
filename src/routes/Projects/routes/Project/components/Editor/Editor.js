@@ -128,7 +128,7 @@ export default class Editor extends Component {
   }
 
   handleDispose = () => {
-    if (this.firepad && typeof this.firepad.dispose === 'function') this.firepad.dispose()
+    if (this.firepad && typeof this.firepad.dispose === 'function') { this.firepad.dispose() }
   }
 
   enableVim = () => {

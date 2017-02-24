@@ -14,10 +14,10 @@ export default class TreeFile extends Component {
   }
 
   onFileClick = (e) => {
-    if (e.button !== 0) return
+    if (e.button !== 0) { return }
 
     // If modified event
-    if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) return
+    if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) { return }
 
     e.preventDefault()
     if (this.props.onClick) {

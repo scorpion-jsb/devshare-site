@@ -56,17 +56,15 @@ export default class ProjectTile extends Component {
 
   addClick = e => {
     e.preventDefault()
-    if (this.props.onAddCollabClick) this.props.onAddCollabClick()
-  }
-
-  collaboratorClick = collaborator => {
-    if (this.props.onCollabClick) this.props.onCollabClick(collaborator)
+    if (this.props.onAddCollabClick) {
+      this.props.onAddCollabClick()
+    }
   }
 
   closeDialog = (name, name2) => {
     let newState = {}
     newState[`${name}Open`] = false
-    if (name2) newState[`${name2}Open`] = true
+    if (name2) { newState[`${name2}Open`] = true }
     this.setState(newState)
   }
 
@@ -84,12 +82,15 @@ export default class ProjectTile extends Component {
 
   deleteProject = () => {
     this.closeDialog('delete')
-    if (this.props.onDelete) this.props.onDelete(this.props.project)
+    if (this.props.onDelete) {
+      this.props.onDelete(this.props.project)
+    }
   }
 
   render () {
-    const { collaborators, name, owner } = this.props.project
+    const { onCollabClick, project: { collaborators, name, owner } } = this.props
     let collaboratorsList = []
+
     // Collaborator Bubbles
     if (collaborators) {
       collaboratorsList = collaborators.map((user, i) => {
@@ -98,7 +99,7 @@ export default class ProjectTile extends Component {
           <div
             key={`${name}-Collab-${i}`}
             className={classes['collaborator']}
-            onClick={this.collaboratorClick.bind(this, user)}>
+            onClick={() => onCollabClick(user)}>
             {
               !username
               ? (
@@ -147,7 +148,7 @@ export default class ProjectTile extends Component {
           onSave={this.saveSettings}
           onVimToggle={this.toggleVim}
           vimEnabled={this.state.vimEnabled}
-          onRequestClose={this.closeDialog.bind(this, 'settings')}
+          onRequestClose={() => this.closeDialog('settings')}
         />
         <DeleteDialog
           name={name}

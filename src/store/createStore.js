@@ -3,14 +3,9 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
 import { reduxDevshare } from 'redux-devshare'
+import { env } from '../config'
 
 export default (initialState = {}, history) => {
-  // ======================================================
-  // Node Environment Vars Strapped to Window
-  // ======================================================
-  window.version = __VERSION__
-  window.env = __NODE_ENV__
-
   // ======================================================
   // Middleware Configuration
   // ======================================================
@@ -20,7 +15,7 @@ export default (initialState = {}, history) => {
   // Store Enhancers
   // ======================================================
   const enhancers = []
-  if (__DEBUG__) {
+  if (__DEV__) {
     const devToolsExtension = window.devToolsExtension
     if (typeof devToolsExtension === 'function') {
       enhancers.push(devToolsExtension())
@@ -36,7 +31,7 @@ export default (initialState = {}, history) => {
     compose(
       applyMiddleware(...middleware),
       // TODO: Pass node environment directly
-      reduxDevshare({ env: __NODE_ENV__ === 'production' ? 'prod' : 'dev' }),
+      reduxDevshare({ env: env === 'production' ? 'prod' : 'dev' }),
       ...enhancers
     )
   )

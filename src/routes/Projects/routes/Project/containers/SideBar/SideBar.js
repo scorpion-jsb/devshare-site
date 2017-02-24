@@ -1,8 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { isArray, each, last, map } from 'lodash'
-
-import TreeView from '../TreeView'
-import ContextMenu from '../../components/ContextMenu/ContextMenu'
+import classnames from 'classnames'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
@@ -14,7 +12,8 @@ import CopyIcon from 'material-ui/svg-icons/content/content-copy'
 import ArchiveIcon from 'material-ui/svg-icons/content/archive'
 import RaisedButton from 'material-ui/RaisedButton'
 
-const classnames = require('classnames')
+import TreeView from '../TreeView'
+import ContextMenu from '../../components/ContextMenu/ContextMenu'
 import classes from './SideBar.scss'
 
 const fileEntityBlackList = ['.DS_Store', 'node_modules']
@@ -133,13 +132,12 @@ export default class SideBar extends Component {
       this.readAndSaveFolderEntry(entries)
     }
     each(entries, (entry) => {
-      if (fileEntityBlackList.indexOf(last(entry.fullPath.split('/'))) !== -1) {
-        return void 0
-      }
-      if (entry.isFile) {
-        this.readAndSaveFileEntry(entry)
-      } else if (entry.isDirectory) {
-        this.readAndSaveFolderEntry(entry)
+      if (fileEntityBlackList.indexOf(last(entry.fullPath.split('/'))) === -1) {
+        if (entry.isFile) {
+          this.readAndSaveFileEntry(entry)
+        } else if (entry.isDirectory) {
+          this.readAndSaveFolderEntry(entry)
+        }
       }
     })
   }
@@ -154,15 +152,18 @@ export default class SideBar extends Component {
       }
       reader.readAsText(file)
     }
-    if (entry.webkitRelativePath) return readAndSaveFile(entry, entry.webkitRelativePath)
-    entry.file(file => readAndSaveFile(file, entry.fullPath))
+    if (entry.webkitRelativePath) {
+      readAndSaveFile(entry, entry.webkitRelativePath)
+    } else {
+      entry.file(file => readAndSaveFile(file, entry.fullPath))
+    }
   }
 
   readAndSaveFolderEntry = (entry) => {
     this.addFolder(entry.fullPath)
     let reader = entry.createReader()
     reader.readEntries(folder => {
-      if (folder.length > 1) this.handleEntries(folder)
+      if (folder.length > 1) { this.handleEntries(folder) }
     })
   }
 

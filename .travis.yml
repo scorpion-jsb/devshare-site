@@ -1,26 +1,35 @@
+sudo: false
+
 language: node_js
 
 node_js:
-  - "6"
+  - 6.9.1
 
-cache:
-  bundler: true
-  directories:
-    - node_modules # NPM packages
+# cache:
+#   bundler: true
+#   directories:
+#     - node_modules # NPM packages
 
 install:
   - npm set progress=false
-  - npm install -g firebase-tools
   - npm install
 
+branches:
+  only:
+    - master
+    - prod
+    - stage
+
 script:
+  - npm run config
   - npm run lint:fix
-  - npm run test
+  # - npm run test
   - npm run build:prod
-  - npm run deploy
 
 after_success:
-  - npm run codecov
+  - npm install -g firebase-tools
+  - npm run deploy
+  # - npm run codecov
 
 notifications:
   email:

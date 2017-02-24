@@ -1,39 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { useRouterHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { initScripts } from 'utils'
 import createStore from './store/createStore'
 import AppContainer from './containers/App/App'
+import { version } from '../package.json'
+import { env, firebase as fbConfig } from './config'
 
 // ========================================================
-// Browser History Setup
+// Set Window Variables
 // ========================================================
-const browserHistory = useRouterHistory(createBrowserHistory)({
-  basename: __BASENAME__
-})
+window.version = version
+window.env = env
+window.db = fbConfig.databaseURL
+initScripts()
 
 // ========================================================
-// Store and History Instantiation
+// Store Instantiation
 // ========================================================
-// Create redux store and sync with react-router-redux. We have installed the
-// react-router-redux reducer under the routerKey "router" in src/routes/index.js,
-// so we need to provide a custom `selectLocationState` to inform
-// react-router-redux of its location.
-const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState, browserHistory)
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router
-})
-
-// ========================================================
-// Developer Tools Setup
-// ========================================================
-if (__DEBUG__) {
-  if (window.devToolsExtension) {
-    // window.devToolsExtension.open()
-  }
-}
+const initialState = window.___INITIAL_STATE__ || { devshare: { authError: null } } // eslint-disable-line no-underscore-dangle
+const store = createStore(initialState)
 
 // ========================================================
 // Render Setup
@@ -41,16 +26,21 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
+  const routes = require('./routes/index').default(store) // eslint-disable-line global-require
 
   ReactDOM.render(
-    <AppContainer
-      store={store}
-      history={history}
-      routes={routes}
-    />,
+    <AppContainer store={store} routes={routes} />,
     MOUNT_NODE
   )
+}
+
+// ========================================================
+// Developer Tools Setup
+// ========================================================
+if (__DEV__) {
+  if (window.devToolsExtension) {
+    // window.devToolsExtension.open()
+  }
 }
 
 // This code is excluded from production bundle
@@ -59,7 +49,7 @@ if (__DEV__) {
     // Development render functions
     const renderApp = render
     const renderError = (error) => {
-      const RedBox = require('redbox-react').default
+      const RedBox = require('redbox-react').default // eslint-disable-line
 
       ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
     }
@@ -74,12 +64,12 @@ if (__DEV__) {
     }
 
     // Setup hot module replacement
-    module.hot.accept('./routes/index', () => {
-      setTimeout(() => {
+    module.hot.accept('./routes/index', () =>
+      setImmediate(() => {
         ReactDOM.unmountComponentAtNode(MOUNT_NODE)
         render()
       })
-    })
+    )
   }
 }
 

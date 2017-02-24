@@ -1,11 +1,10 @@
-import config from '../config'
-import server from '../server/main'
-import _debug from 'debug'
+const config = require('../config');
+const server = require('../server/main');
+const debug = require('debug')('app:bin:server');  // eslint-disable-line import/no-extraneous-dependencies
+const ip = require('ip'); // eslint-disable-line import/no-extraneous-dependencies
 
-const debug = _debug('app:bin:server')
-const port = config.server_port
-const host = config.server_host
+const port = config.server_port;
 
-server.listen(port)
-debug(`Server is now running at http://${host}:${port}.`)
-debug(`Server accessible via localhost:${port} if you are using the project defaults.`)
+server.listen(port);
+debug(`Server is now running at http://localhost:${port}.`);
+debug(`Site is available on your network at ${ip.address()}:${port}`);

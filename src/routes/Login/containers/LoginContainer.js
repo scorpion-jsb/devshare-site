@@ -12,12 +12,14 @@ import GithubIcon from 'react-icons/lib/go/mark-github'
 // styles
 import classes from './LoginContainer.scss'
 
-// redux-devsharev3
+// redux-devshare
 import { connect } from 'react-redux'
 import { devshare, helpers } from 'redux-devshare'
+// import { UserIsNotAuthenticated } from 'utils/router'
 const { isLoaded, isEmpty, pathToJS } = helpers
 
 // Props decorators
+// @UserIsNotAuthenticated // redirect to home if logged in
 @devshare()
 @connect(
   ({devshare}) => ({

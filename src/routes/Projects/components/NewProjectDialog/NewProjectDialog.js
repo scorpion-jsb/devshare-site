@@ -34,23 +34,23 @@ export default class NewProjectDialog extends Component {
     })
   }
 
-  handleSubmit = e => {
+  handleSubmit = e => { // eslint-disable-line consistent-return
     e.preventDefault()
     const { name } = this.state
     if (name.match(/[/\s]/g)) {
       return this.setState({ error: 'Name may not contain spaces.' })
     }
 
-    if (name.match(/[.$#\[\]\/]/g)) {
+    if (name.match(/[.$#[\]/]/g)) {
       return this.setState({
         error: 'Name may contain letters and symbols except for ., $, #, [, ], /.'
       })
     }
 
-    if (this.props && this.props.onCreateClick) {
+    if (this.props.onCreateClick) {
       this.props.onCreateClick(name)
-      this.close()
     }
+    this.close()
   }
 
   close = () => {

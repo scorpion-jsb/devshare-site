@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actions as TabActions } from '../../modules/tabs'
 import { devshare, helpers } from 'redux-devshare'
-const { isLoaded, isEmpty, dataToJS } = helpers
+const { isLoaded, isEmpty, dataToJS, toJS } = helpers
 
 const fileEntityBlackList = ['.DS_Store', 'node_modules']
 
@@ -22,9 +22,8 @@ const fileEntityBlackList = ['.DS_Store', 'node_modules']
     ])
 )
 @connect(
-  ({ devshare, tabs }, { project: { name, owner } }) =>
-    ({
-      tabs: tabs[`${owner}/${name}`] && tabs[`${owner}/${name}`].list ? tabs[`${owner}/${name}`].list : [],
+  ({devshare, tabs}, { project: { owner, name } }) => ({
+      tabs: toJS(tabs)[`${owner}/${name}`] || { list: [], currentIndex: 0 },
       files: map(
         dataToJS(devshare, `files/${owner}/${name}`),
         (file, key) => Object.assign(file, { key })
@@ -39,7 +38,7 @@ export default class TreeView extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
     files: PropTypes.array,
-    tabs: PropTypes.array.isRequired,
+    tabs: PropTypes.object.isRequired,
     openTab: PropTypes.func.isRequired,
     navigateToTab: PropTypes.func.isRequired,
     fileStructure: PropTypes.arrayOf(PropTypes.shape({
@@ -59,16 +58,17 @@ export default class TreeView extends Component {
       file
     }
 
-    // Search for already matching path
-    const matchingInd = findIndex(tabs, (t) => t.file.path === tabData.file.path)
-    // console.log('matching index:', tabs, tabData, matchingInd, )
+    // check if tab is already open
+    let tabIndex = findIndex(tabs.list, (t) => t.file.path === tabData.file.path)
+
     // Only open tab if file is not already open
-    if (matchingInd === -1) {
+    if (tabIndex < 0) {
       this.props.openTab(project, tabData)
-      this.props.navigateToTab(project) // Select last tab
-    } else {
-      this.props.navigateToTab(project, matchingInd)
+      tabIndex = tabs.list.length
     }
+
+    // activate selected tab
+    this.props.navigateToTab(project, tabIndex)
   }
 
   onFilesAdd = (e) => {

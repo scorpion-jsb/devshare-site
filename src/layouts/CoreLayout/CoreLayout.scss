@@ -1,2 +1,10 @@
 .mainContainer {
+  position: relative;
+}
+
+.coreLayout,
+.mainContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
 }

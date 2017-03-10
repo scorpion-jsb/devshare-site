@@ -4,12 +4,12 @@ import classes from './CoreLayout.scss'
 import '../../styles/core.scss'
 
 export const CoreLayout = ({ children }) => (
-  <div>
+  <section className={classes.coreLayout}>
     <Navbar />
-    <div className={classes.mainContainer}>
+    <section className={classes.mainContainer}>
       {children}
-    </div>
-  </div>
+    </section>
+  </section>
 )
 
 CoreLayout.propTypes = {

@@ -13,8 +13,8 @@ describe('(Route) Signup', () => {
     expect(SignupRoute).to.be.a.function
   })
 
-  it('Sets Path to :username', () => {
-    expect(_route.path).to.equal('signup')
+  it('Sets Path to /signup', () => {
+    expect(_route.path).to.equal('/signup')
   })
   it('Defines a getComponent function', () => {
     expect(_route.getComponent).to.be.a.function

@@ -17,14 +17,13 @@ import { map } from 'lodash'
 // const { pathToJS, dataToJS, isLoaded, isEmpty } = helpers
 
 export default class SharingDialog extends Component {
-
   state = {
     error: null
   }
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    open: PropTypes.bool,
+    open: PropTypes.bool, // react/no-unused-prop-types
     error: PropTypes.object,
     onRequestClose: PropTypes.func,
     searchUsers: PropTypes.func.isRequired,

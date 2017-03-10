@@ -25,6 +25,7 @@ globals:
 rules:
   # import/no-unresolved: 2
   consistent-return: 2
+  react/no-unused-prop-types: 0
   max-len: 0
   no-else-return: 2
   arrow-body-style: ['error', 'as-needed']
@@ -35,9 +36,7 @@ rules:
   no-extra-boolean-cast: 0
   react/jsx-filename-extension: 0
   import/no-named-as-default: 0
-
-  # Look at together with Chris
-  react/prefer-stateless-function: 0 # we should add this back in. +1 Let's look at this one together.  I tried implementing in app.js and it didn't seem the rule was working.
+  react/prefer-stateless-function: 0
 
 settings:
   import/resolver:

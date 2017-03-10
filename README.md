@@ -90,8 +90,8 @@ Special thanks to @davezuko for creating [react-redux-starter-kit](https://githu
 
 [release-image]: https://img.shields.io/github/release/KyperTech/devshare-site.svg?style=flat-square
 [release-url]: https://github.com/KyperTech/devshare-site/releases
-[travis-image]: https://img.shields.io/travis/KyperTech/devshare-site/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/KyperTech/devshare-site
+[travis-image]: https://img.shields.io/travis/prescottprue/devshare-site/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/prescottprue/devshare-site
 [daviddm-image]: https://img.shields.io/david/KyperTech/devshare-site.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/KyperTech/devshare-site
 [license-image]: https://img.shields.io/npm/l/devshare-site.svg?style=flat-square

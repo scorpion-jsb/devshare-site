@@ -1,25 +1,43 @@
-.container {
-  display: flex;
-  flex-direction: row;
+.container, .form, .pane, .settings {
   align-items: center;
-  justify-content: center;
-  padding-top: 4rem;
-}
-.pane {
   display: flex;
+  justify-content: center;
+}
+
+.container, .settings {
+  flex-direction: row;
+}
+
+.form, .pane {
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  flex-basis: 60%;
 }
+
+.pane {
+  padding: 8rem 4rem 4rem;
+  margin-top: 9rem;
+}
+
 .settings {
+  align-items: flex-start;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
+
+.title {
+  margin: 0 0 1rem 0;
+}
+
 .avatar {
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+
+  img {
+    border-radius: 50%;
+    box-shadow: 0 0 0.5rem #424242;
+    // margin: 1rem auto;
+    margin-top: -16rem;
+  }
+
   &-new {
     &-droptext {
       height: 100%;
@@ -38,7 +56,6 @@
   }
 }
 
-
 .ImageManager {
   display: flex;
   flex-direction: row;
@@ -46,13 +63,4 @@
     width: 10rem;
     height: auto;
   }
-}
-.meta {
-  display:flex;
-  flex-basis: 60%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3rem;
-  margin-top: 2rem;
 }

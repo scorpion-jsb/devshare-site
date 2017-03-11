@@ -6,36 +6,29 @@ import ProviderDataForm from '../ProviderDataForm/ProviderDataForm'
 
 export const AccountForm = ({ account, handleSubmit, submitting }) => (
   <div className={classes.container}>
-    <h4>Account</h4>
-    <div>
-      <Field
-        name='username'
-        label='Username'
-        component={TextField}
-      />
-    </div>
-    <div>
-      <Field
-        name='email'
-        label='Email'
-        component={TextField}
-      />
-    </div>
-    <div>
-      <h4>Linked Accounts</h4>
-      {
-        account.providerData &&
-          <ProviderDataForm
-            providerData={account.providerData}
-          />
-      }
-    </div>
+    <Field
+      name='username'
+      label='Username'
+      component={TextField}
+    />
+    <Field
+      name='email'
+      label='Email'
+      component={TextField}
+    />
+    <h4 className={classes.title}>Linked Accounts</h4>
+    {
+      account.providerData &&
+        <ProviderDataForm
+          providerData={account.providerData}
+        />
+    }
   </div>
 )
 
 AccountForm.propTypes = {
   account: PropTypes.shape({
-    providerData: PropTypes.array
+    providerData: PropTypes.object
   }),
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool

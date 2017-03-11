@@ -135,7 +135,7 @@ export default class TreeView extends Component {
         <div className={classes.container}>
           <div className={classes.wrapper}>
             <div className={classes.loader}>
-              <CircularProgress size={0.75} />
+              <CircularProgress size={40} />
             </div>
           </div>
         </div>

@@ -4,12 +4,16 @@
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-start;
   height: 100%;
   width: 100%;
   margin: .2rem;
+
+  > div {
+    width: 100%;
+  }
 }
 
 .submit {
@@ -24,4 +28,14 @@
   text-align: center;
   align-items: center;
   flex-direction: column;
+}
+
+.title {
+  margin: 3rem 0 0;
+  color: #455A64 !important;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 1.66rem;
+  width: 100%;
+  text-align: left;
 }

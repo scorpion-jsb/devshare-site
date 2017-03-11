@@ -21,8 +21,7 @@
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "config": "better-npm-run config",
-    "deploy": "better-npm-run deploy"
+    "config": "better-npm-run config"
   },
   "betterScripts": {
     "compile": {
@@ -69,12 +68,6 @@
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "test:*"
-      }
-    },
-    "deploy": {
-      "command": "node ./build/deploy",
-      "env": {
-        "DEBUG": "app:*"
       }
     },
     "config": {

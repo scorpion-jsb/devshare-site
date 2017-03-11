@@ -3,6 +3,7 @@
     "prod": "devshare-1",
     "stg": "devshare-stg",
     "int": "devshare-int",
+    "master": "devshare-int",
     "default": "devshare-int"
   }
 }

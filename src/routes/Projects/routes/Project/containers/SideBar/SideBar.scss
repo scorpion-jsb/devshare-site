@@ -1,4 +1,4 @@
-@import '../../../../../../styles/colors';
+@import 'base';
 
 .container {
   box-sizing: border-box;
@@ -6,6 +6,10 @@
   min-height: 200px;
   transform: rotate(0deg);
   overflow: hidden;
+  // Hide scrollbar from showing in sidebar
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 .filehover {
   border: 3px dashed #b2dfdb;
@@ -14,28 +18,25 @@
   }
 }
 .dropzone {
+  @extend .flex-column;
   padding-top: 2rem;
-  display: flex;
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  flex-direction: column;
-  @media screen and (max-width: 700px){
+  @include mobile {
     padding-top: .5rem;
+
   }
 }
 a {
   text-align: center;
 }
 .treeview {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  @extend .flex-row-center;
   flex: auto;
   flex-grow: 1;
 }
 .buttons {
-  display: flex;
-  flex-direction: row;
+  @extend .flex-row;
   justify-content: space-around;
   padding: 20px 10px 0 10px;
   margin-bottom: 10px;
@@ -43,6 +44,7 @@ a {
     padding: 0 10px 5px 10px;
   }
 }
+
 // Hide default choose file button
 .file-input {
   display: none !important;

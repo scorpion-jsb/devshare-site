@@ -23,12 +23,12 @@ const fileEntityBlackList = ['.DS_Store', 'node_modules']
 )
 @connect(
   ({devshare, tabs}, { project: { owner, name } }) => ({
-      tabs: toJS(tabs)[`${owner}/${name}`] || { list: [], currentIndex: 0 },
-      files: map(
+    tabs: toJS(tabs)[`${owner}/${name}`] || { list: [], currentIndex: 0 },
+    files: map(
         dataToJS(devshare, `files/${owner}/${name}`),
         (file, key) => Object.assign(file, { key })
       )
-    }),
+  }),
   // Map dispatch to props
   (dispatch) =>
     bindActionCreators(TabActions, dispatch)
@@ -154,13 +154,15 @@ export default class TreeView extends Component {
               )
             : (
               <div className={classes.none} key='NotFound-1'>
-                <div className={classes['none-desktop']}>
-                  <span><strong>Right click</strong></span>
-                  <span className=''>OR</span>
+                <div className={classes.emptyDesktop}>
+                  <span>
+                    <strong>Right click</strong>
+                  </span>
+                  <span>OR</span>
                   <strong>Drop files</strong>
                   <span>to get started</span>
                 </div>
-                <div className={classes['none-mobile']}>
+                <div className={classes.emptyMobile}>
                   <span>Touch the Plus to get started</span>
                 </div>
               </div>

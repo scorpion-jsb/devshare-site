@@ -1,4 +1,4 @@
-@import '../../../../../../styles/colors';
+@import 'base';
 
 .container {
   position: absolute;
@@ -9,19 +9,30 @@
   color: #f8f8f2;
   background-color: $editorBackground;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: #222425;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(92, 92, 92, 0.5);
+    border-radius: 5px;
+    box-shadow: 0 0 1px black inset;
+  }
 }
 .default {
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  @extend .flex-column-center;
+  justify-content: center;
   text-align:center;
   vertical-align: middle;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height:100%;
   background-color: $editorBackground;
   color: rgba(0, 0, 0, 0.2);

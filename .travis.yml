@@ -11,7 +11,8 @@ cache:
 
 install:
   - npm set progress=false
-  - npm install
+  - npm install # install project dependencies
+  - npm install --prefix ./functions # install functions dependencies
 
 branches:
   only:

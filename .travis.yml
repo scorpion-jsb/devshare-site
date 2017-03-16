@@ -27,13 +27,8 @@ script:
 
 after_success:
   - npm install --prefix ./functions # install functions dependencies
-
-deploy:
-  provider: firebase
-  project: $TRAVIS_BRANCH
-  skip_cleanup: true
-  token:
-    secure: $FIREBASE_TOKEN
+  - npm i -g firebase-ci # install firebase-ci
+  - firebase-ci deploy
 
 notifications:
   email:

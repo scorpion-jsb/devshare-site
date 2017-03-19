@@ -16,15 +16,27 @@ const { isLoaded, dataToJS } = helpers
   ({ params }) =>
     ([
       `projects/${params.username}`,
-      `projects/${params.username}/${params.projectname}`
+      `projects/${params.username}/${params.projectname}`,
+      // TODO: Use population instead of loading whole usernames list
+      'usernames'
+      // `projects/${params.username}#populate=collaborators:users`,
     ])
 )
 @connect(
   // Map state to props
-  ({ devshare }, { params }) => ({
-    projects: toArray(dataToJS(devshare, `projects/${params.username}`)),
-    project: dataToJS(devshare, `projects/${params.username}/${params.projectname}`)
-  })
+  ({ devshare }, { params }) => {
+    const project = dataToJS(devshare, `projects/${params.username}/${params.projectname}`)
+    // TODO: Replace this with population
+    if (project.collaborators && dataToJS(devshare, 'usernames')) {
+      project.collaborators = project.collaborators.map(id => ({
+        username: dataToJS(devshare, 'usernames')[id]
+      }))
+    }
+    return {
+      projects: toArray(dataToJS(devshare, `projects/${params.username}`)),
+      project
+    }
+  }
 )
 export default class Project extends Component {
 

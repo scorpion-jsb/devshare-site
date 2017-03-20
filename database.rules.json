@@ -8,6 +8,14 @@
         ".write": true
       }
     },
+    "usernames": {
+      ".read": "auth !== null",
+      ".write": "auth !== null"
+    },
+    "uids": {
+      ".read": "auth !== null",
+      ".write": "auth !== null"
+    },
     "projects": {
       ".read": true,
       ".write": true,

@@ -1,33 +1,31 @@
 import React, { Component, PropTypes } from 'react'
-import Workspace from '../Workspace/Workspace'
 import { toArray } from 'lodash'
-
-import classes from './Project.scss'
-import SettingsDialog from '../../components/SettingsDialog/SettingsDialog'
-import SharingDialog from 'components/SharingDialog/SharingDialog'
-import CircularProgress from 'material-ui/CircularProgress'
-// redux-devsharev3
 import { connect } from 'react-redux'
 import { devshare, helpers } from 'redux-devshare'
+import CircularProgress from 'material-ui/CircularProgress'
+import SharingDialog from 'components/SharingDialog/SharingDialog'
+import Workspace from '../Workspace/Workspace'
+import SettingsDialog from '../../components/SettingsDialog/SettingsDialog'
+import classes from './Project.scss'
+
 const { isLoaded, dataToJS } = helpers
 
 @devshare(
   // Get paths from devshare
-  ({ params }) =>
-    ([
-      `projects/${params.username}`,
-      `projects/${params.username}/${params.projectname}`,
-      // TODO: Use population instead of loading whole usernames list
-      'usernames'
-      // `projects/${params.username}#populate=collaborators:users`,
-    ])
+  ({ params }) => ([
+    `projects/${params.username}`,
+    `projects/${params.username}/${params.projectname}`,
+    // TODO: Use population instead of loading whole usernames list
+    // `projects/${params.username}#populate=collaborators:users`,
+    'usernames'
+  ])
 )
 @connect(
   // Map state to props
   ({ devshare }, { params }) => {
     const project = dataToJS(devshare, `projects/${params.username}/${params.projectname}`)
     // TODO: Replace this with population
-    if (project.collaborators && dataToJS(devshare, 'usernames')) {
+    if (project && project.collaborators && dataToJS(devshare, 'usernames')) {
       project.collaborators = project.collaborators.map(id => ({
         username: dataToJS(devshare, 'usernames')[id]
       }))

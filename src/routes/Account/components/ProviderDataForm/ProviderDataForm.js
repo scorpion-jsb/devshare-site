@@ -30,7 +30,7 @@ export const ProviderDataForm = ({ providerData }) => (
 )
 
 ProviderDataForm.propTypes = {
-  providerData: PropTypes.object
+  providerData: PropTypes.object.isRequired
 }
 
 export default ProviderDataForm

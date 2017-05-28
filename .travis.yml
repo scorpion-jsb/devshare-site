@@ -6,6 +6,7 @@ node_js:
   - 6.10.0
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
@@ -18,6 +19,7 @@ branches:
     - master
     - prod
     - stage
+    - int
 
 script:
   - npm run config
@@ -26,8 +28,7 @@ script:
   - npm run build:prod
 
 after_success:
-  - npm install --prefix ./functions # install functions dependencies
-  - npm i -g firebase-ci # install firebase-ci
+  - npm i -g firebase-ci@0.1.0-rc.7 # install firebase-ci
   - firebase-ci deploy
 
 notifications:

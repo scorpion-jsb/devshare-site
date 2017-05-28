@@ -1,41 +1,37 @@
 import React, { Component, PropTypes } from 'react'
-import { toArray, map } from 'lodash'
-
-// Components
+import { connect } from 'react-redux'
+import { map } from 'lodash'
+import {
+  firebaseConnect,
+  pathToJS,
+  isLoaded,
+  isEmpty,
+  populatedDataToJS
+} from 'react-redux-firebase'
+import { devshare } from 'redux-devshare'
+import LoadingSpinner from 'components/LoadingSpinner'
+import SharingDialog from 'components/SharingDialog/SharingDialog'
 import ProjectTile from '../components/ProjectTile/ProjectTile'
 import NewProjectTile from '../components/NewProjectTile/NewProjectTile'
 import NewProjectDialog from '../components/NewProjectDialog/NewProjectDialog'
-import SharingDialog from 'components/SharingDialog/SharingDialog'
-import CircularProgress from 'material-ui/CircularProgress'
+
 import classes from './ProjectsContainer.scss'
 
-// redux/devshare
-import { connect } from 'react-redux'
-import { devshare, helpers } from 'redux-devshare'
-const { pathToJS, dataToJS, isLoaded, isEmpty } = helpers
+const populates = [
+  { child: 'collaborators', root: 'users' }
+]
 
-// Decorators
-@devshare(
-  ({ params }) =>
-    ([
-      `projects/${params.username}`,
-      // TODO: Use population instead of loading whole usernames list
-      'usernames'
-      // `projects/${params.username}#populate=collaborators:users`,
-    ])
+@devshare()
+@firebaseConnect(
+  ({ params }) => ([
+    { path: `projects/${params.username}`, populates }
+  ])
 )
 @connect(
-  ({ devshare }, { params }) => ({
-    projects: toArray(dataToJS(devshare, `projects/${params.username}`))
-    .map(project =>
-      (project.collaborators && dataToJS(devshare, 'usernames'))
-        ? Object.assign(project, {
-          collaborators: project.collaborators.map(id => ({ username: dataToJS(devshare, 'usernames')[id] }))
-        })
-        : project
-    ),
-    account: pathToJS(devshare, 'profile'),
-    auth: pathToJS(devshare, 'auth')
+  ({ firebase }, { params }) => ({
+    projects: populatedDataToJS(firebase, `projects/${params.username}`, populates),
+    account: pathToJS(firebase, 'profile'),
+    auth: pathToJS(firebase, 'auth')
   })
 )
 export default class Projects extends Component {
@@ -46,7 +42,8 @@ export default class Projects extends Component {
 
   static propTypes = {
     account: PropTypes.object,
-    projects: PropTypes.array,
+    projects: PropTypes.object,
+    firebase: PropTypes.object,
     devshare: PropTypes.object,
     auth: PropTypes.object,
     children: PropTypes.object,
@@ -68,14 +65,18 @@ export default class Projects extends Component {
     this.setState(newState)
   }
 
-  newSubmit = name =>
+  newSubmit = name => {
+    const { account } = this.props
+    console.log('this.props.devshare', this.props.devshare)
+    // TODO: Check to make sure project does not already exist before creating
     this.props.devshare
-      .projects()
-      .add({ name, owner: this.props.account.username })
+      .projects(account.username)
+      .add({ name, owner: account.username, createdAt: this.props.firebase.database.ServerValue.TIMESTAMP })
       .catch(err => {
         // TODO: Show Snackbar
         console.error('error creating new project', err)
       })
+  }
 
   // TODO: Delete through devshare projects method
   deleteProject = ({ name }) =>
@@ -98,11 +99,7 @@ export default class Projects extends Component {
     const { newProjectModal, addCollabModal, currentProject } = this.state
 
     if (!isLoaded(projects)) {
-      return (
-        <div className={classes['progress']}>
-          <CircularProgress />
-        </div>
-      )
+      return <LoadingSpinner />
     }
 
     // User has no projects and doesn't match logged in user

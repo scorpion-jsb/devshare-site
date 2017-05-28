@@ -11,11 +11,6 @@ import { red500, red800 } from 'material-ui/styles/colors'
 import classes from './SharingDialog.scss'
 import { map } from 'lodash'
 
-// redux/devshare
-// import { connect } from 'react-redux'
-// import { devshare, helpers } from 'redux-devshare'
-// const { pathToJS, dataToJS, isLoaded, isEmpty } = helpers
-
 export default class SharingDialog extends Component {
   state = {
     error: null

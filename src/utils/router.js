@@ -1,10 +1,9 @@
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { browserHistory } from 'react-router'
 import { paths } from 'constants'
-import { helpers } from 'redux-devshare'
+import { pathToJS } from 'react-redux-firebase'
 import LoadingSpinner from 'components/LoadingSpinner'
 import { AUTHED_REDIRECT, UNAUTHED_REDIRECT } from 'constants/actionTypes'
-const { pathToJS } = helpers
 
 /**
  * @description Higher Order Component that redirects to `/login` instead
@@ -15,10 +14,10 @@ const { pathToJS } = helpers
 export const UserIsAuthenticated = UserAuthWrapper({ // eslint-disable-line new-cap
   wrapperDisplayName: 'UserIsAuthenticated',
   LoadingComponent: LoadingSpinner,
-  authSelector: ({ devshare }) => pathToJS(devshare, 'auth'),
-  authenticatingSelector: ({ devshare }) =>
-    (pathToJS(devshare, 'auth') === undefined) ||
-    (pathToJS(devshare, 'isInitializing') === true),
+  authSelector: ({ firebase }) => pathToJS(firebase, 'auth'),
+  authenticatingSelector: ({ firebase }) =>
+    (pathToJS(firebase, 'auth') === undefined) ||
+    (pathToJS(firebase, 'isInitializing') === true),
   predicate: auth => auth !== null,
   redirectAction: newLoc => (dispatch) => {
     browserHistory.replace(newLoc)
@@ -41,13 +40,12 @@ export const UserIsNotAuthenticated = UserAuthWrapper({ // eslint-disable-line n
   wrapperDisplayName: 'UserIsNotAuthenticated',
   allowRedirectBack: false,
   LoadingComponent: LoadingSpinner,
-  failureRedirectPath: ({ devshare }, props) =>
-    props.location.query.redirect || paths.home,
-  authSelector: ({ devshare }) => pathToJS(devshare, 'auth'),
-  authenticatingSelector: ({ devshare }) =>
-    (pathToJS(devshare, 'auth') === undefined) ||
-    (pathToJS(devshare, 'profile') === undefined) ||
-    (pathToJS(devshare, 'isInitializing') === true),
+  failureRedirectPath: ({ firebase }, props) => paths.home,
+  authSelector: ({ firebase }) => pathToJS(firebase, 'auth'),
+  authenticatingSelector: ({ firebase }) =>
+    (pathToJS(firebase, 'auth') === undefined) ||
+    (pathToJS(firebase, 'profile') === undefined) ||
+    (pathToJS(firebase, 'isInitializing') === true),
   predicate: auth => auth === null,
   redirectAction: newLoc => (dispatch) => {
     browserHistory.replace(newLoc)

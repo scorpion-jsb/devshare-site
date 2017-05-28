@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import { map } from 'lodash'
 import Paper from 'material-ui/Paper'
 import Avatar from 'material-ui/Avatar'
 import Popover from 'material-ui/Popover'
@@ -93,7 +94,7 @@ export default class ProjectTile extends Component {
 
     // Collaborator Bubbles
     if (collaborators) {
-      collaboratorsList = collaborators.map((user, i) => {
+      collaboratorsList = map(collaborators, (user, i) => {
         const { username, avatarUrl } = user
         return (
           <div
@@ -155,9 +156,9 @@ export default class ProjectTile extends Component {
           open={this.state.deleteOpen || false}
           onSubmit={this.deleteProject}
         />
-        <Paper key={`Project-${name}`} className={classes['container']}>
-          <div className={classes['top']}>
-            <span className={classes['name']} onClick={this.handleSelect}>
+        <Paper key={`Project-${name}`} className={classes.container}>
+          <div className={classes.top}>
+            <span className={classes.name} onClick={this.handleSelect}>
               {name}
             </span>
             <Popover

@@ -3,7 +3,9 @@
  * @description Redux-form names
  **/
 export const formNames = {
-  account: 'account'
+  account: 'account',
+  signup: 'signup',
+  login: 'login'
 }
 
 /**
@@ -21,6 +23,7 @@ export const firebasePaths = {
  **/
 export const paths = {
   home: '/',
+  recover: '/recover',
   login: '/login',
   signup: '/signup',
   account: '/account',

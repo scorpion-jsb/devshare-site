@@ -50,7 +50,7 @@ export default class Views extends Component {
     }
     const views = this.buildViews()
     return (
-      <div className={classes['container']}>
+      <div className={classes.container}>
         {views}
       </div>
     )

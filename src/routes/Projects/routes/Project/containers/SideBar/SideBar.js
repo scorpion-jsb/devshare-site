@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { isArray, each, last, map } from 'lodash'
+import { each, last, map } from 'lodash'
 import classnames from 'classnames'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
@@ -11,50 +11,39 @@ import GroupIcon from 'material-ui/svg-icons/social/group'
 import CopyIcon from 'material-ui/svg-icons/content/content-copy'
 import ArchiveIcon from 'material-ui/svg-icons/content/archive'
 import RaisedButton from 'material-ui/RaisedButton'
+import { connect } from 'react-redux'
+import { devshare } from 'redux-devshare'
+import { bindActionCreators } from 'redux'
+import { isLoaded } from 'react-redux-firebase'
 
-import TreeView from '../TreeView'
-import ContextMenu from '../../components/ContextMenu/ContextMenu'
+import TreeView from '../../components/TreeView'
+import ContextMenu from '../../components/ContextMenu'
+import { actions as TabActions } from '../../modules/tabs'
 import classes from './SideBar.scss'
 
 const fileEntityBlackList = ['.DS_Store', 'node_modules']
 
-// Icon styles
 const iconButtonStyle = { width: '50px', height: '50px', padding: '0px' }
 const iconStyle = { width: '100%', height: '100%' }
 const tooltipPosition = 'top-center'
+const projectSelectLabelStyle = {
+  fontSize: '1.5rem',
+  fontWeight: '300',
+  textOverflow: 'ellipsis'
+}
 
-// redux-devsharev3
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { actions as TabActions } from '../../modules/tabs'
-import { devshare, helpers } from 'redux-devshare'
-const { isLoaded, dataToJS } = helpers
-
-@devshare(
-  ({ project }) =>
-    ([
-      `files/${project.owner}/${project.name}`
-    ])
-)
+@devshare()
 @connect(
-  ({ devshare }, { project }) =>
-    ({
-      files: map(
-        dataToJS(devshare, `files/${project.owner}/${project.name}`),
-        (file, key) => Object.assign(file, { key })
-      )
-    }),
-  // Map dispatch to props
-  (dispatch) =>
-    bindActionCreators(TabActions, dispatch)
+  null,
+  (dispatch) => bindActionCreators(TabActions, dispatch)
 )
 export default class SideBar extends Component {
-
   static propTypes = {
-    projects: PropTypes.array,
+    projects: PropTypes.object,
+    firebase: PropTypes.object,
     devshare: PropTypes.object,
     project: PropTypes.object.isRequired,
-    files: PropTypes.array,
+    files: PropTypes.object,
     tabs: PropTypes.object,
     openTab: PropTypes.func,
     closeTab: PropTypes.func,
@@ -62,7 +51,8 @@ export default class SideBar extends Component {
     onSettingsClick: PropTypes.func.isRequired,
     onSharingClick: PropTypes.func.isRequired,
     navigateToTab: PropTypes.func,
-    onShowPopover: PropTypes.func
+    onShowPopover: PropTypes.func,
+    onFileClick: PropTypes.func
   }
 
   state = {
@@ -190,6 +180,15 @@ export default class SideBar extends Component {
     console.log('Open clone dialog')
   }
 
+  onFilesAdd = (e) => {
+    e.preventDefault()
+    each(e.target.files, item => {
+      if (fileEntityBlackList.indexOf(last(item.webkitRelativePath.split('/'))) === -1) {
+        this.readAndSaveFileEntry(item)
+      }
+    })
+  }
+
   render () {
     const {
       files,
@@ -198,47 +197,54 @@ export default class SideBar extends Component {
       showProjects,
       onSettingsClick,
       onSharingClick,
-      onShowPopover
+      onShowPopover,
+      tabs,
+      onFileClick
     } = this.props
 
     const { contextMenu, filesOver } = this.state
 
-    const projectsMenu = isArray(projects) && projects.length > 0
-      ? projects.map((project, i) =>
-        <MenuItem
-          key={`Project-${i}`}
-          label={project.name}
-          value={project.name}
-          primaryText={project.name}
-        />
-        )
-      : null
-
     return (
-      <div className={classnames(classes['container'], { 'filehover': filesOver })}
+      <div className={classnames(classes.container, { 'filehover': filesOver })}
         onDragOver={this.handleFileDrag}
         onDragLeave={this.handleFileDragLeave}
         onDrop={this.handleFileDrop}
         onContextMenu={this._rightClick}
       >
-        <div className={classes['dropzone']}>
+        <div className={classes.dropzone}>
           {
-            (projectsMenu && showProjects)
-              ? <SelectField
-                style={{width: '80%', marginLeft: '10%'}}
-                labelStyle={{fontSize: '1.5rem', fontWeight: '300', textOverflow: 'ellipsis'}}
-                autoWidth={false}
-                value={project.name}
-                children={projectsMenu}
-                onChange={this.selectProject}
+            showProjects
+              ? (
+                <SelectField
+                  style={{width: '80%', marginLeft: '10%'}}
+                  labelStyle={projectSelectLabelStyle}
+                  autoWidth={false}
+                  value={project.name}
+                  onChange={this.selectProject}
+                  >
+                  {
+                    map(projects, (project, i) =>
+                      <MenuItem
+                        key={`Project-${i}`}
+                        label={project.name}
+                        value={project.name}
+                        primaryText={project.name}
+                      />
+                   )
+                  }
+                </SelectField>
+              )
+              : (
+                <RaisedButton
+                  label='Save To Account'
                 />
-              : <RaisedButton
-                label='Save To Account'
-                />
+              )
           }
           <TreeView
-            fileStructure={files}
+            files={files}
+            tabs={tabs}
             onRightClick={this.showContextMenu}
+            onFileClick={onFileClick}
             project={project}
             loading={!isLoaded(files)}
           />
@@ -249,7 +255,7 @@ export default class SideBar extends Component {
             onChange={this.handleFileUpload}
             multiple
           />
-          <div className={classes['buttons']}>
+          <div className={classes.buttons}>
             <IconButton
               style={iconButtonStyle}
               iconStyle={iconStyle}
@@ -271,7 +277,7 @@ export default class SideBar extends Component {
               <ArchiveIcon />
             </IconButton>
           </div>
-          <div className={classes['buttons']}>
+          <div className={classes.buttons}>
             <IconMenu
               iconButtonElement={
                 <IconButton
@@ -289,11 +295,11 @@ export default class SideBar extends Component {
               />
               <MenuItem
                 primaryText='Add file'
-                onClick={() => { onShowPopover('file') }}
+                onClick={() => onShowPopover('file')}
               />
               <MenuItem
                 primaryText='Add folder'
-                onClick={() => { onShowPopover('folder') }}
+                onClick={() => onShowPopover('folder')}
               />
             </IconMenu>
             <IconButton
@@ -320,8 +326,8 @@ export default class SideBar extends Component {
             ? (
               <ContextMenu
                 path={contextMenu.path}
-                onAddFileClick={() => { onShowPopover('file') }}
-                onAddFolderClick={() => { onShowPopover('folder') }}
+                onAddFileClick={() => onShowPopover('file')}
+                onAddFolderClick={() => onShowPopover('folder')}
                 onFileDelete={this.deleteFile}
                 position={contextMenu.position}
                 dismiss={this.dismissContextMenu}

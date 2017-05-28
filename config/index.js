@@ -35,10 +35,10 @@ const config = {
     presets        : ['es2015', 'react', 'stage-0']
   },
   compiler_css_modules     : true,
-  compiler_devtool         : 'source-map',
+  compiler_devtool         : 'eval',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
-  compiler_quiet           : false,
+  compiler_quiet           : false, // use to quiet bundle info
   compiler_public_path     : '/',
   compiler_stats           : {
     chunks : false,

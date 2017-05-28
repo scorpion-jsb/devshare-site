@@ -90,7 +90,7 @@ export default class DeleteDialog extends Component {
               <span>Please type in the name of the project to confirm:</span>
               <TextField
                 floatingLabelText='Project Name'
-                onChange={() => this.handleInputChange('projectname')}
+                onChange={(e) => this.handleInputChange('projectname', e)}
               />
             </div>
           </div>

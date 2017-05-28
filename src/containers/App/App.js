@@ -10,7 +10,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
-class AppContainer extends Component {
+export default class AppContainer extends Component {
   static childContextTypes = {
     muiTheme: PropTypes.object
   }
@@ -36,5 +36,3 @@ class AppContainer extends Component {
     )
   }
 }
-
-export default AppContainer

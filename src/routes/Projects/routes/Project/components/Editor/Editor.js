@@ -1,24 +1,30 @@
 import React, { PropTypes, Component } from 'react'
-import { project } from 'devshare'
-import classes from './Editor.scss'
+import { devshare } from 'redux-devshare'
 
 import { connect } from 'react-redux'
-import { helpers } from 'redux-devshare'
-const { pathToJS } = helpers
+import { pathToJS, firebaseConnect } from 'react-redux-firebase'
+import classes from './Editor.scss'
+require('codemirror/lib/codemirror.css')
+require('codemirror/theme/monokai.css')
 
+@firebaseConnect()
+@devshare()
 @connect(
   // Map state to props
-  ({ devshare }) => ({
-    account: pathToJS(devshare, 'profile')
+  ({ firebase }) => ({
+    account: pathToJS(firebase, 'profile')
   })
 )
 export default class Editor extends Component {
-
   static propTypes = {
     mode: PropTypes.string,
     account: PropTypes.shape({
       username: PropTypes.string.isRequired
     }),
+    firebase: PropTypes.shape({
+      ref: PropTypes.func.isRequired
+    }),
+    devshare: PropTypes.object,
     theme: PropTypes.string,
     name: PropTypes.string.isRequired,
     height: PropTypes.string,
@@ -56,8 +62,6 @@ export default class Editor extends Component {
   componentDidMount () {
     let CodeMirror = require('codemirror')
     require('expose?CodeMirror!codemirror') // Needed for Firepad to load CodeMirror
-    require('codemirror/lib/codemirror.css')
-    require('codemirror/theme/monokai.css')
     require('codemirror/keymap/vim')
     require('codemirror/mode/javascript/javascript')
     require('codemirror/mode/css/css')
@@ -65,7 +69,7 @@ export default class Editor extends Component {
     require('codemirror/mode/htmlmixed/htmlmixed')
     require('codemirror/mode/go/go')
     require('codemirror/mode/yaml/yaml')
-    require('codemirror/mode/pug/pug')
+    // require('codemirror/mode/pug/pug')
     require('codemirror/mode/markdown/markdown')
     require('codemirror/mode/sass/sass')
     require('codemirror/mode/shell/shell')
@@ -73,7 +77,7 @@ export default class Editor extends Component {
     require('codemirror/mode/xml/xml')
     const editorDiv = document.getElementById(this.props.name)
     const { name, owner } = this.props.project
-    const file = project(owner, name).fileSystem.file(this.props.filePath)
+    const file = this.props.devshare.project(owner, name).fileSystem.file(this.props.filePath)
     this.editor = CodeMirror(editorDiv, {
       lineNumbers: true,
       lineWrapping: true,
@@ -98,13 +102,14 @@ export default class Editor extends Component {
     // Load file content
     const Firepad = require('firepad')
     const { project: { name, owner }, account } = this.props
+
     if (typeof editor.firepad === 'undefined') {
-      const { fileSystem } = project(owner, name)
+      const { fileSystem } = this.props.devshare.project(owner, name)
       const file = fileSystem.file(this.props.filePath)
       try {
         try {
           this.firepad = Firepad.fromCodeMirror(
-            file.firebaseRef(),
+            this.props.firebase.ref(file.firebaseUrl()),
             editor,
             { userId: account ? account.username : '&' }
           )
@@ -113,10 +118,11 @@ export default class Editor extends Component {
         }
         if (this.firepad && this.firepad.on) {
           this.firepad.on('ready', () => {
-            // TODO: Load original content of file
             if (this.firepad.isHistoryEmpty()) {
-              Firepad.Headless(fileSystem.firebaseRef()).getText(text => {
-                this.content = text
+              // Load original content of file
+              file.get().then((content) => {
+                console.debug('loading original:', content.original)
+                // this.firepad.setText(content.original)
               })
             }
           })

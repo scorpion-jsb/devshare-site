@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import classes from './Navbar.scss'
 import { Link } from 'react-router'
-// Components
+import { connect } from 'react-redux'
+import { firebaseConnect, pathToJS } from 'react-redux-firebase'
+import { paths } from 'constants'
 import AppBar from 'material-ui/AppBar'
 import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
 import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
+import stockPhotoUrl from 'static/User.png'
+import classes from './Navbar.scss'
 
-const stockPhotoUrl = 'https://s3.amazonaws.com/kyper-cdn/img/User.png'
 const originSettings = { horizontal: 'right', vertical: 'top' }
 const buttonStyle = { color: 'white', textDecoration: 'none' }
 const avatarSize = 62
@@ -19,31 +21,25 @@ const avatarStyles = {
   button: { marginRight: '.25rem', width: avatarSize, height: avatarSize },
   wrapper: { marginTop: '0px' }
 }
-// redux/devshare
-import { connect } from 'react-redux'
-import { devshare, helpers } from 'redux-devshare'
-const { pathToJS } = helpers
 
-// Decorators
-@devshare()
+@firebaseConnect()
 @connect(
-  ({devshare}) => ({
-    authError: pathToJS(devshare, 'authError'),
-    account: pathToJS(devshare, 'profile')
+  ({firebase}) => ({
+    account: pathToJS(firebase, 'profile')
   })
 )
-export class Navbar extends Component {
+export default class Navbar extends Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   }
 
   static propTypes = {
     account: PropTypes.object,
-    devshare: PropTypes.object.isRequired
+    firebase: PropTypes.object.isRequired
   }
 
   handleLogout = () =>
-    this.props.devshare
+    this.props.firebase
       .logout()
       .then(() => this.context.router.push('/'))
 
@@ -59,14 +55,14 @@ export class Navbar extends Component {
     )
 
     const mainMenu = (
-      <div className={classes['menu']}>
-        <Link to='/signup'>
+      <div className={classes.menu}>
+        <Link to={paths.signup}>
           <FlatButton
             label='Sign Up'
             style={buttonStyle}
           />
         </Link>
-        <Link to='/login'>
+        <Link to={paths.login}>
           <FlatButton
             label='Login'
             style={buttonStyle}
@@ -82,14 +78,13 @@ export class Navbar extends Component {
         anchorOrigin={originSettings}
         animated={false}
       >
-        <MenuItem
-          primaryText='Account'
-          value='account'
-          onTouchTap={() => this.context.router.push('/account')}
-        />
+        <Link to={paths.account}>
+          <MenuItem
+            primaryText='Account'
+          />
+        </Link>
         <MenuItem
           primaryText='Sign out'
-          value='logout'
           onClick={this.handleLogout}
         />
       </IconMenu>
@@ -98,13 +93,13 @@ export class Navbar extends Component {
     // Only apply styling if avatar is showing
     const menuStyle = account && account.username && avatarStyles.wrapper
 
-    // Redirect to users home page if logged int
+    // Redirect to users home page if logged in
     const brandPath = account && account.username ? `/${account.username}` : '/'
 
     return (
       <AppBar
         title={
-          <Link to={brandPath} className={classes['brand']}>
+          <Link to={brandPath} className={classes.brand}>
             devshare
           </Link>
         }
@@ -115,5 +110,3 @@ export class Navbar extends Component {
     )
   }
 }
-
-export default Navbar

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import { routerReducer as router } from 'react-router-redux'
-import { reducer as devshare } from 'redux-devshare'
+import { firebaseStateReducer as firebase } from 'react-redux-firebase'
 import { reducer as form } from 'redux-form'
 
 export const makeRootReducer = (asyncReducers) => combineReducers({
     // Add sync reducers here
-  devshare,
+  firebase,
   form,
   router,
   ...asyncReducers

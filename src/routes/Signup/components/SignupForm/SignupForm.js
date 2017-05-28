@@ -1,71 +1,50 @@
 import React, { PropTypes } from 'react'
-import TextField from 'components/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
 import { Field, reduxForm } from 'redux-form'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'components/TextField'
+import { required, validateEmail } from 'utils/form'
+import { formNames } from 'constants'
 
 import classes from './SignupForm.scss'
-const buttonStyle = { width: '100%' }
-
-export const validate = ({ email, password, username }) => {
-  const errors = {}
-  if (!email) { errors.email = 'Email Required' }
-  if (!password) { errors.password = 'Password Required' }
-  if (username) {
-    if (username.match(/[/\s]/g)) {
-      errors.username = 'Username may not contain spaces'
-    }
-    if (username.match(/[.$#[\]/]/g)) {
-      errors.username = 'Username may not contain symbols'
-    }
-  }
-  if (email && email.indexOf('@') === -1) {
-    errors.email = 'Invalid Email'
-  }
-  return errors
-}
 
 export const SignupForm = ({ handleSubmit, submitting }) => (
   <form className={classes.container} onSubmit={handleSubmit}>
-    <div>
-      <Field
-        component={TextField}
-        name='username'
-        label='Username'
-        />
-    </div>
-    <div>
-      <Field
-        component={TextField}
-        name='email'
-        label='Email'
-        />
-    </div>
-    <div>
-      <Field
-        component={TextField}
-        name='password'
-        label='Password'
-        type='password'
-        />
-    </div>
+    <Field
+      name='username'
+      component={TextField}
+      label='Username'
+      validate={[required]}
+    />
+    <Field
+      name='email'
+      component={TextField}
+      label='Email'
+      validate={[required, validateEmail]}
+    />
+    <Field
+      name='password'
+      component={TextField}
+      label='Password'
+      type='password'
+      validate={[required]}
+    />
     <div className={classes.submit}>
       <RaisedButton
         label='Signup'
         primary
         type='submit'
         disabled={submitting}
-        style={buttonStyle}
-        />
+        style={{ width: '100%' }}
+      />
     </div>
   </form>
-  )
+)
 
 SignupForm.propTypes = {
   handleSubmit: PropTypes.func,
-  submitting: PropTypes.bool
+  submitting: PropTypes.bool // added by redux-form
 }
 
 export default reduxForm({
-  form: 'Signup',
-  validate
+  form: formNames.signup
 })(SignupForm)

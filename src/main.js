@@ -16,7 +16,7 @@ initScripts()
 // ========================================================
 // Store Instantiation
 // ========================================================
-const initialState = window.___INITIAL_STATE__ || { devshare: { authError: null } } // eslint-disable-line no-underscore-dangle
+const initialState = window.___INITIAL_STATE__ || { firebase: { authError: null } } // eslint-disable-line no-underscore-dangle
 const store = createStore(initialState)
 
 // ========================================================

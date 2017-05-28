@@ -16,6 +16,10 @@
       ".read": "auth !== null",
       ".write": "auth !== null"
     },
+    "requests": {
+      ".read": true,
+      ".write": true
+    },
     "projects": {
       ".read": true,
       ".write": true,

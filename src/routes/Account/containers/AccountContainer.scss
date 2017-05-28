@@ -1,3 +1,5 @@
+@import 'base';
+
 .container, .form, .pane, .settings {
   align-items: center;
   display: flex;
@@ -48,7 +50,7 @@
       align-items: center;
     }
   }
-  &-current {
+  &Current {
     width: 100%;
     max-width: 13rem;
     height: auto;
@@ -63,4 +65,11 @@
     width: 10rem;
     height: auto;
   }
+}
+.meta {
+  @extend .flex-column-center;
+  justify-content: center;
+  flex-basis: 60%;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
 }

@@ -1,31 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { firebaseConnect, pathToJS, isLoaded, isEmpty } from 'react-redux-firebase'
 import GoogleButton from 'react-google-button'
-
-// Components
-import SignupForm from '../components/SignupForm/SignupForm'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
-import CircularProgress from 'material-ui/CircularProgress'
 import Snackbar from 'material-ui/Snackbar'
 import GithubIcon from 'react-icons/lib/go/mark-github'
 import FontIcon from 'material-ui/FontIcon'
+import { UserIsNotAuthenticated } from 'utils/router'
+import { paths } from 'constants'
+import LoadingSpinner from 'components/LoadingSpinner'
+import SignupForm from '../components/SignupForm/SignupForm'
 
 import classes from './SignupContainer.scss'
 
-// redux-devsharev3
-import { connect } from 'react-redux'
-import { devshare, helpers } from 'redux-devshare'
-const { isLoaded, isEmpty, pathToJS } = helpers
-// import { UserIsNotAuthenticated } from 'utils/router'
-
-// @UserIsNotAuthenticated // redirect to home if logged in
-@devshare()
+@UserIsNotAuthenticated // redirect to home if logged in
+@firebaseConnect()
 @connect(
-  // Map state to props
-  ({devshare}) => ({
-    authError: pathToJS(devshare, 'authError'),
-    account: pathToJS(devshare, 'profile')
+  ({firebase}) => ({
+    authError: pathToJS(firebase, 'authError'),
+    account: pathToJS(firebase, 'profile')
   })
 )
 export default class Signup extends Component {
@@ -34,13 +29,12 @@ export default class Signup extends Component {
   }
   static propTypes = {
     account: PropTypes.object,
-    devshare: PropTypes.object,
+    firebase: PropTypes.object,
     authError: PropTypes.object
   }
 
   state = {
-    snackCanOpen: false,
-    isLoading: false
+    snackCanOpen: false
   }
 
   handleRequestClose = () =>
@@ -49,71 +43,59 @@ export default class Signup extends Component {
     })
 
   handleSignup = (creds) => {
-    this.setState({
-      snackCanOpen: true,
-      isLoading: true
-    })
-    this.props.devshare
-      .signup(creds)
-      .then(account =>
+    this.setState({ snackCanOpen: true })
+    return this.props.firebase
+      .createUser(creds, { email: creds.email, username: creds.username })
+      .then(account => {
         this.context.router.push(`${account.username}`)
-      )
+      })
   }
 
   providerLogin = (provider) => {
-    this.setState({
-      snackCanOpen: true,
-      isLoading: true
-    })
-    this.props.devshare
-      .login({ provider, type: 'popup' })
+    this.setState({ snackCanOpen: true })
+    return this.props.firebase
+      .login({ provider })
       .then(account =>
         this.context.router.push(`${account.username}`)
       )
   }
 
   render () {
-    const { authError } = this.props
-    const { snackCanOpen, isLoading } = this.state
+    const { authError, account } = this.props
+    const { snackCanOpen } = this.state
 
-    if (isLoading && !authError) {
-      return (
-        <div className={classes['container']}>
-          <div className='Signup-Progress'>
-            <CircularProgress mode='indeterminate' />
-          </div>
-        </div>
-      )
+    if (!isLoaded(account)) {
+      return <LoadingSpinner />
     }
 
     return (
-      <div className={classes['container']}>
-        <Paper className={classes['panel']}>
+      <div className={classes.container}>
+        <Paper className={classes.panel}>
           <SignupForm onSubmit={this.handleSignup} />
         </Paper>
-        <div className={classes['or']}>
+        <div className={classes.or}>
           or
         </div>
-        <div className={classes['providers']}>
+        <div className={classes.providers}>
           <GoogleButton onClick={() => this.providerLogin('google')} />
         </div>
-        <div className={classes['providers']}>
+        <div className={classes.providers}>
           <RaisedButton
-            className={classes['github']}
+            className={classes.github}
             onClick={() => this.providerLogin('github')}
             label='Sign in with Github'
             icon={
-              <FontIcon className={classes['github-icon']}>
+              <FontIcon className={classes.githubIcon}>
                 <GithubIcon />
               </FontIcon>
             }
           />
         </div>
-        <div className={classes['login']}>
-          <span className={classes['login-label']}>
+        <div className={classes.login}>
+          <span className={classes.loginLabel}>
             Already have an account?
           </span>
-          <Link className={classes['login-link']} to='/login'>
+          <Link className={classes.loginLink} to={paths.login}>
             Login
           </Link>
         </div>

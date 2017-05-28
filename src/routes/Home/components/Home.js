@@ -1,6 +1,7 @@
-import React, { Component } from 'react' // eslint-disable-line
+import React, { Component, PropTypes } from 'react' // eslint-disable-line
 import { map } from 'lodash'
-import { Link } from 'react-router'
+import { firebaseConnect } from 'react-redux-firebase'
+import { devshare } from 'redux-devshare'
 import logo from '../assets/devShareLogo.gif'
 import preview from '../assets/devShareEdit.gif'
 
@@ -29,9 +30,36 @@ const buttonLabelStyle = {
   fontSize: '1.5rem'
 }
 
+@devshare()
+@firebaseConnect()
 export default class Home extends Component {
-  trackEvent = () => {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
+  static propTypes = {
+    firebase: PropTypes.object.isRequired,
+    devshare: PropTypes.shape({
+      project: PropTypes.func.isRequired
+    })
+  }
+
+  newAnon = () => {
     // event({ category: 'Projects', action: 'Create Anonymous' })
+    this.props.firebase
+      .push('projects/anon', { createdAt: this.props.firebase.database.ServerValue.TIMESTAMP })
+      .then((snap) =>
+        this.props.devshare
+          .project('anon', snap.key)
+          .fileSystem
+          .addFile('index.txt', 'You can add a file by clicking the plus in the lower left corner.\n Delete this file by left clicking on the file name on the left.')
+          .then(() => snap)
+        )
+      // set name for use with tabs
+      .then((snap) => snap.ref.update({ name: snap.key }).then(() => snap))
+      .then((snap) => {
+        this.context.router.push(`anon/${snap.key}`)
+      })
   }
 
   render () {
@@ -68,17 +96,17 @@ export default class Home extends Component {
     return (
       <div className={classes['container']} style={{ color: Theme.palette.primary2Color }}>
         <div>
-          <div className={classes['hero']}>
-            <div className={classes['logo']}>
+          <div className={classes.hero}>
+            <div className={classes.logo}>
               <img src={logo} alt='Devshare' />
-              <span className={classes['brand']}>
+              <span className={classes.brand}>
                 devShare
               </span>
             </div>
-            <span className={classes['name']}>
+            <span className={classes.name}>
               Build together
             </span>
-            <span className={classes['description']}>
+            <span className={classes.description}>
               real-time, full-project code editing in browser
             </span>
             <RaisedButton
@@ -86,19 +114,18 @@ export default class Home extends Component {
               label='Share Code'
               style={buttonStyle}
               labelStyle={buttonLabelStyle}
-              containerElement={<Link to={`/anon/${'asdfas'}`} />}
-              onClick={this.trackEvent}
+              onClick={this.newAnon}
             />
-            <span className={classes['muted']}>
+            <span className={classes.muted}>
               No sign up required
             </span>
-            <div className={classes['preview']}>
+            <div className={classes.preview}>
               <Paper style={{marginBottom: -10}} zDepth={1}>
                 <img className={classes['preview-img']} src={preview} />
               </Paper>
             </div>
           </div>
-          <div className={classes['features']}>
+          <div className={classes.features}>
             {meInThreeElements}
           </div>
         </div>

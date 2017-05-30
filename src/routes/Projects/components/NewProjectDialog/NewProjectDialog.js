@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react'
-import Dialog from 'material-ui/Dialog'
 import { Field, reduxForm } from 'redux-form'
 import { SelectField, TextField } from 'redux-form-material-ui'
 import { map } from 'lodash'
+import Dialog from 'material-ui/Dialog'
 import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
-import classes from './NewProjectDialog.scss'
+import { required } from 'utils/form'
 import { formNames } from 'constants'
+import classes from './NewProjectDialog.scss'
 
 export const NewProjectDialog = ({
   open,
@@ -44,6 +45,7 @@ export const NewProjectDialog = ({
         hintText='exampleProject'
         floatingLabelText='Project Name'
         component={TextField}
+        validate={[required]}
       />
       <Field
         name='template'

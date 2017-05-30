@@ -6,6 +6,7 @@ import {
   pathToJS,
   isLoaded,
   isEmpty,
+  dataToJS,
   populatedDataToJS
 } from 'react-redux-firebase'
 import { devshare } from 'redux-devshare'
@@ -14,6 +15,7 @@ import SharingDialog from 'components/SharingDialog/SharingDialog'
 import ProjectTile from '../components/ProjectTile/ProjectTile'
 import NewProjectTile from '../components/NewProjectTile/NewProjectTile'
 import NewProjectDialog from '../components/NewProjectDialog/NewProjectDialog'
+import Devshare from 'devshare'
 
 import classes from './ProjectsContainer.scss'
 
@@ -24,12 +26,14 @@ const populates = [
 @devshare()
 @firebaseConnect(
   ({ params }) => ([
+    'templates#limitToFirst=40',
     { path: `projects/${params.username}`, populates }
   ])
 )
 @connect(
   ({ firebase }, { params }) => ({
     projects: populatedDataToJS(firebase, `projects/${params.username}`, populates),
+    templates: dataToJS(firebase, 'templates'),
     account: pathToJS(firebase, 'profile'),
     auth: pathToJS(firebase, 'auth')
   })
@@ -43,6 +47,7 @@ export default class Projects extends Component {
   static propTypes = {
     account: PropTypes.object,
     projects: PropTypes.object,
+    templates: PropTypes.object,
     firebase: PropTypes.object,
     devshare: PropTypes.object,
     auth: PropTypes.object,
@@ -65,16 +70,24 @@ export default class Projects extends Component {
     this.setState(newState)
   }
 
-  newSubmit = name => {
+  newSubmit = newProject => {
     const { account } = this.props
-    console.log('this.props.devshare', this.props.devshare)
-    // TODO: Check to make sure project does not already exist before creating
-    this.props.devshare
-      .projects(account.username)
-      .add({ name, owner: account.username, createdAt: this.props.firebase.database.ServerValue.TIMESTAMP })
+    newProject.owner = account.username
+    const args = [newProject]
+    if (newProject.template) {
+      args.unshift(newProject.template)
+    }
+    // call addFromTemplate method if template is selected
+    const method = newProject.template ? 'addFromTemplate' : 'add'
+    return Devshare
+      .projects(account.username)[method](...args)
+      .then(() => {
+        this.toggleModal('newProject')
+      })
       .catch(err => {
         // TODO: Show Snackbar
         console.error('error creating new project', err)
+        this.toggleModal('newProject')
       })
   }
 
@@ -95,7 +108,12 @@ export default class Projects extends Component {
     // TODO: Look into moving this into its own layer
     if (this.props.children) { return this.props.children }
 
-    const { projects, account, params: { username }, devshare } = this.props
+    const { projects,
+      account,
+      params: { username },
+      devshare,
+      templates
+    } = this.props
     const { newProjectModal, addCollabModal, currentProject } = this.state
 
     if (!isLoaded(projects)) {
@@ -152,7 +170,8 @@ export default class Projects extends Component {
           ? (
             <NewProjectDialog
               open={newProjectModal}
-              onCreateClick={this.newSubmit}
+              onSubmit={this.newSubmit}
+              templates={templates}
               onRequestClose={() => this.toggleModal('newProject')}
             />
           ) : null

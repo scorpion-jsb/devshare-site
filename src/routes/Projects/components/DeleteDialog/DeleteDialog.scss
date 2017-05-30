@@ -1,15 +1,12 @@
-@import '../../../../styles/base';
-.container {
-
-}
+@import 'base';
 .content {
+  @extend .flex-column;
   font-weight: 300;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
   margin-bottom: 20px;
+  min-height: 250px;
 }
 .warning {
   display: inline;
@@ -20,16 +17,14 @@
 }
 .restatement {
   margin-top: 1rem;
-  &-name {
+  &Name {
     color: $primary;
     margin-left: .5rem;
   }
 }
-
-.input-group {
+.inputGroup {
+  @extend .flex-column;
   margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }

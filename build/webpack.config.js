@@ -26,7 +26,7 @@ const webpackConfig = {
     warnings: false
   },
   module: {
-    // noParse: [ /firepad/ ]
+    noParse: [ /firepad/ ]
   }
 }
 // ------------------------------------

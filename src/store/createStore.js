@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import { reduxDevshare, getDevshare } from 'redux-devshare'
+import { init } from 'devshare'
 import { firebase as fbConfig, env } from '../config'
 
 export default (initialState = {}, history) => {
@@ -25,7 +26,7 @@ export default (initialState = {}, history) => {
       enhancers.push(devToolsExtension())
     }
   }
-
+  init({ env })
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================

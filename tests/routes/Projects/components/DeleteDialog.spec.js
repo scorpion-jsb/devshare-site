@@ -2,7 +2,7 @@ import React from 'react'
 import DeleteDialog from 'routes/Projects/components/DeleteDialog/DeleteDialog'
 import { shallow } from 'enzyme'
 
-describe('(Projects:Component) DeleteDialog', () => {
+describe.skip('(Projects:Component) DeleteDialog', () => {
   let _component
   beforeEach(() => {
     _component = shallow(

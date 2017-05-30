@@ -4,6 +4,7 @@ import Home from './Home'
 import LoginRoute from './Login'
 import SignupRoute from './Signup'
 import ProjectsRoute from './Projects'
+import TemplatesRoute from './Templates'
 import AccountRoute from './Account'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -17,6 +18,7 @@ export const createRoutes = (store) => ({
     AccountRoute(store),
     LoginRoute(store),
     SignupRoute(store),
+    TemplatesRoute(store),
     ProjectsRoute(store)
   ]
 })

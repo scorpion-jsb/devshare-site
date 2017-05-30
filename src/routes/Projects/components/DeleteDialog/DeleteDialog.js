@@ -1,101 +1,93 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import Dialog from 'material-ui/Dialog'
+import { Field, reduxForm } from 'redux-form'
+import { TextField } from 'redux-form-material-ui'
+import { required } from 'utils/form'
 import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
-
 import classes from './DeleteDialog.scss'
+import { formNames } from 'constants'
 
-export default class DeleteDialog extends Component {
-
-  state = { open: this.props.open || false }
-
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    open: PropTypes.bool,
-    onSubmit: PropTypes.func
-  }
-
-  componentWillReceiveProps (nextProps) {
-    let nextState = {}
-    if (nextProps && typeof nextProps.open !== 'undefined') { nextState.open = nextProps.open }
-    this.setState(nextState)
-  }
-
-  open = () => {
-    this.setState({
-      open: false
-    })
-  }
-
-  close = () => {
-    this.setState({
-      open: false
-    })
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    if (this.props.onSubmit) { this.props.onSubmit(name) }
-    this.close()
-  }
-
-  handleInputChange = (name, e) => {
-    e.preventDefault()
-    this.setState({
-      [name]: e.target.value
-    })
-  }
-
-  render () {
-    const { name } = this.props
-    const deleteActions = [
-      <FlatButton
-        label='Cancel'
-        secondary
-        onTouchTap={this.close}
-      />,
-      <FlatButton
-        label='Delete'
-        primary
-        keyboardFocused
-        onTouchTap={this.handleSubmit}
-        disabled={!this.state.projectname || this.state.projectname !== this.props.name}
-      />
-    ]
-    return (
-      <div className={classes['container']}>
-        <Dialog
-          title={`Delete ${name}`}
-          onRequestClose={this.close}
-          open={this.state.open || false}
-          actions={deleteActions}
-          modal={false} >
-          <div className={classes['content']}>
-            <div className={classes['section']}>
-              <h3 className={classes['warning']}>WARNING: </h3>
-              <span>This is a permenant action</span>
-            </div>
-            <div className={classes['question']}>
-              <span>Are you sure this is what you want to be doing?</span>
-            </div>
-            <div className={classes['restatement']}>
-              <span>
-                You are about to delete your project named
-                <span className={classes['restatement-name']}>
-                  {name}
-                </span>
-              </span>
-            </div>
-            <div className={classes['input-group']}>
-              <span>Please type in the name of the project to confirm:</span>
-              <TextField
-                floatingLabelText='Project Name'
-                onChange={(e) => this.handleInputChange('projectname', e)}
-              />
-            </div>
+export const DeleteDialog = ({
+  open,
+  submit,
+  reset,
+  name,
+  handleSubmit,
+  submitting,
+  invalid,
+  onRequestClose
+}) => {
+  const isProjectName = value =>
+    value && value === name
+      ? undefined
+      : 'Name Does Not Match'
+  return (
+    <Dialog
+      title='New Project'
+      modal={false}
+      actions={[
+        <FlatButton
+          label='Cancel'
+          secondary
+          onTouchTap={() => {
+            reset()
+            onRequestClose()
+          }}
+        />,
+        <FlatButton
+          label='Delete'
+          primary
+          disabled={submitting || invalid}
+          onTouchTap={submit}
+        />
+      ]}
+      open={open}
+      onRequestClose={onRequestClose}
+      contentClassName={classes.container}
+    >
+      <form className={classes.inputs} onSubmit={handleSubmit}>
+        <div className={classes.content}>
+          <div className={classes.section}>
+            <h3 className={classes.warning}>WARNING: </h3>
+            <span>This is a permenant action</span>
           </div>
-        </Dialog>
-      </div>
-    )
-  }
+          <div className={classes.question}>
+            <span>Are you sure this is what you want to be doing?</span>
+          </div>
+          <div className={classes.restatement}>
+            <span>
+              You are about to delete your project named
+              <span className={classes.restatementName}>
+                {name}
+              </span>
+            </span>
+          </div>
+          <div className={classes.inputGroup}>
+            <span>Please type in the name of the project to confirm:</span>
+            <Field
+              floatingLabelText='Project Name'
+              name='name'
+              validate={[required, isProjectName]}
+              component={TextField}
+            />
+          </div>
+        </div>
+      </form>
+    </Dialog>
+  )
 }
+
+DeleteDialog.propTypes = {
+  name: PropTypes.string.isRequired,
+  open: PropTypes.bool,
+  submit: PropTypes.func.isRequired, // added by redux-form
+  reset: PropTypes.func.isRequired, // added by redux-form
+  handleSubmit: PropTypes.func.isRequired, // added by redux-form
+  submitting: PropTypes.bool.isRequired, // added by redux-form
+  invalid: PropTypes.bool.isRequired, // added by redux-form
+  onRequestClose: PropTypes.func.isRequired
+}
+
+export default reduxForm({
+  form: formNames.removeProject
+})(DeleteDialog)

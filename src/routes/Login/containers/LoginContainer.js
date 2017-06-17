@@ -1,18 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { firebaseConnect, pathToJS, isLoaded, isEmpty } from 'react-redux-firebase'
-import { UserIsNotAuthenticated } from 'utils/router'
-import { paths } from 'constants'
+import Raven from 'raven-js'
 import GoogleButton from 'react-google-button'
+import { firebaseConnect, pathToJS, isLoaded, isEmpty } from 'react-redux-firebase'
 import Paper from 'material-ui/Paper'
 import Snackbar from 'material-ui/Snackbar'
 import FontIcon from 'material-ui/FontIcon'
 import RaisedButton from 'material-ui/RaisedButton'
 import GithubIcon from 'react-icons/lib/go/mark-github'
+import { UserIsNotAuthenticated } from 'utils/router'
+import { paths } from 'constants'
+import { trackEvent } from 'utils/analytics'
 import LoadingSpinner from 'components/LoadingSpinner'
-import LoginForm from '../components/LoginForm/LoginForm'
-
+import LoginForm from '../components/LoginForm'
 import classes from './LoginContainer.scss'
 
 @UserIsNotAuthenticated // redirect to home if logged in
@@ -25,13 +26,11 @@ import classes from './LoginContainer.scss'
 )
 export default class Login extends Component {
   static propTypes = {
+    firebase: PropTypes.shape({
+      login: PropTypes.func.isRequired
+    }),
     account: PropTypes.object,
-    firebase: PropTypes.object,
     authError: PropTypes.object
-  }
-
-  static contextTypes = {
-    router: PropTypes.object
   }
 
   state = {
@@ -41,10 +40,15 @@ export default class Login extends Component {
   handleLogin = loginData => {
     this.setState({ snackCanOpen: true })
     return this.props.firebase.login(loginData)
+      .then((account) => trackEvent({ category: 'Auth', action: 'Login' }))
+      .catch((err) => {
+        Raven.captureException('Error with Login:', err)
+        return Promise.reject(err)
+      })
   }
 
   providerLogin = (provider) =>
-    this.handleLogin({ provider })
+    this.handleLogin({ provider, type: 'popup' })
 
   render () {
     const { snackCanOpen } = this.state

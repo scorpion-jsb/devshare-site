@@ -28,7 +28,7 @@ script:
   - npm run build:prod
 
 after_success:
-  - npm i -g firebase-ci@0.1.0-rc.7 # install firebase-ci
+  - npm i -g firebase-ci # install firebase-ci
   - firebase-ci deploy
 
 notifications:

@@ -777,7 +777,13 @@ babel-plugin-transform-function-bind@^6.22.0:
     babel-plugin-syntax-function-bind "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-object-rest-spread@^6.22.0:
+babel-plugin-transform-object-assign@^6.22.0:
+  version "6.22.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-assign/-/babel-plugin-transform-object-assign-6.22.0.tgz#f99d2f66f1a0b0d498e346c5359684740caa20ba"
+  dependencies:
+    babel-runtime "^6.22.0"
+
+babel-plugin-transform-object-rest-spread@^6.22.0, babel-plugin-transform-object-rest-spread@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.23.0.tgz#875d6bc9be761c58a2ae3feee5dc4895d8c7f921"
   dependencies:
@@ -1853,9 +1859,21 @@ detect-indent@^4.0.0:
   dependencies:
     repeating "^2.0.0"
 
-devshare@0.3.0, devshare@^0.3.0:
+devshare@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/devshare/-/devshare-0.3.0.tgz#8111167fa2e8835739f9fa75bced4e6823ced0fe"
+  dependencies:
+    cookie "0.3.1"
+    firebase "3.7.0"
+    firepad "^1.4.0"
+    isomorphic-fetch "2.2.1"
+    jszip "3.1.3"
+    lodash "4.17.4"
+    node-safe-filesaver "0.1.0"
+
+devshare@^0.4.0-alpha:
+  version "0.4.0-alpha"
+  resolved "https://registry.yarnpkg.com/devshare/-/devshare-0.4.0-alpha.tgz#46365bc925a1de8bab7aa547826936f6a7272e6b"
   dependencies:
     cookie "0.3.1"
     firebase "3.7.0"
@@ -2673,19 +2691,9 @@ find-up@^1.0.0, find-up@^1.1.2:
     path-exists "^2.0.0"
     pinkie-promise "^2.0.0"
 
-firebase@3.7.0:
+firebase@3.7.0, firebase@3.x.x:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-3.7.0.tgz#a89a2af81f61eb5294b393e2f8d17066e3cd5eac"
-  dependencies:
-    dom-storage "2.0.2"
-    faye-websocket "0.9.3"
-    jsonwebtoken "7.1.9"
-    rsvp "3.2.1"
-    xmlhttprequest "1.8.0"
-
-firebase@3.x.x:
-  version "3.7.4"
-  resolved "https://registry.yarnpkg.com/firebase/-/firebase-3.7.4.tgz#629fd7f84f8ed74f1da815fd792bfa03cd5e2b5c"
   dependencies:
     dom-storage "2.0.2"
     faye-websocket "0.9.3"
@@ -4192,11 +4200,11 @@ lodash.words@^3.0.0:
   dependencies:
     lodash._root "^3.0.0"
 
-lodash@4.17.2, lodash@^4.2.0:
+lodash@4.17.2:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
-lodash@4.17.4, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.0:
+lodash@4.17.4, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5460,8 +5468,8 @@ react-ga@^2.1.2:
     object-assign "^4.0.1"
 
 react-google-button@^0.3.0:
-  version "0.3.0-alpha"
-  resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.3.0-alpha.tgz#1a200c13c58e6124f2d49c1132423a4232f7b897"
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.3.0.tgz#84fc471d01be9b4a06bda3429c18cca4934079e1"
   dependencies:
     prop-types "^15.5.8"
 
@@ -5475,9 +5483,9 @@ react-icons@^2.2.1:
   dependencies:
     react-icon-base "2.0.4"
 
-react-redux-firebase@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-1.4.0.tgz#e3225622bdb4ecfbddfca5ac5df17d2366ab0384"
+react-redux-firebase@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-1.4.1.tgz#7326a7eb9ab240edb65e73d6132c21197d3f61b6"
   dependencies:
     es6-promise "^4.1.0"
     firebase "^3.9.0"

@@ -2,8 +2,10 @@ import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { browserHistory } from 'react-router'
 import { paths } from 'constants'
 import { pathToJS } from 'react-redux-firebase'
+import { env } from 'config'  // eslint-disable-line import/no-unresolved
 import LoadingSpinner from 'components/LoadingSpinner'
 import { AUTHED_REDIRECT, UNAUTHED_REDIRECT } from 'constants/actionTypes'
+import { trackRouteUpdate } from './analytics'
 
 /**
  * @description Higher Order Component that redirects to `/login` instead
@@ -52,3 +54,13 @@ export const UserIsNotAuthenticated = UserAuthWrapper({ // eslint-disable-line n
     dispatch({ type: AUTHED_REDIRECT })
   }
 })
+
+/**
+ * @description Fired when route is updated. Route updates are tracked if
+ environment is production
+ */
+export const handleRouteUpdate = () => {
+  if (env === 'prod') {
+    trackRouteUpdate()
+  }
+}

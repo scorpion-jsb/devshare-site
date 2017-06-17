@@ -8,6 +8,14 @@ export const initGA = () => {
   }
 }
 
+export const trackEvent = (settings) => {
+  if (gaTrackingId && env === 'prod') {
+    ReactGA.event(settings)
+  } else {
+    console.debug('Analytics event:', settings)
+  }
+}
+
 export const setGAUser = (auth) => {
   if (auth && auth.uid) {
     ReactGA.set({ userId: auth.uid })

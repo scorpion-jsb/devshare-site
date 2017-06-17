@@ -4,13 +4,14 @@ import { initScripts } from 'utils'
 import createStore from './store/createStore'
 import AppContainer from './containers/App/App'
 import { version } from '../package.json'
-import { env } from './config'
+import config, { env } from './config'
 
 // ========================================================
 // Set Window Variables
 // ========================================================
 window.version = version
 window.env = env
+window.config = config
 initScripts()
 
 // ========================================================

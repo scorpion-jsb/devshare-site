@@ -34,7 +34,6 @@ export default (initialState = {}, history) => {
     makeRootReducer(),
     initialState,
     compose(
-      applyMiddleware(...middleware),
       // TODO: Pass node environment directly
       reduxDevshare(
         { env }
@@ -44,8 +43,15 @@ export default (initialState = {}, history) => {
         {
           userProfile: 'users',
           enableLogging: false
+          // customAuthParameters: {
+          //   google: {
+          //     // prompts user to select account on every google login
+          //     prompt: 'select_account'
+          //   }
+          // }
         },
       ),
+      applyMiddleware(...middleware),
       ...enhancers
       )
     )

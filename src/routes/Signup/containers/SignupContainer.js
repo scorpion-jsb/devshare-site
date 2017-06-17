@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
+import Raven from 'raven-js'
 import { firebaseConnect, pathToJS, isLoaded, isEmpty } from 'react-redux-firebase'
 import GoogleButton from 'react-google-button'
 import Paper from 'material-ui/Paper'
@@ -8,11 +9,11 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
 import GithubIcon from 'react-icons/lib/go/mark-github'
 import FontIcon from 'material-ui/FontIcon'
+import { trackEvent } from 'utils/analytics'
 import { UserIsNotAuthenticated } from 'utils/router'
 import { paths } from 'constants'
 import LoadingSpinner from 'components/LoadingSpinner'
-import SignupForm from '../components/SignupForm/SignupForm'
-
+import SignupForm from '../components/SignupForm'
 import classes from './SignupContainer.scss'
 
 @UserIsNotAuthenticated // redirect to home if logged in
@@ -24,9 +25,6 @@ import classes from './SignupContainer.scss'
   })
 )
 export default class Signup extends Component {
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  }
   static propTypes = {
     account: PropTypes.object,
     firebase: PropTypes.object,
@@ -46,18 +44,21 @@ export default class Signup extends Component {
     this.setState({ snackCanOpen: true })
     return this.props.firebase
       .createUser(creds, { email: creds.email, username: creds.username })
-      .then(account => {
-        this.context.router.push(`${account.username}`)
+      .then(() => trackEvent({ category: 'Auth', action: 'Signup' }))
+      .catch((err) => {
+        Raven.captureException('Error with Email Login:', err)
+        return Promise.reject(err)
       })
   }
 
   providerLogin = (provider) => {
     this.setState({ snackCanOpen: true })
     return this.props.firebase
-      .login({ provider })
-      .then(account =>
-        this.context.router.push(`${account.username}`)
-      )
+      .login({ provider, type: 'popup' })
+      .catch((err) => {
+        Raven.captureException('Erorr with Provider Signup:', err)
+        return Promise.reject(err)
+      })
   }
 
   render () {

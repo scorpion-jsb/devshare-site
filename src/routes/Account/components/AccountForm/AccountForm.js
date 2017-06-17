@@ -38,7 +38,10 @@ export const AccountForm = ({ account, handleSubmit, submitting }) => (
 
 AccountForm.propTypes = {
   account: PropTypes.shape({
-    providerData: PropTypes.object
+    providerData: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array
+    ])
   }),
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool

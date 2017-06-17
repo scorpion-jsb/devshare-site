@@ -18,7 +18,6 @@ ecmaFeatures:
 globals:
   MockFirebase: true
   sinon: true
-  Raven: true
   __COVERAGE__: true
   __DEV__: true
 

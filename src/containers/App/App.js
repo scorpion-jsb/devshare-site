@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
+import { handleRouteUpdate } from 'utils/router'
+import Notifications from 'containers/Notifications/Notifications'
 
 // Themeing/Styling
 import Theme from 'theme'
@@ -31,7 +33,12 @@ export default class AppContainer extends Component {
 
     return (
       <Provider store={store}>
-        <Router history={browserHistory} children={routes} />
+        <div style={{ height: '100%' }}>
+          <Router history={browserHistory} onUpdate={handleRouteUpdate}>
+            {routes}
+          </Router>
+          <Notifications />
+        </div>
       </Provider>
     )
   }

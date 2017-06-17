@@ -10,10 +10,6 @@ cache:
   directories:
     - node_modules
 
-install:
-  - npm set progress=false
-  - npm install # install project dependencies
-
 branches:
   only:
     - master

@@ -23,7 +23,7 @@ export const DeleteDialog = ({
       : 'Name Does Not Match'
   return (
     <Dialog
-      title='New Project'
+      title='Delete Project'
       modal={false}
       actions={[
         <FlatButton

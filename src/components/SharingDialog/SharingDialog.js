@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import { List, ListItem } from 'material-ui/List'
@@ -9,7 +8,7 @@ import PersonIcon from 'material-ui/svg-icons/social/person'
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle'
 import { red500, red800 } from 'material-ui/styles/colors'
 import classes from './SharingDialog.scss'
-import { map } from 'lodash'
+import { map, size } from 'lodash'
 
 export default class SharingDialog extends Component {
   state = {
@@ -24,20 +23,6 @@ export default class SharingDialog extends Component {
     searchUsers: PropTypes.func.isRequired,
     onAddCollab: PropTypes.func.isRequired,
     onRemoveCollab: PropTypes.func.isRequired
-  }
-
-  componentDidMount () {
-    this.setState({
-      collaborators: this.props.project ? this.props.project.collaborators : []
-    })
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.open) {
-      this.setState({
-        open: nextProps.open
-      })
-    }
   }
 
   searchAccounts = q =>
@@ -58,10 +43,7 @@ export default class SharingDialog extends Component {
   }
 
   removeCollab = ind => {
-    this.props.onRemoveCollab(this.state.collaborators[ind].username)
-    this.setState({
-      collaborators: this.state.collaborators.splice(ind, 1)
-    })
+    this.props.onRemoveCollab(this.props.project.collaborators[ind].username)
   }
 
   close = () => {
@@ -71,31 +53,7 @@ export default class SharingDialog extends Component {
 
   render () {
     const { project, error, onRequestClose } = this.props
-    const { collaborators, matchingUsers, searchText } = this.state
-
-    const collabsList = collaborators
-      ? collaborators.map(({ image, username }, i) => (
-        <div key={`${project.name}-Collab-${i}`} className={classes.container}>
-          <ListItem
-            leftAvatar={
-              <Avatar
-                icon={<PersonIcon />}
-                src={(image && image.url) ? image.url : null}
-              />
-            }
-            rightIcon={
-              <RemoveIcon
-                color={red500}
-                hoverColor={red800}
-                onClick={() => this.removeCollab(i)}
-              />
-            }
-            primaryText={username}
-            secondaryText='Read, Write'
-          />
-        </div>
-      ))
-      : null
+    const { matchingUsers, searchText } = this.state
 
     const actions = [
       <FlatButton
@@ -132,10 +90,31 @@ export default class SharingDialog extends Component {
           : null
         }
         {
-          collabsList
+          size(project.collaborators)
             ? (
               <List>
-                {collabsList}
+                {
+                  map(project.collaborators, ({ avatarUrl, username }, i) => (
+                    <ListItem
+                      key={`${project.name}-Collab-${i}`}
+                      leftAvatar={
+                        <Avatar
+                          icon={<PersonIcon />}
+                          src={avatarUrl}
+                        />
+                      }
+                      rightIcon={
+                        <RemoveIcon
+                          color={red500}
+                          hoverColor={red800}
+                          onClick={() => this.removeCollab(i)}
+                        />
+                      }
+                      primaryText={username}
+                      secondaryText='Read, Write'
+                    />
+                 ))
+                }
               </List>
             )
             : (

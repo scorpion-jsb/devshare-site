@@ -21,10 +21,16 @@ export default class Pane extends Component {
     closeTab: PropTypes.func.isRequired
   }
 
+  closeAndSelectNext = (i) => {
+    if (i > 0) {
+      this.props.navigateToTab(this.props.project, i - 1)
+    }
+    this.props.closeTab(this.props.project, i)
+  }
+
   render () {
     const {
       project,
-      closeTab,
       navigateToTab,
       tabs: { list, currentIndex }
     } = this.props
@@ -34,7 +40,7 @@ export default class Pane extends Component {
         <Tabs
           list={list}
           currentIndex={currentIndex}
-          onClose={(i) => closeTab(project, i)}
+          onClose={this.closeAndSelectNext}
           onSelect={(i) => navigateToTab(project, i)}
         />
         <Views

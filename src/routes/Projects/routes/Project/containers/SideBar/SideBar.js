@@ -38,6 +38,10 @@ const projectSelectLabelStyle = {
   (dispatch) => bindActionCreators(TabActions, dispatch)
 )
 export default class SideBar extends Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
   static propTypes = {
     projects: PropTypes.object,
     firebase: PropTypes.object,
@@ -187,6 +191,10 @@ export default class SideBar extends Component {
         this.readAndSaveFileEntry(item)
       }
     })
+  }
+
+  selectProject = (e, ind, projectName) => {
+    this.context.router.push(`/${this.props.project.owner}/${projectName}`)
   }
 
   render () {
